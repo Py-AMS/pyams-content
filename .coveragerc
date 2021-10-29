@@ -1,0 +1,3 @@
+[run]
+source = src/pyams_content
+omit = src/pyams_content/tests/*,src/pyams_content/zmi/*
