@@ -73,4 +73,8 @@ setup(name='pyams_content',
           'pyams_workflow',
           'pyramid'
       ],
-      entry_points="")
+      entry_points={
+          'fanstatic.libraries': [
+              'pyams_content = pyams_content.zmi:library'
+          ]
+      })
