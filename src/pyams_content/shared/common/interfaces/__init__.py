@@ -14,25 +14,24 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
-from pyams_content import _
-from pyams_content.interfaces import CONTRIBUTOR_ROLE, GUEST_ROLE, IBaseContent, MANAGER_ROLE, \
-    MANAGE_CONTENT_PERMISSION, OWNER_ROLE, \
-    PILOT_ROLE, \
-    READER_ROLE, WEBMASTER_ROLE
 from zope.container.constraints import containers, contains
 from zope.container.interfaces import IContainer
-
 from zope.interface import Attribute, Interface
 from zope.schema import Bool, Choice, Text, TextLine
 
+from pyams_content.interfaces import CONTRIBUTOR_ROLE, GUEST_ROLE, IBaseContent, MANAGER_ROLE, \
+    MANAGE_CONTENT_PERMISSION, OWNER_ROLE, PILOT_ROLE, READER_ROLE, WEBMASTER_ROLE
 from pyams_i18n.schema import I18nTextField
 from pyams_portal.interfaces import DESIGNER_ROLE, IPortalContext
 from pyams_security.schema import PrincipalField, PrincipalsSetField
 from pyams_site.interfaces import ISiteRoot
 from pyams_utils.schema import TextLineListField
-from pyams_workflow.interfaces import IWorkflowManagedContent
+from pyams_workflow.interfaces import IWorkflowManagedContent, WORKFLOWS_VOCABULARY
+
+
+__docformat__ = 'restructuredtext'
+
+from pyams_content import _
 
 
 class IDeletableElement(Interface):
@@ -104,7 +103,7 @@ class IBaseSharedTool(IBaseContent, IContainer):
     shared_content_workflow = Choice(title=_("Workflow name"),
                                      description=_("Name of workflow utility used to manage tool "
                                                    "contents"),
-                                     vocabulary="PyAMS workflows",
+                                     vocabulary=WORKFLOWS_VOCABULARY,
                                      default="PyAMS default workflow")
 
 
@@ -116,8 +115,9 @@ class ISharedTool(IBaseSharedTool):
 
     contains('.ISharedContent')
 
-    shared_content_type = Attribute("Shared data content type")
+    shared_content_interface = Attribute("Shared content interface")
     shared_content_factory = Attribute("Shared data factory")
+    shared_content_type = Attribute("Shared data content type")
 
 
 class ISharedToolPortalContext(ISharedTool, IPortalContext):
