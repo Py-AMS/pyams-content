@@ -15,7 +15,6 @@
 """
 
 from zope.component import getAdapter
-from zope.interface import implementer
 
 from pyams_content.component.illustration import IBasicIllustration, IBasicIllustrationTarget, \
     IIllustration, IIllustrationTarget, ILinkIllustrationTarget
@@ -33,7 +32,6 @@ from pyams_zmi.interfaces import IAdminLayer
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
-from pyams_zmi.interfaces.form import IFormGroupSwitcher
 
 
 @adapter_config(name='illustration',
