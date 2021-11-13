@@ -15,14 +15,15 @@
 This module provides site's root view of sites, hubs and blogs.
 """
 
-from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
-from pyams_content.shared.common.interfaces import IDeletableElement
-from pyams_content.shared.site.interfaces import ISiteManager
-from pyams_content.zmi.interfaces import IDashboardTable
 from pyramid.view import view_config
 from zope.container.interfaces import IContainer
 from zope.interface import implementer
 
+from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
+from pyams_content.shared.common.interfaces import IDeletableElement
+from pyams_content.shared.site.interfaces import ISiteManager
+from pyams_content.zmi.dashboard import DashboardContentTypeColumn, DashboardLabelColumn
+from pyams_content.zmi.interfaces import IDashboardTable
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_pagelet.pagelet import pagelet_config
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
@@ -34,8 +35,9 @@ from pyams_workflow.interfaces import IWorkflowPublicationInfo
 from pyams_zmi.helper.container import delete_container_element
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import ISiteManagementMenu
-from pyams_zmi.table import IconColumn, NameColumn, Table, TableAdminView, TrashColumn
+from pyams_zmi.table import IconColumn, Table, TableAdminView, TrashColumn
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
+
 
 __docformat__ = 'restructuredtext'
 
@@ -50,7 +52,7 @@ class SiteRootSitesTable(Table):
     def data_attributes(self):
         attributes = super().data_attributes
         attributes['table'].update({
-            'data-ams-order': '1,asc'
+            'data-ams-order': '2,asc'
         })
         return attributes
 
@@ -83,7 +85,7 @@ class SiteRootSitesTableVisibleColumn(IconColumn):
             return None
         if info.is_published():
             return 'fas fa-eye'
-        return 'fas fa-eye-slash text-secondary'
+        return 'fas fa-eye-slash text-danger opaque'
 
     def get_icon_hint(self, item):
         info = IWorkflowPublicationInfo(item, None)
@@ -95,11 +97,20 @@ class SiteRootSitesTableVisibleColumn(IconColumn):
         return translate(_("Not visible site"))
 
 
+@adapter_config(name='content-type',
+                required=(ISiteRoot, IAdminLayer, SiteRootSitesTable),
+                provides=IColumn)
+class SiteRootSitesContentTypeColumn(DashboardContentTypeColumn):
+    """Site root site content-type column"""
+
+    weight = 5
+
+
 @adapter_config(name='name',
                 required=(ISiteRoot, IAdminLayer, SiteRootSitesTable),
                 provides=IColumn)
-class SiteRootSitesNameColumn(NameColumn):
-    """Site roots site name column"""
+class SiteRootSitesNameColumn(DashboardLabelColumn):
+    """Site root site name column"""
 
     css_classes = {
         'td': 'text-truncate'
