@@ -20,8 +20,62 @@ __docformat__ = 'restructuredtext'
 from zope.interface import Interface
 
 
+class IDashboardView(Interface):
+    """Dashboard view marker interface"""
+
+
 class IDashboardTable(Interface):
-    """Dashboard table interface"""
+    """Dashboard table marker interface"""
+
+
+class IDashboardColumn(Interface):
+    """Dashboard column marker interface"""
+
+
+class IDashboardContentVisibility(Interface):
+    """Dashboard content visibility column provider interface
+
+    Adapters to this interface should return a tuple containing a
+    boolean value to specify if the generated action icon should be
+    active to switch item visibility, and a string containing the
+    icon HTML definition.
+    """
+
+
+class IDashboardContentLabel(Interface):
+    """Dashboard content label column provider interface"""
+
+
+class IDashboardContentType(Interface):
+    """Dashboard content type column provider interface"""
+
+
+class IDashboardContentNumber(Interface):
+    """Dashboard content reference number column provider interface"""
+
+
+class IDashboardContentStatus(Interface):
+    """Dashboard content status column provider interface"""
+
+
+class IDashboardContentStatusDatetime(Interface):
+    """Dashboard content status datetime provider interface"""
+
+
+class IDashboardContentVersion(Interface):
+    """Dashboard content version column provider interface"""
+
+
+class IDashboardContentModifier(Interface):
+    """Dashboard content modifier column provider interface"""
+
+
+class IDashboardContentOwner(Interface):
+    """Dashboard content owner column provider interface"""
+
+
+class IDashboardContentTimestamp(Interface):
+    """Dashboard content modification timestamp column provider interface"""
 
 
 class IPropertiesEditForm(Interface):
