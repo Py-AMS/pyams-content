@@ -22,4 +22,5 @@ from fanstatic import Library, Resource
 library = Library('pyams_content', 'resources')
 
 content_js = Resource(library, 'js/content.js',
+                      minified='js/content.min.js',
                       bottom=True)

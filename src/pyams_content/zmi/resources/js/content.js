@@ -11,6 +11,29 @@ if (window.$ === undefined) {
 const content = {
 
     /**
+     * Widgets management
+     */
+    widget: {
+
+        /**
+         * Treeview widget
+         */
+        treeview: {
+
+            selectFolder: (event, node) => {
+                const target = $(event.target);
+                target.siblings('input[type="hidden"]').val(node.id);
+            },
+
+            unselectFolder: (event, node) => {
+                const target = $(event.target);
+                target.siblings('input[type="hidden"]').val(null);
+            }
+        }
+    },
+
+
+    /**
      * Pictograms management
      */
     pictograms: {
@@ -58,8 +81,7 @@ const content = {
         endDrag: (event, ui) => {
             $(ui.source).remove();
         }
-    },
-
+    }
 };
 
 
