@@ -115,7 +115,7 @@ class PictogramElementEditor(TableElementEditor):
 
 @ajax_form_config(name='properties.html',
                   context=IPictogram, layer=IPyAMSLayer,
-                  permission=MANAGE_SITE_ROOT_PERMISSION)
+                  permission=VIEW_SYSTEM_PERMISSION)
 class PictogramEditForm(AdminModalEditForm):
     """Pictogram properties edit form"""
 
