@@ -15,13 +15,15 @@
 This module provides site manager management interface components.
 """
 
-from pyams_content.interfaces import IBaseContent, MANAGE_SITE_ROOT_PERMISSION
-from pyams_content.root.zmi.sites import SiteRootSitesTable
-from pyams_content.shared.common.zmi.properties import PropertiesEditForm
-from pyams_content.shared.site.interfaces import ISiteManager
 from pyramid.events import subscriber
 from zope.interface import Interface, Invalid
 
+from pyams_content.interfaces import IBaseContent, MANAGE_SITE_ROOT_PERMISSION
+from pyams_content.root.zmi.sites import SiteRootSitesTable
+from pyams_content.shared.common.interfaces import IBaseSharedTool, ISharedSite
+from pyams_content.shared.common.zmi.properties import PropertiesEditForm
+from pyams_content.shared.site.interfaces import ISiteManager
+from pyams_content.zmi.interfaces import IDashboardColumn, IDashboardContentType, IDashboardTable
 from pyams_form.ajax import AJAXFormRenderer, ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer, IDataExtractedEvent
@@ -34,7 +36,6 @@ from pyams_skin.viewlet.breadcrumb import BreadcrumbItem
 from pyams_skin.viewlet.menu import MenuItem
 from pyams_table.interfaces import ITable
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
-from pyams_utils.dict import merge_dict
 from pyams_utils.registry import get_utility
 from pyams_utils.unicode import translate_string
 from pyams_viewlet.manager import viewletmanager_config
@@ -164,8 +165,9 @@ class SiteManagerPropertiesEditForm(PropertiesEditForm):
     title = _("Site manager properties")
     legend = _("Main site properties")
 
-    fields = Fields(ISiteManager).select('title', 'short_name', 'header', 'description',
-                                         'navigation_mode', 'notepad')
+    fields = Fields(ISiteManager).select('title', 'short_name', 'header', 'description') + \
+        Fields(IBaseSharedTool).select('shared_content_workflow') + \
+        Fields(ISiteManager).select('navigation_mode', 'notepad')
 
 
 @adapter_config(required=(ISiteManager, IAdminLayer, SiteManagerPropertiesEditForm),
@@ -183,3 +185,14 @@ class SiteManagerPropertiesEditFormRenderer(AJAXFormRenderer):
                 'message': self.request.localizer.translate(self.view.success_message)
             }
         return super().render(changes)
+
+
+#
+# Dashboards management adapters
+#
+
+@adapter_config(required=(ISharedSite, IAdminLayer, IDashboardColumn),
+                provides=IDashboardContentType)
+def site_root_content_type_getter(context, request, column):
+    """Site root sites content-type getter"""
+    return request.localizer.translate(context.content_name)
