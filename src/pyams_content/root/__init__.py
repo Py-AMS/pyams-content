@@ -15,19 +15,16 @@
 This module defines roles and permissions checker of site root.
 """
 
-__docformat__ = 'restructuredtext'
-
 from persistent import Persistent
-
-from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
-from pyams_content.root.interfaces import ISiteRootInfos, ISiteRootRoles, \
-    ISiteRootToolsConfiguration, SITEROOT_ROLES, \
-    SITE_ROOT_INFOS_KEY, SITE_ROOT_TOOLS_CONFIGURATION_KEY
 from zope.container.contained import Contained
 from zope.interface import Interface, implementer
 from zope.schema.fieldproperty import FieldProperty
 from zope.traversing.interfaces import ITraversable
 
+from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
+from pyams_content.root.interfaces import ISiteRootInfos, ISiteRootRoles, \
+    ISiteRootToolsConfiguration, SITEROOT_ROLES, \
+    SITE_ROOT_INFOS_KEY, SITE_ROOT_TOOLS_CONFIGURATION_KEY
 from pyams_file.property import FileProperty
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces import IRolesPolicy, IViewContextPermissionChecker
@@ -37,6 +34,9 @@ from pyams_site.interfaces import ISiteRoot
 from pyams_utils.adapter import ContextAdapter, ContextRequestViewAdapter, adapter_config, \
     get_annotation_adapter
 from pyams_utils.factory import factory_config
+
+
+__docformat__ = 'restructuredtext'
 
 
 @factory_config(provided=ISiteRootInfos)
@@ -95,6 +95,8 @@ class SiteRootRolesPolicy(ContextAdapter):
 
 
 @adapter_config(required=(ISiteRoot, IPyAMSLayer, Interface),
+                provides=IViewContextPermissionChecker)
+@adapter_config(required=(ISiteRootInfos, IPyAMSLayer, Interface),
                 provides=IViewContextPermissionChecker)
 class SiteRootPermissionChecker(ContextRequestViewAdapter):
     """Site root permission checker"""
