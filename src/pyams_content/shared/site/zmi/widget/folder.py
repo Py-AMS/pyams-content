@@ -10,7 +10,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_content.shared.site.zmi.widget.site module
+"""PyAMS_content.shared.site.zmi.widget.folder module
 
 This module provides a custom widget which can be used to select a folder
 inside a site manager.
