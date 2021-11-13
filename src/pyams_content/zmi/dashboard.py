@@ -60,10 +60,10 @@ class DashboardColumnMixin(ObjectDataManagerMixin):  # pylint: disable=no-member
         """Column value getter"""
         target = self.get_target(obj)
         registry = self.request.registry
-        label = registry.queryMultiAdapter((target, self.request, self), self.interface)
-        if label is None:
-            label = registry.queryAdapter(target, self.interface)
-        return label or '--'
+        value = registry.queryMultiAdapter((target, self.request, self), self.interface)
+        if value is None:
+            value = registry.queryAdapter(target, self.interface)
+        return value or '--'
 
 
 class DashboardVisibilityColumn(DashboardColumnMixin, JsActionColumn):
