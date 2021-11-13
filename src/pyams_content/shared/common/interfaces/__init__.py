@@ -84,6 +84,8 @@ class ISharedSite(IBaseContent, IDeletableElement):
 
     containers(ISiteRoot)
 
+    content_name = Attribute("Site content name")
+
 
 class ISharedToolContainer(IBaseContent, IContainer):
     """Shared tools container"""
