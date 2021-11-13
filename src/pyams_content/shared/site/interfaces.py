@@ -16,17 +16,18 @@
 
 from collections import OrderedDict
 
+from zope.annotation import IAttributeAnnotatable
 from zope.container.constraints import containers, contains
 from zope.container.interfaces import IContainer
 from zope.interface import Attribute, Interface
 from zope.location.interfaces import IContained
-from zope.schema import Bool, Choice, Text
+from zope.schema import Bool, Choice, Text, URI
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from pyams_content.interfaces import IBaseContent
 from pyams_content.shared.common.interfaces import IBaseSharedTool, IDeletableElement, ISharedSite
 from pyams_i18n.schema import I18nTextField, I18nTextLineField
-from pyams_sequence.interfaces import ISequentialIdTarget
+from pyams_sequence.interfaces import IInternalReference, ISequentialIdTarget
 from pyams_workflow.interfaces import IWorkflowPublicationSupport
 
 
@@ -160,3 +161,41 @@ class ISiteManager(ISharedSite, ISiteContainer, IBaseSharedTool,
                              required=True,
                              vocabulary=SITE_CONTAINER_NAVIGATION_MODES_VOCABULARY,
                              default=SITE_CONTAINER_TEMPLATE_MODE)
+
+
+class ISiteLink(ISiteElement):
+    """Site link interface"""
+
+    navigation_title = I18nTextLineField(title=_("Navigation title"),
+                                         description=_("Alternate content's title displayed in "
+                                                       "navigation pages; original title will be "
+                                                       "used if none is specified"),
+                                         required=False)
+
+    show_header = Bool(title=_("Show header?"),
+                       description=_("If 'no', no header will be displayed"),
+                       required=False,
+                       default=True)
+
+    navigation_header = I18nTextField(title=_("Navigation header"),
+                                      description=_("Alternate content's header displayed in "
+                                                    "navigation pages; original header will be "
+                                                    "used if none is specified"),
+                                      required=False)
+
+    visible = Bool(title=_("Visible?"),
+                   description=_("If 'no', link is not visible"),
+                   required=True,
+                   default=True)
+
+
+class IInternalContentLink(ISiteLink, IInternalReference):
+    """Internal content link interface"""
+
+
+class IExternalContentLink(ISiteLink, IAttributeAnnotatable):
+    """External link interface"""
+
+    url = URI(title=_("Target URL"),
+              description=_("URL used to access external resource"),
+              required=True)

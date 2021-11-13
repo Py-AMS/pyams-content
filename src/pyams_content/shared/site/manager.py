@@ -13,6 +13,7 @@
 """PyAMS_content.shared.site.manager module
 
 """
+
 from pyams_content.component.illustration import IIllustrationTarget, ILinkIllustrationTarget
 from pyams_content.feature.preview.interfaces import IPreviewTarget
 from pyams_content.interfaces import MANAGE_SITE_PERMISSION
