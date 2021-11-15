@@ -44,13 +44,13 @@ from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager, IPropertiesMenu, \
     ISiteManagementMenu
+from pyams_zmi.table import TableElementEditor
+from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
 
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
-from pyams_zmi.table import TableElementEditor
-from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
 
 @adapter_config(required=(ISiteFolder, IAdminLayer, Interface),
