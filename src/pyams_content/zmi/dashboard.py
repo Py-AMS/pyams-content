@@ -76,7 +76,7 @@ class DashboardVisibilityColumn(DashboardColumnMixin, JsActionColumn):
     def css_classes(self):
         classes = super().css_classes
         classes.update({
-            'td': lambda item, col, row: 'action' if
+            'td': lambda item, col: 'action' if
             ISiteLink.providedBy(item) and col.has_permission(item) else ''
         })
         return classes
