@@ -75,6 +75,12 @@ class ISiteContainer(IContainer, IBaseSiteItem):
 
     contains(ISiteElement)
 
+    navigation_mode = Choice(title=_("Navigation mode"),
+                             description=_("Site behaviour when navigating to site URL"),
+                             required=True,
+                             vocabulary=SITE_CONTAINER_NAVIGATION_MODES_VOCABULARY,
+                             default=SITE_CONTAINER_TEMPLATE_MODE)
+
     def get_visible_items(self, request=None):
         """Iterator over container visible items"""
 
@@ -156,15 +162,9 @@ class ISiteManager(ISharedSite, ISiteContainer, IBaseSharedTool,
                    description=_("Internal information to be known about this content"),
                    required=False)
 
-    navigation_mode = Choice(title=_("Navigation mode"),
-                             description=_("Site behaviour when navigating to site URL"),
-                             required=True,
-                             vocabulary=SITE_CONTAINER_NAVIGATION_MODES_VOCABULARY,
-                             default=SITE_CONTAINER_TEMPLATE_MODE)
-
 
 class ISiteLink(ISiteElement):
-    """Site link interface"""
+    """Content link interface"""
 
     navigation_title = I18nTextLineField(title=_("Navigation title"),
                                          description=_("Alternate content's title displayed in "
@@ -189,12 +189,12 @@ class ISiteLink(ISiteElement):
                    default=True)
 
 
-class IInternalContentLink(ISiteLink, IInternalReference):
-    """Internal content link interface"""
+class IInternalSiteLink(ISiteLink, IInternalReference):
+    """Internal content site link interface"""
 
 
-class IExternalContentLink(ISiteLink, IAttributeAnnotatable):
-    """External link interface"""
+class IExternalSiteLink(ISiteLink, IAttributeAnnotatable):
+    """External site link interface"""
 
     url = URI(title=_("Target URL"),
               description=_("URL used to access external resource"),
