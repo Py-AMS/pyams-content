@@ -23,9 +23,9 @@ from zope.interface import implementer
 from zope.intid import IIntIds
 from zope.lifecycleevent import ObjectMovedEvent
 
-from pyams_content.interfaces import MANAGE_SITE_PERMISSION
+from pyams_content.interfaces import MANAGE_CONTENT_PERMISSION, MANAGE_SITE_PERMISSION
 from pyams_content.shared.site.interfaces import IBaseSiteItem, ISiteContainer, ISiteElement, \
-    ISiteLink, ISiteManager
+    ISiteManager, SITE_CONTAINER_REDIRECT_MODE
 from pyams_content.shared.site.zmi.interfaces import ISiteTreeTable
 from pyams_content.zmi import content_js
 from pyams_content.zmi.dashboard import DashboardContentNumberColumn, DashboardContentOwnerColumn, \
@@ -49,11 +49,11 @@ from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_workflow.interfaces import IWorkflowPublicationInfo
-from pyams_zmi.helper.container import delete_container_element
+from pyams_zmi.helper.container import delete_container_element, switch_element_attribute
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import ISiteManagementMenu
 from pyams_zmi.skin import AdminSkin
-from pyams_zmi.table import ReorderColumn, Table, TableAdminView, TrashColumn
+from pyams_zmi.table import ReorderColumn, Table, TableAdminView, TrashColumn, get_table_id
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
 
@@ -64,16 +64,22 @@ from pyams_content import _
 
 def get_item_order(item):
     """Get item order value"""
-    for parent in reversed(list(lineage(item))):
-        if not ISiteContainer.providedBy(parent):
+    for item in reversed(list(lineage(item))):
+        if item.__parent__ is None:
             continue
-        index = list(parent.__parent__.keys()).index(parent.__name__)
+        index = list(item.__parent__.keys()).index(item.__name__)
         yield f'{index:03}'
 
 
 @implementer(IDashboardTable, ISiteTreeTable)
 class SiteContainerTreeTable(Table):
     """Site container tree table"""
+
+    @property
+    def id(self):
+        """Table id getter"""
+        manager = get_parent(self.context, ISiteManager)
+        return get_table_id(self, manager)
 
     permission = MANAGE_SITE_PERMISSION
     display_if_empty = True
@@ -107,10 +113,10 @@ class SiteContainerTreeTable(Table):
             'data-info': 'false',
             'data-paging': 'false',
             'data-ams-order': '2,asc',
+            'data-ams-visible': json.dumps(IWorkflowPublicationInfo(self.context).is_published()),
             'data-ams-tree-node-id': intids.queryId(manager)
         })
         attributes.setdefault('tr', {}).update({
-            'id': lambda x, col: '{0}::{1}'.format(self.id, intids.queryId(x)),
             'data-ams-location': lambda x, col: absolute_url(x.__parent__, self.request),
             'data-ams-tree-node-id': lambda x, col: intids.queryId(x),
             'data-ams-tree-node-parent-id': lambda x, col: intids.queryId(x.__parent__)
@@ -232,23 +238,30 @@ class SiteContainerTreeNameColumn(DashboardLabelColumn):
             parents = map(lambda x: intids.queryId(x), lineage(self.context))
         else:
             parents = map(lambda x: intids.queryId(x), lineage(intids.queryObject(new_parent)))
+        translate = self.request.localizer.translate
         return '''<div class="name">
             {padding}
             <span class="small hint" title="{hint}" data-ams-hint-gravity="e" 
                   data-ams-click-handler="MyAMS.tree.switchTreeNode"
                   data-ams-stop-propagation="true">
                 <i class="far {switch}"></i>
-            </span>&nbsp;&nbsp;<span class="title">{title}</span>
+            </span>&nbsp;&nbsp;<span class="title">{title}</span> {arrow}
         </div>'''.format(
             padding='<span class="tree-node-padding"></span>' * depth,
-            hint=self.request.localizer.translate(_("Click to show/hide inner folders")),
+            hint=translate(_("Click to show/hide inner folders")),
             switch='fa-{state}-square switch {state}'.format(
                 state=getattr(item, '_v_state',
                               'minus' if (item is self.context) or
                                          (item_id == new_parent) or
-                                         (item_id in parents) else 'plus')
-                    if ISiteContainer.providedBy(item) else ''),
-            title=name or super().render_cell(item))
+                                         (item_id in parents) else 'plus'))
+                    if ISiteContainer.providedBy(item) else 'invisible',
+            title=name or super().render_cell(item),
+            arrow='<i class="ml-1 fas fa-share fa-rotate-90 text-muted hint" '
+                  '   data-original-title="{title}"></i>'.format(
+                title=translate(_("This container automatically redirects navigation to "
+                                  "it's first visible content"))) if
+                    ISiteContainer.providedBy(item) and
+                    (item.navigation_mode == SITE_CONTAINER_REDIRECT_MODE) else '')
 
 
 @adapter_config(name='content-type',
@@ -490,6 +503,31 @@ def set_site_order(request):
             for child in item.values():
                 row = table.setup_row(child)
                 result.append(table.render_row(row).strip())
+    return result
+
+
+@view_config(name='switch-visible-item.json',
+             context=ISiteContainer, request_type=IPyAMSLayer,
+             permission=MANAGE_CONTENT_PERMISSION,
+             renderer='json', xhr=True)
+def switch_visible_item(request):
+    """Switch visible item"""
+    result = switch_element_attribute(request)
+    if result['status'] == 'success':
+        result.pop('status')
+        result.pop('message')
+        intids = get_utility(IIntIds)
+        name = request.params.get('object_name')
+        container = request.context
+        node_id = intids.queryId(container[name])
+        result.setdefault('callbacks', []).append({
+            'module': 'content',
+            'callback': 'MyAMS.content.tree.switchVisibleElement',
+            'options': {
+                'node_id': node_id,
+                'state': result.pop('state')
+            }
+        })
     return result
 
 
