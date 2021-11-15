@@ -11,6 +11,44 @@ if (window.$ === undefined) {
 const content = {
 
     /**
+     * Tree management
+     */
+    tree: {
+
+        /**
+         * Visibility switch callback handler
+         *
+         * @param form: original form (may be empty)
+         * @param options: callback options
+         */
+        switchVisibleElement: (form, options) => {
+            const
+                node_id = options.node_id,
+                tr = $(`tr[data-ams-tree-node-id="${node_id}"]`),
+                table = $(tr.parents('table')),
+                head = $('thead', table),
+                col = $(`th[data-ams-column-name="visible"]`, head),
+                colPos = col.index(),
+                icon = $('i', $(`td:nth-child(${colPos+1})`, tr)),
+                parent = $(`[data-ams-tree-node-id="${tr.data('ams-tree-node-parent-id')}"]`);
+            let klass;
+            if (parent.get(0).tagName === 'TR') {
+                const parentIcon = $('i', $(`td:nth-child(${colPos+1})`, parent));
+                klass = parentIcon.attr('class');
+            } else {
+                klass = table.data('ams-visible') ? '' : 'text-danger';
+            }
+            debugger
+            if (options.state === true) {
+                icon.replaceWith(`<i class="${col.data('ams-icon-on')} ${klass}"></i>`);
+            } else {
+                icon.replaceWith(`<i class="${col.data('ams-icon-off')} ${klass}"></i>`);
+            }
+        }
+    },
+
+
+    /**
      * Widgets management
      */
     widget: {
