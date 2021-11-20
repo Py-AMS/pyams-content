@@ -27,6 +27,8 @@ from pyams_content.shared.site.zmi.interfaces import ISiteTreeTable
 from pyams_content.shared.site.zmi.tree import SiteContainerTreeTable
 from pyams_content.shared.site.zmi.widget.folder import SiteManagerFoldersSelectorFieldWidget
 from pyams_content.zmi.interfaces import IDashboardColumn, IDashboardContentLabel, \
+    IDashboardContentModifier, IDashboardContentNumber, IDashboardContentOwner, \
+    IDashboardContentStatus, IDashboardContentStatusDatetime, IDashboardContentVersion, \
     IDashboardContentVisibility
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
@@ -250,6 +252,57 @@ def internal_content_link_dashboard_label(context, request, column):
     translate = request.localizer.translate
     return f'{label} <i class="ml-1 fas fa-external-link-square-alt fa-rotate-90 hint" ' \
            f'data-original-title="{translate(context.content_name)}"></i>'
+
+
+def get_internal_link_adapter(context, request, column, interface):
+    """Get internal link column adapter"""
+    target = context.target
+    if target is not None:
+        value = request.registry.queryMultiAdapter((target, request, column), interface)
+        return f'({value.strip()})' if value is not None else '--'
+    return '--'
+
+
+@adapter_config(required=(IInternalSiteLink, IAdminLayer, IDashboardColumn),
+                provides=IDashboardContentNumber)
+def internal_content_link_dashboard_number(context, request, column):
+    """Internal content link dashboard number"""
+    return get_internal_link_adapter(context, request, column, IDashboardContentNumber)
+
+
+@adapter_config(required=(IInternalSiteLink, IAdminLayer, IDashboardColumn),
+                provides=IDashboardContentStatus)
+def internal_content_link_dashboard_status(context, request, column):
+    """Internal content link dashboard status"""
+    return get_internal_link_adapter(context, request, column, IDashboardContentStatus)
+
+
+@adapter_config(required=(IInternalSiteLink, IAdminLayer, IDashboardColumn),
+                provides=IDashboardContentStatusDatetime)
+def internal_content_link_dashboard_status_datetime(context, request, column):
+    """Internal content link dashboard status datetime"""
+    return get_internal_link_adapter(context, request, column, IDashboardContentStatusDatetime)
+
+
+@adapter_config(required=(IInternalSiteLink, IAdminLayer, IDashboardColumn),
+                provides=IDashboardContentVersion)
+def internal_content_link_dashboard_version(context, request, column):
+    """Internal content link dashboard version"""
+    return get_internal_link_adapter(context, request, column, IDashboardContentVersion)
+
+
+@adapter_config(required=(IInternalSiteLink, IAdminLayer, IDashboardColumn),
+                provides=IDashboardContentModifier)
+def internal_content_link_dashboard_modifier(context, request, column):
+    """Internal content link dashboard modifier"""
+    return get_internal_link_adapter(context, request, column, IDashboardContentModifier)
+
+
+@adapter_config(required=(IInternalSiteLink, IAdminLayer, IDashboardColumn),
+                provides=IDashboardContentOwner)
+def internal_content_link_dashboard_owner(context, request, column):
+    """Internal content link dashboard owner"""
+    return get_internal_link_adapter(context, request, column, IDashboardContentOwner)
 
 
 #
