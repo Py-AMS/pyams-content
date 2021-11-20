@@ -29,7 +29,7 @@ from pyams_form.interfaces.form import IAJAXFormRenderer
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
-from pyams_skin.viewlet.actions import ContextAction
+from pyams_skin.viewlet.actions import ContextAddAction
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.interfaces.intids import IUniqueID
 from pyams_utils.registry import query_utility
@@ -54,15 +54,11 @@ from pyams_zmi.utils import get_object_label
                 context=IPictogramTable, layer=IAdminLayer, view=PictogramTableContainerTable,
                 manager=IToolbarViewletManager, weight=10,
                 permission=MANAGE_SITE_ROOT_PERMISSION)
-class PictogramAddAction(ContextAction):
+class PictogramAddAction(ContextAddAction):
     """Pictogram add action"""
 
-    status = 'success'
-    icon_class = 'fas fa-plus'
     label = _("Add pictogram")
-
     href = 'add-pictogram.html'
-    modal_target = True
 
 
 @ajax_form_config(name='add-pictogram.html',
