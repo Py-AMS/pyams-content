@@ -15,6 +15,8 @@
 Management interface components used by preview feature.
 """
 
+from pyramid.interfaces import IView
+
 from pyams_content.feature.preview.interfaces import IPreviewTarget
 from zope.interface import Interface
 
@@ -35,14 +37,14 @@ from pyams_content import _
 
 
 @viewletmanager_config(name='pyams_context.preview',
-                       context=IPreviewTarget, layer=IAdminLayer, view=Interface,
+                       context=IPreviewTarget, layer=IAdminLayer, view=IView,
                        manager=IToolbarViewletManager, weight=50)
 class PreviewTargetActions(ContextActionsViewletManager):
     """Preview target actions"""
 
 
 @viewlet_config(name='pyams_content.preview.modal',
-                context=IPreviewTarget, layer=IAdminLayer, view=Interface,
+                context=IPreviewTarget, layer=IAdminLayer, view=IView,
                 manager=PreviewTargetActions, weight=10)
 class ModalPreviewAction(ContextAction):
     """Modal preview action"""
