@@ -15,6 +15,7 @@
 This module provides site's root view of sites, hubs and blogs.
 """
 
+from pyramid.interfaces import IView
 from pyramid.view import view_config
 from zope.container.interfaces import IContainer
 from zope.interface import implementer
@@ -44,7 +45,7 @@ __docformat__ = 'restructuredtext'
 from pyams_content import _
 
 
-@implementer(IDashboardTable)
+@implementer(IDashboardTable, IView)
 class SiteRootSitesTable(Table):
     """Site root sub-sites table"""
 
