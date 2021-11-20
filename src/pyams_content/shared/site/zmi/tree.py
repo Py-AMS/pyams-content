@@ -17,6 +17,7 @@ This module defines components which are used to display the whole site tree.
 
 import json
 
+from pyramid.interfaces import IView
 from pyramid.location import lineage
 from pyramid.view import view_config
 from zope.interface import implementer
@@ -71,7 +72,7 @@ def get_item_order(item):
         yield f'{index:03}'
 
 
-@implementer(IDashboardTable, ISiteTreeTable)
+@implementer(IDashboardTable, ISiteTreeTable, IView)
 class SiteContainerTreeTable(Table):
     """Site container tree table"""
 
