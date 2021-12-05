@@ -182,7 +182,7 @@ class SiteManagerPropertiesEditFormRenderer(AJAXFormRenderer):
         if 'title' in changes.get(IBaseContent, ()):
             return {
                 'status': 'reload',
-                'message': self.request.localizer.translate(self.view.success_message)
+                'message': self.request.localizer.translate(self.form.success_message)
             }
         return super().render(changes)
 
