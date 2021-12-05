@@ -15,16 +15,18 @@
 This module defines common security rules used by all shared tools.
 """
 
-__docformat__ = 'restructuredtext'
-
+from pyams_content.shared.common import IWfSharedContent
 from pyams_content.shared.common.interfaces import CONTENT_MANAGER_ROLES, IBaseSharedTool, \
-    ISharedToolRoles
+    ISharedToolRoles, IWfSharedContentRoles, SHARED_CONTENT_ROLES
 from zope.interface import implementer
 
 from pyams_security.interfaces import IRolesPolicy
 from pyams_security.property import RolePrincipalsFieldProperty
 from pyams_security.security import ProtectedObjectRoles
 from pyams_utils.adapter import ContextAdapter, adapter_config
+
+
+__docformat__ = 'restructuredtext'
 
 
 @implementer(ISharedToolRoles)
@@ -52,4 +54,33 @@ class SharedToolRolesPolicy(ContextAdapter):
     """Shared tool roles policy"""
 
     roles_interface = ISharedToolRoles
+    weight = 10
+
+
+@implementer(IWfSharedContentRoles)
+class WfSharedContentRoles(ProtectedObjectRoles):
+    """Shared content roles"""
+
+    owner = RolePrincipalsFieldProperty(IWfSharedContentRoles['owner'])
+    managers = RolePrincipalsFieldProperty(IWfSharedContentRoles['managers'])
+    contributors = RolePrincipalsFieldProperty(IWfSharedContentRoles['contributors'])
+    designers = RolePrincipalsFieldProperty(IWfSharedContentRoles['designers'])
+    readers = RolePrincipalsFieldProperty(IWfSharedContentRoles['readers'])
+    guests = RolePrincipalsFieldProperty(IWfSharedContentRoles['guests'])
+
+
+@adapter_config(required=IWfSharedContent,
+                provides=IWfSharedContentRoles)
+def shared_content_roles_adapter(context):
+    """Shared content roles adapter"""
+    return WfSharedContentRoles(context)
+
+
+@adapter_config(name=SHARED_CONTENT_ROLES,
+                required=IWfSharedContent,
+                provides=IRolesPolicy)
+class SharedContentRolesPolicy(ContextAdapter):
+    """Shared content roles policy"""
+
+    roles_interface = IWfSharedContentRoles
     weight = 10
