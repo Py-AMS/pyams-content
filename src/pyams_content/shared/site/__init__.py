@@ -15,3 +15,6 @@
 """
 
 __docformat__ = 'restructuredtext'
+
+
+from .topic import SiteTopic, WfSiteTopic

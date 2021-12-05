@@ -26,8 +26,11 @@ from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from pyams_content.interfaces import IBaseContent
 from pyams_content.shared.common.interfaces import IBaseSharedTool, IDeletableElement, ISharedSite
+from pyams_content.shared.common.interfaces.types import DATA_TYPES_VOCABULARY
+from pyams_content.shared.topic import ITopic, IWfTopic
 from pyams_i18n.schema import I18nTextField, I18nTextLineField
-from pyams_sequence.interfaces import IInternalReference, ISequentialIdTarget
+from pyams_sequence.interfaces import IInternalReference, IInternalReferencesList, \
+    ISequentialIdTarget
 from pyams_workflow.interfaces import IWorkflowPublicationSupport
 
 
@@ -88,6 +91,10 @@ class ISiteContainer(IContainer, IBaseSiteItem):
         """Get site tree in JSON format"""
 
 
+#
+# Site folder interface
+#
+
 SITE_FOLDERS_VOCABULARY = 'pyams_content.site.folders'
 
 
@@ -132,6 +139,10 @@ class ISiteFolder(IBaseContent, ISiteElement, ISiteContainer, ISequentialIdTarge
                              default=SITE_CONTAINER_REDIRECT_MODE)
 
 
+#
+# Site manager interface
+#
+
 PYAMS_SITES_VOCABULARY = 'pyams_content.sites'
 
 
@@ -162,6 +173,31 @@ class ISiteManager(ISharedSite, ISiteContainer, IBaseSharedTool,
                    description=_("Internal information to be known about this content"),
                    required=False)
 
+
+#
+# Site topics interfaces
+#
+
+SITE_TOPIC_CONTENT_TYPE = 'site-topic'
+SITE_TOPIC_CONTENT_NAME = _("Site topic")
+
+
+class IWfSiteTopic(IWfTopic, IInternalReferencesList):
+    """Site topic interface"""
+
+    data_type = Choice(title=_("Data type"),
+                       description=_("Type of content data"),
+                       required=False,
+                       vocabulary=DATA_TYPES_VOCABULARY)
+
+
+class ISiteTopic(ITopic, ISiteElement):
+    """Workflow managed site topic interface"""
+
+
+#
+# Site links interfaces
+#
 
 class ISiteLink(ISiteElement):
     """Content link interface"""
