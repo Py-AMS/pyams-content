@@ -34,6 +34,8 @@ from pyams_content.reference import ReferencesManager
 from pyams_content.reference.pictogram import IPictogramTable
 from pyams_content.root import ISiteRootToolsConfiguration
 from pyams_content.shared.common.interfaces import IWfSharedContent
+from pyams_content.shared.common.interfaces.types import IWfTypedSharedContent
+from pyams_content.shared.topic.interfaces import ITopicManager
 from pyams_security.index import PrincipalsRoleIndex
 from pyams_site.generations import check_required_utilities
 from pyams_site.interfaces import ISiteGenerations
@@ -51,17 +53,19 @@ REQUIRED_TABLES = (
     (IPictogramTable, 'pictograms'),
 )
 
-REQUIRED_TOOLS = ()
+REQUIRED_TOOLS = (
+    (ITopicManager, 'topics'),
+)
 
 REQUIRED_INDEXES = [
     ('content_type', FieldIndexWithInterface, {
         'interface': IBaseContent,
         'discriminator': 'content_type'
     }),
-    # ('data_type', FieldIndexWithInterface, {
-    #     'interface': IWfTypedSharedContent,
-    #     'discriminator': 'data_type'
-    # }),
+    ('data_type', FieldIndexWithInterface, {
+        'interface': IWfTypedSharedContent,
+        'discriminator': 'data_type'
+    }),
     ('role:owner', PrincipalsRoleIndex, {
         'role_id': OWNER_ROLE
     }),
