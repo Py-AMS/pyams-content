@@ -13,7 +13,7 @@
 """PyAMS_content.shared.common.interfaces module
 
 """
-
+from zope.annotation import IAttributeAnnotatable
 from zope.container.constraints import containers, contains
 from zope.container.interfaces import IContainer
 from zope.interface import Attribute, Interface
@@ -94,6 +94,9 @@ class ISharedToolContainer(IBaseContent, IContainer):
     contains('.ISharedTool')
 
 
+DEFAULT_CONTENT_WORKFLOW = 'pyams_content.workflow.default'
+
+
 class IBaseSharedTool(IBaseContent, IContainer):
     """Base shared tool interface"""
 
@@ -106,7 +109,7 @@ class IBaseSharedTool(IBaseContent, IContainer):
                                      description=_("Name of workflow utility used to manage tool "
                                                    "contents"),
                                      vocabulary=WORKFLOWS_VOCABULARY,
-                                     default="PyAMS default workflow")
+                                     default=DEFAULT_CONTENT_WORKFLOW)
 
 
 SHARED_TOOL_WORKFLOW_STATES_VOCABULARY = 'PyAMS workflow states'
@@ -117,9 +120,7 @@ class ISharedTool(IBaseSharedTool):
 
     contains('.ISharedContent')
 
-    shared_content_interface = Attribute("Shared content interface")
-    shared_content_factory = Attribute("Shared data factory")
-    shared_content_type = Attribute("Shared data content type")
+    shared_content_type = Attribute("Shared data content type name")
 
 
 class ISharedToolPortalContext(ISharedTool, IPortalContext):
@@ -207,8 +208,7 @@ class IWfSharedContentPortalContext(IWfSharedContent, IBaseContentPortalContext)
     """Shared content with portal support"""
 
 
-class IWfSharedContentFactory(Interface):
-    """Shared content factory interface"""
+SHARED_CONTENT_ROLES = 'pyams_content.content.roles'
 
 
 class IWfSharedContentRoles(Interface):
@@ -257,11 +257,11 @@ class IWfSharedContentRoles(Interface):
 class ISharedContent(IWorkflowManagedContent):
     """Workflow managed shared content interface"""
 
+    content_type = Attribute("Content type interface")
+    content_name = Attribute("Content name")
+    content_factory = Attribute("Content factory attribute")
+
     visible_version = Attribute("Link to actually visible version")
-
-
-class ISharedContentFactory(Interface):
-    """Workflow managed shared content factory interface"""
 
 
 CONTENT_TYPES_VOCABULARY = 'pyams_content.content.types'
@@ -273,107 +273,102 @@ SHARED_CONTENT_TYPES_VOCABULARY = 'pyams_content.shared_content.types'
 # Generic restrictions interfaces
 #
 
-class IRestrictionInfo(Interface):
-    """User restriction base interface"""
+class ISharedToolRestrictions(Interface):
+    """Base shared tool restrictions interface"""
+
+    def new_restrictions(self, principal):
+        """Create new restrictions for given principal"""
+
+    def set_restrictions(self, principal, restrictions=None, interface=None):
+        """Set restrictions for given principal"""
+
+    def get_restrictions(self, principal, create_if_empty=False):
+        """Get restrictions for given principal"""
+
+    def drop_restrictions(self, principal):
+        """Drop restrictions for given principal"""
+
+    def can_access(self, context, permission, request=None):
+        """Check if given request can get access to context with given permission"""
+
+
+class IPrincipalRestrictions(IAttributeAnnotatable):
+    """Principal restrictions base class"""
 
     principal_id = PrincipalField(title=_("Principal ID"),
                                   required=True)
 
-    restriction_interface = Attribute("Restrictions interface")
 
+class IRestrictionInfo(Interface):
+    """Base restriction interface"""
 
-class IRestrictions(Interface):
-    """Restrictions manager interface"""
+    weight = Attribute("Adapter ordering weight")
 
-    restrictions_key = Attribute("Restrictions annotations key")
-    restrictions_factory_interface = Attribute("Restrictions factory")
-
-    def get_restrictions(self, principal, create_if_none=False):
-        """Get manager restrictions for given principal"""
-
-    def new_restrictions(self, principal):
-        """Create new manager restrictions"""
-
-    def set_restrictions(self, principal, restrictions=None):
-        """Set manager restrictions for given principal"""
-
-    def drop_restrictions(self, principal):
-        """Drop manager restrictions for given principal"""
-
-
-class IRestrictionsFactory(Interface):
-    """Restrictions factory interface"""
+    def can_access(self, context, permission, request):
+        """Check if given context can be accessed with given permission"""
 
 
 #
-# Shared tool contributor security restrictions
+# Contributors restrictions
 #
 
-CONTRIBUTOR_RESTRICTIONS_KEY = 'pyams_content.contributor.restrictions'
+CONTRIBUTORS_RESTRICTIONS_KEY = 'pyams_content.restrictions.contributors'
 
 
-class IContributorRestrictionInfo(IRestrictionInfo):
-    """Shared content contributor restrictions"""
+class IContributorRestrictions(ISharedToolRestrictions):
+    """Contributor restrictions marker interface"""
 
-    publication_checks = Bool(title=_("Publication checks"),
-                              description=_("If 'yes', this contributor will have to confirm "
-                                            "that contents have been previewed and checked "
-                                            "before asking for publication"),
-                              required=False,
-                              default=True)
+
+CONTRIBUTOR_WORKFLOW_RESTRICTIONS_KEY = f'{CONTRIBUTORS_RESTRICTIONS_KEY}::workflow'
+
+
+class IContributorWorkflowRestrictions(IRestrictionInfo):
+    """Base contributor workflow restrictions interface"""
+
+    show_workflow_warning = Bool(title=_("Show workflow checks warning"),
+                                 description=_("If 'yes', this contributor will have to confirm "
+                                               "that contents have been checked before asking "
+                                               "for publication"),
+                                 required=True,
+                                 default=True)
 
     owners = PrincipalsSetField(title=_("Substitute for"),
                                 description=_("Contributor will have access to contents owned "
                                               "by these principals"),
                                 required=False)
 
-    def check_access(self, context, permission=MANAGE_CONTENT_PERMISSION, request=None):
-        """Check if principal is granted access to given context"""
-
-
-class IContributorRestrictions(IRestrictions):
-    """Contributor restrictions interface"""
-
-
-class IContributorRestrictionsFactory(IRestrictionsFactory):
-    """Contributor restrictions factory interface"""
-
 
 #
-# Shared tool manager security restrictions
+# Managers restrictions
 #
 
-MANAGER_RESTRICTIONS_KEY = 'pyams_content.manager.restrictions'
+MANAGERS_RESTRICTIONS_KEY = 'pyams_content.restrictions.managers'
 
 
-class IManagerRestrictionInfo(IRestrictionInfo):
-    """Shared content manager restrictions"""
+class IManagerRestrictions(ISharedToolRestrictions):
+    """Manager restrictions marker interface"""
 
-    publication_checks = Bool(title=_("Publication checks"),
-                              description=_("If 'yes', this manager will have to confirm that "
-                                            "contents have been previewed and checked before "
-                                            "publishing a content"),
-                              required=False,
-                              default=True)
+
+MANAGER_WORKFLOW_RESTRICTIONS_KEY = f'{MANAGERS_RESTRICTIONS_KEY}::workflow'
+
+
+class IManagerWorkflowRestrictions(IRestrictionInfo):
+    """Base manager workflow restrictions interface"""
+
+    show_workflow_warning = Bool(title=_("Publication checks"),
+                                 description=_("If 'yes', this manager will have to confirm that "
+                                               "contents have been previewed and checked before "
+                                               "publishing a content"),
+                                 required=True,
+                                 default=True)
 
     restricted_contents = Bool(title=_("Restricted contents"),
                                description=_("If 'yes', this manager will get restricted access "
                                              "to manage contents based on selected settings"),
-                               required=False,
+                               required=True,
                                default=True)
 
     owners = PrincipalsSetField(title=_("Selected owners"),
                                 description=_("Manager will have access to contents owned "
                                               "by these principals"),
                                 required=False)
-
-    def check_access(self, context, permission=MANAGE_CONTENT_PERMISSION, request=None):
-        """Check if principal is granted access to given content"""
-
-
-class IManagerRestrictions(IRestrictions):
-    """Manager restrictions interface"""
-
-
-class IManagerRestrictionsFactory(IRestrictionsFactory):
-    """Manager restrictions factory interface"""
