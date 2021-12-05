@@ -57,7 +57,8 @@ class SiteRootToolsConfiguration(Persistent, Contained):
         """Tables manager checker"""
         manager = self.get_tables_manager()
         if manager is None:
-            factory = registry.settings.get('pyams_content.config.references_manager_factory')
+            settings = registry.settings
+            factory = settings.get('pyams_content.config.references_manager_factory')
             if factory is not None:
                 factory = DottedNameResolver().resolve(factory)
             if factory is None:
@@ -66,8 +67,7 @@ class SiteRootToolsConfiguration(Persistent, Contained):
                 manager = factory()
             if manager is not None:
                 self.tables_manager_name = name = \
-                    registry.settings.get('pyams_content.config.references_manager_name',
-                                          'references')
+                    settings.get('pyams_content.config.references_manager_name', 'references')
                 self.__parent__[name] = manager
                 self.tables_names = {}
         return manager
@@ -100,15 +100,17 @@ class SiteRootToolsConfiguration(Persistent, Contained):
 
     def get_tools_manager(self):
         """Tools manager getter"""
-        name = self.tools_manager_names
+        name = self.tools_manager_name
         if name is not None:
-            return self.get(self.tools_manager_names)
+            return self.__parent__.get(self.tools_manager_name)
         return None
 
-    def check_tools_manager(self, settings):
+    def check_tools_manager(self, registry):
         """Tools manager checker"""
+        import pdb; pdb.set_trace()
         manager = self.get_tools_manager()
         if manager is None:
+            settings = registry.settings
             factory = settings.get('pyams_content.config.tools_manager_factory')
             if factory is not None:
                 factory = DottedNameResolver().resolve(factory)
