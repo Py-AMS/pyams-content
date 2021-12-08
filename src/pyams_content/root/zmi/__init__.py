@@ -16,12 +16,11 @@ Site root management components.
 """
 
 from pyams_content.root import ISiteRootInfos
-from pyams_content.shared.common.zmi.properties import PropertiesEditForm
+from pyams_content.zmi.properties import PropertiesEditForm
 
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer
-from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_site.interfaces import ISiteRoot
