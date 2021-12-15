@@ -15,6 +15,7 @@
 This module defines custom workflow-related interfaces.
 """
 
+from pyams_scheduler.interfaces import ITask
 from pyams_workflow.interfaces import IWorkflow
 
 
@@ -27,3 +28,12 @@ class IContentWorkflow(IWorkflow):
 
 class IBasicWorkflow(IWorkflow):
     """PyAMS basic workflow marker interface"""
+
+
+class IWorkflowManagementTask(ITask):
+    """Workflow management task marker interface
+
+    This interface is used to mark scheduler tasks (see PyAMS_scheduler) which are
+    used by some workflows which can provide a "future" publication date, and which
+    relies on task scheduler to do the actual publication.
+    """

@@ -10,11 +10,11 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.workflow.task module
 
+This module defines scheduler tasks which are used to automatically publish or retire
+contents which were published with a future publication date of with a planned retiring date.
 """
-
-__docformat__ = 'restructuredtext'
 
 import logging
 from datetime import datetime, timedelta
@@ -31,9 +31,12 @@ from pyams_scheduler.task import Task
 from pyams_security.interfaces import INTERNAL_USER_ID
 from pyams_utils.registry import get_utility, query_utility
 from pyams_utils.timezone import gmtime
-from pyams_workflow.interfaces import IWorkflow, IWorkflowInfo, IWorkflowManagementTask, \
-    IWorkflowState
+from pyams_workflow.interfaces import IWorkflow, IWorkflowInfo, IWorkflowState
+from pyams_content.workflow.interfaces import IWorkflowManagementTask
 from pyams_zmq.interfaces import IZMQProcessStartedEvent
+
+
+__docformat__ = 'restructuredtext'
 
 
 LOGGER = logging.getLogger('PyAMS (content)')
@@ -126,7 +129,7 @@ def handle_scheduler_start(event):
             if schedule_info.active and (schedule_info.start_date < now):
                 # we add a small amount of time to be sure that scheduler and indexer
                 # processes are started...
-                schedule_info.start_date = now + timedelta(seconds=10)
+                schedule_info.start_date = now + timedelta(minutes=1)
                 # commit update for reset thread to get updated data!!
                 ITransactionManager(task).commit()
                 # start task resetting thread
