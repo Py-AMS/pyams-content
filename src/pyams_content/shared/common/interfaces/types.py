@@ -17,12 +17,13 @@ This module defines interfaces related to content data types.
 
 from zope.container.constraints import contains
 from zope.container.interfaces import IContainer
-from zope.interface import Attribute, Interface
+from zope.interface import Attribute
 from zope.location import ILocation
-from zope.schema import Bool, Choice, List, TextLine
+from zope.schema import Bool, Choice, List
 
 from pyams_content.reference.pictogram import PICTOGRAM_VOCABULARY
-from pyams_content.shared.common.interfaces import IBaseContentPortalContext, IWfSharedContent
+from pyams_content.shared.common.interfaces import IBaseContentPortalContext, ISharedTool, \
+    IWfSharedContent
 from pyams_i18n.schema import I18nTextLineField
 from pyams_portal.interfaces import IPortalContext
 from pyams_sequence.schema import InternalReferenceField
@@ -34,16 +35,25 @@ from pyams_content import _
 
 
 DATA_TYPES_VOCABULARY = 'pyams_content.datatypes'
+"""Vocabulary of shared content data types"""
+
+VISIBLE_DATA_TYPES_VOCABULARY = 'pyams_content.datatypes.visible'
+"""Vocabulary of shared content visible data types"""
+
+ALL_DATA_TYPES_VOCABULARY = 'pyams_content.datatypes.all'
+"""Vocabulary of all shared content tools data types"""
+
 DATA_TYPE_FIELDS_VOCABULARY = 'pyams_content.datatype.fields'
+"""Vocabulary of data type fields"""
 
 
 class IDataType(ILocation):
     """Data interface for data-types"""
 
-    name = TextLine(title=_("Name"),
-                    description=_("Name of this data type; must be unique between all "
-                                  "data types"),
-                    required=True)
+    visible = Bool(title=_("Visible?"),
+                   description=_("An hidden data type can't be assigned to new contents"),
+                   required=True,
+                   default=True)
 
     label = I18nTextLineField(title=_("Label"),
                               required=True)
@@ -97,8 +107,11 @@ class ITypedDataManager(IContainer):
 
     contains(IDataType)
 
+    def get_visible_items(self):
+        """Iterator on visible data types"""
 
-class ITypedSharedTool(Interface):
+
+class ITypedSharedTool(ISharedTool):
     """Shared tool containing typed data"""
 
     shared_content_types_fields = Attribute("Content fields interface")

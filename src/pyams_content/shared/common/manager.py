@@ -18,12 +18,14 @@ from zope.container.folder import Folder
 from zope.interface import implementer
 from zope.schema.fieldproperty import FieldProperty
 
+from pyams_content.interfaces import MANAGE_TOOL_PERMISSION
 from pyams_content.shared.common import ISharedContent
 from pyams_content.shared.common.interfaces import IBaseSharedTool, ISharedTool, \
     ISharedToolContainer
 from pyams_i18n.content import I18nManagerMixin
-from pyams_security.interfaces import IDefaultProtectionPolicy
-from pyams_utils.adapter import adapter_config
+from pyams_security.interfaces import IDefaultProtectionPolicy, IViewContextPermissionChecker
+from pyams_security.security import ProtectedObjectMixin
+from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.factory import factory_config, get_object_factory
 from pyams_utils.registry import query_utility
 from pyams_workflow.interfaces import IWorkflow
@@ -41,7 +43,7 @@ class SharedToolContainer(Folder):
 
 
 @implementer(IDefaultProtectionPolicy, IBaseSharedTool)
-class BaseSharedTool(I18nManagerMixin):
+class BaseSharedTool(ProtectedObjectMixin, I18nManagerMixin):
     """Base shared tool class"""
 
     title = FieldProperty(IBaseSharedTool['title'])
@@ -68,3 +70,11 @@ class SharedTool(Folder, BaseSharedTool):
 def shared_tool_workflow_adapter(context):
     """Shared tool workflow adapter"""
     return query_utility(IWorkflow, name=context.shared_content_workflow)
+
+
+@adapter_config(required=IBaseSharedTool,
+                provides=IViewContextPermissionChecker)
+class SharedToolPermissionChecker(ContextAdapter):
+    """Shared tool permission checker"""
+
+    edit_permission = MANAGE_TOOL_PERMISSION

@@ -14,13 +14,10 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
 from hypatia.interfaces import ICatalog
 from persistent import Persistent
 from pyramid.events import subscriber
 from pyramid.settings import asbool
-from zope.component import getAdapters
 from zope.container.contained import Contained
 from zope.dublincore.interfaces import IZopeDublinCore
 from zope.interface import implementer
@@ -29,20 +26,18 @@ from zope.lifecycleevent import IObjectModifiedEvent
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
-from pyams_content import _
 from pyams_content.interfaces import IBaseContentInfo
 from pyams_content.shared.common.interfaces import CONTENT_TYPES_VOCABULARY, IBaseSharedTool, \
-    ISharedContent, \
-    IWfSharedContent, SHARED_CONTENT_TYPES_VOCABULARY
+    ISharedContent, IWfSharedContent, IWfSharedContentRoles, SHARED_CONTENT_TYPES_VOCABULARY
 from pyams_i18n.content import I18nManagerMixin
 from pyams_security.interfaces import IDefaultProtectionPolicy
 from pyams_security.interfaces.base import VIEW_PERMISSION
+from pyams_security.security import ProtectedObjectMixin
 from pyams_security.utility import get_principal
 from pyams_sequence.interfaces import ISequentialIdInfo, ISequentialIdTarget
 from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.date import format_datetime
-from pyams_utils.factory import get_object_factory
-from pyams_utils.interfaces import IObjectFactory
+from pyams_utils.factory import get_all_factories, get_object_factory
 from pyams_utils.property import ClassPropertyType, classproperty
 from pyams_utils.registry import query_utility
 from pyams_utils.request import check_request, query_request
@@ -52,6 +47,11 @@ from pyams_utils.vocabulary import vocabulary_config
 from pyams_utils.zodb import volatile_property
 from pyams_workflow.interfaces import IObjectClonedEvent, IWorkflow, IWorkflowPublicationSupport, \
     IWorkflowTransitionEvent, IWorkflowVersions
+
+
+__docformat__ = 'restructuredtext'
+
+from pyams_content import _
 
 
 @vocabulary_config(name=SHARED_CONTENT_TYPES_VOCABULARY)
@@ -64,7 +64,7 @@ class ContentTypesVocabulary(SimpleVocabulary):
         translate = request.localizer.translate
         terms = sorted([
             SimpleTerm(factory.content_type, title=translate(factory.content_name))
-            for _name, factory in getAdapters((ISharedContent,), IObjectFactory)
+            for _name, factory in get_all_factories(ISharedContent)
             if asbool(settings.get(f'pyams_content.register.{factory.content_type}', True))
         ], key=lambda x: x.title)
         super().__init__(terms)
@@ -75,7 +75,7 @@ class ContentTypesVocabulary(SimpleVocabulary):
 #
 
 @implementer(IDefaultProtectionPolicy, IWfSharedContent, IWorkflowPublicationSupport)
-class WfSharedContent(Persistent, Contained, I18nManagerMixin):
+class WfSharedContent(ProtectedObjectMixin, I18nManagerMixin, Persistent, Contained):
     """Shared data content class"""
 
     content_type = None
@@ -155,12 +155,13 @@ def handle_cloned_shared_content(event):
     principal_id = request.principal.id
     content = event.object
     content.creator = principal_id
-    if principal_id != content.owner:
+    roles = IWfSharedContentRoles(content)
+    if principal_id in roles.owner:
         # creation of new versions doesn't change owner
         # but new creators are added to contributors list
-        contributors = content.contributors or set()
+        contributors = roles.contributors or set()
         contributors.add(principal_id)
-        content.contributors = contributors
+        roles.contributors = contributors
     # reset modifiers
     content.modifiers = set()
     # clear review comments

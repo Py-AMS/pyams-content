@@ -21,6 +21,7 @@ from pyams_sequence.interfaces import ISequentialIdTarget
 from pyams_skin.interfaces.view import IModalPage
 from pyams_skin.interfaces.viewlet import IHeaderViewletManager
 from pyams_template.template import override_template
+from pyams_utils.adapter import NullAdapter
 from pyams_utils.date import format_datetime
 from pyams_utils.timezone import tztime
 from pyams_viewlet.viewlet import Viewlet, viewlet_config
@@ -81,4 +82,11 @@ class WorkflowPublicationSupportHeaderViewlet(Viewlet):
         else:
             state = '<span class="text-danger">{}</span>'.format(
                 translate(_("Not published")))
-        return '<div>{}</div>'.format(state)
+        return '<div class="mb-1">{}</div>'.format(state)
+
+
+@viewlet_config(name='workflow-status',
+                context=IWorkflowPublicationSupport, layer=IAdminLayer, view=IModalPage,
+                manager=IHeaderViewletManager, weight=20)
+class WorkflowPublicationSupportModalHeaderViewlet(NullAdapter):
+    """Workflow publication support modal header viewlet"""

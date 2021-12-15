@@ -17,22 +17,25 @@ This module defines common management components for shared content managers.
 
 from zope.interface import Interface
 
-from pyams_content.interfaces import IBaseContent
+from pyams_content.interfaces import IBaseContent, MANAGE_TOOL_PERMISSION
 from pyams_content.shared.common import IBaseSharedTool
 from pyams_content.shared.common.interfaces import ISharedTool
-from pyams_content.shared.common.zmi.properties import PropertiesEditForm
+from pyams_content.shared.common.manager import BaseSharedTool
+from pyams_content.zmi.properties import PropertiesEditForm
 from pyams_form.ajax import AJAXFormRenderer, ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer
 from pyams_i18n.interfaces import II18n
+from pyams_i18n_views.zmi.manager import I18nManagerLanguagesEditForm
 from pyams_layer.interfaces import IPyAMSLayer
+from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_skin.interfaces.viewlet import IBreadcrumbItem
 from pyams_skin.viewlet.breadcrumb import BreadcrumbItem
-from pyams_utils.adapter import adapter_config
+from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_viewlet.manager import viewletmanager_config
 from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
-from pyams_zmi.interfaces.viewlet import IPropertiesMenu, ISiteManagementMenu
+from pyams_zmi.interfaces.viewlet import IMenuHeader, IPropertiesMenu, ISiteManagementMenu
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
 
@@ -59,6 +62,13 @@ class SharedToolBreadcrumb(BreadcrumbItem):
 
     view_name = 'admin'
     css_class = 'breadcrumb-item persistent strong'
+
+
+@adapter_config(required=(ISharedTool, IAdminLayer, Interface, ISiteManagementMenu),
+                provides=IMenuHeader)
+def shared_tool_menu_header(context, request, view, menu):
+    """Shared tool management menu header"""
+    return request.localizer.translate(_("Shared content management"))
 
 
 @viewletmanager_config(name='properties.menu',
@@ -101,3 +111,11 @@ class SharedToolPropertiesEditFormRenderer(AJAXFormRenderer):
                 'message': self.request.localizer.translate(self.form.success_message)
             }
         return super().render(changes)
+
+
+@adapter_config(required=(BaseSharedTool, IPyAMSLayer, I18nManagerLanguagesEditForm),
+                provides=IViewContextPermissionChecker)
+class SharedToolLanguagesEditFormPermissionChecker(ContextRequestViewAdapter):
+    """Shared tool languages edit form permission checker"""
+
+    edit_permission = MANAGE_TOOL_PERMISSION

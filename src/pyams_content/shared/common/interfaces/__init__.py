@@ -20,7 +20,7 @@ from zope.interface import Attribute, Interface
 from zope.schema import Bool, Choice, Text, TextLine
 
 from pyams_content.interfaces import CONTRIBUTOR_ROLE, GUEST_ROLE, IBaseContent, MANAGER_ROLE, \
-    MANAGE_CONTENT_PERMISSION, OWNER_ROLE, PILOT_ROLE, READER_ROLE, WEBMASTER_ROLE
+    OWNER_ROLE, PILOT_ROLE, READER_ROLE, WEBMASTER_ROLE
 from pyams_i18n.schema import I18nTextField
 from pyams_portal.interfaces import DESIGNER_ROLE, IPortalContext
 from pyams_security.schema import PrincipalField, PrincipalsSetField
@@ -144,9 +144,6 @@ class IWfSharedContent(IBaseContent):
                                          "replaced by hyphens"),
                            required=True)
 
-    handle_content_url = Attribute("Static boolean value to specify if content URL is "
-                                   "supported by this content type")
-
     creator = PrincipalField(title=_("Version creator"),
                              description=_("Name of content's version creator. "
                                            "The creator of the first version is also it's "
@@ -177,9 +174,6 @@ class IWfSharedContent(IBaseContent):
                                          "header"),
                            required=False)
 
-    handle_header = Attribute("Static boolean value to specify if header is supported by this "
-                              "content type")
-
     description = I18nTextField(title=_("Meta-description"),
                                 description=_("The content's description is 'hidden' into HTML's "
                                               "page headers; but it can be seen, for example, in "
@@ -187,9 +181,6 @@ class IWfSharedContent(IBaseContent):
                                               "description; if description is empty, content's "
                                               "header will be used."),
                                 required=False)
-
-    handle_description = Attribute("Static boolean value to specify if description is "
-                                   "supported by this content type")
 
     keywords = TextLineListField(title=_("Keywords"),
                                  description=_("They will be included into HTML pages metadata"),
