@@ -29,9 +29,9 @@ from pyams_content.component.paragraph.interfaces import IParagraphContainerTarg
 from pyams_content.interfaces import MANAGE_TOOL_PERMISSION
 from pyams_content.reference.pictogram import IPictogramTable
 from pyams_content.shared.common.interfaces import ISharedTool
-from pyams_content.shared.common.interfaces.types import DATA_MANAGER_ANNOTATION_KEY, \
-    DATA_TYPES_VOCABULARY, DATA_TYPE_FIELDS_VOCABULARY, IDataType, \
-    ITypedDataManager, ITypedSharedTool, IWfTypedSharedContent
+from pyams_content.shared.common.interfaces.types import ALL_DATA_TYPES_VOCABULARY, \
+    DATA_MANAGER_ANNOTATION_KEY, DATA_TYPES_VOCABULARY, DATA_TYPE_FIELDS_VOCABULARY, IDataType, \
+    ITypedDataManager, ITypedSharedTool, IWfTypedSharedContent, VISIBLE_DATA_TYPES_VOCABULARY
 from pyams_i18n.interfaces import II18n
 from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_sequence.reference import get_reference_target
@@ -54,6 +54,7 @@ from pyams_content import _
 class DataType(Persistent, Contained):
     """Base data type"""
 
+    visible = FieldProperty(IDataType['visible'])
     label = FieldProperty(IDataType['label'])
     source_folder = FieldProperty(IDataType['source_folder'])
     navigation_label = FieldProperty(IDataType['navigation_label'])
@@ -77,6 +78,10 @@ class DataType(Persistent, Contained):
 @factory_config(ITypedDataManager)
 class TypedDataManager(OrderedContainer):
     """Data types container persistent class"""
+
+    def get_visible_items(self):
+        """Iterator on visible data types"""
+        yield from filter(lambda x: x.visible, self.values())
 
 
 @adapter_config(required=IDataType,
@@ -169,42 +174,43 @@ class WfTypedSharedContentMixin:
 # Data types vocabularies
 #
 
-# @vocabulary_config(name=ALL_DATA_TYPES_VOCABULARY)
-# class AllTypedSharedToolDataTypesVocabulary(SimpleVocabulary):
-#     """Vocabulary consolidating all data types"""
-#
-#     def __init__(self, context):
-#         terms = []
-#         request = check_request()
-#         registry = get_local_registry()
-#         for tool in registry.getAllUtilitiesRegisteredFor(ISharedTool):
-#             manager = ITypedDataManager(tool, None)
-#             if manager is not None:
-#                 terms.extend([
-#                     SimpleTerm(datatype.__name__,
-#                                title=II18n(datatype).query_attribute('backoffice_label',
-#                                                                      request=request) or
-#                                      II18n(datatype).query_attribute('label',
-#                                                                      request=request))
-#                     for datatype in manager.values()
-#                 ])
-#         terms.sort(key=lambda x: x.title)
-#         super().__init__(terms)
-#
-#     def getTermByToken(self, token):
-#         try:
-#             return super().getTermByToken(token)
-#         except LookupError:
-#             request = check_request()
-#             translate = request.localizer.translate
-#             return SimpleTerm(token,
-#                               title=translate(_("-- missing value ({}) --")).format(token))
+@vocabulary_config(name=ALL_DATA_TYPES_VOCABULARY)
+class AllTypedSharedToolDataTypesVocabulary(SimpleVocabulary):
+    """Vocabulary consolidating data types of all shared tools"""
+
+    def __init__(self, context):
+        terms = []
+        request = check_request()
+        registry = get_local_registry()
+        for tool in registry.getAllUtilitiesRegisteredFor(ISharedTool):
+            manager = ITypedDataManager(tool, None)
+            if manager is not None:
+                terms.extend([
+                    SimpleTerm(datatype.__name__,
+                               title=II18n(datatype).query_attribute('backoffice_label',
+                                                                     request=request) or
+                                     II18n(datatype).query_attribute('label',
+                                                                     request=request))
+                    for datatype in manager.values()
+                ])
+        terms.sort(key=lambda x: x.title)
+        super().__init__(terms)
+
+    def getTermByToken(self, token):
+        try:
+            return super().getTermByToken(token)
+        except LookupError:
+            request = check_request()
+            translate = request.localizer.translate
+            return SimpleTerm(token,
+                              title=translate(_("-- missing value ({}) --")).format(token))
 
 
 def get_all_data_types(request):
     """Get list of all registered data types as JSON object"""
     results = []
     registry = get_local_registry()
+    translate = request.localizer.translate
     for tool in sorted(registry.getAllUtilitiesRegisteredFor(ISharedTool),
                        key=lambda x: II18n(x).query_attribute('title', request=request)):
         manager = ITypedDataManager(tool, None)
@@ -221,7 +227,7 @@ def get_all_data_types(request):
             ]
             content_factory = tool.shared_content_factory
             results.append({
-                'text': request.localizer.translate(content_factory.content_name),
+                'text': translate(content_factory.content_name),
                 'disabled': True,
                 'children': terms
             })
@@ -238,13 +244,36 @@ class TypedSharedToolDataTypesVocabulary(SimpleVocabulary):
         if parent is not None:
             request = check_request()
             manager = ITypedDataManager(parent)
-            terms = [SimpleTerm(datatype.__name__,
-                                title=II18n(datatype).query_attribute('backoffice_label',
-                                                                      request=request) or
-                                      II18n(datatype).query_attribute('label',
-                                                                      request=request))
-                     for datatype in manager.values()]
-        super(TypedSharedToolDataTypesVocabulary, self).__init__(terms)
+            terms = [
+                SimpleTerm(datatype.__name__,
+                           title=II18n(datatype).query_attribute('backoffice_label',
+                                                                 request=request) or
+                                 II18n(datatype).query_attribute('label',
+                                                                 request=request))
+                for datatype in manager.values()
+            ]
+        super().__init__(terms)
+
+
+@vocabulary_config(name=VISIBLE_DATA_TYPES_VOCABULARY)
+class TypedSharedToolVisibleDataTypesVocabulary(SimpleVocabulary):
+    """Typed shared tool visible data types vocabulary"""
+
+    def __init__(self, context):
+        terms = []
+        parent = get_parent(context, ITypedSharedTool)
+        if parent is not None:
+            request = check_request()
+            manager = ITypedDataManager(parent)
+            terms = [
+                SimpleTerm(datatype.__name__,
+                           title=II18n(datatype).query_attribute('backoffice_label',
+                                                                 request=request) or
+                                 II18n(datatype).query_attribute('label',
+                                                                 request=request))
+                for datatype in manager.get_visible_items()
+            ]
+        super().__init__(terms)
 
 
 @vocabulary_config(name=DATA_TYPE_FIELDS_VOCABULARY)
@@ -257,6 +286,8 @@ class TypedSharedToolDataTypesFieldsVocabulary(SimpleVocabulary):
         if (parent is not None) and parent.shared_content_types_fields:
             request = check_request()
             translate = request.localizer.translate
-            terms = [SimpleTerm(name, title=translate(field.title))
-                     for name, field in getFieldsInOrder(parent.shared_content_types_fields)]
-        super(TypedSharedToolDataTypesFieldsVocabulary, self).__init__(terms)
+            terms = [
+                SimpleTerm(name, title=translate(field.title))
+                for name, field in getFieldsInOrder(parent.shared_content_types_fields)
+            ]
+        super().__init__(terms)
