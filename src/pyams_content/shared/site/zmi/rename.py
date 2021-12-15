@@ -15,19 +15,18 @@
 This module defines components which can be used to rename a site element.
 """
 
-from pyams_content.interfaces import MANAGE_SITE_PERMISSION
-from pyams_content.shared.site.interfaces import IBaseSiteItem
 from pyramid.events import subscriber
 from zope.container.interfaces import IOrderedContainer
 from zope.interface import Invalid
 from zope.lifecycleevent import ObjectMovedEvent
 
+from pyams_content.interfaces import MANAGE_SITE_PERMISSION
+from pyams_content.shared.site.interfaces import IBaseSiteItem
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer, IDataExtractedEvent
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
-from pyams_skin.interfaces.viewlet import IContextActionsViewletManager
 from pyams_skin.viewlet.menu import MenuItem
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.unicode import translate_string

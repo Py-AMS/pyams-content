@@ -15,21 +15,26 @@
 This module defines base management components for all shared contents.
 """
 
+from datetime import datetime
 from uuid import uuid4
 
 from pyramid.events import subscriber
 from pyramid.location import lineage
+from zope.copy import copy
 from zope.interface import Interface
 from zope.lifecycleevent import ObjectCreatedEvent
+from zope.location import locate
 
 from pyams_content.interfaces import CREATE_CONTENT_PERMISSION, IBaseContent, \
     MANAGE_CONTENT_PERMISSION, MANAGE_SITE_ROOT_PERMISSION, PUBLISH_CONTENT_PERMISSION
-from pyams_content.shared.common import IWfSharedContent, WfSharedContent
+from pyams_content.shared.common import IBaseSharedTool, ISharedContent, IWfSharedContent, \
+    WfSharedContent
 from pyams_content.shared.common.interfaces import IContributorRestrictions, IManagerRestrictions, \
     ISharedTool, IWfSharedContentRoles
 from pyams_content.zmi.properties import PropertiesEditForm
 from pyams_content.zmi.widget.seo import I18nSEOTextLineFieldWidget
 from pyams_form.ajax import AJAXFormRenderer, ajax_form_config
+from pyams_form.button import Buttons, handler
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer, IDataExtractedEvent
 from pyams_i18n.interfaces import II18n, II18nManager, INegotiator
@@ -37,23 +42,30 @@ from pyams_i18n_views.zmi.manager import I18nManagerLanguagesEditForm
 from pyams_layer.interfaces import IFormLayer, IPyAMSLayer
 from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_security.interfaces.base import FORBIDDEN_PERMISSION, VIEW_SYSTEM_PERMISSION
-from pyams_skin.interfaces.viewlet import IBreadcrumbItem
+from pyams_sequence.interfaces import ISequentialIdInfo
+from pyams_skin.interfaces.viewlet import IBreadcrumbItem, IFormHeaderViewletManager
+from pyams_skin.schema.button import CloseButton, SubmitButton
 from pyams_skin.viewlet.actions import ContextAddAction
 from pyams_skin.viewlet.breadcrumb import BreadcrumbItem
+from pyams_skin.viewlet.help import AlertMessage
+from pyams_skin.viewlet.menu import MenuItem
 from pyams_utils.adapter import ContextAdapter, ContextRequestViewAdapter, adapter_config
 from pyams_utils.registry import get_utility
 from pyams_utils.request import check_request
+from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url, generate_url
 from pyams_viewlet.manager import viewletmanager_config
 from pyams_viewlet.viewlet import viewlet_config
-from pyams_workflow.interfaces import IWorkflow, IWorkflowInfo, IWorkflowState, IWorkflowVersions
+from pyams_workflow.interfaces import IWorkflow, IWorkflowCommentInfo, IWorkflowInfo, \
+    IWorkflowPublicationInfo, IWorkflowState, IWorkflowVersions
+from pyams_workflow.versions import WorkflowHistoryItem
 from pyams_zmi.form import AdminModalAddForm
 from pyams_zmi.helper.event import get_json_widget_refresh_callback
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.table import ITableElementEditor
-from pyams_zmi.interfaces.viewlet import IContentManagementMenu, IMenuHeader, \
-    INavigationViewletManager, IPropertiesMenu, \
-    ISiteManagementMenu, IToolbarViewletManager
+from pyams_zmi.interfaces.viewlet import IActionsViewletManager, IContentManagementMenu, \
+    IMenuHeader, INavigationViewletManager, IPropertiesMenu, ISiteManagementMenu, \
+    IToolbarViewletManager
 from pyams_zmi.table import TableElementEditor
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuHeaderDivider, NavigationMenuItem, \
     SiteManagementMenu
@@ -359,3 +371,144 @@ class SharedContentLanguagesEditFormPermissionChecker(ContextRequestViewAdapter)
     @property
     def edit_permission(self):
         return SharedContentPermissionChecker(self.context).edit_permission
+
+
+#
+# Content duplication
+#
+
+@viewlet_config(name='duplicate-content.menu',
+                context=IWfSharedContent, layer=IAdminLayer,
+                manager=IActionsViewletManager, weight=50,
+                permission=CREATE_CONTENT_PERMISSION)
+class SharedContentDuplicateMenu(MenuItem):
+    """Shared content duplication menu"""
+
+    label = _("Duplicate content")
+    icon_class = 'far fa-copy'
+
+    href = 'duplicate-content.html'
+    modal_target = True
+
+
+class ISharedContentDuplicateButtons(Interface):
+    """Shared content duplication form buttons"""
+
+    close = CloseButton(name='close', title=_("Cancel"))
+    duplicate = SubmitButton(name='duplicate', title=_("Duplicate this content"))
+
+
+@ajax_form_config(name='duplicate-content.html',
+                  context=IWfSharedContent, layer=IPyAMSLayer,
+                  permission=CREATE_CONTENT_PERMISSION)
+class SharedContentDuplicateForm(AdminModalAddForm):
+    """Shared content duplicate form"""
+
+    @property
+    def title(self):
+        return II18n(self.context).query_attribute('title', request=self.request)
+
+    legend = _("Duplicate content")
+
+    fields = Fields(IWfSharedContent).select('title') + \
+        Fields(IWorkflowCommentInfo)
+    buttons = Buttons(ISharedContentDuplicateButtons)
+
+    _edit_permission = CREATE_CONTENT_PERMISSION
+
+    def update_widgets(self, prefix=None):
+        super().update_widgets(prefix)
+        title = self.widgets.get('title')
+        if title is not None:
+            title.value = self.context.title.copy()
+            title.update()
+
+    @handler(buttons['duplicate'])
+    def handle_duplicate(self, action):
+        super().handle_add(self, action)
+
+    def create_and_add(self, data):
+        data = data.get(self, data)
+        request = self.request
+        registry = request.registry
+        # initialize new content
+        content = get_parent(self.context, ISharedContent)
+        new_content = content.__class__()
+        registry.notify(ObjectCreatedEvent(new_content))
+        container = get_parent(content, IBaseSharedTool)
+        container[str(uuid4())] = new_content
+        # initialize new version
+        new_version = copy(self.context)
+        registry.notify(ObjectCreatedEvent(new_version))
+        locate(new_version, self.context.__parent__)  # locate new version for traversing to work...
+        new_version.title = data['title']
+        if getattr(new_version, 'handle_short_name', True):
+            new_version.short_name = new_version.title.copy()
+        if getattr(new_version, 'handle_content_url', True):
+            lang = get_utility(INegotiator).server_language
+            new_version.content_url = generate_url(new_version.title.get(lang, ''))
+        new_version.creator = request.principal.id
+        new_version.modifiers = set()
+        roles = IWfSharedContentRoles(new_version)
+        roles.owner = request.principal.id
+        # # check comments
+        # comments = IReviewComments(new_version, None)
+        # if comments is not None:
+        #     comments.clear()
+        # store new version
+        translate = self.request.localizer.translate
+        workflow = IWorkflow(new_content)
+        IWorkflowVersions(new_content).add_version(new_version, workflow.initial_state)
+        # reset publication info
+        pub_info = IWorkflowPublicationInfo(new_version, None)
+        if pub_info is not None:
+            pub_info.reset(complete=True)
+        # update new version history
+        source_state = IWorkflowState(self.context)
+        state = IWorkflowState(new_version)
+        state.history.clear()
+        history = WorkflowHistoryItem(date=datetime.utcnow(),
+                                      principal=request.principal.id,
+                                      comment=translate(
+                                          _("Clone created from version {source} of {oid} "
+                                            "(in « {state} » state)")).format(
+                                          source=source_state.version_id,
+                                          oid=ISequentialIdInfo(self.context).get_short_oid(),
+                                          state=translate(IWorkflow(self.context).get_state_label(
+                                              source_state.state))))
+        state.history.append(history)
+        history = WorkflowHistoryItem(date=datetime.utcnow(),
+                                      target_state=workflow.initial_state,
+                                      principal=request.principal.id,
+                                      comment=data.get('comment'))
+        state.history.append(history)
+        return new_version
+
+
+@adapter_config(required=(IWfSharedContent, IAdminLayer, SharedContentDuplicateForm),
+                provides=IAJAXFormRenderer)
+class SharedContentDuplicateFormRenderer(ContextRequestViewAdapter):
+    """Shared content duplicate form renderer"""
+
+    def render(self, changes):
+        """AJAX form renderer"""
+        if changes is None:
+            return None
+        return {
+            'status': 'redirect',
+            'location': absolute_url(changes, self.request, 'admin')
+        }
+
+
+@viewlet_config(name='duplication-help',
+                context=IWfSharedContent, layer=IAdminLayer, view=SharedContentDuplicateForm,
+                manager=IFormHeaderViewletManager, weight=10)
+class SharedContentDuplicateHelp(AlertMessage):
+    """Shared content duplicate help"""
+
+    _message = _("You are going to duplicate a whole content.<br />"
+                 "The new copy is going to be created in 'draft' mode, so that you can modify "
+                 "it before publication.<br />"
+                 "A new unique number is also going to be assigned to it. This number will be "
+                 "shared by all content's versions.")
+    message_renderer = 'markdown'

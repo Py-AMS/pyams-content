@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2021-12-15 11:13+0100\n"
+"POT-Creation-Date: 2021-12-15 21:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,7 +138,7 @@ msgid "Pictogram properties"
 msgstr ""
 
 #: ./src/pyams_content/reference/pictogram/zmi/__init__.py:159
-#: ./src/pyams_content/reference/pictogram/zmi/widget/__init__.py:55
+#: ./src/pyams_content/reference/pictogram/zmi/widget/__init__.py:58
 msgid "Default header: --"
 msgstr ""
 
@@ -174,7 +174,7 @@ msgid ""
 "To include a pictogram, you can move it from *available pictograms* list to *selected pictograms* list by just doing a double click onto it; the reverse operation is working in the same way..."
 msgstr ""
 
-#: ./src/pyams_content/reference/pictogram/zmi/widget/__init__.py:36
+#: ./src/pyams_content/reference/pictogram/zmi/widget/__init__.py:38
 msgid "No selected pictogram"
 msgstr ""
 
@@ -207,7 +207,7 @@ msgstr ""
 #: ./src/pyams_content/reference/zmi/table.py:51
 #: ./src/pyams_content/root/zmi/__init__.py:56
 #: ./src/pyams_content/shared/common/zmi/manager.py:82
-#: ./src/pyams_content/shared/common/zmi/__init__.py:269
+#: ./src/pyams_content/shared/common/zmi/__init__.py:281
 #: ./src/pyams_content/shared/site/zmi/folder.py:168
 #: ./src/pyams_content/shared/site/zmi/manager.py:161
 msgid "Properties"
@@ -1312,6 +1312,7 @@ msgid "CONTRIBUTORS - {} modified contents"
 msgstr ""
 
 #: ./src/pyams_content/shared/common/zmi/workflow.py:62
+#: ./src/pyams_content/shared/common/zmi/__init__.py:397
 msgid "Cancel"
 msgstr ""
 
@@ -1509,34 +1510,56 @@ msgid ""
 "you share it."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:78
+#: ./src/pyams_content/shared/common/zmi/__init__.py:90
 #, python-format
 msgid "Add new: {}"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:96
+#: ./src/pyams_content/shared/common/zmi/__init__.py:108
 #, python-format
 msgid "Add new content: {}"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:99
+#: ./src/pyams_content/shared/common/zmi/__init__.py:111
 msgid "New content properties"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:246
+#: ./src/pyams_content/shared/common/zmi/__init__.py:258
 msgid "Content management"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:257
+#: ./src/pyams_content/shared/common/zmi/__init__.py:269
 msgid "Composition"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:279
+#: ./src/pyams_content/shared/common/zmi/__init__.py:291
 msgid "Content properties"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:280
+#: ./src/pyams_content/shared/common/zmi/__init__.py:292
 msgid "Main content properties"
+msgstr ""
+
+#: ./src/pyams_content/shared/common/zmi/__init__.py:387
+#: ./src/pyams_content/shared/common/zmi/__init__.py:411
+msgid "Duplicate content"
+msgstr ""
+
+#: ./src/pyams_content/shared/common/zmi/__init__.py:398
+msgid "Duplicate this content"
+msgstr ""
+
+#: ./src/pyams_content/shared/common/zmi/__init__.py:473
+#, python-format
+msgid "Clone created from version {source} of {oid} (in « {state} » state)"
+msgstr ""
+
+#: ./src/pyams_content/shared/common/zmi/__init__.py:509
+msgid ""
+"You are going to duplicate a whole content.<br />The new copy is going to be "
+"created in 'draft' mode, so that you can modify it before publication.<br />A"
+" new unique number is also going to be assigned to it. This number will be "
+"shared by all content's versions."
 msgstr ""
 
 #: ./src/pyams_content/shared/common/zmi/header.py:64
@@ -2199,27 +2222,27 @@ msgstr ""
 msgid "Site manager properties"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/zmi/rename.py:53
+#: ./src/pyams_content/shared/site/zmi/rename.py:52
 msgid "Change URL"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/zmi/rename.py:70
+#: ./src/pyams_content/shared/site/zmi/rename.py:69
 msgid "Change item URL"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/zmi/rename.py:79
+#: ./src/pyams_content/shared/site/zmi/rename.py:78
 msgid "Item URL"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/zmi/rename.py:80
+#: ./src/pyams_content/shared/site/zmi/rename.py:79
 msgid "URL part used to access this item"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/zmi/rename.py:109
+#: ./src/pyams_content/shared/site/zmi/rename.py:108
 msgid "Item URL can't be empty!"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/zmi/rename.py:114
+#: ./src/pyams_content/shared/site/zmi/rename.py:113
 msgid "Selected name is already used!"
 msgstr ""
 
