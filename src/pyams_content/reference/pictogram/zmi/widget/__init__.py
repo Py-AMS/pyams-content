@@ -10,11 +10,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.reference.pictogram.zmi.widget module
 
 """
-
-__docformat__ = 'restructuredtext'
 
 from zope.interface import implementer
 
@@ -23,10 +21,14 @@ from pyams_content.reference.pictogram.zmi import get_pictogram_header
 from pyams_form.browser.select import SelectWidget
 from pyams_form.widget import FieldWidget
 from pyams_utils.interfaces.data import IObjectData
-
-from pyams_content import _
 from pyams_utils.registry import query_utility
 from pyams_utils.url import absolute_url
+from pyams_viewlet.viewlet import RawContentProvider
+
+
+__docformat__ = 'restructuredtext'
+
+from pyams_content import _
 
 
 @implementer(IObjectData)
@@ -46,13 +48,18 @@ class PictogramSelectWidget(SelectWidget):
         if self.value and (self.pictograms is not None):
             pictogram = self.pictograms.get(self.value[0])
             if pictogram is not None:
-                self.suffix = '<span id="{0}" class="text-info">{1}</span>'.format(
-                    self.label_id,
-                    get_pictogram_header(pictogram, self.request))
+                self.suffix = RawContentProvider(
+                    self.context, self.request,
+                    html=f'<span id="{self.label_id}"'
+                         f' class="text-info">'
+                         f'{get_pictogram_header(pictogram, self.request)}'
+                         f'</span>')
                 return
-        self.suffix = '<span id="{0}" class="text-info">{1}</span>'.format(
-            self.label_id,
-            self.request.localizer.translate(_("Default header: --")))
+        header = self.request.localizer.translate(_("Default header: --"))
+        self.suffix = RawContentProvider(
+            self.context, self.request,
+            html=f'<span id="{self.label_id}"'
+                 f' class="text-info">{header}</span>')
 
     @property
     def object_data(self):
