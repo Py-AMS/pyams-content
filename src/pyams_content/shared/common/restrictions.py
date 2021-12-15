@@ -102,7 +102,7 @@ class SharedToolRestrictions(Folder):
         if restrictions:
             for _name, adapter in sorted(request.registry.getAdapters((restrictions,),
                                                                       IRestrictionInfo),
-                                         key=lambda x: get_adapter_weight(x[1])):
+                                         key=get_adapter_weight):
                 if adapter.can_access(context, permission, request):
                     return True
         return False

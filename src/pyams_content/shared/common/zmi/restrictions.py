@@ -24,7 +24,6 @@ from pyams_content.shared.common.interfaces import IContributorRestrictions, \
     IPrincipalRestrictions, ISharedToolRoles
 from pyams_content.shared.common.zmi.interfaces import IContributorRestrictionsEditForm, \
     IManagerRestrictionsEditForm, IManagerRestrictionsGroup
-from pyams_file_views.zmi.image import ImageCropFormHelp
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.group import Group
@@ -33,7 +32,6 @@ from pyams_form.interfaces.form import IAJAXFormRenderer, IGroup
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_pagelet.pagelet import pagelet_config
 from pyams_security.interfaces import ISecurityManager
-from pyams_security.interfaces.base import IPrincipalInfo
 from pyams_security_views.zmi.interfaces import IObjectSecurityMenu
 from pyams_skin.interfaces.viewlet import IHelpViewletManager
 from pyams_skin.viewlet.help import AlertMessage
@@ -43,7 +41,7 @@ from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.registry import get_utility
 from pyams_utils.url import absolute_url
 from pyams_viewlet.viewlet import viewlet_config
-from pyams_zmi.form import AdminModalEditForm, FormGroupChecker, FormGroupSwitcher
+from pyams_zmi.form import AdminModalEditForm, FormGroupChecker
 from pyams_zmi.helper.event import get_json_table_row_refresh_callback
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.table import ITableElementEditor
@@ -58,205 +56,12 @@ from pyams_content import _  # pylint: disable=ungrouped-imports
 
 
 #
-# Contributors restrictions table view
-#
-
-@viewlet_config(name='contributors-restrictions.menu',
-                context=IBaseSharedTool, request=IAdminLayer,
-                manager=IObjectSecurityMenu, weight=200,
-                permission=MANAGE_TOOL_PERMISSION)
-class ContributorsRestrictionsMenu(NavigationMenuItem):
-    """Contributor restrictions menu"""
-
-    label = _("Contributors restrictions")
-    href = '#contributors-restrictions.html'
-
-
-class ContributorsRestrictionsTable(Table):
-    """Contributors restrictions table"""
-
-    def get_row_id(self, row):
-        return f'{self.id}::{row[0].id}'
-
-
-@adapter_config(required=(IBaseSharedTool, IAdminLayer, ContributorsRestrictionsTable),
-                provides=IValues)
-class ContributorsRestrictionsTableValues(ContextRequestViewAdapter):
-    """Contributors restrictions table values"""
-
-    @property
-    def values(self):
-        """Contributors restrictions table values getter"""
-        sm = get_utility(ISecurityManager)  # pylint: disable=invalid-name
-        roles = ISharedToolRoles(self.context)
-        restrictions = IContributorRestrictions(self.context)
-        for principal_id in roles.contributors:
-            yield sm.get_principal(principal_id), restrictions.get_restrictions(principal_id)
-
-
-@adapter_config(name='title',
-                required=(IBaseSharedTool, IAdminLayer, ContributorsRestrictionsTable),
-                provides=IColumn)
-class ContributorTitleColumn(I18nColumnMixin, GetAttrColumn):
-    """Contributor title column"""
-
-    i18n_header = _("Contributor name")
-    attr_name = 'title'
-
-    weight = 10
-
-    def get_value(self, obj):
-        return super().get_value(obj[0])
-
-
-@adapter_config(name='warning',
-                required=(IBaseSharedTool, IAdminLayer, ContributorsRestrictionsTable),
-                provides=IColumn)
-class ContributorWarningColumn(I18nColumnMixin, IconColumn):
-    """Contributor workflow warning column"""
-
-    i18n_header = _("Show warnings")
-    css_classes = {}
-    weight = 20
-
-    def get_icon_class(self, item):
-        restrictions = IContributorWorkflowRestrictions(item[1])
-        if restrictions.show_workflow_warning:
-            return 'fas fa-check'
-        return ''
-
-
-@adapter_config(name='substitutes',
-                required=(IBaseSharedTool, IAdminLayer, ContributorsRestrictionsTable),
-                provides=IColumn)
-class ContributorSubstitutesColumn(I18nColumnMixin, GetAttrColumn):
-    """Contributor substitutes column"""
-
-    i18n_header = _("Substitute of")
-    weight = 30
-
-    def get_value(self, obj):
-        restrictions = IContributorWorkflowRestrictions(obj[1])
-        if not restrictions.owners:
-            return '--'
-        sm = get_utility(ISecurityManager)
-        return ', '.join((
-            sm.get_principal(principal_id).title
-            for principal_id in restrictions.owners
-        ))
-
-
-@pagelet_config(name='contributors-restrictions.html',
-                context=IBaseSharedTool, layer=IPyAMSLayer,
-                permission=MANAGE_TOOL_PERMISSION)
-class ContributorsRestrictionsView(TableAdminView):
-    """Contributors restrictions view"""
-
-    title = _("Contributors restrictions")
-
-    table_class = ContributorsRestrictionsTable
-    table_label = _("Contributors list")
-
-
-#
-# Contributor restrictions view
-#
-
-@adapter_config(required=(tuple, IAdminLayer, ContributorsRestrictionsTable),
-                provides=ITableElementEditor)
-class ContributorRestrictionsEditor(TableElementEditor):
-    """Contributor restrictions editor"""
-
-    view_name = 'contributor-restrictions.html'
-
-    @property
-    def href(self):
-        return absolute_url(self.view.context, self.request, self.view_name,
-                            query={'principal_id': self.context[0].id})
-
-
-@ajax_form_config(name='contributor-restrictions.html',
-                  context=IBaseSharedTool, layer=IPyAMSLayer,
-                  permission=MANAGE_TOOL_PERMISSION)
-@implementer(IContributorRestrictionsEditForm)
-class ContributorRestrictionsEditForm(AdminModalEditForm):
-    """Contributor restrictions edit form"""
-
-    @property
-    def title(self):
-        """Form title getter"""
-        translate = self.request.localizer.translate
-        return '<small>{}</small><br />{}'.format(
-            get_object_label(self.context, self.request, self),
-            translate(_("Contributor restrictions: {}")).format(self.principal.title))
-
-    fields = Fields(IPrincipalRestrictions)
-
-    @reify
-    def principal_id(self):
-        """Principal ID getter"""
-        params = self.request.params
-        return params.get('principal_id') or params.get('form.widgets.principal_id')
-
-    @reify
-    def principal(self):
-        """Principal ID getter"""
-        sm = get_utility(ISecurityManager)  # pylint: disable=invalid-name
-        return sm.get_principal(self.principal_id)
-
-    def get_content(self):
-        return IContributorRestrictions(self.context).get_restrictions(self.principal.id)
-
-    def update_widgets(self, prefix=None):
-        super().update_widgets(prefix)
-        principal_id = self.widgets.get('principal_id')
-        if principal_id is not None:
-            principal_id.mode = HIDDEN_MODE
-            principal_id.value = self.principal_id
-
-
-@adapter_config(required=(IBaseSharedTool, IAdminLayer, IContributorRestrictionsEditForm),
-                provides=IAJAXFormRenderer)
-class ContributorRestrictionsEditFormRenderer(ContextRequestViewAdapter):
-    """Contributor restrictions edit form renderer"""
-
-    def render(self, changes):
-        """AJAX form renderer"""
-        if not changes:
-            return None
-        sm = get_utility(ISecurityManager)
-        restrictions = IContributorRestrictions(self.context)
-        principal_id = self.view.principal_id
-        context = sm.get_principal(principal_id), restrictions.get_restrictions(principal_id)
-        return {
-            'callbacks': [
-                get_json_table_row_refresh_callback(self.context, self.request,
-                                                    ContributorsRestrictionsTable,
-                                                    context)
-            ]
-        }
-
-
-@adapter_config(name='workflow',
-                required=(IBaseSharedTool, IAdminLayer, IContributorRestrictionsEditForm),
-                provides=IGroup)
-class ContributorRestrictionsWorkflowGroup(Group):
-    """Contributor_restrictions workflow group"""
-
-    legend = _("Contributor restrictions")
-    fields = Fields(IContributorWorkflowRestrictions)
-
-    def get_content(self):
-        return IContributorWorkflowRestrictions(self.parent_form.get_content())
-
-
-#
 # Managers restrictions table view
 #
 
 @viewlet_config(name='managers-restrictions.menu',
                 context=IBaseSharedTool, request=IAdminLayer,
-                manager=IObjectSecurityMenu, weight=210,
+                manager=IObjectSecurityMenu, weight=200,
                 permission=MANAGE_TOOL_PERMISSION)
 class ManagersRestrictionsMenu(NavigationMenuItem):
     """Manager restrictions menu"""
@@ -484,3 +289,196 @@ class ManagerRestrictionsHelp(AlertMessage):
                  "manage contents matching at least one of these properties!")
 
     message_renderer = 'markdown'
+
+
+#
+# Contributors restrictions table view
+#
+
+@viewlet_config(name='contributors-restrictions.menu',
+                context=IBaseSharedTool, request=IAdminLayer,
+                manager=IObjectSecurityMenu, weight=210,
+                permission=MANAGE_TOOL_PERMISSION)
+class ContributorsRestrictionsMenu(NavigationMenuItem):
+    """Contributor restrictions menu"""
+
+    label = _("Contributors restrictions")
+    href = '#contributors-restrictions.html'
+
+
+class ContributorsRestrictionsTable(Table):
+    """Contributors restrictions table"""
+
+    def get_row_id(self, row):
+        return f'{self.id}::{row[0].id}'
+
+
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, ContributorsRestrictionsTable),
+                provides=IValues)
+class ContributorsRestrictionsTableValues(ContextRequestViewAdapter):
+    """Contributors restrictions table values"""
+
+    @property
+    def values(self):
+        """Contributors restrictions table values getter"""
+        sm = get_utility(ISecurityManager)  # pylint: disable=invalid-name
+        roles = ISharedToolRoles(self.context)
+        restrictions = IContributorRestrictions(self.context)
+        for principal_id in roles.contributors:
+            yield sm.get_principal(principal_id), restrictions.get_restrictions(principal_id)
+
+
+@adapter_config(name='title',
+                required=(IBaseSharedTool, IAdminLayer, ContributorsRestrictionsTable),
+                provides=IColumn)
+class ContributorTitleColumn(I18nColumnMixin, GetAttrColumn):
+    """Contributor title column"""
+
+    i18n_header = _("Contributor name")
+    attr_name = 'title'
+
+    weight = 10
+
+    def get_value(self, obj):
+        return super().get_value(obj[0])
+
+
+@adapter_config(name='warning',
+                required=(IBaseSharedTool, IAdminLayer, ContributorsRestrictionsTable),
+                provides=IColumn)
+class ContributorWarningColumn(I18nColumnMixin, IconColumn):
+    """Contributor workflow warning column"""
+
+    i18n_header = _("Show warnings")
+    css_classes = {}
+    weight = 20
+
+    def get_icon_class(self, item):
+        restrictions = IContributorWorkflowRestrictions(item[1])
+        if restrictions.show_workflow_warning:
+            return 'fas fa-check'
+        return ''
+
+
+@adapter_config(name='substitutes',
+                required=(IBaseSharedTool, IAdminLayer, ContributorsRestrictionsTable),
+                provides=IColumn)
+class ContributorSubstitutesColumn(I18nColumnMixin, GetAttrColumn):
+    """Contributor substitutes column"""
+
+    i18n_header = _("Substitute of")
+    weight = 30
+
+    def get_value(self, obj):
+        restrictions = IContributorWorkflowRestrictions(obj[1])
+        if not restrictions.owners:
+            return '--'
+        sm = get_utility(ISecurityManager)
+        return ', '.join((
+            sm.get_principal(principal_id).title
+            for principal_id in restrictions.owners
+        ))
+
+
+@pagelet_config(name='contributors-restrictions.html',
+                context=IBaseSharedTool, layer=IPyAMSLayer,
+                permission=MANAGE_TOOL_PERMISSION)
+class ContributorsRestrictionsView(TableAdminView):
+    """Contributors restrictions view"""
+
+    title = _("Contributors restrictions")
+
+    table_class = ContributorsRestrictionsTable
+    table_label = _("Contributors list")
+
+
+#
+# Contributor restrictions view
+#
+
+@adapter_config(required=(tuple, IAdminLayer, ContributorsRestrictionsTable),
+                provides=ITableElementEditor)
+class ContributorRestrictionsEditor(TableElementEditor):
+    """Contributor restrictions editor"""
+
+    view_name = 'contributor-restrictions.html'
+
+    @property
+    def href(self):
+        return absolute_url(self.view.context, self.request, self.view_name,
+                            query={'principal_id': self.context[0].id})
+
+
+@ajax_form_config(name='contributor-restrictions.html',
+                  context=IBaseSharedTool, layer=IPyAMSLayer,
+                  permission=MANAGE_TOOL_PERMISSION)
+@implementer(IContributorRestrictionsEditForm)
+class ContributorRestrictionsEditForm(AdminModalEditForm):
+    """Contributor restrictions edit form"""
+
+    @property
+    def title(self):
+        """Form title getter"""
+        translate = self.request.localizer.translate
+        return '<small>{}</small><br />{}'.format(
+            get_object_label(self.context, self.request, self),
+            translate(_("Contributor restrictions: {}")).format(self.principal.title))
+
+    fields = Fields(IPrincipalRestrictions)
+
+    @reify
+    def principal_id(self):
+        """Principal ID getter"""
+        params = self.request.params
+        return params.get('principal_id') or params.get('form.widgets.principal_id')
+
+    @reify
+    def principal(self):
+        """Principal ID getter"""
+        sm = get_utility(ISecurityManager)  # pylint: disable=invalid-name
+        return sm.get_principal(self.principal_id)
+
+    def get_content(self):
+        return IContributorRestrictions(self.context).get_restrictions(self.principal.id)
+
+    def update_widgets(self, prefix=None):
+        super().update_widgets(prefix)
+        principal_id = self.widgets.get('principal_id')
+        if principal_id is not None:
+            principal_id.mode = HIDDEN_MODE
+            principal_id.value = self.principal_id
+
+
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, IContributorRestrictionsEditForm),
+                provides=IAJAXFormRenderer)
+class ContributorRestrictionsEditFormRenderer(ContextRequestViewAdapter):
+    """Contributor restrictions edit form renderer"""
+
+    def render(self, changes):
+        """AJAX form renderer"""
+        if not changes:
+            return None
+        sm = get_utility(ISecurityManager)
+        restrictions = IContributorRestrictions(self.context)
+        principal_id = self.view.principal_id
+        context = sm.get_principal(principal_id), restrictions.get_restrictions(principal_id)
+        return {
+            'callbacks': [
+                get_json_table_row_refresh_callback(self.context, self.request,
+                                                    ContributorsRestrictionsTable,
+                                                    context)
+            ]
+        }
+
+
+@adapter_config(name='workflow',
+                required=(IBaseSharedTool, IAdminLayer, IContributorRestrictionsEditForm),
+                provides=IGroup)
+class ContributorRestrictionsWorkflowGroup(Group):
+    """Contributor_restrictions workflow group"""
+
+    legend = _("Contributor restrictions")
+    fields = Fields(IContributorWorkflowRestrictions)
+
+    def get_content(self):
+        return IContributorWorkflowRestrictions(self.parent_form.get_content())
