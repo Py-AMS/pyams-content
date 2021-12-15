@@ -52,6 +52,7 @@ from pyams_viewlet.viewlet import viewlet_config
 from pyams_workflow.interfaces import IWorkflowPublicationInfo
 from pyams_zmi.helper.container import delete_container_element, switch_element_attribute
 from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces.table import IReorderColumn
 from pyams_zmi.interfaces.viewlet import ISiteManagementMenu
 from pyams_zmi.skin import AdminSkin
 from pyams_zmi.table import ReorderColumn, Table, TableAdminView, TrashColumn, get_table_id
@@ -108,12 +109,11 @@ class SiteContainerTreeTable(Table):
                 }
             }),
             'data-ams-location': absolute_url(self.context, self.request),
-            'data-ordering': 'true',
             'data-searching': 'false',
             'data-length-change': 'false',
             'data-info': 'false',
             'data-paging': 'false',
-            'data-ams-order': '2,asc',
+            'data-ams-order': '0,asc',
             'data-ams-visible': json.dumps(IWorkflowPublicationInfo(self.context).is_published()),
             'data-ams-tree-node-id': intids.queryId(manager)
         })
@@ -124,7 +124,7 @@ class SiteContainerTreeTable(Table):
         })
         attributes.setdefault('td', {}).update({
             'data-order': lambda x, col: ':'.join(get_item_order(x))
-                if col.__name__ == 'name' else None
+                if IReorderColumn.providedBy(col) else None
         })
         permission = self.permission
         if self.can_sort and \

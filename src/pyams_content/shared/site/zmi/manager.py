@@ -21,9 +21,9 @@ from zope.interface import Interface, Invalid
 from pyams_content.interfaces import IBaseContent, MANAGE_SITE_ROOT_PERMISSION
 from pyams_content.root.zmi.sites import SiteRootSitesTable
 from pyams_content.shared.common.interfaces import IBaseSharedTool, ISharedSite
-from pyams_content.shared.common.zmi.properties import PropertiesEditForm
+from pyams_content.zmi.properties import PropertiesEditForm
 from pyams_content.shared.site.interfaces import ISiteManager
-from pyams_content.zmi.interfaces import IDashboardColumn, IDashboardContentType, IDashboardTable
+from pyams_content.zmi.interfaces import IDashboardColumn, IDashboardContentType
 from pyams_form.ajax import AJAXFormRenderer, ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer, IDataExtractedEvent
@@ -45,7 +45,7 @@ from pyams_zmi.helper.event import get_json_table_row_add_callback
 from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager, \
-    IPropertiesMenu, ISiteManagementMenu
+    IMenuHeader, IPropertiesMenu, ISiteManagementMenu
 from pyams_zmi.table import TableElementEditor
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
@@ -143,6 +143,13 @@ class SiteManagerBreadcrumbs(BreadcrumbItem):
     css_class = 'breadcrumb-item persistent strong'
 
 
+@adapter_config(required=(ISiteManager, IAdminLayer, Interface, ISiteManagementMenu),
+                provides=IMenuHeader)
+def site_manager_management_menu_header(context, request, view, manager):
+    """Site manager management menu header adapter"""
+    return _("Site management")
+
+
 @viewletmanager_config(name='properties.menu',
                        context=ISiteManager, layer=IAdminLayer,
                        manager=ISiteManagementMenu, weight=10,
@@ -193,6 +200,6 @@ class SiteManagerPropertiesEditFormRenderer(AJAXFormRenderer):
 
 @adapter_config(required=(ISharedSite, IAdminLayer, IDashboardColumn),
                 provides=IDashboardContentType)
-def site_root_content_type_getter(context, request, column):
-    """Site root sites content-type getter"""
+def site_manager_content_type(context, request, column):
+    """Site manager content-type getter"""
     return request.localizer.translate(context.content_name)

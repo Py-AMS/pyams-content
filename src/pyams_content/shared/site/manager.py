@@ -125,7 +125,7 @@ class SiteManagerVocabulary(SimpleVocabulary):
 
     def __init__(self, context=None):
         request = query_request()
-        super(SiteManagerVocabulary, self).__init__([
+        super().__init__([
             SimpleTerm(v, title=II18n(t).query_attribute('title', request=request))
             for v, t in get_utilities_for(self.interface)
         ])

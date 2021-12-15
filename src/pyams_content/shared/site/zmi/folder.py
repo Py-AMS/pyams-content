@@ -20,7 +20,7 @@ from zope.schema import Int, Text
 
 from pyams_content.interfaces import IBaseContent, MANAGE_SITE_PERMISSION
 from pyams_content.shared.common.interfaces import IBaseSharedTool
-from pyams_content.shared.common.zmi.properties import PropertiesEditForm
+from pyams_content.zmi.properties import PropertiesEditForm
 from pyams_content.shared.site.interfaces import ISiteContainer, ISiteFolder
 from pyams_content.shared.site.zmi.interfaces import ISiteTreeTable
 from pyams_content.shared.site.zmi.widget.folder import SiteManagerFoldersSelectorFieldWidget
