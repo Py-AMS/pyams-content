@@ -23,7 +23,7 @@ from zope.interface import implementer
 from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
 from pyams_content.shared.common.interfaces import IDeletableElement
 from pyams_content.shared.site.interfaces import ISiteManager
-from pyams_content.zmi.dashboard import DashboardContentTypeColumn, DashboardLabelColumn
+from pyams_content.zmi.dashboard import DashboardLabelColumn
 from pyams_content.zmi.interfaces import IDashboardTable
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_pagelet.pagelet import pagelet_config
@@ -53,7 +53,7 @@ class SiteRootSitesTable(Table):
     def data_attributes(self):
         attributes = super().data_attributes
         attributes['table'].update({
-            'data-ams-order': '2,asc'
+            'data-ams-order': '1,asc'
         })
         return attributes
 
@@ -96,15 +96,6 @@ class SiteRootSitesTableVisibleColumn(IconColumn):
         if info.is_published():
             return translate(_("Visible site"))
         return translate(_("Not visible site"))
-
-
-@adapter_config(name='content-type',
-                required=(ISiteRoot, IAdminLayer, SiteRootSitesTable),
-                provides=IColumn)
-class SiteRootSitesContentTypeColumn(DashboardContentTypeColumn):
-    """Site root site content-type column"""
-
-    weight = 5
 
 
 @adapter_config(name='name',

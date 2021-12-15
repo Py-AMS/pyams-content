@@ -15,12 +15,14 @@
 Common management interfaces.
 """
 
-__docformat__ = 'restructuredtext'
-
+from pyramid.interfaces import IView
 from zope.interface import Interface
 
 
-class IDashboardView(Interface):
+__docformat__ = 'restructuredtext'
+
+
+class IDashboardView(IView):
     """Dashboard view marker interface"""
 
 
@@ -50,6 +52,10 @@ class IDashboardContentType(Interface):
     """Dashboard content type column provider interface"""
 
 
+class ISiteRootDashboardContentType(IDashboardContentType):
+    """Site root dashboard content type column provider interface"""
+
+
 class IDashboardContentNumber(Interface):
     """Dashboard content reference number column provider interface"""
 
@@ -76,6 +82,14 @@ class IDashboardContentOwner(Interface):
 
 class IDashboardContentTimestamp(Interface):
     """Dashboard content modification timestamp column provider interface"""
+
+
+class IMyDashboardMenu(Interface):
+    """My dashboard menu marker interface"""
+
+
+class IAllDashboardMenu(Interface):
+    """General dashboard menu"""
 
 
 class IPropertiesEditForm(Interface):
