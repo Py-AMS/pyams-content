@@ -40,7 +40,7 @@ from pyams_content import _
 class BasicIllustrationPropertiesEditForm(FormGroupSwitcher):
     """Basic illustration properties edit form"""
 
-    legend = _("Illustration")
+    legend = _("Main illustration")
     weight = 10
 
     fields = Fields(IBasicIllustration)
