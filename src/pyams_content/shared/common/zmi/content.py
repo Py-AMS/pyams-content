@@ -58,7 +58,9 @@ def shared_content_type(context, request, column):
     if IWfTypedSharedContent.providedBy(context):
         data_type = context.get_data_type()
         if data_type is not None:
-            return II18n(data_type).query_attribute('label', request=request)
+            i18n = II18n(data_type)
+            return i18n.query_attribute('backoffice_label', request=request) or \
+                i18n.query_attribute('label', request=request)
     return None
 
 
