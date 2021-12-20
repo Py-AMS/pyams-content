@@ -20,6 +20,7 @@ from zope.schema.fieldproperty import FieldProperty
 from pyams_content.component.illustration import IIllustrationTarget, ILinkIllustrationTarget
 from pyams_content.component.paragraph.interfaces import IParagraphContainerTarget
 from pyams_content.feature.preview.interfaces import IPreviewTarget
+from pyams_content.feature.review import IReviewTarget
 from pyams_content.shared.common import ISharedContent, SharedContent, WfSharedContent
 from pyams_content.shared.common.interfaces import IWfSharedContent
 from pyams_content.shared.common.types import WfTypedSharedContentMixin
@@ -35,7 +36,7 @@ __docformat__ = 'restructuredtext'
 @factory_config(IWfSiteTopic)
 @factory_config(IWfSharedContent, name=SITE_TOPIC_CONTENT_TYPE)
 @implementer(IIllustrationTarget, ILinkIllustrationTarget, IParagraphContainerTarget,
-             IPreviewTarget)
+             IReviewTarget, IPreviewTarget)
 class WfSiteTopic(WfSharedContent, WfTypedSharedContentMixin):
     """Base site topic"""
 

@@ -164,10 +164,6 @@ def handle_cloned_shared_content(event):
         roles.contributors = contributors
     # reset modifiers
     content.modifiers = set()
-    # clear review comments
-    # comments = IReviewComments(content, None)
-    # if comments is not None:
-    #     comments.clear()
 
 
 @adapter_config(required=IWfSharedContent,
@@ -264,7 +260,7 @@ def shared_content_workflow_adapter(context):
 
 @subscriber(IWorkflowTransitionEvent)
 def handle_workflow_event(event):
-    """Reste target on workflow transition"""
+    """Reset target on workflow transition"""
     content = get_parent(event.object, ISharedContent)
     if content is not None:
         del content.visible_version

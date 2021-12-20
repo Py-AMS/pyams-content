@@ -21,6 +21,7 @@ from pyams_content.component.illustration.interfaces import IIllustrationTarget,
     ILinkIllustrationTarget
 from pyams_content.component.paragraph.interfaces import IParagraphContainerTarget
 from pyams_content.feature.preview.interfaces import IPreviewTarget
+from pyams_content.feature.review import IReviewTarget
 from pyams_content.shared.common import ISharedContent, IWfSharedContent, SharedContent, \
     WfSharedContent
 from pyams_content.shared.common.types import WfTypedSharedContentMixin
@@ -35,7 +36,7 @@ __docformat__ = 'restructuredtext'
 @factory_config(IWfTopic)
 @factory_config(IWfSharedContent, name=TOPIC_CONTENT_TYPE)
 @implementer(IIllustrationTarget, ILinkIllustrationTarget, IParagraphContainerTarget,
-             IPreviewTarget)
+             IReviewTarget, IPreviewTarget)
 class WfTopic(WfSharedContent, WfTypedSharedContentMixin):
     """Base topic"""
 
