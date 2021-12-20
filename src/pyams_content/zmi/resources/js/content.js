@@ -119,6 +119,73 @@ const content = {
         endDrag: (event, ui) => {
             $(ui.source).remove();
         }
+    },
+
+
+    /**
+     * Reviews management
+     */
+    review: {
+
+        // Review comments timer
+        timer: null,
+        interval: 30000,
+
+        // Scroll messages list to last message
+        init: () => {
+            $(document).off('update-comments.ams.content')
+                .on('update-comments.ams.content', (evt, {count}) => {
+                    const menu = $('a[href="#review-comments.html"]', $('nav'));
+                    if (menu.exists()) {
+                        $('.badge', menu).text(count);
+                    }
+                });
+            const review = MyAMS.content.review;
+            review.timer = setTimeout(review.getComments, review.interval);
+        },
+
+        initPage: () => {
+            MyAMS.require('helpers').then(() => {
+                const
+                    messages = $('#review-messages-view'),
+                    lastMessage = $('li', messages).last();
+                if (messages.exists()) {
+                    MyAMS.helpers.scrollTo(messages, lastMessage);
+                }
+            });
+        },
+
+        getComments: () => {
+            MyAMS.require('ajax', 'helpers').then(() => {
+                const
+                    review = MyAMS.content.review,
+                    menu = $('a[href="#review-comments.html"]', $('nav')),
+                    badge = $('.badge', menu);
+                MyAMS.ajax.get('get-comments.json', {
+                    count: badge.text() || '0'
+                }).then(({status, comments, count}, xhrStatus, xhr) => {
+                    if (count !== parseInt(badge.text())) {
+                        badge.removeClass('bg-info')
+                            .addClass('bg-danger scaled');
+                        badge.text(count);
+                        setTimeout(() => {
+                            badge.removeClass('bg-danger scaled')
+                                .addClass('bg-info');
+                        }, 10000);
+                    }
+                    if (comments) {
+                        const
+                            messagesView = $('#review-messages-view'),
+                            messagesList = $('#review-messages');
+                        for (const comment of comments) {
+                            messagesList.append($(comment));
+                        }
+                        MyAMS.helpers.scrollTo(messagesView, $('li', messagesList).last());
+                    }
+                    review.timer = setTimeout(review.getComments, review.interval);
+                });
+            })
+        }
     }
 };
 

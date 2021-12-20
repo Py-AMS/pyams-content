@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2021-12-15 21:23+0100\n"
+"POT-Creation-Date: 2021-12-19 16:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -278,6 +278,7 @@ msgid "Short name used in breadcrumbs"
 msgstr "Libellé court visible dans le fil d'Ariane"
 
 #: src/pyams_content/interfaces/__init__.py:115
+#: src/pyams_content/feature/review/interfaces.py:77
 msgid "Creation date"
 msgstr "Date de création"
 
@@ -909,6 +910,193 @@ msgstr "NON affiché"
 msgid "Default content renderer"
 msgstr "Mode de rendu par défaut"
 
+#: src/pyams_content/feature/review/__init__.py:172
+#, python-format
+msgid "{service_name}A content review is requested"
+msgstr "{service_name}Demande de relecture"
+
+#: src/pyams_content/feature/review/__init__.py:187
+#, python-format
+msgid "Request comment: {comment}"
+msgstr "Commentaire : {comment}"
+
+#: src/pyams_content/feature/review/__init__.py:219
+#: src/pyams_content/feature/review/interfaces.py:34
+msgid "Review request"
+msgstr "Demande de relecture"
+
+#: src/pyams_content/feature/review/__init__.py:220
+#, python-format
+msgid "A new comment was added on content « {0} »"
+msgstr "Un nouveau commentaire a été ajouté au contenu « {0} »"
+
+#: src/pyams_content/feature/review/interfaces.py:35
+msgid "Reviewer comment"
+msgstr "Commentaire du relecteur"
+
+#: src/pyams_content/feature/review/interfaces.py:59
+msgid "Comment writer"
+msgstr "Rédacteur"
+
+#: src/pyams_content/feature/review/interfaces.py:62
+msgid "Content reviewers"
+msgstr "Relecteurs sollicités"
+
+#: src/pyams_content/feature/review/interfaces.py:65
+msgid "Comment type"
+msgstr "Type de commentaire"
+
+#: src/pyams_content/feature/review/interfaces.py:70
+msgid "Comment body"
+msgstr "Commentaire"
+
+#: src/pyams_content/feature/review/interfaces.py:73
+msgid "Reviewer comment?"
+msgstr "Commentaire d'un relecteur"
+
+#: src/pyams_content/feature/review/interfaces.py:89
+msgid "Reviewers list"
+msgstr "Liste des relecteurs"
+
+#: src/pyams_content/feature/review/interfaces.py:90
+msgid "List of principals which reviewed the comment"
+msgstr "Liste des mandataires qui ont apporté des commentaires sur ce contenu"
+
+#: src/pyams_content/feature/review/zmi/__init__.py:59
+#: src/pyams_content/feature/review/zmi/__init__.py:90
+msgid "Ask for content review"
+msgstr "Demander une relecture"
+
+#: src/pyams_content/feature/review/zmi/__init__.py:69
+msgid "Sought principals"
+msgstr "Relecteurs sollicités"
+
+#: src/pyams_content/feature/review/zmi/__init__.py:70
+msgid "List of principals from which a review is requested"
+msgstr ""
+"Liste des utilisateurs que vous souhaitez solliciter par mail pour relire ce "
+"contenu"
+
+#: src/pyams_content/feature/review/zmi/__init__.py:74
+msgid "Comment"
+msgstr "Commentaire"
+
+#: src/pyams_content/feature/review/zmi/__init__.py:75
+msgid "Comment associated with this request"
+msgstr ""
+"Le commentaire associé à cette demande sera également transmis par mail"
+
+#: src/pyams_content/feature/review/zmi/__init__.py:78
+msgid "Notify all reviewers"
+msgstr "Notifier tous les relecteurs"
+
+#: src/pyams_content/feature/review/zmi/__init__.py:79
+msgid ""
+"If 'yes', selected reviewers will be notified by mail of your request, even "
+"if they were already members of the reviewers group. Otherwise, only new "
+"reviewers will be notified"
+msgstr ""
+"Si 'oui', tous les utilisateurs sollicités seront notifiés par mail de "
+"votredemande, même s'ils avaient déjà été sollicités auparavant ; dans le "
+"cas contraire, seuls les nouveaux relecteurs seront notifiés."
+
+#: src/pyams_content/feature/review/zmi/__init__.py:91
+#: src/pyams_content/shared/common/zmi/workflow.py:63
+#: src/pyams_content/shared/common/zmi/__init__.py:406
+msgid "Cancel"
+msgstr "Annuler"
+
+#: src/pyams_content/feature/review/zmi/__init__.py:104
+msgid "Content review request"
+msgstr "Demande de relecture"
+
+#: src/pyams_content/feature/review/zmi/__init__.py:144
+#, python-format
+msgid "Request successful, {count} new notifications have been sent."
+msgstr "Votre demande a été transmise, {count} notification(s) envoyée(s)."
+
+#: src/pyams_content/feature/review/zmi/__init__.py:152
+msgid "Request successful, no new notification have been sent."
+msgstr ""
+"Votre demande a été transmise, aucune nouvelle notification n'a été envoyée."
+
+#: src/pyams_content/feature/review/zmi/__init__.py:168
+msgid "Comments"
+msgstr "Commentaires"
+
+#: src/pyams_content/feature/review/zmi/__init__.py:189
+msgid "Version comments"
+msgstr "Commentaires associés à cette version"
+
+#: src/pyams_content/feature/review/zmi/templates/notification.pt:4
+msgid "[${service_name}] You are requested for a content review"
+msgstr "[${service_name}] Vous êtes sollicité pour une demande de relecture"
+
+#: src/pyams_content/feature/review/zmi/templates/notification.pt:30
+msgid "Hello,"
+msgstr "Bonjour,"
+
+#: src/pyams_content/feature/review/zmi/templates/notification.pt:31
+msgid ""
+"You have been requested by ${sender}, contributor of « ${service_name} » "
+"website, to make a review of a content."
+msgstr ""
+"Vous êtes sollicité par ${sender}, contributor du site internet « "
+"${service_name} », qui souhaite recueillir votre commentaire à propos d'un "
+"contenu."
+
+#: src/pyams_content/feature/review/zmi/templates/notification.pt:36
+msgid "${sender} added the following message to his request:"
+msgstr "${sender} a accompagné sa demande de relecture du message suivant :"
+
+#: src/pyams_content/feature/review/zmi/templates/notification.pt:41
+msgid ""
+"To review and comment this publication, please use the following link: "
+"${target}."
+msgstr "Pour accéder à cette contribution, cliquez ici : ${target}."
+
+#: src/pyams_content/feature/review/zmi/templates/notification.pt:44
+msgid "After reading this content, please use the « Comments » menu entry."
+msgstr ""
+"Lorsque vous aurez pris connaissance du contenu, vous pourrez utiliser le "
+"menu « Commentaire » en colonne de gauche pour apporter vos commentaires."
+
+#: src/pyams_content/feature/review/zmi/templates/notification.pt:45
+msgid ""
+"If you don't want to reply to this request, please contact ${sender} "
+"directly by replying to this mail."
+msgstr ""
+"Si vous ne souhaitez pas donner suite à cette demande, vous pouvez répondre "
+"directement à ${sender} en lui adressant un message dans ce sens."
+
+#: src/pyams_content/feature/review/zmi/templates/notification.pt:47
+msgid "Thank you."
+msgstr "Merci."
+
+#: src/pyams_content/feature/review/zmi/templates/comments.pt:33
+msgid "Review query from"
+msgstr "Demande de relecture de"
+
+#: src/pyams_content/feature/review/zmi/templates/comments.pt:38
+msgid "(as reviewer)"
+msgstr "(en tant que relecteur)"
+
+#: src/pyams_content/feature/review/zmi/templates/comments.pt:47
+msgid "Selected reviewers:"
+msgstr "Auprès de :"
+
+#: src/pyams_content/feature/review/zmi/templates/comments.pt:57
+msgid "New comment"
+msgstr "Nouveau commentaire"
+
+#: src/pyams_content/feature/review/zmi/templates/comments.pt:59
+msgid "Your comment..."
+msgstr "Votre commentaire..."
+
+#: src/pyams_content/feature/review/zmi/templates/comments.pt:62
+msgid "Add comment"
+msgstr "Ajouter ce commentaire"
+
 #: src/pyams_content/feature/preview/zmi/__init__.py:53
 msgid "Preview"
 msgstr "Aperçu"
@@ -1196,7 +1384,7 @@ msgid "Main tool properties"
 msgstr "Propriétés principales"
 
 #: src/pyams_content/shared/common/zmi/dashboard.py:108
-#: src/pyams_content/shared/common/zmi/content.py:155
+#: src/pyams_content/shared/common/zmi/content.py:157
 msgid "Content publication start date is not passed yet"
 msgstr "La date de début de publication de ce contenu n'est pas encore passée"
 
@@ -1362,11 +1550,6 @@ msgid "CONTRIBUTORS - {} modified contents"
 msgstr "CONTRIBUTEURS - {} contenus modifiés"
 
 #: src/pyams_content/shared/common/zmi/workflow.py:62
-#: src/pyams_content/shared/common/zmi/__init__.py:397
-msgid "Cancel"
-msgstr "Annuler"
-
-#: src/pyams_content/shared/common/zmi/workflow.py:63
 msgid "Workflow action"
 msgstr "Action du workflow"
 
@@ -1543,39 +1726,39 @@ msgstr ""
 "Cette version de ce contenu va être supprimée.<br />Les versions précédentes "
 "seront toujours accessibles."
 
-#: src/pyams_content/shared/common/zmi/content.py:109
+#: src/pyams_content/shared/common/zmi/content.py:111
 #, python-format
 msgid "from {}"
 msgstr "de {}"
 
 #. init state format
-#: src/pyams_content/shared/common/zmi/content.py:141
+#: src/pyams_content/shared/common/zmi/content.py:143
 #, python-format
 msgid "{state} <span class=\"px-1\">by</span> {principal}"
 msgstr "{state} <span class=\"px-1\">par</span> {principal}"
 
-#: src/pyams_content/shared/common/zmi/content.py:180
+#: src/pyams_content/shared/common/zmi/content.py:182
 #, python-format
 msgid "since {date}"
 msgstr "depuis {date}"
 
-#: src/pyams_content/shared/common/zmi/content.py:193
+#: src/pyams_content/shared/common/zmi/content.py:195
 msgid "access published version"
 msgstr "accéder à la version publiée"
 
-#: src/pyams_content/shared/common/zmi/content.py:202
+#: src/pyams_content/shared/common/zmi/content.py:204
 msgid "access new version"
 msgstr "accéder à la version en préparation"
 
-#: src/pyams_content/shared/common/zmi/content.py:214
+#: src/pyams_content/shared/common/zmi/content.py:216
 msgid "access waiting version"
 msgstr "accéder à la version en attente"
 
-#: src/pyams_content/shared/common/zmi/content.py:229
+#: src/pyams_content/shared/common/zmi/content.py:231
 msgid "access retired version"
 msgstr "accéder à la version retirée"
 
-#: src/pyams_content/shared/common/zmi/content.py:242
+#: src/pyams_content/shared/common/zmi/content.py:244
 msgid "access archived version"
 msgstr "accéder à la version archivée"
 
@@ -1645,34 +1828,34 @@ msgstr "Propriétés du contenu"
 msgid "Main content properties"
 msgstr "Propriétés élémentaires"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:387
-#: src/pyams_content/shared/common/zmi/__init__.py:411
+#: src/pyams_content/shared/common/zmi/__init__.py:395
+#: src/pyams_content/shared/common/zmi/__init__.py:419
 msgid "Duplicate content"
 msgstr "Dupliquer le contenu"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:398
+#: src/pyams_content/shared/common/zmi/__init__.py:405
 msgid "Duplicate this content"
 msgstr "Dupliquer ce contenu"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:473
+#: src/pyams_content/shared/common/zmi/__init__.py:481
 #, python-format
 msgid "Clone created from version {source} of {oid} (in « {state} » state)"
 msgstr ""
 "Contenu créé à partir de la version {source} de {oid} (alors en statut "
 "« {state} »)"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:509
+#: src/pyams_content/shared/common/zmi/__init__.py:517
 msgid ""
 "You are going to duplicate a whole content.<br />The new copy is going to be "
 "created in 'draft' mode, so that you can modify it before publication.<br /"
 ">A new unique number is also going to be assigned to it. This number will be "
 "shared by all content's versions."
 msgstr ""
-"Vous vous apprêtez à dupliquer une version de ce contenu pour en créer un nouveau.<br />"
-"Cette copie va être créée en statut 'Brouillon' et vous en serez propriétaire pour vous "
-"permettre de la préparer.<br />"
-"Un numéro unique lui sera également attribué ; ce numéro sera conservé pendant toute "
-"la vie du contenu, quelle que soit la version."
+"Vous vous apprêtez à dupliquer une version de ce contenu pour en créer un "
+"nouveau.<br />Cette copie va être créée en statut 'Brouillon' et vous en "
+"serez propriétaire pour vous permettre de la préparer.<br />Un numéro unique "
+"lui sera également attribué ; ce numéro sera conservé pendant toute la vie "
+"du contenu, quelle que soit la version."
 
 #: src/pyams_content/shared/common/zmi/header.py:64
 #: src/pyams_content/shared/common/zmi/header.py:70
