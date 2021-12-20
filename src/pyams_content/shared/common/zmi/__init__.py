@@ -48,7 +48,7 @@ from pyams_skin.schema.button import CloseButton, SubmitButton
 from pyams_skin.viewlet.actions import ContextAddAction
 from pyams_skin.viewlet.breadcrumb import BreadcrumbItem
 from pyams_skin.viewlet.help import AlertMessage
-from pyams_skin.viewlet.menu import MenuItem
+from pyams_skin.viewlet.menu import MenuDivider, MenuItem
 from pyams_utils.adapter import ContextAdapter, ContextRequestViewAdapter, adapter_config
 from pyams_utils.registry import get_utility
 from pyams_utils.request import check_request
@@ -377,6 +377,14 @@ class SharedContentLanguagesEditFormPermissionChecker(ContextRequestViewAdapter)
 # Content duplication
 #
 
+@viewlet_config(name='duplicate-content.divider',
+                context=IWfSharedContent, layer=IAdminLayer,
+                manager=IActionsViewletManager, weight=49,
+                permission=CREATE_CONTENT_PERMISSION)
+class SharedContentDuplicateMenuDivider(MenuDivider):
+    """Shared content duplication menu divider"""
+
+
 @viewlet_config(name='duplicate-content.menu',
                 context=IWfSharedContent, layer=IAdminLayer,
                 manager=IActionsViewletManager, weight=50,
@@ -394,8 +402,8 @@ class SharedContentDuplicateMenu(MenuItem):
 class ISharedContentDuplicateButtons(Interface):
     """Shared content duplication form buttons"""
 
-    close = CloseButton(name='close', title=_("Cancel"))
     duplicate = SubmitButton(name='duplicate', title=_("Duplicate this content"))
+    close = CloseButton(name='close', title=_("Cancel"))
 
 
 @ajax_form_config(name='duplicate-content.html',
