@@ -59,8 +59,8 @@ from pyams_content import _
 class ISharedContentWorkflowFormButtons(Interface):
     """Shared content workflow transition form buttons"""
 
-    close = CloseButton(name='close', title=_("Cancel"))
     action = SubmitButton(name='action', title=_("Workflow action"))
+    close = CloseButton(name='close', title=_("Cancel"))
 
 
 class SharedContentWorkflowTransitionForm(WorkflowContentTransitionForm):
