@@ -28,7 +28,8 @@ from pyams_content.shared.site.zmi.tree import SiteContainerTreeTable
 from pyams_content.shared.site.zmi.widget.folder import SiteManagerFoldersSelectorFieldWidget
 from pyams_content.zmi.interfaces import IDashboardColumn, IDashboardContentLabel, \
     IDashboardContentModifier, IDashboardContentNumber, IDashboardContentOwner, \
-    IDashboardContentStatus, IDashboardContentStatusDatetime, IDashboardContentVersion, \
+    IDashboardContentStatus, IDashboardContentStatusDatetime, IDashboardContentType, \
+    IDashboardContentVersion, \
     IDashboardContentVisibility
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
@@ -261,6 +262,13 @@ def get_internal_link_adapter(context, request, column, interface):
         value = request.registry.queryMultiAdapter((target, request, column), interface)
         return f'({value.strip()})' if value is not None else '--'
     return '--'
+
+
+@adapter_config(required=(IInternalSiteLink, IAdminLayer, IDashboardColumn),
+                provides=IDashboardContentType)
+def internal_content_link_type(context, request, column):
+    """Internal content link dashboard type"""
+    return get_internal_link_adapter(context, request, column, IDashboardContentType)
 
 
 @adapter_config(required=(IInternalSiteLink, IAdminLayer, IDashboardColumn),
