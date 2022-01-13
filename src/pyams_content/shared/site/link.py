@@ -75,7 +75,7 @@ class InternalSiteLink(InternalReferenceMixin, SiteLink):
     (same site, another site or in any shared tool).
     """
 
-    reference = FieldProperty(IInternalSiteLink['reference'])
+    _reference = FieldProperty(IInternalSiteLink['reference'])
 
     content_name = _("Internal link")
 
