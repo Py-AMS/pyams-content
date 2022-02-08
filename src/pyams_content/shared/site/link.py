@@ -68,6 +68,7 @@ class SiteLinkPermissionCheck(ContextAdapter):
 #
 
 @factory_config(IInternalSiteLink)
+@implementer(ILinkIllustrationTarget)
 class InternalSiteLink(InternalReferenceMixin, SiteLink):
     """Internal site link persistent class
 

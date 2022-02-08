@@ -16,7 +16,7 @@
 
 from uuid import uuid4
 
-from zope.interface import Interface
+from zope.interface import Interface, implementer
 from zope.intid import IIntIds
 from zope.schema import Int
 
@@ -30,7 +30,7 @@ from pyams_content.zmi.interfaces import IDashboardColumn, IDashboardContentLabe
     IDashboardContentModifier, IDashboardContentNumber, IDashboardContentOwner, \
     IDashboardContentStatus, IDashboardContentStatusDatetime, IDashboardContentType, \
     IDashboardContentVersion, \
-    IDashboardContentVisibility
+    IDashboardContentVisibility, IPropertiesEditForm
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.form import apply_changes
@@ -115,6 +115,7 @@ class SiteLinkTableElementEditor(TableElementEditor):
     """Site link table element editor"""
 
 
+@implementer(IPropertiesEditForm)
 class SiteLinkPropertiesEditForm(AdminModalEditForm):
     """Site link properties edit form"""
 
