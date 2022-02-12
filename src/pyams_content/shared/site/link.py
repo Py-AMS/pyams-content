@@ -40,7 +40,7 @@ __docformat__ = 'restructuredtext'
 from pyams_content import _
 
 
-@implementer(ISiteLink)
+@implementer(ISiteLink, ILinkIllustrationTarget)
 class SiteLink(Persistent, Contained):
     """Site link persistent class"""
 
@@ -68,7 +68,6 @@ class SiteLinkPermissionCheck(ContextAdapter):
 #
 
 @factory_config(IInternalSiteLink)
-@implementer(ILinkIllustrationTarget)
 class InternalSiteLink(InternalReferenceMixin, SiteLink):
     """Internal site link persistent class
 
@@ -158,7 +157,6 @@ def internal_site_link_publication_info(context):
 #
 
 @factory_config(IExternalSiteLink)
-@implementer(ILinkIllustrationTarget)
 class ExternalSiteLink(SiteLink):
     """External site link persistent class"""
 
