@@ -31,6 +31,7 @@ from pyams_content.shared.common import IBaseSharedTool, ISharedContent, IWfShar
     WfSharedContent
 from pyams_content.shared.common.interfaces import IContributorRestrictions, IManagerRestrictions, \
     ISharedTool, IWfSharedContentRoles
+from pyams_content.shared.common.interfaces.types import ITypedSharedTool, IWfTypedSharedContent
 from pyams_content.zmi.properties import PropertiesEditForm
 from pyams_content.zmi.widget.seo import I18nSEOTextLineFieldWidget
 from pyams_form.ajax import AJAXFormRenderer, ajax_form_config
@@ -50,6 +51,7 @@ from pyams_skin.viewlet.breadcrumb import BreadcrumbItem
 from pyams_skin.viewlet.help import AlertMessage
 from pyams_skin.viewlet.menu import MenuDivider, MenuItem
 from pyams_utils.adapter import ContextAdapter, ContextRequestViewAdapter, adapter_config
+from pyams_utils.factory import get_object_factory
 from pyams_utils.registry import get_utility
 from pyams_utils.request import check_request
 from pyams_utils.traversing import get_parent
@@ -110,8 +112,16 @@ class SharedContentAddForm(AdminModalAddForm):
 
     legend = _("New content properties")
 
-    fields = Fields(IWfSharedContent).select('title', 'notepad')
-    fields['title'].widget_factory = I18nSEOTextLineFieldWidget
+    @property
+    def fields(self):
+        factory = get_object_factory(IWfSharedContent, name=self.context.shared_content_type)
+        if factory is not None:
+            names = ('title', 'data_type', 'notepad') \
+                if ITypedSharedTool.providedBy(self.context) else ('title', 'notepad')
+            fields = Fields(factory.factory.content_intf).select(*names)
+            fields['title'].widget_factory = I18nSEOTextLineFieldWidget
+            return fields
+        return Fields(Interface)
 
     _edit_permission = CREATE_CONTENT_PERMISSION
 

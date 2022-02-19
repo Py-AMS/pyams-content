@@ -136,6 +136,7 @@ class IWfSharedContent(IBaseContent):
 
     content_type = Attribute("Content data type")
     content_name = Attribute("Content name")
+    content_intf = Attribute("Content interface")
 
     content_url = TextLine(title=_("Content URL"),
                            description=_("URL used to access this content; this is important for "

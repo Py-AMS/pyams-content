@@ -44,6 +44,7 @@ class WfSiteTopic(WfSharedContent, WfTypedSharedContentMixin):
 
     content_type = SITE_TOPIC_CONTENT_TYPE
     content_name = SITE_TOPIC_CONTENT_NAME
+    content_intf = IWfSiteTopic
 
     references = FieldProperty(IWfSiteTopic['references'])
     data_type = FieldProperty(IWfSiteTopic['data_type'])

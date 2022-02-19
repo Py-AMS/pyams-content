@@ -43,6 +43,7 @@ class WfTopic(WfSharedContent, WfTypedSharedContentMixin):
 
     content_type = TOPIC_CONTENT_TYPE
     content_name = TOPIC_CONTENT_NAME
+    content_intf = IWfTopic
 
     references = FieldProperty(IWfTopic['references'])
     data_type = FieldProperty(IWfTopic['data_type'])
