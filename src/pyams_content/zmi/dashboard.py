@@ -32,7 +32,7 @@ from pyams_utils.interfaces import ICacheKeyValue
 from pyams_utils.registry import get_utility
 from pyams_utils.request import request_property
 from pyams_zmi.interfaces import IAdminLayer
-from pyams_zmi.table import I18nColumnMixin, JsActionColumn, NameColumn
+from pyams_zmi.table import I18nColumnMixin, NameColumn, VisibilityColumn
 from pyams_zmi.utils import get_object_label
 
 
@@ -66,11 +66,8 @@ class DashboardColumnMixin(ObjectDataManagerMixin):  # pylint: disable=no-member
         return value or '--'
 
 
-class DashboardVisibilityColumn(DashboardColumnMixin, JsActionColumn):
+class DashboardVisibilityColumn(DashboardColumnMixin, VisibilityColumn):
     """Dashboard visibility column"""
-
-    href = 'MyAMS.container.switchElementAttribute'
-    modal_target = False
 
     @property
     def css_classes(self):
@@ -81,14 +78,6 @@ class DashboardVisibilityColumn(DashboardColumnMixin, JsActionColumn):
         })
         return classes
 
-    object_data = {
-        'ams-modules': 'container',
-        'ams-update-target': 'switch-visible-item.json',
-        'ams-attribute-name': 'visible',
-        'ams-icon-on': 'far fa-eye',
-        'ams-icon-off': 'far fa-eye-slash'
-    }
-
     interface = IDashboardContentVisibility
     permission = MANAGE_CONTENT_PERMISSION
 
@@ -98,15 +87,18 @@ class DashboardVisibilityColumn(DashboardColumnMixin, JsActionColumn):
     inactive_icon_hint = _("Visible element?")
 
     def get_icon(self, item):
+        """Icon getter"""
         return self.get_value(item)[1]
 
     def get_icon_hint(self, item):
+        """Icon hint getter"""
         translate = self.request.localizer.translate
         if ISiteLink.providedBy(item) and self.has_permission(item):
             return translate(self.active_icon_hint)
         return translate(self.inactive_icon_hint)
 
     def render_cell(self, item):
+        """Cell renderer"""
         active, icon = self.get_value(item)
         if not active:
             return self.get_icon(item)
