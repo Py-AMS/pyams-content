@@ -17,6 +17,9 @@ This module is used for Pyramid integration
 
 import re
 
+from pyams_content.component.extfile.interfaces import IExtFileManagerTarget
+from pyams_content.component.thesaurus import ICollectionsManagerTarget, ITagsManagerTarget, \
+    IThemesManagerTarget
 from pyams_content.feature.preview.interfaces import IPreviewTarget
 from pyams_content.interfaces import COMMENT_CONTENT_PERMISSION, CONTRIBUTOR_ROLE, \
     CREATE_CONTENT_PERMISSION, CREATE_VERSION_PERMISSION, GUEST_ROLE, MANAGER_ROLE, \
@@ -209,6 +212,10 @@ def include_package(config):
     })
 
     # site root extensions
+    classImplements(BaseSiteRoot, IExtFileManagerTarget)
+    classImplements(BaseSiteRoot, ITagsManagerTarget)
+    classImplements(BaseSiteRoot, IThemesManagerTarget)
+    classImplements(BaseSiteRoot, ICollectionsManagerTarget)
     classImplements(BaseSiteRoot, IPreviewTarget)
 
     try:
