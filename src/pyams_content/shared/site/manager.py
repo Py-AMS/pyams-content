@@ -18,9 +18,12 @@ from pyams_content.component.illustration import IIllustrationTarget, ILinkIllus
 from pyams_content.feature.preview.interfaces import IPreviewTarget
 from pyams_content.interfaces import MANAGE_SITE_PERMISSION
 from pyams_content.reference.pictogram.interfaces import IPictogramManagerTarget
+from pyams_content.shared.common import ISharedContent
 from pyams_content.shared.common.manager import BaseSharedTool
+from pyams_content.shared.common.types import TypedSharedToolMixin
 from pyams_content.shared.site.container import SiteContainerMixin
-from pyams_content.shared.site.interfaces import ISiteManager, PYAMS_SITES_VOCABULARY
+from pyams_content.shared.site.interfaces import ISiteManager, PYAMS_SITES_VOCABULARY, \
+    SITE_TOPIC_CONTENT_TYPE
 from pyramid.events import subscriber
 from zope.container.ordered import OrderedContainer
 from zope.interface import implementer
@@ -34,7 +37,7 @@ from pyams_portal.interfaces import IPortalContext
 from pyams_security.interfaces import IDefaultProtectionPolicy, IViewContextPermissionChecker
 from pyams_site.interfaces import ISiteRoot
 from pyams_utils.adapter import ContextAdapter, adapter_config
-from pyams_utils.factory import factory_config
+from pyams_utils.factory import factory_config, get_object_factory
 from pyams_utils.registry import get_utilities_for
 from pyams_utils.request import query_request
 from pyams_utils.traversing import get_parent
@@ -50,7 +53,7 @@ from pyams_content import _
 @implementer(IDefaultProtectionPolicy, IPictogramManagerTarget,
              IIllustrationTarget, ILinkIllustrationTarget,
              IPortalContext, IPreviewTarget)
-class SiteManager(SiteContainerMixin, OrderedContainer, BaseSharedTool,
+class SiteManager(SiteContainerMixin, OrderedContainer, TypedSharedToolMixin, BaseSharedTool,
                   UserSkinnableContentMixin):
     """Site manager persistent class"""
 

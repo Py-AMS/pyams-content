@@ -39,11 +39,11 @@ from pyams_zmi.form import AdminModalAddForm, AdminModalEditForm
 from pyams_zmi.helper.container import delete_container_element, switch_element_attribute
 from pyams_zmi.helper.event import get_json_table_row_add_callback, \
     get_json_table_row_refresh_callback
-from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
+from pyams_zmi.interfaces import IAdminLayer, IObjectHint, IObjectLabel
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu, IToolbarViewletManager
 from pyams_zmi.table import JsActionColumn, NameColumn, ReorderColumn, Table, \
-    TableAdminView, TableElementEditor, TrashColumn, get_ordered_data_attributes
+    TableAdminView, TableElementEditor, TrashColumn, VisibilityColumn, get_ordered_data_attributes
 from pyams_zmi.utils import get_object_label
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
@@ -111,27 +111,10 @@ def reorder_types_table(request):
 @adapter_config(name='visible',
                 required=(ITypedSharedTool, IAdminLayer, SharedToolTypesTable),
                 provides=IColumn)
-class SharedToolTypesVisibleColumn(ObjectDataManagerMixin, JsActionColumn):
+class SharedToolTypesVisibleColumn(VisibilityColumn):
     """Shared tool data types table visible column"""
 
     hint = _("Click icon to enable or disable content type")
-
-    href = 'MyAMS.container.switchElementAttribute'
-    modal_target = False
-
-    object_data = {
-        'ams-modules': 'container',
-        'ams-update-target': 'switch-visible-item.json',
-        'ams-attribute-name': 'visible',
-        'ams-icon-on': 'far fa-eye',
-        'ams-icon-off': 'far fa-eye-slash'
-    }
-
-    weight = 1
-
-    def get_icon_class(self, item):
-        """Icon class getter"""
-        return 'far fa-eye' if item.visible else 'far fa-eye-slash'
 
 
 @view_config(name='switch-visible-item.json',
@@ -190,6 +173,13 @@ def data_type_label(context, request, view):
     i18n = II18n(context)
     return i18n.query_attribute('backoffice_label', request=request) or \
         i18n.query_attribute('label', request=request)
+
+
+@adapter_config(required=(IDataType, IAdminLayer, Interface),
+                provides=IObjectHint)
+def data_type_hint(context, request, view):  # pylint: disable=unused-argument
+    """Data type hint"""
+    return request.localizer.translate(_("Content type"))
 
 
 @adapter_config(required=(IDataType, IAdminLayer, SharedToolTypesTable),

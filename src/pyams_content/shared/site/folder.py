@@ -16,15 +16,18 @@ This module provides persistent classes to handles sites folders, which are used
 contents together.
 """
 
+from pyramid.events import subscriber
 from zope.container.ordered import OrderedContainer
-from zope.interface import implementer
+from zope.interface import alsoProvides, implementer
 from zope.intid import IIntIds
+from zope.lifecycleevent import IObjectAddedEvent
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from pyams_content.component.illustration.interfaces import IIllustrationTarget, \
     ILinkIllustrationTarget
 from pyams_content.component.links import InternalLink
+from pyams_content.component.thesaurus import IThemesTarget
 from pyams_content.feature.menu.interfaces import IDynamicMenu
 from pyams_content.feature.preview.interfaces import IPreviewTarget
 from pyams_content.interfaces import MANAGE_SITE_PERMISSION
@@ -78,6 +81,12 @@ class SiteFolder(SiteContainerMixin, OrderedContainer, BaseSharedTool):
         return True
 
 
+@subscriber(IObjectAddedEvent, context_selector=ISiteFolder, parent_selector=IThemesTarget)
+def handle_added_site_folder(event):
+    """Handle site folder when added to a themes target"""
+    alsoProvides(event.object, IThemesTarget)
+
+
 @adapter_config(required=ISiteFolder,
                 provides=IViewContextPermissionChecker)
 class SiteFolderPermissionChecker(ContextAdapter):
@@ -110,4 +119,4 @@ class SiteManagerFoldersVocabulary(SimpleVocabulary):
                 terms.append(SimpleTerm(value=intids.queryId(folder),
                                         title=II18n(folder).query_attribute('title',
                                                                             request=request)))
-        super(SiteManagerFoldersVocabulary, self).__init__(terms)
+        super().__init__(terms)

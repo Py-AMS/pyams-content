@@ -15,17 +15,21 @@
 """
 
 from persistent import Persistent
+from pyramid.events import subscriber
 from zope.container.contained import Contained
 from zope.container.ordered import OrderedContainer
 from zope.interface import implementer
+from zope.lifecycleevent import IObjectAddedEvent
 from zope.location.interfaces import ISublocations
 from zope.schema import getFieldsInOrder
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 from zope.traversing.interfaces import ITraversable
 
+from pyams_content.component.extfile.interfaces import IExtFileContainerTarget
 from pyams_content.component.links.interfaces import ILinkContainerTarget
 from pyams_content.component.paragraph.interfaces import IParagraphContainerTarget
+from pyams_content.component.thesaurus import ITagsInfo, ITagsTarget, IThemesInfo, IThemesTarget
 from pyams_content.interfaces import MANAGE_TOOL_PERMISSION
 from pyams_content.reference.pictogram import IPictogramTable
 from pyams_content.shared.common.interfaces import ISharedTool
@@ -49,8 +53,8 @@ from pyams_content import _
 
 
 @factory_config(IDataType)
-@implementer(IParagraphContainerTarget,
-             ILinkContainerTarget)
+@implementer(IParagraphContainerTarget, ILinkContainerTarget, IExtFileContainerTarget,
+             ITagsTarget, IThemesTarget)
 class DataType(Persistent, Contained):
     """Base data type"""
 
@@ -67,12 +71,14 @@ class DataType(Persistent, Contained):
         """Source folder getter"""
         if self.source_folder is not None:
             return get_reference_target(self.source_folder)
+        return None
 
     def get_pictogram(self):
         """Pictogram getter"""
         table = query_utility(IPictogramTable)
         if table is not None:
             return table.get(self.pictogram)
+        return None
 
 
 @factory_config(ITypedDataManager)
@@ -125,7 +131,8 @@ class TypedSharedToolSublocations(ContextAdapter):
     """Typed shared tool sub-locations adapter"""
 
     def sublocations(self):
-        return ITypedDataManager(self.context).values()
+        """Sub-locations iterator"""
+        yield from ITypedDataManager(self.context).values()
 
 
 #
@@ -157,17 +164,20 @@ class WfTypedSharedContentMixin:
         return None
 
 
-# @subscriber(IObjectAddedEvent, context_selector=IWfTypedSharedContent)
-# def handle_added_typed_shared_content(event):
-#     """Automatically assign themes for newly created contents"""
-#     content = event.object
-#     if not IThemesTarget.providedBy(content):
-#         return
-#     themes_info = IThemesInfo(content)
-#     if not themes_info.themes:  # don't remove previous themes!
-#         data_type = content.get_data_type()
-#         if data_type is not None:
-#             themes_info.themes = IThemesInfo(data_type).themes
+@subscriber(IObjectAddedEvent, context_selector=IWfTypedSharedContent)
+def handle_added_typed_shared_content(event):
+    """Automatically assign tags and themes for newly created typed contents"""
+    content = event.object
+    data_type = content.get_data_type()
+    if data_type is not None:
+        if ITagsTarget.providedBy(data_type) and ITagsTarget.providedBy(content):
+            tags_info = ITagsInfo(content)
+            if not tags_info.tags:
+                tags_info.tags = ITagsInfo(data_type).tags
+        if IThemesTarget.providedBy(data_type) and IThemesTarget.providedBy(content):
+            themes_info = IThemesInfo(content)
+            if not themes_info.themes:  # don't remove previous themes!
+                themes_info.themes = IThemesInfo(data_type).themes
 
 
 #

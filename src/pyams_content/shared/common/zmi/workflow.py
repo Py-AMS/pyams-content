@@ -372,10 +372,11 @@ class SharedContentPublicationForm(SharedContentWorkflowTransitionForm):
         widget = self.widgets.get('publication_effective_date')
         if widget is not None:
             widget.required = True
+            now = gmtime(datetime.utcnow())
             if pub_info.publication_effective_date:
-                widget.value = tztime(pub_info.publication_effective_date).isoformat()
+                widget.value = tztime(max(now, pub_info.publication_effective_date)).isoformat()
             else:
-                widget.value = tztime(datetime.utcnow()).isoformat()
+                widget.value = tztime(now).isoformat()
         if pub_info.push_end_date:
             widget = self.widgets.get('push_end_date')
             if widget is not None:
