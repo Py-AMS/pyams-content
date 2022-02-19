@@ -107,7 +107,8 @@ class ReviewCommentsSublocations(ContextAdapter):
     """Review comments sub-location adapter"""
 
     def sublocations(self):
-        return IReviewComments(self.context).values()
+        """Sub-locations iterator"""
+        yield from IReviewComments(self.context).values()
 
 
 @subscriber(IObjectCreatedEvent, context_selector=IReviewTarget)

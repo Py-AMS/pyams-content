@@ -87,9 +87,9 @@ class ReviewManagerAdapter(ContextAdapter):
                                                     "requested")).format(
                                     service_name=f'[{settings.subject_prefix}] '
                                         if settings.subject_prefix else ''),
-                                fromaddr='{name} <{address}>'.format(name=sender_name,
-                                                                     address=sender_address),
-                                toaddr='{name} <{address}>'.format(name=name, address=address),
+                                from_addr=f'{settings.sender_name} <{settings.sender_email}>',
+                                reply_to=f'{sender_name} <{sender_address}>',
+                                to_addr=f'{name} <{address}>',
                                 html=html_body)
                             mailer.send(message)
                             notifications += 1
