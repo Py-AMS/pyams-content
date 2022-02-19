@@ -20,7 +20,6 @@ import logging
 from importlib import import_module
 
 from zope.dublincore.interfaces import IZopeDublinCore
-from zope.lifecycleevent import ObjectCreatedEvent
 
 from pyams_catalog.generations import check_required_indexes
 from pyams_catalog.i18n import I18nTextIndexWithInterface
@@ -28,9 +27,9 @@ from pyams_catalog.index import DatetimeIndexWithInterface, FieldIndexWithInterf
     KeywordIndexWithInterface
 from pyams_catalog.interfaces import DATE_RESOLUTION, MINUTE_RESOLUTION
 from pyams_catalog.nltk import get_fulltext_lexicon
+from pyams_content.component.thesaurus import ICollectionsInfo, ITagsInfo, IThemesInfo
 from pyams_content.interfaces import CONTRIBUTOR_ROLE, IBaseContent, MANAGER_ROLE, OWNER_ROLE, \
     PILOT_ROLE, WEBMASTER_ROLE
-from pyams_content.reference import ReferencesManager
 from pyams_content.reference.pictogram import IPictogramTable
 from pyams_content.root import ISiteRootToolsConfiguration
 from pyams_content.shared.common.interfaces import IWfSharedContent
@@ -132,41 +131,46 @@ REQUIRED_INDEXES = [
         'discriminator': 'first_publication_date',
         'resolution': MINUTE_RESOLUTION
     }),
+    ('content_publication_date', DatetimeIndexWithInterface, {
+        'interface': IWorkflowPublicationInfo,
+        'discriminator': 'content_publication_date',
+        'resolution': MINUTE_RESOLUTION
+    }),
     ('visible_publication_date', DatetimeIndexWithInterface, {
         'interface': IWorkflowPublicationInfo,
         'discriminator': 'visible_publication_date',
         'resolution': MINUTE_RESOLUTION
     }),
-    # ('tags', ThesaurusTermsListFieldIndex, {
-    #     'interface': ITagsInfo,
-    #     'discriminator': 'tags',
-    #     'include_parents': False,
-    #     'include_synonyms': False
-    # }),
-    # ('themes', ThesaurusTermsListFieldIndex, {
-    #     'interface': IThemesInfo,
-    #     'discriminator': 'themes',
-    #     'include_parents': False,
-    #     'include_synonyms': False
-    # }),
-    # ('themes_tree', ThesaurusTermsListFieldIndex, {
-    #     'interface': IThemesInfo,
-    #     'discriminator': 'themes',
-    #     'include_parents': True,
-    #     'include_synonyms': False
-    # }),
-    # ('themes_all', ThesaurusTermsListFieldIndex, {
-    #     'interface': IThemesInfo,
-    #     'discriminator': 'themes',
-    #     'include_parents': True,
-    #     'include_synonyms': True
-    # }),
-    # ('collections', ThesaurusTermsListFieldIndex, {
-    #     'interface': ICollectionsInfo,
-    #     'discriminator': 'collections',
-    #     'include_parents': False,
-    #     'include_synonyms': False
-    # })
+    ('tags', ThesaurusTermsListFieldIndex, {
+        'interface': ITagsInfo,
+        'discriminator': 'tags',
+        'include_parents': False,
+        'include_synonyms': False
+    }),
+    ('themes', ThesaurusTermsListFieldIndex, {
+        'interface': IThemesInfo,
+        'discriminator': 'themes',
+        'include_parents': False,
+        'include_synonyms': False
+    }),
+    ('themes_tree', ThesaurusTermsListFieldIndex, {
+        'interface': IThemesInfo,
+        'discriminator': 'themes',
+        'include_parents': True,
+        'include_synonyms': False
+    }),
+    ('themes_all', ThesaurusTermsListFieldIndex, {
+        'interface': IThemesInfo,
+        'discriminator': 'themes',
+        'include_parents': True,
+        'include_synonyms': True
+    }),
+    ('collections', ThesaurusTermsListFieldIndex, {
+        'interface': ICollectionsInfo,
+        'discriminator': 'collections',
+        'include_parents': False,
+        'include_synonyms': False
+    })
 ]
 
 
