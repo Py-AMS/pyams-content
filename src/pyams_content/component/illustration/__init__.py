@@ -169,6 +169,7 @@ class IllustrationSublocations(ContextAdapter):
     """Illustration sub-locations adapter"""
 
     def sublocations(self):
+        """Sub-locations iterator"""
         registry = get_pyramid_registry()
         for name, adapter in registry.getAdapters((self,), IBasicIllustration):
             yield adapter
