@@ -107,7 +107,6 @@ class SiteRootToolsConfiguration(Persistent, Contained):
 
     def check_tools_manager(self, registry):
         """Tools manager checker"""
-        import pdb; pdb.set_trace()
         manager = self.get_tools_manager()
         if manager is None:
             settings = registry.settings
