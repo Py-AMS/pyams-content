@@ -192,6 +192,11 @@ class ExtImage(BaseExtFile):
             if IImageFile.providedBy(data):
                 alsoProvides(data, IResponsiveImage)
 
+    @data.deleter
+    def data(self):
+        """Data deleter"""
+        del self._data
+
 
 @factory_config(IExtVideo)
 class ExtVideo(BaseExtFile):
