@@ -37,7 +37,6 @@ from pyams_content.zmi.interfaces import IAllDashboardMenu, IDashboardColumn, \
     IDashboardContentModifier, IDashboardContentNumber, IDashboardContentOwner, \
     IDashboardContentStatus, IDashboardContentStatusDatetime, IDashboardContentTimestamp, \
     IDashboardContentVersion, IDashboardTable, IDashboardView, IMyDashboardMenu
-from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_pagelet.pagelet import pagelet_config
 from pyams_security.interfaces import ISecurityManager
@@ -56,7 +55,7 @@ from pyams_viewlet.manager import viewletmanager_config
 from pyams_viewlet.viewlet import ViewContentProvider, viewlet_config
 from pyams_workflow.interfaces import IWorkflow, IWorkflowPublicationInfo, \
     IWorkflowPublicationSupport, IWorkflowState, IWorkflowVersions
-from pyams_zmi.interfaces import IAdminLayer, IPageTitle
+from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.table import IInnerTable
 from pyams_zmi.interfaces.viewlet import IContentManagementMenu, IMenuHeader
 from pyams_zmi.table import InnerTableAdminView, MultipleTablesAdminView, Table, TableAdminView
@@ -180,7 +179,7 @@ class BaseSharedToolDashboardTable(Table):
 
     sort_order = 'desc'
 
-    @property
+    @reify
     def values(self):
         return list(super().values)
 
@@ -257,19 +256,8 @@ class SharedToolDashboardMenu(NavigationMenuItem):
 class SharedToolDashboardView(MultipleTablesAdminView):
     """Shared tool dashboard view"""
 
+    header_label = _("My dashboard")
     table_label = _("My dashboard")
-
-
-@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolDashboardView),
-                provides=IPageTitle)
-def shared_tool_dashboard_title(context, request, view):
-    """Shared tool dashboard title"""
-    translate = request.localizer.translate
-    return '{} <small><small>' \
-           ' <i class="px-2 fas fa-chevron-right"></i> ' \
-           '{}</small></small>'.format(
-                II18n(context).query_attribute('title', request=request),
-                translate(_("My dashboard")))
 
 
 @adapter_config(name='no-content-warning',
@@ -385,7 +373,7 @@ class SharedToolDashboardOwnerWaitingView(BaseSharedToolDashboardView):
     weight = 30
 
 
-@adapter_config(context=(IBaseSharedTool, IPyAMSLayer, SharedToolDashboardOwnerWaitingTable),
+@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolDashboardOwnerWaitingTable),
                 provides=IValues)
 class SharedToolDashboardOwnerWaitingValues(ContextRequestViewAdapter):
     """Shared tool dashboard waiting owned contents values adapter"""
@@ -504,7 +492,7 @@ class SharedToolPreparationsTable(BaseSharedToolDashboardTable):
     """Shared tool preparations table"""
 
 
-@adapter_config(context=(IBaseSharedTool, IPyAMSLayer, SharedToolPreparationsTable),
+@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolPreparationsTable),
                 provides=IValues)
 class SharedToolPreparationsValues(ContextRequestViewAdapter):
     """Shared tool preparations values adapter"""
@@ -533,23 +521,12 @@ class SharedToolPreparationsValues(ContextRequestViewAdapter):
 class SharedToolPreparationsView(BaseSharedToolDashboardSingleView):
     """Shared tool preparations view"""
 
+    header_label = _("My drafts")
     table_class = SharedToolPreparationsTable
 
     empty_label = _("CONTRIBUTOR - 0 content in preparation")
     single_label = _("CONTRIBUTOR - 1 content in preparation")
     plural_label = _("CONTRIBUTOR - {} contents in preparation")
-
-
-@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolPreparationsView),
-                provides=IPageTitle)
-def shared_tool_preparations_title(context, request, view):
-    """Shared tool preparations title"""
-    translate = request.localizer.translate
-    return '{} <small><small>' \
-           ' <i class="px-2 fas fa-chevron-right"></i> ' \
-           '{}</small></small>'.format(
-                II18n(context).query_attribute('title', request=request),
-                translate(_("My drafts")))
 
 
 #
@@ -573,7 +550,7 @@ class SharedToolSubmissionsTable(BaseSharedToolDashboardTable):
     """Shared tool submissions table"""
 
 
-@adapter_config(context=(IBaseSharedTool, IPyAMSLayer, SharedToolSubmissionsTable),
+@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolSubmissionsTable),
                 provides=IValues)
 class SharedToolSubmissionsValues(ContextRequestViewAdapter):
     """Shared tool submissions values adapter"""
@@ -603,23 +580,12 @@ class SharedToolSubmissionsValues(ContextRequestViewAdapter):
 class SharedToolSubmissionsView(BaseSharedToolDashboardSingleView):
     """Shared tool submissions view"""
 
+    header_label = _("My submissions")
     table_class = SharedToolSubmissionsTable
 
     empty_label = _("CONTRIBUTOR - 0 submitted content")
     single_label = _("CONTRIBUTOR - 1 submitted content")
     plural_label = _("CONTRIBUTOR - {} submitted contents")
-
-
-@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolSubmissionsView),
-                provides=IPageTitle)
-def shared_tool_submissions_title(context, request, view):
-    """Shared tool submissions title"""
-    translate = request.localizer.translate
-    return '{} <small><small>' \
-           ' <i class="px-2 fas fa-chevron-right"></i> ' \
-           '{}</small></small>'.format(
-                II18n(context).query_attribute('title', request=request),
-                translate(_("My submissions")))
 
 
 #
@@ -643,7 +609,7 @@ class SharedToolPublicationsTable(BaseSharedToolDashboardTable):
     """Shared tool publications table"""
 
 
-@adapter_config(context=(IBaseSharedTool, IPyAMSLayer, SharedToolPublicationsTable),
+@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolPublicationsTable),
                 provides=IValues)
 class SharedToolPublicationsValues(ContextRequestViewAdapter):
     """Shared tool publications values adapter"""
@@ -673,23 +639,12 @@ class SharedToolPublicationsValues(ContextRequestViewAdapter):
 class SharedToolPublicationsView(BaseSharedToolDashboardSingleView):
     """Shared tool publications view"""
 
+    header_label = _("My publications")
     table_class = SharedToolPublicationsTable
 
     empty_label = _("CONTRIBUTOR - 0 published content")
     single_label = _("CONTRIBUTOR - 1 published content")
     plural_label = _("CONTRIBUTOR - {} published contents")
-
-
-@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolPublicationsView),
-                provides=IPageTitle)
-def shared_tool_publications_title(context, request, view):
-    """Shared tool publications title"""
-    translate = request.localizer.translate
-    return '{} <small><small>' \
-           ' <i class="px-2 fas fa-chevron-right"></i> ' \
-           '{}</small></small>'.format(
-                II18n(context).query_attribute('title', request=request),
-                translate(_("My publications")))
 
 
 #
@@ -713,7 +668,7 @@ class SharedToolRetiredContentsTable(BaseSharedToolDashboardTable):
     """Shared tool retired contents table"""
 
 
-@adapter_config(context=(IBaseSharedTool, IPyAMSLayer, SharedToolRetiredContentsTable),
+@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolRetiredContentsTable),
                 provides=IValues)
 class SharedToolRetiredContentsValues(ContextRequestViewAdapter):
     """Shared tool retired contents values adapter"""
@@ -743,23 +698,12 @@ class SharedToolRetiredContentsValues(ContextRequestViewAdapter):
 class SharedToolRetiredContentsView(BaseSharedToolDashboardSingleView):
     """Shared tool retired contents view"""
 
+    header_label = _("My retired contents")
     table_class = SharedToolRetiredContentsTable
 
     empty_label = _("CONTRIBUTOR - 0 retired content")
     single_label = _("CONTRIBUTOR - 1 retired content")
     plural_label = _("CONTRIBUTOR - {} retired contents")
-
-
-@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolRetiredContentsView),
-                provides=IPageTitle)
-def shared_tool_retired_contents_title(context, request, view):
-    """Shared tool retired contents title"""
-    translate = request.localizer.translate
-    return '{} <small><small>' \
-           ' <i class="px-2 fas fa-chevron-right"></i> ' \
-           '{}</small></small>'.format(
-                II18n(context).query_attribute('title', request=request),
-                translate(_("My retired contents")))
 
 
 #
@@ -783,7 +727,7 @@ class SharedToolArchivedContentsTable(BaseSharedToolDashboardTable):
     """Shared tool archived contents table"""
 
 
-@adapter_config(context=(IBaseSharedTool, IPyAMSLayer, SharedToolArchivedContentsTable),
+@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolArchivedContentsTable),
                 provides=IValues)
 class SharedToolArchivedContentsValues(ContextRequestViewAdapter):
     """Shared tool archived contents values adapter"""
@@ -813,23 +757,12 @@ class SharedToolArchivedContentsValues(ContextRequestViewAdapter):
 class SharedToolArchivedContentsView(BaseSharedToolDashboardSingleView):
     """Shared tool archived contents view"""
 
+    header_label = _("My archived contents")
     table_class = SharedToolArchivedContentsTable
 
     empty_label = _("CONTRIBUTOR - 0 archived content")
     single_label = _("CONTRIBUTOR - 1 archived content")
     plural_label = _("CONTRIBUTOR - {} archived contents")
-
-
-@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolArchivedContentsView),
-                provides=IPageTitle)
-def shared_tool_archives_title(context, request, view):
-    """Shared tool archives title"""
-    translate = request.localizer.translate
-    return '{} <small><small>' \
-           ' <i class="px-2 fas fa-chevron-right"></i> ' \
-           '{}</small></small>'.format(
-                II18n(context).query_attribute('title', request=request),
-                translate(_("My archived contents")))
 
 
 #
@@ -870,7 +803,7 @@ class SharedToolLastPublicationsTable(BaseSharedToolDashboardTable):
     """Shared tool dashboard last publications table"""
 
 
-@adapter_config(context=(IBaseSharedTool, IPyAMSLayer, SharedToolLastPublicationsTable),
+@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolLastPublicationsTable),
                 provides=IValues)
 class SharedToolLastPublicationsValues(ContextRequestViewAdapter):
     """Shared tool publications values adapter"""
@@ -897,6 +830,7 @@ class SharedToolLastPublicationsValues(ContextRequestViewAdapter):
 class SharedToolLastPublicationsView(BaseSharedToolDashboardSingleView):
     """Shared tool last publications view"""
 
+    header_label = _("Last publications")
     table_class = SharedToolLastPublicationsTable
 
     empty_label = _("CONTRIBUTORS - 0 published content")
@@ -908,18 +842,6 @@ class SharedToolLastPublicationsView(BaseSharedToolDashboardSingleView):
         if length == 50:
             return _("CONTRIBUTORS - Last {} published contents")
         return _("CONTRIBUTORS - {} published contents")
-
-
-@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolLastPublicationsView),
-                provides=IPageTitle)
-def shared_tool_last_publications_title(context, request, view):
-    """Shared tool publications title"""
-    translate = request.localizer.translate
-    return '{} <small><small>' \
-           ' <i class="px-2 fas fa-chevron-right"></i> ' \
-           '{}</small></small>'.format(
-                II18n(context).query_attribute('title', request=request),
-                translate(_("Last publications")))
 
 
 #
@@ -942,7 +864,7 @@ class SharedToolLastModificationsTable(BaseSharedToolDashboardTable):
     """Shared tool dashboard last modifications table"""
 
 
-@adapter_config(context=(IBaseSharedTool, IPyAMSLayer, SharedToolLastModificationsTable),
+@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolLastModificationsTable),
                 provides=IValues)
 class SharedToolLastModificationsValues(ContextRequestViewAdapter):
     """Shared tool modifications values adapter"""
@@ -967,6 +889,7 @@ class SharedToolLastModificationsValues(ContextRequestViewAdapter):
 class SharedToolLastModificationsView(BaseSharedToolDashboardSingleView):
     """Shared tool last modifications view"""
 
+    header_label = _("Last modifications")
     table_class = SharedToolLastModificationsTable
 
     empty_label = _("CONTRIBUTORS - 0 modified content")
@@ -978,15 +901,3 @@ class SharedToolLastModificationsView(BaseSharedToolDashboardSingleView):
         if length == 50:
             return _("CONTRIBUTORS - Last {} modified contents")
         return _("CONTRIBUTORS - {} modified contents")
-
-
-@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolLastModificationsView),
-                provides=IPageTitle)
-def shared_tool_last_modifications_title(context, request, view):
-    """Shared tool modifications title"""
-    translate = request.localizer.translate
-    return '{} <small><small>' \
-           ' <i class="px-2 fas fa-chevron-right"></i> ' \
-           '{}</small></small>'.format(
-                II18n(context).query_attribute('title', request=request),
-                translate(_("Last modifications")))

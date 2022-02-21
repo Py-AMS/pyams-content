@@ -52,8 +52,7 @@ from pyams_utils.registry import get_all_utilities_registered_for, get_utility
 from pyams_viewlet.manager import viewletmanager_config
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_workflow.interfaces import IWorkflow, IWorkflowState, IWorkflowVersions
-from pyams_zmi.interfaces import IAdminLayer, IPageTitle
-from pyams_zmi.interfaces.configuration import IZMIConfiguration
+from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.table import IInnerTable
 from pyams_zmi.interfaces.viewlet import IContentManagementMenu, IMenuHeader
 from pyams_zmi.table import MultipleTablesAdminView
@@ -74,15 +73,6 @@ class BaseSiteRootDashboardView(BaseSharedToolDashboardView):
 
 class BaseSiteRootDashboardSingleView(BaseSharedToolDashboardSingleView):
     """Base site root dashboard view with single table"""
-
-
-def get_site_root_title(context, request, label):
-    """Site root publications title"""
-    translate = request.localizer.translate
-    configuration = IZMIConfiguration(request.root)
-    return '{} <small><small>' \
-           ' <i class="px-2 fas fa-chevron-right"></i> ' \
-           '{}</small></small>'.format(configuration.site_name, translate(label))
 
 
 @adapter_config(name='content-type',
@@ -120,14 +110,8 @@ class SiteRootDashboardMenu(SharedToolDashboardMenu):
 class SiteRootDashboardView(MultipleTablesAdminView):
     """Site root dashboard view"""
 
+    header_label = _("My dashboard")
     table_label = _("My dashboard")
-
-
-@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootDashboardView),
-                provides=IPageTitle)
-def site_root_dashboard_title(context, request, view):
-    """Site root dashboard title"""
-    return get_site_root_title(context, request, _("My dashboard"))
 
 
 @adapter_config(name='no-content-warning',
@@ -206,7 +190,7 @@ class SiteRootDashboardOwnerWaitingView(SharedToolDashboardOwnerWaitingView):
     table_class = SiteRootDashboardOwnerWaitingTable
 
 
-@adapter_config(context=(ISiteRoot, IPyAMSLayer, SiteRootDashboardOwnerWaitingTable),
+@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootDashboardOwnerWaitingTable),
                 provides=IValues)
 class SiteRootDashboardOwnerWaitingValues(ContextRequestViewAdapter):
     """Site root dashboard waiting owned contents values adapter"""
@@ -312,7 +296,7 @@ class SiteRootPreparationsTable(BaseSiteRootDashboardTable):
     """Site root preparations table"""
 
 
-@adapter_config(context=(ISiteRoot, IPyAMSLayer, SiteRootPreparationsTable),
+@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootPreparationsTable),
                 provides=IValues)
 class SiteRootPreparationsValues(ContextRequestViewAdapter):
     """Site root preparations values adapter"""
@@ -346,13 +330,6 @@ class SiteRootPreparationsView(SharedToolPreparationsView):
     table_class = SiteRootPreparationsTable
 
 
-@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootPreparationsView),
-                provides=IPageTitle)
-def site_root_preparations_title(context, request, view):
-    """Site root preparations title"""
-    return get_site_root_title(context, request, _("My drafts"))
-
-
 #
 # My submissions
 # Dashboard of contents waiting for manager action
@@ -371,7 +348,7 @@ class SiteRootSubmissionsTable(BaseSiteRootDashboardTable):
     """Site root submissions table"""
 
 
-@adapter_config(context=(ISiteRoot, IPyAMSLayer, SiteRootSubmissionsTable),
+@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootSubmissionsTable),
                 provides=IValues)
 class SiteRootSubmissionsValues(ContextRequestViewAdapter):
     """Site root submissions values adapter"""
@@ -407,13 +384,6 @@ class SiteRootSubmissionsView(SharedToolSubmissionsView):
     table_class = SiteRootSubmissionsTable
 
 
-@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootSubmissionsView),
-                provides=IPageTitle)
-def site_root_submissions_title(context, request, view):
-    """Site root submissions title"""
-    return get_site_root_title(context, request, _("My submissions"))
-
-
 #
 # My publications
 # Dashboard of published contents
@@ -432,7 +402,7 @@ class SiteRootPublicationsTable(BaseSiteRootDashboardTable):
     """Site root publications table"""
 
 
-@adapter_config(context=(ISiteRoot, IPyAMSLayer, SiteRootPublicationsTable),
+@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootPublicationsTable),
                 provides=IValues)
 class SiteRootPublicationsValues(ContextRequestViewAdapter):
     """Site root publications values adapter"""
@@ -468,13 +438,6 @@ class SiteRootPublicationsView(SharedToolPublicationsView):
     table_class = SiteRootPublicationsTable
 
 
-@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootPublicationsView),
-                provides=IPageTitle)
-def site_root_publications_title(context, request, view):
-    """Site root publications title"""
-    return get_site_root_title(context, request, _("My publications"))
-
-
 #
 # My retired contents
 # Dashboard of retired contents
@@ -493,7 +456,7 @@ class SiteRootRetiredContentsTable(BaseSiteRootDashboardTable):
     """Site root retired contents table"""
 
 
-@adapter_config(context=(ISiteRoot, IPyAMSLayer, SiteRootRetiredContentsTable),
+@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootRetiredContentsTable),
                 provides=IValues)
 class SiteRootRetiredContentsValues(ContextRequestViewAdapter):
     """Site root retired contents values adapter"""
@@ -529,13 +492,6 @@ class SiteRootRetiredContentsView(SharedToolRetiredContentsView):
     table_class = SiteRootRetiredContentsTable
 
 
-@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootRetiredContentsView),
-                provides=IPageTitle)
-def site_root_retired_contents_title(context, request, view):
-    """Site root retired contents title"""
-    return get_site_root_title(context, request, _("My retired contents"))
-
-
 #
 # My archived contents
 # Dashboard of archived contents
@@ -554,7 +510,7 @@ class SiteRootArchivedContentsTable(BaseSiteRootDashboardTable):
     """Site root archived contents table"""
 
 
-@adapter_config(context=(ISiteRoot, IPyAMSLayer, SiteRootArchivedContentsTable),
+@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootArchivedContentsTable),
                 provides=IValues)
 class SiteRootArchivedContentsValues(ContextRequestViewAdapter):
     """Site root archived contents values adapter"""
@@ -590,13 +546,6 @@ class SiteRootArchivedContentsView(SharedToolArchivedContentsView):
     table_class = SiteRootArchivedContentsTable
 
 
-@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootArchivedContentsView),
-                provides=IPageTitle)
-def site_root_archives_title(context, request, view):
-    """Site root archives title"""
-    return get_site_root_title(context, request, _("My archived contents"))
-
-
 #
 # All interventions menu
 #
@@ -627,7 +576,7 @@ class SiteRootLastPublicationsTable(BaseSiteRootDashboardTable):
     """Site root dashboard last publications table"""
 
 
-@adapter_config(context=(ISiteRoot, IPyAMSLayer, SiteRootLastPublicationsTable),
+@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootLastPublicationsTable),
                 provides=IValues)
 class SiteRootLastPublicationsValues(ContextRequestViewAdapter):
     """Site root publications values adapter"""
@@ -660,13 +609,6 @@ class SiteRootLastPublicationsView(SharedToolLastPublicationsView):
     table_class = SiteRootLastPublicationsTable
 
 
-@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootLastPublicationsView),
-                provides=IPageTitle)
-def site_root_last_publications_title(context, request, view):
-    """Site root publications title"""
-    return get_site_root_title(context, request, _("Last publications"))
-
-
 #
 # Last modified contents
 #
@@ -684,7 +626,7 @@ class SiteRootLastModificationsTable(BaseSiteRootDashboardTable):
     """Site root dashboard last modifications table"""
 
 
-@adapter_config(context=(ISiteRoot, IPyAMSLayer, SiteRootLastModificationsTable),
+@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootLastModificationsTable),
                 provides=IValues)
 class SiteRootLastModificationsValues(ContextRequestViewAdapter):
     """Site root modifications values adapter"""
@@ -708,10 +650,3 @@ class SiteRootLastModificationsView(SharedToolLastModificationsView):
     """Site root last modifications view"""
 
     table_class = SiteRootLastModificationsTable
-
-
-@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootLastModificationsView),
-                provides=IPageTitle)
-def site_root_last_modifications_title(context, request, view):
-    """Site root modifications title"""
-    return get_site_root_title(context, request, _("Last modifications"))
