@@ -15,12 +15,13 @@
 This module defines base classes for properties edit forms.
 """
 
-__docformat__ = 'restructuredtext'
-
-from pyams_content.zmi.interfaces import IPropertiesEditForm
 from zope.interface import implementer
 
+from pyams_content.zmi.interfaces import IPropertiesEditForm
 from pyams_zmi.form import AdminEditForm
+
+
+__docformat__ = 'restructuredtext'
 
 
 @implementer(IPropertiesEditForm)
