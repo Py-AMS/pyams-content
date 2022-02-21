@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2015-2021 Thierry Florac <tflorac AT ulthar.net>
+# Copyright (c) 2015-2022 Thierry Florac <tflorac AT ulthar.net>
 # All Rights Reserved.
 #
 # This software is subject to the provisions of the Zope Public License,
@@ -10,19 +10,18 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_content.shared.common.zmi.search module
+"""PyAMS_content.root.zmi.search module
 
-This module provides components used for contents searching from dashboards.
+This module defines components which are used to handle search on site root.
 """
 
 __docformat__ = 'restructuredtext'
 
 from hypatia.catalog import CatalogQuery
 from hypatia.interfaces import ICatalog
-from hypatia.query import And, Any, Contains, Eq, Ge, Le
+from hypatia.query import Any, Contains, Eq, Ge, Le
 from pyramid.interfaces import IView
 from pyramid.view import view_config
-from zope.dublincore.interfaces import IZopeDublinCore
 from zope.interface import Interface, implementer
 from zope.intid import IIntIds
 from zope.schema import Choice, TextLine
@@ -30,77 +29,56 @@ from zope.schema.vocabulary import getVocabularyRegistry
 
 from pyams_catalog.query import CatalogResultSet
 from pyams_content.component.thesaurus import ICollectionsManager, ITagsManager, IThemesManager
-from pyams_content.shared.common import IBaseSharedTool, SHARED_CONTENT_TYPES_VOCABULARY
-from pyams_content.shared.common.interfaces import SHARED_TOOL_WORKFLOW_STATES_VOCABULARY
-from pyams_content.shared.common.interfaces.types import DATA_TYPES_VOCABULARY
-from pyams_content.shared.common.zmi.dashboard import BaseSharedToolDashboardSingleView, \
-    BaseSharedToolDashboardTable, BaseSharedToolDashboardView, SharedToolDashboardView
+from pyams_content.root.zmi.dashboard import BaseSiteRootDashboardTable, SiteRootDashboardView
+from pyams_content.shared.common import SHARED_CONTENT_TYPES_VOCABULARY
+from pyams_content.shared.common.zmi.search import SharedToolAdvancedSearchForm, \
+    SharedToolAdvancedSearchResultsView, SharedToolAdvancedSearchView, \
+    SharedToolQuickSearchPageView, SharedToolQuickSearchView, get_json_search_results, \
+    get_quick_search_params
 from pyams_content.zmi.interfaces import IAllDashboardMenu
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IGroup
-from pyams_i18n.interfaces import II18n, INegotiator
+from pyams_i18n.interfaces import INegotiator
 from pyams_layer.interfaces import IPyAMSLayer
-from pyams_layer.skin import apply_skin
 from pyams_pagelet.pagelet import pagelet_config
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_security.schema import PrincipalField
 from pyams_sequence.interfaces import ISequentialIntIds
 from pyams_sequence.workflow import get_last_version
+from pyams_site.interfaces import ISiteRoot
 from pyams_table.interfaces import IValues
-from pyams_template.template import template_config
 from pyams_thesaurus.schema import ThesaurusTermsListField
 from pyams_thesaurus.zmi.widget import ThesaurusTermsTreeFieldWidget
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.list import unique
 from pyams_utils.registry import get_utility
 from pyams_utils.schema import DatetimesRangeField
-from pyams_utils.traversing import get_parent
-from pyams_utils.url import absolute_url
-from pyams_utils.vocabulary import vocabulary_config
-from pyams_viewlet.viewlet import ViewContentProvider, viewlet_config
-from pyams_workflow.interfaces import IWorkflow, IWorkflowVersions
+from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import FormGroupSwitcher
-from pyams_zmi.interfaces import IAdminLayer, IPageTitle
+from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.table import IInnerTable
-from pyams_zmi.search import SearchForm, SearchResultsView, SearchView
-from pyams_zmi.skin import AdminSkin
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
 from pyams_content import _
 
 
+#
+# Quick search components
+#
+
 @implementer(IView)
-class SharedToolQuickSearchResultsTable(BaseSharedToolDashboardTable):
-    """Shared tool quick search results table"""
+class SiteRootQuickSearchResultsTable(BaseSiteRootDashboardTable):
+    """Site root quick search results table"""
 
 
-def get_quick_search_params(query, request, catalog, sequence):
-    """Get quick search params"""
-    query_params = Eq(catalog['oid'], sequence.get_full_oid(query))
-    negotiator = get_utility(INegotiator)
-    for lang in {
-                    request.registry.settings.get('pyramid.default_locale_name', 'en'),
-                    request.locale_name,
-                    negotiator.server_language
-                } | negotiator.offered_languages:
-        index_name = f'title:{lang}'
-        if index_name in catalog:
-            index = catalog[index_name]
-            if index.check_query(query):
-                query_params |= Contains(index,
-                                         ' and '.join((f'{w}*' for w in query.split())))
-    return query_params
-
-
-@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolQuickSearchResultsTable),
+@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootQuickSearchResultsTable),
                 provides=IValues)
-class SharedToolQuickSearchResultsTableValues(ContextRequestViewAdapter):
-    """Shared tool quick search results table values adapter"""
+class SiteRootQuickSearchResultsTableValues(ContextRequestViewAdapter):
+    """Site root quick search results table values adapter"""
 
     @property
     def values(self):
         """Table values getter"""
-        intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
         query = self.request.params.get('query', '').strip()
         if not query:
@@ -112,99 +90,61 @@ class SharedToolQuickSearchResultsTableValues(ContextRequestViewAdapter):
         else:
             vocabulary = getVocabularyRegistry().get(self.context,
                                                      SHARED_CONTENT_TYPES_VOCABULARY)
-            params = And(Eq(catalog['parents'], intids.register(self.context)),
-                         Any(catalog['content_type'], vocabulary.by_value.keys()))
+            params = Any(catalog['content_type'], vocabulary.by_value.keys())
             params &= get_quick_search_params(query, self.request, catalog, sequence)
         return unique(map(get_last_version,
                           CatalogResultSet(CatalogQuery(catalog).query(
                               params, sort_index='modified_date', reverse=True))))
 
 
-def get_json_search_results(request, results):
-    """Get search results as JSON response"""
-    if len(results.values) == 1:
-        result = results.values[0]
-        return {
-            'status': 'redirect',
-            'location': absolute_url(result, request, 'admin')
-        }
-    apply_skin(request, AdminSkin)
-    results.update()
-    return {
-        'status': 'info',
-        'content': {
-            'html': results.render()
-        }
-    }
-
-
 @view_config(name='quick-search.json',
-             context=IBaseSharedTool, request_type=IPyAMSLayer,
+             context=ISiteRoot, request_type=IPyAMSLayer,
              permission=VIEW_SYSTEM_PERMISSION, renderer='json', xhr=True)
 def shared_tool_quick_search_view(request):
     """Shared tool quick search view"""
-    results = SharedToolQuickSearchResultsTable(request.context, request)
+    results = SiteRootQuickSearchResultsTable(request.context, request)
     return get_json_search_results(request, results)
 
 
 @adapter_config(name='quick-search',
-                required=(IBaseSharedTool, IAdminLayer, SharedToolDashboardView),
+                required=(ISiteRoot, IAdminLayer, SiteRootDashboardView),
                 provides=IInnerTable)
-@template_config(template='templates/quick-search.pt', layer=IAdminLayer)
-class SharedToolQuickSearchView(BaseSharedToolDashboardView):
+class SiteRootQuickSearchView(SharedToolQuickSearchView):
     """Shared tool quick search view"""
 
     @property
     def legend(self):
         """Legend getter"""
         translate = self.request.localizer.translate
-        return translate(_("Between all contents of « {} » content type")) \
-            .format(translate(self.context.shared_content_factory.factory.content_name))
-
-    def render(self):
-        """Viewlet renderer"""
-        return ViewContentProvider.render(self)
+        return translate(_("Between all contents"))
 
 
 @pagelet_config(name='quick-search.html',
-                context=IBaseSharedTool, layer=IPyAMSLayer,
+                context=ISiteRoot, layer=IPyAMSLayer,
                 permission=VIEW_SYSTEM_PERMISSION)
-class SharedToolQuickSearchPageView(BaseSharedToolDashboardSingleView):
+class SiteRootQuickSearchPageView(SharedToolQuickSearchPageView):
     """Shared tool quick search page view"""
 
-    table_class = SharedToolQuickSearchResultsTable
-
-    empty_label = _("SEARCH - No result found")
-    single_label = _("SEARCH - 1 result found")
-    plural_label = _("SEARCH - {} results found")
+    table_class = SiteRootQuickSearchResultsTable
 
 
 #
 # Advanced search components
 #
 
-@vocabulary_config(name=SHARED_TOOL_WORKFLOW_STATES_VOCABULARY)
-def WorkflowStatesVocabulary(context):
-    """Workflow states vocabulary"""
-    target = get_parent(context, IBaseSharedTool)
-    if target is not None:
-        workflow = IWorkflow(target)
-        return workflow.states
-
-
 @viewlet_config(name='advanced-search.menu',
-                context=IBaseSharedTool, layer=IAdminLayer,
+                context=ISiteRoot, layer=IAdminLayer,
                 manager=IAllDashboardMenu, weight=40,
                 permission=VIEW_SYSTEM_PERMISSION)
-class SharedToolAdvancedSearchMenu(NavigationMenuItem):
-    """Shared tool advanced search menu"""
+class SiteRootAdvancedSearchMenu(NavigationMenuItem):
+    """Site root advanced search menu"""
 
     label = _("Advanced search")
     href = "#advanced-search.html"
 
 
-class ISharedToolAdvancedSearchQuery(Interface):
-    """Shared tool advanced search query interface"""
+class ISiteRootAdvancedSearchQuery(Interface):
+    """Site root advanced search query interface"""
 
     query = TextLine(title=_("Search text"),
                      description=_("Entered text will be search in title only"),
@@ -213,13 +153,9 @@ class ISharedToolAdvancedSearchQuery(Interface):
     owner = PrincipalField(title=_("Owner"),
                            required=False)
 
-    status = Choice(title=_("Status"),
-                    vocabulary=SHARED_TOOL_WORKFLOW_STATES_VOCABULARY,
-                    required=False)
-
-    data_type = Choice(title=_("Data type"),
-                       vocabulary=DATA_TYPES_VOCABULARY,
-                       required=False)
+    content_type = Choice(title=_("Content type"),
+                          vocabulary=SHARED_CONTENT_TYPES_VOCABULARY,
+                          required=False)
 
     created = DatetimesRangeField(title=_("Creation date"),
                                   required=False)
@@ -237,14 +173,10 @@ class ISharedToolAdvancedSearchQuery(Interface):
                                           required=False)
 
 
-class SharedToolAdvancedSearchForm(SearchForm):
-    """Shared tool advanced search form"""
+class SiteRootAdvancedSearchForm(SharedToolAdvancedSearchForm):
+    """Site root advanced search form"""
 
-    title = _("Contents search form")
-
-    fields = Fields(ISharedToolAdvancedSearchQuery).omit('tags', 'themes', 'collections')
-
-    ajax_form_handler = 'advanced-search-results.html'
+    fields = Fields(ISiteRootAdvancedSearchQuery).omit('tags', 'themes', 'collections')
 
 
 class BaseThesaurusTermsSearchGroup(FormGroupSwitcher):
@@ -256,7 +188,7 @@ class BaseThesaurusTermsSearchGroup(FormGroupSwitcher):
     @property
     def fields(self):
         """Fields getter"""
-        fields = Fields(ISharedToolAdvancedSearchQuery).select(self.fieldname)
+        fields = Fields(ISiteRootAdvancedSearchQuery).select(self.fieldname)
         fields[self.fieldname].widget_factory = ThesaurusTermsTreeFieldWidget
         return fields
 
@@ -273,10 +205,10 @@ class BaseThesaurusTermsSearchGroup(FormGroupSwitcher):
 
 
 @adapter_config(name='tags',
-                required=(IBaseSharedTool, IAdminLayer, SharedToolAdvancedSearchForm),
+                required=(ISiteRoot, IAdminLayer, SiteRootAdvancedSearchForm),
                 provides=IGroup)
-class SharedToolAdvancedSearchFormTagsGroup(BaseThesaurusTermsSearchGroup):
-    """Shared tool advanced search form tags group"""
+class SiteRootAdvancedSearchFormTagsGroup(BaseThesaurusTermsSearchGroup):
+    """Site root advanced search form tags group"""
 
     legend = _("Tags")
 
@@ -287,10 +219,10 @@ class SharedToolAdvancedSearchFormTagsGroup(BaseThesaurusTermsSearchGroup):
 
 
 @adapter_config(name='themes',
-                required=(IBaseSharedTool, IAdminLayer, SharedToolAdvancedSearchForm),
+                required=(ISiteRoot, IAdminLayer, SiteRootAdvancedSearchForm),
                 provides=IGroup)
-class SharedToolAdvancedSearchFormThemesGroup(BaseThesaurusTermsSearchGroup):
-    """Shared tool advanced search form themes group"""
+class SiteRootAdvancedSearchFormThemesGroup(BaseThesaurusTermsSearchGroup):
+    """Site root advanced search form themes group"""
 
     legend = _("Themes")
 
@@ -301,7 +233,7 @@ class SharedToolAdvancedSearchFormThemesGroup(BaseThesaurusTermsSearchGroup):
 
 
 @adapter_config(name='collections',
-                required=(IBaseSharedTool, IAdminLayer, SharedToolAdvancedSearchForm),
+                required=(ISiteRoot, IAdminLayer, SiteRootAdvancedSearchForm),
                 provides=IGroup)
 class SharedToolAdvancedSearchFormCollectionsGroup(BaseThesaurusTermsSearchGroup):
     """Shared tool advanced search form collections group"""
@@ -315,36 +247,33 @@ class SharedToolAdvancedSearchFormCollectionsGroup(BaseThesaurusTermsSearchGroup
 
 
 @pagelet_config(name='advanced-search.html',
-                context=IBaseSharedTool, layer=IPyAMSLayer,
+                context=ISiteRoot, layer=IPyAMSLayer,
                 permission=VIEW_SYSTEM_PERMISSION)
-class SharedToolAdvancedSearchView(SearchView):
-    """Shared tool advanced search view"""
+class SiteRootAdvancedSearchView(SharedToolAdvancedSearchView):
+    """Site root advanced search view"""
 
-    title = _("Contents search form")
-    header_label = _("Advanced search")
-    search_form = SharedToolAdvancedSearchForm
+    search_form = SiteRootAdvancedSearchForm
 
 
-class SharedToolAdvancedSearchResultsTable(BaseSharedToolDashboardTable):
-    """Shared tool advanced search results table"""
+class SiteRootAdvancedSearchResultsTable(BaseSiteRootDashboardTable):
+    """Site root advanced search results table"""
 
 
-@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolAdvancedSearchResultsTable),
+@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootAdvancedSearchResultsTable),
                 provides=IValues)
-class SharedToolAdvancedSearchResultsValues(ContextRequestViewAdapter):
-    """Shared tool advanced search results values"""
+class SiteRootAdvancedSearchResultsValues(ContextRequestViewAdapter):
+    """Site root advanced search results values"""
 
     @property
     def values(self):
         """Shared tool advanced search results values getter"""
-        form = SharedToolAdvancedSearchForm(self.context, self.request)
+        form = SiteRootAdvancedSearchForm(self.context, self.request)
         form.update()
         data, _errors = form.extract_data()
         intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
         vocabulary = getVocabularyRegistry().get(self.context, SHARED_CONTENT_TYPES_VOCABULARY)
-        params = And(Eq(catalog['parents'], intids.register(self.context)),
-                     Any(catalog['content_type'], vocabulary.by_value.keys()))
+        params = Any(catalog['content_type'], vocabulary.by_value.keys())
         query = data.get('query')
         if query:
             sequence = get_utility(ISequentialIntIds)
@@ -368,8 +297,8 @@ class SharedToolAdvancedSearchResultsValues(ContextRequestViewAdapter):
             params &= Eq(catalog['role:owner'], data['owner'])
         if data.get('status'):
             params &= Eq(catalog['workflow_state'], data['status'])
-        if data.get('data_type'):
-            params &= Eq(catalog['data_type'], data['data_type'])
+        if data.get('content_type'):
+            params &= Eq(catalog['content_type'], data['content_type'])
         created_after, created_before = data.get('created', (None, None))
         if created_after:
             params &= Ge(catalog['created_date'], created_after)
@@ -389,21 +318,15 @@ class SharedToolAdvancedSearchResultsValues(ContextRequestViewAdapter):
         if data.get('collections'):
             tags = [intids.register(term) for term in data['collections']]
             params &= Any(catalog['collections'], tags)
-        if data.get('status'):
-            return unique(map(lambda x: sorted(IWorkflowVersions(x).get_versions(data['status']),
-                                               key=lambda y: IZopeDublinCore(y).modified)[0],
-                              CatalogResultSet(CatalogQuery(catalog).query(
-                                  params, sort_index='modified_date', reverse=True))))
         return unique(map(get_last_version,
                           CatalogResultSet(CatalogQuery(catalog).query(
                               params, sort_index='modified_date', reverse=True))))
 
 
 @pagelet_config(name='advanced-search-results.html',
-                context=IBaseSharedTool, layer=IPyAMSLayer,
+                context=ISiteRoot, layer=IPyAMSLayer,
                 permission=VIEW_SYSTEM_PERMISSION, xhr=True)
-class SharedToolAdvancedSearchResultsView(SearchResultsView):
-    """Shared tool advanced search results view"""
+class SiteRootAdvancedSearchResultsView(SharedToolAdvancedSearchResultsView):
+    """Site root advanced search results view"""
 
-    table_label = _("Search results")
-    table_class = SharedToolAdvancedSearchResultsTable
+    table_class = SiteRootAdvancedSearchResultsTable
