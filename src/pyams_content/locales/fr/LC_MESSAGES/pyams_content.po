@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2021-12-19 16:42+0100\n"
+"POT-Creation-Date: 2022-02-21 18:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,67 +15,67 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Lingua 4.14\n"
 
-#: src/pyams_content/include.py:51
+#: src/pyams_content/include.py:54
 msgid "Manage main site root properties"
 msgstr "Gérer les propriétés globales du site"
 
-#: src/pyams_content/include.py:55
+#: src/pyams_content/include.py:58
 msgid "Manage site, blog or hub properties"
 msgstr "Gérer les propriétés d'un site, d'un blog ou d'un hub"
 
-#: src/pyams_content/include.py:59
+#: src/pyams_content/include.py:62
 msgid "Manage shared tool properties"
 msgstr "Gérer les propriétés d'un outil partagé"
 
-#: src/pyams_content/include.py:63
+#: src/pyams_content/include.py:66
 msgid "Create new content"
 msgstr "Créer un nouveau contenu"
 
-#: src/pyams_content/include.py:67
+#: src/pyams_content/include.py:70
 msgid "Create new version of existing content"
 msgstr "Créer une nouvelle version d'un contenu"
 
-#: src/pyams_content/include.py:71
+#: src/pyams_content/include.py:74
 msgid "Manage content properties"
 msgstr "Gérer les propriétés d'un contenu"
 
-#: src/pyams_content/include.py:75
+#: src/pyams_content/include.py:78
 msgid "Comment existing content"
 msgstr "Commenter un contenu"
 
-#: src/pyams_content/include.py:79
+#: src/pyams_content/include.py:82
 msgid "Publish or retire existing content"
 msgstr "Publier ou retirer un contenu"
 
-#: src/pyams_content/include.py:94
+#: src/pyams_content/include.py:97
 msgid "Webmaster (role)"
 msgstr "Webmestre (rôle)"
 
-#: src/pyams_content/include.py:112
+#: src/pyams_content/include.py:115
 msgid "Pilot (role)"
 msgstr "Pilote (rôle)"
 
-#: src/pyams_content/include.py:128
+#: src/pyams_content/include.py:131
 msgid "Manager (role)"
 msgstr "Responsable (rôle)"
 
-#: src/pyams_content/include.py:144
+#: src/pyams_content/include.py:147
 msgid "Owner (role)"
 msgstr "Propriétaire (rôle)"
 
-#: src/pyams_content/include.py:153
+#: src/pyams_content/include.py:156
 msgid "Contributor (role)"
 msgstr "Contributeur (rôle)"
 
-#: src/pyams_content/include.py:170
+#: src/pyams_content/include.py:173
 msgid "Reader (role)"
 msgstr "Relecteur (rôle)"
 
-#: src/pyams_content/include.py:186
+#: src/pyams_content/include.py:189
 msgid "Operator (role)"
 msgstr "Opérateur (rôle)"
 
-#: src/pyams_content/include.py:197
+#: src/pyams_content/include.py:200
 msgid "Guest user (role)"
 msgstr "Invité (rôle)"
 
@@ -161,7 +161,7 @@ msgstr "Liste des pictogrammes"
 
 #: src/pyams_content/reference/pictogram/zmi/manager.py:49
 msgid "Pictograms selection"
-msgstr "Pictogrammes"
+msgstr "Sélection des pictogrammes"
 
 #: src/pyams_content/reference/pictogram/zmi/manager.py:59
 msgid "Pictograms management"
@@ -221,7 +221,7 @@ msgstr "Références"
 #: src/pyams_content/reference/zmi/table.py:51
 #: src/pyams_content/root/zmi/__init__.py:56
 #: src/pyams_content/shared/common/zmi/manager.py:82
-#: src/pyams_content/shared/common/zmi/__init__.py:281
+#: src/pyams_content/shared/common/zmi/__init__.py:291
 #: src/pyams_content/shared/site/zmi/folder.py:168
 #: src/pyams_content/shared/site/zmi/manager.py:161
 msgid "Properties"
@@ -242,7 +242,7 @@ msgstr "Gérer cette table"
 #: src/pyams_content/reference/zmi/table.py:99
 #: src/pyams_content/interfaces/__init__.py:103
 #: src/pyams_content/root/interfaces.py:39
-#: src/pyams_content/zmi/dashboard.py:122
+#: src/pyams_content/zmi/dashboard.py:121
 #: src/pyams_content/shared/site/zmi/folder.py:80
 msgid "Title"
 msgstr "Titre"
@@ -278,11 +278,15 @@ msgid "Short name used in breadcrumbs"
 msgstr "Libellé court visible dans le fil d'Ariane"
 
 #: src/pyams_content/interfaces/__init__.py:115
+#: src/pyams_content/root/zmi/search.py:160
 #: src/pyams_content/feature/review/interfaces.py:77
+#: src/pyams_content/shared/common/zmi/search.py:225
 msgid "Creation date"
 msgstr "Date de création"
 
 #: src/pyams_content/interfaces/__init__.py:119
+#: src/pyams_content/root/zmi/search.py:163
+#: src/pyams_content/shared/common/zmi/search.py:228
 msgid "Modification date"
 msgstr "Date de dernière modification"
 
@@ -301,7 +305,8 @@ msgid "Application short title visible as title prefix"
 msgstr "Ce libellé court peut être affiché dans différents contextes..."
 
 #: src/pyams_content/root/interfaces.py:48
-#: src/pyams_content/component/links/interfaces.py:43
+#: src/pyams_content/component/extfile/interfaces.py:45
+#: src/pyams_content/component/links/interfaces.py:44
 msgid "Description"
 msgstr "Description"
 
@@ -313,6 +318,7 @@ msgstr ""
 "peut être utilisée par les moteurs de recherche"
 
 #: src/pyams_content/root/interfaces.py:52
+#: src/pyams_content/component/extfile/interfaces.py:50
 #: src/pyams_content/component/illustration/interfaces.py:55
 msgid "Author"
 msgstr "Auteur"
@@ -366,6 +372,64 @@ msgstr "Groupe des opérateurs"
 msgid "Name of group containing all roles owners"
 msgstr "Groupe de mandataires contenant tous les détenteurs d'un rôle"
 
+#: src/pyams_content/root/zmi/search.py:119
+msgid "Between all contents"
+msgstr "Parmi tous les contenus"
+
+#: src/pyams_content/root/zmi/search.py:142
+#: src/pyams_content/shared/common/zmi/search.py:203
+msgid "Advanced search"
+msgstr "Recherche avancée"
+
+#: src/pyams_content/root/zmi/search.py:149
+#: src/pyams_content/shared/common/zmi/search.py:210
+msgid "Search text"
+msgstr "Texte recherché"
+
+#: src/pyams_content/root/zmi/search.py:150
+#: src/pyams_content/shared/common/zmi/search.py:211
+msgid "Entered text will be search in title only"
+msgstr "La requête s'applique au titre uniquement..."
+
+#: src/pyams_content/root/zmi/search.py:153
+#: src/pyams_content/zmi/dashboard.py:222
+#: src/pyams_content/shared/common/zmi/search.py:214
+msgid "Owner"
+msgstr "Propriétaire"
+
+#: src/pyams_content/root/zmi/search.py:156
+#: src/pyams_content/zmi/dashboard.py:142
+#: src/pyams_content/shared/common/zmi/types/__init__.py:182
+msgid "Content type"
+msgstr "Type de contenu"
+
+#: src/pyams_content/root/zmi/search.py:166
+#: src/pyams_content/root/zmi/search.py:213
+#: src/pyams_content/component/thesaurus/interfaces.py:67
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:99
+#: src/pyams_content/shared/common/zmi/search.py:231
+#: src/pyams_content/shared/common/zmi/search.py:282
+msgid "Tags"
+msgstr "Tags"
+
+#: src/pyams_content/root/zmi/search.py:169
+#: src/pyams_content/root/zmi/search.py:227
+#: src/pyams_content/component/thesaurus/interfaces.py:94
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:171
+#: src/pyams_content/shared/common/zmi/search.py:234
+#: src/pyams_content/shared/common/zmi/search.py:296
+msgid "Themes"
+msgstr "Thèmes"
+
+#: src/pyams_content/root/zmi/search.py:172
+#: src/pyams_content/root/zmi/search.py:241
+#: src/pyams_content/component/thesaurus/interfaces.py:121
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:287
+#: src/pyams_content/shared/common/zmi/search.py:237
+#: src/pyams_content/shared/common/zmi/search.py:310
+msgid "Collections"
+msgstr "Collections"
+
 #: src/pyams_content/root/zmi/__init__.py:45
 msgid "Main site management"
 msgstr "Gérer le portail"
@@ -392,8 +456,8 @@ msgid "Delete shared site"
 msgstr "Supprimer le site"
 
 #: src/pyams_content/root/zmi/sites.py:136
-#: src/pyams_content/shared/site/zmi/tree.py:369
-#: src/pyams_content/shared/site/zmi/tree.py:386
+#: src/pyams_content/shared/site/zmi/tree.py:368
+#: src/pyams_content/shared/site/zmi/tree.py:385
 msgid "Site tree"
 msgstr "Arborescence"
 
@@ -402,7 +466,7 @@ msgid "Sites, hubs and blogs"
 msgstr "Sites, hubs et blogs"
 
 #: src/pyams_content/root/zmi/sites.py:150
-#: src/pyams_content/shared/site/zmi/tree.py:372
+#: src/pyams_content/shared/site/zmi/tree.py:371
 msgid "Site content"
 msgstr "Contenu du site"
 
@@ -850,14 +914,14 @@ msgstr "Dates de publication"
 
 #: src/pyams_content/feature/menu/interfaces.py:74
 #: src/pyams_content/component/paragraph/interfaces.py:43
-#: src/pyams_content/component/association/interfaces.py:41
+#: src/pyams_content/component/association/interfaces.py:42
 #: src/pyams_content/shared/common/interfaces/types.py:53
 #: src/pyams_content/shared/site/interfaces.py:222
 msgid "Visible?"
 msgstr "Visible ?"
 
 #: src/pyams_content/feature/menu/interfaces.py:75
-#: src/pyams_content/component/association/interfaces.py:42
+#: src/pyams_content/component/association/interfaces.py:43
 msgid "Is this item visible in front-office?"
 msgstr "Cet élément est-il visible en front-office ?"
 
@@ -893,7 +957,7 @@ msgstr ""
 "manuellement au sein du menu, ceux-ci seront positionnés ensuite"
 
 #: src/pyams_content/feature/menu/interfaces.py:97
-#: src/pyams_content/component/links/interfaces.py:48
+#: src/pyams_content/component/links/interfaces.py:49
 #: src/pyams_content/shared/common/interfaces/types.py:80
 msgid "Pictogram"
 msgstr "Pictogramme"
@@ -910,25 +974,10 @@ msgstr "NON affiché"
 msgid "Default content renderer"
 msgstr "Mode de rendu par défaut"
 
-#: src/pyams_content/feature/review/__init__.py:172
-#, python-format
-msgid "{service_name}A content review is requested"
-msgstr "{service_name}Demande de relecture"
-
-#: src/pyams_content/feature/review/__init__.py:187
-#, python-format
-msgid "Request comment: {comment}"
-msgstr "Commentaire : {comment}"
-
-#: src/pyams_content/feature/review/__init__.py:219
 #: src/pyams_content/feature/review/interfaces.py:34
+#: src/pyams_content/feature/review/chat.py:52
 msgid "Review request"
 msgstr "Demande de relecture"
-
-#: src/pyams_content/feature/review/__init__.py:220
-#, python-format
-msgid "A new comment was added on content « {0} »"
-msgstr "Un nouveau commentaire a été ajouté au contenu « {0} »"
 
 #: src/pyams_content/feature/review/interfaces.py:35
 msgid "Reviewer comment"
@@ -962,35 +1011,50 @@ msgstr "Liste des relecteurs"
 msgid "List of principals which reviewed the comment"
 msgstr "Liste des mandataires qui ont apporté des commentaires sur ce contenu"
 
-#: src/pyams_content/feature/review/zmi/__init__.py:59
-#: src/pyams_content/feature/review/zmi/__init__.py:90
+#: src/pyams_content/feature/review/manager.py:86
+#, python-format
+msgid "{service_name}A content review is requested"
+msgstr "{service_name}Demande de relecture"
+
+#: src/pyams_content/feature/review/manager.py:101
+#, python-format
+msgid "Request comment: {comment}"
+msgstr "Commentaire : {comment}"
+
+#: src/pyams_content/feature/review/chat.py:53
+#, python-format
+msgid "A new comment was added on content « {0} »"
+msgstr "Un nouveau commentaire a été ajouté au contenu « {0} »"
+
+#: src/pyams_content/feature/review/zmi/__init__.py:67
+#: src/pyams_content/feature/review/zmi/__init__.py:98
 msgid "Ask for content review"
 msgstr "Demander une relecture"
 
-#: src/pyams_content/feature/review/zmi/__init__.py:69
+#: src/pyams_content/feature/review/zmi/__init__.py:77
 msgid "Sought principals"
 msgstr "Relecteurs sollicités"
 
-#: src/pyams_content/feature/review/zmi/__init__.py:70
+#: src/pyams_content/feature/review/zmi/__init__.py:78
 msgid "List of principals from which a review is requested"
 msgstr ""
 "Liste des utilisateurs que vous souhaitez solliciter par mail pour relire ce "
 "contenu"
 
-#: src/pyams_content/feature/review/zmi/__init__.py:74
+#: src/pyams_content/feature/review/zmi/__init__.py:82
 msgid "Comment"
 msgstr "Commentaire"
 
-#: src/pyams_content/feature/review/zmi/__init__.py:75
+#: src/pyams_content/feature/review/zmi/__init__.py:83
 msgid "Comment associated with this request"
 msgstr ""
 "Le commentaire associé à cette demande sera également transmis par mail"
 
-#: src/pyams_content/feature/review/zmi/__init__.py:78
+#: src/pyams_content/feature/review/zmi/__init__.py:86
 msgid "Notify all reviewers"
 msgstr "Notifier tous les relecteurs"
 
-#: src/pyams_content/feature/review/zmi/__init__.py:79
+#: src/pyams_content/feature/review/zmi/__init__.py:87
 msgid ""
 "If 'yes', selected reviewers will be notified by mail of your request, even "
 "if they were already members of the reviewers group. Otherwise, only new "
@@ -1000,43 +1064,74 @@ msgstr ""
 "votredemande, même s'ils avaient déjà été sollicités auparavant ; dans le "
 "cas contraire, seuls les nouveaux relecteurs seront notifiés."
 
-#: src/pyams_content/feature/review/zmi/__init__.py:91
+#: src/pyams_content/feature/review/zmi/__init__.py:99
 #: src/pyams_content/shared/common/zmi/workflow.py:63
-#: src/pyams_content/shared/common/zmi/__init__.py:406
+#: src/pyams_content/shared/common/zmi/__init__.py:416
 msgid "Cancel"
 msgstr "Annuler"
 
-#: src/pyams_content/feature/review/zmi/__init__.py:104
+#: src/pyams_content/feature/review/zmi/__init__.py:112
 msgid "Content review request"
 msgstr "Demande de relecture"
 
-#: src/pyams_content/feature/review/zmi/__init__.py:144
+#: src/pyams_content/feature/review/zmi/__init__.py:148
 #, python-format
 msgid "Request successful, {count} new notifications have been sent."
 msgstr "Votre demande a été transmise, {count} notification(s) envoyée(s)."
 
-#: src/pyams_content/feature/review/zmi/__init__.py:152
+#: src/pyams_content/feature/review/zmi/__init__.py:151
 msgid "Request successful, no new notification have been sent."
 msgstr ""
 "Votre demande a été transmise, aucune nouvelle notification n'a été envoyée."
 
-#: src/pyams_content/feature/review/zmi/__init__.py:168
+#: src/pyams_content/feature/review/zmi/__init__.py:179
 msgid "Comments"
 msgstr "Commentaires"
 
-#: src/pyams_content/feature/review/zmi/__init__.py:189
+#: src/pyams_content/feature/review/zmi/__init__.py:211
 msgid "Version comments"
 msgstr "Commentaires associés à cette version"
 
-#: src/pyams_content/feature/review/zmi/templates/notification.pt:4
+#: src/pyams_content/feature/review/zmi/__init__.py:252
+msgid "Message is mandatory!"
+msgstr "Le message est obligatoire !"
+
+#: src/pyams_content/feature/review/zmi/templates/comment.pt:13
+#: src/pyams_content/feature/review/zmi/templates/comments.pt:37
+msgid "Review query from"
+msgstr "Demande de relecture de"
+
+#: src/pyams_content/feature/review/zmi/templates/comment.pt:18
+#: src/pyams_content/feature/review/zmi/templates/comments.pt:41
+msgid "(as reviewer)"
+msgstr "(en tant que relecteur)"
+
+#: src/pyams_content/feature/review/zmi/templates/comment.pt:27
+#: src/pyams_content/feature/review/zmi/templates/comments.pt:50
+msgid "Selected reviewers:"
+msgstr "Auprès de :"
+
+#: src/pyams_content/feature/review/zmi/templates/comments.pt:60
+msgid "New comment"
+msgstr "Nouveau commentaire"
+
+#: src/pyams_content/feature/review/zmi/templates/comments.pt:63
+msgid "Your comment..."
+msgstr "Votre commentaire..."
+
+#: src/pyams_content/feature/review/zmi/templates/comments.pt:66
+msgid "Add comment"
+msgstr "Ajouter ce commentaire"
+
+#: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:4
 msgid "[${service_name}] You are requested for a content review"
 msgstr "[${service_name}] Vous êtes sollicité pour une demande de relecture"
 
-#: src/pyams_content/feature/review/zmi/templates/notification.pt:30
+#: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:30
 msgid "Hello,"
 msgstr "Bonjour,"
 
-#: src/pyams_content/feature/review/zmi/templates/notification.pt:31
+#: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:31
 msgid ""
 "You have been requested by ${sender}, contributor of « ${service_name} » "
 "website, to make a review of a content."
@@ -1045,23 +1140,23 @@ msgstr ""
 "${service_name} », qui souhaite recueillir votre commentaire à propos d'un "
 "contenu."
 
-#: src/pyams_content/feature/review/zmi/templates/notification.pt:36
+#: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:36
 msgid "${sender} added the following message to his request:"
 msgstr "${sender} a accompagné sa demande de relecture du message suivant :"
 
-#: src/pyams_content/feature/review/zmi/templates/notification.pt:41
+#: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:41
 msgid ""
 "To review and comment this publication, please use the following link: "
 "${target}."
 msgstr "Pour accéder à cette contribution, cliquez ici : ${target}."
 
-#: src/pyams_content/feature/review/zmi/templates/notification.pt:44
+#: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:44
 msgid "After reading this content, please use the « Comments » menu entry."
 msgstr ""
 "Lorsque vous aurez pris connaissance du contenu, vous pourrez utiliser le "
 "menu « Commentaire » en colonne de gauche pour apporter vos commentaires."
 
-#: src/pyams_content/feature/review/zmi/templates/notification.pt:45
+#: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:45
 msgid ""
 "If you don't want to reply to this request, please contact ${sender} "
 "directly by replying to this mail."
@@ -1069,33 +1164,9 @@ msgstr ""
 "Si vous ne souhaitez pas donner suite à cette demande, vous pouvez répondre "
 "directement à ${sender} en lui adressant un message dans ce sens."
 
-#: src/pyams_content/feature/review/zmi/templates/notification.pt:47
+#: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:47
 msgid "Thank you."
 msgstr "Merci."
-
-#: src/pyams_content/feature/review/zmi/templates/comments.pt:33
-msgid "Review query from"
-msgstr "Demande de relecture de"
-
-#: src/pyams_content/feature/review/zmi/templates/comments.pt:38
-msgid "(as reviewer)"
-msgstr "(en tant que relecteur)"
-
-#: src/pyams_content/feature/review/zmi/templates/comments.pt:47
-msgid "Selected reviewers:"
-msgstr "Auprès de :"
-
-#: src/pyams_content/feature/review/zmi/templates/comments.pt:57
-msgid "New comment"
-msgstr "Nouveau commentaire"
-
-#: src/pyams_content/feature/review/zmi/templates/comments.pt:59
-msgid "Your comment..."
-msgstr "Votre commentaire..."
-
-#: src/pyams_content/feature/review/zmi/templates/comments.pt:62
-msgid "Add comment"
-msgstr "Ajouter ce commentaire"
 
 #: src/pyams_content/feature/preview/zmi/__init__.py:53
 msgid "Preview"
@@ -1105,47 +1176,40 @@ msgstr "Aperçu"
 msgid "Open preview in new tab"
 msgstr "Ouvrir l'aperçu dans un nouvel onglet"
 
-#: src/pyams_content/zmi/dashboard.py:97
+#: src/pyams_content/zmi/dashboard.py:93
 msgid "Switch element visibility"
 msgstr "Cliquez pour rendre l'élément visible ou non"
 
-#: src/pyams_content/zmi/dashboard.py:98
+#: src/pyams_content/zmi/dashboard.py:94
 msgid "Visible element?"
 msgstr ""
 "Un élément peut ne pas être visible s'il n'a pas encore été publié ou si son "
 "niveau parent n'est pas publié"
 
-#: src/pyams_content/zmi/dashboard.py:143
-msgid "Content type"
-msgstr "Type de contenu"
-
-#: src/pyams_content/zmi/dashboard.py:158
+#: src/pyams_content/zmi/dashboard.py:157
 #, python-format
 msgid "#{}"
 msgstr "N° {}"
 
-#: src/pyams_content/zmi/dashboard.py:170
+#: src/pyams_content/zmi/dashboard.py:169
+#: src/pyams_content/shared/common/zmi/search.py:217
 msgid "Status"
 msgstr "Statut"
 
-#: src/pyams_content/zmi/dashboard.py:184
+#: src/pyams_content/zmi/dashboard.py:183
 msgid "Status datetime"
 msgstr "En date du"
 
-#: src/pyams_content/zmi/dashboard.py:198
+#: src/pyams_content/zmi/dashboard.py:197
 msgid "Version"
 msgstr "Version"
 
-#: src/pyams_content/zmi/dashboard.py:209
+#: src/pyams_content/zmi/dashboard.py:208
 msgid "Modifier"
 msgstr "Intervenant"
 
-#: src/pyams_content/zmi/dashboard.py:223
-msgid "Owner"
-msgstr "Propriétaire"
-
-#: src/pyams_content/zmi/dashboard.py:237
-#: src/pyams_content/shared/common/interfaces/__init__.py:169
+#: src/pyams_content/zmi/dashboard.py:236
+#: src/pyams_content/shared/common/interfaces/__init__.py:170
 msgid "Last update"
 msgstr "Dernière modification"
 
@@ -1200,53 +1264,253 @@ msgstr ""
 "Des blocs vides des types sélectionnés seront créés automatiquement dans les "
 "nouveaux contenus de ce gabarit lors de leur création"
 
-#: src/pyams_content/component/association/interfaces.py:91
+#: src/pyams_content/component/extfile/__init__.py:168
+msgid "Standard file"
+msgstr "Fichier"
+
+#: src/pyams_content/component/extfile/__init__.py:178
+#: src/pyams_content/component/extfile/zmi/__init__.py:174
+msgid "External image"
+msgstr "Image téléchargeable"
+
+#: src/pyams_content/component/extfile/__init__.py:206
+msgid "Video"
+msgstr "Vidéo téléchargeable"
+
+#: src/pyams_content/component/extfile/__init__.py:216
+msgid "Audio file"
+msgstr "Bande son téléchargeable"
+
+#: src/pyams_content/component/extfile/interfaces.py:41
+msgid "Download link label"
+msgstr "Intitulé du lien"
+
+#: src/pyams_content/component/extfile/interfaces.py:42
+msgid "Label of download link, as shown in front-office"
+msgstr ""
+"Intitulé du lien présenté aux internautes pour télécharger ce fichier. Si le "
+"responsable du site a choisi de préfixer automatiquement tous les liens avec "
+"un texte de son choix, celui-ci est indiqué ci-contre et votre libellé ne "
+"sera utilisé que pour compléter ce libellé par défaut."
+
+#: src/pyams_content/component/extfile/interfaces.py:46
+msgid "File description displayed by front-office template"
+msgstr "Description du fichier présentée aux internautes"
+
+#: src/pyams_content/component/extfile/interfaces.py:51
+msgid "Name of document's author"
+msgstr "Nom de l'auteur, sous la forme \"Prénom Nom / Organisme\""
+
+#: src/pyams_content/component/extfile/interfaces.py:54
+#: src/pyams_content/component/links/interfaces.py:110
+msgid "Language"
+msgstr "Langue"
+
+#: src/pyams_content/component/extfile/interfaces.py:55
+msgid "File's content language"
+msgstr "Langue du fichier"
+
+#: src/pyams_content/component/extfile/interfaces.py:59
+msgid "Save file as..."
+msgstr "Nom du fichier"
+
+#: src/pyams_content/component/extfile/interfaces.py:60
+msgid "Name under which the file will be saved"
+msgstr ""
+"Nom donné au fichier en cas de téléchargement ; il est donc important de "
+"veiller à ce que ce nom reflète bien le contenu du fichier, sans oublier "
+"d'indiquer l'extension (« .pdf », « .doc »...) ; si vous n'indiquez rien "
+"ici, le nom du fichier que vous avez sélectionné sera repris tel quel"
+
+#: src/pyams_content/component/extfile/interfaces.py:70
+msgid "File data"
+msgstr "Fichier"
+
+#: src/pyams_content/component/extfile/interfaces.py:71
+msgid "File content"
+msgstr ""
+"Cliquez sur le bouton \"Parcourir...\" pour sélectionner un nouveau contenu"
+
+#: src/pyams_content/component/extfile/interfaces.py:82
+msgid "Image data"
+msgstr "Image"
+
+#: src/pyams_content/component/extfile/interfaces.py:83
+msgid "Image content"
+msgstr ""
+"Utilisez le bouton \"Parcourir...\" pour sélectionner une nouvelle image"
+
+#: src/pyams_content/component/extfile/interfaces.py:90
+msgid "Video data"
+msgstr "Vidéo"
+
+#: src/pyams_content/component/extfile/interfaces.py:91
+msgid "Video content"
+msgstr ""
+"Utilisez le bouton \"Parcourir...\" pour sélectionner une nouvelle vidéo"
+
+#: src/pyams_content/component/extfile/interfaces.py:98
+msgid "Audio data"
+msgstr "Bande son"
+
+#: src/pyams_content/component/extfile/interfaces.py:99
+msgid "Audio file content"
+msgstr ""
+"Utilisez le bouton \"Parcourir...\" pour sélectionner une nouvelle bande son"
+
+#: src/pyams_content/component/extfile/interfaces.py:117
+msgid "Default title prefix"
+msgstr "Préfixe par défaut"
+
+#: src/pyams_content/component/extfile/interfaces.py:118
+msgid ""
+"If used, this prefix will be automatically added to download link's label of "
+"all files"
+msgstr ""
+"Si vous indiquez un texte ici, celui-ci sera repris automatiquement comme "
+"préfixe de tous les liens de téléchargement de pièces jointes"
+
+#: src/pyams_content/component/extfile/zmi/manager.py:43
+#: src/pyams_content/component/extfile/zmi/manager.py:53
+msgid "External files settings"
+msgstr "Paramétrage des pièces jointes"
+
+#: src/pyams_content/component/extfile/zmi/manager.py:54
+msgid "Default prefix"
+msgstr "Propriétés des pièces jointes"
+
+#: src/pyams_content/component/extfile/zmi/__init__.py:54
+msgid "Add new external file"
+msgstr "Ajouter un fichier téléchargeable"
+
+#: src/pyams_content/component/extfile/zmi/__init__.py:62
+msgid "New file properties"
+msgstr "Propriétés du nouveau fichier"
+
+#: src/pyams_content/component/extfile/zmi/__init__.py:83
+msgid "External file properties"
+msgstr "Propriétés du fichier"
+
+#: src/pyams_content/component/extfile/zmi/__init__.py:103
+msgid "External file..."
+msgstr "Fichier"
+
+#: src/pyams_content/component/extfile/zmi/__init__.py:114
+msgid "Add external file"
+msgstr "Nouveau fichier"
+
+#: src/pyams_content/component/extfile/zmi/__init__.py:143
+msgid "External image..."
+msgstr "Image téléchargeable"
+
+#: src/pyams_content/component/extfile/zmi/__init__.py:154
+msgid "Add external image"
+msgstr "Nouvelle image téléchargeable"
+
+#: src/pyams_content/component/extfile/zmi/__init__.py:197
+msgid "External video..."
+msgstr "Vidéo téléchargeable"
+
+#: src/pyams_content/component/extfile/zmi/__init__.py:208
+msgid "Add external video"
+msgstr "Nouvelle vidéo téléchargeable"
+
+#: src/pyams_content/component/extfile/zmi/__init__.py:228
+msgid "External video"
+msgstr "Vidéo téléchargeable"
+
+#: src/pyams_content/component/extfile/zmi/__init__.py:251
+msgid "External audio..."
+msgstr "Bande son téléchargeable"
+
+#: src/pyams_content/component/extfile/zmi/__init__.py:262
+msgid "Add external audio"
+msgstr "Nouvelle bande son téléchargeable"
+
+#: src/pyams_content/component/extfile/zmi/__init__.py:282
+msgid "External audio"
+msgstr "Bande son téléchargeable"
+
+#: src/pyams_content/component/association/interfaces.py:92
 msgid "Associations"
 msgstr "Associations"
 
-#: src/pyams_content/component/association/interfaces.py:98
+#: src/pyams_content/component/association/interfaces.py:99
 msgid "Associations template"
 msgstr "Mode de rendu"
 
-#: src/pyams_content/component/association/interfaces.py:99
+#: src/pyams_content/component/association/interfaces.py:100
 msgid "Presentation template used for associations"
 msgstr "Mode de rendu utilisé pour ce bloc"
 
+#: src/pyams_content/component/association/zmi/__init__.py:99
+#: src/pyams_content/component/association/zmi/container.py:82
+#, python-format
+msgid "{}: {}"
+msgstr "{} : {}"
+
+#: src/pyams_content/component/association/zmi/container.py:55
+msgid "Default links and external files"
+msgstr "Liens et pièces jointes par défaut"
+
+#: src/pyams_content/component/association/zmi/container.py:83
+msgid "Links and external files"
+msgstr "Liens et pièces jointes"
+
+#: src/pyams_content/component/association/zmi/container.py:162
+msgid "Public label"
+msgstr "Libellé public"
+
+#: src/pyams_content/component/association/zmi/container.py:171
+msgid "Internal target"
+msgstr "Contenu interne"
+
+#: src/pyams_content/component/association/zmi/container.py:188
+msgid "Size"
+msgstr "Taille"
+
+#: src/pyams_content/component/association/zmi/container.py:226
+msgid "Links and external files list"
+msgstr "Liste des liens et pièces jointes"
+
 #: src/pyams_content/component/links/__init__.py:124
+#: src/pyams_content/component/links/zmi/__init__.py:119
 #: src/pyams_content/shared/site/link.py:80
 msgid "Internal link"
 msgstr "Lien interne"
 
 #: src/pyams_content/component/links/__init__.py:240
-#: src/pyams_content/shared/site/link.py:166
+#: src/pyams_content/component/links/zmi/__init__.py:172
+#: src/pyams_content/shared/site/link.py:165
 msgid "External link"
 msgstr "Lien externe"
 
 #: src/pyams_content/component/links/__init__.py:292
+#: src/pyams_content/component/links/zmi/__init__.py:225
 msgid "Mailto link"
 msgstr "Lien mailto"
 
-#: src/pyams_content/component/links/interfaces.py:39
+#: src/pyams_content/component/links/interfaces.py:40
 msgid "Alternate title"
 msgstr "Titre de substitution"
 
-#: src/pyams_content/component/links/interfaces.py:40
+#: src/pyams_content/component/links/interfaces.py:41
 msgid "Link title, as shown in front-office"
 msgstr "Libellé de lien, tel qu'il sera affiché en front-office"
 
-#: src/pyams_content/component/links/interfaces.py:44
+#: src/pyams_content/component/links/interfaces.py:45
 msgid "Link description displayed by front-office template"
 msgstr "Description du lien affichée en front-office"
 
-#: src/pyams_content/component/links/interfaces.py:49
+#: src/pyams_content/component/links/interfaces.py:50
 msgid "Name of the pictogram associated with this link"
 msgstr "Sélection du pictogramme associé à ce lien"
 
-#: src/pyams_content/component/links/interfaces.py:62
+#: src/pyams_content/component/links/interfaces.py:63
 msgid "Force canonical URL?"
 msgstr "Imposer l'URL canonique"
 
-#: src/pyams_content/component/links/interfaces.py:63
+#: src/pyams_content/component/links/interfaces.py:64
 msgid ""
 "By default, internal links use a \"relative\" URL, which tries to display "
 "link target in the current context; by using a canonical URL, you can "
@@ -1257,7 +1521,7 @@ msgstr ""
 "canonique, vous pouvez imposer l'affichage de ce contenu dans son contexte "
 "d'origine, s'il est défini"
 
-#: src/pyams_content/component/links/interfaces.py:84
+#: src/pyams_content/component/links/interfaces.py:85
 msgid ""
 "Marker interface provided by links directed to contents supporting this "
 "interface"
@@ -1265,43 +1529,155 @@ msgstr ""
 "Interface de marquage fournie par les liens vers des contenus supportant "
 "cette interface"
 
-#: src/pyams_content/component/links/interfaces.py:96
+#: src/pyams_content/component/links/interfaces.py:97
 msgid "Info properties interface"
 msgstr "Interface des propriétés du lien"
 
-#: src/pyams_content/component/links/interfaces.py:105
+#: src/pyams_content/component/links/interfaces.py:106
 #: src/pyams_content/shared/site/interfaces.py:235
 msgid "Target URL"
 msgstr "URL de destination"
 
-#: src/pyams_content/component/links/interfaces.py:106
+#: src/pyams_content/component/links/interfaces.py:107
 #: src/pyams_content/shared/site/interfaces.py:236
 msgid "URL used to access external resource"
 msgstr "Adresse utilisée pour accéder à cette ressource externe"
 
-#: src/pyams_content/component/links/interfaces.py:109
-msgid "Language"
-msgstr "Langue"
-
-#: src/pyams_content/component/links/interfaces.py:110
+#: src/pyams_content/component/links/interfaces.py:111
 msgid "Language used in this remote resource"
 msgstr "Langue utilisée par la ressource distante"
 
-#: src/pyams_content/component/links/interfaces.py:118
+#: src/pyams_content/component/links/interfaces.py:119
 msgid "Target address"
 msgstr "Adresse de destination"
 
-#: src/pyams_content/component/links/interfaces.py:119
+#: src/pyams_content/component/links/interfaces.py:120
 msgid "Target email address"
 msgstr "Adresse de messagerie destinataire, sous la forme \"nom@domaine.com\""
 
-#: src/pyams_content/component/links/interfaces.py:122
+#: src/pyams_content/component/links/interfaces.py:123
 msgid "Address name"
 msgstr "Nom de l'adresse"
 
-#: src/pyams_content/component/links/interfaces.py:123
+#: src/pyams_content/component/links/interfaces.py:124
 msgid "Address as displayed in address book"
 msgstr "Nom associé à l'adresse de messagerie indiquée"
+
+#: src/pyams_content/component/links/zmi/__init__.py:61
+msgid "Add new link"
+msgstr "Ajouter un lien"
+
+#: src/pyams_content/component/links/zmi/__init__.py:69
+msgid "New link properties"
+msgstr "Propriétés du nouveau lien"
+
+#: src/pyams_content/component/links/zmi/__init__.py:76
+#: src/pyams_content/shared/site/zmi/link.py:133
+msgid "Link properties"
+msgstr "Propriétés du lien"
+
+#: src/pyams_content/component/links/zmi/__init__.py:89
+msgid "Internal link..."
+msgstr "Lien interne"
+
+#: src/pyams_content/component/links/zmi/__init__.py:100
+#: src/pyams_content/shared/site/zmi/link.py:223
+msgid "Add internal link"
+msgstr "Nouveau lien interne"
+
+#: src/pyams_content/component/links/zmi/__init__.py:142
+msgid "External link..."
+msgstr "Lien externe"
+
+#: src/pyams_content/component/links/zmi/__init__.py:153
+#: src/pyams_content/shared/site/zmi/link.py:349
+msgid "Add external link"
+msgstr "Nouveau lien externe"
+
+#: src/pyams_content/component/links/zmi/__init__.py:195
+msgid "Mailto link..."
+msgstr "Lien mailto"
+
+#: src/pyams_content/component/links/zmi/__init__.py:206
+msgid "Add mailto link"
+msgstr "Nouveau lien mailto:"
+
+#: src/pyams_content/component/thesaurus/interfaces.py:46
+msgid "Enable glossary"
+msgstr "Activer le glossaire"
+
+#: src/pyams_content/component/thesaurus/interfaces.py:50
+msgid "Glossary thesaurus name"
+msgstr "Nom du thésaurus"
+
+#: src/pyams_content/component/thesaurus/interfaces.py:57
+msgid "You must specify a glossary thesaurus to activate it!"
+msgstr ""
+"Le devez spécifier le glossaire utilisé par le thésaurus pour pouvoir "
+"l'activer"
+
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:106
+msgid "Content tags"
+msgstr "Tags du contenu"
+
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:107
+msgid "Content tags selection"
+msgstr "Sélection des tags du contenu"
+
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:145
+msgid "Default tags"
+msgstr "Tags par défaut"
+
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:178
+msgid "Content themes"
+msgstr "Thèmes du contenu"
+
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:179
+msgid "Content themes selection"
+msgstr "Sélection des thèmes du contenu"
+
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:226
+msgid "Don't inherit parent themes"
+msgstr "Ne pas hériter des thèmes du niveau supérieur"
+
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:261
+msgid "Default themes"
+msgstr "Thèmes par défaut"
+
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:297
+msgid "Content collections"
+msgstr "Collections du contenu"
+
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:298
+msgid "Content collections selection"
+msgstr "Sélection des collections du contenu"
+
+#: src/pyams_content/component/thesaurus/zmi/manager.py:79
+#: src/pyams_content/component/thesaurus/zmi/manager.py:89
+msgid "Tags settings"
+msgstr "Paramétrage des tags"
+
+#: src/pyams_content/component/thesaurus/zmi/manager.py:90
+msgid "Selected tags thesaurus"
+msgstr "Thésaurus des tags"
+
+#: src/pyams_content/component/thesaurus/zmi/manager.py:125
+#: src/pyams_content/component/thesaurus/zmi/manager.py:135
+msgid "Themes settings"
+msgstr "Paramétrage des thèmes"
+
+#: src/pyams_content/component/thesaurus/zmi/manager.py:136
+msgid "Selected themes thesaurus"
+msgstr "Thésaurus des thèmes"
+
+#: src/pyams_content/component/thesaurus/zmi/manager.py:156
+#: src/pyams_content/component/thesaurus/zmi/manager.py:166
+msgid "Collections settings"
+msgstr "Paramétrage des collections"
+
+#: src/pyams_content/component/thesaurus/zmi/manager.py:167
+msgid "Selected collections thesaurus"
+msgstr "Thésaurus des collections"
 
 #: src/pyams_content/component/illustration/thesaurus.py:34
 msgid "Illustration"
@@ -1360,13 +1736,13 @@ msgstr "Illustration principale"
 msgid "Navigation link illustration"
 msgstr "Illustration de navigation"
 
-#: src/pyams_content/shared/common/types.py:206
+#: src/pyams_content/shared/common/types.py:216
 #, python-format
 msgid "-- missing value ({}) --"
 msgstr "-- valeur manquante ({}) --"
 
-#: src/pyams_content/shared/common/__init__.py:112
-#: src/pyams_content/shared/common/__init__.py:121
+#: src/pyams_content/shared/common/__init__.py:113
+#: src/pyams_content/shared/common/__init__.py:122
 #, python-format
 msgid "{date} by {principal}"
 msgstr "{date} par {principal}"
@@ -1549,6 +1925,40 @@ msgstr "CONTRIBUTEURS - {} derniers contenus modifiés"
 msgid "CONTRIBUTORS - {} modified contents"
 msgstr "CONTRIBUTEURS - {} contenus modifiés"
 
+#: src/pyams_content/shared/common/zmi/search.py:162
+#, python-format
+msgid "Between all contents of « {} » content type"
+msgstr "Parmi les contenus du gabarit « {} »"
+
+#: src/pyams_content/shared/common/zmi/search.py:178
+msgid "SEARCH - No result found"
+msgstr "RECHERCHE - Aucun résultat trouvé"
+
+#: src/pyams_content/shared/common/zmi/search.py:179
+msgid "SEARCH - 1 result found"
+msgstr "RECHERCHE - 1 résultat trouvé"
+
+#: src/pyams_content/shared/common/zmi/search.py:180
+#, python-format
+msgid "SEARCH - {} results found"
+msgstr "RECHERCHE - {} résultats trouvés"
+
+#: src/pyams_content/shared/common/zmi/search.py:221
+#: src/pyams_content/shared/common/interfaces/types.py:131
+#: src/pyams_content/shared/topic/interfaces.py:42
+#: src/pyams_content/shared/site/interfaces.py:188
+msgid "Data type"
+msgstr "Type de contenu"
+
+#: src/pyams_content/shared/common/zmi/search.py:244
+#: src/pyams_content/shared/common/zmi/search.py:324
+msgid "Contents search form"
+msgstr "Recherche de contenus"
+
+#: src/pyams_content/shared/common/zmi/search.py:408
+msgid "Search results"
+msgstr "Résultats de la recherche"
+
 #: src/pyams_content/shared/common/zmi/workflow.py:62
 msgid "Workflow action"
 msgstr "Action du workflow"
@@ -1587,7 +1997,7 @@ msgid "Publication settings"
 msgstr "Paramètres de publication"
 
 #: src/pyams_content/shared/common/zmi/workflow.py:268
-#: src/pyams_content/shared/common/zmi/workflow.py:420
+#: src/pyams_content/shared/common/zmi/workflow.py:421
 msgid "Publication start date is required"
 msgstr "La date de début de publication est obligatoire"
 
@@ -1604,7 +2014,7 @@ msgstr ""
 "modifiable."
 
 #: src/pyams_content/shared/common/zmi/workflow.py:327
-#: src/pyams_content/shared/common/zmi/workflow.py:488
+#: src/pyams_content/shared/common/zmi/workflow.py:489
 msgid "A comment is required"
 msgstr "Le commentaire est obligatoire !"
 
@@ -1619,7 +2029,7 @@ msgstr ""
 "de votre refus ; il pourra modifier ce contenu et effectuer une nouvelle "
 "demande de publication."
 
-#: src/pyams_content/shared/common/zmi/workflow.py:432
+#: src/pyams_content/shared/common/zmi/workflow.py:433
 msgid ""
 "As a manager, you considerate that this content is complete and can be "
 "published 'as is'.<br />This operation will make the content publicly "
@@ -1629,7 +2039,7 @@ msgstr ""
 "l'état.<br />Cette opération va rendre le contenu visible de tous, sauf si "
 "des restrictions d'accès lui ont été appliquées."
 
-#: src/pyams_content/shared/common/zmi/workflow.py:459
+#: src/pyams_content/shared/common/zmi/workflow.py:460
 msgid ""
 "After cancelling the publication, the content will return to proposed "
 "publication state."
@@ -1637,7 +2047,7 @@ msgstr ""
 "En annulant cette publication, ce contenu va retourner en statut "
 "'Publication demandée'."
 
-#: src/pyams_content/shared/common/zmi/workflow.py:500
+#: src/pyams_content/shared/common/zmi/workflow.py:501
 msgid ""
 "You considerate that the currently published version should no more be "
 "publicly visible.<br />WARNING: the content will remain visible until a "
@@ -1647,13 +2057,13 @@ msgstr ""
 "consultable.<br />ATTENTION : ce contenu restera visible jusqu'à ce qu'un "
 "responsable prenne en charge votre demande."
 
-#: src/pyams_content/shared/common/zmi/workflow.py:527
+#: src/pyams_content/shared/common/zmi/workflow.py:528
 msgid ""
 "After cancelling this request, the content will return to it's normal "
 "published state."
 msgstr "En annulant cette demande, ce contenu va retourner en statut 'Publié'."
 
-#: src/pyams_content/shared/common/zmi/workflow.py:551
+#: src/pyams_content/shared/common/zmi/workflow.py:552
 msgid ""
 "As a content manager, you considerate that this content should no longer be "
 "published.<br />Retired content won't be visible anymore, but it can be "
@@ -1664,7 +2074,7 @@ msgstr ""
 "pourra par contre être publié à nouveau, archivé, ou modifié en créant une "
 "nouvelle version."
 
-#: src/pyams_content/shared/common/zmi/workflow.py:582
+#: src/pyams_content/shared/common/zmi/workflow.py:583
 msgid ""
 "This content is already retired and not visible.<br />After archiving, it "
 "will be backed up but you will not be able to publish it again except by "
@@ -1675,13 +2085,13 @@ msgstr ""
 "actuel ; il pourra ensuite à nouveau être publié, en créant une nouvelle "
 "version."
 
-#: src/pyams_content/shared/common/zmi/workflow.py:608
+#: src/pyams_content/shared/common/zmi/workflow.py:609
 msgid ""
 "After cancelling this request, the content will return to it's previous "
 "retired state."
 msgstr "En annulant cette demande, ce contenu va retourner en statut 'Retiré'."
 
-#: src/pyams_content/shared/common/zmi/workflow.py:632
+#: src/pyams_content/shared/common/zmi/workflow.py:633
 msgid ""
 "As a manager, you considerate that this content must be archived.<br />After "
 "archiving, it will be backed up but you will not be able to publish it again "
@@ -1692,7 +2102,7 @@ msgstr ""
 "actuel ; il pourra ensuite à nouveau être publié, en créant une nouvelle "
 "version."
 
-#: src/pyams_content/shared/common/zmi/workflow.py:677
+#: src/pyams_content/shared/common/zmi/workflow.py:678
 msgid ""
 "You considerate that the currently published must evolve.<br />By creating a "
 "new version, you can update it's content without impacting the currently "
@@ -1706,11 +2116,11 @@ msgstr ""
 "vous pourrez demander sa publication (et la version actuelle sera "
 "automatiquement archivée)."
 
-#: src/pyams_content/shared/common/zmi/workflow.py:711
+#: src/pyams_content/shared/common/zmi/workflow.py:712
 msgid "Delete definitively"
 msgstr "Supprimer définitivement ce contenu"
 
-#: src/pyams_content/shared/common/zmi/workflow.py:755
+#: src/pyams_content/shared/common/zmi/workflow.py:756
 msgid ""
 "This content was never published and is going to be deleted.<br />If you "
 "confirm deletion, it won't be possible to restore it."
@@ -1718,7 +2128,7 @@ msgstr ""
 "Ce contenu n'a jamais été publié et va être supprimé.<br />**Cette "
 "suppression est définitive**, il sera impossible de restaurer ce contenu !"
 
-#: src/pyams_content/shared/common/zmi/workflow.py:757
+#: src/pyams_content/shared/common/zmi/workflow.py:758
 msgid ""
 "The content version is going to be definitely deleted.<br />Will only remain "
 "the currently published version."
@@ -1798,53 +2208,53 @@ msgstr ""
 "spécifique, vous aurez toute liberté pour paramétrer ce modèle, mais il ne "
 "sera pas réutilisable dans d'autres contenus, sauf si vous le partagez."
 
-#: src/pyams_content/shared/common/zmi/__init__.py:90
+#: src/pyams_content/shared/common/zmi/__init__.py:92
 #, python-format
 msgid "Add new: {}"
 msgstr "Ajouter un contenu : {}"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:108
+#: src/pyams_content/shared/common/zmi/__init__.py:110
 #, python-format
 msgid "Add new content: {}"
 msgstr "Ajout d'un contenu : {}"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:111
+#: src/pyams_content/shared/common/zmi/__init__.py:113
 msgid "New content properties"
 msgstr "Propriétés du nouveau contenu"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:258
+#: src/pyams_content/shared/common/zmi/__init__.py:268
 msgid "Content management"
 msgstr "Gérer ce contenu"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:269
+#: src/pyams_content/shared/common/zmi/__init__.py:279
 msgid "Composition"
 msgstr "Composition"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:291
+#: src/pyams_content/shared/common/zmi/__init__.py:301
 msgid "Content properties"
 msgstr "Propriétés du contenu"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:292
+#: src/pyams_content/shared/common/zmi/__init__.py:302
 msgid "Main content properties"
 msgstr "Propriétés élémentaires"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:395
-#: src/pyams_content/shared/common/zmi/__init__.py:419
+#: src/pyams_content/shared/common/zmi/__init__.py:405
+#: src/pyams_content/shared/common/zmi/__init__.py:429
 msgid "Duplicate content"
 msgstr "Dupliquer le contenu"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:405
+#: src/pyams_content/shared/common/zmi/__init__.py:415
 msgid "Duplicate this content"
 msgstr "Dupliquer ce contenu"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:481
+#: src/pyams_content/shared/common/zmi/__init__.py:491
 #, python-format
 msgid "Clone created from version {source} of {oid} (in « {state} » state)"
 msgstr ""
 "Contenu créé à partir de la version {source} de {oid} (alors en statut "
 "« {state} »)"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:517
+#: src/pyams_content/shared/common/zmi/__init__.py:527
 msgid ""
 "You are going to duplicate a whole content.<br />The new copy is going to be "
 "created in 'draft' mode, so that you can modify it before publication.<br /"
@@ -1957,7 +2367,7 @@ msgid "Contributor restrictions"
 msgstr "Restrictions du contributeur"
 
 #: src/pyams_content/shared/common/zmi/types/__init__.py:63
-#: src/pyams_content/shared/common/zmi/types/__init__.py:176
+#: src/pyams_content/shared/common/zmi/types/__init__.py:159
 msgid "Content types"
 msgstr "Types de contenus"
 
@@ -1965,33 +2375,33 @@ msgstr "Types de contenus"
 msgid "Click icon to enable or disable content type"
 msgstr "Cliquer pour activer ou désactiver ce type de contenu"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:151
+#: src/pyams_content/shared/common/zmi/types/__init__.py:134
 #: src/pyams_content/shared/common/interfaces/types.py:58
 msgid "Label"
 msgstr "Libellé"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:179
+#: src/pyams_content/shared/common/zmi/types/__init__.py:162
 msgid "Shared tool content types list"
 msgstr "Liste des types de contenus"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:208
+#: src/pyams_content/shared/common/zmi/types/__init__.py:198
 msgid "Add content type"
 msgstr "Ajouter un type de contenu"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:223
+#: src/pyams_content/shared/common/zmi/types/__init__.py:213
 msgid "Add new content type"
 msgstr "Ajout d'un type de contenu"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:225
+#: src/pyams_content/shared/common/zmi/types/__init__.py:215
 msgid "New data type properties"
 msgstr "Propriétés du nouveau type"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:273
+#: src/pyams_content/shared/common/zmi/types/__init__.py:263
 #, python-format
 msgid "Content type: {}"
 msgstr "Type de contenu : {}"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:276
+#: src/pyams_content/shared/common/zmi/types/__init__.py:266
 msgid "Content type properties"
 msgstr "Propriétés du type de contenu"
 
@@ -2010,6 +2420,18 @@ msgstr "Étape précédente"
 #: src/pyams_content/shared/common/zmi/templates/wf-transition-info.pt:10
 msgid "With this comment:"
 msgstr "Avec ce commentaire :"
+
+#: src/pyams_content/shared/common/zmi/templates/quick-search.pt:3
+msgid "SEARCH - ${legend}"
+msgstr "RECHERCHE - ${legend}"
+
+#: src/pyams_content/shared/common/zmi/templates/quick-search.pt:12
+msgid "Search..."
+msgstr "Recherche rapide..."
+
+#: src/pyams_content/shared/common/zmi/templates/quick-search.pt:20
+msgid "Advanced search..."
+msgstr "Recherche avancée..."
 
 #: src/pyams_content/shared/common/zmi/viewlet/__init__.py:43
 msgid "Shared contents"
@@ -2079,12 +2501,6 @@ msgstr "Champs associés"
 msgid "List of fields associated with this data type"
 msgstr "Liste des champs spécifiques du gabarit associés à ce type de contenu"
 
-#: src/pyams_content/shared/common/interfaces/types.py:131
-#: src/pyams_content/shared/topic/interfaces.py:42
-#: src/pyams_content/shared/site/interfaces.py:188
-msgid "Data type"
-msgstr "Type de contenu"
-
 #: src/pyams_content/shared/common/interfaces/types.py:132
 #: src/pyams_content/shared/topic/interfaces.py:43
 #: src/pyams_content/shared/site/interfaces.py:189
@@ -2110,12 +2526,12 @@ msgstr ""
 "droits d'accès et gérer les restrictions d'accès des responsables"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:63
-#: src/pyams_content/shared/common/interfaces/__init__.py:216
+#: src/pyams_content/shared/common/interfaces/__init__.py:217
 msgid "Managers"
 msgstr "Responsables"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:64
-#: src/pyams_content/shared/common/interfaces/__init__.py:217
+#: src/pyams_content/shared/common/interfaces/__init__.py:218
 msgid ""
 "Managers can handle main operations in tool's workflow, like publish or "
 "retire contents"
@@ -2125,7 +2541,7 @@ msgstr ""
 "contenus (dans le cadre des restrictions d'accès qui leurs sont appliquées)"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:69
-#: src/pyams_content/shared/common/interfaces/__init__.py:222
+#: src/pyams_content/shared/common/interfaces/__init__.py:223
 msgid "Contributors"
 msgstr "Contributeurs"
 
@@ -2134,12 +2550,12 @@ msgid "Contributors are users which are allowed to create new contents"
 msgstr "Les contributeurs sont autorisés à créer de nouveaux contenus"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:75
-#: src/pyams_content/shared/common/interfaces/__init__.py:229
+#: src/pyams_content/shared/common/interfaces/__init__.py:230
 msgid "Designers"
 msgstr "Designers"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:76
-#: src/pyams_content/shared/common/interfaces/__init__.py:230
+#: src/pyams_content/shared/common/interfaces/__init__.py:231
 msgid "Designers are users which are allowed to manage presentation templates"
 msgstr ""
 "Les designers sont autorisés à gérer les modèles de présentation des contenus"
@@ -2153,11 +2569,11 @@ msgid "Name of workflow utility used to manage tool contents"
 msgstr ""
 "Nom du workflow utilisé pour gérer le cycle de publication des contenus"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:140
+#: src/pyams_content/shared/common/interfaces/__init__.py:141
 msgid "Content URL"
 msgstr "URL du contenu"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:141
+#: src/pyams_content/shared/common/interfaces/__init__.py:142
 msgid ""
 "URL used to access this content; this is important for SEO and should "
 "include most important words describing content; spaces and underscores will "
@@ -2168,11 +2584,11 @@ msgstr ""
 "intégrer des mots qui décrivent ce contenu ; les espaces et underscores "
 "seront remplacés automatiquement par des tirets"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:147
+#: src/pyams_content/shared/common/interfaces/__init__.py:148
 msgid "Version creator"
 msgstr "Créateur de cette version"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:148
+#: src/pyams_content/shared/common/interfaces/__init__.py:149
 msgid ""
 "Name of content's version creator. The creator of the first version is also "
 "it's owner."
@@ -2180,51 +2596,51 @@ msgstr ""
 "Nom du créateur de cette version. Le créateur de la première version est "
 "aussi son propriétaire"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:153
+#: src/pyams_content/shared/common/interfaces/__init__.py:154
 msgid "First owner"
 msgstr "Premier propriétaire"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:154
+#: src/pyams_content/shared/common/interfaces/__init__.py:155
 msgid "Name of content's first version owner"
 msgstr "Nom du premier propriétaire du contenu"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:158
+#: src/pyams_content/shared/common/interfaces/__init__.py:159
 msgid "Version creation"
 msgstr "Création"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:161
+#: src/pyams_content/shared/common/interfaces/__init__.py:162
 msgid "Version modifiers"
 msgstr "Dernière modification"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:162
+#: src/pyams_content/shared/common/interfaces/__init__.py:163
 msgid "List of principals who modified this content"
 msgstr "Liste des mandataires ayant modifié ce contenu"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:165
+#: src/pyams_content/shared/common/interfaces/__init__.py:166
 msgid "Last modifier"
 msgstr "Dernière modification"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:166
+#: src/pyams_content/shared/common/interfaces/__init__.py:167
 msgid "Last principal who modified this content"
 msgstr "Nom du dernier mandataire étant intervenu sur ce contenu"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:172
+#: src/pyams_content/shared/common/interfaces/__init__.py:173
 #: src/pyams_content/shared/site/interfaces.py:107
 #: src/pyams_content/shared/site/interfaces.py:160
 msgid "Header"
 msgstr "Chapô"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:173
+#: src/pyams_content/shared/common/interfaces/__init__.py:174
 msgid "Content's header is generally displayed in page header"
 msgstr "Le chapô est généralement affiché dans l'en-tête de page"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:177
+#: src/pyams_content/shared/common/interfaces/__init__.py:178
 #: src/pyams_content/shared/site/interfaces.py:111
 #: src/pyams_content/shared/site/interfaces.py:164
 msgid "Meta-description"
 msgstr "Méta-description"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:178
+#: src/pyams_content/shared/common/interfaces/__init__.py:179
 msgid ""
 "The content's description is 'hidden' into HTML's page headers; but it can "
 "be seen, for example, in some search engines results as content's "
@@ -2234,22 +2650,22 @@ msgstr ""
 "essentiellement utilisée par les moteurs de recherche pour l'indexation des "
 "contenus et leur présentation dans les résultats de recherches"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:185
+#: src/pyams_content/shared/common/interfaces/__init__.py:186
 msgid "Keywords"
 msgstr "Mots-clés"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:186
+#: src/pyams_content/shared/common/interfaces/__init__.py:187
 msgid "They will be included into HTML pages metadata"
 msgstr "Ces mots-clés sont intégrés dans les en-têtes HTML"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:189
+#: src/pyams_content/shared/common/interfaces/__init__.py:190
 #: src/pyams_content/shared/site/interfaces.py:119
 #: src/pyams_content/shared/site/interfaces.py:172
 #: src/pyams_content/shared/site/zmi/folder.py:88
 msgid "Notepad"
 msgstr "Bloc-notes"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:190
+#: src/pyams_content/shared/common/interfaces/__init__.py:191
 #: src/pyams_content/shared/site/interfaces.py:120
 #: src/pyams_content/shared/site/interfaces.py:173
 #: src/pyams_content/shared/site/zmi/folder.py:89
@@ -2258,11 +2674,11 @@ msgstr ""
 "Informations internes à l'attention des contributeurs et des gestionnaires "
 "du site"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:208
+#: src/pyams_content/shared/common/interfaces/__init__.py:209
 msgid "Content owner"
 msgstr "Propriétaire"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:209
+#: src/pyams_content/shared/common/interfaces/__init__.py:210
 msgid ""
 "The owner is the creator of content's first version, except if it was "
 "transferred afterwards to another owner"
@@ -2270,7 +2686,7 @@ msgstr ""
 "Le propriétaire est le créateur de la première version d'un contenu, sauf si "
 "cette propriété est transmise ensuite à un autre propriétaire"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:223
+#: src/pyams_content/shared/common/interfaces/__init__.py:224
 msgid ""
 "Contributors are users which are allowed to update this content in addition "
 "to it's owner"
@@ -2278,11 +2694,11 @@ msgstr ""
 "Les contributeurs sont autorisés à modifier ce contenu, en plus de son "
 "propriétaire"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:235
+#: src/pyams_content/shared/common/interfaces/__init__.py:236
 msgid "Readers"
 msgstr "Relecteurs"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:236
+#: src/pyams_content/shared/common/interfaces/__init__.py:237
 msgid ""
 "Readers are users which are asked to verify and comment contents before they "
 "are published"
@@ -2290,26 +2706,26 @@ msgstr ""
 "Les relecteurs sont sollicités pour vérifier et apporter des commentaires "
 "sur un contenu avant leur publication"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:241
+#: src/pyams_content/shared/common/interfaces/__init__.py:242
 msgid "Guests"
 msgstr "Invités"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:242
+#: src/pyams_content/shared/common/interfaces/__init__.py:243
 msgid ""
 "Guests are users which are allowed to view contents with restricted access"
 msgstr ""
 "Les invités sont autorisés à consulter les contenus sur lesquels des "
 "restrictions d'accès ont été appliquées"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:289
+#: src/pyams_content/shared/common/interfaces/__init__.py:290
 msgid "Principal ID"
 msgstr "Mandataire"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:319
+#: src/pyams_content/shared/common/interfaces/__init__.py:320
 msgid "Show workflow checks warning"
 msgstr "Activer le tunnel de publication"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:320
+#: src/pyams_content/shared/common/interfaces/__init__.py:321
 msgid ""
 "If 'yes', this contributor will have to confirm that contents have been "
 "checked before asking for publication"
@@ -2317,21 +2733,21 @@ msgstr ""
 "Si 'oui', ce contributeur devra confirmer explicitement que ses contenus ont "
 "été prévisualisés et vérifiés avant de pouvoir demander leur publication"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:326
+#: src/pyams_content/shared/common/interfaces/__init__.py:327
 msgid "Substitute for"
 msgstr "Suppléant de"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:327
+#: src/pyams_content/shared/common/interfaces/__init__.py:328
 msgid "Contributor will have access to contents owned by these principals"
 msgstr ""
 "Le contributeur aura accès aux contenus dont ces mandataires sont "
 "propriétaires"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:349
+#: src/pyams_content/shared/common/interfaces/__init__.py:350
 msgid "Publication checks"
 msgstr "Activer le tunnel de publication"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:350
+#: src/pyams_content/shared/common/interfaces/__init__.py:351
 msgid ""
 "If 'yes', this manager will have to confirm that contents have been "
 "previewed and checked before publishing a content"
@@ -2340,11 +2756,11 @@ msgstr ""
 "lui ont été transmis ont été prévisualisés et vérifiés avant de pouvoir les "
 "publier"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:356
+#: src/pyams_content/shared/common/interfaces/__init__.py:357
 msgid "Restricted contents"
 msgstr "Activer des restrictions d'accès"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:357
+#: src/pyams_content/shared/common/interfaces/__init__.py:358
 msgid ""
 "If 'yes', this manager will get restricted access to manage contents based "
 "on selected settings"
@@ -2352,11 +2768,11 @@ msgstr ""
 "Si 'oui', ce responsable ne pourra gérer que des contenus dont les "
 "propriétés correspondent à au moins l'un des paramètres indiqués ci-dessous"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:362
+#: src/pyams_content/shared/common/interfaces/__init__.py:363
 msgid "Selected owners"
 msgstr "Propriétaires"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:363
+#: src/pyams_content/shared/common/interfaces/__init__.py:364
 msgid "Manager will have access to contents owned by these principals"
 msgstr "Ce responsable aura accès aux contenus de ces propriétaires"
 
@@ -2452,7 +2868,7 @@ msgstr ""
 
 #: src/pyams_content/shared/site/interfaces.py:182
 msgid "Site topic"
-msgstr "Article"
+msgstr "Article (dans un site)"
 
 #: src/pyams_content/shared/site/interfaces.py:206
 msgid ""
@@ -2487,58 +2903,46 @@ msgstr ""
 msgid "If 'no', link is not visible"
 msgstr "Si 'non', le lien ne sera pas visible"
 
-#: src/pyams_content/shared/site/manager.py:65
+#: src/pyams_content/shared/site/manager.py:68
 msgid "Site manager"
 msgstr "Site"
 
-#: src/pyams_content/shared/site/folder.py:68
+#: src/pyams_content/shared/site/folder.py:71
 msgid "Site folder"
 msgstr "Rubrique"
 
-#: src/pyams_content/shared/site/zmi/link.py:70
-#: src/pyams_content/shared/site/zmi/link.py:126
+#: src/pyams_content/shared/site/zmi/link.py:71
+#: src/pyams_content/shared/site/zmi/link.py:128
 #, python-format
 msgid "{content_name}: {label}"
 msgstr "{content_name} : {label}"
 
-#: src/pyams_content/shared/site/zmi/link.py:73
+#: src/pyams_content/shared/site/zmi/link.py:74
 msgid "Create new link"
 msgstr "Ajouter un lien"
 
-#: src/pyams_content/shared/site/zmi/link.py:131
-msgid "Link properties"
-msgstr "Propriétés du lien"
-
-#: src/pyams_content/shared/site/zmi/link.py:176
+#: src/pyams_content/shared/site/zmi/link.py:178
 msgid "Click to switch link visibility"
 msgstr "Cliquez pour rendre le lien visible ou non"
 
-#: src/pyams_content/shared/site/zmi/link.py:200
+#: src/pyams_content/shared/site/zmi/link.py:202
 msgid "Add internal link..."
 msgstr "Lien interne"
 
-#: src/pyams_content/shared/site/zmi/link.py:210
-#: src/pyams_content/shared/site/zmi/link.py:329
+#: src/pyams_content/shared/site/zmi/link.py:212
+#: src/pyams_content/shared/site/zmi/link.py:338
 #: src/pyams_content/shared/site/zmi/folder.py:84
 msgid "Parent"
 msgstr "Niveau parent"
 
-#: src/pyams_content/shared/site/zmi/link.py:211
-#: src/pyams_content/shared/site/zmi/link.py:330
+#: src/pyams_content/shared/site/zmi/link.py:213
+#: src/pyams_content/shared/site/zmi/link.py:339
 msgid "Link's parent"
 msgstr "Niveau de rattachement de ce lien"
 
-#: src/pyams_content/shared/site/zmi/link.py:221
-msgid "Add internal link"
-msgstr "Nouveau lien interne"
-
-#: src/pyams_content/shared/site/zmi/link.py:319
+#: src/pyams_content/shared/site/zmi/link.py:328
 msgid "Add external link..."
 msgstr "Lien externe"
-
-#: src/pyams_content/shared/site/zmi/link.py:340
-msgid "Add external link"
-msgstr "Nouveau lien externe"
 
 #: src/pyams_content/shared/site/zmi/folder.py:70
 msgid "Add site folder..."
@@ -2563,6 +2967,11 @@ msgstr "Propriétés principales"
 #: src/pyams_content/shared/site/zmi/folder.py:210
 msgid "Navigation properties"
 msgstr "Propriétés de navigation"
+
+#: src/pyams_content/shared/site/zmi/search.py:43
+#, python-format
+msgid "Between all contents of « {} » site manager"
+msgstr "Parmi les contenus du site « {} »"
 
 #: src/pyams_content/shared/site/zmi/manager.py:65
 #: src/pyams_content/shared/site/zmi/manager.py:78
@@ -2621,11 +3030,11 @@ msgstr "Rubriquage"
 msgid "Click to open/close all folders"
 msgstr "Afficher/masquer toutes les rubriques"
 
-#: src/pyams_content/shared/site/zmi/tree.py:252
+#: src/pyams_content/shared/site/zmi/tree.py:251
 msgid "Click to show/hide inner folders"
 msgstr "Afficher/masquer les sous-rubriques"
 
-#: src/pyams_content/shared/site/zmi/tree.py:262
+#: src/pyams_content/shared/site/zmi/tree.py:261
 msgid ""
 "This container automatically redirects navigation to it's first visible "
 "content"
@@ -2633,11 +3042,11 @@ msgstr ""
 "Cette rubrique redirige automatiquement la navigation vers le premier "
 "élément publié"
 
-#: src/pyams_content/shared/site/zmi/tree.py:353
+#: src/pyams_content/shared/site/zmi/tree.py:352
 msgid "Delete site item"
 msgstr "Supprimer ce contenu"
 
-#: src/pyams_content/shared/site/zmi/tree.py:456
+#: src/pyams_content/shared/site/zmi/tree.py:455
 msgid "Can't reparent object to one of it's children. Reloading..."
 msgstr ""
 "Impossible de déplacer une rubrique dans l'une de ses sous-rubriques ! "
@@ -2647,5 +3056,23 @@ msgstr ""
 msgid "Sites"
 msgstr "Sites"
 
-#~ msgid "{}: {}"
-#~ msgstr "{} : {}"
+#~ msgid "SEARCH - <dynamic element>"
+#~ msgstr "RECHERCHE - <dynamic element>"
+
+#~ msgid "Links and files properties"
+#~ msgstr "Propriétés des contenus"
+
+#~ msgid "File properties"
+#~ msgstr "Propriétés du fichier"
+
+#~ msgid "New image properties"
+#~ msgstr "Propriétés de la nouvelle image"
+
+#~ msgid "New video properties"
+#~ msgstr "Propriétés de la nouvelle vidéo"
+
+#~ msgid "New audio properties"
+#~ msgstr "Propriétés de la nouvelle bande son"
+
+#~ msgid "Add mailto link..."
+#~ msgstr "Lien mailto:"
