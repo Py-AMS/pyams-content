@@ -20,7 +20,7 @@ from pyramid.events import subscriber
 from pyramid.location import lineage
 from zope.container.contained import Contained
 from zope.interface import alsoProvides
-from zope.lifecycleevent import IObjectAddedEvent
+from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent, ObjectModifiedEvent
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.thesaurus.interfaces import COLLECTIONS_INFO_KEY, \
@@ -34,7 +34,9 @@ from pyams_security.permission import get_edit_permission
 from pyams_utils.adapter import ContextAdapter, adapter_config, get_annotation_adapter
 from pyams_utils.factory import factory_config
 from pyams_utils.inherit import BaseInheritInfo, InheritedFieldProperty
+from pyams_utils.registry import get_pyramid_registry
 from pyams_utils.request import query_request
+from pyams_utils.traversing import get_parent
 
 
 __docformat__ = 'restructuredtext'
@@ -100,6 +102,15 @@ def tags_info_factory(target):
                                   name='++tags++')
 
 
+@subscriber(IObjectModifiedEvent, context_selector=ITagsInfo)
+def handle_modified_tags_info(event):
+    """Handle modified tags info"""
+    target = get_parent(event.object, ITagsTarget)
+    if target is not None:
+        registry = get_pyramid_registry()
+        registry.notify(ObjectModifiedEvent(target))
+
+
 #
 # Themes management
 #
@@ -145,6 +156,15 @@ def handle_added_site_folder(event):
     alsoProvides(event.object, IThemesTarget)
 
 
+@subscriber(IObjectModifiedEvent, context_selector=IThemesInfo)
+def handle_modified_themes_info(event):
+    """Handle modified themes info"""
+    target = get_parent(event.object, IThemesTarget)
+    if target is not None:
+        registry = get_pyramid_registry()
+        registry.notify(ObjectModifiedEvent(target))
+
+
 #
 # Collections management
 #
@@ -178,3 +198,12 @@ def collections_info_factory(target):
     """Collections info factory"""
     return get_annotation_adapter(target, COLLECTIONS_INFO_KEY, ICollectionsInfo,
                                   name='++collections++')
+
+
+@subscriber(IObjectModifiedEvent, context_selector=ICollectionsInfo)
+def handle_modified_collections_info(event):
+    """Handle modified collections info"""
+    target = get_parent(event.object, ICollectionsTarget)
+    if target is not None:
+        registry = get_pyramid_registry()
+        registry.notify(ObjectModifiedEvent(target))
