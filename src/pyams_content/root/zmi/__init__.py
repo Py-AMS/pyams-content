@@ -19,7 +19,6 @@ from zope.interface import Interface
 
 from pyams_content.root import ISiteRootInfos
 from pyams_content.zmi.properties import PropertiesEditForm
-
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer
@@ -28,7 +27,8 @@ from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_site.interfaces import ISiteRoot
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_viewlet.manager import viewletmanager_config
-from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
+from pyams_zmi.interfaces.configuration import IZMIConfiguration
 from pyams_zmi.interfaces.viewlet import IMenuHeader, IPropertiesMenu, ISiteManagementMenu
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
@@ -43,6 +43,13 @@ from pyams_content import _
 def site_root_management_menu_header(context, request, view, manager):
     """Site root management menu header adapter"""
     return _("Main site management")
+
+
+@adapter_config(required=(ISiteRoot, IAdminLayer, Interface),
+                provides=IObjectLabel)
+def site_root_label(context, request, view):
+    """Site root label"""
+    return IZMIConfiguration(request.root).site_name
 
 
 @viewletmanager_config(name='properties.menu',
