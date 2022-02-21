@@ -66,6 +66,13 @@ class DashboardColumnMixin(ObjectDataManagerMixin):  # pylint: disable=no-member
         return value or '--'
 
 
+@adapter_config(required=IDashboardColumn,
+                provides=ICacheKeyValue)
+def dashboard_column_cache_key(column: IDashboardColumn):
+    """Dashboard column cache key"""
+    return ICacheKeyValue(column.table)
+
+
 class DashboardVisibilityColumn(DashboardColumnMixin, VisibilityColumn):
     """Dashboard visibility column"""
 
