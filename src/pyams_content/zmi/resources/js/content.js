@@ -38,7 +38,6 @@ const content = {
             } else {
                 klass = table.data('ams-visible') ? '' : 'text-danger';
             }
-            debugger
             if (options.state === true) {
                 icon.replaceWith(`<i class="${col.data('ams-icon-on')} ${klass}"></i>`);
             } else {
@@ -185,6 +184,51 @@ const content = {
                     review.timer = setTimeout(review.getComments, review.interval);
                 });
             })
+        }
+    },
+
+
+    /**
+     * Thesaurus management
+     */
+    thesaurus: {
+
+        /**
+         * Update extracts list on selected thesaurus change
+         *
+         * @param evt: source change event
+         */
+        changeThesaurus: (evt) => {
+            const
+                form = $(evt.currentTarget).parents('form'),
+                thesaurus = $('select[name$=".widgets.thesaurus_name"]', form),
+                thesaurus_name = thesaurus.val(),
+                extract = $('select[name$=".widgets.extract_name"]', form),
+                plugin = extract.data('select2');
+            extract.empty();
+            extract.select2('data', null);
+            plugin.results.clear();
+            if (thesaurus_name) {
+                MyAMS.require('ajax').then(() => {
+                    MyAMS.ajax.get('/api/thesaurus/extracts', {
+                        'thesaurus_name': thesaurus_name
+                    }).then((result) => {
+                        $('<option />')
+                            .attr('id', 'form-widgets-extract_name-novalue')
+                            .attr('value', '--NOVALUE--')
+                            .text(MyAMS.i18n.NO_SELECTED_VALUE)
+                            .appendTo(extract);
+                        $(result.results).each((idx, elt) => {
+                            $('<option />')
+                                .attr('id', `form-widgets-extract_name-${idx}`)
+                                .attr('value', elt.id)
+                                .text(elt.text)
+                                .appendTo(extract);
+                        });
+                        extract.val('--NOVALUE--').trigger('change');
+                    });
+                })
+            }
         }
     }
 };
