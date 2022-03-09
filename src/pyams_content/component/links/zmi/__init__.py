@@ -14,15 +14,16 @@
 
 """
 
-from zope.interface import Interface, implementer
+from zope.interface import implementer
 
-from pyams_content.component.association import IAssociationContainerTarget
+from pyams_content.component.association import IAssociationContainer, IAssociationContainerTarget
 from pyams_content.component.association.zmi import AssociationItemAddFormMixin, \
     AssociationItemAddMenuMixin, IAssociationsTable
 from pyams_content.component.association.zmi.interfaces import IAssociationItemAddForm, \
     IAssociationItemEditForm
-from pyams_content.component.links import IExternalLink, IInternalLink, IMailtoLink
-from pyams_content.component.links.interfaces import ILinkContainerTarget
+from pyams_content.component.links import ExternalLink, InternalLink, MailtoLink
+from pyams_content.component.links.interfaces import IExternalLink, IInternalLink, \
+    ILinkContainerTarget, IMailtoLink
 from pyams_content.reference.pictogram.zmi.widget import PictogramSelectFieldWidget
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
@@ -33,10 +34,10 @@ from pyams_utils.adapter import adapter_config
 from pyams_utils.traversing import get_parent
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalAddForm, AdminModalEditForm
-from pyams_zmi.interfaces import IAdminLayer, IObjectHint, IObjectIcon
+from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager
-from pyams_zmi.utils import get_object_label
+from pyams_zmi.utils import get_object_hint, get_object_label
 
 
 __docformat__ = 'restructuredtext'
@@ -52,14 +53,16 @@ class ILinkEditForm(IAssociationItemEditForm):
     """Link edit form internal marker interface"""
 
 
-@adapter_config(required=(IAssociationContainerTarget, IAdminLayer, ILinkAddForm),
+@adapter_config(required=(IAssociationContainer, IAdminLayer, ILinkAddForm),
                 provides=IFormTitle)
 def link_add_form_title(context, request, view):
     """Link add form title getter"""
     translate = request.localizer.translate
     parent = get_parent(context, IAssociationContainerTarget)
+    parent_label = translate(_("{}: {}")).format(get_object_hint(parent, request, view),
+                                                 get_object_label(parent, request, view))
     label = translate(_("Add new link"))
-    return f'<small>{get_object_label(parent, request, view)}</small><br />{label}'
+    return f'<small>{parent_label}</small><br />{label}'
 
 
 @implementer(ILinkAddForm)
@@ -86,14 +89,14 @@ class LinkEditFormMixin:
 class InternalLinkAddMenu(ProtectedViewObjectMixin, AssociationItemAddMenuMixin, MenuItem):
     """Internal link add menu"""
 
-    label = _("Internal link...")
-    icon_class = 'fas fa-external-link-square-alt fa-rotate-90'
+    label = InternalLink.icon_hint
+    icon_class = InternalLink.icon_class
 
     href = 'add-internal-link.html'
 
 
 @ajax_form_config(name='add-internal-link.html',
-                  context=ILinkContainerTarget, layer=IPyAMSLayer)
+                  context=IAssociationContainer, layer=IPyAMSLayer)
 class InternalLinkAddForm(LinkAddFormMixin, AdminModalAddForm):
     """Internal link add form"""
 
@@ -103,20 +106,6 @@ class InternalLinkAddForm(LinkAddFormMixin, AdminModalAddForm):
                                           'description', 'pictogram_name')
     fields['pictogram_name'].widget_factory = PictogramSelectFieldWidget
     content_factory = IInternalLink
-
-
-@adapter_config(required=(IInternalLink, IAdminLayer, Interface),
-                provides=IObjectIcon)
-def internal_link_icon(context, request, view):  # pylint: disable=unused-argument
-    """Internal link icon getter"""
-    return "fas fa-fw fa-external-link-square-alt fa-rotate-90"
-
-
-@adapter_config(required=(IInternalLink, IAdminLayer, Interface),
-                provides=IObjectHint)
-def internal_link_hint(context, request, view):  # pylint: disable=unused-argument
-    """internal link hint getter"""
-    return request.localizer.translate(_("Internal link"))
 
 
 @ajax_form_config(name='properties.html',
@@ -139,14 +128,14 @@ class InternalLinkPropertiesEditForm(LinkEditFormMixin, AdminModalEditForm):
 class ExternalLinkAddMenu(ProtectedViewObjectMixin, AssociationItemAddMenuMixin, MenuItem):
     """External link add menu"""
 
-    label = _("External link...")
-    icon_class = 'fas fa-external-link-alt'
+    label = ExternalLink.icon_hint
+    icon_class = ExternalLink.icon_class
 
     href = 'add-external-link.html'
 
 
 @ajax_form_config(name='add-external-link.html',
-                  context=ILinkContainerTarget, layer=IPyAMSLayer)
+                  context=IAssociationContainer, layer=IPyAMSLayer)
 class ExternalLinkAddForm(LinkAddFormMixin, AdminModalAddForm):
     """External link add form"""
 
@@ -156,20 +145,6 @@ class ExternalLinkAddForm(LinkAddFormMixin, AdminModalAddForm):
                                           'language', 'pictogram_name')
     fields['pictogram_name'].widget_factory = PictogramSelectFieldWidget
     content_factory = IExternalLink
-
-
-@adapter_config(required=(IExternalLink, IAdminLayer, Interface),
-                provides=IObjectIcon)
-def external_link_icon(context, request, view):  # pylint: disable=unused-argument
-    """External link icon getter"""
-    return "fas fa-fw fa-external-link-alt"
-
-
-@adapter_config(required=(IExternalLink, IAdminLayer, Interface),
-                provides=IObjectHint)
-def external_link_hint(context, request, view):  # pylint: disable=unused-argument
-    """external link hint getter"""
-    return request.localizer.translate(_("External link"))
 
 
 @ajax_form_config(name='properties.html',
@@ -192,14 +167,14 @@ class ExternalLinkPropertiesEditForm(LinkEditFormMixin, AdminModalEditForm):
 class MailtoLinkAddMenu(ProtectedViewObjectMixin, AssociationItemAddMenuMixin, MenuItem):
     """Mailto link add menu"""
 
-    label = _("Mailto link...")
-    icon_class = 'far fa-envelope'
+    label = MailtoLink.icon_hint
+    icon_class = MailtoLink.icon_class
 
     href = 'add-mailto-link.html'
 
 
 @ajax_form_config(name='add-mailto-link.html',
-                  context=ILinkContainerTarget, layer=IPyAMSLayer)
+                  context=IAssociationContainer, layer=IPyAMSLayer)
 class MailtoLinkAddForm(LinkAddFormMixin, AdminModalAddForm):
     """Mailto link add form"""
 
@@ -209,20 +184,6 @@ class MailtoLinkAddForm(LinkAddFormMixin, AdminModalAddForm):
                                         'description', 'pictogram_name')
     fields['pictogram_name'].widget_factory = PictogramSelectFieldWidget
     content_factory = IMailtoLink
-
-
-@adapter_config(required=(IMailtoLink, IAdminLayer, Interface),
-                provides=IObjectIcon)
-def mailto_link_icon(context, request, view):  # pylint: disable=unused-argument
-    """Mailto link icon getter"""
-    return "far fa-fw fa-envelope"
-
-
-@adapter_config(required=(IMailtoLink, IAdminLayer, Interface),
-                provides=IObjectHint)
-def mailto_link_hint(context, request, view):  # pylint: disable=unused-argument
-    """mailto link hint getter"""
-    return request.localizer.translate(_("Mailto link"))
 
 
 @ajax_form_config(name='properties.html',

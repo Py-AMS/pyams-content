@@ -26,9 +26,11 @@ from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 from pyams_content.component.association import AssociationItem
 from pyams_content.component.association.interfaces import IAssociationContainer, \
     IAssociationContainerTarget, IAssociationInfo
-from pyams_content.component.links.interfaces import CONTENT_LINKS_VOCABULARY, IBaseLink, \
+from pyams_content.component.links.interfaces import CONTENT_LINKS_VOCABULARY, \
+    EXTERNAL_LINK_ICON_CLASS, EXTERNAL_LINK_ICON_HINT, IBaseLink, \
     IExternalLink, IInternalLink, IInternalLinkCustomInfo, IInternalLinkCustomInfoTarget, \
-    IMailtoLink
+    IMailtoLink, INTERNAL_LINK_ICON_CLASS, INTERNAL_LINK_ICON_HINT, MAILTO_LINK_ICON_CLASS, \
+    MAILTO_LINK_ICON_HINT
 from pyams_content.reference.pictogram.interfaces import IPictogramTable
 from pyams_i18n.interfaces import II18n
 from pyams_sequence.interfaces import ISequentialIdInfo
@@ -45,8 +47,6 @@ from pyams_workflow.interfaces import IWorkflowPublicationInfo
 
 
 __docformat__ = 'restructuredtext'
-
-from pyams_content import _
 
 
 #
@@ -120,8 +120,8 @@ class BaseLinkInfoAdapter(ContextAdapter):
 class InternalLink(InternalReferenceMixin, BaseLink):
     """Internal link persistent class"""
 
-    icon_class = 'fa-external-link-square fa-rotate-90'
-    icon_hint = _("Internal link")
+    icon_class = INTERNAL_LINK_ICON_CLASS
+    icon_hint = INTERNAL_LINK_ICON_HINT
 
     _reference = FieldProperty(IInternalLink['reference'])
     force_canonical_url = FieldProperty(IInternalLink['force_canonical_url'])
@@ -236,8 +236,8 @@ class InternalLinkAssociationInfoAdapter(BaseLinkInfoAdapter):
 class ExternalLink(BaseLink):
     """External link persistent class"""
 
-    icon_class = 'fa-external-link'
-    icon_hint = _("External link")
+    icon_class = EXTERNAL_LINK_ICON_CLASS
+    icon_hint = EXTERNAL_LINK_ICON_HINT
 
     url = FieldProperty(IExternalLink['url'])
     language = FieldProperty(IExternalLink['language'])
@@ -288,8 +288,8 @@ class ExternalLinkAssociationInfoAdapter(BaseLinkInfoAdapter):
 class MailtoLink(BaseLink):
     """Mailto link persistent class"""
 
-    icon_class = 'fa-envelope-o'
-    icon_hint = _("Mailto link")
+    icon_class = MAILTO_LINK_ICON_CLASS
+    icon_hint = MAILTO_LINK_ICON_HINT
 
     address = FieldProperty(IMailtoLink['address'])
     address_name = FieldProperty(IMailtoLink['address_name'])

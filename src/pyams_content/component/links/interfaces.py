@@ -57,6 +57,10 @@ class IBaseLink(IAssociationItem):
         """Get URL for use in HTML editor"""
 
 
+INTERNAL_LINK_ICON_CLASS = 'fas fa-external-link-square-alt fa-rotate-90'
+INTERNAL_LINK_ICON_HINT = _("Internal link")
+
+
 class IInternalLink(IBaseLink, IInternalReference):
     """Internal link interface"""
 
@@ -100,6 +104,10 @@ class IInternalLinkCustomInfo(Interface):
         """Get custom params to generate link URL"""
 
 
+EXTERNAL_LINK_ICON_CLASS = 'fas fa-external-link-alt'
+EXTERNAL_LINK_ICON_HINT = _("External link")
+
+
 class IExternalLink(IBaseLink):
     """External link interface"""
 
@@ -111,6 +119,10 @@ class IExternalLink(IBaseLink):
                       description=_("Language used in this remote resource"),
                       vocabulary=BASE_LANGUAGES_VOCABULARY_NAME,
                       required=False)
+
+
+MAILTO_LINK_ICON_CLASS = 'fas fa-envelope'
+MAILTO_LINK_ICON_HINT = _("Mailto link")
 
 
 class IMailtoLink(IBaseLink):
