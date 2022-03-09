@@ -31,7 +31,6 @@ from pyams_pagelet.pagelet import pagelet_config
 from pyams_skin.viewlet.actions import ContextAddAction
 from pyams_table.interfaces import IColumn, IValues
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
-from pyams_utils.data import ObjectDataManagerMixin
 from pyams_utils.interfaces.intids import IUniqueID
 from pyams_utils.traversing import get_parent
 from pyams_viewlet.viewlet import viewlet_config
@@ -42,7 +41,7 @@ from pyams_zmi.helper.event import get_json_table_row_add_callback, \
 from pyams_zmi.interfaces import IAdminLayer, IObjectHint, IObjectLabel
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu, IToolbarViewletManager
-from pyams_zmi.table import JsActionColumn, NameColumn, ReorderColumn, Table, \
+from pyams_zmi.table import NameColumn, ReorderColumn, Table, \
     TableAdminView, TableElementEditor, TrashColumn, VisibilityColumn, get_ordered_data_attributes
 from pyams_zmi.utils import get_object_label
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
