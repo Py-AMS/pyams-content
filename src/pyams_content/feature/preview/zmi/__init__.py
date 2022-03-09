@@ -38,7 +38,7 @@ from pyams_content import _
 
 @viewletmanager_config(name='pyams_context.preview',
                        context=IPreviewTarget, layer=IAdminLayer, view=IView,
-                       manager=IToolbarViewletManager, weight=50)
+                       manager=IToolbarViewletManager, weight=900)
 class PreviewTargetActions(ContextActionsViewletManager):
     """Preview target actions"""
 
