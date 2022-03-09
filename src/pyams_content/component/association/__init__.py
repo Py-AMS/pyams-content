@@ -19,15 +19,16 @@ These *elements* can be internal or external links, external files...
 from persistent import Persistent
 from pyramid.events import subscriber
 from zope.container.contained import Contained
+from zope.interface import implementer
 from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent, \
     ObjectModifiedEvent
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.association.interfaces import IAssociationContainer, \
     IAssociationContainerTarget, IAssociationItem
+from pyams_content.shared.common import IWfSharedContent
 from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_utils.adapter import ContextAdapter, adapter_config
-from pyams_utils.factory import factory_config
 from pyams_utils.registry import get_pyramid_registry
 from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
@@ -36,7 +37,7 @@ from pyams_utils.url import absolute_url
 __docformat__ = 'restructuredtext'
 
 
-@factory_config(IAssociationItem)
+@implementer(IAssociationItem)
 class AssociationItem(Persistent, Contained):
     """Base association item persistent class"""
 
@@ -67,27 +68,14 @@ class AssociationPermissionChecker(ContextAdapter):
         parent = get_parent(self.context, IAssociationContainerTarget)
         if parent is not None:
             return IViewContextPermissionChecker(parent).edit_permission
+        return None
 
 
 @subscriber(IObjectAddedEvent, context_selector=IAssociationItem)
-def handle_added_association(event):
-    """Handle added association item"""
-    content = get_parent(event.object, IAssociationContainerTarget)
-    if content is not None:
-        get_pyramid_registry().notify(ObjectModifiedEvent(content))
-
-
 @subscriber(IObjectModifiedEvent, context_selector=IAssociationItem)
-def handle_modified_association(event):
-    """Handle modified association item"""
-    content = get_parent(event.object, IAssociationContainerTarget)
-    if content is not None:
-        get_pyramid_registry().notify(ObjectModifiedEvent(content))
-
-
 @subscriber(IObjectRemovedEvent, context_selector=IAssociationItem)
-def handle_removed_association(event):
-    """Handle removed association item"""
-    content = get_parent(event.object, IAssociationContainerTarget)
+def handle_association_event(event):
+    """Handle added association item"""
+    content = get_parent(event.object, IWfSharedContent)
     if content is not None:
         get_pyramid_registry().notify(ObjectModifiedEvent(content))
