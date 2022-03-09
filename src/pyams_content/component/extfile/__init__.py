@@ -25,7 +25,12 @@ from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.association import AssociationItem
 from pyams_content.component.association.interfaces import IAssociationInfo
-from pyams_content.component.extfile.interfaces import IBaseExtFile, IExtAudio, IExtFile, \
+from pyams_content.component.extfile.interfaces import EXTAUDIO_ICON_CLASS, EXTAUDIO_ICON_HINT, \
+    EXTFILE_ICON_CLASS, EXTFILE_ICON_HINT, EXTIMAGE_ICON_CLASS, EXTIMAGE_ICON_HINT, \
+    EXTVIDEO_ICON_CLASS, \
+    EXTVIDEO_ICON_HINT, \
+    IBaseExtFile, \
+    IExtAudio, IExtFile, \
     IExtFileManagerInfo, IExtImage, IExtVideo
 from pyams_content.shared.common import IWfSharedContent
 from pyams_file.file import EXTENSIONS_THUMBNAILS
@@ -164,8 +169,8 @@ def handle_removed_extfile(event):
 class ExtFile(BaseExtFile):
     """Generic external file persistent class"""
 
-    icon_class = 'far fa-file-alt'
-    icon_hint = _("Standard file")
+    icon_class = EXTFILE_ICON_CLASS
+    icon_hint = EXTFILE_ICON_HINT
 
     data = I18nFileProperty(IExtFile['data'])
 
@@ -174,8 +179,8 @@ class ExtFile(BaseExtFile):
 class ExtImage(BaseExtFile):
     """External image persistent class"""
 
-    icon_class = 'far fa-image'
-    icon_hint = _("External image")
+    icon_class = EXTIMAGE_ICON_CLASS
+    icon_hint = EXTIMAGE_ICON_HINT
 
     _data = I18nFileProperty(IExtImage['data'])
 
@@ -202,8 +207,8 @@ class ExtImage(BaseExtFile):
 class ExtVideo(BaseExtFile):
     """External video file persistent class"""
 
-    icon_class = 'fas fa-film'
-    icon_hint = _("Video")
+    icon_class = EXTVIDEO_ICON_CLASS
+    icon_hint = EXTVIDEO_ICON_HINT
 
     data = I18nFileProperty(IExtVideo['data'])
 
@@ -212,7 +217,7 @@ class ExtVideo(BaseExtFile):
 class ExtAudio(BaseExtFile):
     """External audio file persistent class"""
 
-    icon_class = 'fas fa-headphones'
-    icon_hint = _("Audio file")
+    icon_class = EXTAUDIO_ICON_CLASS
+    icon_hint = EXTAUDIO_ICON_HINT
 
     data = I18nFileProperty(IExtAudio['data'])

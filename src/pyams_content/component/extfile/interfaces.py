@@ -15,9 +15,7 @@
 This module defines interfaces which are used to handle external files.
 """
 
-__docformat__ = 'restructuredtext'
-
-from zope.interface import Attribute, Interface
+from zope.interface import Interface
 from zope.schema import Choice, TextLine
 
 from pyams_content.component.association import IAssociationContainerTarget, IAssociationItem
@@ -25,6 +23,9 @@ from pyams_file.schema import I18nAudioField, I18nFileField, I18nThumbnailImageF
     I18nVideoField
 from pyams_i18n.interfaces import BASE_LANGUAGES_VOCABULARY_NAME
 from pyams_i18n.schema import I18nTextField, I18nTextLineField
+
+
+__docformat__ = 'restructuredtext'
 
 from pyams_content import _
 
@@ -60,8 +61,9 @@ class IBaseExtFile(IAssociationItem):
                         description=_("Name under which the file will be saved"),
                         required=False)
 
-    icon_class = Attribute("File icon class")
-    icon_hint = Attribute("File icon hint")
+
+EXTFILE_ICON_CLASS = 'far fa-file-alt'
+EXTFILE_ICON_HINT = _("Standard file")
 
 
 class IExtFile(IBaseExtFile):
@@ -76,6 +78,10 @@ class IExtMedia(IExtFile):
     """External media file interface"""
 
 
+EXTIMAGE_ICON_CLASS = 'far fa-image'
+EXTIMAGE_ICON_HINT = _("External image")
+
+
 class IExtImage(IExtMedia):
     """External image file interface"""
 
@@ -84,12 +90,20 @@ class IExtImage(IExtMedia):
                                    required=True)
 
 
+EXTVIDEO_ICON_CLASS = 'fas fa-film'
+EXTVIDEO_ICON_HINT = _("Video")
+
+
 class IExtVideo(IExtMedia):
     """External video file interface"""
 
     data = I18nVideoField(title=_("Video data"),
                           description=_("Video content"),
                           required=True)
+
+
+EXTAUDIO_ICON_CLASS = 'fas fa-headphones'
+EXTAUDIO_ICON_HINT = _("Audio file")
 
 
 class IExtAudio(IExtMedia):
