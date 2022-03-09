@@ -37,8 +37,10 @@ from pyams_utils.registry import query_utility
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminEditForm, AdminModalEditForm, FormGroupChecker
 from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu
 from pyams_zmi.table import ActionColumn
+from pyams_zmi.utils import get_object_hint, get_object_label
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
 
@@ -50,8 +52,8 @@ from pyams_content import _
 class BaseThesaurusTermsEditFormMixin:
     """Base thesaurus terms edit form"""
 
-    label_css_class = 'control-label hidden'
-    input_css_class = 'col-md-12'
+    label_css_class = 'hidden'
+    input_css_class = 'col-12'
 
     manager = None
     interface = None
@@ -103,7 +105,6 @@ class TagsMenu(NavigationMenuItem):
 class BaseTagsEditFormMixin(BaseThesaurusTermsEditFormMixin):
     """Base tags edit form"""
 
-    title = _("Content tags")
     legend = _("Content tags selection")
 
     manager = ITagsManager
@@ -117,6 +118,8 @@ class BaseTagsEditFormMixin(BaseThesaurusTermsEditFormMixin):
 class TagsEditForm(BaseTagsEditFormMixin, AdminEditForm):
     """Tags edit form"""
 
+    title = _("Content tags")
+
 
 @ajax_form_config(name='tags-modal.html',
                   context=ITagsTarget, layer=IPyAMSLayer,
@@ -125,6 +128,17 @@ class TagsModalEditForm(BaseTagsEditFormMixin, AdminModalEditForm):
     """Tags modal edit form"""
 
     modal_class = 'modal-xl'
+
+
+@adapter_config(required=(ITagsTarget, IAdminLayer, TagsModalEditForm),
+                provides=IFormTitle)
+def tags_edit_form_title(context, request, view):
+    """Tags edit form title"""
+    translate = request.localizer.translate
+    context_label = translate(_("{}: {}")).format(get_object_hint(context, request, view),
+                                                  get_object_label(context, request, view))
+    label = translate(_("Content tags"))
+    return f'<small>{context_label}</small><br />{label}'
 
 
 @adapter_config(name='tags',
@@ -175,7 +189,6 @@ class ThemesMenu(NavigationMenuItem):
 class BaseThemesEditFormMixin(BaseThesaurusTermsEditFormMixin):
     """Base themes edit form mixin"""
 
-    title = _("Content themes")
     legend = _("Content themes selection")
 
     manager = IThemesManager
@@ -196,6 +209,7 @@ class BaseThemesEditFormMixin(BaseThesaurusTermsEditFormMixin):
 class ThemesEditForm(BaseThemesEditFormMixin, AdminEditForm):
     """Themes edit form"""
 
+    title = _("Content themes")
     fields = Fields(Interface)
 
 
@@ -207,6 +221,17 @@ class ThemesModalEditForm(BaseThemesEditFormMixin, AdminModalEditForm):
 
     fields = Fields(Interface)
     modal_class = 'modal-xl'
+
+
+@adapter_config(required=(IThemesTarget, IAdminLayer, ThemesModalEditForm),
+                provides=IFormTitle)
+def themes_edit_form_title(context, request, view):
+    """Themes edit form title"""
+    translate = request.localizer.translate
+    context_label = translate(_("{}: {}")).format(get_object_hint(context, request, view),
+                                                  get_object_label(context, request, view))
+    label = translate(_("Content themes"))
+    return f'<small>{context_label}</small><br />{label}'
 
 
 @adapter_config(name='themes-override',
