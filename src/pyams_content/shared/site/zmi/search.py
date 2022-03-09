@@ -19,7 +19,7 @@ inside a site manager.
 from pyams_content.shared.common.zmi.dashboard import SharedToolDashboardView
 from pyams_content.shared.common.zmi.search import SharedToolAdvancedSearchResultsView, \
     SharedToolQuickSearchView
-from pyams_content.shared.site.interfaces import ISiteManager
+from pyams_content.shared.site.interfaces import ISiteFolder, ISiteManager
 from pyams_i18n.interfaces import II18n
 from pyams_skin.interfaces.viewlet import IHeaderViewletManager
 from pyams_utils.adapter import adapter_config
@@ -44,6 +44,20 @@ class SiteManagerQuickSearchView(SharedToolQuickSearchView):
         """Legend getter"""
         translate = self.request.localizer.translate
         return translate(_("Between all contents of « {} » site manager")) \
+            .format(II18n(self.context).query_attribute('title', request=self.request))
+
+
+@adapter_config(name='quick-search',
+                required=(ISiteFolder, IAdminLayer, SharedToolDashboardView),
+                provides=IInnerTable)
+class SiteFolderQuickSearchView(SharedToolQuickSearchView):
+    """Site folder quick search view"""
+
+    @property
+    def legend(self):
+        """Legend getter"""
+        translate = self.request.localizer.translate
+        return translate(_("Between all contents of « {} » site folder")) \
             .format(II18n(self.context).query_attribute('title', request=self.request))
 
 
