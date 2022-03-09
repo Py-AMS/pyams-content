@@ -192,8 +192,8 @@ class BaseThesaurusTermsSearchGroup(FormGroupSwitcher):
         fields[self.fieldname].widget_factory = ThesaurusTermsTreeFieldWidget
         return fields
 
-    label_css_class = 'control-label hidden'
-    input_css_class = 'col-md-12'
+    label_css_class = 'hidden'
+    input_css_class = 'col-12'
 
     def update_widgets(self, prefix=None):
         super().update_widgets(prefix)
