@@ -35,13 +35,21 @@ from pyams_utils.url import absolute_url
 from pyams_viewlet.viewlet import EmptyViewlet, Viewlet, viewlet_config
 from pyams_workflow.interfaces import IWorkflow, IWorkflowPublicationInfo, IWorkflowState, \
     IWorkflowStateLabel, IWorkflowVersions
-from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
+from pyams_zmi.interfaces import IAdminLayer, IObjectHint, IObjectLabel
 from pyams_zmi.zmi.viewlet.header import ContentHeaderViewlet
 
 
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
+
+
+@adapter_config(required=(IWfSharedContent, IAdminLayer, Interface),
+                provides=IObjectHint)
+def shared_content_hint(context, request, view):
+    """Shared content hint"""
+    translate = request.localizer.translate
+    return translate(context.content_name)
 
 
 @adapter_config(required=(IWfSharedContent, IAdminLayer, Interface),
