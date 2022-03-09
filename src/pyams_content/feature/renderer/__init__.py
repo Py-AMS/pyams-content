@@ -88,8 +88,8 @@ class RenderersVocabulary(SimpleVocabulary):
     """Interface used to check current context"""
 
     content_factory = None
-    """Factory used to create a new context if current context doesn't implements required 
-    interface. If no factory is given, vocabulary is looking for default object factory for 
+    """Factory used to create a new context if current context doesn't implements required
+    interface. If no factory is given, vocabulary is looking for default object factory for
     given interface.
     """
 
@@ -109,7 +109,7 @@ class RenderersVocabulary(SimpleVocabulary):
                                                              self.renderer_interface),
                                         key=lambda x: x[1].weight)
         ]
-        super(RenderersVocabulary, self).__init__(terms)
+        super().__init__(terms)
 
 
 @implementer(IContentRenderer)
@@ -123,7 +123,7 @@ class BaseContentRenderer(BaseContentProvider):
 
     @reify
     def settings(self):
-
+        """Renderer settings getter"""
         if self.settings_interface is None:
             return None
         return IRendererSettings(self.context)
@@ -139,6 +139,7 @@ class HiddenContentRenderer(BaseContentRenderer):
     weight = -999
 
     def render(self, template_name=''):
+        """Renderer output"""
         return ''
 
 

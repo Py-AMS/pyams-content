@@ -26,6 +26,8 @@ __docformat__ = 'restructuredtext'
 HIDDEN_RENDERER_NAME = 'hidden'
 DEFAULT_RENDERER_NAME = 'default'
 
+RENDERER_SETTINGS_KEY = 'pyams_content.renderer.settings'
+
 
 class IRenderedContent(IAttributeAnnotatable):
     """Generic interface for any rendered content"""
