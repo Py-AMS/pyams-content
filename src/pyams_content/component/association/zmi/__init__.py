@@ -22,13 +22,14 @@ from pyams_content.component.association import IAssociationContainer, \
 from pyams_content.component.association.interfaces import IAssociationInfo
 from pyams_content.component.association.zmi.interfaces import IAssociationItemAddForm, \
     IAssociationItemEditForm, IAssociationsTable
+from pyams_content.component.paragraph.zmi import get_json_paragraph_toolbar_refresh_event
 from pyams_form.interfaces.form import IAJAXFormRenderer
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
 from pyams_zmi.helper.event import get_json_table_row_add_callback, \
     get_json_table_row_refresh_callback
-from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
+from pyams_zmi.interfaces import IAdminLayer, IObjectHint, IObjectIcon, IObjectLabel
 from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.table import TableElementEditor
@@ -40,6 +41,14 @@ __docformat__ = 'restructuredtext'
 from pyams_content import _
 
 
+@adapter_config(required=(IAssociationContainer, IAdminLayer, Interface),
+                provides=IObjectLabel)
+def association_container_label(context, request, view):  # pylint: disable=unused-argument
+    """Association container label getter"""
+    target = get_parent(context, IAssociationContainerTarget)
+    return get_object_label(target, request, view)
+
+
 class AssociationItemAddMenuMixin:
     """Link add menu mixin class"""
 
@@ -47,7 +56,8 @@ class AssociationItemAddMenuMixin:
 
     def get_href(self):
         """Menu URL target getter"""
-        return absolute_url(self.context, self.request, self.href)
+        container = IAssociationContainer(self.context)
+        return absolute_url(container, self.request, self.href)
 
 
 @implementer(IAssociationItemAddForm)
@@ -59,7 +69,7 @@ class AssociationItemAddFormMixin:
         IAssociationContainer(self.context).append(obj)
 
 
-@adapter_config(required=(IAssociationContainerTarget, IAdminLayer, IAssociationItemAddForm),
+@adapter_config(required=(IAssociationContainer, IAdminLayer, IAssociationItemAddForm),
                 provides=IAJAXFormRenderer)
 class AssociationItemAddFormRenderer(ContextRequestViewAdapter):
     """Association item add form renderer"""
@@ -68,13 +78,17 @@ class AssociationItemAddFormRenderer(ContextRequestViewAdapter):
         """AJAX form renderer"""
         if not changes:
             return None
-        return {
+        result = {
             'status': 'success',
             'callbacks': [
                 get_json_table_row_add_callback(self.context, self.request,
                                                 IAssociationsTable, changes)
             ]
         }
+        event = get_json_paragraph_toolbar_refresh_event(changes, self.request)
+        if event is not None:
+            result.setdefault('callbacks', []).append(event)
+        return result
 
 
 @adapter_config(required=(IAssociationItem, IAdminLayer, Interface),
@@ -82,6 +96,20 @@ class AssociationItemAddFormRenderer(ContextRequestViewAdapter):
 def association_item_label(context, request, view):  # pylint: disable=unused-argument
     """Association item label getter"""
     return IAssociationInfo(context).user_title
+
+
+@adapter_config(required=(IAssociationItem, IAdminLayer, Interface),
+                provides=IObjectIcon)
+def association_item_icon(context, request, view):
+    """Association item icon getter"""
+    return f'fa-fw {context.icon_class}'
+
+
+@adapter_config(required=(IAssociationItem, IAdminLayer, Interface),
+                provides=IObjectHint)
+def association_item_hint(context, request, view):
+    """Association item hint getter"""
+    return request.localizer.translate(context.icon_hint)
 
 
 @adapter_config(required=(IAssociationItem, IAdminLayer, Interface),
@@ -96,9 +124,11 @@ def association_item_edit_form_title(context, request, view):
     """Association item properties edit form title getter"""
     translate = request.localizer.translate
     parent = get_parent(context, IAssociationContainerTarget)
+    parent_label = translate(_("{}: {}")).format(get_object_hint(parent, request, view),
+                                                 get_object_label(parent, request, view))
     label = translate(_("{}: {}")).format(get_object_hint(context, request, view),
                                           get_object_label(context, request, view))
-    return f'<small>{get_object_label(parent, request, view)}</small><br />{label}'
+    return f'<small>{parent_label}</small><br />{label}'
 
 
 @adapter_config(required=(IAssociationItem, IAdminLayer, IAssociationItemEditForm),
@@ -110,7 +140,7 @@ class AssociationItemEditFormRenderer(ContextRequestViewAdapter):
         """AJAX form renderer"""
         if not changes:
             return None
-        parent = get_parent(self.context, IAssociationContainerTarget)
+        parent = get_parent(self.context, IAssociationContainer)
         return {
             'callbacks': [
                 get_json_table_row_refresh_callback(parent, self.request,

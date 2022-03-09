@@ -10,13 +10,15 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.component.association.zmi.interfaces module
 
+This module defines associations-related management interfaces.
 """
 
-__docformat__ = 'restructuredtext'
-
 from zope.interface import Interface
+
+
+__docformat__ = 'restructuredtext'
 
 
 class IAssociationsView(Interface):

@@ -22,10 +22,14 @@ from pyams_content.component.association import IAssociationContainer, IAssociat
 from pyams_content.component.association.interfaces import IAssociationInfo
 from pyams_content.component.association.zmi import IAssociationsTable
 from pyams_content.component.association.zmi.interfaces import IAssociationsContainerEditForm
+from pyams_content.component.paragraph.zmi.helper import get_json_paragraph_toolbar_refresh_event
 from pyams_content.shared.common.interfaces.types import ITypedSharedTool
 from pyams_content.shared.common.zmi.types import SharedToolTypesTable
+from pyams_content.zmi.interfaces import IPropertiesEditForm
 from pyams_form.ajax import ajax_form_config
+from pyams_form.interfaces.form import IInnerSubForm
 from pyams_layer.interfaces import IPyAMSLayer
+from pyams_layer.skin import apply_skin
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_skin.interfaces.viewlet import IContentSuffixViewletManager
 from pyams_table.column import GetAttrColumn
@@ -36,8 +40,10 @@ from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalDisplayForm
 from pyams_zmi.helper.container import delete_container_element, switch_element_attribute
 from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.skin import AdminSkin
 from pyams_zmi.table import ActionColumn, ContentTypeColumn, I18nColumnMixin, InnerTableAdminView, \
-    NameColumn, ReorderColumn, Table, TrashColumn, VisibilityColumn, get_ordered_data_attributes
+    NameColumn, ReorderColumn, Table, TableGroupSwitcher, TrashColumn, VisibilityColumn, \
+    get_ordered_data_attributes
 from pyams_zmi.utils import get_object_hint, get_object_label
 
 
@@ -100,7 +106,7 @@ class AssociationsTable(Table):
     display_if_empty = True
 
 
-@adapter_config(required=(IAssociationContainerTarget, IAdminLayer, IAssociationsTable),
+@adapter_config(required=(IAssociationContainer, IAdminLayer, IAssociationsTable),
                 provides=IValues)
 class AssociationsTableValues(ContextRequestViewAdapter):
     """Associations table values"""
@@ -112,7 +118,7 @@ class AssociationsTableValues(ContextRequestViewAdapter):
 
 
 @adapter_config(name='reorder',
-                required=(IAssociationContainerTarget, IAdminLayer, IAssociationsTable),
+                required=(IAssociationContainer, IAdminLayer, IAssociationsTable),
                 provides=IColumn)
 class AssociationsReorderColumn(ReorderColumn):
     """Associations reorder column"""
@@ -132,7 +138,7 @@ def reorder_associations_table(request):
 
 
 @adapter_config(name='visible',
-                required=(IAssociationContainerTarget, IAdminLayer, IAssociationsTable),
+                required=(IAssociationContainer, IAdminLayer, IAssociationsTable),
                 provides=IColumn)
 class AssociationsVisibleColumn(VisibilityColumn):
     """Associations table visible column"""
@@ -147,14 +153,14 @@ def switch_visible_item(request):
 
 
 @adapter_config(name='icon',
-                required=(IAssociationContainerTarget, IAdminLayer, IAssociationsTable),
+                required=(IAssociationContainer, IAdminLayer, IAssociationsTable),
                 provides=IColumn)
 class AssociationsIconColumn(ContentTypeColumn):
     """Associations table icon column"""
 
 
 @adapter_config(name='label',
-                required=(IAssociationContainerTarget, IAdminLayer, IAssociationsTable),
+                required=(IAssociationContainer, IAdminLayer, IAssociationsTable),
                 provides=IColumn)
 class AssociationsLabelColumn(NameColumn):
     """Associations table label column"""
@@ -163,7 +169,7 @@ class AssociationsLabelColumn(NameColumn):
 
 
 @adapter_config(name='target',
-                required=(IAssociationContainerTarget, IAdminLayer, IAssociationsTable),
+                required=(IAssociationContainer, IAdminLayer, IAssociationsTable),
                 provides=IColumn)
 class AssociationsTargetColumn(I18nColumnMixin, GetAttrColumn):
     """Associations table target column"""
@@ -180,7 +186,7 @@ class AssociationsTargetColumn(I18nColumnMixin, GetAttrColumn):
 
 
 @adapter_config(name='size',
-                required=(IAssociationContainerTarget, IAdminLayer, IAssociationsTable),
+                required=(IAssociationContainer, IAdminLayer, IAssociationsTable),
                 provides=IColumn)
 class AssociationsSizeColumn(I18nColumnMixin, GetAttrColumn):
     """Associations table size column"""
@@ -197,7 +203,7 @@ class AssociationsSizeColumn(I18nColumnMixin, GetAttrColumn):
 
 
 @adapter_config(name='trash',
-                required=(IAssociationContainerTarget, IAdminLayer, IAssociationsTable),
+                required=(IAssociationContainer, IAdminLayer, IAssociationsTable),
                 provides=IColumn)
 class AssociationsTrashColumn(TrashColumn):
     """Associations table trash column"""
@@ -208,7 +214,13 @@ class AssociationsTrashColumn(TrashColumn):
              renderer='json', xhr=True)
 def delete_data_type(request):
     """Delete data type"""
-    return delete_container_element(request)
+    result = delete_container_element(request)
+    apply_skin(request, AdminSkin)
+    event = get_json_paragraph_toolbar_refresh_event(request.context, request)
+    if event is not None:
+        result.setdefault('callbacks', []).append(event)
+        result.setdefault('handle_json', True)
+    return result
 
 
 #
@@ -222,5 +234,25 @@ def delete_data_type(request):
 class AssociationsTableView(InnerTableAdminView):
     """Associations table view"""
 
-    table_class = AssociationsTable
+    table_class = IAssociationsTable
     table_label = _("Links and external files list")
+
+    container_intf = IAssociationContainer
+
+
+#
+# Associations table group
+#
+
+@adapter_config(name='associations-group',
+                required=(IAssociationContainerTarget, IAdminLayer, IPropertiesEditForm),
+                provides=IInnerSubForm, force_implements=False)
+class AssociationsGroup(TableGroupSwitcher):
+    """Associations table group"""
+
+    legend = _("Links and external files")
+
+    table_class = IAssociationsTable
+    container_intf = IAssociationContainer
+
+    weight = 20
