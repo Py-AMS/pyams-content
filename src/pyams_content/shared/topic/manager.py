@@ -20,9 +20,8 @@ from pyramid.events import subscriber
 from zope.component.interfaces import ISite
 from zope.interface import implementer
 from zope.lifecycleevent import IObjectAddedEvent
-from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.component.paragraph.interfaces import IParagraphFactorySettings
+from pyams_content.component.paragraph.interfaces import IParagraphFactorySettingsTarget
 from pyams_content.reference.pictogram.interfaces import IPictogramManagerTarget
 from pyams_content.shared.common.manager import SharedTool
 from pyams_content.shared.common.types import TypedSharedToolMixin
@@ -33,14 +32,11 @@ from pyams_utils.traversing import get_parent
 
 
 @factory_config(ITopicManager)
-@implementer(IParagraphFactorySettings, IPictogramManagerTarget)
+@implementer(IParagraphFactorySettingsTarget, IPictogramManagerTarget)
 class TopicManager(SharedTool, TypedSharedToolMixin):
     """Topic manager class"""
 
     shared_content_type = TOPIC_CONTENT_TYPE
-
-    allowed_paragraphs = FieldProperty(IParagraphFactorySettings['allowed_paragraphs'])
-    auto_created_paragraphs = FieldProperty(IParagraphFactorySettings['auto_created_paragraphs'])
 
 
 @subscriber(IObjectAddedEvent, context_selector=ITopicManager)
