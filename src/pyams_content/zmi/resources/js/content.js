@@ -122,6 +122,101 @@ const content = {
 
 
     /**
+     * Paragraphs management
+     */
+    paragraphs: {
+
+        switchEditor: (event) => {
+            const
+                target = $(event.currentTarget),
+                switcher = $('.switcher', target),
+                editor = target.siblings('.editor');
+            if (switcher.hasClass('expanded')) {
+                MyAMS.core.clearContent(editor).then(() => {
+                    editor.empty();
+                    switcher.html('<i class="far fa-plus-square"></i>')
+                        .removeClass('expanded');
+                });
+            } else {
+                switcher.html('<i class="fas fa-spinner fa-spin"></i>');
+                MyAMS.require('ajax', 'helpers').then(() => {
+                    const
+                        tr = target.parents('tr'),
+                        objectName = tr.data('ams-element-name'),
+                        table = tr.parents('table'),
+                        location = table.data('ams-location');
+                    MyAMS.ajax.post(`${location}/get-paragraph-editor.json`, {
+                        object_name: objectName
+                    }).then((result) => {
+                        const content = result[objectName];
+                        if (content) {
+                            editor.html(content);
+                            MyAMS.core.initContent(editor).then(() => {
+                                MyAMS.helpers.scrollTo('#content', editor, {
+                                    offset: -15
+                                });
+                            });
+                        }
+                    }).finally(() => {
+                        switcher.html('<i class="far fa-minus-square"></i>')
+                            .addClass('expanded');
+                    });
+                });
+            }
+        },
+
+        switchAllEditors: (event) => {
+            const
+                target = $(event.currentTarget),
+                switcher = $('.switcher', target),
+                table = target.parents('table'),
+                tbody = $('tbody', table);
+            if (switcher.hasClass('expanded')) {
+                $('tr', tbody).each((idx, elt) => {
+                    const editor = $('.editor', elt);
+                    MyAMS.core.clearContent(editor).then(() => {
+                        editor.empty();
+                        $('.switcher', elt).html('<i class="far fa-plus-square"></i>')
+                            .removeClass('expanded');
+                    });
+                });
+                switcher.html('<i class="far fa-plus-square"></i>')
+                    .removeClass('expanded');
+            } else {
+                switcher.html('<i class="fas fa-spinner fa-spin"></i>');
+                MyAMS.require('ajax', 'helpers').then(() => {
+                    const location = table.data('ams-location');
+                    MyAMS.ajax.post(`${location}/get-paragraphs-editors.json`).then((result) => {
+                        for (const [name, form] of Object.entries(result)) {
+                            const
+                                row = $(`tr[data-ams-element-name="${name}"]`, tbody),
+                                rowSwitcher = $('.switcher', row);
+                            if (!rowSwitcher.hasClass('expanded')) {
+                                const editor = $('.editor', row);
+                                editor.html(form);
+                                MyAMS.core.initContent(editor).then(() => {
+                                    rowSwitcher.html('<i class="far fa-minus-square"></i>')
+                                        .addClass('expanded');
+                                });
+                            }
+                        }
+                    }).finally(() => {
+                        switcher.html('<i class="far fa-minus-square"></i>')
+                            .addClass('expanded');
+                    });
+                });
+            }
+        },
+
+        refreshTitle: (form, params) => {
+            const
+                row = $(`tr[data-ams-element-name="${params.element_name}"]`);
+            $('.title', row).text(params.title);
+        }
+    },
+
+
+    /**
      * Reviews management
      */
     review: {
