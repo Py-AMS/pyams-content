@@ -15,8 +15,6 @@
 This module provides paragraphs containers classes and adapters.
 """
 
-__docformat__ = 'restructuredtext'
-
 from ZODB.interfaces import IBroken
 from pyramid.events import subscriber
 from zope.copy import copy
@@ -36,6 +34,9 @@ from pyams_utils.container import BTreeOrderedContainer
 from pyams_utils.factory import factory_config, get_object_factory
 from pyams_utils.traversing import get_parent
 from pyams_workflow.interfaces import IWorkflowState
+
+
+__docformat__ = 'restructuredtext'
 
 
 @factory_config(IParagraphContainer)
@@ -78,16 +79,8 @@ class ParagraphContainer(BTreeOrderedContainer):
                     continue
                 if exclude_anchors and paragraph.anchor:
                     continue
-                if factories:
-                    has_factory = False
-                    for factory_name in factories:
-                        factory = get_object_factory(IBaseParagraph, name=factory_name)
-                        has_factory = (factory is not None) and \
-                            isinstance(paragraph, factory.content_type)
-                        if has_factory:
-                            break
-                    if not has_factory:
-                        continue
+                if factories and (paragraph.factory_name not in factories):
+                    continue
                 yield paragraph
                 count += 1
                 if limit and (count == limit):
