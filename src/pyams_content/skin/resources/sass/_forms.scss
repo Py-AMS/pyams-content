@@ -1,0 +1,22 @@
+
+
+@import "_variables.scss";
+
+
+.form-group {
+  &.required-field {
+    .control-label {
+      &::after {
+        content: '*';
+        display: inline-block;
+        color: $danger;
+      }
+    }
+  }
+
+  .input {
+    .error {
+      color: $danger;
+    }
+  }
+}

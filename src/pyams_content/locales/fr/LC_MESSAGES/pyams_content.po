@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2022-03-11 12:53+0100\n"
+"POT-Creation-Date: 2022-03-12 02:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -488,6 +488,10 @@ msgstr "Suivre l'activité"
 #: src/pyams_content/shared/common/zmi/dashboard.py:260
 msgid "My dashboard"
 msgstr "Mon tableau de bord"
+
+#: src/pyams_content/skin/__init__.py:46
+msgid "PyAMS default skin"
+msgstr "PyAMS: thème par défaut"
 
 #: src/pyams_content/workflow/__init__.py:84
 msgid "Draft"
@@ -1365,8 +1369,8 @@ msgstr "Code source"
 #: src/pyams_content/component/paragraph/interfaces/html.py:41
 msgid "You can use &lt;CTRL&gt;+&lt;,&gt; to change editor settings"
 msgstr ""
-"Vous pouvez utiliser le raccourci &lt;CTRL&gt;+&lt;,&gt; pour modifier la configuration de "
-"l'éditeur de texte"
+"Vous pouvez utiliser le raccourci &lt;CTRL&gt;+&lt;,&gt; pour modifier la "
+"configuration de l'éditeur de texte"
 
 #: src/pyams_content/component/paragraph/interfaces/html.py:45
 msgid "Paragraph renderer"
@@ -1444,8 +1448,8 @@ msgid ""
 "If a source is specified, it will be used as paragraphs source instead of "
 "current context"
 msgstr ""
-"Si une source est sélectionnée, elle sera utilisée pour sélectionner les blocs de "
-"contenus à afficher à la place du contexte d'affichage"
+"Si une source est sélectionnée, elle sera utilisée pour sélectionner les "
+"blocs de contenus à afficher à la place du contexte d'affichage"
 
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:42
 msgid "Button label"
@@ -1456,8 +1460,8 @@ msgid ""
 "If a source is specified, you can create a link to this content using a "
 "button with this label"
 msgstr ""
-"Si une source est sélectionnée pour les blocs, vous pouvez positionner un lien vers "
-"ce contenu en utilisant ce libellé"
+"Si une source est sélectionnée pour les blocs, vous pouvez positionner un "
+"lien vers ce contenu en utilisant ce libellé"
 
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:48
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:90
@@ -1470,17 +1474,18 @@ msgid ""
 "will be selectable by following filters; otherwise, this selection will have "
 "priority"
 msgstr ""
-"Liste des blocs de contenus sélectionnés pour l'affichage : une sélection vide indique que "
-"tous les blocs correspondant aux filtres choisis ci-dessous seront pris en compte ; dans le cas "
-"contraire, cette sélection sera prioritaire et les filtres ne seront pas appliqués"
+"Liste des blocs de contenus sélectionnés pour l'affichage : une sélection "
+"vide indique que tous les blocs correspondant aux filtres choisis ci-dessous "
+"seront pris en compte ; dans le cas contraire, cette sélection sera "
+"prioritaire et les filtres ne seront pas appliqués"
 
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:56
 msgid ""
 "Select list of paragraph types you want to include; an empty selection means "
 "that all paragraphs types will be selected"
 msgstr ""
-"Liste des types de blocs que vous souhaitez sélectionner ; une sélection vide indique que "
-"tous les types de blocs de contenus seront pris en compte"
+"Liste des types de blocs que vous souhaitez sélectionner ; une sélection "
+"vide indique que tous les types de blocs de contenus seront pris en compte"
 
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:61
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:105
@@ -1489,7 +1494,9 @@ msgstr "Ancres seulement"
 
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:62
 msgid "If 'yes', only paragraphs set as 'anchors' will be selected"
-msgstr "Si 'oui', seuls les blocs de contenus définis comme ancres de navigation seront sélectionnés"
+msgstr ""
+"Si 'oui', seuls les blocs de contenus définis comme ancres de navigation "
+"seront sélectionnés"
 
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:67
 msgid "Exclude anchors"
@@ -1501,9 +1508,9 @@ msgid ""
 "activate this option and the previous one simultaneously, or no paragraph "
 "will be displayed!"
 msgstr ""
-"Si 'oui', les blocs de contenus définis comme ancres de navigation seront exclus ; veillez à ne "
-"pas sélectionner cette option en même temps que la précédente, faute de quoi aucun bloc de contenu "
-"ne sera retenu !"
+"Si 'oui', les blocs de contenus définis comme ancres de navigation seront "
+"exclus ; veillez à ne pas sélectionner cette option en même temps que la "
+"précédente, faute de quoi aucun bloc de contenu ne sera retenu !"
 
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:75
 msgid "Paragraphs count limit"
@@ -1514,7 +1521,8 @@ msgid ""
 "If specified, the number of displayed paragraphs will be limited to this "
 "number"
 msgstr ""
-"Vous pouvez limiter le nombre de blocs affichés en indiquant une valeur pour ce paramètre"
+"Vous pouvez limiter le nombre de blocs affichés en indiquant une valeur pour "
+"ce paramètre"
 
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:80
 msgid "Display navigation links"
@@ -1524,8 +1532,8 @@ msgstr "Liens de navigation"
 msgid ""
 "If 'no', navigation links to previous and next contents will not be displayed"
 msgstr ""
-"Si 'non', les liens de navigation vers les contenus précédent et suivant positionnés dans "
-"la même rubrique ne seront pas affichés"
+"Si 'non', les liens de navigation vers les contenus précédent et suivant "
+"positionnés dans la même rubrique ne seront pas affichés"
 
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:91
 msgid ""
@@ -1533,23 +1541,24 @@ msgid ""
 "all paragraphs will be selectable by following filters; otherwise, this "
 "selection will have priority"
 msgstr ""
-"Liste des blocs de contenus sélectionnés pour la navigation : une sélection vide indique que "
-"tous les blocs correspondant aux filtres choisis ci-dessous seront pris en compte ; dans le cas "
-"contraire, cette sélection sera prioritaire et les filtres ne seront pas appliqués"
+"Liste des blocs de contenus sélectionnés pour la navigation : une sélection "
+"vide indique que tous les blocs correspondant aux filtres choisis ci-dessous "
+"seront pris en compte ; dans le cas contraire, cette sélection sera "
+"prioritaire et les filtres ne seront pas appliqués"
 
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:99
 msgid ""
 "Select list of paragraph types you want to use for navigation; an empty "
 "selection means that all paragraphs types will be selected"
 msgstr ""
-"Liste des types de blocs sélectionnés pour la navigation ; une sélection vide indique que tous "
-"les types de blocs seront pris en compte"
+"Liste des types de blocs sélectionnés pour la navigation ; une sélection "
+"vide indique que tous les types de blocs seront pris en compte"
 
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:106
 msgid "If 'no', all paragraphs will be used as navigation anchors"
 msgstr ""
-"Si 'non', tous les blocs de contenus seront utilisés comme liens de navigation "
-"même s'ils ne sont pas définis comme ancres de navigation"
+"Si 'non', tous les blocs de contenus seront utilisés comme liens de "
+"navigation même s'ils ne sont pas définis comme ancres de navigation"
 
 #: src/pyams_content/component/paragraph/portlet/__init__.py:93
 msgid "Content paragraphs"
@@ -1748,15 +1757,19 @@ msgstr "Bandes son téléchargeables"
 
 #: src/pyams_content/component/association/interfaces.py:92
 msgid "Associations"
-msgstr "Associations"
+msgstr "Liens et pièces jointes"
 
-#: src/pyams_content/component/association/interfaces.py:99
+#: src/pyams_content/component/association/interfaces.py:100
 msgid "Associations template"
 msgstr "Mode de rendu"
 
-#: src/pyams_content/component/association/interfaces.py:100
+#: src/pyams_content/component/association/interfaces.py:101
 msgid "Presentation template used for associations"
 msgstr "Mode de rendu utilisé pour ce bloc"
+
+#: src/pyams_content/component/association/skin/paragraph.py:38
+msgid "Associations list (default)"
+msgstr "Liens et pièces jointes (par défaut)"
 
 #: src/pyams_content/component/association/zmi/container.py:61
 msgid "Default links and external files"

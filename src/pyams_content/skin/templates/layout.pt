@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="${request.locale_name}">
+	<head prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# fb: http://ogp.me/ns/fb#">
+		<i tal:omit-tag="">${structure:tales:metas}</i>
+		<i tal:omit-tag="">${tales:resources}</i>
+	</head>
+	<body class="no-margin no-padding">
+
+		<div class="page">
+
+			<!-- Page header -->
+<!--?			${structure:provider:pyams.header}-->
+			<!-- End page header -->
+
+			<!-- Main panel -->
+			<div id="main"
+				 tal:define="skin_class tales:skin_container_class;"
+				 class="${skin_class} no-margin" role="main">
+
+				<!-- Content -->
+				<div id="content"
+					 tal:define="template_class tales:template_container_class"
+					 class="${template_class or 'container'}" style="opacity: 1;">
+					<!--[if lt IE 9]>
+					<h1 i18n:translate="">Your browser is too old. Please install version 9 or higher of Internet Explorer.</h1>
+					<![endif]-->
+					${structure:provider:pagelet}
+				</div>
+				<!-- end content -->
+
+			</div>
+			<!-- end main panel -->
+
+			<!-- Page footer -->
+<!--?			<i tal:omit-tag="">${structure:provider:pyams.footer}</i>-->
+<!--?			<i tal:omit-tag="">${structure:provider:pyams.alerts}</i>-->
+			<!-- End page footer -->
+
+		</div>  <!-- page -->
+
+	</body>
+</html>

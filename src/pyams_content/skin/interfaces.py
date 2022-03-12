@@ -19,6 +19,12 @@ __docformat__ = 'restructuredtext'
 
 from zope.interface import Attribute, Interface
 
+from pyams_layer.interfaces import IPyAMSUserLayer
+
+
+class IPyAMSDefaultLayer(IPyAMSUserLayer):
+    """PyAMS default skin layer interface"""
+
 
 class IContentTitle(Interface):
     """Content title getter interface"""

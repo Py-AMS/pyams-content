@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2022-03-11 12:53+0100\n"
+"POT-Creation-Date: 2022-03-12 02:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -463,6 +463,10 @@ msgstr ""
 #: ./src/pyams_content/shared/common/zmi/dashboard.py:259
 #: ./src/pyams_content/shared/common/zmi/dashboard.py:260
 msgid "My dashboard"
+msgstr ""
+
+#: ./src/pyams_content/skin/__init__.py:46
+msgid "PyAMS default skin"
 msgstr ""
 
 #: ./src/pyams_content/workflow/__init__.py:84
@@ -1658,12 +1662,16 @@ msgstr ""
 msgid "Associations"
 msgstr ""
 
-#: ./src/pyams_content/component/association/interfaces.py:99
+#: ./src/pyams_content/component/association/interfaces.py:100
 msgid "Associations template"
 msgstr ""
 
-#: ./src/pyams_content/component/association/interfaces.py:100
+#: ./src/pyams_content/component/association/interfaces.py:101
 msgid "Presentation template used for associations"
+msgstr ""
+
+#: ./src/pyams_content/component/association/skin/paragraph.py:38
+msgid "Associations list (default)"
 msgstr ""
 
 #: ./src/pyams_content/component/association/zmi/container.py:61
