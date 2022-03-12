@@ -45,7 +45,8 @@ __docformat__ = 'restructuredtext'
 
 @viewlet_config(name='add-raw-paragraph.menu',
                 context=IParagraphContainerTarget, request=IAdminLayer,
-                view=IParagraphContainerBaseTable, manager=IContextAddingsViewletManager, weight=900)
+                view=IParagraphContainerBaseTable,
+                manager=IContextAddingsViewletManager, weight=900)
 class RawParagraphAddMenu(BaseParagraphAddMenu):
     """Raw paragraph add menu"""
 
@@ -95,7 +96,8 @@ def handle_raw_paragraph_form_update(event):
 
 @viewlet_config(name='add-html-paragraph.menu',
                 context=IParagraphContainerTarget, request=IAdminLayer,
-                view=IParagraphContainerBaseTable, manager=IContextAddingsViewletManager, weight=50)
+                view=IParagraphContainerBaseTable,
+                manager=IContextAddingsViewletManager, weight=50)
 class HTMLParagraphAddMenu(BaseParagraphAddMenu):
     """HTML paragraph add menu"""
 

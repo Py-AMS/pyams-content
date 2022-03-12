@@ -80,7 +80,7 @@ class RawParagraphSourceCodeRenderer(DefaultContentRenderer):
     def resources(self):
         """Fanstatic resources getter"""
         settings = self.settings
-        path = 'get-pygments-style.css?style={}'.format(settings.style)
+        path = f'get-pygments-style.css?style={settings.style}'
         resource = library.known_resources.get(path)
         if resource is None:
             resource = ExternalResource(library, path, resource_type='css')
