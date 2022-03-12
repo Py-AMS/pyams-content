@@ -1,0 +1,7 @@
+<tal:var define="settings view.settings;
+				 viewlet provider:pyams.associations"
+		 condition="viewlet">
+	<h2 tal:define="title view.title"
+		tal:condition="title">${title}</h2>
+	${structure:viewlet}
+</tal:var>

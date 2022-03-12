@@ -91,6 +91,7 @@ class IAssociationRenderer(Interface):
 ASSOCIATION_PARAGRAPH_TYPE = 'Associations'
 ASSOCIATION_PARAGRAPH_NAME = _("Associations")
 ASSOCIATION_PARAGRAPH_RENDERERS = 'PyAMS.associations.renderers'
+ASSOCIATION_PARAGRAPH_ICON_CLASS = 'fas fa-link'
 
 
 class IAssociationParagraph(IBaseParagraph):
