@@ -13,11 +13,8 @@
 """PyAMS_*** module
 
 """
-from pyams_content.component.association import IAssociationContainer
-from pyams_content.component.association.interfaces import IAssociationInfo, IAssociationParagraph
+from pyams_content.component.association.interfaces import IAssociationParagraph
 from pyams_content.component.association.skin import AssociationContainerRendererMixin
-from pyams_content.component.extfile import IExtFile
-from pyams_content.component.links import IBaseLink
 from pyams_content.feature.renderer import DEFAULT_RENDERER_NAME, DefaultContentRenderer, \
     IContentRenderer
 from pyams_layer.interfaces import IPyAMSLayer

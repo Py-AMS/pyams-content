@@ -14,8 +14,6 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
 from pyams_content.component.association.interfaces import ASSOCIATION_PARAGRAPH_ICON_CLASS, \
     ASSOCIATION_PARAGRAPH_NAME, ASSOCIATION_PARAGRAPH_TYPE, IAssociationParagraph
 from pyams_content.component.paragraph import IParagraphContainer, IParagraphContainerTarget
@@ -26,6 +24,9 @@ from pyams_layer.interfaces import IPyAMSLayer
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager
+
+
+__docformat__ = 'restructuredtext'
 
 
 @viewlet_config(name='add-association-paragraph.menu',
