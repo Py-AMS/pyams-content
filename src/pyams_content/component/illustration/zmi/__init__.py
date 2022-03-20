@@ -13,17 +13,24 @@
 """PyAMS_*** module
 
 """
-
+from pyramid.events import subscriber
 from zope.component import getAdapter
 
-from pyams_content.component.illustration import IBasicIllustration, IBasicIllustrationTarget, \
-    IIllustration, IIllustrationTarget, ILinkIllustrationTarget
+from pyams_content.component.illustration.interfaces import IBasicIllustration, \
+    IBasicIllustrationTarget, IIllustration, IIllustrationTarget, ILinkIllustrationTarget, \
+    IParagraphIllustration
 from pyams_content.component.paragraph.interfaces import IBaseParagraph
+from pyams_content.component.paragraph.zmi import BaseParagraphRendererSettingsEditForm
 from pyams_content.zmi.interfaces import IPropertiesEditForm
+from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
-from pyams_form.interfaces.form import IAJAXFormRenderer, IInnerSubForm
+from pyams_form.interfaces.form import IAJAXFormRenderer, IFormUpdatedEvent, IInnerSubForm
+from pyams_layer.interfaces import IPyAMSLayer
+from pyams_portal.zmi.portlet import PortletRendererSettingsEditForm
 from pyams_portal.zmi.widget import RendererSelectFieldWidget
+from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
+from pyams_utils.traversing import get_parent
 from pyams_zmi.form import FormGroupSwitcher
 from pyams_zmi.helper.event import get_json_widget_refresh_callback
 from pyams_zmi.interfaces import IAdminLayer
@@ -32,6 +39,7 @@ from pyams_zmi.interfaces import IAdminLayer
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
+from pyams_zmi.utils import get_object_label
 
 
 @adapter_config(name='illustration',
@@ -106,3 +114,31 @@ class BasicIllustrationPropertiesEditFormRenderer(ContextRequestViewAdapter):
                 get_json_widget_refresh_callback(self.view, 'data', self.request)
             ]
         return result
+
+
+@ajax_form_config(name='renderer-settings.html',
+                  context=IParagraphIllustration, layer=IPyAMSLayer,
+                  permission=VIEW_SYSTEM_PERMISSION)
+class ParagraphIllustrationRendererSettingsEditForm(BaseParagraphRendererSettingsEditForm):
+    """Paragraph illustration renderer settings edit form"""
+
+    @property
+    def title(self):
+        """Title getter"""
+        translate = self.request.localizer.translate
+        paragraph = get_parent(self.context, IBaseParagraph)
+        return translate(_("<small>Paragraph: {paragraph}</small><br />"
+                           "Renderer: {renderer}")).format(
+            paragraph=get_object_label(paragraph, self.request, self),
+            renderer=translate(self.renderer.label))
+
+
+@subscriber(IFormUpdatedEvent,
+            context_selector=IBasicIllustration,
+            form_selector=PortletRendererSettingsEditForm)
+def handle_illustration_renderer_settings_edit_form_update(event):
+    """Illustration renderer settings edit form update"""
+    widgets = event.form.widgets
+    thumb_selection = widgets.get('thumb_selection')
+    if thumb_selection is not None:
+        thumb_selection.no_value_message = _("Use responsive selection")

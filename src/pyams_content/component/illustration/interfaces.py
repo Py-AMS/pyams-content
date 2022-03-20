@@ -20,7 +20,9 @@ __docformat__ = 'restructuredtext'
 from zope.interface import Interface
 from zope.schema import Choice, TextLine
 
-from pyams_content.feature.renderer import IRenderedContent
+from pyams_content.component.paragraph import IBaseParagraph
+from pyams_content.component.paragraph.interfaces import ParagraphRendererChoice
+from pyams_content.feature.renderer import DEFAULT_RENDERER_NAME, IRenderedContent
 from pyams_file.schema import I18nThumbnailMediaField
 from pyams_i18n.schema import I18nTextField, I18nTextLineField
 
@@ -73,6 +75,10 @@ class IIllustration(IBasicIllustration, IRenderedContent):
                       default='default')
 
 
+class IParagraphIllustration(IIllustration):
+    """Paragraph illustration marker interface"""
+
+
 class ILinkIllustration(IBasicIllustration):
     """Navigation link illustration interface"""
 
@@ -95,3 +101,30 @@ class IIllustrationTarget(IBasicIllustrationTarget):
 
 class ILinkIllustrationTarget(IIllustrationTargetBase):
     """Link illustration target interface"""
+
+
+#
+# Illustration paragraph
+#
+
+ILLUSTRATION_PARAGRAPH_TYPE = 'illustration'
+ILLUSTRATION_PARAGRAPH_NAME = _("Illustration")
+ILLUSTRATION_PARAGRAPH_RENDERERS = 'PyAMS_content.paragraph.illustration.renderers'
+ILLUSTRATION_PARAGRAPH_ICON_CLASS = 'fas fa-image'
+
+
+class IIllustrationParagraph(IBasicIllustration, IBaseParagraph):
+    """Illustration paragraph interface"""
+
+    data = I18nThumbnailMediaField(title=_("Image or video data"),
+                                   description=_("Image or video content"),
+                                   required=True)
+
+    description = I18nTextField(title=_("Associated text"),
+                                description=_("Illustration description displayed in "
+                                              "front-office templates"),
+                                required=False)
+
+    renderer = ParagraphRendererChoice(description=_("Presentation template used for "
+                                                     "illustration"),
+                                       renderers=ILLUSTRATION_PARAGRAPH_RENDERERS)

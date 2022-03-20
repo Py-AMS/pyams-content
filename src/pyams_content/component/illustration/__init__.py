@@ -26,10 +26,10 @@ from zope.schema.fieldproperty import FieldProperty
 from zope.traversing.interfaces import ITraversable
 
 from pyams_content.component.illustration.interfaces import BASIC_ILLUSTRATION_KEY, \
-    IBasicIllustration, \
-    IBasicIllustrationTarget, IIllustration, IIllustrationTarget, IIllustrationTargetBase, \
-    ILLUSTRATION_KEY, \
-    ILLUSTRATION_RENDERERS, ILinkIllustration, ILinkIllustrationTarget, LINK_ILLUSTRATION_KEY
+    IBasicIllustration, IBasicIllustrationTarget, IIllustration, IIllustrationTarget, \
+    IIllustrationTargetBase, ILLUSTRATION_KEY, ILLUSTRATION_RENDERERS, ILinkIllustration, \
+    ILinkIllustrationTarget, IParagraphIllustration, LINK_ILLUSTRATION_KEY
+from pyams_content.component.paragraph import IBaseParagraph
 from pyams_content.feature.renderer import RenderedContentMixin, RenderersVocabulary
 from pyams_file.interfaces import IFileInfo, IImageFile, IResponsiveImage
 from pyams_file.property import I18nFileProperty
@@ -52,14 +52,21 @@ class BasicIllustration(Persistent, Contained):
 
     @property
     def data(self):
+        """Data property getter"""
         return self._data
 
     @data.setter
     def data(self, value):
+        """Data property setter"""
         self._data = value
         for data in (self._data or {}).values():
             if IImageFile.providedBy(data):
                 alsoProvides(data, IResponsiveImage)
+
+    @data.deleter
+    def data(self):
+        """Data property deleter"""
+        del self._data
 
     def has_data(self):
         if not self._data:
@@ -98,6 +105,8 @@ def illustration_factory(context):
     """Illustration factory"""
 
     def illustration_callback(illustration):
+        if IBaseParagraph.providedBy(context):
+            alsoProvides(illustration, IParagraphIllustration)
         get_pyramid_registry().notify(ObjectAddedEvent(illustration, context,
                                                        illustration.__name__))
 
