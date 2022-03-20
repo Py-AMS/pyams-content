@@ -19,7 +19,7 @@ from zope.container.constraints import containers, contains
 from zope.container.interfaces import IOrderedContainer
 from zope.interface import Attribute, Interface
 from zope.schema import Bool, Choice
-from pyams_content.component.paragraph.interfaces import IBaseParagraph
+from pyams_content.component.paragraph.interfaces import IBaseParagraph, ParagraphRendererChoice
 
 
 __docformat__ = 'restructuredtext'
@@ -88,16 +88,15 @@ class IAssociationRenderer(Interface):
 # Associations paragraph
 #
 
-ASSOCIATION_PARAGRAPH_TYPE = 'Associations'
+ASSOCIATION_PARAGRAPH_TYPE = 'associations'
 ASSOCIATION_PARAGRAPH_NAME = _("Associations")
-ASSOCIATION_PARAGRAPH_RENDERERS = 'PyAMS.associations.renderers'
+ASSOCIATION_PARAGRAPH_RENDERERS = 'PyAMS_content.paragraph.associations.renderers'
 ASSOCIATION_PARAGRAPH_ICON_CLASS = 'fas fa-link'
 
 
 class IAssociationParagraph(IBaseParagraph):
     """Associations paragraph interface"""
 
-    renderer = Choice(title=_("Associations template"),
-                      description=_("Presentation template used for associations"),
-                      vocabulary=ASSOCIATION_PARAGRAPH_RENDERERS,
-                      default='default')
+    renderer = ParagraphRendererChoice(description=_("Presentation template used for "
+                                                     "associations"),
+                                       renderers=ASSOCIATION_PARAGRAPH_RENDERERS)
