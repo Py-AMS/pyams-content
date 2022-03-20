@@ -23,10 +23,9 @@ from zope.interface import implementer
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from pyams_content.feature.renderer.interfaces import DEFAULT_RENDERER_NAME, HIDDEN_RENDERER_NAME, \
-    IContentRenderer, \
-    IRenderedContent, IRendererSettings
+    IContentRenderer, IRenderedContent, IRendererSettings, RENDERER_SETTINGS_KEY
 from pyams_layer.interfaces import IPyAMSLayer
-from pyams_utils.adapter import adapter_config
+from pyams_utils.adapter import adapter_config, get_annotation_adapter
 from pyams_utils.factory import get_object_factory
 from pyams_utils.request import check_request
 from pyams_viewlet.viewlet import BaseContentProvider
@@ -42,9 +41,9 @@ class RenderedContentMixin:
     """Renderer mixin interface"""
 
     renderer = None
-    """Attribute used to store selected content renderer.    
+    """Attribute used to store selected content renderer.
     Subclasses should generally override this attribute to define a "Choice" field property based
-    on a given renderers vocabulary. 
+    on a given renderers vocabulary.
     """
 
     renderer_interface = IContentRenderer
@@ -73,9 +72,11 @@ def rendered_content_renderer_factory(context):
 def rendered_content_renderer_settings_factory(context):
     """Rendered content renderer settings factory"""
     renderer = IContentRenderer(context)
-    if renderer.settings_interface is None:
+    if (renderer is None) or (renderer.settings_interface is None):
         return None
-    return renderer.settings_interface(context)
+    return get_annotation_adapter(context,
+                                  f'{RENDERER_SETTINGS_KEY}::{context.renderer}',
+                                  renderer.settings_interface, name='++renderer++')
 
 
 class RenderersVocabulary(SimpleVocabulary):
