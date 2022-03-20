@@ -14,27 +14,26 @@
 
 This module provides base paragraphs management components.
 """
+
 from zope.interface import implementer
 
-from pyams_content.component.association import IAssociationContainer
-from pyams_content.component.association.zmi import IAssociationsTable
-from pyams_content.component.paragraph import IBaseParagraph, IParagraphContainer, \
-    IParagraphContainerTarget
-from pyams_content.component.paragraph.interfaces import IParagraphFactorySettings, \
-    IParagraphFactorySettingsTarget, PARAGRAPH_HIDDEN_FIELDS
+from pyams_content.component.association.interfaces import IAssociationContainer
+from pyams_content.component.association.zmi.interfaces import IAssociationsTable
+from pyams_content.component.paragraph.interfaces import IBaseParagraph, IParagraphContainer, \
+    IParagraphContainerTarget, IParagraphFactorySettings, IParagraphFactorySettingsTarget, \
+    PARAGRAPH_HIDDEN_FIELDS
 from pyams_content.component.paragraph.zmi.helper import get_json_paragraph_toolbar_refresh_event
 from pyams_content.component.paragraph.zmi.interfaces import IInnerParagraphEditForm, \
     IParagraphAddForm, IParagraphContainerBaseTable, IParagraphContainerFullTable, \
     IParagraphContainerView, IParagraphRendererSettingsEditForm
-from pyams_content.feature.renderer import IRendererSettings
+from pyams_content.feature.renderer.interfaces import IRendererSettings
 from pyams_content.interfaces import MANAGE_TOOL_PERMISSION
-from pyams_content.shared.common import IWfSharedContent
+from pyams_content.shared.common.interfaces import IWfSharedContent
 from pyams_content.zmi.interfaces import IPropertiesEditForm
 from pyams_form.ajax import ajax_form_config
 from pyams_form.button import Buttons, handler
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer
-from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_pagelet.pagelet import pagelet_config
 from pyams_portal.interfaces import PREVIEW_MODE
@@ -46,7 +45,7 @@ from pyams_security.security import ProtectedViewObjectMixin
 from pyams_skin.schema.button import ActionButton
 from pyams_skin.viewlet.menu import MenuDivider, MenuItem
 from pyams_utils.adapter import ContextRequestViewAdapter, NullAdapter, adapter_config
-from pyams_utils.factory import get_object_factory
+from pyams_utils.factory import get_object_factory, is_interface
 from pyams_utils.request import get_annotations
 from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
@@ -54,8 +53,7 @@ from pyams_viewlet.manager import get_label, viewletmanager_config
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminEditForm, AdminModalAddForm, AdminModalEditForm
 from pyams_zmi.helper.event import get_json_table_refresh_callback, \
-    get_json_table_row_add_callback, \
-    get_json_widget_refresh_callback
+    get_json_table_row_add_callback, get_json_widget_refresh_callback
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.form import IEditFormButtons, IFormTitle
 from pyams_zmi.interfaces.table import ITableElementEditor
@@ -181,6 +179,9 @@ class BaseParagraphAddForm(AdminModalAddForm):
     @property
     def fields(self):
         """Form fields getter"""
+        fields = super().fields
+        if fields:
+            return fields
         return Fields(self.content_factory).omit(*PARAGRAPH_HIDDEN_FIELDS) + \
             Fields(self.content_factory).select('renderer')
 
@@ -202,6 +203,19 @@ def paragraph_add_form_title(context, request, view):
     return f'<small>{parent_label}</small><br />{label}'
 
 
+def get_json_paragraph_editor_open_event(context, request, table_factory, item):
+    """Get paragraph editor opening event"""
+    factory = get_object_factory(table_factory) if is_interface(table_factory) else table_factory
+    table = factory(context, request)
+    return {
+        'module': 'content',
+        'callback': 'MyAMS.content.paragraphs.switchEditor',
+        'options': {
+            'object_id': table.get_row_id(item)
+        }
+    }
+
+
 @adapter_config(required=(IParagraphContainer, IAdminLayer, IParagraphAddForm),
                 provides=IAJAXFormRenderer)
 class ParagraphAddFormRenderer(ContextRequestViewAdapter):
@@ -214,12 +228,16 @@ class ParagraphAddFormRenderer(ContextRequestViewAdapter):
         target = get_parent(self.context, IParagraphContainerTarget)
         table_factory = IParagraphContainerFullTable if IWfSharedContent.providedBy(target) \
             else IParagraphContainerBaseTable
+        callbacks = [
+            get_json_table_row_add_callback(self.context, self.request,
+                                            table_factory, changes)
+        ]
+        if IWfSharedContent.providedBy(target):
+            callbacks.append(get_json_paragraph_editor_open_event(self.context, self.request,
+                                                                  table_factory, changes))
         return {
             'status': 'success',
-            'callbacks': [
-                get_json_table_row_add_callback(self.context, self.request,
-                                                table_factory, changes)
-            ]
+            'callbacks': callbacks
         }
 
 
@@ -244,6 +262,9 @@ class ParagraphPropertiesEditFormMixin:
     @property
     def fields(self):
         """Form fields getter"""
+        fields = super().fields
+        if fields:
+            return fields
         fields = Fields(self.context.factory_intf).omit(*PARAGRAPH_HIDDEN_FIELDS) + \
             Fields(self.context.factory_intf).select('renderer')
         fields['renderer'].widget_factory = RendererSelectFieldWidget
@@ -318,7 +339,6 @@ class BaseParagraphPropertiesEditFormRenderer(ContextRequestViewAdapter):
             event = get_json_paragraph_toolbar_refresh_event(self.context, self.request)
             if event is not None:
                 result.setdefault('callbacks', []).append(event)
-        if 'title' in changes.get(IBaseParagraph, ()):
             result.setdefault('callbacks', []).append({
                 'callback': 'MyAMS.content.paragraphs.refreshTitle',
                 'options': {
@@ -364,7 +384,7 @@ class BaseParagraphRendererSettingsEditForm(PortletRendererSettingsEditForm):
         translate = self.request.localizer.translate
         return translate(_("<small>Paragraph: {paragraph}</small><br />"
                            "Renderer: {renderer}")).format(
-            paragraph=II18n(self.context).query_attribute('title', request=self.request) or '--',
+            paragraph=get_object_label(self.context, self.request, self),
             renderer=translate(self.renderer.label))
 
     def get_content(self):
