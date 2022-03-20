@@ -19,23 +19,10 @@ from zope.traversing.interfaces import ITraversable
 
 from pyams_content.component.paragraph import IBaseParagraph
 from pyams_content.feature.renderer import IRendererSettings
-from pyams_content.feature.renderer.interfaces import RENDERER_SETTINGS_KEY
-from pyams_utils.adapter import ContextAdapter, adapter_config, get_annotation_adapter
+from pyams_utils.adapter import ContextAdapter, adapter_config
 
 
 __docformat__ = 'restructuredtext'
-
-
-@adapter_config(required=IBaseParagraph,
-                provides=IRendererSettings)
-def paragraph_renderer_settings(context):
-    """Paragraph renderer settings adapter"""
-    renderer = context.get_renderer()
-    if renderer is None:
-        return None
-    return get_annotation_adapter(context,
-                                  f'{RENDERER_SETTINGS_KEY}::{context.renderer}',
-                                  renderer.settings_interface, name='++renderer++')
 
 
 @adapter_config(name='renderer',
