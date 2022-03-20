@@ -33,7 +33,6 @@ from pyams_content.interfaces import MANAGE_CONTENT_PERMISSION, PUBLISH_CONTENT_
 from pyams_content.shared.common.interfaces.types import ITypedSharedTool
 from pyams_content.shared.common.zmi.types import SharedToolTypesTable
 from pyams_content.zmi import content_js
-from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_layer.skin import apply_skin
 from pyams_pagelet.pagelet import pagelet_config
@@ -53,10 +52,8 @@ from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu
 from pyams_zmi.skin import AdminSkin
 from pyams_zmi.table import ActionColumn, AttributeSwitcherColumn, ContentTypeColumn, \
-    InnerTableAdminView, MultipleTablesAdminView, NameColumn, ReorderColumn, \
-    Table, \
-    TableAdminView, TrashColumn, \
-    VisibilityColumn, get_ordered_data_attributes, get_table_id
+    InnerTableAdminView, MultipleTablesAdminView, NameColumn, ReorderColumn, Table, \
+    TableAdminView, TrashColumn, VisibilityColumn, get_ordered_data_attributes, get_table_id
 from pyams_zmi.utils import get_object_hint, get_object_icon, get_object_label
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
@@ -237,6 +234,10 @@ class ParagraphsLabelColumn(NameColumn):
 
     i18n_header = _("Title")
 
+    css_classes = {
+        'td': 'title'
+    }
+
 
 @adapter_config(name='label',
                 required=(IParagraphContainer, IAdminLayer, IParagraphContainerFullTable),
@@ -247,6 +248,8 @@ class ParagraphsFullLabelColumn(ParagraphsLabelColumn):
     i18n_header = _("Show/hide all paragraphs")
     head_hint = _("Click to show/hide all paragraphs editors")
     cell_hint = _("Click to show/hide paragraph editor")
+
+    css_classes = {}
 
     def render_head_cell(self):
         """Head cell renderer"""
@@ -269,7 +272,8 @@ class ParagraphsFullLabelColumn(ParagraphsLabelColumn):
             provider.update()
             toolbar = provider.render()
         hint = self.request.localizer.translate(self.cell_hint)
-        return f'<div data-ams-click-handler="MyAMS.content.paragraphs.switchEditor" ' \
+        return f'<div class="switcher-parent" ' \
+               f'     data-ams-click-handler="MyAMS.content.paragraphs.switchEditor" ' \
                f'     data-ams-stop-propagation="true">' \
                f'  <span class="switcher mr-2 hint" data-original-title="{hint}">' \
                f'    <i class="far fa-plus-square"></i>' \
