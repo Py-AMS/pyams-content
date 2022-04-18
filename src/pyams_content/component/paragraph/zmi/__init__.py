@@ -33,7 +33,7 @@ from pyams_content.zmi.interfaces import IPropertiesEditForm
 from pyams_form.ajax import ajax_form_config
 from pyams_form.button import Buttons, handler
 from pyams_form.field import Fields
-from pyams_form.interfaces.form import IAJAXFormRenderer
+from pyams_form.interfaces.form import IAJAXFormRenderer, IFormContent
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_pagelet.pagelet import pagelet_config
 from pyams_portal.interfaces import PREVIEW_MODE
@@ -92,9 +92,13 @@ class ParagraphFactorySettingsEditForm(AdminEditForm):
 
     fields = Fields(IParagraphFactorySettings)
 
-    def get_content(self):
-        """Content getter"""
-        return IParagraphFactorySettings(self.context)
+
+@adapter_config(required=(IParagraphFactorySettingsTarget, IAdminLayer,
+                          ParagraphFactorySettingsEditForm),
+                provides=IFormContent)
+def get_paragraph_factory_settings_edit_form_content(context, request, form):
+    """Paragraph factory settings edit form content getter"""
+    return IParagraphFactorySettings(context)
 
 
 #
@@ -387,12 +391,15 @@ class BaseParagraphRendererSettingsEditForm(PortletRendererSettingsEditForm):
             paragraph=get_object_label(self.context, self.request, self),
             renderer=translate(self.renderer.label))
 
-    def get_content(self):
-        """Content getter"""
-        renderer = self.context.get_renderer(self.request)
-        if renderer.settings_interface is None:
-            return None
-        return IRendererSettings(self.context)
+
+@adapter_config(required=(IBaseParagraph, IAdminLayer, IParagraphRendererSettingsEditForm),
+                provides=IFormContent)
+def get_paragraph_renderer_settings_edit_form_content(context, request, form):
+    """Paragraph renderer settings edit form content getter"""
+    renderer = context.get_renderer(request)
+    if renderer.settings_interface is None:
+        return None
+    return IRendererSettings(context)
 
 
 #
