@@ -55,6 +55,7 @@ from pyams_viewlet.manager import viewletmanager_config
 from pyams_viewlet.viewlet import ViewContentProvider, viewlet_config
 from pyams_workflow.interfaces import IWorkflow, IWorkflowPublicationInfo, \
     IWorkflowPublicationSupport, IWorkflowState, IWorkflowVersions
+from pyams_workflow.versions import get_last_version_in_state
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.table import IInnerTable
 from pyams_zmi.interfaces.viewlet import IContentManagementMenu, IMenuHeader
@@ -310,10 +311,10 @@ class SharedToolDashboardManagerWaitingView(BaseSharedToolDashboardView):
     weight = 20
 
 
-@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolDashboardManagerWaitingTable),
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolDashboardManagerWaitingTable),
                 provides=IValues)
 class SharedToolDashboardManagerWaitingValues(ContextRequestViewAdapter):
-    """Shared tool dashboard waiting values adapter"""
+    """Shared tool dashboard waiting values getter"""
 
     @property
     def values(self):
@@ -327,11 +328,10 @@ class SharedToolDashboardManagerWaitingValues(ContextRequestViewAdapter):
                      Any(catalog['workflow_state'], workflow.waiting_states))
         yield from filter(
             self.check_access,
-            unique_iter(map(
-                lambda x: sorted(IWorkflowVersions(x).get_versions(IWorkflowState(x).state),
-                                 key=lambda y: IZopeDublinCore(y).modified, reverse=True)[0],
-                CatalogResultSet(CatalogQuery(catalog).query(params,
-                                                             sort_index='modified_date')))))
+            unique_iter(
+                map(get_last_version_in_state,
+                    CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                                 sort_index='modified_date')))))
 
     def check_access(self, content):
         """Content access checker"""
@@ -373,7 +373,7 @@ class SharedToolDashboardOwnerWaitingView(BaseSharedToolDashboardView):
     weight = 30
 
 
-@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolDashboardOwnerWaitingTable),
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolDashboardOwnerWaitingTable),
                 provides=IValues)
 class SharedToolDashboardOwnerWaitingValues(ContextRequestViewAdapter):
     """Shared tool dashboard waiting owned contents values adapter"""
@@ -390,8 +390,7 @@ class SharedToolDashboardOwnerWaitingValues(ContextRequestViewAdapter):
                      Any(catalog['workflow_state'], workflow.waiting_states),
                      Eq(catalog['workflow_principal'], self.request.principal.id))
         yield from unique_iter(
-            map(lambda x: sorted(IWorkflowVersions(x).get_versions(IWorkflowState(x).state),
-                                 key=lambda y: IZopeDublinCore(y).modified, reverse=True)[0],
+            map(get_last_version_in_state,
                 CatalogResultSet(CatalogQuery(catalog).query(params,
                                                              sort_index='modified_date'))))
 
@@ -426,10 +425,10 @@ class SharedToolDashboardOwnerModifiedView(BaseSharedToolDashboardView):
             return _("CONTRIBUTOR - Last {} modified contents")
         return _("CONTRIBUTOR - {} modified contents")
 
-    weight = 30
+    weight = 40
 
 
-@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolDashboardOwnerModifiedTable),
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolDashboardOwnerModifiedTable),
                 provides=IValues)
 class SharedToolDashboardOwnerModifiedValues(ContextRequestViewAdapter):
     """Shared tool dashboard owner modified adapter"""
@@ -445,13 +444,12 @@ class SharedToolDashboardOwnerModifiedValues(ContextRequestViewAdapter):
                      Any(catalog['content_type'], vocabulary.by_value.keys()),
                      Or(Eq(catalog['role:owner'], principal_id),
                         Eq(catalog['role:contributor'], principal_id)))
-        yield from unique_iter(map(
-            lambda x: sorted(IWorkflowVersions(x).get_versions(IWorkflowState(x).state),
-                             key=lambda y: IZopeDublinCore(y).modified, reverse=True)[0],
-            CatalogResultSet(CatalogQuery(catalog).query(params,
-                                                         limit=50,
-                                                         sort_index='modified_date',
-                                                         reverse=True))))
+        yield from unique_iter(
+            map(get_last_version_in_state,
+                CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                             limit=50,
+                                                             sort_index='modified_date',
+                                                             reverse=True))))
 
 
 #
@@ -492,7 +490,7 @@ class SharedToolPreparationsTable(BaseSharedToolDashboardTable):
     """Shared tool preparations table"""
 
 
-@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolPreparationsTable),
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolPreparationsTable),
                 provides=IValues)
 class SharedToolPreparationsValues(ContextRequestViewAdapter):
     """Shared tool preparations values adapter"""
@@ -509,10 +507,10 @@ class SharedToolPreparationsValues(ContextRequestViewAdapter):
                      Or(Eq(catalog['role:owner'], principal_id),
                         Eq(catalog['role:contributor'], principal_id)),
                      Eq(catalog['workflow_state'], workflow.initial_state))
-        yield from unique_iter(CatalogResultSet(
-            CatalogQuery(catalog).query(params,
-                                        sort_index='modified_date',
-                                        reverse=True)))
+        yield from unique_iter(
+            CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                         sort_index='modified_date',
+                                                         reverse=True)))
 
 
 @pagelet_config(name='my-preparations.html',
@@ -550,7 +548,7 @@ class SharedToolSubmissionsTable(BaseSharedToolDashboardTable):
     """Shared tool submissions table"""
 
 
-@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolSubmissionsTable),
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolSubmissionsTable),
                 provides=IValues)
 class SharedToolSubmissionsValues(ContextRequestViewAdapter):
     """Shared tool submissions values adapter"""
@@ -568,10 +566,10 @@ class SharedToolSubmissionsValues(ContextRequestViewAdapter):
                      Or(Eq(catalog['role:owner'], principal_id),
                         Eq(catalog['role:contributor'], principal_id)),
                      Any(catalog['workflow_state'], workflow.waiting_states))
-        yield from unique_iter(CatalogResultSet(
-            CatalogQuery(catalog).query(params,
-                                        sort_index='modified_date',
-                                        reverse=True)))
+        yield from unique_iter(
+            CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                         sort_index='modified_date',
+                                                         reverse=True)))
 
 
 @pagelet_config(name='my-submissions.html',
@@ -609,7 +607,7 @@ class SharedToolPublicationsTable(BaseSharedToolDashboardTable):
     """Shared tool publications table"""
 
 
-@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolPublicationsTable),
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolPublicationsTable),
                 provides=IValues)
 class SharedToolPublicationsValues(ContextRequestViewAdapter):
     """Shared tool publications values adapter"""
@@ -627,10 +625,10 @@ class SharedToolPublicationsValues(ContextRequestViewAdapter):
                      Or(Eq(catalog['role:owner'], principal_id),
                         Eq(catalog['role:contributor'], principal_id)),
                      Any(catalog['workflow_state'], workflow.published_states))
-        yield from unique_iter(CatalogResultSet(
-            CatalogQuery(catalog).query(params,
-                                        sort_index='modified_date',
-                                        reverse=True)))
+        yield from unique_iter(
+            CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                         sort_index='modified_date',
+                                                         reverse=True)))
 
 
 @pagelet_config(name='my-publications.html',
@@ -668,7 +666,7 @@ class SharedToolRetiredContentsTable(BaseSharedToolDashboardTable):
     """Shared tool retired contents table"""
 
 
-@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolRetiredContentsTable),
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolRetiredContentsTable),
                 provides=IValues)
 class SharedToolRetiredContentsValues(ContextRequestViewAdapter):
     """Shared tool retired contents values adapter"""
@@ -686,10 +684,10 @@ class SharedToolRetiredContentsValues(ContextRequestViewAdapter):
                      Or(Eq(catalog['role:owner'], principal_id),
                         Eq(catalog['role:contributor'], principal_id)),
                      Any(catalog['workflow_state'], workflow.retired_states))
-        yield from unique_iter(CatalogResultSet(
-            CatalogQuery(catalog).query(params,
-                                        sort_index='modified_date',
-                                        reverse=True)))
+        yield from unique_iter(
+            CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                         sort_index='modified_date',
+                                                         reverse=True)))
 
 
 @pagelet_config(name='my-retired-contents.html',
@@ -727,7 +725,7 @@ class SharedToolArchivedContentsTable(BaseSharedToolDashboardTable):
     """Shared tool archived contents table"""
 
 
-@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolArchivedContentsTable),
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolArchivedContentsTable),
                 provides=IValues)
 class SharedToolArchivedContentsValues(ContextRequestViewAdapter):
     """Shared tool archived contents values adapter"""
@@ -745,10 +743,10 @@ class SharedToolArchivedContentsValues(ContextRequestViewAdapter):
                      Or(Eq(catalog['role:owner'], principal_id),
                         Eq(catalog['role:contributor'], principal_id)),
                      Any(catalog['workflow_state'], workflow.archived_states))
-        yield from unique_iter(CatalogResultSet(
-            CatalogQuery(catalog).query(params,
-                                        sort_index='modified_date',
-                                        reverse=True)))
+        yield from unique_iter(
+            CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                         sort_index='modified_date',
+                                                         reverse=True)))
 
 
 @pagelet_config(name='my-archived-contents.html',
@@ -803,7 +801,7 @@ class SharedToolLastPublicationsTable(BaseSharedToolDashboardTable):
     """Shared tool dashboard last publications table"""
 
 
-@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolLastPublicationsTable),
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolLastPublicationsTable),
                 provides=IValues)
 class SharedToolLastPublicationsValues(ContextRequestViewAdapter):
     """Shared tool publications values adapter"""
@@ -817,11 +815,11 @@ class SharedToolLastPublicationsValues(ContextRequestViewAdapter):
         params = And(Eq(catalog['parents'], intids.register(self.context)),
                      Any(catalog['content_type'], vocabulary.by_value.keys()) &
                      Any(catalog['workflow_state'], workflow.published_states))
-        yield from unique_iter(CatalogResultSet(
-            CatalogQuery(catalog).query(params,
-                                        limit=50,
-                                        sort_index='modified_date',
-                                        reverse=True)))
+        yield from unique_iter(
+            CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                         limit=50,
+                                                         sort_index='modified_date',
+                                                         reverse=True)))
 
 
 @pagelet_config(name='last-published.html',
@@ -864,7 +862,7 @@ class SharedToolLastModificationsTable(BaseSharedToolDashboardTable):
     """Shared tool dashboard last modifications table"""
 
 
-@adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolLastModificationsTable),
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolLastModificationsTable),
                 provides=IValues)
 class SharedToolLastModificationsValues(ContextRequestViewAdapter):
     """Shared tool modifications values adapter"""
@@ -876,11 +874,11 @@ class SharedToolLastModificationsValues(ContextRequestViewAdapter):
         vocabulary = getVocabularyRegistry().get(self.context, SHARED_CONTENT_TYPES_VOCABULARY)
         params = And(Eq(catalog['parents'], intids.register(self.context)),
                      Any(catalog['content_type'], vocabulary.by_value.keys()))
-        yield from unique_iter(CatalogResultSet(
-            CatalogQuery(catalog).query(params,
-                                        limit=50,
-                                        sort_index='modified_date',
-                                        reverse=True)))
+        yield from unique_iter(
+            CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                         limit=50,
+                                                         sort_index='modified_date',
+                                                         reverse=True)))
 
 
 @pagelet_config(name='last-modified.html',
