@@ -28,7 +28,7 @@ from pyams_scheduler.interfaces import IScheduler, ISchedulerProcess
 from pyams_scheduler.interfaces.task import IDateTaskScheduling
 from pyams_scheduler.process import TaskResettingThread
 from pyams_scheduler.task import Task
-from pyams_security.interfaces import INTERNAL_USER_ID
+from pyams_security.interfaces.names import INTERNAL_USER_ID
 from pyams_utils.registry import get_utility, query_utility
 from pyams_utils.timezone import gmtime
 from pyams_workflow.interfaces import IWorkflow, IWorkflowInfo, IWorkflowState
