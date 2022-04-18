@@ -16,6 +16,7 @@ This module is used for Pyramid integration
 """
 
 import re
+from zope.interface import classImplements
 
 from pyams_content.component.extfile.interfaces import IExtFileManagerTarget
 from pyams_content.component.thesaurus import ICollectionsManagerTarget, ITagsManagerTarget, \
@@ -26,12 +27,10 @@ from pyams_content.interfaces import COMMENT_CONTENT_PERMISSION, CONTRIBUTOR_ROL
     MANAGE_CONTENT_PERMISSION, MANAGE_SITE_PERMISSION, MANAGE_SITE_ROOT_PERMISSION, \
     MANAGE_TOOL_PERMISSION, OPERATOR_ROLE, OWNER_ROLE, PILOT_ROLE, PUBLISH_CONTENT_PERMISSION, \
     READER_ROLE, WEBMASTER_ROLE
-from zope.interface import classImplements
-
 from pyams_layer.interfaces import MANAGE_SKIN_PERMISSION
-from pyams_security.interfaces import ADMIN_USER_ID, SYSTEM_ADMIN_ROLE
 from pyams_security.interfaces.base import MANAGE_PERMISSION, MANAGE_ROLES_PERMISSION, \
     PUBLIC_PERMISSION, ROLE_ID, VIEW_PERMISSION, VIEW_SYSTEM_PERMISSION
+from pyams_security.interfaces.names import ADMIN_USER_ID, SYSTEM_ADMIN_ROLE
 from pyams_site.site import BaseSiteRoot
 from pyams_thesaurus.interfaces import ADMIN_THESAURUS_PERMISSION, CREATE_THESAURUS_PERMISSION, \
     MANAGE_THESAURUS_CONTENT_PERMISSION, MANAGE_THESAURUS_EXTRACT_PERMISSION
