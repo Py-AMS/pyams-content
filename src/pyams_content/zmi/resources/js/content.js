@@ -126,9 +126,10 @@ const content = {
      */
     paragraphs: {
 
-        switchEditor: (event) => {
+        switchEditor: (event, options) => {
             const
-                target = $(event.currentTarget),
+                object_id = options && options.object_id ? options.object_id : null,
+                target = object_id ? $('.switcher-parent', $(`tr[id="${object_id}"]`)) : $(event.currentTarget),
                 switcher = $('.switcher', target),
                 editor = target.siblings('.editor');
             if (switcher.hasClass('expanded')) {
