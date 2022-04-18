@@ -14,6 +14,7 @@
 
 This module defines components which are used to handle security restrictions.
 """
+
 from pyramid.decorator import reify
 from zope.interface import implementer
 
@@ -28,7 +29,7 @@ from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.group import Group
 from pyams_form.interfaces import HIDDEN_MODE
-from pyams_form.interfaces.form import IAJAXFormRenderer, IGroup
+from pyams_form.interfaces.form import IAJAXFormRenderer, IFormContent, IGroup
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_pagelet.pagelet import pagelet_config
 from pyams_security.interfaces import ISecurityManager
@@ -219,15 +220,19 @@ class ManagerRestrictionsEditForm(AdminModalEditForm):
         sm = get_utility(ISecurityManager)  # pylint: disable=invalid-name
         return sm.get_principal(self.principal_id)
 
-    def get_content(self):
-        return IManagerRestrictions(self.context).get_restrictions(self.principal.id)
-
     def update_widgets(self, prefix=None):
         super().update_widgets(prefix)
         principal_id = self.widgets.get('principal_id')
         if principal_id is not None:
             principal_id.mode = HIDDEN_MODE
             principal_id.value = self.principal_id
+
+
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, IManagerRestrictionsEditForm),
+                provides=IFormContent)
+def manager_restrictions_edit_form_content(context, request, form):
+    """Manager restrictions edit form content getter"""
+    return IManagerRestrictions(context).get_restrictions(form.principal.id)
 
 
 @adapter_config(required=(IBaseSharedTool, IAdminLayer, IManagerRestrictionsEditForm),
@@ -261,8 +266,12 @@ class ManagerRestrictionsWorkflowGroup(Group):
     legend = _("Manager restrictions")
     fields = Fields(IManagerWorkflowRestrictions).select('show_workflow_warning')
 
-    def get_content(self):
-        return IManagerWorkflowRestrictions(self.parent_form.get_content())
+
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, ManagerRestrictionsWorkflowGroup),
+                provides=IFormContent)
+def get_manager_restrictions_workflow_group_content(context, request, group):
+    """Manager restrictions workflow group content getter"""
+    return IManagerWorkflowRestrictions(group.parent_form.get_content())
 
 
 @adapter_config(name='restrictions',
@@ -438,15 +447,19 @@ class ContributorRestrictionsEditForm(AdminModalEditForm):
         sm = get_utility(ISecurityManager)  # pylint: disable=invalid-name
         return sm.get_principal(self.principal_id)
 
-    def get_content(self):
-        return IContributorRestrictions(self.context).get_restrictions(self.principal.id)
-
     def update_widgets(self, prefix=None):
         super().update_widgets(prefix)
         principal_id = self.widgets.get('principal_id')
         if principal_id is not None:
             principal_id.mode = HIDDEN_MODE
             principal_id.value = self.principal_id
+
+
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, IContributorRestrictionsEditForm),
+                provides=IFormContent)
+def contributor_restrictions_edit_form_content(context, request, form):
+    """Contributor restrictions edit form content getter"""
+    return IContributorRestrictions(context).get_restrictions(form.principal.id)
 
 
 @adapter_config(required=(IBaseSharedTool, IAdminLayer, IContributorRestrictionsEditForm),

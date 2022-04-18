@@ -37,7 +37,7 @@ from pyams_content.shared.common.zmi.dashboard import BaseSharedToolDashboardSin
     BaseSharedToolDashboardTable, BaseSharedToolDashboardView, SharedToolDashboardView
 from pyams_content.zmi.interfaces import IAllDashboardMenu
 from pyams_form.field import Fields
-from pyams_form.interfaces.form import IGroup
+from pyams_form.interfaces.form import IFormFields, IGroup
 from pyams_i18n.interfaces import II18n, INegotiator
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_layer.skin import apply_skin
@@ -242,9 +242,14 @@ class SharedToolAdvancedSearchForm(SearchForm):
 
     title = _("Contents search form")
 
-    fields = Fields(ISharedToolAdvancedSearchQuery).omit('tags', 'themes', 'collections')
-
     ajax_form_handler = 'advanced-search-results.html'
+
+
+@adapter_config(required=(Interface, IAdminLayer, SharedToolAdvancedSearchForm),
+                provides=IFormFields)
+def shared_tool_advanced_search_form_fields(context, request, form):
+    """Shared tool advanced search form fields getter"""
+    return Fields(ISharedToolAdvancedSearchQuery).omit('tags', 'themes', 'collections')
 
 
 class BaseThesaurusTermsSearchGroup(FormGroupSwitcher):
