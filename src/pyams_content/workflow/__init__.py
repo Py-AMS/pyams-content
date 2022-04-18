@@ -421,8 +421,9 @@ draft_to_proposed = Transition(transition_id='draft_to_proposed',
                                            "content are going to be notified of your request."),
                                notify_roles={WEBMASTER_ROLE, PILOT_ROLE, MANAGER_ROLE,
                                              OWNER_ROLE},
-                               notify_message=_("submitted a publication request for content "
-                                                "« {0} »"),
+                               notify_title=_("Publication request"),
+                               notify_message=_("{principal} submitted a publication request "
+                                                "for content « {title} »"),
                                order=1)
 
 retired_to_proposed = Transition(transition_id='retired_to_proposed',
@@ -438,8 +439,9 @@ retired_to_proposed = Transition(transition_id='retired_to_proposed',
                                              "content are going to be notified of your request."),
                                  notify_roles={WEBMASTER_ROLE, PILOT_ROLE, MANAGER_ROLE,
                                                OWNER_ROLE},
-                                 notify_message=_("submitted a publication request for content "
-                                                  "« {0} »"),
+                                 notify_title=_("Publication request"),
+                                 notify_message=_("{principal} submitted a publication request "
+                                                  "for content « {title} »"),
                                  order=1)
 
 proposed_to_canceled = Transition(transition_id='proposed_to_canceled',
@@ -454,8 +456,9 @@ proposed_to_canceled = Transition(transition_id='proposed_to_canceled',
                                   history_label=_("Publication request canceled"),
                                   notify_roles={WEBMASTER_ROLE, PILOT_ROLE, MANAGER_ROLE,
                                                 OWNER_ROLE},
-                                  notify_message=_("cancelled the publication request for "
-                                                   "content « {0} »"),
+                                  notify_title=_("Publication request"),
+                                  notify_message=_("{principal} cancelled the publication "
+                                                   "request for content « {title} »"),
                                   order=2)
 
 canceled_to_draft = Transition(transition_id='canceled_to_draft',
@@ -485,8 +488,9 @@ proposed_to_refused = Transition(transition_id='proposed_to_refused',
                                  view_name='wf-refuse.html',
                                  history_label=_("Publication refused"),
                                  notify_roles={OWNER_ROLE},
-                                 notify_message=_("refused the publication request for content "
-                                                  "« {0} »"),
+                                 notify_title=_("Publication request"),
+                                 notify_message=_("{principal} refused the publication request "
+                                                  "for content « {title} »"),
                                  order=3)
 
 refused_to_draft = Transition(transition_id='refused_to_draft',
@@ -513,7 +517,9 @@ proposed_to_prepublished = Transition(transition_id='proposed_to_prepublished',
                                       action=prepublish_action,
                                       history_label=_("Content pre-published"),
                                       notify_roles={'*'},
-                                      notify_message=_("pre-published the content « {0} »"))
+                                      notify_title=_("Content publication"),
+                                      notify_message=_("{principal} pre-published the content "
+                                                       "« {title} »"))
 
 prepublished_to_published = Transition(transition_id='prepublished_to_published',
                                        title=_("Publish content"),
@@ -535,8 +541,9 @@ prepublished_to_proposed = Transition(transition_id='prepublished_to_proposed',
                                       history_label=_("Publication canceled"),
                                       notify_roles={WEBMASTER_ROLE, PILOT_ROLE, MANAGER_ROLE,
                                                     OWNER_ROLE},
-                                      notify_message=_("cancelled the publication for content "
-                                                       "« {0} »"),
+                                      notify_title=_("Content publication"),
+                                      notify_message=_("{principal} cancelled the publication "
+                                                       "for content « {title} »"),
                                       order=1)
 
 proposed_to_published = Transition(transition_id='proposed_to_published',
@@ -552,7 +559,9 @@ proposed_to_published = Transition(transition_id='proposed_to_published',
                                    show_operator_warning=True,
                                    history_label=_("Content published"),
                                    notify_roles={'*'},
-                                   notify_message=_("published the content « {0} »"),
+                                   notify_title=_("Content publication"),
+                                   notify_message=_("{principal} published the content "
+                                                    "« {title} »"),
                                    order=4)
 
 published_to_retiring = Transition(transition_id='published_to_retiring',
@@ -568,8 +577,9 @@ published_to_retiring = Transition(transition_id='published_to_retiring',
                                                "request."),
                                    notify_roles={WEBMASTER_ROLE, PILOT_ROLE, MANAGER_ROLE,
                                                  OWNER_ROLE},
-                                   notify_message=_("submitted a retire request for content "
-                                                    "« {0} »"),
+                                   notify_title=_("Content removal"),
+                                   notify_message=_("{principal} submitted a retire request "
+                                                    "for content « {title} »"),
                                    order=7)
 
 published_to_retired = Transition(transition_id='published_to_retired',
@@ -590,8 +600,9 @@ retiring_to_published = Transition(transition_id='retiring_to_published',
                                    history_label=_("Retire request canceled"),
                                    notify_roles={WEBMASTER_ROLE, PILOT_ROLE, MANAGER_ROLE,
                                                  OWNER_ROLE},
-                                   notify_message=_("cancelled the retiring request for content "
-                                                    "« {0} »"),
+                                   notify_title=_("Content removal"),
+                                   notify_message=_("{principal} cancelled the retiring request "
+                                                    "for content « {title} »"),
                                    order=8)
 
 retiring_to_retired = Transition(transition_id='retiring_to_retired',
@@ -607,7 +618,8 @@ retiring_to_retired = Transition(transition_id='retiring_to_retired',
                                  history_label=_("Content retired"),
                                  notify_roles={WEBMASTER_ROLE, PILOT_ROLE, MANAGER_ROLE,
                                                OWNER_ROLE},
-                                 notify_message=_("retired content « {0} »"),
+                                 notify_title=_("Content removal"),
+                                 notify_message=_("{principal} retired content « {title} »"),
                                  order=9)
 
 retired_to_archiving = Transition(transition_id='retired_to_archiving',
@@ -623,8 +635,9 @@ retired_to_archiving = Transition(transition_id='retired_to_archiving',
                                               "request."),
                                   notify_roles={WEBMASTER_ROLE, PILOT_ROLE, MANAGER_ROLE,
                                                 OWNER_ROLE},
-                                  notify_message=_("submitted an archive request for content "
-                                                   "« {0} »"),
+                                  notify_title=_("Content archiving"),
+                                  notify_message=_("{principal} submitted an archive request "
+                                                   "for content « {title} »"),
                                   order=10)
 
 archiving_to_retired = Transition(transition_id='archiving_to_retired',
@@ -638,8 +651,9 @@ archiving_to_retired = Transition(transition_id='archiving_to_retired',
                                   history_label=_("Archive request canceled"),
                                   notify_roles={WEBMASTER_ROLE, PILOT_ROLE, MANAGER_ROLE,
                                                 OWNER_ROLE},
-                                  notify_message=_("cancelled the archive request for content "
-                                                   "« {0} »"),
+                                  notify_title=_("Content archiving"),
+                                  notify_message=_("{principal} cancelled the archive request "
+                                                   "for content « {title} »"),
                                   order=11)
 
 archiving_to_archived = Transition(transition_id='archiving_to_archived',
@@ -655,7 +669,8 @@ archiving_to_archived = Transition(transition_id='archiving_to_archived',
                                    history_label=_("Content archived"),
                                    notify_roles={WEBMASTER_ROLE, PILOT_ROLE, MANAGER_ROLE,
                                                  OWNER_ROLE},
-                                   notify_message=_("archived content « {0} »"),
+                                   notify_title=_("Content archiving"),
+                                   notify_message=_("{principal} archived content « {title} »"),
                                    order=12)
 
 published_to_archived = Transition(transition_id='published_to_archived',
