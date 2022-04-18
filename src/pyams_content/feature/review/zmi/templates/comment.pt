@@ -5,7 +5,7 @@
 				 src="${tales:absolute_url(avatar, '++thumb++square:32x32.png')}"/>
 		</tal:if>
 		<tal:if condition="not:avatar">
-			<i class="fa fa-lg fa-user avatar"></i>
+			<i class="fa fa-lg fa-user avatar text-center mt-2"></i>
 		</tal:if>
 		<div class="mx-3">
 			<div>

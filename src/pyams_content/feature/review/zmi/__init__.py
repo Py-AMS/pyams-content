@@ -95,8 +95,11 @@ class IContentReviewFormFields(Interface):
 class IContentReviewButtons(Interface):
     """Shared content review form buttons"""
 
-    review = SubmitButton(name='review', title=_("Ask for content review"))
-    close = CloseButton(name='close', title=_("Cancel"))
+    review = SubmitButton(name='review',
+                          title=_("Ask for content review"))
+
+    close = CloseButton(name='close',
+                        title=_("Cancel"))
 
 
 @ajax_form_config(name='content-review.html',

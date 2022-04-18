@@ -28,6 +28,8 @@ from pyams_utils.url import absolute_url
 
 __docformat__ = 'restructuredtext'
 
+from pyams_content import _
+
 
 try:
     from pyams_chat.interfaces import IChatMessage, IChatMessageHandler
