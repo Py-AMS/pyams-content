@@ -20,7 +20,6 @@ from hypatia.interfaces import ICatalog
 from hypatia.query import And, Any, Eq, Or
 from pyramid.decorator import reify
 from pyramid.interfaces import IView
-from zope.dublincore.interfaces import IZopeDublinCore
 from zope.interface import Interface, implementer
 from zope.intid import IIntIds
 from zope.schema.vocabulary import getVocabularyRegistry
@@ -51,7 +50,8 @@ from pyams_utils.list import unique_iter
 from pyams_utils.registry import get_all_utilities_registered_for, get_utility
 from pyams_viewlet.manager import viewletmanager_config
 from pyams_viewlet.viewlet import viewlet_config
-from pyams_workflow.interfaces import IWorkflow, IWorkflowState, IWorkflowVersions
+from pyams_workflow.interfaces import IWorkflow
+from pyams_workflow.versions import get_last_version_in_state
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.table import IInnerTable
 from pyams_zmi.interfaces.viewlet import IContentManagementMenu, IMenuHeader
@@ -142,7 +142,7 @@ class SiteRootDashboardManagerWaitingView(SharedToolDashboardManagerWaitingView)
     table_class = SiteRootDashboardManagerWaitingTable
 
 
-@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootDashboardManagerWaitingTable),
+@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootDashboardManagerWaitingTable),
                 provides=IValues)
 class SiteRootDashboardManagerWaitingValues(SharedToolDashboardManagerWaitingValues):
     """Site root dashboard waiting values adapter"""
@@ -162,11 +162,10 @@ class SiteRootDashboardManagerWaitingValues(SharedToolDashboardManagerWaitingVal
             params = params | query if params else query
         yield from filter(
             self.check_access,
-            unique_iter(map(
-                lambda x: sorted(IWorkflowVersions(x).get_versions(IWorkflowState(x).state),
-                                 key=lambda y: IZopeDublinCore(y).modified, reverse=True)[0],
-                CatalogResultSet(CatalogQuery(catalog).query(params,
-                                                             sort_index='modified_date')))))
+            unique_iter(
+                map(get_last_version_in_state,
+                    CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                                 sort_index='modified_date')))))
 
 
 #
@@ -190,7 +189,7 @@ class SiteRootDashboardOwnerWaitingView(SharedToolDashboardOwnerWaitingView):
     table_class = SiteRootDashboardOwnerWaitingTable
 
 
-@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootDashboardOwnerWaitingTable),
+@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootDashboardOwnerWaitingTable),
                 provides=IValues)
 class SiteRootDashboardOwnerWaitingValues(ContextRequestViewAdapter):
     """Site root dashboard waiting owned contents values adapter"""
@@ -198,6 +197,7 @@ class SiteRootDashboardOwnerWaitingValues(ContextRequestViewAdapter):
     @property
     def values(self):
         """Table values getter"""
+        principal_id = self.request.principal.id
         intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
         vocabulary = getVocabularyRegistry().get(self.context, SHARED_CONTENT_TYPES_VOCABULARY)
@@ -207,11 +207,10 @@ class SiteRootDashboardOwnerWaitingValues(ContextRequestViewAdapter):
             query = And(Eq(catalog['parents'], intids.register(tool)),
                         Any(catalog['content_type'], vocabulary.by_value.keys()),
                         Any(catalog['workflow_state'], workflow.waiting_states),
-                        Eq(catalog['workflow_principal'], self.request.principal.id))
+                        Eq(catalog['workflow_principal'], principal_id))
             params = params | query if params else query
         yield from unique_iter(
-            map(lambda x: sorted(IWorkflowVersions(x).get_versions(IWorkflowState(x).state),
-                                 key=lambda y: IZopeDublinCore(y).modified, reverse=True)[0],
+            map(get_last_version_in_state,
                 CatalogResultSet(CatalogQuery(catalog).query(params,
                                                              sort_index='modified_date'))))
 
@@ -237,7 +236,7 @@ class SiteRootDashboardOwnerModifiedView(SharedToolDashboardOwnerModifiedView):
     table_class = SiteRootDashboardOwnerModifiedTable
 
 
-@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootDashboardOwnerModifiedTable),
+@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootDashboardOwnerModifiedTable),
                 provides=IValues)
 class SiteRootDashboardOwnerModifiedValues(ContextRequestViewAdapter):
     """Site root dashboard owner modified adapter"""
@@ -256,13 +255,12 @@ class SiteRootDashboardOwnerModifiedValues(ContextRequestViewAdapter):
                         Or(Eq(catalog['role:owner'], principal_id),
                            Eq(catalog['role:contributor'], principal_id)))
             params = params | query if params else query
-        yield from unique_iter(map(
-            lambda x: sorted(IWorkflowVersions(x).get_versions(IWorkflowState(x).state),
-                             key=lambda y: IZopeDublinCore(y).modified, reverse=True)[0],
-            CatalogResultSet(CatalogQuery(catalog).query(params,
-                                                         limit=50,
-                                                         sort_index='modified_date',
-                                                         reverse=True))))
+        yield from unique_iter(
+            map(get_last_version_in_state,
+                CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                             limit=50,
+                                                             sort_index='modified_date',
+                                                             reverse=True))))
 
 
 #
@@ -296,13 +294,14 @@ class SiteRootPreparationsTable(BaseSiteRootDashboardTable):
     """Site root preparations table"""
 
 
-@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootPreparationsTable),
+@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootPreparationsTable),
                 provides=IValues)
 class SiteRootPreparationsValues(ContextRequestViewAdapter):
     """Site root preparations values adapter"""
 
     @property
     def values(self):
+        principal_id = self.request.principal.id
         intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
         vocabulary = getVocabularyRegistry().get(self.context, SHARED_CONTENT_TYPES_VOCABULARY)
@@ -311,14 +310,14 @@ class SiteRootPreparationsValues(ContextRequestViewAdapter):
             workflow = IWorkflow(tool)
             query = And(Eq(catalog['parents'], intids.register(self.context)),
                         Any(catalog['content_type'], vocabulary.by_value.keys()),
-                        Or(Eq(catalog['role:owner'], self.request.principal.id),
-                           Eq(catalog['role:contributor'], self.request.principal.id)),
+                        Or(Eq(catalog['role:owner'], principal_id),
+                           Eq(catalog['role:contributor'], principal_id)),
                         Eq(catalog['workflow_state'], workflow.initial_state))
             params = params | query if params else query
-        yield from unique_iter(CatalogResultSet(
-            CatalogQuery(catalog).query(params,
-                                        sort_index='modified_date',
-                                        reverse=True)))
+        yield from unique_iter(
+            CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                         sort_index='modified_date',
+                                                         reverse=True)))
 
 
 @pagelet_config(name='my-preparations.html',
@@ -348,7 +347,7 @@ class SiteRootSubmissionsTable(BaseSiteRootDashboardTable):
     """Site root submissions table"""
 
 
-@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootSubmissionsTable),
+@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootSubmissionsTable),
                 provides=IValues)
 class SiteRootSubmissionsValues(ContextRequestViewAdapter):
     """Site root submissions values adapter"""
@@ -369,10 +368,10 @@ class SiteRootSubmissionsValues(ContextRequestViewAdapter):
                            Eq(catalog['role:contributor'], principal_id)),
                         Any(catalog['workflow_state'], workflow.waiting_states))
             params = params | query if params else query
-        yield from unique_iter(CatalogResultSet(
-            CatalogQuery(catalog).query(params,
-                                        sort_index='modified_date',
-                                        reverse=True)))
+        yield from unique_iter(
+            CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                         sort_index='modified_date',
+                                                         reverse=True)))
 
 
 @pagelet_config(name='my-submissions.html',
@@ -402,7 +401,7 @@ class SiteRootPublicationsTable(BaseSiteRootDashboardTable):
     """Site root publications table"""
 
 
-@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootPublicationsTable),
+@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootPublicationsTable),
                 provides=IValues)
 class SiteRootPublicationsValues(ContextRequestViewAdapter):
     """Site root publications values adapter"""
@@ -423,10 +422,10 @@ class SiteRootPublicationsValues(ContextRequestViewAdapter):
                            Eq(catalog['role:contributor'], principal_id)),
                         Any(catalog['workflow_state'], workflow.published_states))
             params = params | query if params else query
-        yield from unique_iter(CatalogResultSet(
-            CatalogQuery(catalog).query(params,
-                                        sort_index='modified_date',
-                                        reverse=True)))
+        yield from unique_iter(
+            CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                         sort_index='modified_date',
+                                                         reverse=True)))
 
 
 @pagelet_config(name='my-publications.html',
@@ -456,7 +455,7 @@ class SiteRootRetiredContentsTable(BaseSiteRootDashboardTable):
     """Site root retired contents table"""
 
 
-@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootRetiredContentsTable),
+@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootRetiredContentsTable),
                 provides=IValues)
 class SiteRootRetiredContentsValues(ContextRequestViewAdapter):
     """Site root retired contents values adapter"""
@@ -477,10 +476,10 @@ class SiteRootRetiredContentsValues(ContextRequestViewAdapter):
                            Eq(catalog['role:contributor'], principal_id)),
                         Any(catalog['workflow_state'], workflow.retired_states))
             params = params | query if params else query
-        yield from unique_iter(CatalogResultSet(
-            CatalogQuery(catalog).query(params,
-                                        sort_index='modified_date',
-                                        reverse=True)))
+        yield from unique_iter(
+            CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                         sort_index='modified_date',
+                                                         reverse=True)))
 
 
 @pagelet_config(name='my-retired-contents.html',
@@ -510,7 +509,7 @@ class SiteRootArchivedContentsTable(BaseSiteRootDashboardTable):
     """Site root archived contents table"""
 
 
-@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootArchivedContentsTable),
+@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootArchivedContentsTable),
                 provides=IValues)
 class SiteRootArchivedContentsValues(ContextRequestViewAdapter):
     """Site root archived contents values adapter"""
@@ -531,10 +530,10 @@ class SiteRootArchivedContentsValues(ContextRequestViewAdapter):
                            Eq(catalog['role:contributor'], principal_id)),
                         Any(catalog['workflow_state'], workflow.archived_states))
             params = params | query if params else query
-        yield from unique_iter(CatalogResultSet(
-            CatalogQuery(catalog).query(params,
-                                        sort_index='modified_date',
-                                        reverse=True)))
+        yield from unique_iter(
+            CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                         sort_index='modified_date',
+                                                         reverse=True)))
 
 
 @pagelet_config(name='my-archived-contents.html',
@@ -576,7 +575,7 @@ class SiteRootLastPublicationsTable(BaseSiteRootDashboardTable):
     """Site root dashboard last publications table"""
 
 
-@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootLastPublicationsTable),
+@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootLastPublicationsTable),
                 provides=IValues)
 class SiteRootLastPublicationsValues(ContextRequestViewAdapter):
     """Site root publications values adapter"""
@@ -593,11 +592,11 @@ class SiteRootLastPublicationsValues(ContextRequestViewAdapter):
                         Any(catalog['content_type'], vocabulary.by_value.keys()),
                         Any(catalog['workflow_state'], workflow.published_states))
             params = params | query if params else query
-        yield from unique_iter(CatalogResultSet(
-            CatalogQuery(catalog).query(params,
-                                        limit=50,
-                                        sort_index='modified_date',
-                                        reverse=True)))
+        yield from unique_iter(
+            CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                         limit=50,
+                                                         sort_index='modified_date',
+                                                         reverse=True)))
 
 
 @pagelet_config(name='last-published.html',
@@ -626,7 +625,7 @@ class SiteRootLastModificationsTable(BaseSiteRootDashboardTable):
     """Site root dashboard last modifications table"""
 
 
-@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootLastModificationsTable),
+@adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootLastModificationsTable),
                 provides=IValues)
 class SiteRootLastModificationsValues(ContextRequestViewAdapter):
     """Site root modifications values adapter"""
@@ -636,11 +635,11 @@ class SiteRootLastModificationsValues(ContextRequestViewAdapter):
         catalog = get_utility(ICatalog)
         vocabulary = getVocabularyRegistry().get(self.context, SHARED_CONTENT_TYPES_VOCABULARY)
         params = Any(catalog['content_type'], vocabulary.by_value.keys())
-        yield from unique_iter(CatalogResultSet(
-            CatalogQuery(catalog).query(params,
-                                        limit=50,
-                                        sort_index='modified_date',
-                                        reverse=True)))
+        yield from unique_iter(
+            CatalogResultSet(CatalogQuery(catalog).query(params,
+                                                         limit=50,
+                                                         sort_index='modified_date',
+                                                         reverse=True)))
 
 
 @pagelet_config(name='last-modified.html',

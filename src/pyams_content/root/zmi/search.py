@@ -37,7 +37,7 @@ from pyams_content.shared.common.zmi.search import SharedToolAdvancedSearchForm,
     get_quick_search_params
 from pyams_content.zmi.interfaces import IAllDashboardMenu
 from pyams_form.field import Fields
-from pyams_form.interfaces.form import IGroup
+from pyams_form.interfaces.form import IFormFields, IGroup
 from pyams_i18n.interfaces import INegotiator
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_pagelet.pagelet import pagelet_config
@@ -176,7 +176,12 @@ class ISiteRootAdvancedSearchQuery(Interface):
 class SiteRootAdvancedSearchForm(SharedToolAdvancedSearchForm):
     """Site root advanced search form"""
 
-    fields = Fields(ISiteRootAdvancedSearchQuery).omit('tags', 'themes', 'collections')
+
+@adapter_config(required=(Interface, IAdminLayer, SiteRootAdvancedSearchForm),
+                provides=IFormFields)
+def site_root_advanced_search_form_fields(context, request, form):
+    """Site root advanced search form fields getter"""
+    return Fields(ISiteRootAdvancedSearchQuery).omit('tags', 'themes', 'collections')
 
 
 class BaseThesaurusTermsSearchGroup(FormGroupSwitcher):
@@ -295,8 +300,6 @@ class SiteRootAdvancedSearchResultsValues(ContextRequestViewAdapter):
                 params &= query_params
         if data.get('owner'):
             params &= Eq(catalog['role:owner'], data['owner'])
-        if data.get('status'):
-            params &= Eq(catalog['workflow_state'], data['status'])
         if data.get('content_type'):
             params &= Eq(catalog['content_type'], data['content_type'])
         created_after, created_before = data.get('created', (None, None))
