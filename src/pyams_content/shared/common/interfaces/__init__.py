@@ -13,6 +13,7 @@
 """PyAMS_content.shared.common.interfaces module
 
 """
+
 from zope.annotation import IAttributeAnnotatable
 from zope.container.constraints import containers, contains
 from zope.container.interfaces import IContainer
