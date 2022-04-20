@@ -10,9 +10,10 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.component.illustration.zmi module
 
 """
+
 from pyramid.events import subscriber
 from zope.component import getAdapter
 
@@ -21,10 +22,12 @@ from pyams_content.component.illustration.interfaces import IBasicIllustration, 
     IParagraphIllustration
 from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.component.paragraph.zmi import BaseParagraphRendererSettingsEditForm
+from pyams_content.feature.renderer import IRendererSettings
 from pyams_content.zmi.interfaces import IPropertiesEditForm
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
-from pyams_form.interfaces.form import IAJAXFormRenderer, IFormUpdatedEvent, IInnerSubForm
+from pyams_form.interfaces.form import IAJAXFormRenderer, IFormContent, IFormUpdatedEvent, \
+    IInnerSubForm
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.zmi.portlet import PortletRendererSettingsEditForm
 from pyams_portal.zmi.widget import RendererSelectFieldWidget
@@ -34,12 +37,12 @@ from pyams_utils.traversing import get_parent
 from pyams_zmi.form import FormGroupSwitcher
 from pyams_zmi.helper.event import get_json_widget_refresh_callback
 from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.utils import get_object_label
 
 
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
-from pyams_zmi.utils import get_object_label
 
 
 @adapter_config(name='illustration',
@@ -131,6 +134,14 @@ class ParagraphIllustrationRendererSettingsEditForm(BaseParagraphRendererSetting
                            "Renderer: {renderer}")).format(
             paragraph=get_object_label(paragraph, self.request, self),
             renderer=translate(self.renderer.label))
+
+
+@adapter_config(required=(IParagraphIllustration, IAdminLayer,
+                          ParagraphIllustrationRendererSettingsEditForm),
+                provides=IFormContent)
+def get_paragraph_illustration_renderer_settings_edit_form_content(context, request, form):
+    """Paragraph illustration renderer settings edit form content getter"""
+    return IRendererSettings(context)
 
 
 @subscriber(IFormUpdatedEvent,
