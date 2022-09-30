@@ -15,11 +15,8 @@
 This module provides components which are used to display a summary of main content properties.
 """
 
-__docformat__ = 'restructuredtext'
-
 from zope.interface import Interface
 
-from pyams_content import _
 from pyams_content.shared.common import IWfSharedContent, IWfSharedContentRoles
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
@@ -37,9 +34,14 @@ from pyams_utils.timezone import tztime
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_workflow.interfaces import IWorkflow, IWorkflowPublicationInfo, IWorkflowState, \
     IWorkflowStateHistoryItem
-from pyams_zmi.form import AdminInnerAddForm, AdminModalAddForm, AdminModalDisplayForm
+from pyams_zmi.form import AdminModalDisplayForm
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import IToolbarViewletManager
+
+
+__docformat__ = 'restructuredtext'
+
+from pyams_content import _
 
 
 @viewlet_config(name='summary.action',
@@ -50,8 +52,8 @@ class SharedContentSummaryAction(ContextAction):
     """Shared content summary action"""
 
     status = 'transparent'
-    css_class = 'btn-xs rounded-circle border-info mr-2'
-    icon_class = 'fas fa-info text-info px-0 py-1'
+    css_class = 'btn-xs rounded-circle border-primary mr-2'
+    icon_class = 'fas fa-info text-primary px-0 py-1'
 
     hint = _("Content information")
 
