@@ -11,6 +11,74 @@ if (window.$ === undefined) {
 const content = {
 
     /**
+     * TinyMCE editor extensions
+     */
+    TinyMCE: {
+
+        initEditor: (input, settings) => {
+            const mce = window.tinyMCE;
+            if (mce !== undefined) {
+
+                settings.external_plugins = $.extend({}, settings.external_plugins, {
+                    'pyams_link': '/--static--/pyams_content/js/tinymce/internal-link/plugin.js',
+                    'pyams_headers': '/--static--/pyams_content/js/tinymce/headers/plugin.js'
+                });
+                settings.style_formats = [{
+                    title: 'Headers',
+                    items: [
+                        { title: 'H3 header', format: 'h3' },
+                        { title: 'H4 header', format: 'h4' }
+                    ]
+                }, {
+                    title: 'Blocs',
+                    items: [
+                        { title: 'Paragraph', format: 'p' },
+                        { title: 'Blockquote', format: 'blockquote' },
+                        { title: 'Div', format: 'div' },
+                        { title: 'Pre', format: 'pre' }
+                    ]
+                }, {
+                    title: 'Inline',
+                    items: [
+                        { title: 'Bold', icon: 'bold', format: 'bold' },
+                        { title: 'Italic', icon: 'italic', format: 'italic' },
+                        { title: 'Underline', icon: 'underline', format: 'underline' },
+                        { title: 'Strikethrough', icon: 'strike-through', format: 'strikethrough' },
+                        { title: 'Superscript', icon: 'superscript', format: 'superscript' },
+                        { title: 'Subscript', icon: 'subscript', format: 'subscript' },
+                        { title: 'Code', icon: 'sourcecode', format: 'code' }
+                    ]
+                }, {
+                    title: 'Align',
+                    items: [
+                        { title: 'Left', icon: 'align-left', format: 'alignleft' },
+                        { title: 'Center', icon: 'align-center', format: 'aligncenter' },
+                        { title: 'Right', icon: 'align-right', format: 'alignright' }
+                    ]
+                }];
+                if (settings.menubar) {
+                    settings.menu = $.extend({}, settings.menu, {
+                        insert: {
+                            title: "Insert",
+                            items: 'link pyams_link inserttable | charmap emoticons hr | ' +
+                                'pagebreak nonbreaking anchor | insertdatetime'
+                        }
+                    });
+                }
+                if (settings.toolbar1) {
+                    settings.toolbar1 = 'undo redo | pastetext | header-h3 header-h4 styleselect ' +
+                        '| bold italic | alignleft aligncenter alignright ' +
+                        '| bullist numlist outdent indent';
+                }
+                if (settings.toolbar2) {
+                    settings.toolbar2 = 'forecolor backcolor | charmap pyams_link link ' +
+                        '| fullscreen preview print | code';
+                }
+            }
+        }
+    },
+
+    /**
      * Tree management
      */
     tree: {
