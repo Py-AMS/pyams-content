@@ -222,7 +222,9 @@ class SiteContainerTreeNameColumn(DashboardLabelColumn):
         return '''<span data-ams-stop-propagation="true"
             data-ams-click-handler="MyAMS.tree.switchTree">
             <span class="small hint" title="{hint}" data-ams-hint-gravity="e">
-                <i class="far fa-plus-square switch"></i>
+                <span class="switcher">
+                    <i class="far fa-plus-square"></i>
+                </span>
             </span>&nbsp;&nbsp;{title}
         </span>'''.format(
             hint=self.request.localizer.translate(_("Click to open/close all folders")),
@@ -240,6 +242,7 @@ class SiteContainerTreeNameColumn(DashboardLabelColumn):
         else:
             parents = map(lambda x: intids.queryId(x), lineage(intids.queryObject(new_parent)))
         translate = self.request.localizer.translate
+        expanded = (item is self.context) or (item_id == new_parent) or (item_id in parents)
         return '''<div class="name">
             {padding}
             <span class="small hint tree-switcher" title="{hint}" data-ams-hint-gravity="e" 
@@ -249,11 +252,12 @@ class SiteContainerTreeNameColumn(DashboardLabelColumn):
         </div>'''.format(
             padding='<span class="tree-node-padding"></span>' * depth,
             hint=translate(_("Click to show/hide inner folders")),
-            switch='<i class="far fa-{state}-square switch {state}"></i>'.format(
+            switch='<span class="switcher {switch_state}">'
+                   '<i class="far fa-{state}-square switch"></i>'
+                   '</span>'.format(
+                switch_state='expanded' if expanded else '',
                 state=getattr(item, '_v_state',
-                              'minus' if (item is self.context) or
-                                         (item_id == new_parent) or
-                                         (item_id in parents) else 'plus'))
+                              'minus' if expanded else 'plus'))
                     if ISiteContainer.providedBy(item) else '',
             title=name or super().render_cell(item),
             arrow='<i class="ml-1 fas fa-share fa-rotate-90 text-muted hint" '
