@@ -23,7 +23,8 @@ from pyams_content.root.zmi.sites import SiteRootSitesTable
 from pyams_content.shared.common.interfaces import IBaseSharedTool, ISharedSite
 from pyams_content.zmi.properties import PropertiesEditForm
 from pyams_content.shared.site.interfaces import ISiteManager
-from pyams_content.zmi.interfaces import IDashboardColumn, IDashboardContentType
+from pyams_content.zmi.interfaces import IDashboardColumn, IDashboardContentType, \
+    ISiteRootDashboardContentType
 from pyams_form.ajax import AJAXFormRenderer, ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer, IDataExtractedEvent
@@ -200,6 +201,8 @@ class SiteManagerPropertiesEditFormRenderer(AJAXFormRenderer):
 
 @adapter_config(required=(ISharedSite, IAdminLayer, IDashboardColumn),
                 provides=IDashboardContentType)
+@adapter_config(required=(ISharedSite, IAdminLayer, IDashboardColumn),
+                provides=ISiteRootDashboardContentType)
 def site_manager_content_type(context, request, column):
     """Site manager content-type getter"""
     return request.localizer.translate(context.content_name)

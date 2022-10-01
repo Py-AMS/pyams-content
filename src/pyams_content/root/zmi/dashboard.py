@@ -81,7 +81,7 @@ class BaseSiteRootDashboardSingleView(BaseSharedToolDashboardSingleView):
 class SiteRootContentTypeColumn(DashboardContentTypeColumn):
     """Site root dashboard content type column"""
 
-    i18n_header = _("Shared content")
+    i18n_header = _("Content type")
     interface = ISiteRootDashboardContentType
 
 

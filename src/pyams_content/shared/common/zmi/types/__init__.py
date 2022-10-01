@@ -178,7 +178,7 @@ def data_type_label(context, request, view):
                 provides=IObjectHint)
 def data_type_hint(context, request, view):  # pylint: disable=unused-argument
     """Data type hint"""
-    return request.localizer.translate(_("Content type"))
+    return request.localizer.translate(_("Data type"))
 
 
 @adapter_config(required=(IDataType, IAdminLayer, SharedToolTypesTable),

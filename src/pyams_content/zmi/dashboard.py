@@ -139,7 +139,7 @@ class DashboardLabelColumn(DashboardColumnMixin, NameColumn):
 class DashboardContentTypeColumn(DashboardColumnMixin, I18nColumnMixin, GetAttrColumn):
     """Dashboard content type column"""
 
-    i18n_header = _("Content type")
+    i18n_header = _("Data type")
     interface = IDashboardContentType
     weight = 15
 
