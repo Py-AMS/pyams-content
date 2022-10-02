@@ -87,7 +87,7 @@ class IIllustrationTargetBase(Interface):
     """Illustration base target interface"""
 
 
-class IBasicIllustrationTarget(IIllustrationTargetBase):
+class IBaseIllustrationTarget(IIllustrationTargetBase):
     """Basic illustration target marker interface
 
     This interface is used to identify contexts which should handle only
@@ -95,7 +95,7 @@ class IBasicIllustrationTarget(IIllustrationTargetBase):
     """
 
 
-class IIllustrationTarget(IBasicIllustrationTarget):
+class IIllustrationTarget(IBaseIllustrationTarget):
     """Base illustration target marker interface"""
 
 

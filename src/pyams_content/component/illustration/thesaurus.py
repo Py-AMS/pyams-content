@@ -16,7 +16,7 @@ This module provides a custom thesaurus extension which allows to assign an
 illustration on any thesaurus term.
 """
 
-from pyams_content.component.illustration.interfaces import IBasicIllustrationTarget
+from pyams_content.component.illustration.interfaces import IBaseIllustrationTarget
 from pyams_thesaurus.interfaces.extension import IThesaurusTermExtension
 from pyams_utils.registry import utility_config
 
@@ -36,5 +36,5 @@ class IllustrationThesaurusTermExtension:
 
     icon_css_class = 'far fa-image'
 
-    target_interface = IBasicIllustrationTarget
+    target_interface = IBaseIllustrationTarget
     target_view = 'illustration-dialog.html'

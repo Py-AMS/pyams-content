@@ -26,7 +26,7 @@ from zope.schema.fieldproperty import FieldProperty
 from zope.traversing.interfaces import ITraversable
 
 from pyams_content.component.illustration.interfaces import BASIC_ILLUSTRATION_KEY, \
-    IBaseIllustration, IBasicIllustrationTarget, IIllustration, IIllustrationTarget, \
+    IBaseIllustration, IBaseIllustrationTarget, IIllustration, IIllustrationTarget, \
     IIllustrationTargetBase, ILLUSTRATION_KEY, ILLUSTRATION_RENDERERS, ILinkIllustration, \
     ILinkIllustrationTarget, IParagraphIllustration, LINK_ILLUSTRATION_KEY
 from pyams_content.component.paragraph import IBaseParagraph
@@ -85,7 +85,7 @@ class Illustration(RenderedContentMixin, BasicIllustration):
     renderer = FieldProperty(IIllustration['renderer'])
 
 
-@adapter_config(required=IBasicIllustrationTarget,
+@adapter_config(required=IBaseIllustrationTarget,
                 provides=IIllustration)
 def basic_illustration_factory(context):
     """Basic illustration factory"""
@@ -185,7 +185,7 @@ class IllustrationSublocations(ContextAdapter):
 
 
 @vocabulary_config(name=ILLUSTRATION_RENDERERS)
-class IllustrationRendererVocabulary(RenderersVocabulary):
+class IllustrationRenderersVocabulary(RenderersVocabulary):
     """Illustration renderers vocabulary"""
 
     content_interface = IIllustration

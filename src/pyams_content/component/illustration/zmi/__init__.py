@@ -18,7 +18,7 @@ from pyramid.events import subscriber
 from zope.component import getAdapter
 
 from pyams_content.component.illustration.interfaces import IBaseIllustration, \
-    IBasicIllustrationTarget, IIllustration, IIllustrationTarget, ILinkIllustrationTarget, \
+    IBaseIllustrationTarget, IIllustration, IIllustrationTarget, ILinkIllustrationTarget, \
     IParagraphIllustration
 from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.component.paragraph.zmi import BaseParagraphRendererSettingsEditForm
@@ -46,7 +46,7 @@ from pyams_content import _
 
 
 @adapter_config(name='illustration',
-                required=(IBasicIllustrationTarget, IAdminLayer, IPropertiesEditForm),
+                required=(IBaseIllustrationTarget, IAdminLayer, IPropertiesEditForm),
                 provides=IInnerSubForm, force_implements=False)
 class BasicIllustrationPropertiesEditForm(FormGroupSwitcher):
     """Basic illustration properties edit form"""
@@ -98,7 +98,7 @@ class LinkIllustrationPropertiesEditForm(BasicIllustrationPropertiesEditForm):
         return getAdapter(self.context, IIllustration, name='link')
 
 
-@adapter_config(required=(IBasicIllustrationTarget, IAdminLayer,
+@adapter_config(required=(IBaseIllustrationTarget, IAdminLayer,
                           BasicIllustrationPropertiesEditForm),
                 provides=IAJAXFormRenderer)
 class BasicIllustrationPropertiesEditFormRenderer(ContextRequestViewAdapter):
