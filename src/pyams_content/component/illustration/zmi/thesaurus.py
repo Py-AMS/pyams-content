@@ -16,7 +16,7 @@ This module provides management components for thesaurus term
 illustration extension.
 """
 
-from pyams_content.component.illustration import IBasicIllustration, IIllustration
+from pyams_content.component.illustration import IBaseIllustration, IIllustration
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_layer.interfaces import IPyAMSLayer
@@ -39,7 +39,7 @@ class ThesaurusTermIllustrationPropertiesEditForm(ThesaurusTermExtensionEditForm
     legend = _("Edit illustration properties")
     modal_class = 'modal-xl'
 
-    fields = Fields(IBasicIllustration)
+    fields = Fields(IBaseIllustration)
 
     def get_content(self):
         return IIllustration(self.context)

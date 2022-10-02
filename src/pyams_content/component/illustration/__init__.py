@@ -26,7 +26,7 @@ from zope.schema.fieldproperty import FieldProperty
 from zope.traversing.interfaces import ITraversable
 
 from pyams_content.component.illustration.interfaces import BASIC_ILLUSTRATION_KEY, \
-    IBasicIllustration, IBasicIllustrationTarget, IIllustration, IIllustrationTarget, \
+    IBaseIllustration, IBasicIllustrationTarget, IIllustration, IIllustrationTarget, \
     IIllustrationTargetBase, ILLUSTRATION_KEY, ILLUSTRATION_RENDERERS, ILinkIllustration, \
     ILinkIllustrationTarget, IParagraphIllustration, LINK_ILLUSTRATION_KEY
 from pyams_content.component.paragraph import IBaseParagraph
@@ -41,14 +41,14 @@ from pyams_utils.request import check_request
 from pyams_utils.vocabulary import vocabulary_config
 
 
-@factory_config(IBasicIllustration)
+@factory_config(IBaseIllustration)
 class BasicIllustration(Persistent, Contained):
     """Illustration persistent class"""
 
-    _data = I18nFileProperty(IBasicIllustration['data'])
-    title = FieldProperty(IBasicIllustration['title'])
-    alt_title = FieldProperty(IBasicIllustration['alt_title'])
-    author = FieldProperty(IBasicIllustration['author'])
+    _data = I18nFileProperty(IBaseIllustration['data'])
+    title = FieldProperty(IBaseIllustration['title'])
+    alt_title = FieldProperty(IBaseIllustration['alt_title'])
+    author = FieldProperty(IBaseIllustration['author'])
 
     @property
     def data(self):
@@ -94,7 +94,7 @@ def basic_illustration_factory(context):
         get_pyramid_registry().notify(ObjectAddedEvent(illustration, context,
                                                        illustration.__name__))
 
-    return get_annotation_adapter(context, BASIC_ILLUSTRATION_KEY, IBasicIllustration,
+    return get_annotation_adapter(context, BASIC_ILLUSTRATION_KEY, IBaseIllustration,
                                   name='++illustration++',
                                   callback=illustration_callback)
 
@@ -127,7 +127,7 @@ def link_illustration_factory(context):
         get_pyramid_registry().notify(ObjectAddedEvent(illustration, context,
                                                        illustration.__name__))
 
-    return get_annotation_adapter(context, LINK_ILLUSTRATION_KEY, IBasicIllustration,
+    return get_annotation_adapter(context, LINK_ILLUSTRATION_KEY, IBaseIllustration,
                                   markers=ILinkIllustration,
                                   name='++illustration++link',
                                   callback=illustration_callback)
@@ -146,14 +146,14 @@ def update_illustration_properties(illustration):
             info.description = II18n(illustration).get_attribute('alt_title', lang, request)
 
 
-@subscriber(IObjectAddedEvent, context_selector=IBasicIllustration)
+@subscriber(IObjectAddedEvent, context_selector=IBaseIllustration)
 def handle_added_illustration(event):
     """Handle added illustration"""
     illustration = event.object
     update_illustration_properties(illustration)
 
 
-@subscriber(IObjectModifiedEvent, context_selector=IBasicIllustration)
+@subscriber(IObjectModifiedEvent, context_selector=IBaseIllustration)
 def handle_modified_illustration(event):
     """Handle modified illustration"""
     illustration = event.object
@@ -180,7 +180,7 @@ class IllustrationSublocations(ContextAdapter):
     def sublocations(self):
         """Sub-locations iterator"""
         registry = get_pyramid_registry()
-        for name, adapter in registry.getAdapters((self,), IBasicIllustration):
+        for name, adapter in registry.getAdapters((self,), IBaseIllustration):
             yield adapter
 
 
@@ -196,7 +196,7 @@ class IllustrationRendererVocabulary(RenderersVocabulary):
 #
 
 @adapter_config(required=IImageFile,
-                provides=IBasicIllustration)
+                provides=IBaseIllustration)
 class VirtualIllustration:
     """Virtual illustration based on image file"""
 

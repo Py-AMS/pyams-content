@@ -14,7 +14,7 @@
 
 """
 
-from pyams_content.component.illustration import IBasicIllustration, IIllustrationTarget
+from pyams_content.component.illustration import IBaseIllustration, IIllustrationTarget
 from pyams_content.component.illustration.interfaces import IIllustrationParagraph, \
     ILLUSTRATION_PARAGRAPH_ICON_CLASS, ILLUSTRATION_PARAGRAPH_NAME, ILLUSTRATION_PARAGRAPH_TYPE
 from pyams_content.component.paragraph import IParagraphContainer, IParagraphContainerTarget
@@ -53,7 +53,7 @@ class IllustrationTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
     icon_class = 'far fa-image'
     icon_hint = _("Illustration")
 
-    target_intf = IBasicIllustration
+    target_intf = IBaseIllustration
 
     def update(self):
         illustration = self.target_intf(self.context, None)

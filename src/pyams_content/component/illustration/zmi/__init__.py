@@ -17,7 +17,7 @@
 from pyramid.events import subscriber
 from zope.component import getAdapter
 
-from pyams_content.component.illustration.interfaces import IBasicIllustration, \
+from pyams_content.component.illustration.interfaces import IBaseIllustration, \
     IBasicIllustrationTarget, IIllustration, IIllustrationTarget, ILinkIllustrationTarget, \
     IParagraphIllustration
 from pyams_content.component.paragraph.interfaces import IBaseParagraph
@@ -54,7 +54,7 @@ class BasicIllustrationPropertiesEditForm(FormGroupSwitcher):
     legend = _("Main illustration")
     weight = 10
 
-    fields = Fields(IBasicIllustration)
+    fields = Fields(IBaseIllustration)
     prefix = 'illustration.'
 
     def get_content(self):
@@ -112,7 +112,7 @@ class BasicIllustrationPropertiesEditFormRenderer(ContextRequestViewAdapter):
             'status': 'success',
             'message': self.request.localizer.translate(self.view.parent_form.success_message)
         }
-        if 'data' in changes.get(IBasicIllustration, ()):
+        if 'data' in changes.get(IBaseIllustration, ()):
             result['callbacks'] = [
                 get_json_widget_refresh_callback(self.view, 'data', self.request)
             ]
@@ -145,7 +145,7 @@ def get_paragraph_illustration_renderer_settings_edit_form_content(context, requ
 
 
 @subscriber(IFormUpdatedEvent,
-            context_selector=IBasicIllustration,
+            context_selector=IBaseIllustration,
             form_selector=PortletRendererSettingsEditForm)
 def handle_illustration_renderer_settings_edit_form_update(event):
     """Illustration renderer settings edit form update"""

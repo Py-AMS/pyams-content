@@ -37,7 +37,7 @@ ILLUSTRATION_RENDERERS = 'pyams.illustration.renderers'
 LINK_ILLUSTRATION_KEY = '{0}::link'.format(ILLUSTRATION_KEY)
 
 
-class IBasicIllustration(Interface):
+class IBaseIllustration(Interface):
     """Basic illustration interface"""
 
     data = I18nThumbnailMediaField(title=_("Image or video data"),
@@ -59,7 +59,7 @@ class IBasicIllustration(Interface):
                       required=False)
 
 
-class IIllustration(IBasicIllustration, IRenderedContent):
+class IIllustration(IBaseIllustration, IRenderedContent):
     """Illustration paragraph"""
 
     description = I18nTextField(title=_("Associated text"),
@@ -79,7 +79,7 @@ class IParagraphIllustration(IIllustration):
     """Paragraph illustration marker interface"""
 
 
-class ILinkIllustration(IBasicIllustration):
+class ILinkIllustration(IBaseIllustration):
     """Navigation link illustration interface"""
 
 
@@ -113,7 +113,7 @@ ILLUSTRATION_PARAGRAPH_RENDERERS = 'PyAMS_content.paragraph.illustration.rendere
 ILLUSTRATION_PARAGRAPH_ICON_CLASS = 'fas fa-image'
 
 
-class IIllustrationParagraph(IBasicIllustration, IBaseParagraph):
+class IIllustrationParagraph(IBaseIllustration, IBaseParagraph):
     """Illustration paragraph interface"""
 
     data = I18nThumbnailMediaField(title=_("Image or video data"),
