@@ -227,7 +227,7 @@ class ParagraphAddFormRenderer(ContextRequestViewAdapter):
 
     def render(self, changes):
         """AJAX form renderer"""
-        if not changes:
+        if changes is None:
             return None
         target = get_parent(self.context, IParagraphContainerTarget)
         table_factory = IParagraphContainerFullTable if IWfSharedContent.providedBy(target) \
