@@ -209,7 +209,7 @@ def paragraph_add_form_title(context, request, view):
 
 def get_json_paragraph_editor_open_event(context, request, table_factory, item):
     """Get paragraph editor opening event"""
-    factory = get_object_factory(table_factory) if is_interface(table_factory) else table_factory
+    factory = get_object_factory(table_factory)
     table = factory(context, request)
     return {
         'module': 'content',
