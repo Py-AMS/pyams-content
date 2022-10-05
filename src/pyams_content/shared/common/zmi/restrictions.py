@@ -61,7 +61,7 @@ from pyams_content import _  # pylint: disable=ungrouped-imports
 #
 
 @viewlet_config(name='managers-restrictions.menu',
-                context=IBaseSharedTool, request=IAdminLayer,
+                context=IBaseSharedTool, layer=IAdminLayer,
                 manager=IObjectSecurityMenu, weight=200,
                 permission=MANAGE_TOOL_PERMISSION)
 class ManagersRestrictionsMenu(NavigationMenuItem):
@@ -305,7 +305,7 @@ class ManagerRestrictionsHelp(AlertMessage):
 #
 
 @viewlet_config(name='contributors-restrictions.menu',
-                context=IBaseSharedTool, request=IAdminLayer,
+                context=IBaseSharedTool, layer=IAdminLayer,
                 manager=IObjectSecurityMenu, weight=210,
                 permission=MANAGE_TOOL_PERMISSION)
 class ContributorsRestrictionsMenu(NavigationMenuItem):

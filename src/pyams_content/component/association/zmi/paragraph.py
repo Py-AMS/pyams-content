@@ -30,7 +30,7 @@ __docformat__ = 'restructuredtext'
 
 
 @viewlet_config(name='add-association-paragraph.menu',
-                context=IParagraphContainerTarget, request=IAdminLayer,
+                context=IParagraphContainerTarget, layer=IAdminLayer,
                 view=IParagraphContainerBaseTable,
                 manager=IContextAddingsViewletManager, weight=90)
 class AssociationParagraphAddMenu(BaseParagraphAddMenu):

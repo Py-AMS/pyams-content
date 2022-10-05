@@ -40,11 +40,11 @@ from pyams_content import _
 
 
 @viewlet_config(name='illustration',
-                context=IIllustrationTarget, request=IAdminLayer,
+                context=IIllustrationTarget, layer=IAdminLayer,
                 view=IParagraphContainerFullTable, manager=IParagraphTitleToolbar,
                 weight=10)
 @viewlet_config(name='illustration',
-                context=IIllustrationParagraph, request=IAdminLayer,
+                context=IIllustrationParagraph, layer=IAdminLayer,
                 view=IParagraphContainerFullTable, manager=IParagraphTitleToolbar,
                 weight=10)
 class IllustrationTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
@@ -62,7 +62,7 @@ class IllustrationTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
 
 
 @viewlet_config(name='add-illustration-paragraph.menu',
-                context=IParagraphContainerTarget, request=IAdminLayer,
+                context=IParagraphContainerTarget, layer=IAdminLayer,
                 view=IParagraphContainerBaseTable,
                 manager=IContextAddingsViewletManager, weight=60)
 class IllustrationParagraphAddMenu(BaseParagraphAddMenu):

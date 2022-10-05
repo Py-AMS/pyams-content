@@ -240,7 +240,7 @@ def shared_tool_menu_header(context, request, view, menu):
 
 
 @viewlet_config(name='dashboard.menu',
-                context=IBaseSharedTool, request=IAdminLayer,
+                context=IBaseSharedTool, layer=IAdminLayer,
                 manager=IContentManagementMenu, weight=5,
                 permission=VIEW_SYSTEM_PERMISSION)
 class SharedToolDashboardMenu(NavigationMenuItem):

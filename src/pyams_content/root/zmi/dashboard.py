@@ -97,7 +97,7 @@ def site_root_menu_header(context, request, view, menu):
 
 
 @viewlet_config(name='dashboard.menu',
-                context=ISiteRoot, request=IAdminLayer,
+                context=ISiteRoot, layer=IAdminLayer,
                 manager=IContentManagementMenu, weight=5,
                 permission=VIEW_SYSTEM_PERMISSION)
 class SiteRootDashboardMenu(SharedToolDashboardMenu):

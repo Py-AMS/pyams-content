@@ -53,7 +53,7 @@ from pyams_content import _
 
 
 @viewlet_config(name='data-types.menu',
-                context=ITypedSharedTool, request=IAdminLayer,
+                context=ITypedSharedTool, layer=IAdminLayer,
                 manager=IPropertiesMenu, weight=400,
                 permission=MANAGE_TOOL_PERMISSION)
 class SharedToolTypesMenu(NavigationMenuItem):

@@ -30,7 +30,7 @@ from pyams_content import _
 
 
 @viewlet_config(name='internal-links',
-                context=IAssociationContainerTarget, request=IAdminLayer,
+                context=IAssociationContainerTarget, layer=IAdminLayer,
                 view=IParagraphContainerFullTable, manager=IParagraphTitleToolbar,
                 weight=20)
 class InternalLinksTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
@@ -44,7 +44,7 @@ class InternalLinksTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
 
 
 @viewlet_config(name='external-links',
-                context=IAssociationContainerTarget, request=IAdminLayer,
+                context=IAssociationContainerTarget, layer=IAdminLayer,
                 view=IParagraphContainerFullTable, manager=IParagraphTitleToolbar,
                 weight=20)
 class ExternalLinksTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
@@ -58,7 +58,7 @@ class ExternalLinksTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
 
 
 @viewlet_config(name='mailto-links',
-                context=IAssociationContainerTarget, request=IAdminLayer,
+                context=IAssociationContainerTarget, layer=IAdminLayer,
                 view=IParagraphContainerFullTable, manager=IParagraphTitleToolbar,
                 weight=30)
 class MailtoLinksTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):

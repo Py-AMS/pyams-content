@@ -32,7 +32,7 @@ from pyams_content import _
 
 
 @viewlet_config(name='external-files',
-                context=IAssociationContainerTarget, request=IAdminLayer,
+                context=IAssociationContainerTarget, layer=IAdminLayer,
                 view=IParagraphContainerFullTable, manager=IParagraphTitleToolbar,
                 weight=50)
 class ExternalFilesTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
@@ -46,7 +46,7 @@ class ExternalFilesTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
 
 
 @viewlet_config(name='external-images',
-                context=IAssociationContainerTarget, request=IAdminLayer,
+                context=IAssociationContainerTarget, layer=IAdminLayer,
                 view=IParagraphContainerFullTable, manager=IParagraphTitleToolbar,
                 weight=60)
 class ExternalImagesTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
@@ -60,7 +60,7 @@ class ExternalImagesTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
 
 
 @viewlet_config(name='external-videos',
-                context=IAssociationContainerTarget, request=IAdminLayer,
+                context=IAssociationContainerTarget, layer=IAdminLayer,
                 view=IParagraphContainerFullTable, manager=IParagraphTitleToolbar,
                 weight=70)
 class ExternalVideosTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
@@ -74,7 +74,7 @@ class ExternalVideosTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
 
 
 @viewlet_config(name='external-audios',
-                context=IAssociationContainerTarget, request=IAdminLayer,
+                context=IAssociationContainerTarget, layer=IAdminLayer,
                 view=IParagraphContainerFullTable, manager=IParagraphTitleToolbar,
                 weight=80)
 class ExternalAudiosTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
