@@ -17,6 +17,7 @@ This module defines interfaces related to illustrations management.
 
 __docformat__ = 'restructuredtext'
 
+from zope.annotation import IAttributeAnnotatable
 from zope.interface import Interface
 from zope.schema import Choice, TextLine
 
@@ -83,7 +84,7 @@ class ILinkIllustration(IBaseIllustration):
     """Navigation link illustration interface"""
 
 
-class IIllustrationTargetBase(Interface):
+class IIllustrationTargetBase(IAttributeAnnotatable):
     """Illustration base target interface"""
 
 

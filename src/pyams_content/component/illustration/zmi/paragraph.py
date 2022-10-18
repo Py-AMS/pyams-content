@@ -47,11 +47,11 @@ from pyams_content import _
                 context=IIllustrationParagraph, layer=IAdminLayer,
                 view=IParagraphContainerFullTable, manager=IParagraphTitleToolbar,
                 weight=10)
-class IllustrationTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
+class IllustrationParagraphTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
     """Paragraph illustration marker toolbar viewlet"""
 
-    icon_class = 'far fa-image'
-    icon_hint = _("Illustration")
+    icon_class = ILLUSTRATION_PARAGRAPH_ICON_CLASS
+    icon_hint = ILLUSTRATION_PARAGRAPH_NAME
 
     target_intf = IBaseIllustration
 
