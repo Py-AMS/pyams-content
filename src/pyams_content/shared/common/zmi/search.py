@@ -243,6 +243,7 @@ class SharedToolAdvancedSearchForm(SearchForm):
     title = _("Contents search form")
 
     ajax_form_handler = 'advanced-search-results.html'
+    _edit_permission = VIEW_SYSTEM_PERMISSION
 
 
 @adapter_config(required=(Interface, IAdminLayer, SharedToolAdvancedSearchForm),
