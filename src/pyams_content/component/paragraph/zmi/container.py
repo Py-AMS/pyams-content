@@ -22,7 +22,7 @@ from pyramid.view import view_config
 from zope.contentprovider.interfaces import IContentProvider
 from zope.interface import implementer
 
-from pyams_content.component.association import IAssociationContainerTarget
+from pyams_content.component.association.interfaces import IAssociationContainerTarget
 from pyams_content.component.association.zmi.container import AssociationsTableView
 from pyams_content.component.paragraph.interfaces import IBaseParagraph, IParagraphContainer, \
     IParagraphContainerTarget
