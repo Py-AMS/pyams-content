@@ -160,6 +160,14 @@ h6 {
 }
 
 
+.modal-auto {
+  .modal-dialog {
+    max-width: 20em;
+    transition: max-width .5s ease-in, transform .3s ease-out !important;
+  }
+}
+
+
 .thumbnail {
   img {
     width: auto !important;

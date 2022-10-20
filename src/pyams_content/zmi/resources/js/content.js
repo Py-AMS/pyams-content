@@ -286,6 +286,96 @@ const content = {
 
 
     /**
+     * Medias galeries management
+     */
+    galleries: {
+
+        /**
+         * Sort medias into gallery
+         */
+        sortMedias: (event, ui) => {
+            const
+                gallery = $(event.target),
+                location = gallery.data('ams-location'),
+                elements = $('.media-thumbnail', gallery).listattr('data-ams-element-name');
+            MyAMS.require('ajax', 'alert', 'i18n').then(() => {
+                MyAMS.ajax.post(`${location}/set-medias-order.json`, {
+                    order: elements.join(';')
+                }).then((result) => {
+                    MyAMS.alert.smallBox({
+                        status: 'success',
+                        message: MyAMS.i18n.DATA_UPDATED,
+                        icon: 'fa-info-circle'
+                    });
+                });
+            });
+        },
+
+        switchVisibleMedia: (event, options) => {
+            const
+                switcher = $(event.currentTarget),
+                switcherHtml = switcher.html(),
+                media = switcher.parents('.media-thumbnail'),
+                gallery = switcher.parents('.gallery'),
+                location = gallery.data('ams-location');
+            switcher.html('<i class="fas fa-fw fa-spinner fa-spin"></i>');
+            MyAMS.require('ajax').then(() => {
+                MyAMS.ajax.post(`${location}/switch-media-visibility.json`, {
+                    object_name: media.data('ams-element-name'),
+                    attribute_name: 'visible'
+                }).then((result) => {
+                    if (result.status === 'success') {
+                        if (result.state) {
+                            switcher.html('<i class="far fa-fw fa-eye"></i>');
+                        } else {
+                            switcher.html('<i class="far fa-fw fa-eye-slash text-danger"></i>');
+                        }
+                    }
+                }).catch(() => {
+                    switcher.html(switcherHtml);
+                });
+            });
+        },
+
+        /**
+         * Remove media from gallery
+         */
+        removeMedia: (event, options) => {
+            const
+                media = $(event.currentTarget).parents('.media-thumbnail'),
+                gallery = media.parents('.gallery'),
+                location = gallery.data('ams-location');
+            MyAMS.require('ajax', 'alert', 'i18n', 'helpers').then(() => {
+                MyAMS.alert.bigBox({
+                    status: 'danger',
+                    icon: 'fas fa-bell',
+                    title: MyAMS.i18n.WARNING,
+                    message: MyAMS.i18n.CONFIRM_REMOVE,
+                    successLabel: MyAMS.i18n.CONFIRM,
+                    cancelLabel: MyAMS.i18n.BTN_CANCEL
+                }).then((status) => {
+                    if (status !== 'success') {
+                        return;
+                    }
+                    MyAMS.ajax.post(`${location}/remove-media.json`, {
+                        object_name: media.data('ams-element-name')
+                    }).then((result) => {
+                        if (result.status === 'success') {
+                            media.remove();
+                            if (result.handle_json) {
+                                MyAMS.ajax.handleJSON(result);
+                            }
+                        } else {
+                            MyAMS.ajax.handleJSON(result);
+                        }
+                    });
+                });
+            });
+        }
+    },
+
+
+    /**
      * Reviews management
      */
     review: {

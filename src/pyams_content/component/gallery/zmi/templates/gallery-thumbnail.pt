@@ -1,0 +1,15 @@
+<div class="m-2 d-flex flex-column border rounded media-thumbnail" i18n:domain="pyams_content"
+	 data-ams-element-name="${context.__name__}">
+	<a class="d-flex align-items-center justify-content-center flex-grow-1 thumbnail p-2"
+	   href="${view.get_thumbnail_target()}/"
+	   title="${i18n:context.title}"
+	   data-toggle="modal">
+		<img tal:define="thumbnails tales:thumbnails(context.data);
+						 thumbnail thumbnails.get_thumbnail('128x128');"
+			 src="${tales:absolute_url(thumbnail)}"
+			 alt="${i18n:context.alt_title}" />
+	</a>
+	<div class="text-center mx-auto mb-2">
+		${structure:provider:pyams.context_actions}
+	</div>
+</div>

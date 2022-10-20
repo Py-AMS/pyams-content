@@ -30,9 +30,23 @@ $(document).ready(() => {
 	/**
 	 * Gallery modals
 	 */
+	const fitModalToContent = (modal) => {
+		const target = $(modal.data('ams-resize-target'));
+		if (target.length > 0) {
+			const
+				dialog = $('.modal-dialog', modal),
+				padding = dialog.width() - target.width();
+			dialog.css('max-width',
+				Math.min($(window).width(), target.get(0).naturalWidth + padding));
+		}
+	};
+
 	const showImage = (link, modal) => {
 		const data = link.data();
 		modal.find('.gallery-img')
+			.one('load', () => {
+				fitModalToContent(modal);
+			})
 			.attr('src', link.attr('href'))
 			.attr('alt', data.alt_title || '');
 		modal.find('.title').text(data.title || '');

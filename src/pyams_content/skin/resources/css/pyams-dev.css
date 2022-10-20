@@ -8010,6 +8010,10 @@ h6 .underline {
     margin: 0;
     padding: 0; }
 
+.modal-auto .modal-dialog {
+  max-width: 20em;
+  transition: max-width .5s ease-in, transform .3s ease-out !important; }
+
 .thumbnail img {
   width: auto !important;
   max-width: 150px;

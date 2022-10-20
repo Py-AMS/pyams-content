@@ -10,18 +10,188 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.component.gallery module
 
+This module defines persistent components and adapters used to handle medias
+galleries.
 """
+
+from pyramid.events import subscriber
+from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent, \
+    ObjectModifiedEvent
+from zope.location import locate
+from zope.location.interfaces import ISublocations
+from zope.schema.fieldproperty import FieldProperty
+from zope.traversing.interfaces import ITraversable
+
+from pyams_catalog.utils import index_object
+from pyams_content.component.gallery.interfaces import GALLERY_CONTAINER_KEY, GALLERY_RENDERERS, \
+    IBaseGallery, IGallery, IGalleryFile, IGalleryItem, IGalleryTarget
+from pyams_content.component.illustration import VirtualIllustration
+from pyams_content.component.illustration.interfaces import IBaseIllustration
+from pyams_content.component.paragraph import IBaseParagraph
+from pyams_content.feature.renderer import RenderedContentMixin, RenderersVocabulary
+from pyams_content.shared.common import IWfSharedContent
+from pyams_file.interfaces import IBaseImageFile
+from pyams_security.interfaces import IViewContextPermissionChecker
+from pyams_utils.adapter import ContextAdapter, adapter_config, get_annotation_adapter
+from pyams_utils.container import BTreeOrderedContainer
+from pyams_utils.factory import factory_config
+from pyams_utils.list import boolean_iter
+from pyams_utils.registry import get_current_registry
+from pyams_utils.traversing import get_parent
+from pyams_utils.vocabulary import vocabulary_config
+
 
 __docformat__ = 'restructuredtext'
 
 
+@factory_config(provided=IBaseGallery)
+class BaseGallery(RenderedContentMixin, BTreeOrderedContainer):
+    """Base gallery persistent class"""
+
+    renderer = FieldProperty(IBaseGallery['renderer'])
+
+    last_id = 1
+
+    def append(self, item, notify=True):
+        """Media item appender"""
+        key = str(self.last_id)
+        if not notify:
+            # pre-locate gallery item to avoid multiple notifications
+            locate(item, self, key)
+        self[key] = item
+        self.last_id += 1
+        if not notify:
+            # make sure that gallery item is correctly indexed
+            index_object(item)
+
+    def get_visible_medias(self):
+        """Visible medias iterator"""
+        yield from filter(lambda x: IGalleryFile(x).visible, self.values())
+
+    def get_visible_images(self):
+        """Visible images iterator"""
+        yield from filter(lambda x: IBaseImageFile.providedBy(x.data),
+                          self.get_visible_medias())
 
 
-# @adapter_config(required=IBaseGallery, provides=IBasicIllustration)
-# def gallery_illustration_adapter(gallery):
-#     """Gallery illustration adapter"""
-#     has_medias, medias = boolean_iter(gallery.get_visible_medias())
-#     if has_medias:
-#         return IBasicIllustration(next(medias).data, None)
+@factory_config(provided=IGallery)
+class Gallery(BaseGallery):
+    """Gallery persistent class"""
+
+    title = FieldProperty(IGallery['title'])
+    description = FieldProperty(IGallery['description'])
+
+
+@adapter_config(context=IGalleryTarget,
+                provides=IGallery)
+def gallery_adapter(target):
+    """Gallery container adapter"""
+    return get_annotation_adapter(target, GALLERY_CONTAINER_KEY, IGallery,
+                                  name='++gallery++')
+
+
+@adapter_config(name='gallery',
+                context=IGalleryTarget,
+                provides=ITraversable)
+class GalleryContainerNamespace(ContextAdapter):
+    """++gallery++ container namespace traverser"""
+
+    def traverse(self, name, furtherPath=None):
+        """Gallery traverser"""
+        return get_current_registry().queryAdapter(self.context, IGallery, name=name)
+
+
+@adapter_config(name='gallery',
+                context=IGalleryTarget,
+                provides=ISublocations)
+class GalleryContainerSublocations(ContextAdapter):
+    """Galleries container sub-locations"""
+
+    def sublocations(self):
+        """Sub-locations getter"""
+        return IGallery(self.context).values()
+
+
+@adapter_config(context=IGallery,
+                provides=IViewContextPermissionChecker)
+class GalleryPermissionChecker(ContextAdapter):
+    """Gallery permission checker"""
+
+    @property
+    def edit_permission(self):
+        """Edit permission getter"""
+        content = get_parent(self.context, IWfSharedContent)
+        return IViewContextPermissionChecker(content).edit_permission
+
+
+@subscriber(IObjectAddedEvent, context_selector=IGallery)
+def handle_added_gallery(event):
+    """Handle added gallery"""
+    gallery = event.object
+    if IBaseParagraph.providedBy(gallery):
+        # there is another event subscriber for paragraphs,
+        # so don't trigger event twice !
+        return
+    content = get_parent(gallery, IWfSharedContent)
+    if content is not None:
+        get_current_registry().notify(ObjectModifiedEvent(content))
+
+
+@subscriber(IObjectModifiedEvent, context_selector=IGallery)
+def handle_modified_gallery(event):
+    """Handle modified gallery"""
+    gallery = event.object
+    if IBaseParagraph.providedBy(gallery):
+        # there is another event subscriber for paragraphs,
+        # so don't trigger event twice !
+        return
+    content = get_parent(gallery, IWfSharedContent)
+    if content is not None:
+        get_current_registry().notify(ObjectModifiedEvent(content))
+
+
+@subscriber(IObjectRemovedEvent, context_selector=IGallery)
+def handle_removed_gallery(event):
+    """Handle removed gallery"""
+    gallery = event.object
+    if IBaseParagraph.providedBy(gallery):
+        # there is another event subscriber for paragraphs,
+        # so don't trigger event twice !
+        return
+    content = get_parent(gallery, IWfSharedContent)
+    if content is not None:
+        get_current_registry().notify(ObjectModifiedEvent(content))
+
+
+@vocabulary_config(name=GALLERY_RENDERERS)
+class GalleryRenderersVocabulary(RenderersVocabulary):
+    """Gallery renderers vocabulary"""
+
+    content_interface = IBaseGallery
+
+
+#
+# Illustrations adapters
+#
+
+@adapter_config(required=IBaseGallery,
+                provides=IBaseIllustration)
+def gallery_illustration_adapter(gallery):
+    """Gallery illustration adapter"""
+    has_medias, medias = boolean_iter(gallery.get_visible_medias())
+    if has_medias:
+        return IBaseIllustration(next(medias).data, None)
+    return None
+
+
+@adapter_config(context=IGalleryFile,
+                provides=IBaseIllustration)
+def gallery_file_illustration_adapter(file):
+    """Gallery file illustration adapter"""
+    illustration = VirtualIllustration(file.data)
+    illustration.title = (file.title or {}).copy()
+    illustration.alt_title = (file.alt_title or {}).copy()
+    illustration.author = file.author
+    return illustration
