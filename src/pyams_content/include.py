@@ -147,7 +147,8 @@ def include_package(config):
         'permissions': {
             PUBLIC_PERMISSION, VIEW_PERMISSION, MANAGE_PERMISSION,
             VIEW_SYSTEM_PERMISSION, MANAGE_ROLES_PERMISSION,
-            MANAGE_CONTENT_PERMISSION, COMMENT_CONTENT_PERMISSION
+            MANAGE_CONTENT_PERMISSION, CREATE_VERSION_PERMISSION,
+            COMMENT_CONTENT_PERMISSION
         }
     })
     config.register_role({
@@ -180,6 +181,7 @@ def include_package(config):
             ROLE_ID.format(WEBMASTER_ROLE),
             ROLE_ID.format(PILOT_ROLE),
             ROLE_ID.format(MANAGER_ROLE),
+            ROLE_ID.format(OWNER_ROLE),
             ROLE_ID.format(CONTRIBUTOR_ROLE)
         }
     })
@@ -206,6 +208,7 @@ def include_package(config):
             ROLE_ID.format(WEBMASTER_ROLE),
             ROLE_ID.format(PILOT_ROLE),
             ROLE_ID.format(MANAGER_ROLE),
+            ROLE_ID.format(OWNER_ROLE),
             ROLE_ID.format(CONTRIBUTOR_ROLE)
         }
     })
