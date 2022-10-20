@@ -157,7 +157,7 @@ def handle_cloned_shared_content(event):
     content = event.object
     content.creator = principal_id
     roles = IWfSharedContentRoles(content)
-    if principal_id in roles.owner:
+    if principal_id not in roles.owner:
         # creation of new versions doesn't change owner
         # but new creators are added to contributors list
         contributors = roles.contributors or set()
