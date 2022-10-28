@@ -12,12 +12,13 @@
 
 """PyAMS_content.root.interfaces module
 
+This module defines interfaces which are used for whole site configuration.
 """
 
-from pyams_content.interfaces import OPERATOR_ROLE, WEBMASTER_ROLE
-from zope.interface import Attribute, Interface
-from zope.schema import Dict, InterfaceField, Text, TextLine
+from zope.interface import Interface
+from zope.schema import Dict, InterfaceField, TextLine, URI
 
+from pyams_content.interfaces import OPERATOR_ROLE, WEBMASTER_ROLE
 from pyams_file.schema import ImageField
 from pyams_i18n.schema import I18nTextField, I18nTextLineField
 from pyams_portal.interfaces import DESIGNER_ROLE
@@ -60,6 +61,10 @@ class ISiteRootInfos(Interface):
     logo = ImageField(title=_("Logo"),
                       description=_("Image containing application logo"),
                       required=False)
+
+    public_url = URI(title=_("Public site URI"),
+                     description=_("Base URL of the public site"),
+                     required=False)
 
 
 SITEROOT_ROLES = 'pyams_content.root.roles'

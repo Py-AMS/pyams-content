@@ -49,6 +49,7 @@ class SiteRootInfos(Persistent, Contained):
     author = FieldProperty(ISiteRootInfos['author'])
     icon = FileProperty(ISiteRootInfos['icon'])
     logo = FileProperty(ISiteRootInfos['logo'])
+    public_url = FieldProperty(ISiteRootInfos['public_url'])
 
 
 @adapter_config(required=ISiteRoot, provides=ISiteRootInfos)
