@@ -23,8 +23,8 @@ from zope.traversing.interfaces import ITraversable
 
 from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
 from pyams_content.root.interfaces import ISiteRootInfos, ISiteRootRoles, \
-    ISiteRootToolsConfiguration, SITEROOT_ROLES, \
-    SITE_ROOT_INFOS_KEY, SITE_ROOT_TOOLS_CONFIGURATION_KEY
+    ISiteRootToolsConfiguration, SITEROOT_ROLES, SITE_ROOT_INFOS_KEY, \
+    SITE_ROOT_TOOLS_CONFIGURATION_KEY
 from pyams_file.property import FileProperty
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces import IRolesPolicy, IViewContextPermissionChecker
