@@ -14,16 +14,6 @@
 
 """
 
-from pyams_content.component.illustration import IIllustrationTarget, ILinkIllustrationTarget
-from pyams_content.feature.preview.interfaces import IPreviewTarget
-from pyams_content.interfaces import MANAGE_SITE_PERMISSION
-from pyams_content.reference.pictogram.interfaces import IPictogramManagerTarget
-from pyams_content.shared.common import ISharedContent
-from pyams_content.shared.common.manager import BaseSharedTool
-from pyams_content.shared.common.types import TypedSharedToolMixin
-from pyams_content.shared.site.container import SiteContainerMixin
-from pyams_content.shared.site.interfaces import ISiteManager, PYAMS_SITES_VOCABULARY, \
-    SITE_TOPIC_CONTENT_TYPE
 from pyramid.events import subscriber
 from zope.container.ordered import OrderedContainer
 from zope.interface import implementer
@@ -31,18 +21,25 @@ from zope.lifecycleevent import IObjectAddedEvent, IObjectMovedEvent, IObjectRem
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
+from pyams_content.component.illustration import IIllustrationTarget, ILinkIllustrationTarget
+from pyams_content.feature.preview.interfaces import IPreviewTarget
+from pyams_content.interfaces import MANAGE_SITE_PERMISSION
+from pyams_content.reference.pictogram.interfaces import IPictogramManagerTarget
+from pyams_content.shared.common.manager import BaseSharedTool
+from pyams_content.shared.common.types import TypedSharedToolMixin
+from pyams_content.shared.site.container import SiteContainerMixin
+from pyams_content.shared.site.interfaces import ISiteManager, PYAMS_SITES_VOCABULARY
 from pyams_i18n.interfaces import II18n
 from pyams_layer.skin import UserSkinnableContentMixin
 from pyams_portal.interfaces import IPortalContext
 from pyams_security.interfaces import IDefaultProtectionPolicy, IViewContextPermissionChecker
 from pyams_site.interfaces import ISiteRoot
 from pyams_utils.adapter import ContextAdapter, adapter_config
-from pyams_utils.factory import factory_config, get_object_factory
+from pyams_utils.factory import factory_config
 from pyams_utils.registry import get_utilities_for
-from pyams_utils.request import query_request
+from pyams_utils.request import query_request, check_request
 from pyams_utils.traversing import get_parent
 from pyams_utils.vocabulary import vocabulary_config
-
 
 __docformat__ = 'restructuredtext'
 
@@ -81,7 +78,7 @@ class SiteManager(SiteContainerMixin, OrderedContainer, TypedSharedToolMixin, Ba
 
 
 @subscriber(IObjectAddedEvent, context_selector=ISiteManager)
-def handle_added_site_manager(event):
+def handle_added_site_manager(event: IObjectAddedEvent):
     """Register site manager when added"""
     site = get_parent(event.newParent, ISiteRoot)
     registry = site.getSiteManager()
@@ -90,21 +87,24 @@ def handle_added_site_manager(event):
 
 
 @subscriber(IObjectMovedEvent, context_selector=ISiteManager)
-def handle_moved_site_manager(event):
+def handle_moved_site_manager(event: IObjectMovedEvent):
     """Update site manager registration when renamed"""
-    old_name = event.oldName
-    new_name = event.newName
-    if old_name == new_name:
+    if IObjectRemovedEvent.providedBy(event):
         return
-    site = get_parent(event.newParent, ISiteRoot)
-    registry = site.getSiteManager()
+    request = check_request()
+    registry = request.root.getSiteManager()
     if registry is not None:
+        old_name = event.oldName
+        new_name = event.newName
+        if old_name == new_name:
+            return
         registry.unregisterUtility(event.object, ISiteManager, name=old_name)
-        registry.registerUtility(event.object, ISiteManager, name=new_name)
+        if new_name:
+            registry.registerUtility(event.object, ISiteManager, name=new_name)
 
 
 @subscriber(IObjectRemovedEvent, context_selector=ISiteManager)
-def handle_deleted_site_manager(event):
+def handle_deleted_site_manager(event: IObjectRemovedEvent):
     """Un-register site manager when deleted"""
     site = get_parent(event.oldParent, ISiteRoot)
     registry = site.getSiteManager()
