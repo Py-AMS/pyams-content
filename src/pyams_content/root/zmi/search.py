@@ -50,7 +50,7 @@ from pyams_table.interfaces import IValues
 from pyams_thesaurus.schema import ThesaurusTermsListField
 from pyams_thesaurus.zmi.widget import ThesaurusTermsTreeFieldWidget
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
-from pyams_utils.list import unique
+from pyams_utils.list import unique, unique_iter
 from pyams_utils.registry import get_utility
 from pyams_utils.schema import DatetimesRangeField
 from pyams_viewlet.viewlet import viewlet_config
@@ -92,9 +92,9 @@ class SiteRootQuickSearchResultsTableValues(ContextRequestViewAdapter):
                                                      SHARED_CONTENT_TYPES_VOCABULARY)
             params = Any(catalog['content_type'], vocabulary.by_value.keys())
             params &= get_quick_search_params(query, self.request, catalog, sequence)
-        return unique(map(get_last_version,
-                          CatalogResultSet(CatalogQuery(catalog).query(
-                              params, sort_index='modified_date', reverse=True))))
+        yield from unique_iter(map(get_last_version,
+                                   CatalogResultSet(CatalogQuery(catalog).query(
+                                       params, sort_index='modified_date', reverse=True))))
 
 
 @view_config(name='quick-search.json',
@@ -189,6 +189,12 @@ class BaseThesaurusTermsSearchGroup(FormGroupSwitcher):
 
     fieldname = None
     manager = None
+
+    def __new__(cls, context, request, view):
+        manager = cls.manager(request.root)
+        if not manager.thesaurus_name:
+            return None
+        return FormGroupSwitcher.__new__(cls)
 
     @property
     def fields(self):
@@ -321,9 +327,9 @@ class SiteRootAdvancedSearchResultsValues(ContextRequestViewAdapter):
         if data.get('collections'):
             tags = [intids.register(term) for term in data['collections']]
             params &= Any(catalog['collections'], tags)
-        return unique(map(get_last_version,
-                          CatalogResultSet(CatalogQuery(catalog).query(
-                              params, sort_index='modified_date', reverse=True))))
+        yield from unique_iter(map(get_last_version,
+                                   CatalogResultSet(CatalogQuery(catalog).query(
+                                       params, sort_index='modified_date', reverse=True))))
 
 
 @pagelet_config(name='advanced-search-results.html',

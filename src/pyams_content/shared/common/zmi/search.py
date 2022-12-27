@@ -15,8 +15,6 @@
 This module provides components used for contents searching from dashboards.
 """
 
-__docformat__ = 'restructuredtext'
-
 from hypatia.catalog import CatalogQuery
 from hypatia.interfaces import ICatalog
 from hypatia.query import And, Any, Contains, Eq, Ge, Le
@@ -38,7 +36,7 @@ from pyams_content.shared.common.zmi.dashboard import BaseSharedToolDashboardSin
 from pyams_content.zmi.interfaces import IAllDashboardMenu
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IFormFields, IGroup
-from pyams_i18n.interfaces import II18n, INegotiator
+from pyams_i18n.interfaces import INegotiator
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_layer.skin import apply_skin
 from pyams_pagelet.pagelet import pagelet_config
@@ -51,7 +49,7 @@ from pyams_template.template import template_config
 from pyams_thesaurus.schema import ThesaurusTermsListField
 from pyams_thesaurus.zmi.widget import ThesaurusTermsTreeFieldWidget
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
-from pyams_utils.list import unique
+from pyams_utils.list import unique_iter
 from pyams_utils.registry import get_utility
 from pyams_utils.schema import DatetimesRangeField
 from pyams_utils.traversing import get_parent
@@ -60,11 +58,13 @@ from pyams_utils.vocabulary import vocabulary_config
 from pyams_viewlet.viewlet import ViewContentProvider, viewlet_config
 from pyams_workflow.interfaces import IWorkflow, IWorkflowVersions
 from pyams_zmi.form import FormGroupSwitcher
-from pyams_zmi.interfaces import IAdminLayer, IPageTitle
+from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.table import IInnerTable
 from pyams_zmi.search import SearchForm, SearchResultsView, SearchView
 from pyams_zmi.skin import AdminSkin
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
+
+__docformat__ = 'restructuredtext'
 
 from pyams_content import _
 
@@ -115,9 +115,9 @@ class SharedToolQuickSearchResultsTableValues(ContextRequestViewAdapter):
             params = And(Eq(catalog['parents'], intids.register(self.context)),
                          Any(catalog['content_type'], vocabulary.by_value.keys()))
             params &= get_quick_search_params(query, self.request, catalog, sequence)
-        return unique(map(get_last_version,
-                          CatalogResultSet(CatalogQuery(catalog).query(
-                              params, sort_index='modified_date', reverse=True))))
+        yield from unique_iter(map(get_last_version,
+                               CatalogResultSet(CatalogQuery(catalog).query(
+                                   params, sort_index='modified_date', reverse=True))))
 
 
 def get_json_search_results(request, results):
@@ -259,6 +259,12 @@ class BaseThesaurusTermsSearchGroup(FormGroupSwitcher):
     fieldname = None
     manager = None
 
+    def __new__(cls, context, request, view):
+        manager = cls.manager(request.root)
+        if not manager.thesaurus_name:
+            return None
+        return FormGroupSwitcher.__new__(cls)
+
     @property
     def fields(self):
         """Fields getter"""
@@ -396,13 +402,16 @@ class SharedToolAdvancedSearchResultsValues(ContextRequestViewAdapter):
             tags = [intids.register(term) for term in data['collections']]
             params &= Any(catalog['collections'], tags)
         if data.get('status'):
-            return unique(map(lambda x: sorted(IWorkflowVersions(x).get_versions(data['status']),
-                                               key=lambda y: IZopeDublinCore(y).modified)[0],
-                              CatalogResultSet(CatalogQuery(catalog).query(
-                                  params, sort_index='modified_date', reverse=True))))
-        return unique(map(get_last_version,
-                          CatalogResultSet(CatalogQuery(catalog).query(
-                              params, sort_index='modified_date', reverse=True))))
+            yield from unique_iter(
+                map(lambda x: sorted(IWorkflowVersions(x).get_versions(data['status']),
+                                     key=lambda y: IZopeDublinCore(y).modified)[0],
+                    CatalogResultSet(CatalogQuery(catalog).query(
+                        params, sort_index='modified_date', reverse=True))))
+        else:
+            yield from unique_iter(
+                map(get_last_version,
+                    CatalogResultSet(CatalogQuery(catalog).query(
+                        params, sort_index='modified_date', reverse=True))))
 
 
 @pagelet_config(name='advanced-search-results.html',
