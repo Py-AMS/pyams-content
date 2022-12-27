@@ -31,6 +31,7 @@ from pyams_content.component.illustration import VirtualIllustration
 from pyams_content.component.illustration.interfaces import IBaseIllustration
 from pyams_content.component.paragraph import IBaseParagraph
 from pyams_content.feature.renderer import RenderedContentMixin, RenderersVocabulary
+from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
 from pyams_content.shared.common import IWfSharedContent
 from pyams_file.interfaces import IBaseImageFile
 from pyams_security.interfaces import IViewContextPermissionChecker
@@ -123,38 +124,16 @@ class GalleryPermissionChecker(ContextAdapter):
     def edit_permission(self):
         """Edit permission getter"""
         content = get_parent(self.context, IWfSharedContent)
-        return IViewContextPermissionChecker(content).edit_permission
+        if content is not None:
+            return IViewContextPermissionChecker(content).edit_permission
+        return MANAGE_SITE_ROOT_PERMISSION
 
 
 @subscriber(IObjectAddedEvent, context_selector=IGallery)
-def handle_added_gallery(event):
-    """Handle added gallery"""
-    gallery = event.object
-    if IBaseParagraph.providedBy(gallery):
-        # there is another event subscriber for paragraphs,
-        # so don't trigger event twice !
-        return
-    content = get_parent(gallery, IWfSharedContent)
-    if content is not None:
-        get_current_registry().notify(ObjectModifiedEvent(content))
-
-
 @subscriber(IObjectModifiedEvent, context_selector=IGallery)
-def handle_modified_gallery(event):
-    """Handle modified gallery"""
-    gallery = event.object
-    if IBaseParagraph.providedBy(gallery):
-        # there is another event subscriber for paragraphs,
-        # so don't trigger event twice !
-        return
-    content = get_parent(gallery, IWfSharedContent)
-    if content is not None:
-        get_current_registry().notify(ObjectModifiedEvent(content))
-
-
 @subscriber(IObjectRemovedEvent, context_selector=IGallery)
-def handle_removed_gallery(event):
-    """Handle removed gallery"""
+def handle_gallery_event(event):
+    """Handle event for added, modified or removed gallery"""
     gallery = event.object
     if IBaseParagraph.providedBy(gallery):
         # there is another event subscriber for paragraphs,
