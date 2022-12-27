@@ -19,9 +19,8 @@ from zope.schema import Choice
 
 from pyams_content.shared.common.interfaces import ISharedContent, ISharedToolPortalContext, \
     IWfSharedContentPortalContext
-from pyams_content.shared.common.interfaces.types import DATA_TYPES_VOCABULARY
+from pyams_content.shared.common.interfaces.types import VISIBLE_DATA_TYPES_VOCABULARY
 from pyams_sequence.interfaces import IInternalReferencesList
-
 
 __docformat__ = 'restructuredtext'
 
@@ -42,7 +41,7 @@ class IWfTopic(IWfSharedContentPortalContext, IInternalReferencesList):
     data_type = Choice(title=_("Data type"),
                        description=_("Type of content data"),
                        required=False,
-                       vocabulary=DATA_TYPES_VOCABULARY)
+                       vocabulary=VISIBLE_DATA_TYPES_VOCABULARY)
 
 
 class IWfTopicFactory(Interface):
