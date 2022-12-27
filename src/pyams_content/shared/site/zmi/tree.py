@@ -166,7 +166,7 @@ class SiteContainerTreeTableValues(ContextRequestViewAdapter):
             values.append(container)
             if ISiteContainer.providedBy(container):
                 get_values(container, values)
-        return values
+        yield from values
 
 
 @adapter_config(name='reorder',
