@@ -131,7 +131,7 @@ class IWfTypedSharedContent(IWfSharedContent):
     data_type = Choice(title=_("Data type"),
                        description=_("Type of content data"),
                        required=True,
-                       vocabulary=DATA_TYPES_VOCABULARY)
+                       vocabulary=VISIBLE_DATA_TYPES_VOCABULARY)
 
     def get_data_type(self):
         """Get associated data type"""
