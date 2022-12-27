@@ -16,16 +16,14 @@ This module is used to assign tags, themes and collections to contents.
 These elements are based on thesaurus contents.
 """
 
-from zope.interface import Interface, Invalid, invariant
+from zope.interface import Attribute, Interface, Invalid, invariant
 from zope.schema import Bool, Choice
 
 from pyams_thesaurus.interfaces import THESAURUS_NAMES_VOCABULARY
 from pyams_thesaurus.interfaces.thesaurus import IThesaurusContextManager, \
     IThesaurusContextManagerTarget
 from pyams_thesaurus.schema import ThesaurusTermsListField
-from pyams_thesaurus.zmi.test import PYAMS_THESAURUS_TEST_KEY
 from pyams_utils.interfaces.inherit import IInheritInfo
-
 
 __docformat__ = 'restructuredtext'
 
@@ -50,6 +48,8 @@ class ITagsManager(IThesaurusContextManager):
     glossary_thesaurus_name = Choice(title=_("Glossary thesaurus name"),
                                      vocabulary=THESAURUS_NAMES_VOCABULARY,
                                      required=False)
+
+    glossary = Attribute("Glossary getter")
 
     @invariant
     def check_glossary_thesaurus(self):

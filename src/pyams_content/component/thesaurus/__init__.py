@@ -31,10 +31,11 @@ from pyams_content.component.thesaurus.interfaces import COLLECTIONS_INFO_KEY, \
 from pyams_content.shared.site.interfaces import ISiteFolder
 from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_security.permission import get_edit_permission
+from pyams_thesaurus.interfaces.thesaurus import IThesaurus
 from pyams_utils.adapter import ContextAdapter, adapter_config, get_annotation_adapter
 from pyams_utils.factory import factory_config
 from pyams_utils.inherit import BaseInheritInfo, InheritedFieldProperty
-from pyams_utils.registry import get_pyramid_registry
+from pyams_utils.registry import get_pyramid_registry, query_utility
 from pyams_utils.request import query_request
 from pyams_utils.traversing import get_parent
 
@@ -77,6 +78,13 @@ class TagsManager(Persistent, Contained):
 
     enable_glossary = FieldProperty(ITagsManager['enable_glossary'])
     glossary_thesaurus_name = FieldProperty(ITagsManager['glossary_thesaurus_name'])
+
+    @property
+    def glossary(self):
+        """Glossary getter"""
+        if not self.enable_glossary:
+            return None
+        return query_utility(IThesaurus, name=self.glossary_thesaurus_name)
 
 
 @adapter_config(required=ITagsManagerTarget,
