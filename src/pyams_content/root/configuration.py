@@ -118,7 +118,7 @@ class SiteRootToolsConfiguration(Persistent, Contained):
             if factory is not None:
                 manager = factory()
             if manager is not None:
-                self.tables_manager_name = name = \
+                self.tools_manager_name = name = \
                     settings.get('pyams_content.config.tools_manager_name', 'tools')
                 self.__parent__[name] = manager
                 self.tools_names = {}
@@ -148,6 +148,7 @@ class SiteRootToolsConfiguration(Persistent, Contained):
             name = registry.settings.get(f'pyams_content.config.{tool_name}_tool_name',
                                          tool_name)
             manager[name] = tool
+            self.tools_names[interface] = name
         return tool
 
 
