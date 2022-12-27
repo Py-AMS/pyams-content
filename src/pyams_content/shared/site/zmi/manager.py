@@ -111,8 +111,12 @@ class SiteManagerAddFormRenderer(ContextRequestViewAdapter):
     def render(self, changes):
         if changes is None:
             return None
-        return get_json_table_row_add_callback(self.context, self.request,
-                                               SiteRootSitesTable, changes)
+        return {
+            'callbacks': [
+                get_json_table_row_add_callback(self.context, self.request,
+                                                SiteRootSitesTable, changes)
+            ]
+        }
 
 
 @adapter_config(required=(ISiteManager, IAdminLayer, Interface),
