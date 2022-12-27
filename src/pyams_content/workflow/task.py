@@ -24,17 +24,18 @@ from transaction.interfaces import ITransactionManager
 from zope.interface import implementer
 from zope.intid import IIntIds
 
-from pyams_scheduler.interfaces import IScheduler, ISchedulerProcess
+from pyams_content.workflow.interfaces import IWorkflowManagementTask
+from pyams_scheduler.interfaces import ISchedulerProcess, SCHEDULER_NAME
 from pyams_scheduler.interfaces.task import IDateTaskScheduling
 from pyams_scheduler.process import TaskResettingThread
 from pyams_scheduler.task import Task
 from pyams_security.interfaces.names import INTERNAL_USER_ID
-from pyams_utils.registry import get_utility, query_utility
+from pyams_site.interfaces import PYAMS_APPLICATION_SETTINGS_KEY, PYAMS_APPLICATION_DEFAULT_NAME
+from pyams_utils.registry import get_pyramid_registry, get_utility
 from pyams_utils.timezone import gmtime
+from pyams_utils.zodb import ZODBConnection
 from pyams_workflow.interfaces import IWorkflow, IWorkflowInfo, IWorkflowState
-from pyams_content.workflow.interfaces import IWorkflowManagementTask
 from pyams_zmq.interfaces import IZMQProcessStartedEvent
-
 
 __docformat__ = 'restructuredtext'
 
@@ -116,22 +117,28 @@ def handle_scheduler_start(event):
     because scheduler was stopped at task execution time; so tasks which where not run are
     re-scheduled at process startup in a very near future...
     """
-    scheduler = query_utility(IScheduler)
-    LOGGER.debug("Checking dangling scheduler tasks on {!r}".format(scheduler))
-    if scheduler is not None:
-        for task in scheduler.values():
-            if not IWorkflowManagementTask.providedBy(task):
-                continue
-            schedule_info = IDateTaskScheduling(task, None)
-            if schedule_info is None:  # no date scheduling
-                continue
-            now = gmtime(datetime.utcnow())
-            if schedule_info.active and (schedule_info.start_date < now):
-                # we add a small amount of time to be sure that scheduler and indexer
-                # processes are started...
-                schedule_info.start_date = now + timedelta(minutes=1)
-                # commit update for reset thread to get updated data!!
-                ITransactionManager(task).commit()
-                # start task resetting thread
-                LOGGER.debug(" - restarting task « {} »".format(task.name))
-                TaskResettingThread(event.object, task).start()
+    with ZODBConnection() as root:
+        registry = get_pyramid_registry()
+        application_name = registry.settings.get(PYAMS_APPLICATION_SETTINGS_KEY,
+                                                 PYAMS_APPLICATION_DEFAULT_NAME)
+        application = root.get(application_name)
+        sm = application.getSiteManager()  # pylint: disable=invalid-name
+        scheduler = sm.get(SCHEDULER_NAME)
+        if scheduler is not None:
+            LOGGER.debug("Checking pending scheduler tasks on {!r}".format(scheduler))
+            for task in scheduler.values():
+                if not IWorkflowManagementTask.providedBy(task):
+                    continue
+                schedule_info = IDateTaskScheduling(task, None)
+                if schedule_info is None:  # no date scheduling
+                    continue
+                now = gmtime(datetime.utcnow())
+                if schedule_info.active and (schedule_info.start_date < now):
+                    # we add a small amount of time to be sure that scheduler and indexer
+                    # processes are started...
+                    schedule_info.start_date = now + timedelta(minutes=1)
+                    # commit update for reset thread to get updated data!!
+                    ITransactionManager(task).commit()
+                    # start task resetting thread
+                    LOGGER.debug(" - restarting task « {} »".format(task.name))
+                    TaskResettingThread(event.object, task).start()
