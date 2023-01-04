@@ -23,7 +23,7 @@ from zope.schema import Bool, Choice, Text, TextLine
 from pyams_content.interfaces import CONTRIBUTOR_ROLE, GUEST_ROLE, IBaseContent, MANAGER_ROLE, \
     OWNER_ROLE, PILOT_ROLE, READER_ROLE, WEBMASTER_ROLE
 from pyams_i18n.schema import I18nTextField
-from pyams_portal.interfaces import DESIGNER_ROLE, IPortalContext
+from pyams_portal.interfaces import DESIGNER_ROLE, IPortalContext, IPortalPage
 from pyams_security.schema import PrincipalField, PrincipalsSetField
 from pyams_site.interfaces import ISiteRoot
 from pyams_utils.schema import TextLineListField
@@ -199,6 +199,10 @@ class IBaseContentPortalContext(IPortalContext):
 
 class IWfSharedContentPortalContext(IWfSharedContent, IBaseContentPortalContext):
     """Shared content with portal support"""
+
+
+class ISharedContentPortalPage(IPortalPage):
+    """Shared content portal page interface"""
 
 
 SHARED_CONTENT_ROLES = 'pyams_content.content.roles'

@@ -14,19 +14,21 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
 from pyams_content.shared.common import IBaseSharedTool
-from pyams_content.shared.common.interfaces import IBaseContentPortalContext
+from pyams_content.shared.common.interfaces import IBaseContentPortalContext, \
+    ISharedContentPortalPage
 from pyams_portal.interfaces import IPortalPage, PORTAL_PAGE_KEY
 from pyams_portal.page import PortalPage
 from pyams_utils.adapter import adapter_config, get_annotation_adapter
+from pyams_utils.factory import factory_config
 from pyams_utils.traversing import get_parent
 from pyams_utils.zodb import volatile_property
 
+__docformat__ = 'restructuredtext'
 
-class SharedContentPortalPage(PortalPage):
-    """Shared content portal page"""
+
+class SharedContentPortalPageMixin:
+    """Shared content portal page mixin class"""
 
     @volatile_property
     def can_inherit(self):
@@ -37,8 +39,17 @@ class SharedContentPortalPage(PortalPage):
         return get_parent(self, IBaseSharedTool, allow_context=False)
 
 
+#
+# SHared content portal page
+#
+
+@factory_config(ISharedContentPortalPage)
+class SharedContentPortalPage(SharedContentPortalPageMixin, PortalPage):
+    """Shared content portal page"""
+
+
 @adapter_config(required=IBaseContentPortalContext,
                 provides=IPortalPage)
 def shared_content_portal_page_adapter(context):
     """Shared content portal page adapter"""
-    return get_annotation_adapter(context, PORTAL_PAGE_KEY, SharedContentPortalPage)
+    return get_annotation_adapter(context, PORTAL_PAGE_KEY, ISharedContentPortalPage)
