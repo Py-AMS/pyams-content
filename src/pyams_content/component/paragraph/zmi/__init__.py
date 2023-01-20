@@ -15,7 +15,7 @@
 This module provides base paragraphs management components.
 """
 
-from zope.interface import implementer
+from zope.interface import implementer, Interface
 
 from pyams_content.component.association.interfaces import IAssociationContainer
 from pyams_content.component.association.zmi.interfaces import IAssociationsTable
@@ -50,7 +50,7 @@ from pyams_utils.request import get_annotations
 from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
 from pyams_viewlet.manager import get_label, viewletmanager_config
-from pyams_viewlet.viewlet import viewlet_config
+from pyams_viewlet.viewlet import EmptyContentProvider, contentprovider_config, viewlet_config
 from pyams_zmi.form import AdminEditForm, AdminModalAddForm, AdminModalEditForm
 from pyams_zmi.helper.event import get_json_table_refresh_callback, \
     get_json_table_row_add_callback, get_json_widget_refresh_callback
@@ -427,3 +427,15 @@ class ParagraphPreviewPage(PortalContextPreviewPage):
         if self.renderer is not None:
             return self.renderer.render()
         return ''
+
+
+@contentprovider_config(name='pyams_portal.header',
+                        context=IBaseParagraph, layer=IPyAMSLayer, view=Interface)
+class ParagraphHeaderContentProvider(EmptyContentProvider):
+    """Paragraph header content provider"""
+
+
+@contentprovider_config(name='pyams_portal.footer',
+                        context=IBaseParagraph, layer=IPyAMSLayer, view=Interface)
+class ParagraphFooterContentProvider(EmptyContentProvider):
+    """Paragraph footer content provider"""
