@@ -1,5 +1,7 @@
 <section class="inner-table border-0" i18n:domain="pyams_content"
-		 id="gallery_${tales:cache_key(context)}">
+		 id="gallery_${tales:cache_key(context)}"
+		 tal:define="js tales:resource_path('pyams_content.zmi:content_js')"
+		 data-ams-modules='{"content": "${js}"}'>
 	<fieldset class="border position-relative"
 			  data-ams-modules="plugins">
 		<legend class="switcher"
