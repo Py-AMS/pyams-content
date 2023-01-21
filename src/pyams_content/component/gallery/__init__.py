@@ -17,6 +17,7 @@ galleries.
 """
 
 from pyramid.events import subscriber
+from zope.interface import implementer
 from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent, \
     ObjectModifiedEvent
 from zope.location import locate
@@ -26,7 +27,7 @@ from zope.traversing.interfaces import ITraversable
 
 from pyams_catalog.utils import index_object
 from pyams_content.component.gallery.interfaces import GALLERY_CONTAINER_KEY, GALLERY_RENDERERS, \
-    IBaseGallery, IGallery, IGalleryFile, IGalleryItem, IGalleryTarget
+    IBaseGallery, IGallery, IGalleryContainer, IGalleryFile, IGalleryItem, IGalleryTarget
 from pyams_content.component.illustration import VirtualIllustration
 from pyams_content.component.illustration.interfaces import IBaseIllustration
 from pyams_content.component.paragraph import IBaseParagraph
@@ -47,11 +48,9 @@ from pyams_utils.vocabulary import vocabulary_config
 __docformat__ = 'restructuredtext'
 
 
-@factory_config(provided=IBaseGallery)
-class BaseGallery(RenderedContentMixin, BTreeOrderedContainer):
-    """Base gallery persistent class"""
-
-    renderer = FieldProperty(IBaseGallery['renderer'])
+@implementer(IGalleryContainer)
+class GalleryContainer(BTreeOrderedContainer):
+    """Gallery medias container"""
 
     last_id = 1
 
@@ -75,6 +74,13 @@ class BaseGallery(RenderedContentMixin, BTreeOrderedContainer):
         """Visible images iterator"""
         yield from filter(lambda x: IBaseImageFile.providedBy(x.data),
                           self.get_visible_medias())
+
+
+@factory_config(provided=IBaseGallery)
+class BaseGallery(RenderedContentMixin, GalleryContainer):
+    """Base gallery persistent class"""
+
+    renderer = FieldProperty(IBaseGallery['renderer'])
 
 
 @factory_config(provided=IGallery)

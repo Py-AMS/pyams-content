@@ -19,7 +19,7 @@ from pyramid.decorator import reify
 from pyramid.view import view_config
 from zope.interface import implementer
 
-from pyams_content.component.gallery.interfaces import IBaseGallery
+from pyams_content.component.gallery.interfaces import IGalleryContainer
 from pyams_content.component.gallery.zmi.file import get_json_gallery_refresh_event
 from pyams_content.component.gallery.zmi.interfaces import IGalleryMediasView
 from pyams_content.component.paragraph.zmi import get_json_paragraph_toolbar_refresh_event
@@ -49,7 +49,7 @@ class BaseGalleryMediasViewlet(Viewlet):
     @reify
     def gallery(self):
         """Gallery getter"""
-        return IBaseGallery(self.context)
+        return IGalleryContainer(self.context)
 
     @property
     def gallery_name(self):
@@ -72,7 +72,7 @@ class BaseGalleryMediasViewlet(Viewlet):
 
 
 @adapter_config(name='gallery-medias',
-                required=(IBaseGallery, IAdminLayer, IPropertiesEditForm),
+                required=(IGalleryContainer, IAdminLayer, IPropertiesEditForm),
                 provides=IInnerSubForm, force_implements=False)
 @template_config(template='templates/gallery-medias.pt', layer=IAdminLayer)
 @factory_config(IGalleryMediasView)
@@ -84,7 +84,7 @@ class GalleryMediasViewlet(BaseGalleryMediasViewlet):
 
 
 @view_config(name='set-medias-order.json',
-             context=IBaseGallery, request_type=IPyAMSLayer,
+             context=IGalleryContainer, request_type=IPyAMSLayer,
              renderer='json', xhr=True)
 def set_medias_order(request):
     """Medias ordering view"""
@@ -97,7 +97,7 @@ def set_medias_order(request):
 
 
 @view_config(name='switch-media-visibility.json',
-             context=IBaseGallery, request_type=IPyAMSLayer,
+             context=IGalleryContainer, request_type=IPyAMSLayer,
              renderer='json', xhr=True)
 def switch_media_visibility(request):
     """Media visibility switch view"""
@@ -105,11 +105,11 @@ def switch_media_visibility(request):
 
 
 @view_config(name='remove-media.json',
-             context=IBaseGallery, request_type=IPyAMSLayer,
+             context=IGalleryContainer, request_type=IPyAMSLayer,
              renderer='json', xhr=True)
 def remove_media(request):
     """Media remover view"""
-    result = delete_container_element(request, container_factory=IBaseGallery)
+    result = delete_container_element(request, container_factory=IGalleryContainer)
     if result.get('status') == 'success':
         apply_skin(request, AdminSkin)
         gallery = request.context

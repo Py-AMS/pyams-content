@@ -83,13 +83,10 @@ class IGalleryFile(IGalleryItem):
                    default=True)
 
 
-class IBaseGallery(IOrderedContainer, IRenderedContent):
-    """Base gallery interface"""
+class IGalleryContainer(IOrderedContainer):
+    """Base gallery container interface"""
 
-    renderer = Choice(title=_("Gallery renderer"),
-                      description=_("Presentation template used for this gallery"),
-                      vocabulary=GALLERY_RENDERERS,
-                      default='default')
+    contains(IGalleryItem)
 
     def append(self, item, notify=True):
         """Append new file to gallery
@@ -106,10 +103,17 @@ class IBaseGallery(IOrderedContainer, IRenderedContent):
         """Get iterator over visible images"""
 
 
+class IBaseGallery(IGalleryContainer, IRenderedContent):
+    """Base gallery interface"""
+
+    renderer = Choice(title=_("Gallery renderer"),
+                      description=_("Presentation template used for this gallery"),
+                      vocabulary=GALLERY_RENDERERS,
+                      default='default')
+
+
 class IGallery(IBaseGallery):
     """Gallery interface"""
-
-    contains(IGalleryItem)
 
     title = I18nTextLineField(title=_("Title"),
                               description=_("Gallery title, as shown in front-office"),

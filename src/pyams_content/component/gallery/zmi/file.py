@@ -20,7 +20,7 @@ from zope.interface import Interface
 from zope.lifecycleevent import ObjectCreatedEvent
 from zope.schema._bootstrapinterfaces import WrongType
 
-from pyams_content.component.gallery.interfaces import IBaseGallery, IGalleryFile
+from pyams_content.component.gallery.interfaces import IGalleryContainer, IGalleryFile
 from pyams_content.component.gallery.zmi.interfaces import IGalleryMediasAddFields, \
     IGalleryMediasView
 from pyams_content.component.paragraph.zmi import get_json_paragraph_toolbar_refresh_event
@@ -47,16 +47,16 @@ from pyams_viewlet.viewlet import ViewContentProvider, contentprovider_config, v
 from pyams_zmi.form import AdminModalAddForm, AdminModalEditForm, FormGroupSwitcher
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import IToolbarViewletManager
+from pyams_zmi.utils import get_object_label
 
 
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
-from pyams_zmi.utils import get_object_label
 
 
 @viewlet_config(name='add-media.menu',
-                context=IBaseGallery, layer=IAdminLayer,
+                context=IGalleryContainer, layer=IAdminLayer,
                 view=IGalleryMediasView,
                 manager=IToolbarViewletManager, weight=10)
 class GalleryMediaAddAction(ProtectedViewObjectMixin, ContextAddAction):
@@ -67,7 +67,7 @@ class GalleryMediaAddAction(ProtectedViewObjectMixin, ContextAddAction):
 
 
 @ajax_form_config(name='add-media.html',
-                  context=IBaseGallery, layer=IPyAMSLayer)
+                  context=IGalleryContainer, layer=IPyAMSLayer)
 class GalleryMediaAddForm(AdminModalAddForm):
     """Gallery media add form"""
 
@@ -122,7 +122,7 @@ class GalleryMediaAddForm(AdminModalAddForm):
 
 def get_json_gallery_refresh_event(context, request, view):
     """Get gallery refresh event"""
-    gallery = get_parent(context, IBaseGallery)
+    gallery = get_parent(context, IGalleryContainer)
     provider = create_object(IGalleryMediasView,
                              context=gallery, request=request, view=view)
     if provider is not None:
@@ -137,7 +137,7 @@ def get_json_gallery_refresh_event(context, request, view):
     return None
 
 
-@adapter_config(required=(IBaseGallery, IAdminLayer, GalleryMediaAddForm),
+@adapter_config(required=(IGalleryContainer, IAdminLayer, GalleryMediaAddForm),
                 provides=IAJAXFormRenderer)
 class GalleryMediaAddFormRenderer(ContextRequestViewAdapter):
     """Gallery media add form renderer"""
@@ -187,7 +187,7 @@ class GalleryFileShowHideAction(ContextAction):
 
     def __init__(self, context, request, view, manager):
         super().__init__(context, request, view, manager)
-        gallery = get_parent(context, IBaseGallery)
+        gallery = get_parent(context, IGalleryContainer)
         if gallery is not None:
             edit_permission = get_edit_permission(request, context=gallery, view=view)
             self.can_edit = request.has_permission(edit_permission, context=context)
@@ -293,7 +293,7 @@ class GalleryFileDeleteAction(ContextAction):
     """Gallery file delete action"""
 
     def __new__(cls, context, request, view, manager):
-        gallery = get_parent(context, IBaseGallery)
+        gallery = get_parent(context, IGalleryContainer)
         if gallery is not None:
             edit_permission = get_edit_permission(request, context=gallery, view=view)
             if not request.has_permission(edit_permission, context=context):
