@@ -203,7 +203,7 @@ def paragraph_add_form_title(context, request, view):
     parent_label = translate(_("{}: {}")).format(get_object_hint(parent, request, view),
                                                  get_object_label(parent, request, view))
     factory = get_object_factory(view.content_factory)
-    label = translate(_("New paragraph: {}")).format(factory.factory.factory_label)
+    label = translate(_("New paragraph: {}")).format(translate(factory.factory.factory_label))
     return f'<small>{parent_label}</small><br />{label}'
 
 
