@@ -35,6 +35,8 @@ from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.factory import factory_config
 from pyams_utils.registry import get_current_registry, get_utility
 from pyams_utils.traversing import get_parent
+from pyams_workflow.content import HiddenContentPublicationInfo
+from pyams_workflow.interfaces import IWorkflowPublicationInfo
 
 
 #
@@ -122,3 +124,12 @@ def handle_removed_gallery_file(event):
     content = get_parent(event.object, IWfSharedContent)
     if content is not None:
         get_current_registry().notify(ObjectModifiedEvent(content))
+
+
+@adapter_config(required=IGalleryFile,
+                provides=IWorkflowPublicationInfo)
+def gallery_file_publication_info(context):
+    """Gallery file publication info"""
+    if not context.visible:
+        return HiddenContentPublicationInfo()
+    return None

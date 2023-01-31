@@ -32,6 +32,8 @@ from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.registry import get_pyramid_registry
 from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
+from pyams_workflow.content import HiddenContentPublicationInfo
+from pyams_workflow.interfaces import IWorkflowPublicationInfo
 
 
 __docformat__ = 'restructuredtext'
@@ -79,3 +81,12 @@ def handle_association_event(event):
     content = get_parent(event.object, IWfSharedContent)
     if content is not None:
         get_pyramid_registry().notify(ObjectModifiedEvent(content))
+
+
+@adapter_config(required=IAssociationItem,
+                provides=IWorkflowPublicationInfo)
+def association_item_publication_info(context):
+    """Association item publication info"""
+    if not context.visible:
+        return HiddenContentPublicationInfo()
+    return None
