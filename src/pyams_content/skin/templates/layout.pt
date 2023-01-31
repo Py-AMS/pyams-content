@@ -4,12 +4,12 @@
 		<i tal:omit-tag="">${structure:tales:metas}</i>
 		<i tal:omit-tag="">${tales:resources}</i>
 	</head>
-	<body class="no-margin no-padding">
+	<body class="${tales:skin_container_class}">
 		<div class="page">
 
 			<!-- Page header -->
-			<div id="header"
-				 tal:define="header_class tales:template_header_class"
+			<div tal:define="header_class tales:template_header_class"
+				 id="header"
 				 class="header ${header_class or 'container'}" style="opacity: 1;">
 				${structure:provider:pyams_portal.header}
 			</div>
@@ -17,12 +17,10 @@
 
 			<!-- Main panel -->
 			<div id="main"
-				 tal:define="skin_class tales:skin_container_class;"
-				 class="${skin_class} no-margin" role="main">
+                 class="main m-0" role="main">
 				<!-- Content -->
-				<div id="content"
-					 tal:define="template_class tales:template_container_class"
-					 class="main ${template_class or 'container'}" style="opacity: 1;">
+				<div tal:define="template_class tales:template_container_class"
+					 class="content ${template_class or 'container'}" style="opacity: 1;">
 					<!--[if lt IE 9]>
 					<h1 i18n:translate="">Your browser is too old. Please install version 9 or higher of Internet Explorer.</h1>
 					<![endif]-->
@@ -33,8 +31,8 @@
 			<!-- end main panel -->
 
 			<!-- Page footer -->
-			<div id="footer"
-				 tal:define="footer_class tales:template_footer_class"
+			<div tal:define="footer_class tales:template_footer_class"
+				 id="footer"
 				 class="footer ${footer_class or 'container'}" style="opacity: 1;">
 				${structure:provider:pyams_portal.footer}
 			</div>
