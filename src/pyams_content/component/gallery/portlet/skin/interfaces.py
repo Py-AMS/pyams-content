@@ -17,7 +17,7 @@ This module defines interfaces of gallery portlet renderers settings.
 
 from zope.interface import Interface
 
-from pyams_skin.schema import BootstrapThumbnailsSelectionDictField
+from pyams_skin.schema import BootstrapThumbnailsSelectionField
 
 __docformat__ = 'restructuredtext'
 
@@ -30,7 +30,7 @@ GALLERY_RENDERER_SETTINGS_KEY = 'pyams_content.gallery.renderer'
 class IGalleryPortletDefaultRendererSettings(Interface):
     """Gallery portlet default renderer settings interface"""
 
-    thumb_selection = BootstrapThumbnailsSelectionDictField(
+    thumb_selection = BootstrapThumbnailsSelectionField(
         title=_("Thumbnails selection"),
         description=_("Selection used to display images thumbnails"),
         default_width=2,
@@ -47,7 +47,7 @@ GALLERY_CAROUSEL_RENDERER_SETTINGS_KEY = f'{GALLERY_RENDERER_SETTINGS_KEY}::caro
 class IGalleryPortletCarouselRendererSettings(Interface):
     """Gallery portlet carousel renderer settings interface"""
 
-    thumb_selection = BootstrapThumbnailsSelectionDictField(
+    thumb_selection = BootstrapThumbnailsSelectionField(
         title=_("Images selection"),
         description=_("Selection used to display images"),
         default_width=12,

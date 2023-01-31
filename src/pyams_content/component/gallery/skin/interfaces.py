@@ -15,7 +15,7 @@
 """
 
 from pyams_content.feature.renderer import IRendererSettings
-from pyams_skin.schema import BootstrapThumbnailsSelectionDictField
+from pyams_skin.schema import BootstrapThumbnailsSelectionField
 
 
 __docformat__ = 'restructuredtext'
@@ -26,7 +26,7 @@ from pyams_content import _
 class IGalleryDefaultRendererSettings(IRendererSettings):
     """Gallery default renderer settings interface"""
 
-    thumb_selection = BootstrapThumbnailsSelectionDictField(
+    thumb_selection = BootstrapThumbnailsSelectionField(
         title=_("Thumbnails selection"),
         description=_("Selection used to display images thumbnails"),
         default_width=2,
@@ -40,7 +40,7 @@ class IGalleryDefaultRendererSettings(IRendererSettings):
 class IGalleryCarouselRendererSettings(IRendererSettings):
     """Gallery carousel renderer settings interface"""
 
-    thumb_selection = BootstrapThumbnailsSelectionDictField(
+    thumb_selection = BootstrapThumbnailsSelectionField(
         title=_("Images selection"),
         description=_("Selection used to display images"),
         default_width=12,

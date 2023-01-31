@@ -18,7 +18,7 @@ from zope.interface import Attribute, Interface
 from zope.schema import Bool
 
 from pyams_content.feature.renderer import IRendererSettings
-from pyams_skin.schema import BootstrapThumbnailsSelectionDictField
+from pyams_skin.schema import BootstrapThumbnailsSelectionField
 
 
 __docformat__ = 'restructuredtext'
@@ -40,7 +40,7 @@ class IIllustrationRenderer(Interface):
 class IIllustrationDefaultRendererSettings(IRendererSettings):
     """Illustration default renderer settings interface"""
 
-    thumb_selection = BootstrapThumbnailsSelectionDictField(
+    thumb_selection = BootstrapThumbnailsSelectionField(
         title=_("Images selection"),
         description=_("Illustration can use responsive selections, but you "
                       "can also force selection of another specific format"),
@@ -52,7 +52,7 @@ class IIllustrationDefaultRendererSettings(IRendererSettings):
 class IParagraphIllustrationSideRendererSettings(IIllustrationDefaultRendererSettings):
     """Illustration paragraph side renderer settings interface"""
 
-    thumb_selection = BootstrapThumbnailsSelectionDictField(
+    thumb_selection = BootstrapThumbnailsSelectionField(
         title=_("Images selection"),
         description=_("Illustration can use responsive selections, but you "
                       "can also force selection of another specific format"),
