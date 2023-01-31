@@ -14,21 +14,23 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
 from persistent import Persistent
 from zope.container.contained import Contained
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.gallery.interfaces import IGalleryParagraph
 from pyams_content.component.gallery.skin.interfaces import IGalleryCarouselRendererSettings, \
-    IGalleryDefaultRendererSettings
+    IGalleryDefaultRendererSettings, IGalleryRandomImageRendererSettings
 from pyams_content.feature.renderer import BaseContentRenderer, DEFAULT_RENDERER_NAME, \
     IContentRenderer
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
 from pyams_utils.factory import factory_config
+from pyams_utils.list import random_iter
+
+
+__docformat__ = 'restructuredtext'
 
 from pyams_content import _
 
@@ -92,3 +94,32 @@ class GalleryParagraphCarouselRenderer(BaseGalleryRenderer):
 
     settings_interface = IGalleryCarouselRendererSettings
     weight = 20
+
+
+#
+# Random image gallery renderer
+#
+
+@factory_config(IGalleryRandomImageRendererSettings)
+class GalleryRandomImageRendererSettings(Persistent, Contained):
+    """Gallery random image renderer settings"""
+
+    thumb_selection = FieldProperty(
+        IGalleryRandomImageRendererSettings['thumb_selection'])
+
+
+@adapter_config(name='random',
+                required=(IGalleryParagraph, IPyAMSLayer),
+                provides=IContentRenderer)
+@template_config(template='templates/gallery-random.pt', layer=IPyAMSLayer)
+class GalleryRandomImageRenderer(BaseGalleryRenderer):
+    """Gallery paragraph random image renderer"""
+
+    label = _("Random image renderer")
+
+    settings_interface = IGalleryRandomImageRendererSettings
+    weight = 30
+
+    def get_media(self):
+        """Visible media getter"""
+        return next(random_iter(self.context.get_visible_medias()))

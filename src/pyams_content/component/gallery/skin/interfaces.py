@@ -46,3 +46,14 @@ class IGalleryCarouselRendererSettings(IRendererSettings):
         default_width=12,
         change_width=False,
         required=False)
+
+
+class IGalleryRandomImageRendererSettings(IRendererSettings):
+    """Gallery random image renderer settings interface"""
+
+    thumb_selection = BootstrapThumbnailsSelectionField(
+        title=_("Images selection"),
+        description=_("Selection used to display images"),
+        default_width=12,
+        change_width=False,
+        required=False)

@@ -24,9 +24,6 @@ __docformat__ = 'restructuredtext'
 from pyams_content import _
 
 
-GALLERY_RENDERER_SETTINGS_KEY = 'pyams_content.gallery.renderer'
-
-
 class IGalleryPortletDefaultRendererSettings(Interface):
     """Gallery portlet default renderer settings interface"""
 
@@ -41,9 +38,6 @@ class IGalleryPortletDefaultRendererSettings(Interface):
         """Return CSS columns width matching current selection"""
 
 
-GALLERY_CAROUSEL_RENDERER_SETTINGS_KEY = f'{GALLERY_RENDERER_SETTINGS_KEY}::carousel'
-
-
 class IGalleryPortletCarouselRendererSettings(Interface):
     """Gallery portlet carousel renderer settings interface"""
 
@@ -52,4 +46,15 @@ class IGalleryPortletCarouselRendererSettings(Interface):
         description=_("Selection used to display images"),
         default_width=12,
         change_width=False,
+        required=False)
+
+
+class IGalleryPortletRandomImageRendererSettings(Interface):
+    """Gallery portlet random image renderer settings interface"""
+
+    thumb_selection = BootstrapThumbnailsSelectionField(
+        title=_("Images selection"),
+        description=_("Selection used to display images"),
+        default_width=2,
+        change_width=True,
         required=False)

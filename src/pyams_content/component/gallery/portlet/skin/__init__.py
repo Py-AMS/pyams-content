@@ -23,14 +23,15 @@ from zope.schema.fieldproperty import FieldProperty
 from pyams_content.component.gallery import IGallery
 from pyams_content.component.gallery.portlet import IGalleryPortletSettings
 from pyams_content.component.gallery.portlet.skin.interfaces import \
-    GALLERY_RENDERER_SETTINGS_KEY, IGalleryPortletCarouselRendererSettings, \
-    IGalleryPortletDefaultRendererSettings, GALLERY_CAROUSEL_RENDERER_SETTINGS_KEY
+    IGalleryPortletCarouselRendererSettings, IGalleryPortletDefaultRendererSettings
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortalContext, IPortletRenderer
 from pyams_portal.skin import PortletRenderer
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
 from pyams_utils.factory import factory_config
+from pyams_utils.list import random_iter
+
 
 __docformat__ = 'restructuredtext'
 
@@ -101,3 +102,31 @@ class GalleryPortletCarouselRenderer(BaseGalleryPortletRenderer):
 
     settings_interface = IGalleryPortletCarouselRendererSettings
     weight = 20
+
+
+#
+# Random image gallery portlet renderer
+#
+
+@factory_config(provided=IGalleryPortletCarouselRendererSettings)
+class GalleryPortletRandomImageRendererSettings(Persistent, Contained):
+    """Gallery portlet random image renderer settings"""
+
+    thumb_selection = FieldProperty(IGalleryPortletCarouselRendererSettings['thumb_selection'])
+
+
+@adapter_config(name='random',
+                required=(IPortalContext, IPyAMSLayer, Interface, IGalleryPortletSettings),
+                provides=IPortletRenderer)
+@template_config(template='templates/gallery-random.pt', layer=IPyAMSLayer)
+class GalleryPortletRandomImageRenderer(BaseGalleryPortletRenderer):
+    """Gallery carousel random image renderer"""
+
+    label = _("Random image renderer")
+
+    settings_interface = IGalleryPortletCarouselRendererSettings
+    weight = 30
+
+    def get_media(self):
+        """Visible media getter"""
+        return next(random_iter(self.settings.get_visible_medias()))
