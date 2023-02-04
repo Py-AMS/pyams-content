@@ -12,6 +12,7 @@
 
 """PyAMS_content.component.illustration.skin.interfaces module
 
+This module provides skin interfaces specific to illustrations rendering.
 """
 
 from zope.interface import Attribute, Interface
@@ -25,6 +26,10 @@ __docformat__ = 'restructuredtext'
 
 from pyams_content import _
 
+
+#
+# Illustrations renderers
+#
 
 ILLUSTRATION_BEFORE_TITLE = 'before-title'
 ILLUSTRATION_BEFORE_BODY = 'before-body'
@@ -41,7 +46,7 @@ class IIllustrationDefaultRendererSettings(IRendererSettings):
     """Illustration default renderer settings interface"""
 
     thumb_selection = BootstrapThumbnailsSelectionField(
-        title=_("Images selection"),
+        title=_("Image selection"),
         description=_("Illustration can use responsive selections, but you "
                       "can also force selection of another specific format"),
         default_width=12,
@@ -53,7 +58,7 @@ class IParagraphIllustrationSideRendererSettings(IIllustrationDefaultRendererSet
     """Illustration paragraph side renderer settings interface"""
 
     thumb_selection = BootstrapThumbnailsSelectionField(
-        title=_("Images selection"),
+        title=_("Image selection"),
         description=_("Illustration can use responsive selections, but you "
                       "can also force selection of another specific format"),
         default_width=5,

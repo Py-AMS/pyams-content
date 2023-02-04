@@ -12,32 +12,23 @@
 
 """PyAMS_content.component.illustration.zmi module
 
+This module provides management interface components for illustrations.
 """
 
 from pyramid.events import subscriber
-from zope.component import getAdapter
 
 from pyams_content.component.illustration.interfaces import IBaseIllustration, \
-    IBaseIllustrationTarget, IIllustration, IIllustrationTarget, ILinkIllustrationTarget, \
-    IParagraphIllustration
+    IBaseIllustrationTarget, IIllustration, IIllustrationTarget, ILinkIllustrationTarget
 from pyams_content.component.paragraph.interfaces import IBaseParagraph
-from pyams_content.component.paragraph.zmi import BaseParagraphRendererSettingsEditForm
-from pyams_content.feature.renderer import IRendererSettings
 from pyams_content.zmi.interfaces import IPropertiesEditForm
-from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
-from pyams_form.interfaces.form import IAJAXFormRenderer, IFormContent, IFormUpdatedEvent, \
-    IInnerSubForm
-from pyams_layer.interfaces import IPyAMSLayer
+from pyams_form.interfaces.form import IAJAXFormRenderer, IFormUpdatedEvent, IInnerSubForm
 from pyams_portal.zmi.portlet import PortletRendererSettingsEditForm
 from pyams_portal.zmi.widget import RendererSelectFieldWidget
-from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
-from pyams_utils.traversing import get_parent
 from pyams_zmi.form import FormGroupSwitcher
 from pyams_zmi.helper.event import get_json_widget_refresh_callback
 from pyams_zmi.interfaces import IAdminLayer
-from pyams_zmi.utils import get_object_label
 
 
 __docformat__ = 'restructuredtext'
@@ -47,7 +38,7 @@ from pyams_content import _
 
 @adapter_config(name='illustration',
                 required=(IBaseIllustrationTarget, IAdminLayer, IPropertiesEditForm),
-                provides=IInnerSubForm, force_implements=False)
+                provides=IInnerSubForm)
 class BasicIllustrationPropertiesEditForm(FormGroupSwitcher):
     """Basic illustration properties edit form"""
 
@@ -58,14 +49,17 @@ class BasicIllustrationPropertiesEditForm(FormGroupSwitcher):
     prefix = 'illustration.'
 
     def get_content(self):
+        """Form content getter"""
         return IIllustration(self.context)
 
     @property
     def mode(self):
+        """Form mode getter"""
         return self.parent_form.mode
 
     @property
     def state(self):
+        """Form state getter"""
         return 'open' if self.get_content().has_data() else 'closed'
 
 
@@ -80,6 +74,7 @@ class IllustrationPropertiesEditForm(BasicIllustrationPropertiesEditForm):
 
     @property
     def state(self):
+        """Form state getter"""
         return super().state if IBaseParagraph.providedBy(self.context) else 'open'
 
 
@@ -95,7 +90,8 @@ class LinkIllustrationPropertiesEditForm(BasicIllustrationPropertiesEditForm):
     prefix = 'link_illustration.'
 
     def get_content(self):
-        return getAdapter(self.context, IIllustration, name='link')
+        """Form content getter"""
+        return self.request.registry.getAdapter(self.context, IIllustration, name='link')
 
 
 @adapter_config(required=(IBaseIllustrationTarget, IAdminLayer,
@@ -117,31 +113,6 @@ class BasicIllustrationPropertiesEditFormRenderer(ContextRequestViewAdapter):
                 get_json_widget_refresh_callback(self.view, 'data', self.request)
             ]
         return result
-
-
-@ajax_form_config(name='renderer-settings.html',
-                  context=IParagraphIllustration, layer=IPyAMSLayer,
-                  permission=VIEW_SYSTEM_PERMISSION)
-class ParagraphIllustrationRendererSettingsEditForm(BaseParagraphRendererSettingsEditForm):
-    """Paragraph illustration renderer settings edit form"""
-
-    @property
-    def title(self):
-        """Title getter"""
-        translate = self.request.localizer.translate
-        paragraph = get_parent(self.context, IBaseParagraph)
-        return translate(_("<small>Paragraph: {paragraph}</small><br />"
-                           "Renderer: {renderer}")).format(
-            paragraph=get_object_label(paragraph, self.request, self),
-            renderer=translate(self.renderer.label))
-
-
-@adapter_config(required=(IParagraphIllustration, IAdminLayer,
-                          ParagraphIllustrationRendererSettingsEditForm),
-                provides=IFormContent)
-def get_paragraph_illustration_renderer_settings_edit_form_content(context, request, form):
-    """Paragraph illustration renderer settings edit form content getter"""
-    return IRendererSettings(context)
 
 
 @subscriber(IFormUpdatedEvent,

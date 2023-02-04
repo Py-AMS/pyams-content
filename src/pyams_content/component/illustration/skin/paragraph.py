@@ -20,7 +20,8 @@ from zope.container.contained import Contained
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.illustration.interfaces import IIllustrationParagraph
-from pyams_content.component.illustration.skin import IIllustrationDefaultRendererSettings
+from pyams_content.component.illustration.skin.interfaces import \
+    IIllustrationDefaultRendererSettings
 from pyams_content.feature.renderer import DEFAULT_RENDERER_NAME, DefaultContentRenderer, \
     IContentRenderer
 from pyams_layer.interfaces import IPyAMSLayer

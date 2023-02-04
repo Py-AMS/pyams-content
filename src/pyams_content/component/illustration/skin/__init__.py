@@ -12,120 +12,70 @@
 
 """PyAMS_content.component.illustration.skin module
 
-This module provides simple illustrations renderers.
+This module provides base illustrations adapters.
 """
 
-from persistent import Persistent
-from zope.container.contained import Contained
-from zope.interface import implementer
-from zope.schema.fieldproperty import FieldProperty
+from zope.interface import Interface
 
-from pyams_content.component.illustration import IParagraphIllustration
-from pyams_content.component.illustration.skin.interfaces import \
-    IIllustrationDefaultRendererSettings, IIllustrationRenderer, ILLUSTRATION_AFTER_BODY, \
-    ILLUSTRATION_BEFORE_BODY, IParagraphIllustrationSideRendererSettings
-from pyams_content.feature.renderer import BaseContentRenderer, DEFAULT_RENDERER_NAME, \
-    IContentRenderer
+from pyams_content.component.illustration import IBaseIllustrationTarget, IIllustration, \
+    ILinkIllustration
+from pyams_content.component.links import IInternalLink
+from pyams_content.feature.renderer import HIDDEN_RENDERER_NAME
+from pyams_content.shared.common import ISharedContent
+from pyams_content.skin.interfaces import IContentNavigationIllustration
 from pyams_layer.interfaces import IPyAMSLayer
-from pyams_template.template import template_config
-from pyams_utils.adapter import adapter_config
-from pyams_utils.factory import factory_config
-
-
-__docformat__ = 'restructuredtext'
-
-from pyams_content import _
+from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
+from pyams_utils.interfaces.tales import ITALESExtension
 
 
 #
-# Illustrations renderer settings
+# Illustrations adapters
 #
 
-@factory_config(IIllustrationDefaultRendererSettings)
-class IllustrationDefaultRendererSettings(Persistent, Contained):
-    """Illustration paragraph default renderer settings"""
-
-    thumb_selection = FieldProperty(
-        IIllustrationDefaultRendererSettings['thumb_selection'])
-
-
-@factory_config(IParagraphIllustrationSideRendererSettings)
-class ParagraphIllustrationSideRendererSettings(IllustrationDefaultRendererSettings):
-    """Illustration paragraph side renderer settings"""
-
-    thumb_selection = FieldProperty(
-        IParagraphIllustrationSideRendererSettings['thumb_selection'])
-    zoom_on_click = FieldProperty(
-        IParagraphIllustrationSideRendererSettings['zoom_on_click'])
-
-
-#
-# Illustrations renderers
-#
-
-@implementer(IIllustrationRenderer)
-class BaseIllustrationRenderer(BaseContentRenderer):
-    """Base illustration renderer"""
-
-    settings_interface = IIllustrationDefaultRendererSettings
-    position = None
+@adapter_config(required=(IInternalLink, IPyAMSLayer),
+                provides=IContentNavigationIllustration)
+@adapter_config(context=(IBaseIllustrationTarget, IPyAMSLayer),
+                provides=IContentNavigationIllustration)
+def base_content_navigation_illustration_factory(context, request):
+    """Default content navigation illustration adapter"""
+    illustration = ILinkIllustration(context, None)
+    if not (illustration and illustration.has_data()):
+        illustration = IIllustration(context, None)
+        if IIllustration.providedBy(illustration) and \
+                (illustration.renderer == HIDDEN_RENDERER_NAME):
+            illustration = None
+    if illustration and illustration.has_data():
+        return illustration
+    if IInternalLink.providedBy(context):
+        target = context.get_target()
+        if target is not None:
+            illustration = request.registry.queryMultiAdapter((target, request),
+                                                              IContentNavigationIllustration)
+            if illustration and illustration.has_data():
+                return illustration
+    return None
 
 
-@adapter_config(name='centered-before',
-                required=(IParagraphIllustration, IPyAMSLayer),
-                provides=IContentRenderer)
-@template_config(template='templates/illustration-default.pt', layer=IPyAMSLayer)
-class ParagraphIllustrationBeforeTextRenderer(BaseIllustrationRenderer):
-    """Illustration centered before text renderer"""
-
-    label = _("Centered image before text")
-
-    position = ILLUSTRATION_BEFORE_BODY
-    weight = 10
+@adapter_config(context=(ISharedContent, IPyAMSLayer),
+                provides=IContentNavigationIllustration)
+def shared_content_illustration_factory(context, request):
+    """Shared content illustration factory"""
+    version = context.visible_version
+    if version is not None:
+        return request.registry.queryMultiAdapter((version, request),
+                                                  IContentNavigationIllustration)
+    return None
 
 
-@template_config(template='templates/illustration-side.pt', layer=IPyAMSLayer)
-class BaseParagraphIllustrationSideRenderer(BaseIllustrationRenderer):
-    """Base illustration side renderer"""
+@adapter_config(name='pyams_illustration',
+                context=(Interface, Interface, Interface),
+                provides=ITALESExtension)
+class PyAMSIllustrationTALESExtension(ContextRequestViewAdapter):
+    """PyAMS navigation illustration TALES extension"""
 
-    settings_interface = IParagraphIllustrationSideRendererSettings
-    position = ILLUSTRATION_BEFORE_BODY
-
-    css_class = None
-
-
-@adapter_config(name='float-left',
-                required=(IParagraphIllustration, IPyAMSLayer),
-                provides=IContentRenderer)
-class ParagraphIllustrationToLeftRenderer(BaseParagraphIllustrationSideRenderer):
-    """Left illustration side renderer"""
-
-    label = _("Floating illustration to the left")
-    css_class = 'float-left'
-
-    weight = 20
-
-
-@adapter_config(name='float-right',
-                required=(IParagraphIllustration, IPyAMSLayer),
-                provides=IContentRenderer)
-class ParagraphIllustrationToRightRenderer(BaseParagraphIllustrationSideRenderer):
-    """Right illustration side renderer"""
-
-    label = _("Floating illustration to the right")
-    css_class = 'float-right'
-
-    weight = 30
-
-
-@adapter_config(name=DEFAULT_RENDERER_NAME,
-                required=(IParagraphIllustration, IPyAMSLayer),
-                provides=IContentRenderer)
-@template_config(template='templates/illustration-default.pt', layer=IPyAMSLayer)
-class ParagraphIllustrationAfterTextRenderer(BaseIllustrationRenderer):
-    """Illustration centered after text renderer"""
-
-    label = _("Centered image after text (default)")
-
-    position = ILLUSTRATION_AFTER_BODY
-    weight = 40
+    def render(self, context=None, name=''):
+        if context is None:
+            context = self.context
+        return self.request.registry.queryMultiAdapter((context, self.request),
+                                                       IContentNavigationIllustration,
+                                                       name=name)
