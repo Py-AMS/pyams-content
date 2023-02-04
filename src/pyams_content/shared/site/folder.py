@@ -28,7 +28,7 @@ from pyams_content.component.illustration.interfaces import IIllustrationTarget,
     ILinkIllustrationTarget
 from pyams_content.component.links import InternalLink
 from pyams_content.component.thesaurus import IThemesTarget
-from pyams_content.feature.menu.interfaces import IDynamicMenu
+from pyams_content.feature.navigation.interfaces import IDynamicMenu
 from pyams_content.feature.preview.interfaces import IPreviewTarget
 from pyams_content.interfaces import MANAGE_SITE_PERMISSION
 from pyams_content.shared.common.manager import BaseSharedTool
@@ -97,7 +97,7 @@ class SiteFolderPermissionChecker(ContextAdapter):
 
 @adapter_config(required=ISiteFolder,
                 provides=IDynamicMenu)
-def site_folder_dynamic_menu_factory(context):
+def site_folder_dynamic_menu(context):
     """Site folder dynamic menu factory"""
     result = InternalLink()
     result.title = context.navigation_title.copy() if context.navigation_title else {}

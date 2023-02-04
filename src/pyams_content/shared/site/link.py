@@ -21,7 +21,7 @@ from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.illustration import ILinkIllustrationTarget
 from pyams_content.component.links import ExternalLink, InternalLink
-from pyams_content.feature.menu.interfaces import IDynamicMenu
+from pyams_content.feature.navigation.interfaces import IDynamicMenu
 from pyams_content.interfaces import MANAGE_CONTENT_PERMISSION
 from pyams_content.shared.site.interfaces import IExternalSiteLink, IInternalSiteLink, \
     ISiteElementNavigation, ISiteLink
@@ -97,7 +97,7 @@ class InternalSiteLink(InternalReferenceMixin, SiteLink):
 
 @adapter_config(required=IInternalSiteLink,
                 provides=IDynamicMenu)
-def internal_site_link_dynamic_menu_factory(context):
+def internal_site_link_dynamic_menu(context):
     """Internal site link dynamic menu factory"""
     target = context.get_target()
     if target is not None:
