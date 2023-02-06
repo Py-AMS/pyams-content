@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2023-02-03 18:34+0100\n"
+"POT-Creation-Date: 2023-02-04 11:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -243,7 +243,7 @@ msgstr "Gérer cette table"
 #: src/pyams_content/reference/zmi/table.py:99
 #: src/pyams_content/interfaces/__init__.py:103
 #: src/pyams_content/root/interfaces.py:40
-#: src/pyams_content/feature/navigation/portlet/interfaces.py:32
+#: src/pyams_content/feature/navigation/portlet/interfaces.py:33
 #: src/pyams_content/zmi/dashboard.py:121
 #: src/pyams_content/component/paragraph/zmi/container.py:235
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:33
@@ -921,7 +921,11 @@ msgstr "NON affiché"
 msgid "Default content renderer"
 msgstr "Mode de rendu par défaut"
 
-#: src/pyams_content/feature/navigation/interfaces.py:80
+#: src/pyams_content/feature/navigation/interfaces.py:76
+msgid "Navigation menu"
+msgstr "Menu de navigation"
+
+#: src/pyams_content/feature/navigation/interfaces.py:84
 #: src/pyams_content/component/paragraph/interfaces/__init__.py:49
 #: src/pyams_content/component/association/interfaces.py:42
 #: src/pyams_content/shared/common/interfaces/types.py:53
@@ -929,34 +933,34 @@ msgstr "Mode de rendu par défaut"
 msgid "Visible?"
 msgstr "Visible ?"
 
-#: src/pyams_content/feature/navigation/interfaces.py:81
+#: src/pyams_content/feature/navigation/interfaces.py:85
 #: src/pyams_content/component/association/interfaces.py:43
 msgid "Is this item visible in front-office?"
 msgstr "Cet élément est-il visible en front-office ?"
 
-#: src/pyams_content/feature/navigation/interfaces.py:88
+#: src/pyams_content/feature/navigation/interfaces.py:92
 msgid "Menu title"
 msgstr "Titre"
 
-#: src/pyams_content/feature/navigation/interfaces.py:89
+#: src/pyams_content/feature/navigation/interfaces.py:93
 msgid "Displayed menu label"
 msgstr "Libellé affiché pour ce menu"
 
-#: src/pyams_content/feature/navigation/interfaces.py:92
+#: src/pyams_content/feature/navigation/interfaces.py:96
 msgid "Internal reference"
 msgstr "Référence interne"
 
-#: src/pyams_content/feature/navigation/interfaces.py:93
+#: src/pyams_content/feature/navigation/interfaces.py:97
 msgid "Direct reference to menu target"
 msgstr ""
 "Référence directe vers la cible du lien, identifiée à partir de son numéro "
 "interne"
 
-#: src/pyams_content/feature/navigation/interfaces.py:96
+#: src/pyams_content/feature/navigation/interfaces.py:100
 msgid "Use canonical URL"
 msgstr "Imposer l'URL canonique"
 
-#: src/pyams_content/feature/navigation/interfaces.py:97
+#: src/pyams_content/feature/navigation/interfaces.py:101
 msgid ""
 "If 'yes', link to internal reference will use it's canonical URL instead of "
 "relative URL"
@@ -964,11 +968,11 @@ msgstr ""
 "Si 'oui', les liens vers des contenus partagés utiliseront leur adresse "
 "canonique plutôt qu'une adresse relative"
 
-#: src/pyams_content/feature/navigation/interfaces.py:102
+#: src/pyams_content/feature/navigation/interfaces.py:106
 msgid "Dynamic menu?"
 msgstr "Menu dynamique"
 
-#: src/pyams_content/feature/navigation/interfaces.py:103
+#: src/pyams_content/feature/navigation/interfaces.py:107
 msgid ""
 "If 'yes', menu items will be built from internal reference navigation items; "
 "other static items will be placed after dynamic items"
@@ -977,13 +981,13 @@ msgstr ""
 "contenu de la référence interne ; s'il y a également des éléments définis "
 "manuellement au sein du menu, ceux-ci seront positionnés ensuite"
 
-#: src/pyams_content/feature/navigation/interfaces.py:109
+#: src/pyams_content/feature/navigation/interfaces.py:113
 #: src/pyams_content/component/links/interfaces.py:49
 #: src/pyams_content/shared/common/interfaces/types.py:80
 msgid "Pictogram"
 msgstr "Pictogramme"
 
-#: src/pyams_content/feature/navigation/interfaces.py:110
+#: src/pyams_content/feature/navigation/interfaces.py:114
 msgid ""
 "Name of the pictogram associated with this menu; pictogram display may "
 "depend on selected renderer and skin"
@@ -991,21 +995,29 @@ msgstr ""
 "Nom du pictogramme associé à ce menu ; l'affichage du pictogramme peut "
 "dépendre du thème graphique et du mode de rendu sélectionnés"
 
-#: src/pyams_content/feature/navigation/portlet/interfaces.py:33
+#: src/pyams_content/feature/navigation/portlet/interfaces.py:34
 msgid "Portlet main title"
 msgstr "Titre du composant"
 
-#: src/pyams_content/feature/navigation/portlet/__init__.py:62
+#: src/pyams_content/feature/navigation/portlet/__init__.py:63
 msgid "Simple navigation menu"
-msgstr "Navigation à un niveau"
+msgstr "Liens de navigation à un niveau"
 
-#: src/pyams_content/feature/navigation/portlet/zmi/__init__.py:61
+#: src/pyams_content/feature/navigation/portlet/__init__.py:98
+msgid "Double navigation menus"
+msgstr "Liens de navigation à deux niveaux"
+
+#: src/pyams_content/feature/navigation/portlet/zmi/__init__.py:73
 msgid "Navigation links"
 msgstr "Liens de navigation"
 
 #: src/pyams_content/feature/navigation/portlet/zmi/templates/simple-preview.pt:3
 msgid "Navigation links:"
 msgstr "Liens de navigation :"
+
+#: src/pyams_content/feature/navigation/portlet/zmi/templates/double-preview.pt:2
+msgid "Navigation menus:"
+msgstr "Menus de navigation :"
 
 #: src/pyams_content/feature/navigation/portlet/skin/interfaces.py:30
 #: src/pyams_content/component/gallery/skin/interfaces.py:44
@@ -1021,9 +1033,25 @@ msgstr "Sélection des images"
 msgid "Selection used to display images thumbnails"
 msgstr "Sélections utilisées pour l'affichage des vignettes"
 
-#: src/pyams_content/feature/navigation/portlet/skin/__init__.py:63
-msgid "Horizontal list with vertical illustrations (default)"
-msgstr "Liste de liens horizontale (par défaut)"
+#: src/pyams_content/feature/navigation/portlet/skin/__init__.py:64
+msgid "Horizontal grid links with illustrations (default)"
+msgstr "Grille de liens avec illustrations (par défaut)"
+
+#: src/pyams_content/feature/navigation/portlet/skin/__init__.py:77
+msgid "Horizontal tabs of grids links with illustrations (default)"
+msgstr "Grilles de liens avec illustrations par onglets (par défaut)"
+
+#: src/pyams_content/feature/navigation/zmi/__init__.py:104
+msgid "New navigation menu"
+msgstr "Ajouter un menu"
+
+#: src/pyams_content/feature/navigation/zmi/__init__.py:106
+msgid "New menu properties"
+msgstr "Nouveau menu"
+
+#: src/pyams_content/feature/navigation/zmi/__init__.py:149
+msgid "Menu properties"
+msgstr "Propriétés du menu"
 
 #: src/pyams_content/feature/navigation/zmi/container.py:58
 #: src/pyams_content/component/paragraph/zmi/container.py:400
@@ -1040,10 +1068,14 @@ msgid "{}: {}"
 msgstr "{} : {}"
 
 #: src/pyams_content/feature/navigation/zmi/container.py:59
-#: src/pyams_content/feature/navigation/zmi/container.py:94
-#: src/pyams_content/feature/navigation/zmi/container.py:105
+#: src/pyams_content/feature/navigation/zmi/container.py:124
+#: src/pyams_content/feature/navigation/zmi/container.py:135
 msgid "Navigation menus"
 msgstr "Menus de navigation"
+
+#: src/pyams_content/feature/navigation/zmi/container.py:103
+msgid "Dynamic menu"
+msgstr "Menu dynamique"
 
 #: src/pyams_content/feature/review/interfaces.py:34
 #: src/pyams_content/feature/review/chat.py:54
@@ -2390,12 +2422,12 @@ msgid "Centered image before text"
 msgstr "Illustration centrée avant le texte"
 
 #: src/pyams_content/component/illustration/skin/illustration.py:103
-#: src/pyams_content/component/illustration/portlet/skin/__init__.py:131
+#: src/pyams_content/component/illustration/portlet/skin/__init__.py:132
 msgid "Floating illustration to the left"
 msgstr "Illustration placée à gauche du texte"
 
 #: src/pyams_content/component/illustration/skin/illustration.py:115
-#: src/pyams_content/component/illustration/portlet/skin/__init__.py:152
+#: src/pyams_content/component/illustration/portlet/skin/__init__.py:153
 msgid "Floating illustration to the right"
 msgstr "Illustration placée à droite du texte"
 
@@ -2447,15 +2479,15 @@ msgstr "Propriétés de l'illustration"
 msgid "Main illustration"
 msgstr "Illustration principale"
 
-#: src/pyams_content/component/illustration/zmi/__init__.py:83
+#: src/pyams_content/component/illustration/zmi/__init__.py:87
 msgid "Navigation link illustration"
 msgstr "Illustration de navigation"
 
-#: src/pyams_content/component/illustration/zmi/__init__.py:121
+#: src/pyams_content/component/illustration/zmi/__init__.py:126
 msgid "Use responsive selection"
 msgstr "Utiliser les sélections responsives"
 
-#: src/pyams_content/component/illustration/portlet/skin/__init__.py:87
+#: src/pyams_content/component/illustration/portlet/skin/__init__.py:88
 msgid "Full width illustration (default)"
 msgstr "Illustration simple (par défaut)"
 
