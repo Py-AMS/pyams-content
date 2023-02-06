@@ -18,7 +18,7 @@ This module provides base illustrations adapters.
 from zope.interface import Interface
 
 from pyams_content.component.illustration import IBaseIllustrationTarget, IIllustration, \
-    ILinkIllustration
+    ILinkIllustration, ILinkIllustrationTarget
 from pyams_content.component.links import IInternalLink
 from pyams_content.feature.renderer import HIDDEN_RENDERER_NAME
 from pyams_content.shared.common import ISharedContent
@@ -34,7 +34,7 @@ from pyams_utils.interfaces.tales import ITALESExtension
 
 @adapter_config(required=(IInternalLink, IPyAMSLayer),
                 provides=IContentNavigationIllustration)
-@adapter_config(context=(IBaseIllustrationTarget, IPyAMSLayer),
+@adapter_config(required=(IBaseIllustrationTarget, IPyAMSLayer),
                 provides=IContentNavigationIllustration)
 def base_content_navigation_illustration_factory(context, request):
     """Default content navigation illustration adapter"""
@@ -68,7 +68,7 @@ def shared_content_illustration_factory(context, request):
 
 
 @adapter_config(name='pyams_illustration',
-                context=(Interface, Interface, Interface),
+                required=(Interface, Interface, Interface),
                 provides=ITALESExtension)
 class PyAMSIllustrationTALESExtension(ContextRequestViewAdapter):
     """PyAMS navigation illustration TALES extension"""

@@ -88,7 +88,7 @@ class GalleryFile(Persistent, Contained):
             self._data.title = value.get(negociator.server_language)
 
 
-@adapter_config(context=IGalleryFile,
+@adapter_config(required=IGalleryFile,
                 provides=IViewContextPermissionChecker)
 class GalleryFilePermissionChecker(ContextAdapter):
     """Gallery file permission checker"""

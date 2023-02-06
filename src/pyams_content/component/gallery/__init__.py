@@ -91,7 +91,7 @@ class Gallery(BaseGallery):
     description = FieldProperty(IGallery['description'])
 
 
-@adapter_config(context=IGalleryTarget,
+@adapter_config(required=IGalleryTarget,
                 provides=IGallery)
 def gallery_adapter(target):
     """Gallery container adapter"""
@@ -100,7 +100,7 @@ def gallery_adapter(target):
 
 
 @adapter_config(name='gallery',
-                context=IGalleryTarget,
+                required=IGalleryTarget,
                 provides=ITraversable)
 class GalleryContainerNamespace(ContextAdapter):
     """++gallery++ container namespace traverser"""
@@ -111,7 +111,7 @@ class GalleryContainerNamespace(ContextAdapter):
 
 
 @adapter_config(name='gallery',
-                context=IGalleryTarget,
+                required=IGalleryTarget,
                 provides=ISublocations)
 class GalleryContainerSublocations(ContextAdapter):
     """Galleries container sub-locations"""
@@ -121,7 +121,7 @@ class GalleryContainerSublocations(ContextAdapter):
         return IGallery(self.context).values()
 
 
-@adapter_config(context=IGallery,
+@adapter_config(required=IGallery,
                 provides=IViewContextPermissionChecker)
 class GalleryPermissionChecker(ContextAdapter):
     """Gallery permission checker"""
@@ -171,7 +171,7 @@ def gallery_illustration_adapter(gallery):
     return None
 
 
-@adapter_config(context=IGalleryFile,
+@adapter_config(required=IGalleryFile,
                 provides=IBaseIllustration)
 def gallery_file_illustration_adapter(file):
     """Gallery file illustration adapter"""
