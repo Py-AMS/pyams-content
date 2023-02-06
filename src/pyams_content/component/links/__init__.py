@@ -33,7 +33,7 @@ from pyams_content.component.links.interfaces import CONTENT_LINKS_VOCABULARY, \
     MAILTO_LINK_ICON_HINT
 from pyams_content.reference.pictogram.interfaces import IPictogramTable
 from pyams_i18n.interfaces import II18n
-from pyams_sequence.interfaces import ISequentialIdInfo
+from pyams_sequence.interfaces import IInternalReference, ISequentialIdInfo
 from pyams_sequence.reference import InternalReferenceMixin
 from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.factory import factory_config
