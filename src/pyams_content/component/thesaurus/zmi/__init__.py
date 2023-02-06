@@ -147,7 +147,9 @@ def tags_edit_form_title(context, request, view):
 def tags_edit_form_thesaurus_adapter(context, request, view):  # pylint: disable=unused-argument
     """Tags edit form thesaurus adapter"""
     manager = ITagsManager(request.root, ITagsManager)
-    return query_utility(IThesaurus, name=manager.thesaurus_name)
+    if manager.thesaurus_name:
+        return query_utility(IThesaurus, name=manager.thesaurus_name)
+    return None
 
 
 @adapter_config(name='tags',
@@ -274,7 +276,9 @@ class ThemesInnerEditForm(BaseThemesEditFormMixin, InnerEditForm):
 def themes_edit_form_thesaurus_adapter(context, request, view):  # pylint: disable=unused-argument
     """Themes edit form thesaurus adapter"""
     manager = IThemesManager(request.root, IThemesManager)
-    return query_utility(IThesaurus, name=manager.thesaurus_name)
+    if manager.thesaurus_name:
+        return query_utility(IThesaurus, name=manager.thesaurus_name)
+    return None
 
 
 @adapter_config(name='themes',
