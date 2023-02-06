@@ -187,7 +187,7 @@ def handle_updated_internal_link(event):
             alsoProvides(link, info.internal_link_marker_interface)
 
 
-@adapter_config(required=IInternalLink,
+@adapter_config(required=IInternalReference,
                 provides=IAssociationInfo)
 class InternalLinkAssociationInfoAdapter(BaseLinkInfoAdapter):
     """Internal link association info adapter"""
