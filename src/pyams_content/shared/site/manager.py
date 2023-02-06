@@ -31,7 +31,7 @@ from pyams_content.shared.site.container import SiteContainerMixin
 from pyams_content.shared.site.interfaces import ISiteManager, PYAMS_SITES_VOCABULARY
 from pyams_i18n.interfaces import II18n
 from pyams_layer.skin import UserSkinnableContentMixin
-from pyams_portal.interfaces import IPortalContext
+from pyams_portal.interfaces import IPortalContext, IPortalFooterContext, IPortalHeaderContext
 from pyams_security.interfaces import IDefaultProtectionPolicy, IViewContextPermissionChecker
 from pyams_site.interfaces import ISiteRoot
 from pyams_utils.adapter import ContextAdapter, adapter_config
@@ -49,7 +49,7 @@ from pyams_content import _
 @factory_config(ISiteManager)
 @implementer(IDefaultProtectionPolicy, IPictogramManagerTarget,
              IIllustrationTarget, ILinkIllustrationTarget,
-             IPortalContext, IPreviewTarget)
+             IPortalContext, IPortalHeaderContext, IPortalFooterContext, IPreviewTarget)
 class SiteManager(SiteContainerMixin, OrderedContainer, TypedSharedToolMixin, BaseSharedTool,
                   UserSkinnableContentMixin):
     """Site manager persistent class"""

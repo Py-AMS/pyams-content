@@ -36,7 +36,7 @@ from pyams_content.shared.site.container import SiteContainerMixin
 from pyams_content.shared.site.interfaces import ISiteFolder, ISiteManager, \
     SITE_FOLDERS_VOCABULARY
 from pyams_i18n.interfaces import II18n
-from pyams_portal.interfaces import IPortalContext
+from pyams_portal.interfaces import IPortalContext, IPortalFooterContext, IPortalHeaderContext
 from pyams_security.interfaces import IDefaultProtectionPolicy, IViewContextPermissionChecker
 from pyams_sequence.interfaces import ISequentialIdInfo
 from pyams_utils.adapter import ContextAdapter, adapter_config
@@ -56,7 +56,7 @@ from pyams_content import _
 @factory_config(ISiteFolder)
 @implementer(IDefaultProtectionPolicy,
              IIllustrationTarget, ILinkIllustrationTarget,
-             IPortalContext, IPreviewTarget)
+             IPortalContext, IPortalHeaderContext, IPortalFooterContext, IPreviewTarget)
 class SiteFolder(SiteContainerMixin, OrderedContainer, BaseSharedTool):
     """Site folder persistent class"""
 
