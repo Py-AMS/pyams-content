@@ -56,7 +56,16 @@ def base_content_navigation_illustration_factory(context, request):
     return None
 
 
-@adapter_config(context=(ISharedContent, IPyAMSLayer),
+@adapter_config(required=(ILinkIllustrationTarget, IPyAMSLayer),
+                provides=IContentNavigationIllustration)
+def link_content_navigation_illustration_factory(context, request):
+    """Content navigation illustration adapter for basic link illustration targets"""
+    illustration = ILinkIllustration(context, None)
+    if illustration and illustration.has_data():
+        return illustration
+
+
+@adapter_config(required=(ISharedContent, IPyAMSLayer),
                 provides=IContentNavigationIllustration)
 def shared_content_illustration_factory(context, request):
     """Shared content illustration factory"""
