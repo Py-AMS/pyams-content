@@ -95,11 +95,13 @@ class AssociationsModalEditForm(AdminModalDisplayForm):
 class AssociationsTable(Table):
     """Associations table"""
 
+    container_class = IAssociationContainer
+
     @property
     def data_attributes(self):
         """Attributes getter"""
         attributes = super().data_attributes
-        container = IAssociationContainer(self.context)
+        container = self.container_class(self.context)
         get_ordered_data_attributes(attributes, container, self.request)
         return attributes
 

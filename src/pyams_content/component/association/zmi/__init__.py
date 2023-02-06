@@ -124,8 +124,9 @@ def association_item_edit_form_title(context, request, view):
     """Association item properties edit form title getter"""
     translate = request.localizer.translate
     parent = get_parent(context, IAssociationContainerTarget)
-    parent_label = translate(_("{}: {}")).format(get_object_hint(parent, request, view),
-                                                 get_object_label(parent, request, view))
+    hint = get_object_hint(parent, request, view)
+    label = get_object_label(parent, request, view)
+    parent_label = translate(_("{}: {}")).format(hint, label) if hint else label
     label = translate(_("{}: {}")).format(get_object_hint(context, request, view),
                                           get_object_label(context, request, view))
     return f'<small>{parent_label}</small><br />{label}'

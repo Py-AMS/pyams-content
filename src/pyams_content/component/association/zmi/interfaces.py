@@ -17,6 +17,8 @@ This module defines associations-related management interfaces.
 
 from zope.interface import Interface
 
+from pyams_content.zmi.interfaces import IPropertiesEditForm
+
 
 __docformat__ = 'restructuredtext'
 
@@ -37,5 +39,5 @@ class IAssociationItemAddForm(Interface):
     """Association item add form marker interface"""
 
 
-class IAssociationItemEditForm(Interface):
+class IAssociationItemEditForm(IPropertiesEditForm):
     """Association item edit form marker interface"""
