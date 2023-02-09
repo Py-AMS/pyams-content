@@ -31,10 +31,6 @@ TOPIC_CONTENT_TYPE = 'topic'
 TOPIC_CONTENT_NAME = _("Topic")
 
 
-class ITopicManager(ISharedToolPortalContext):
-    """Topic manager interface"""
-
-
 class IWfTopic(IWfSharedContentPortalContext, IInternalReferencesList):
     """Topic interface"""
 
@@ -50,3 +46,7 @@ class IWfTopicFactory(Interface):
 
 class ITopic(ISharedContent):
     """Workflow managed topic interface"""
+
+
+class ITopicManager(ISharedToolPortalContext):
+    """Topic manager interface"""
