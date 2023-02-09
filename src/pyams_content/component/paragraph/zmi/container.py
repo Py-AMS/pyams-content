@@ -31,7 +31,7 @@ from pyams_content.component.paragraph.zmi.interfaces import IInnerParagraphEdit
     IParagraphTitleToolbar
 from pyams_content.interfaces import MANAGE_CONTENT_PERMISSION, PUBLISH_CONTENT_PERMISSION
 from pyams_content.shared.common.interfaces.types import ITypedSharedTool
-from pyams_content.shared.common.zmi.types import SharedToolTypesTable
+from pyams_content.shared.common.zmi.types.interfaces import ISharedToolTypesTable
 from pyams_content.zmi import content_js
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_layer.skin import apply_skin
@@ -370,7 +370,7 @@ class ParagraphsContainerView(ParagraphsContainerViewMixin, TableAdminView):
 
 
 @adapter_config(name='paragraphs',
-                required=(ITypedSharedTool, IAdminLayer, SharedToolTypesTable),
+                required=(ITypedSharedTool, IAdminLayer, ISharedToolTypesTable),
                 provides=IColumn)
 class SharedToolTypesParagraphsColumn(ActionColumn):
     """Shared tool data types table paragraphs column"""

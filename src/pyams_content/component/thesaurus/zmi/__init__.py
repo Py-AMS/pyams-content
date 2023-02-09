@@ -22,7 +22,7 @@ from pyams_content.component.thesaurus import ICollectionsInfo, ICollectionsMana
     IThemesTarget
 from pyams_content.component.thesaurus.zmi.interfaces import IThesaurusThemesEditForm
 from pyams_content.shared.common.interfaces.types import ITypedSharedTool
-from pyams_content.shared.common.zmi.types import SharedToolTypesTable
+from pyams_content.shared.common.zmi.types.interfaces import ISharedToolTypesTable
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IGroup, IInnerSubForm
@@ -153,7 +153,7 @@ def tags_edit_form_thesaurus_adapter(context, request, view):  # pylint: disable
 
 
 @adapter_config(name='tags',
-                required=(ITypedSharedTool, IAdminLayer, SharedToolTypesTable),
+                required=(ITypedSharedTool, IAdminLayer, ISharedToolTypesTable),
                 provides=IColumn)
 class SharedToolTypesTagsColumn(ActionColumn):
     """Shared tool data types table tags column"""
@@ -282,7 +282,7 @@ def themes_edit_form_thesaurus_adapter(context, request, view):  # pylint: disab
 
 
 @adapter_config(name='themes',
-                required=(ITypedSharedTool, IAdminLayer, SharedToolTypesTable),
+                required=(ITypedSharedTool, IAdminLayer, ISharedToolTypesTable),
                 provides=IColumn)
 class SharedToolTypesThemesColumn(ActionColumn):
     """Shared tool data types table themes column"""
