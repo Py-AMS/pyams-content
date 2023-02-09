@@ -54,6 +54,7 @@ REQUIRED_TABLES = (
 
 REQUIRED_TOOLS = (
     (ITopicManager, 'topics'),
+    (IFormManager, 'forms')
 )
 
 REQUIRED_INDEXES = [
