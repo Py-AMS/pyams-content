@@ -34,6 +34,7 @@ from pyams_content.reference.pictogram import IPictogramTable
 from pyams_content.root import ISiteRootToolsConfiguration
 from pyams_content.shared.common.interfaces import IWfSharedContent
 from pyams_content.shared.common.interfaces.types import IWfTypedSharedContent
+from pyams_content.shared.form.interfaces import IFormManager
 from pyams_content.shared.topic.interfaces import ITopicManager
 from pyams_security.index import PrincipalsRoleIndex
 from pyams_site.generations import check_required_utilities

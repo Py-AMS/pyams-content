@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2023-02-04 11:35+0100\n"
+"POT-Creation-Date: 2023-02-09 11:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -244,6 +244,7 @@ msgstr "Gérer cette table"
 #: src/pyams_content/interfaces/__init__.py:103
 #: src/pyams_content/root/interfaces.py:40
 #: src/pyams_content/feature/navigation/portlet/interfaces.py:33
+#: src/pyams_content/feature/navigation/portlet/interfaces.py:47
 #: src/pyams_content/zmi/dashboard.py:121
 #: src/pyams_content/component/paragraph/zmi/container.py:235
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:33
@@ -434,7 +435,7 @@ msgstr "Tags"
 #: src/pyams_content/root/zmi/search.py:169
 #: src/pyams_content/root/zmi/search.py:238
 #: src/pyams_content/component/thesaurus/interfaces.py:94
-#: src/pyams_content/component/thesaurus/zmi/__init__.py:185
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:187
 #: src/pyams_content/shared/common/zmi/search.py:233
 #: src/pyams_content/shared/common/zmi/search.py:307
 msgid "Themes"
@@ -443,7 +444,7 @@ msgstr "Thèmes"
 #: src/pyams_content/root/zmi/search.py:172
 #: src/pyams_content/root/zmi/search.py:252
 #: src/pyams_content/component/thesaurus/interfaces.py:121
-#: src/pyams_content/component/thesaurus/zmi/__init__.py:312
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:316
 #: src/pyams_content/shared/common/zmi/search.py:236
 #: src/pyams_content/shared/common/zmi/search.py:321
 msgid "Collections"
@@ -996,6 +997,7 @@ msgstr ""
 "dépendre du thème graphique et du mode de rendu sélectionnés"
 
 #: src/pyams_content/feature/navigation/portlet/interfaces.py:34
+#: src/pyams_content/feature/navigation/portlet/interfaces.py:48
 msgid "Portlet main title"
 msgstr "Titre du composant"
 
@@ -1003,11 +1005,11 @@ msgstr "Titre du composant"
 msgid "Simple navigation menu"
 msgstr "Liens de navigation à un niveau"
 
-#: src/pyams_content/feature/navigation/portlet/__init__.py:98
+#: src/pyams_content/feature/navigation/portlet/__init__.py:100
 msgid "Double navigation menus"
 msgstr "Liens de navigation à deux niveaux"
 
-#: src/pyams_content/feature/navigation/portlet/zmi/__init__.py:73
+#: src/pyams_content/feature/navigation/portlet/zmi/__init__.py:71
 msgid "Navigation links"
 msgstr "Liens de navigation"
 
@@ -1015,9 +1017,14 @@ msgstr "Liens de navigation"
 msgid "Navigation links:"
 msgstr "Liens de navigation :"
 
-#: src/pyams_content/feature/navigation/portlet/zmi/templates/double-preview.pt:2
+#: src/pyams_content/feature/navigation/portlet/zmi/templates/double-preview.pt:3
 msgid "Navigation menus:"
 msgstr "Menus de navigation :"
+
+#: src/pyams_content/feature/navigation/portlet/zmi/templates/double-preview.pt:17
+#: src/pyams_content/feature/navigation/zmi/container.py:103
+msgid "Dynamic menu"
+msgstr "Menu dynamique"
 
 #: src/pyams_content/feature/navigation/portlet/skin/interfaces.py:30
 #: src/pyams_content/component/gallery/skin/interfaces.py:44
@@ -1033,11 +1040,11 @@ msgstr "Sélection des images"
 msgid "Selection used to display images thumbnails"
 msgstr "Sélections utilisées pour l'affichage des vignettes"
 
-#: src/pyams_content/feature/navigation/portlet/skin/__init__.py:64
+#: src/pyams_content/feature/navigation/portlet/skin/__init__.py:65
 msgid "Horizontal grid links with illustrations (default)"
 msgstr "Grille de liens avec illustrations (par défaut)"
 
-#: src/pyams_content/feature/navigation/portlet/skin/__init__.py:77
+#: src/pyams_content/feature/navigation/portlet/skin/__init__.py:86
 msgid "Horizontal tabs of grids links with illustrations (default)"
 msgstr "Grilles de liens avec illustrations par onglets (par défaut)"
 
@@ -1049,33 +1056,31 @@ msgstr "Ajouter un menu"
 msgid "New menu properties"
 msgstr "Nouveau menu"
 
-#: src/pyams_content/feature/navigation/zmi/__init__.py:149
-msgid "Menu properties"
-msgstr "Propriétés du menu"
-
+#: src/pyams_content/feature/navigation/zmi/__init__.py:165
+#: src/pyams_content/feature/navigation/zmi/__init__.py:166
 #: src/pyams_content/feature/navigation/zmi/container.py:58
 #: src/pyams_content/component/paragraph/zmi/container.py:400
 #: src/pyams_content/component/paragraph/zmi/__init__.py:203
 #: src/pyams_content/component/extfile/zmi/__init__.py:54
-#: src/pyams_content/component/association/zmi/__init__.py:127
 #: src/pyams_content/component/association/zmi/__init__.py:129
+#: src/pyams_content/component/association/zmi/__init__.py:130
 #: src/pyams_content/component/association/zmi/container.py:88
-#: src/pyams_content/component/links/zmi/__init__.py:62
+#: src/pyams_content/component/links/zmi/__init__.py:64
 #: src/pyams_content/component/thesaurus/zmi/__init__.py:138
-#: src/pyams_content/component/thesaurus/zmi/__init__.py:231
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:233
 #, python-format
 msgid "{}: {}"
 msgstr "{} : {}"
+
+#: src/pyams_content/feature/navigation/zmi/__init__.py:177
+msgid "Menu properties"
+msgstr "Propriétés du menu"
 
 #: src/pyams_content/feature/navigation/zmi/container.py:59
 #: src/pyams_content/feature/navigation/zmi/container.py:124
 #: src/pyams_content/feature/navigation/zmi/container.py:135
 msgid "Navigation menus"
 msgstr "Menus de navigation"
-
-#: src/pyams_content/feature/navigation/zmi/container.py:103
-msgid "Dynamic menu"
-msgstr "Menu dynamique"
 
 #: src/pyams_content/feature/review/interfaces.py:34
 #: src/pyams_content/feature/review/chat.py:54
@@ -1338,9 +1343,10 @@ msgstr ""
 
 #: src/pyams_content/zmi/dashboard.py:142
 #: src/pyams_content/shared/common/zmi/search.py:220
-#: src/pyams_content/shared/common/zmi/types/__init__.py:181
+#: src/pyams_content/shared/common/zmi/types/__init__.py:125
 #: src/pyams_content/shared/common/interfaces/types.py:131
-#: src/pyams_content/shared/topic/interfaces.py:41
+#: src/pyams_content/shared/form/interfaces.py:37
+#: src/pyams_content/shared/topic/interfaces.py:37
 #: src/pyams_content/shared/site/interfaces.py:188
 msgid "Data type"
 msgstr "Type de contenu"
@@ -2062,30 +2068,30 @@ msgstr "Nom de l'adresse"
 msgid "Address as displayed in address book"
 msgstr "Nom associé à l'adresse de messagerie indiquée"
 
-#: src/pyams_content/component/links/zmi/__init__.py:64
+#: src/pyams_content/component/links/zmi/__init__.py:65
 msgid "Add new link"
 msgstr "Ajouter un lien"
 
-#: src/pyams_content/component/links/zmi/__init__.py:72
+#: src/pyams_content/component/links/zmi/__init__.py:73
 msgid "New link properties"
 msgstr "Propriétés du nouveau lien"
 
-#: src/pyams_content/component/links/zmi/__init__.py:79
+#: src/pyams_content/component/links/zmi/__init__.py:80
 #: src/pyams_content/shared/site/zmi/link.py:133
 msgid "Link properties"
 msgstr "Propriétés du lien"
 
-#: src/pyams_content/component/links/zmi/__init__.py:103
+#: src/pyams_content/component/links/zmi/__init__.py:104
 #: src/pyams_content/shared/site/zmi/link.py:223
 msgid "Add internal link"
 msgstr "Nouveau lien interne"
 
-#: src/pyams_content/component/links/zmi/__init__.py:142
+#: src/pyams_content/component/links/zmi/__init__.py:143
 #: src/pyams_content/shared/site/zmi/link.py:349
 msgid "Add external link"
 msgstr "Nouveau lien externe"
 
-#: src/pyams_content/component/links/zmi/__init__.py:181
+#: src/pyams_content/component/links/zmi/__init__.py:182
 msgid "Add mailto link"
 msgstr "Nouveau lien mailto:"
 
@@ -2124,32 +2130,32 @@ msgstr "Sélection des tags du contenu"
 msgid "Content tags"
 msgstr "Tags du contenu"
 
-#: src/pyams_content/component/thesaurus/zmi/__init__.py:159
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:161
 msgid "Default tags"
 msgstr "Tags par défaut"
 
-#: src/pyams_content/component/thesaurus/zmi/__init__.py:192
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:194
 msgid "Content themes selection"
 msgstr "Sélection des thèmes du contenu"
 
-#: src/pyams_content/component/thesaurus/zmi/__init__.py:212
-#: src/pyams_content/component/thesaurus/zmi/__init__.py:233
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:214
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:235
 msgid "Content themes"
 msgstr "Thèmes du contenu"
 
-#: src/pyams_content/component/thesaurus/zmi/__init__.py:251
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:253
 msgid "Don't inherit parent themes"
 msgstr "Ne pas hériter des thèmes du niveau supérieur"
 
-#: src/pyams_content/component/thesaurus/zmi/__init__.py:286
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:290
 msgid "Default themes"
 msgstr "Thèmes par défaut"
 
-#: src/pyams_content/component/thesaurus/zmi/__init__.py:322
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:326
 msgid "Content collections"
 msgstr "Collections du contenu"
 
-#: src/pyams_content/component/thesaurus/zmi/__init__.py:323
+#: src/pyams_content/component/thesaurus/zmi/__init__.py:327
 msgid "Content collections selection"
 msgstr "Sélection des collections du contenu"
 
@@ -3211,42 +3217,42 @@ msgstr "Contributeur : {}"
 msgid "Contributor restrictions"
 msgstr "Restrictions du contributeur"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:62
-#: src/pyams_content/shared/common/zmi/types/__init__.py:158
+#: src/pyams_content/shared/common/zmi/types/container.py:47
+#: src/pyams_content/shared/common/zmi/types/container.py:144
 msgid "Content types"
 msgstr "Types de contenus"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:116
+#: src/pyams_content/shared/common/zmi/types/container.py:102
 msgid "Click icon to enable or disable content type"
 msgstr "Cliquer pour activer ou désactiver ce type de contenu"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:133
+#: src/pyams_content/shared/common/zmi/types/container.py:119
 #: src/pyams_content/shared/common/interfaces/types.py:58
 msgid "Label"
 msgstr "Libellé"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:161
+#: src/pyams_content/shared/common/zmi/types/container.py:147
 msgid "Shared tool content types list"
 msgstr "Liste des types de contenus"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:197
+#: src/pyams_content/shared/common/zmi/types/__init__.py:59
 msgid "Add content type"
 msgstr "Ajouter un type de contenu"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:212
+#: src/pyams_content/shared/common/zmi/types/__init__.py:74
 msgid "Add new content type"
 msgstr "Ajout d'un type de contenu"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:214
+#: src/pyams_content/shared/common/zmi/types/__init__.py:76
 msgid "New data type properties"
 msgstr "Propriétés du nouveau type"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:262
+#: src/pyams_content/shared/common/zmi/types/__init__.py:146
 #, python-format
 msgid "Content type: {}"
 msgstr "Type de contenu : {}"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:265
+#: src/pyams_content/shared/common/zmi/types/__init__.py:149
 msgid "Content type properties"
 msgstr "Propriétés du type de contenu"
 
@@ -3347,7 +3353,8 @@ msgid "List of fields associated with this data type"
 msgstr "Liste des champs spécifiques du gabarit associés à ce type de contenu"
 
 #: src/pyams_content/shared/common/interfaces/types.py:132
-#: src/pyams_content/shared/topic/interfaces.py:42
+#: src/pyams_content/shared/form/interfaces.py:38
+#: src/pyams_content/shared/topic/interfaces.py:38
 #: src/pyams_content/shared/site/interfaces.py:189
 msgid "Type of content data"
 msgstr "Type spécifique associé au contenu"
@@ -3620,6 +3627,14 @@ msgstr "Propriétaires"
 #: src/pyams_content/shared/common/interfaces/__init__.py:369
 msgid "Manager will have access to contents owned by these principals"
 msgstr "Ce responsable aura accès aux contenus de ces propriétaires"
+
+#: src/pyams_content/shared/form/interfaces.py:31
+msgid "Form"
+msgstr "Formulaire"
+
+#: src/pyams_content/shared/form/zmi/__init__.py:39
+msgid "Form management"
+msgstr "Ce formulaire"
 
 #: src/pyams_content/shared/topic/interfaces.py:31
 msgid "Topic"
