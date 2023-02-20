@@ -21,6 +21,10 @@ const PyAMS_form = {
 		const getFormOptions = (form, options) => {
 			$('[data-ams-validate-messages]', form).each((idx, elt) => {
 				options.messages[$(elt).attr('name')] = $(elt).data('ams-validate-messages');
+				options.errorClass = 'error d-block';
+				options.errorPlacement = (error, element) => {
+					element.parents('div:first').append(error);
+				};
 			});
 			return options;
 		};
