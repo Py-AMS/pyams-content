@@ -717,7 +717,7 @@ class SharedContentDeleteForm(SharedContentWorkflowTransitionForm):
         if state.version_id == 1:  # remove the first and only version => remove all
             content = get_parent(self.context, ISharedContent)
             target = get_parent(content, IBaseSharedTool)
-            del content.__parent__[content.__name__]
+            del target[content.__name__]
         else:
             versions = IWorkflowVersions(self.context)
             versions.remove_version(state.version_id,
