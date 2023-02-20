@@ -20,7 +20,7 @@ from pyramid.events import subscriber
 from pyams_content.component.illustration.interfaces import IBaseIllustration, \
     IBaseIllustrationTarget, IIllustration, IIllustrationTarget, ILinkIllustrationTarget
 from pyams_content.component.paragraph.interfaces import IBaseParagraph
-from pyams_content.zmi.interfaces import IPropertiesEditForm
+from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer, IFormUpdatedEvent, IInnerSubForm
 from pyams_portal.zmi.portlet import PortletRendererSettingsEditForm

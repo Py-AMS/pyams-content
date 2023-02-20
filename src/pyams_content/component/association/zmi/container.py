@@ -25,7 +25,7 @@ from pyams_content.component.association.zmi.interfaces import IAssociationsCont
 from pyams_content.component.paragraph.zmi.helper import get_json_paragraph_toolbar_refresh_event
 from pyams_content.shared.common.interfaces.types import ITypedSharedTool
 from pyams_content.shared.common.zmi.types import ISharedToolTypesTable
-from pyams_content.zmi.interfaces import IPropertiesEditForm
+from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_form.ajax import ajax_form_config
 from pyams_form.interfaces.form import IInnerSubForm
 from pyams_layer.interfaces import IPyAMSLayer

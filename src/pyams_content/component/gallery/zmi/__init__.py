@@ -23,7 +23,7 @@ from pyams_content.component.gallery.interfaces import IGalleryContainer
 from pyams_content.component.gallery.zmi.file import get_json_gallery_refresh_event
 from pyams_content.component.gallery.zmi.interfaces import IGalleryMediasView
 from pyams_content.component.paragraph.zmi import get_json_paragraph_toolbar_refresh_event
-from pyams_content.zmi.interfaces import IPropertiesEditForm
+from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_form.interfaces.form import IInnerSubForm
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer

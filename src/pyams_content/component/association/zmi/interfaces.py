@@ -17,7 +17,7 @@ This module defines associations-related management interfaces.
 
 from zope.interface import Interface
 
-from pyams_content.zmi.interfaces import IPropertiesEditForm
+from pyams_zmi.interfaces.form import IPropertiesEditForm
 
 
 __docformat__ = 'restructuredtext'

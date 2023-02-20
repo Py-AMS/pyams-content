@@ -15,7 +15,7 @@
 This module provides base paragraphs management components.
 """
 
-from zope.interface import implementer, Interface
+from zope.interface import Interface, implementer
 
 from pyams_content.component.association.interfaces import IAssociationContainer
 from pyams_content.component.association.zmi.interfaces import IAssociationsTable
@@ -29,7 +29,6 @@ from pyams_content.component.paragraph.zmi.interfaces import IInnerParagraphEdit
 from pyams_content.feature.renderer.interfaces import IRendererSettings
 from pyams_content.interfaces import MANAGE_TOOL_PERMISSION
 from pyams_content.shared.common.interfaces import IWfSharedContent
-from pyams_content.zmi.interfaces import IPropertiesEditForm
 from pyams_form.ajax import ajax_form_config
 from pyams_form.button import Buttons, handler
 from pyams_form.field import Fields
@@ -45,7 +44,7 @@ from pyams_security.security import ProtectedViewObjectMixin
 from pyams_skin.schema.button import ActionButton
 from pyams_skin.viewlet.menu import MenuDivider, MenuItem
 from pyams_utils.adapter import ContextRequestViewAdapter, NullAdapter, adapter_config
-from pyams_utils.factory import get_object_factory, is_interface
+from pyams_utils.factory import get_object_factory
 from pyams_utils.request import get_annotations
 from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
@@ -55,7 +54,7 @@ from pyams_zmi.form import AdminEditForm, AdminModalAddForm, AdminModalEditForm
 from pyams_zmi.helper.event import get_json_table_refresh_callback, \
     get_json_table_row_add_callback, get_json_widget_refresh_callback
 from pyams_zmi.interfaces import IAdminLayer
-from pyams_zmi.interfaces.form import IEditFormButtons, IFormTitle
+from pyams_zmi.interfaces.form import IEditFormButtons, IFormTitle, IPropertiesEditForm
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager, IPropertiesMenu, \
     IToolbarViewletManager

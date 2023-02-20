@@ -24,7 +24,7 @@ from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BasePara
     IParagraphContainerBaseTable, IParagraphContainerFullTable
 from pyams_content.component.paragraph.zmi.container import ParagraphTitleToolbarItemMixin
 from pyams_content.component.paragraph.zmi.interfaces import IParagraphTitleToolbar
-from pyams_content.zmi.interfaces import IPropertiesEditForm
+from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IFormFields

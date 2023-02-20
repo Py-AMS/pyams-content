@@ -20,7 +20,7 @@ __docformat__ = 'restructuredtext'
 from zope.interface import implementer, Interface
 
 from pyams_content.component.gallery.portlet import IGalleryPortletSettings
-from pyams_content.zmi.interfaces import IPropertiesEditForm
+from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_form.interfaces.form import IInnerSubForm
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortletPreviewer

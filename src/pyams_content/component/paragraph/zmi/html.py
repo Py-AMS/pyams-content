@@ -26,13 +26,13 @@ from pyams_content.component.paragraph.interfaces.html import HTML_PARAGRAPH_ICO
 from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu
 from pyams_content.component.paragraph.zmi.interfaces import IParagraphContainerBaseTable
 from pyams_content.feature.renderer import DEFAULT_RENDERER_NAME, HIDDEN_RENDERER_NAME
-from pyams_content.zmi.interfaces import IPropertiesEditForm
 from pyams_form.ajax import ajax_form_config
 from pyams_form.interfaces.form import IFormUpdatedEvent
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_utils.interfaces.data import IObjectData
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager
 
 
