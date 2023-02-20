@@ -24,11 +24,12 @@ from pyams_content.zmi.interfaces import IDashboardColumn, IDashboardContentNumb
     IDashboardContentOwner, IDashboardContentType, ISiteRootDashboardContentType
 from pyams_i18n.interfaces import II18n
 from pyams_security.utility import get_principal
+from pyams_security_views.interfaces.login import ILoginView
 from pyams_sequence.interfaces import ISequentialIdTarget
 from pyams_skin.interfaces.view import IModalPage
 from pyams_skin.interfaces.viewlet import IHeaderViewletManager
 from pyams_template.template import template_config
-from pyams_utils.adapter import adapter_config
+from pyams_utils.adapter import NullAdapter, adapter_config
 from pyams_utils.date import format_datetime
 from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
@@ -118,6 +119,13 @@ class SharedContentHeaderViewlet(ContentHeaderViewlet):
             translate = self.request.localizer.translate
             return translate(_("from {}")).format(
                 get_principal(self.request, next(iter(owner))).title)
+
+
+@viewlet_config(name='pyams.content_header',
+                context=IWfSharedContent, layer=IAdminLayer, view=ILoginView,
+                manager=IHeaderViewletManager, weight=10)
+class SharedContentHeaderLoginViewViewlet(EmptyViewlet):
+    """Shared content header viewlet on login view"""
 
 
 @viewlet_config(name='workflow-status',
@@ -258,6 +266,9 @@ class SharedContentWorkflowStatus(Viewlet):
 
 @viewlet_config(name='workflow-status',
                 context=IWfSharedContent, layer=IAdminLayer, view=IModalPage,
+                manager=IHeaderViewletManager, weight=20)
+@viewlet_config(name='workflow-status',
+                context=IWfSharedContent, layer=IAdminLayer, view=ILoginView,
                 manager=IHeaderViewletManager, weight=20)
 class SharedContentWorkflowModalStatus(EmptyViewlet):
     """Shared content workflow modal status"""
