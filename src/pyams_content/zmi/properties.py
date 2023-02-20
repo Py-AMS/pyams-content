@@ -17,7 +17,7 @@ This module defines base classes for properties edit forms.
 
 from zope.interface import implementer
 
-from pyams_content.zmi.interfaces import IPropertiesEditForm
+from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_zmi.form import AdminEditForm
 
 

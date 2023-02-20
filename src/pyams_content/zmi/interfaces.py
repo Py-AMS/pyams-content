@@ -90,7 +90,3 @@ class IMyDashboardMenu(Interface):
 
 class IAllDashboardMenu(Interface):
     """General dashboard menu"""
-
-
-class IPropertiesEditForm(Interface):
-    """Properties edit form marker interface"""
