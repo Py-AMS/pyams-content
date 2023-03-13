@@ -25,7 +25,6 @@ from pyams_content.component.association.zmi.interfaces import IAssociationsCont
 from pyams_content.component.paragraph.zmi.helper import get_json_paragraph_toolbar_refresh_event
 from pyams_content.shared.common.interfaces.types import ITypedSharedTool
 from pyams_content.shared.common.zmi.types import ISharedToolTypesTable
-from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_form.ajax import ajax_form_config
 from pyams_form.interfaces.form import IInnerSubForm
 from pyams_layer.interfaces import IPyAMSLayer
@@ -40,10 +39,10 @@ from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalDisplayForm
 from pyams_zmi.helper.container import delete_container_element, switch_element_attribute
 from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_zmi.skin import AdminSkin
 from pyams_zmi.table import ActionColumn, ContentTypeColumn, I18nColumnMixin, InnerTableAdminView, \
-    NameColumn, ReorderColumn, Table, TableGroupSwitcher, TrashColumn, VisibilityColumn, \
-    get_ordered_data_attributes
+    NameColumn, ReorderColumn, SortableTable, TableGroupSwitcher, TrashColumn, VisibilityColumn
 from pyams_zmi.utils import get_object_hint, get_object_label
 
 
@@ -92,18 +91,10 @@ class AssociationsModalEditForm(AdminModalDisplayForm):
 
 
 @factory_config(IAssociationsTable)
-class AssociationsTable(Table):
+class AssociationsTable(SortableTable):
     """Associations table"""
 
     container_class = IAssociationContainer
-
-    @property
-    def data_attributes(self):
-        """Attributes getter"""
-        attributes = super().data_attributes
-        container = self.container_class(self.context)
-        get_ordered_data_attributes(attributes, container, self.request)
-        return attributes
 
     display_if_empty = True
 
