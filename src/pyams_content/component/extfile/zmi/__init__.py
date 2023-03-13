@@ -34,7 +34,7 @@ from pyams_utils.adapter import adapter_config
 from pyams_utils.traversing import get_parent
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalAddForm, AdminModalEditForm
-from pyams_zmi.interfaces import IAdminLayer, IObjectHint, IObjectIcon
+from pyams_zmi.interfaces import IAdminLayer, IObjectHint
 from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager
 from pyams_zmi.utils import get_object_hint, get_object_label
