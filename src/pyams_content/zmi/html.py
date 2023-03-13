@@ -38,19 +38,22 @@ class HTMLWidgetDataRenderer(ContextAdapter):
 
     def get_object_data(self):
         """Object data getter"""
+        context = self.context.context
+        request = self.context.request
         data = {
             'ams-modules': {
                 'content': get_resource_path(content_js)
             },
-            'ams-tinymce-init-callback': 'MyAMS.content.TinyMCE.initEditor'
+            'ams-tinymce-init-callback': 'MyAMS.content.TinyMCE.initEditor',
+            'ams-tinymce-link-list': absolute_url(context, request, 'get-links-list.json')
         }
-        skinnable = get_parent(self.context.context, ISkinnable)
+        skinnable = get_parent(request.context, ISkinnable)
         if skinnable is not None:
             editor_stylesheet = skinnable.editor_stylesheet
             if editor_stylesheet:
                 modified = IZopeDublinCore(editor_stylesheet).modified
                 data['ams-tinymce-content-css'] = absolute_url(editor_stylesheet,
-                                                               self.context.request,
+                                                               request,
                                                                query={
                                                                    '_': modified.timestamp()
                                                                })
