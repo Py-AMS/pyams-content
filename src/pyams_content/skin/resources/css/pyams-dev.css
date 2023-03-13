@@ -7469,6 +7469,9 @@ h6 {
   margin-top: 0.25rem;
   margin-bottom: 1.25rem; }
 
+legend {
+  font-size: 1.25rem; }
+
 .legend {
   max-width: 100%;
   right: 0;
@@ -7553,6 +7556,11 @@ table td {
       width: 100%;
       max-width: 100%; } }
 
+.form-group.required-field > label::after {
+  content: ' * ';
+  color: #dc3545;
+  font-weight: bold; }
+
 .form-group.required-field .control-label::after {
   content: '*';
   display: inline-block;
@@ -7560,6 +7568,10 @@ table td {
 
 .form-group .input .error {
   color: #dc3545; }
+
+.datepicker table thead th,
+.datepicker table thead td {
+  background-color: #fafafa; }
 
 .list-separated li:empty {
   display: none; }

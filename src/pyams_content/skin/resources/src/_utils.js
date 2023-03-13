@@ -162,6 +162,24 @@ const MyAMS = {
 			}
 			dataElement.removeAttr('data-ams-data');
 		});
+	},
+
+	/**
+	 * MyAMS helpers
+	 */
+	helpers: {
+
+		/**
+		 * Click handler used to clear datetime input
+		 */
+		clearDatetimeValue: (evt) => {
+			const
+				target = $(evt.currentTarget).data('target'),
+				picker = $(target).data('datetimepicker');
+			if (picker) {
+				picker.date(null);
+			}
+		}
 	}
 };
 
@@ -171,7 +189,7 @@ const MyAMS = {
  */
 $(document).on('click', '[data-ams-click-handler]', (event) => {
 	const
-		source = $(event.target),
+		source = $(event.currentTarget),
 		data = source.data();
 	if (data.amsClickHandler) {
 		if ((data.amsStopPropagation === true) || (data.amsClickStopPropagation === true)) {
@@ -220,5 +238,6 @@ $(document).on('change', '[data-ams-change-handler]', (event) => {
 	}
 });
 
+window.MyAMS = MyAMS;
 
 export default MyAMS;

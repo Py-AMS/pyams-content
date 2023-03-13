@@ -5,6 +5,13 @@
 
 .form-group {
   &.required-field {
+    >label {
+      &::after {
+        content: ' * ';
+        color: $danger;
+        font-weight: bold;
+      }
+    }
     .control-label {
       &::after {
         content: '*';
@@ -17,6 +24,17 @@
   .input {
     .error {
       color: $danger;
+    }
+  }
+}
+
+.datepicker {
+  table {
+    thead {
+      th,
+      td {
+        background-color: $page-bg;
+      }
     }
   }
 }
