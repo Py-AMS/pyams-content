@@ -17,20 +17,21 @@
 from pyramid.view import view_config
 
 from pyams_content.interfaces import MANAGE_TOOL_PERMISSION
-from pyams_content.shared.common.interfaces.types import ITypedSharedTool, ITypedDataManager
+from pyams_content.shared.common.interfaces.types import ITypedDataManager, ITypedSharedTool
 from pyams_content.shared.common.zmi.types.interfaces import ISharedToolTypesTable
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_pagelet.pagelet import pagelet_config
-from pyams_table.interfaces import IValues, IColumn
-from pyams_utils.adapter import adapter_config, ContextRequestViewAdapter
+from pyams_table.interfaces import IColumn, IValues
+from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.factory import factory_config
 from pyams_viewlet.viewlet import viewlet_config
-from pyams_zmi.helper.container import switch_element_attribute, delete_container_element
+from pyams_zmi.helper.container import delete_container_element, switch_element_attribute
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu
-from pyams_zmi.table import Table, get_ordered_data_attributes, ReorderColumn, VisibilityColumn, NameColumn, \
-    TrashColumn, TableAdminView
+from pyams_zmi.table import NameColumn, ReorderColumn, SortableTable, TableAdminView, TrashColumn, \
+    VisibilityColumn
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
+
 
 __docformat__ = 'restructuredtext'
 
@@ -49,15 +50,10 @@ class SharedToolTypesMenu(NavigationMenuItem):
 
 
 @factory_config(ISharedToolTypesTable)
-class SharedToolTypesTable(Table):
+class SharedToolTypesTable(SortableTable):
     """Shared tool data types table"""
 
-    @property
-    def data_attributes(self):
-        attributes = super().data_attributes
-        container = ITypedDataManager(self.context)
-        get_ordered_data_attributes(attributes, container, self.request)
-        return attributes
+    container_class = ITypedDataManager
 
     display_if_empty = True
 
