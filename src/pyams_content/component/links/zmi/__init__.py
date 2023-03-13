@@ -14,9 +14,11 @@
 
 """
 
+from pyramid.view import view_config
 from zope.interface import implementer
 
-from pyams_content.component.association import IAssociationContainer, IAssociationContainerTarget
+from pyams_content.component.association.interfaces import IAssociationContainer, IAssociationContainerTarget, \
+    IAssociationInfo
 from pyams_content.component.association.zmi import AssociationItemAddFormMixin, \
     AssociationItemAddMenuMixin, IAssociationsTable
 from pyams_content.component.association.zmi.interfaces import IAssociationItemAddForm, \
@@ -28,6 +30,7 @@ from pyams_content.reference.pictogram.zmi.widget import PictogramSelectFieldWid
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_layer.interfaces import IPyAMSLayer
+from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_security.security import ProtectedViewObjectMixin
 from pyams_skin.viewlet.menu import MenuItem
 from pyams_utils.adapter import adapter_config
@@ -195,3 +198,29 @@ class MailtoLinkPropertiesEditForm(LinkEditFormMixin, AdminModalEditForm):
     fields = Fields(IMailtoLink).select('address', 'address_name', 'title',
                                         'description', 'pictogram_name')
     fields['pictogram_name'].widget_factory = PictogramSelectFieldWidget
+
+
+#
+# Links getter API
+#
+
+@view_config(name='get-links-list.json',
+             request_type=IPyAMSLayer,
+             permission=VIEW_SYSTEM_PERMISSION,
+             renderer='json', xhr=True)
+def get_links_list(request):
+    """Links list getter"""
+    result = []
+    context = request.context
+    links = IAssociationContainer(context, None)
+    if not links:
+        return result
+    for link in links.values():
+        if not (IInternalLink.providedBy(link) or IExternalLink.providedBy(link)):
+            continue
+        link_info = IAssociationInfo(link)
+        result.append({
+            'title': link_info.user_title,
+            'value': link.get_editor_url()
+        })
+    return result
