@@ -19,6 +19,10 @@ __docformat__ = 'restructuredtext'
 from zope.interface import Interface
 
 
+class ISharedContentPropertiesMenu(Interface):
+    """Shared content properties menu marker interface"""
+
+
 class IContributorRestrictionsEditForm(Interface):
     """Contributor restrictions edit form marker interface"""
 

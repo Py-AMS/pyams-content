@@ -31,7 +31,8 @@ from pyams_content.shared.common import IBaseSharedTool, ISharedContent, IWfShar
     WfSharedContent
 from pyams_content.shared.common.interfaces import IContributorRestrictions, IManagerRestrictions, \
     ISharedTool, IWfSharedContentRoles
-from pyams_content.shared.common.interfaces.types import ITypedSharedTool, IWfTypedSharedContent
+from pyams_content.shared.common.interfaces.types import ITypedSharedTool
+from pyams_content.shared.common.zmi.interfaces import ISharedContentPropertiesMenu
 from pyams_content.zmi.properties import PropertiesEditForm
 from pyams_content.zmi.widget.seo import I18nSEOTextLineFieldWidget
 from pyams_form.ajax import AJAXFormRenderer, ajax_form_config
@@ -281,10 +282,11 @@ class SharedContentCompositionMenu(NavigationMenuItem):
     url = '#'
 
 
-@viewlet_config(name='properties.menu',
-                context=IWfSharedContent, layer=IAdminLayer,
-                manager=IPropertiesMenu, weight=10,
-                permission=VIEW_SYSTEM_PERMISSION)
+@viewletmanager_config(name='properties.menu',
+                       context=IWfSharedContent, layer=IAdminLayer,
+                       manager=IPropertiesMenu, weight=10,
+                       provides=ISharedContentPropertiesMenu,
+                       permission=VIEW_SYSTEM_PERMISSION)
 class SharedContentPropertiesMenu(NavigationMenuItem):
     """Shared content properties menu"""
 
