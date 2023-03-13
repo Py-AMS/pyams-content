@@ -16,13 +16,12 @@
 
 from zope.interface import Interface, implementer
 
-from pyams_content.component.association.zmi import IAssociationsTable, association_item_edit_form_title
+from pyams_content.component.association.zmi import IAssociationsTable
 from pyams_content.feature.navigation import IMenu, IMenuLinksContainer, IMenusContainer, \
     IMenusContainerTarget, Menu
 from pyams_content.feature.navigation.interfaces import IMenuLinksContainerTarget
 from pyams_content.feature.navigation.zmi.interfaces import IMenusTable
 from pyams_content.reference.pictogram.zmi.widget import PictogramSelectFieldWidget
-from pyams_content.zmi.interfaces import IPropertiesEditForm
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer
@@ -39,12 +38,13 @@ from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalAddForm, AdminModalEditForm
 from pyams_zmi.helper.event import get_json_table_row_add_callback, \
     get_json_table_row_refresh_callback
-from pyams_zmi.interfaces import IAdminLayer, IObjectLabel, IObjectIcon, IObjectHint
-from pyams_zmi.interfaces.form import IFormTitle
+from pyams_zmi.interfaces import IAdminLayer, IObjectHint, IObjectIcon, IObjectLabel
+from pyams_zmi.interfaces.form import IFormTitle, IPropertiesEditForm
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager, IToolbarViewletManager
 from pyams_zmi.table import TableElementEditor
-from pyams_zmi.utils import get_object_label, get_object_hint
+from pyams_zmi.utils import get_object_hint, get_object_label
+
 
 __docformat__ = 'restructuredtext'
 

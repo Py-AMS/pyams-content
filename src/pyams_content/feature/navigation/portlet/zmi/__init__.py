@@ -21,7 +21,7 @@ from pyams_content.component.association.zmi.container import AssociationsGroup
 from pyams_content.feature.navigation import IMenuLinksContainerTarget
 from pyams_content.feature.navigation.portlet import IDoubleNavigationPortletSettings, \
     ISimpleNavigationPortletSettings
-from pyams_content.zmi.interfaces import IPropertiesEditForm
+from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_form.interfaces.form import IInnerSubForm
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortletPreviewer
