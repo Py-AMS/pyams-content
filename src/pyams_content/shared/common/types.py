@@ -41,11 +41,10 @@ from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_sequence.reference import get_reference_target
 from pyams_utils.adapter import ContextAdapter, adapter_config, get_annotation_adapter
 from pyams_utils.factory import factory_config
-from pyams_utils.registry import get_local_registry, query_utility
+from pyams_utils.registry import get_utilities_for, query_utility
 from pyams_utils.request import check_request
 from pyams_utils.traversing import get_parent
 from pyams_utils.vocabulary import vocabulary_config
-
 
 __docformat__ = 'restructuredtext'
 
@@ -191,18 +190,20 @@ class AllTypedSharedToolDataTypesVocabulary(SimpleVocabulary):
     def __init__(self, context):
         terms = []
         request = check_request()
-        registry = get_local_registry()
-        for tool in registry.getAllUtilitiesRegisteredFor(ISharedTool):
+        for name, tool in get_utilities_for(ISharedTool):
+            if not name:
+                continue
             manager = ITypedDataManager(tool, None)
-            if manager is not None:
-                terms.extend([
-                    SimpleTerm(datatype.__name__,
-                               title=II18n(datatype).query_attribute('backoffice_label',
-                                                                     request=request) or
-                                     II18n(datatype).query_attribute('label',
-                                                                     request=request))
-                    for datatype in manager.values()
-                ])
+            if manager is None:
+                continue
+            terms.extend([
+                SimpleTerm(datatype.__name__,
+                           title=II18n(datatype).query_attribute('backoffice_label',
+                                                                 request=request) or
+                                 II18n(datatype).query_attribute('label',
+                                                                 request=request))
+                for datatype in manager.values()
+            ])
         terms.sort(key=lambda x: x.title)
         super().__init__(terms)
 
@@ -219,28 +220,30 @@ class AllTypedSharedToolDataTypesVocabulary(SimpleVocabulary):
 def get_all_data_types(request):
     """Get list of all registered data types as JSON object"""
     results = []
-    registry = get_local_registry()
     translate = request.localizer.translate
-    for tool in sorted(registry.getAllUtilitiesRegisteredFor(ISharedTool),
-                       key=lambda x: II18n(x).query_attribute('title', request=request)):
+    for name, tool in sorted(get_utilities_for(ISharedTool),
+                             key=lambda x: II18n(x).query_attribute('title', request=request)):
+        if not name:
+            continue
         manager = ITypedDataManager(tool, None)
-        if manager is not None:
-            terms = [
-                {
-                    'id': datatype.__name__,
-                    'text': II18n(datatype).query_attribute('backoffice_label',
-                                                            request=request) or
-                            II18n(datatype).query_attribute('label',
-                                                            request=request)
-                }
-                for datatype in manager.values()
-            ]
-            content_factory = tool.shared_content_factory
-            results.append({
-                'text': translate(content_factory.content_name),
-                'disabled': True,
-                'children': terms
-            })
+        if manager is None:
+            continue
+        terms = [
+            {
+                'id': datatype.__name__,
+                'text': II18n(datatype).query_attribute('backoffice_label',
+                                                        request=request) or
+                        II18n(datatype).query_attribute('label',
+                                                        request=request)
+            }
+            for datatype in manager.values()
+        ]
+        content_factory = tool.shared_content_factory
+        results.append({
+            'text': translate(content_factory.content_name),
+            'disabled': True,
+            'children': terms
+        })
     return results
 
 
