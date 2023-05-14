@@ -18,26 +18,35 @@ import locale
 
 from zope.interface import Interface
 
-from pyams_content.shared.common.interfaces import IBaseSharedTool, ISharedSite
+from pyams_content.shared.common.interfaces import ISharedSite, ISharedTool
 from pyams_content.zmi.viewlet.toplinks import TopTabsViewletManager
 from pyams_i18n.interfaces import II18n
 from pyams_skin.viewlet.menu import MenuItem
-from pyams_utils.registry import get_all_utilities_registered_for
+from pyams_utils.registry import get_utilities_for
 from pyams_utils.url import absolute_url
 from pyams_viewlet.manager import viewletmanager_config
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.zmi.viewlet.toplinks import TopMenuViewletManager
-
 
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
 
 
+class BaseSharedToolsMenu(TopMenuViewletManager):
+    """Base shared tool menu"""
+
+    def add_menu(self, context, request, parent, tool):
+        menu = MenuItem(context, request, parent, self)
+        menu.label = II18n(tool).query_attribute('title', request=request) or tool.__name__
+        menu.href = absolute_url(tool, request, 'admin')
+        self.viewlets.append(menu)
+
+
 @viewletmanager_config(name='shared-contents.menu',
                        context=Interface, layer=IAdminLayer,
                        manager=TopTabsViewletManager, weight=20)
-class SharedContentsMenu(TopMenuViewletManager):
+class SharedContentsMenu(BaseSharedToolsMenu):
     """Shared contents menu"""
 
     label = _("Shared contents")
@@ -47,22 +56,21 @@ class SharedContentsMenu(TopMenuViewletManager):
         context = self.context
         request = self.request
         parent = self.__parent__
-        for site in sorted(filter(lambda tool: (not ISharedSite.providedBy(tool)) and
-                                               tool.shared_content_menu,
-                                  get_all_utilities_registered_for(IBaseSharedTool)),
-                           key=lambda x: locale.strxfrm(II18n(x).query_attribute('title',
-                                                                                 request=request)
-                                                        or '')):
-            menu = MenuItem(context, request, parent, self)
-            menu.label = II18n(site).query_attribute('title', request=request) or site.__name__
-            menu.href = absolute_url(site, request, 'admin')
-            self.viewlets.append(menu)
+        for name, tool in sorted(filter(lambda x: (not ISharedSite.providedBy(x[1])) and
+                                                  x[1].shared_content_menu,
+                                        get_utilities_for(ISharedTool)),
+                                 key=lambda x: locale.strxfrm(II18n(x[1]).query_attribute('title',
+                                                                                          request=request)
+                                                              or '')):
+            if not name:
+                continue
+            self.add_menu(context, request, parent, tool)
 
 
 @viewletmanager_config(name='shared-tools.menu',
                        context=Interface, layer=IAdminLayer,
                        manager=TopTabsViewletManager, weight=30)
-class SharedToolsMenu(TopMenuViewletManager):
+class SharedToolsMenu(BaseSharedToolsMenu):
     """Shared tools menu"""
 
     label = _("Shared tools")
@@ -72,13 +80,12 @@ class SharedToolsMenu(TopMenuViewletManager):
         context = self.context
         request = self.request
         parent = self.__parent__
-        for site in sorted(filter(lambda tool: (not ISharedSite.providedBy(tool)) and
-                                               (not tool.shared_content_menu),
-                                  get_all_utilities_registered_for(IBaseSharedTool)),
-                           key=lambda x: locale.strxfrm(II18n(x).query_attribute('title',
-                                                                                 request=request)
-                                                        or '')):
-            menu = MenuItem(context, request, parent, self)
-            menu.label = II18n(site).query_attribute('title', request=request) or site.__name__
-            menu.href = absolute_url(site, request, 'admin')
-            self.viewlets.append(menu)
+        for name, tool in sorted(filter(lambda x: (not ISharedSite.providedBy(x[1])) and
+                                                  (not x[1].shared_content_menu),
+                                        get_utilities_for(ISharedTool)),
+                                 key=lambda x: locale.strxfrm(II18n(x[1]).query_attribute('title',
+                                                                                          request=request)
+                                                              or '')):
+            if not name:
+                continue
+            self.add_menu(context, request, parent, tool)
