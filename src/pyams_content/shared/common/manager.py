@@ -14,8 +14,11 @@
 
 """
 
+from pyramid.events import subscriber
+from zope.component.interfaces import ISite
 from zope.container.folder import Folder
 from zope.interface import implementer
+from zope.lifecycleevent.interfaces import IObjectAddedEvent
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.interfaces import MANAGE_TOOL_PERMISSION
@@ -28,6 +31,7 @@ from pyams_security.security import ProtectedObjectMixin
 from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.factory import factory_config, get_object_factory
 from pyams_utils.registry import query_utility
+from pyams_utils.traversing import get_parent
 from pyams_workflow.interfaces import IWorkflow
 
 
@@ -63,6 +67,17 @@ class SharedTool(Folder, BaseSharedTool):
     @property
     def shared_content_factory(self):
         return get_object_factory(ISharedContent, name=self.shared_content_type)
+
+
+@subscriber(IObjectAddedEvent, context_selector=ISharedTool)
+def handle_added_shared_tool(event):
+    """Register shared tool after """
+    site = get_parent(event.newParent, ISite)
+    if site is not None:
+        registry = site.getSiteManager()
+        if registry is not None:
+            tool = event.object
+            registry.registerUtility(tool, ISharedTool, name=tool.shared_content_type)
 
 
 @adapter_config(required=IBaseSharedTool,
