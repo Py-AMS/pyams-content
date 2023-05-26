@@ -36,7 +36,7 @@ from pyams_content import _
 @viewletmanager_config(name='reference-tables.menu',
                        context=Interface, layer=IAdminLayer,
                        manager=TopTabsViewletManager, weight=40)
-class SharedToolsMenu(TopMenuViewletManager):
+class ReferencesTablesMenu(TopMenuViewletManager):
     """Reference tables menu"""
 
     label = _("Reference tables")
@@ -46,11 +46,8 @@ class SharedToolsMenu(TopMenuViewletManager):
         context = self.context
         request = self.request
         parent = self.__parent__
-        for site in sorted(get_all_utilities_registered_for(IReferenceTable),
-                           key=lambda x: locale.strxfrm(II18n(x).query_attribute('title',
-                                                                                 request=request)
-                                                        or '')):
-            menu = MenuItem(context, request, parent, self)
-            menu.label = II18n(site).query_attribute('title', request=request) or site.__name__
-            menu.href = absolute_url(site, request, 'admin')
-            self.viewlets.append(menu)
+        for table in sorted(get_all_utilities_registered_for(IReferenceTable),
+                            key=lambda x: locale.strxfrm(II18n(x).query_attribute('title',
+                                                                                  request=request)
+                                                         or '')):
+            self.add_menu(context, request, parent, table)
