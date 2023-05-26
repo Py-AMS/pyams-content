@@ -19,28 +19,34 @@ from pyramid.decorator import reify
 from pyramid.view import view_config
 from zope.interface import implementer
 
+from pyams_content.component.gallery import IGallery, IGalleryTarget
 from pyams_content.component.gallery.interfaces import IGalleryContainer
 from pyams_content.component.gallery.zmi.file import get_json_gallery_refresh_event
 from pyams_content.component.gallery.zmi.interfaces import IGalleryMediasView
 from pyams_content.component.paragraph.zmi import get_json_paragraph_toolbar_refresh_event
-from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_form.interfaces.form import IInnerSubForm
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_layer.skin import apply_skin
+from pyams_pagelet.pagelet import pagelet_config
+from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_security.permission import get_edit_permission
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
-from pyams_utils.factory import factory_config
+from pyams_utils.factory import factory_config, get_object_factory
 from pyams_utils.interfaces import ICacheKeyValue
-from pyams_viewlet.viewlet import Viewlet
+from pyams_viewlet.viewlet import Viewlet, viewlet_config
 from pyams_zmi.helper.container import delete_container_element, switch_element_attribute
 from pyams_zmi.interfaces import IAdminLayer
-
+from pyams_zmi.interfaces.form import IPropertiesEditForm
+from pyams_zmi.interfaces.viewlet import IPropertiesMenu
+from pyams_zmi.skin import AdminSkin
+from pyams_zmi.view import InnerAdminView
+from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
 __docformat__ = 'restructuredtext'
 
-from pyams_zmi.skin import AdminSkin
+from pyams_content import _
 
 
 class BaseGalleryMediasViewlet(Viewlet):
@@ -124,3 +130,35 @@ def remove_media(request):
             result.setdefault('callbacks', []).append(event)
         result.setdefault('handle_json', True)
     return result
+
+
+@viewlet_config(name='gallery.menu',
+                context=IGalleryTarget, layer=IAdminLayer,
+                manager=IPropertiesMenu, weight=20,
+                permission=VIEW_SYSTEM_PERMISSION)
+class GalleryMenu(NavigationMenuItem):
+    """Gallery menu"""
+
+    label = _("Medias gallery")
+    href = '#medias-gallery.html'
+
+
+@pagelet_config(name='medias-gallery.html',
+                context=IGalleryTarget, layer=IPyAMSLayer,
+                permission=VIEW_SYSTEM_PERMISSION)
+@template_config(template='templates/gallery-view.pt', layer=IAdminLayer)
+@implementer(IPropertiesEditForm)
+class GalleryView(InnerAdminView):
+    """Gallery view"""
+
+    title = _("Medias gallery")
+
+    medias_view = None
+
+    def update(self):
+        super().update()
+        medias_view_factory = get_object_factory(IGalleryMediasView)
+        if medias_view_factory is not None:
+            gallery = IGallery(self.context)
+            self.medias_view = medias_view_factory(gallery, self.request, self)
+            self.medias_view.update()
