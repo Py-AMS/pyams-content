@@ -39,7 +39,7 @@ class ExternalFilesTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
     """External files title toolbar viewlet"""
 
     icon_class = EXTFILE_ICON_CLASS
-    icon_hint = _("External files")
+    icon_hint = _("Internal files")
 
     target_intf = IAssociationContainer
     item_intf = IExtFile
@@ -53,7 +53,7 @@ class ExternalImagesTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
     """External images title toolbar viewlet"""
 
     icon_class = EXTIMAGE_ICON_CLASS
-    icon_hint = _("External images")
+    icon_hint = _("Internal images")
 
     target_intf = IAssociationContainer
     item_intf = IExtImage
@@ -67,7 +67,7 @@ class ExternalVideosTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
     """External files title toolbar viewlet"""
 
     icon_class = EXTVIDEO_ICON_CLASS
-    icon_hint = _("External videos")
+    icon_hint = _("Internal videos")
 
     target_intf = IAssociationContainer
     item_intf = IExtVideo
@@ -81,7 +81,7 @@ class ExternalAudiosTitleToolbarViewlet(ParagraphTitleToolbarItemMixin):
     """External audio files title toolbar viewlet"""
 
     icon_class = EXTAUDIO_ICON_CLASS
-    icon_hint = _("External audio files")
+    icon_hint = _("Internal audio files")
 
     target_intf = IAssociationContainer
     item_intf = IExtAudio
