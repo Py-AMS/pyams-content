@@ -80,7 +80,7 @@ class DataTypeAddForm(AdminModalAddForm):
         """Form fields getter"""
         fields = Fields(IDataType).omit('__name__', '__parent__', 'visible')
         fields['pictogram'].widget_factory = PictogramSelectFieldWidget
-        if not self.context.shared_content_types_fields:
+        if not self.context.shared_content_info_factory:
             fields = fields.omit('field_names')
         return fields
 
@@ -154,7 +154,7 @@ class DataTypeEditForm(AdminModalEditForm):
         fields = Fields(IDataType).omit('__name__', '__parent__', 'visible')
         fields['pictogram'].widget_factory = PictogramSelectFieldWidget
         tool = get_parent(self.context, ITypedSharedTool)
-        if (tool is not None) and not tool.shared_content_types_fields:
+        if (tool is not None) and not tool.shared_content_info_factory:
             fields = fields.omit('field_names')
         return fields
 

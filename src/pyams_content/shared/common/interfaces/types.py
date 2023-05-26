@@ -114,7 +114,7 @@ class ITypedDataManager(IContainer):
 class ITypedSharedTool(ISharedTool):
     """Shared tool containing typed data"""
 
-    shared_content_types_fields = Attribute("Content fields interface")
+    shared_content_info_factory = Attribute("Custom shared content information factory")
 
 
 class ITypedSharedToolPortalContext(ITypedSharedTool, IPortalContext):
