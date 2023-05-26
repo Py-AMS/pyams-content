@@ -21,13 +21,10 @@ from zope.interface import Interface
 from pyams_content.shared.common.interfaces import ISharedSite
 from pyams_content.zmi.viewlet.toplinks import TopTabsViewletManager
 from pyams_i18n.interfaces import II18n
-from pyams_skin.viewlet.menu import MenuItem
 from pyams_utils.registry import get_all_utilities_registered_for
-from pyams_utils.url import absolute_url
 from pyams_viewlet.manager import viewletmanager_config
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.zmi.viewlet.toplinks import TopMenuViewletManager
-
 
 __docformat__ = 'restructuredtext'
 
@@ -41,17 +38,15 @@ class SharedSitesMenu(TopMenuViewletManager):
     """Shared sites menu"""
 
     label = _("Sites")
+    interface = ISharedSite
 
     def update(self):
         super().update()
         context = self.context
         request = self.request
         parent = self.__parent__
-        for site in sorted(get_all_utilities_registered_for(ISharedSite),
+        for site in sorted(get_all_utilities_registered_for(self.interface),
                            key=lambda x: locale.strxfrm(II18n(x).query_attribute('title',
                                                                                  request=request)
                                                         or '')):
-            menu = MenuItem(context, request, parent, self)
-            menu.label = II18n(site).query_attribute('title', request=request) or site.__name__
-            menu.href = absolute_url(site, request, 'admin')
-            self.viewlets.append(menu)
+            self.add_menu(context, request, parent, site)
