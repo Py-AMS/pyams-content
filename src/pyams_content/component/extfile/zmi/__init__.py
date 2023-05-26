@@ -45,6 +45,13 @@ __docformat__ = 'restructuredtext'
 from pyams_content import _
 
 
+@adapter_config(required=(IExtFile, IAdminLayer, Interface),
+                provides=IObjectHint)
+def external_file_hint(context, request, view):  # pylint: disable=unused-argument
+    """External file hint getter"""
+    return request.localizer.translate(context.icon_hint)
+
+
 @adapter_config(required=(IAssociationContainer, IAdminLayer, IExtFileAddForm),
                 provides=IFormTitle)
 def base_extfile_add_form_title(context, request, view):
@@ -148,13 +155,6 @@ class ExtImageAddForm(ExtFileAddFormMixin, AdminModalAddForm):
     content_factory = IExtImage
 
 
-@adapter_config(required=(IExtImage, IAdminLayer, Interface),
-                provides=IObjectHint)
-def external_image_hint(context, request, view):  # pylint: disable=unused-argument
-    """External image hint getter"""
-    return request.localizer.translate(_("External image"))
-
-
 @ajax_form_config(name='properties.html',
                   context=IExtImage, layer=IPyAMSLayer)
 class ExtImageEditForm(ExtFileEditFormMixin, AdminModalEditForm):
@@ -193,13 +193,6 @@ class ExtVideoAddForm(ExtFileAddFormMixin, AdminModalAddForm):
     fields['title'].widget_factory = I18nExtFileTitleFieldWidget
 
     content_factory = IExtVideo
-
-
-@adapter_config(required=(IExtVideo, IAdminLayer, Interface),
-                provides=IObjectHint)
-def external_video_hint(context, request, view):  # pylint: disable=unused-argument
-    """External video hint getter"""
-    return request.localizer.translate(_("External video"))
 
 
 @ajax_form_config(name='properties.html',
