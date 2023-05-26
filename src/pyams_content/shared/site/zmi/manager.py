@@ -95,7 +95,7 @@ def handle_new_site_manager_data(event):
     negotiator = get_utility(INegotiator)
     name = data.get('short_name', {}).get(negotiator.server_language)
     if not name:
-        event.form.widgets.errors += (Invalid(_("Site name is required!")))
+        event.form.widgets.errors += (Invalid(_("Site name is required!")),)
     else:
         name = translate_string(name, force_lower=True, spaces='-')
         if name in event.form.context:
