@@ -101,7 +101,7 @@ class DatatypePermissionChecker(ContextAdapter):
 class TypedSharedToolMixin:
     """Typed shared tool"""
 
-    shared_content_types_fields = None
+    shared_content_info_factory = None
 
 
 @adapter_config(required=ITypedSharedTool,
@@ -296,11 +296,11 @@ class TypedSharedToolDataTypesFieldsVocabulary(SimpleVocabulary):
     def __init__(self, context):
         terms = []
         parent = get_parent(context, ITypedSharedTool)
-        if (parent is not None) and parent.shared_content_types_fields:
+        if (parent is not None) and parent.shared_content_info_factory:
             request = check_request()
             translate = request.localizer.translate
             terms = [
                 SimpleTerm(name, title=translate(field.title))
-                for name, field in getFieldsInOrder(parent.shared_content_types_fields)
+                for name, field in getFieldsInOrder(parent.shared_content_info_factory)
             ]
         super().__init__(terms)
