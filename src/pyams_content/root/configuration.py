@@ -133,6 +133,13 @@ class SiteRootToolsConfiguration(Persistent, Contained):
             tool = manager.get(name)
             if tool is not None:
                 return tool
+        name = registry.settings.get(f'pyams_content.config.{tool_name}_tool_name',
+                                     tool_name)
+        if name in manager:
+            tool = manager.get(name)
+            if interface.providedBy(tool):
+                self.tools_names[interface] = name
+                return tool
         factory = registry.settings.get(f'pyams_content.config.{tool_name}_factory')
         if factory:
             if factory.lower in ('--', 'off', 'none', 'disabled'):
@@ -145,8 +152,6 @@ class SiteRootToolsConfiguration(Persistent, Contained):
             LOGGER.info(f'Creating shared tool from factory {factory!r}...')
             tool = factory()
             registry.notify(ObjectCreatedEvent(tool))
-            name = registry.settings.get(f'pyams_content.config.{tool_name}_tool_name',
-                                         tool_name)
             manager[name] = tool
             self.tools_names[interface] = name
         return tool
