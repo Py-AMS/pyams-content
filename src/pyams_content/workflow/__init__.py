@@ -26,8 +26,8 @@ from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 from pyams_content.interfaces import CREATE_VERSION_PERMISSION, MANAGER_ROLE, \
     MANAGE_CONTENT_PERMISSION, MANAGE_SITE_ROOT_PERMISSION, OWNER_ROLE, PILOT_ROLE, \
     PUBLISH_CONTENT_PERMISSION, READER_ROLE, WEBMASTER_ROLE
-from pyams_content.shared.common.interfaces import DEFAULT_CONTENT_WORKFLOW, \
-    IContributorRestrictions, IManagerRestrictions, IWfSharedContentRoles
+from pyams_content.shared.common.interfaces import DEFAULT_CONTENT_WORKFLOW, IContributorRestrictions, \
+    IManagerRestrictions, IWfSharedContentRoles
 from pyams_content.workflow.interfaces import IContentWorkflow
 from pyams_content.workflow.task import ContentArchivingTask, ContentPublishingTask
 from pyams_scheduler.interfaces import IScheduler
@@ -43,7 +43,6 @@ from pyams_workflow.interfaces import AUTOMATIC_TRANSITION, IWorkflow, IWorkflow
     IWorkflowPublicationInfo, IWorkflowState, IWorkflowStateLabel, IWorkflowVersions, \
     ObjectClonedEvent, SYSTEM_TRANSITION
 from pyams_workflow.workflow import Transition, Workflow
-
 
 __docformat__ = 'restructuredtext'
 
