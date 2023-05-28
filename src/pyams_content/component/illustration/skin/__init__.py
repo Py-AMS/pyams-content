@@ -21,9 +21,11 @@ from pyams_content.component.illustration import IBaseIllustrationTarget, IIllus
     ILinkIllustration, ILinkIllustrationTarget
 from pyams_content.component.links import IInternalLink
 from pyams_content.feature.renderer import HIDDEN_RENDERER_NAME
+from pyams_content.interfaces import IBaseContent
 from pyams_content.shared.common import ISharedContent
-from pyams_content.skin.interfaces import IContentNavigationIllustration
+from pyams_content.skin.interfaces import IContentBannerIllustration, IContentNavigationIllustration
 from pyams_layer.interfaces import IPyAMSLayer
+from pyams_site.interfaces import ISiteRoot
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.interfaces.tales import ITALESExtension
 
@@ -87,4 +89,30 @@ class PyAMSIllustrationTALESExtension(ContextRequestViewAdapter):
             context = self.context
         return self.request.registry.queryMultiAdapter((context, self.request),
                                                        IContentNavigationIllustration,
+                                                       name=name)
+
+
+@adapter_config(required=(ISiteRoot, IPyAMSLayer),
+                provides=IContentBannerIllustration)
+@adapter_config(context=(IBaseContent, IPyAMSLayer),
+                provides=IContentBannerIllustration)
+def base_content_banner_illustration_factory(context, request):
+    """Base content banner illustration adapter"""
+    illustration = IIllustration(context, None)
+    if illustration and illustration.has_data() and (illustration.renderer != HIDDEN_RENDERER_NAME):
+        return illustration
+    return None
+
+
+@adapter_config(name='pyams_banner_illustration',
+                required=(Interface, Interface, Interface),
+                provides=ITALESExtension)
+class PyAMSBannerIllustrationTALESExtension(ContextRequestViewAdapter):
+    """PyAMS banner illustration TALES extension"""
+
+    def render(self, context=None, name=''):
+        if context is None:
+            context = self.context
+        return self.request.registry.queryMultiAdapter((context, self.request),
+                                                       IContentBannerIllustration,
                                                        name=name)

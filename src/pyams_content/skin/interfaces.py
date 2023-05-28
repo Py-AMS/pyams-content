@@ -34,6 +34,10 @@ class IContentIllustration(Interface):
     """Content illustration getter interface"""
 
 
+class IContentBannerIllustration(Interface):
+    """Content banner illustration getter interface"""
+
+
 class IContentNavigationIllustration(Interface):
     """Content navigation illustration getter interface"""
 
