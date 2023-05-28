@@ -10,8 +10,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.portlet.zmi.title module
 
+This module defines management components of shared contents title portlet.
 """
 
 __docformat__ = 'restructuredtext'

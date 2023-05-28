@@ -10,8 +10,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.skin module
 
+This is the base module of shared contents content providers.
 """
 
 __docformat__ = 'restructuredtext'

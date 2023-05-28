@@ -10,8 +10,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.portlet.skin.header module
 
+This module defines shared contents header portlet renderer.
 """
 
 from zope.interface import Interface

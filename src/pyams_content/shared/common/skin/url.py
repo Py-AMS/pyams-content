@@ -10,8 +10,10 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.skin.url module
 
+This module defines adapters used to manage shared contents canonical
+and relative URLs.
 """
 
 from pyramid.encode import urlencode, url_quote

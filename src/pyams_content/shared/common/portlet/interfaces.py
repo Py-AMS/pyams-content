@@ -10,8 +10,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.portlet.interfaces module
 
+This module defines interfaces of shared contents portlets settings.
 """
 
 __docformat__ = 'restructuredtext'

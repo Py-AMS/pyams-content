@@ -10,8 +10,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.skin.title module
 
+This module defines components which are used for shared contents title rendering.
 """
 
 from zope.interface import Interface
@@ -26,6 +27,13 @@ from pyams_viewlet.viewlet import ViewContentProvider, contentprovider_config
 __docformat__ = 'restructuredtext'
 
 
+@adapter_config(required=(IBaseContent, IPyAMSUserLayer, Interface),
+                provides=IContentTitle)
+def base_content_title(context, request, view):
+    """Base content title adapter"""
+    return II18n(context).query_attribute('title', request=request)
+
+
 @contentprovider_config(name='pyams_content.title',
                         layer=IPyAMSUserLayer, view=Interface)
 class SharedContentTitleContentProvider(ViewContentProvider):
@@ -34,10 +42,3 @@ class SharedContentTitleContentProvider(ViewContentProvider):
     def render(self, template_name=''):
         return self.request.registry.queryMultiAdapter((self.context, self.request, self.view),
                                                        IContentTitle) or ''
-
-
-@adapter_config(required=(IBaseContent, IPyAMSUserLayer, Interface),
-                provides=IContentTitle)
-def base_content_title(context, request, view):
-    """Base content title adapter"""
-    return II18n(context).query_attribute('title', request=request)

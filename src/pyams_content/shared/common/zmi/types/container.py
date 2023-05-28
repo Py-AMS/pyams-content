@@ -10,8 +10,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.zmi.types.container module
 
+This module defines components which are used for shared contents types management interface.
 """
 
 from pyramid.view import view_config

@@ -10,8 +10,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.skin.workflow module
 
+This module defines a content provider used for shared content publication date rendering.
 """
 
 from babel import Locale, UnknownLocaleError

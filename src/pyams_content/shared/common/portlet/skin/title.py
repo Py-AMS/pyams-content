@@ -10,14 +10,14 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.portlet.skin.title module
 
+This module defines shared content title portlet renderer.
 """
 
 from zope.interface import Interface
 
 from pyams_content.shared.common.portlet.interfaces import ISharedContentTitlePortletSettings
-from pyams_content.skin.interfaces import IContentTitle
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortalContext, IPortletRenderer
 from pyams_portal.skin import PortletRenderer

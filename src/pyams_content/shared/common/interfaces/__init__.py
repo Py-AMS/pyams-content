@@ -12,6 +12,7 @@
 
 """PyAMS_content.shared.common.interfaces module
 
+This module defines interfaces which are common to all shared contents.
 """
 
 from zope.annotation import IAttributeAnnotatable

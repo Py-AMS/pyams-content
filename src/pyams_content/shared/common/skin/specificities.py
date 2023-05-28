@@ -10,8 +10,10 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.skin.specificities module
 
+This module defines a custom content provider used for shared contents specificities
+rendering.
 """
 
 from zope.interface import Interface

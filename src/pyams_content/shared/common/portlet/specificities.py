@@ -10,8 +10,12 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.portlet.specificities module
 
+This module defines a shared content "specificities" portlet.
+
+Specificities renderers are based on named adapters for shared
+contents which are handling specificities.
 """
 
 from pyams_content.shared.common.portlet.interfaces import ISharedContentSpecificitiesPortletSettings, \

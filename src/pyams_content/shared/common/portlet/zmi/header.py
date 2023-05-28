@@ -10,13 +10,12 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.portlet.zmi.header module
 
+This module defines management interface components of shared contents header portlet.
 """
 
 from zope.interface import Interface
-
-__docformat__ = 'restructuredtext'
 
 from pyams_content.shared.common.portlet.interfaces import ISharedContentHeaderPortletSettings
 from pyams_layer.interfaces import IPyAMSLayer
@@ -24,6 +23,8 @@ from pyams_portal.interfaces import IPortletPreviewer
 from pyams_portal.zmi import PortletPreviewer
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
+
+__docformat__ = 'restructuredtext'
 
 
 @adapter_config(required=(Interface, IPyAMSLayer, Interface, ISharedContentHeaderPortletSettings),

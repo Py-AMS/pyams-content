@@ -10,8 +10,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.portlet.zmi.specificities module
 
+This module defines management interface components of shared contents specificities portlet.
 """
 
 from zope.interface import Interface

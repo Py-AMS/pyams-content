@@ -10,8 +10,10 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.zmi.types module
 
+This module define components which are used for management of typed
+shared contents.
 """
 
 __docformat__ = 'restructuredtext'

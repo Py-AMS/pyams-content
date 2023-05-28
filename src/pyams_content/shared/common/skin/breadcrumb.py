@@ -10,8 +10,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.skin.breadcrumbs module
 
+This module defines components used for shared contents breadcrumbs management.
 """
 
 from zope.interface import Interface

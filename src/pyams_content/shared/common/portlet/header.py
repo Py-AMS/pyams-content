@@ -10,17 +10,18 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.portlet.header module
 
+This module defines a shared content header portlet.
 """
-
-__docformat__ = 'restructuredtext'
 
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.shared.common.portlet.interfaces import HEADER_PORTLET_NAME, ISharedContentHeaderPortletSettings
 from pyams_portal.portlet import Portlet, PortletSettings, portlet_config
 from pyams_utils.factory import factory_config
+
+__docformat__ = 'restructuredtext'
 
 from pyams_content import _
 

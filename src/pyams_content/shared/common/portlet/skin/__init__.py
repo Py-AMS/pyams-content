@@ -10,8 +10,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.portlet.skin module
 
+This is the base module for shared contents portlets renderers.
 """
 
 __docformat__ = 'restructuredtext'

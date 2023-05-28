@@ -10,8 +10,10 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.portlet.title module
 
+This module defines a small shared content title portlet, which can be used
+instead of header portlet just to render content title.
 """
 
 from zope.schema.fieldproperty import FieldProperty

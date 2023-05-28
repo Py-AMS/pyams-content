@@ -10,8 +10,10 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.shared.common.skin.oid module
 
+This module defines a custom route and a custom traverser used to support
+'/+/{oid}::title.html' URL syntax support.
 """
 
 from typing import Optional
