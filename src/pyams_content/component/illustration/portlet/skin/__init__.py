@@ -33,6 +33,7 @@ from pyams_portal.skin import PortletRenderer
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
 from pyams_utils.factory import factory_config
+from pyams_utils.interfaces import DISPLAY_CONTEXT_KEY_NAME
 
 
 __docformat__ = 'restructuredtext'
@@ -54,9 +55,12 @@ class BaseIllustrationPortletRenderer(PortletRenderer):
     @property
     def illustration(self):
         """Illustration getter"""
+        registry = self.request.registry
+        context = self.request.context
         for illustration in (
-                self.request.registry.queryMultiAdapter((self.context, self.request, self.view),
-                                                        IIllustrationPortletContent),
+                registry.queryMultiAdapter((context, self.request, self.view), IIllustrationPortletContent),
+                IIllustration(context, None),
+                registry.queryMultiAdapter((self.context, self.request, self.view), IIllustrationPortletContent),
                 IIllustration(self.context, None)):
             if (illustration is not None) and \
                     (illustration.renderer != HIDDEN_RENDERER_NAME) and \
