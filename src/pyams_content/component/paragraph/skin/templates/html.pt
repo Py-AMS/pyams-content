@@ -16,6 +16,6 @@
 		</div>
 		<tal:var case="'after-body'">${structure:renderer.render()}</tal:var>
 		<div class="clearfix"></div>
-		${structure:provider:pyams.associations}
+		${structure:provider:pyams_content.associations}
 	</div>
 </div>

@@ -55,7 +55,7 @@ class AssociationContainerRendererMixin:
                 self.links.append(item)
 
 
-@contentprovider_config(name='pyams.associations',
+@contentprovider_config(name='pyams_content.associations',
                         layer=IPyAMSLayer, view=Interface)
 @template_config(template='templates/association-viewlet.pt', layer=IPyAMSLayer)
 class AssociationsViewlet(AssociationContainerRendererMixin, ViewContentProvider):
