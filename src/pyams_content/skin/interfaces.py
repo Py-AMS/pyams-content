@@ -68,3 +68,7 @@ class IContentSummaryInfo(Interface):
     header = Attribute("Content header")
 
     button_title = Attribute("Button title")
+
+
+class IPublicURL(Interface):
+    """Public URL target getter interface"""
