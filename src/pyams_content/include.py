@@ -220,6 +220,9 @@ def include_package(config):
     classImplements(BaseSiteRoot, ICollectionsManagerTarget)
     classImplements(BaseSiteRoot, IPreviewTarget)
 
+    # custom routes
+    config.add_route('oid_access', '/+/{oid}*view')
+
     try:
         import pyams_zmi  # pylint: disable=import-outside-toplevel,unused-import
     except ImportError:
