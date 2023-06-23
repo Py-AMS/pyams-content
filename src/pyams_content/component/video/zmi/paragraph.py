@@ -43,6 +43,7 @@ from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_utils.adapter import adapter_config
 from pyams_utils.interfaces import ICacheKeyValue
 from pyams_utils.interfaces.data import IObjectData
+from pyams_utils.interfaces.form import NO_VALUE_STRING
 from pyams_utils.registry import get_utility
 from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
@@ -149,7 +150,7 @@ def video_provider_settings_add_form(request):
     provider_name = request.params.get('provider_name')
     if provider_name is None:
         raise HTTPBadRequest("Missing provider name argument")
-    if (not provider_name) or (provider_name == '--NOVALUE--'):
+    if (not provider_name) or (provider_name == NO_VALUE_STRING):
         return Response('')
     provider = get_utility(IExternalVideoProvider, name=provider_name)
     form = ExternalVideoProviderSettingsAddForm(request.context, request, provider)
@@ -266,7 +267,7 @@ def video_provider_settings_edit_form(request):
     provider_name = request.params.get('provider_name')
     if provider_name is None:
         raise HTTPBadRequest("Missing provider name argument")
-    if (not provider_name) or (provider_name == '--NOVALUE--'):
+    if (not provider_name) or (provider_name == NO_VALUE_STRING):
         return Response('')
     settings = external_video_settings(request.context, provider_name)
     provider = get_utility(IExternalVideoProvider, name=provider_name)
