@@ -101,7 +101,7 @@ MANAGER_STATES = ()
 PUBLISHED_STATES = (PRE_PUBLISHED, PUBLISHED)
 '''Contents in published states are pre-published, published or waiting for retiring'''
 
-VISIBLE_STATES = (PUBLISHED)
+VISIBLE_STATES = (PUBLISHED, )
 '''Contents in visible states are visible in front-office'''
 
 WAITING_STATES = ()
