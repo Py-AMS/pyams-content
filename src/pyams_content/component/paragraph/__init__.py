@@ -15,7 +15,7 @@
 Paragraphs are components which are used to build the *content* of a given web page;
 these components can be very simple elements like rich HTML text, but can also include
 specialized components like verbatims, contact cards, framed text, illustrations, images
-galeries, videos or any other kind of content that you can imagine...
+galleries, videos or any other kind of content that you can imagine...
 """
 
 __docformat__ = 'restructuredtext'
@@ -38,7 +38,7 @@ from pyams_content.interfaces import MANAGE_CONTENT_PERMISSION, PUBLISH_CONTENT_
 from pyams_i18n.interfaces import II18n
 from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_utils.adapter import ContextAdapter, adapter_config
-from pyams_utils.factory import get_all_factories, get_object_factory
+from pyams_utils.factory import get_all_factories
 from pyams_utils.html import html_to_text
 from pyams_utils.registry import get_pyramid_registry
 from pyams_utils.request import check_request

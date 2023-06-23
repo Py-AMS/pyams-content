@@ -10,8 +10,13 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.component.paragraph.settings module
 
+This module defines persistent classes and adapters which are used to handle
+paragraphs factory settings.
+
+These settings are used to define which types of paragraphs are allowed in
+each content.
 """
 
 __docformat__ = 'restructuredtext'
