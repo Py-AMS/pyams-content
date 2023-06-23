@@ -66,7 +66,7 @@ class CustomVideoSettings(Persistent):
 
 @utility_config(name='custom',
                 provides=IExternalVideoProvider)
-class CustomVideoProvider(object):
+class CustomVideoProvider:
     """Custom video provider"""
 
     label = _("Other provider")
