@@ -44,18 +44,19 @@ from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_security.schema import PrincipalField
 from pyams_sequence.interfaces import ISequentialIntIds
 from pyams_sequence.workflow import get_last_version
+from pyams_skin.interfaces.viewlet import IHeaderViewletManager
 from pyams_table.interfaces import IValues
 from pyams_template.template import template_config
 from pyams_thesaurus.schema import ThesaurusTermsListField
 from pyams_thesaurus.zmi.widget import ThesaurusTermsTreeFieldWidget
-from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
+from pyams_utils.adapter import ContextRequestViewAdapter, NullAdapter, adapter_config
 from pyams_utils.list import unique_iter
 from pyams_utils.registry import get_utility
 from pyams_utils.schema import DatetimesRangeField
 from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
 from pyams_utils.vocabulary import vocabulary_config
-from pyams_viewlet.viewlet import ViewContentProvider, viewlet_config
+from pyams_viewlet.viewlet import EmptyViewlet, ViewContentProvider, viewlet_config
 from pyams_workflow.interfaces import IWorkflow, IWorkflowVersions
 from pyams_zmi.form import FormGroupSwitcher
 from pyams_zmi.interfaces import IAdminLayer
@@ -116,8 +117,8 @@ class SharedToolQuickSearchResultsTableValues(ContextRequestViewAdapter):
                          Any(catalog['content_type'], vocabulary.by_value.keys()))
             params &= get_quick_search_params(query, self.request, catalog, sequence)
         yield from unique_iter(map(get_last_version,
-                               CatalogResultSet(CatalogQuery(catalog).query(
-                                   params, sort_index='modified_date', reverse=True))))
+                                   CatalogResultSet(CatalogQuery(catalog).query(
+                                       params, sort_index='modified_date', reverse=True))))
 
 
 def get_json_search_results(request, results):
@@ -422,3 +423,13 @@ class SharedToolAdvancedSearchResultsView(SearchResultsView):
 
     table_label = _("Search results")
     table_class = SharedToolAdvancedSearchResultsTable
+
+
+@viewlet_config(name='pyams.content_header',
+                layer=IAdminLayer, view=SharedToolAdvancedSearchResultsView,
+                manager=IHeaderViewletManager, weight=10)
+class AdvancedSearchResultsViewHeaderViewlet(EmptyViewlet):
+    """Advanced search results view header viewlet"""
+
+    def render(self):
+        return '<h1 class="mt-3"></h1>'
