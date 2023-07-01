@@ -31,6 +31,7 @@ from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_skin.viewlet.actions import ContextAddAction
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
+from pyams_utils.interfaces.form import NO_VALUE_STRING
 from pyams_utils.interfaces.intids import IUniqueID
 from pyams_utils.registry import query_utility
 from pyams_utils.traversing import get_parent
@@ -42,12 +43,11 @@ from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IToolbarViewletManager
 from pyams_zmi.table import TableElementEditor
-
+from pyams_zmi.utils import get_object_label
 
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
-from pyams_zmi.utils import get_object_label
 
 
 @viewlet_config(name='add-pictogram.menu',
@@ -155,7 +155,7 @@ def get_pictogram_header_view(request):
     """View used to get thumbnail and alternate label associated with a given pictogram"""
     translate = request.localizer.translate
     name = request.params.get('value')
-    if (not name) or (name == '--NOVALUE--'):
+    if (not name) or (name == NO_VALUE_STRING):
         return Response(translate(_("Default header: --")))
     pictogram = request.context.get(name)
     if pictogram is None:
