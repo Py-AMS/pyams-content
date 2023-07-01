@@ -61,17 +61,6 @@ class SiteFolderQuickSearchView(SharedToolQuickSearchView):
             .format(II18n(self.context).query_attribute('title', request=self.request))
 
 
-@viewlet_config(name='pyams.content_header',
-                context=ISiteManager, layer=IAdminLayer, view=SharedToolAdvancedSearchResultsView,
-                manager=IHeaderViewletManager, weight=10)
-class SiteManagerSearchResultsHeaderViewlet(EmptyViewlet):
-    """Site manager advanced search results header viewlet"""
-
-    def render(self):
-        """Viewlet renderer"""
-        return '<h1></h1>'
-
-
 @viewlet_config(name='workflow-status',
                 context=ISiteManager, layer=IAdminLayer, view=SharedToolAdvancedSearchResultsView,
                 manager=IHeaderViewletManager, weight=20)
