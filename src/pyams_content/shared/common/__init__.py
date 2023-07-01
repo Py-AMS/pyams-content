@@ -38,6 +38,7 @@ from pyams_sequence.interfaces import ISequentialIdInfo, ISequentialIdTarget
 from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.date import format_datetime
 from pyams_utils.factory import get_all_factories, get_object_factory
+from pyams_utils.interfaces.text import IHTMLRenderer
 from pyams_utils.property import ClassPropertyType, classproperty
 from pyams_utils.registry import query_utility
 from pyams_utils.request import check_request, query_request
@@ -266,3 +267,23 @@ def handle_workflow_event(event):
     content = get_parent(event.object, ISharedContent)
     if content is not None:
         del content.visible_version
+
+
+@adapter_config(name='text_with_oid',
+                required=(ISharedContent, str),
+                provides=IHTMLRenderer)
+@adapter_config(name='text_with_oid',
+                required=(IWfSharedContent, str),
+                provides=IHTMLRenderer)
+class SharedContentTextWithOIDRenderer:
+    """Shared content text with OID renderer"""
+
+    def __init__(self, context, value):
+        self.context = context
+        self.value = value
+
+    def render(self):
+        sequence = ISequentialIdInfo(self.context, None)
+        if sequence is None:
+            return self.value
+        return f'{self.value} ({sequence.public_oid})'
