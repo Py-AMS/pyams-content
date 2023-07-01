@@ -47,7 +47,7 @@ from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalAddForm
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.profile import IUserProfile
-from pyams_zmi.interfaces.viewlet import IActionsViewletManager, IContentManagementMenu
+from pyams_zmi.interfaces.viewlet import IContextActionsDropdownMenu, IContentManagementMenu
 from pyams_zmi.view import InnerAdminView
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
@@ -59,7 +59,7 @@ from pyams_content import _
 
 @viewlet_config(name='content-review.menu',
                 context=IReviewTarget, layer=IAdminLayer,
-                manager=IActionsViewletManager, weight=10,
+                manager=IContextActionsDropdownMenu, weight=10,
                 permission=MANAGE_CONTENT_PERMISSION)
 class ContentReviewMenu(MenuItem):
     """Content review menu"""
