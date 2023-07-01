@@ -32,10 +32,12 @@ from pyams_content.interfaces import CONTRIBUTOR_ROLE, IBaseContent, MANAGER_ROL
     PILOT_ROLE, WEBMASTER_ROLE
 from pyams_content.reference.pictogram import IPictogramTable
 from pyams_content.root import ISiteRootToolsConfiguration
+from pyams_content.shared.alert.interfaces import IAlertManager
 from pyams_content.shared.common.interfaces import IWfSharedContent
 from pyams_content.shared.common.interfaces.types import IWfTypedSharedContent
 from pyams_content.shared.form.interfaces import IFormManager
 from pyams_content.shared.topic.interfaces import ITopicManager
+from pyams_content.shared.view.interfaces import IViewManager
 from pyams_security.index import PrincipalsRoleIndex
 from pyams_site.generations import check_required_utilities
 from pyams_site.interfaces import ISiteGenerations
@@ -54,8 +56,10 @@ REQUIRED_TABLES = (
 )
 
 REQUIRED_TOOLS = (
-    (ITopicManager, 'topics'),
-    (IFormManager, 'forms')
+    (IViewManager, 'views'),
+    (IAlertManager, 'alerts'),
+    (IFormManager, 'forms'),
+    (ITopicManager, 'topics')
 )
 
 REQUIRED_INDEXES = [
