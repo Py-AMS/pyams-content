@@ -217,12 +217,16 @@ class AllTypedSharedToolDataTypesVocabulary(SimpleVocabulary):
                               title=translate(_("-- missing value ({}) --")).format(token))
 
 
-def get_all_data_types(request):
+def get_all_data_types(request, context=None, fieldname=None):
     """Get list of all registered data types as JSON object"""
     results = []
     translate = request.localizer.translate
+    if context is not None:
+        values = getattr(context, fieldname, ()) or ()
+    else:
+        values = ()
     for name, tool in sorted(get_utilities_for(ISharedTool),
-                             key=lambda x: II18n(x).query_attribute('title', request=request)):
+                             key=lambda x: II18n(x[1]).query_attribute('title', request=request)):
         if not name:
             continue
         manager = ITypedDataManager(tool, None)
@@ -234,11 +238,12 @@ def get_all_data_types(request):
                 'text': II18n(datatype).query_attribute('backoffice_label',
                                                         request=request) or
                         II18n(datatype).query_attribute('label',
-                                                        request=request)
+                                                        request=request),
+                'selected': datatype.__name__ in values
             }
             for datatype in manager.values()
         ]
-        content_factory = tool.shared_content_factory
+        content_factory = tool.shared_content_factory.factory
         results.append({
             'text': translate(content_factory.content_name),
             'disabled': True,
