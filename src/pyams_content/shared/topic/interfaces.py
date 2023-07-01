@@ -40,10 +40,6 @@ class IWfTopic(IWfSharedContentPortalContext, IInternalReferencesList):
                        vocabulary=VISIBLE_DATA_TYPES_VOCABULARY)
 
 
-class IWfTopicFactory(Interface):
-    """Topic parent interface"""
-
-
 class ITopic(ISharedContent):
     """Workflow managed topic interface"""
 
