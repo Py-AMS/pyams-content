@@ -22,8 +22,9 @@ from zope.lifecycleevent import ObjectModifiedEvent
 
 from pyams_content.interfaces import CREATE_VERSION_PERMISSION, MANAGE_CONTENT_PERMISSION, \
     PUBLISH_CONTENT_PERMISSION
-from pyams_content.shared.common import IBaseSharedTool, ISharedContent, IWfSharedContent
-from pyams_content.shared.common.interfaces import IWfSharedContentRoles
+from pyams_content.shared.common.interfaces import IBaseSharedTool, ISharedContent, IWfSharedContent, \
+    IWfSharedContentRoles
+from pyams_content.shared.common.zmi.interfaces import IWorkflowDeleteFormTarget
 from pyams_content.workflow import DELETED, DRAFT, PROPOSED, PUBLISHED
 from pyams_form.ajax import ajax_form_config
 from pyams_form.button import Buttons, handler
@@ -716,14 +717,23 @@ class SharedContentDeleteForm(SharedContentWorkflowTransitionForm):
         state = IWorkflowState(self.context)
         if state.version_id == 1:  # remove the first and only version => remove all
             content = get_parent(self.context, ISharedContent)
-            target = get_parent(content, IBaseSharedTool)
-            del target[content.__name__]
+            parent = get_parent(content, IBaseSharedTool)
+            del parent[content.__name__]
+            target = self.request.registry.queryMultiAdapter((parent, self.request, self),
+                                                             IWorkflowDeleteFormTarget)
         else:
             versions = IWorkflowVersions(self.context)
             versions.remove_version(state.version_id,
                                     state=DELETED, comment=data.get('comment'))
             target = versions.get_last_versions(count=1)[0]
         return target
+
+
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedContentDeleteForm),
+                provides=IWorkflowDeleteFormTarget)
+def shared_content_workflow_delete_form_target(context, request, form):
+    """Shared content workflow delete form target"""
+    return context
 
 
 @adapter_config(required=(IWorkflowVersion, IAdminLayer, SharedContentDeleteForm),
