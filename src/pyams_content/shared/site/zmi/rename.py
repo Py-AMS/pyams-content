@@ -34,7 +34,7 @@ from pyams_utils.url import absolute_url
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalEditForm
 from pyams_zmi.interfaces import IAdminLayer
-from pyams_zmi.interfaces.viewlet import IActionsViewletManager
+from pyams_zmi.interfaces.viewlet import IContextActionsDropdownMenu
 
 
 __docformat__ = 'restructuredtext'
@@ -44,7 +44,7 @@ from pyams_content import _
 
 @viewlet_config(name='rename-site-item.menu',
                 context=IBaseSiteItem, layer=IAdminLayer,
-                manager=IActionsViewletManager, weight=10,
+                manager=IContextActionsDropdownMenu, weight=10,
                 permission=MANAGE_SITE_PERMISSION)
 class SiteItemRenameMenu(MenuItem):
     """Site item rename menu"""
