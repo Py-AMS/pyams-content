@@ -194,6 +194,10 @@ class IWfSharedContent(IBaseContent):
                    required=False)
 
 
+class IPreventSharedContentUpdateSubscribers(Interface):
+    """Shared content update subscribers handler"""
+
+
 class IBaseContentPortalContext(IPortalContext):
     """Content portal context interface"""
 
