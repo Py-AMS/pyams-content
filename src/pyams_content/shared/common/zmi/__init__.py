@@ -66,7 +66,7 @@ from pyams_zmi.form import AdminModalAddForm
 from pyams_zmi.helper.event import get_json_widget_refresh_callback
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.table import ITableElementEditor
-from pyams_zmi.interfaces.viewlet import IActionsViewletManager, IContentManagementMenu, \
+from pyams_zmi.interfaces.viewlet import IContextActionsDropdownMenu, IContentManagementMenu, \
     IMenuHeader, INavigationViewletManager, IPropertiesMenu, ISiteManagementMenu, \
     IToolbarViewletManager
 from pyams_zmi.table import TableElementEditor
@@ -126,17 +126,25 @@ class SharedContentAddForm(AdminModalAddForm):
 
     _edit_permission = CREATE_CONTENT_PERMISSION
 
+    owner_roles_interface = IWfSharedContentRoles
+
     @property
     def content_factory(self):
         """Shared content factory"""
         return self.context.shared_content_factory.factory.content_factory
 
+    @property
+    def container_target(self):
+        """New content container getter"""
+        return self.context
+
     def update_content(self, obj, data):
+        """New content update"""
         super().update_content(obj, data)
         # initialize content fields
         lang = get_utility(INegotiator).server_language
         obj.creator = self.request.principal.id
-        IWfSharedContentRoles(obj).owner = self.request.principal.id
+        self.owner_roles_interface(obj).owner = self.request.principal.id
         obj.short_name = obj.title.copy()
         obj.content_url = generate_url(obj.title.get(lang, ''))
         # init content languages
@@ -145,17 +153,19 @@ class SharedContentAddForm(AdminModalAddForm):
             II18nManager(obj).languages = languages.copy()
 
     def add(self, obj):
+        """Add new content to container"""
         factory = self.context.shared_content_factory
         if factory is not None:
             content = factory()
             self.request.registry.notify(ObjectCreatedEvent(content))
             self.__uuid = uuid = str(uuid4())
-            self.context[uuid] = content
+            self.container_target[uuid] = content
             IWorkflowVersions(content).add_version(obj, None)
             IWorkflowInfo(obj).fire_transition('init', comment=obj.notepad)
 
     def next_url(self):
-        return absolute_url(self.context, self.request,
+        """Redirection URL getter"""
+        return absolute_url(self.container_target, self.request,
                             f'{self.__uuid}/++versions++/1/admin')
 
 
@@ -165,6 +175,7 @@ class SharedToolAddFormRenderer(AJAXFormRenderer):
     """Shared tool add form renderer"""
 
     def render(self, changes):
+        """JSON output renderer"""
         return {
             'status': 'redirect',
             'location': self.form.next_url()
@@ -182,6 +193,7 @@ class SharedContentPermissionChecker(ContextAdapter):
 
     @property
     def edit_permission(self):
+        """Edit form permission getter"""
         context = self.context
         workflow = IWorkflow(context)
         state = IWorkflowState(context).state
@@ -391,7 +403,7 @@ class SharedContentLanguagesEditFormPermissionChecker(ContextRequestViewAdapter)
 
 @viewlet_config(name='duplicate-content.divider',
                 context=IWfSharedContent, layer=IAdminLayer,
-                manager=IActionsViewletManager, weight=49,
+                manager=IContextActionsDropdownMenu, weight=49,
                 permission=CREATE_CONTENT_PERMISSION)
 class SharedContentDuplicateMenuDivider(MenuDivider):
     """Shared content duplication menu divider"""
@@ -399,7 +411,7 @@ class SharedContentDuplicateMenuDivider(MenuDivider):
 
 @viewlet_config(name='duplicate-content.menu',
                 context=IWfSharedContent, layer=IAdminLayer,
-                manager=IActionsViewletManager, weight=50,
+                manager=IContextActionsDropdownMenu, weight=50,
                 permission=CREATE_CONTENT_PERMISSION)
 class SharedContentDuplicateMenu(MenuItem):
     """Shared content duplication menu"""
