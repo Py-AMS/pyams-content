@@ -97,6 +97,7 @@ class ISharedToolContainer(IBaseContent, IContainer):
 
 
 DEFAULT_CONTENT_WORKFLOW = 'pyams_content.workflow.default'
+BASIC_CONTENT_WORKFLOW = 'pyams_content.workflow.basic'
 
 
 class IBaseSharedTool(IBaseContent, IContainer):
