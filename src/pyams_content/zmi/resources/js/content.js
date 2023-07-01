@@ -286,7 +286,7 @@ const content = {
 
 
     /**
-     * Medias galeries management
+     * Medias galleries management
      */
     galleries: {
 
@@ -464,7 +464,7 @@ const content = {
             plugin.results.clear();
             if (thesaurus_name) {
                 MyAMS.require('ajax').then(() => {
-                    MyAMS.ajax.get('/api/thesaurus/extracts', {
+                    MyAMS.ajax.get(`${window.location.origin}/api/thesaurus/extracts`, {
                         'thesaurus_name': thesaurus_name
                     }).then((result) => {
                         $('<option />')
