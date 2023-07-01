@@ -46,7 +46,7 @@
         </tal:var>
     </div>
     <tal:if condition="settings.display_alerts">
-<!--?        ${structure:provider:pyams_content.context_alerts}-->
+        ${structure:provider:pyams_content.context_alerts}
     </tal:if>
     <tal:if condition="settings.display_specificities">
         ${structure:provider:pyams_content.specificities(name='header')}
