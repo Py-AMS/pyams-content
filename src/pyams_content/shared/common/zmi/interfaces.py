@@ -35,3 +35,7 @@ class IManagerRestrictionsEditForm(Interface):
 
 class IManagerRestrictionsGroup(Interface):
     """Manager restrictions workflow group marker interface"""
+
+
+class IWorkflowDeleteFormTarget(Interface):
+    """Interface used to get target of a workflow delete form"""
