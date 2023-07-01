@@ -20,13 +20,14 @@ from setuptools import setup, find_packages
 DOCS = os.path.join(os.path.dirname(__file__),
                     'docs')
 
-README = os.path.join(DOCS, 'README.txt')
-HISTORY = os.path.join(DOCS, 'HISTORY.txt')
+README = os.path.join(DOCS, 'README.rst')
+HISTORY = os.path.join(DOCS, 'HISTORY.rst')
 
 version = '1.0.0'
 long_description = open(README).read() + '\n\n' + open(HISTORY).read()
 
 tests_require = [
+    'pyams_security_views',
     'pyams_zmi',
     'pyramid_zcml',
     'zope.exceptions'
@@ -62,16 +63,45 @@ setup(name='pyams_content',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
+          'fanstatic',
+          'hypatia',
+          'persistent',
           'pyams_catalog',
+          'pyams_fields',
           'pyams_file',
+          'pyams_form',
           'pyams_i18n',
+          'pyams_i18n_views',
+          'pyams_layer',
           'pyams_mail',
+          'pyams_pagelet',
           'pyams_portal',
+          'pyams_scheduler',
           'pyams_security',
+          'pyams_security_views',
+          'pyams_sequence',
+          'pyams_site',
+          'pyams_skin',
+          'pyams_template',
           'pyams_thesaurus',
           'pyams_utils',
+          'pyams_viewlet',
           'pyams_workflow',
-          'pyramid'
+          'pyahocorasick',
+          'pyramid',
+          'transaction',
+          'zope.annotation',
+          'zope.component',
+          'zope.container',
+          'zope.contentprovider',
+          'zope.copy',
+          'zope.dublincore',
+          'zope.interface',
+          'zope.intid',
+          'zope.lifecycleevent',
+          'zope.location',
+          'zope.schema',
+          'zope.traversing'
       ],
       entry_points={
           'fanstatic.libraries': [
