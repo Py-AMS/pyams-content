@@ -47,6 +47,7 @@ class WfForm(WfSharedContent, WfTypedSharedContentMixin):
     content_type = FORM_CONTENT_TYPE
     content_name = FORM_CONTENT_NAME
     content_intf = IWfForm
+    content_view = True
 
     references = FieldProperty(IWfForm['references'])
     data_type = FieldProperty(IWfForm['data_type'])

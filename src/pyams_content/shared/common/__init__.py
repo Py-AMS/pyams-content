@@ -81,6 +81,7 @@ class WfSharedContent(ProtectedObjectMixin, I18nManagerMixin, Persistent, Contai
     content_type = None
     content_name = None
     content_intf = None
+    content_view = True
 
     handle_short_name = False
     handle_content_url = True
