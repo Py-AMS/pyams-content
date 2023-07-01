@@ -767,7 +767,7 @@ class SharedToolArchivedContentsView(BaseSharedToolDashboardSingleView):
 # All interventions menu
 #
 
-@viewletmanager_config(name='my-interventions.menu',
+@viewletmanager_config(name='all-interventions.menu',
                        context=IBaseSharedTool, layer=IAdminLayer,
                        manager=IContentManagementMenu, weight=20,
                        permission=VIEW_SYSTEM_PERMISSION,
