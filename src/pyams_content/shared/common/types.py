@@ -80,6 +80,13 @@ class DataType(Persistent, Contained):
         return None
 
 
+@adapter_config(required=IDataType,
+                provides=ITypedSharedTool)
+def datatype_shared_tool(context):
+    """Datatype shared tool getter"""
+    return get_parent(context, ITypedSharedTool)
+
+
 @factory_config(ITypedDataManager)
 class TypedDataManager(OrderedContainer):
     """Data types container persistent class"""
@@ -148,7 +155,7 @@ class WfTypedSharedContentMixin:
         """Datatype getter"""
         if not self.data_type:
             return None
-        tool = get_parent(self, ITypedSharedTool)
+        tool = ITypedSharedTool(self, None)
         if tool is not None:
             manager = ITypedDataManager(tool)
             return manager.get(self.data_type)
@@ -161,6 +168,13 @@ class WfTypedSharedContentMixin:
         if data_type is not None:
             return data_type.field_names
         return None
+
+
+@adapter_config(required=IWfTypedSharedContent,
+                provides=ITypedSharedTool)
+def typed_shared_content_shared_tool(context):
+    """Typed shared content tool getter"""
+    return get_parent(context, ITypedSharedTool)
 
 
 @subscriber(IObjectAddedEvent, context_selector=IWfTypedSharedContent)
@@ -258,7 +272,7 @@ class TypedSharedToolDataTypesVocabulary(SimpleVocabulary):
 
     def __init__(self, context):
         terms = []
-        parent = get_parent(context, ITypedSharedTool)
+        parent = ITypedSharedTool(context, None)
         if parent is not None:
             request = check_request()
             manager = ITypedDataManager(parent)
@@ -279,7 +293,7 @@ class TypedSharedToolVisibleDataTypesVocabulary(SimpleVocabulary):
 
     def __init__(self, context):
         terms = []
-        parent = get_parent(context, ITypedSharedTool)
+        parent = ITypedSharedTool(context, None)
         if parent is not None:
             request = check_request()
             manager = ITypedDataManager(parent)
@@ -300,7 +314,7 @@ class TypedSharedToolDataTypesFieldsVocabulary(SimpleVocabulary):
 
     def __init__(self, context):
         terms = []
-        parent = get_parent(context, ITypedSharedTool)
+        parent = ITypedSharedTool(context, None)
         if (parent is not None) and parent.shared_content_info_factory:
             request = check_request()
             translate = request.localizer.translate
