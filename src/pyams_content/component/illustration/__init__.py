@@ -19,7 +19,7 @@ __docformat__ = 'restructuredtext'
 from persistent import Persistent
 from pyramid.events import subscriber
 from zope.container.contained import Contained
-from zope.interface import alsoProvides
+from zope.interface import alsoProvides, classImplements
 from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent, ObjectAddedEvent
 from zope.location.interfaces import ISublocations
 from zope.schema.fieldproperty import FieldProperty
@@ -34,11 +34,15 @@ from pyams_content.feature.renderer import RenderedContentMixin, RenderersVocabu
 from pyams_file.interfaces import IFileInfo, IImageFile, IResponsiveImage
 from pyams_file.property import I18nFileProperty
 from pyams_i18n.interfaces import II18n, INegotiator
+from pyams_site.site import BaseSiteRoot
 from pyams_utils.adapter import ContextAdapter, adapter_config, get_annotation_adapter
 from pyams_utils.factory import factory_config
 from pyams_utils.registry import get_pyramid_registry, query_utility
 from pyams_utils.request import check_request
 from pyams_utils.vocabulary import vocabulary_config
+
+
+classImplements(BaseSiteRoot, IIllustrationTarget)
 
 
 @factory_config(IBaseIllustration)
