@@ -68,8 +68,8 @@ class ViewPropertiesGroup(FormGroupSwitcher):
     fields = Fields(IWfView).select('select_context_path', 'select_context_type',
                                     'selected_content_types', 'select_context_datatype',
                                     'selected_datatypes', 'excluded_content_types',
-                                    'excluded_datatypes', 'order_by', 'reversed_order',
-                                    'limit', 'age_limit')
+                                    'excluded_datatypes', 'allow_user_params',
+                                    'order_by', 'reversed_order', 'limit', 'age_limit')
     switcher_mode = 'always'
 
     def update_widgets(self, prefix=None):
