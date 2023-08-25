@@ -21,7 +21,7 @@ from zope.schema import Bool, Choice, Int
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from pyams_content.shared.view.interfaces import VIEW_CONTENT_TYPE
-from pyams_content.shared.view.interfaces.query import CONCAT_VIEWS_MERGE_MODE, VIEWS_MERGERS_VOCABULARY
+from pyams_content.shared.view.interfaces.query import MergeModes, VIEWS_MERGERS_VOCABULARY
 from pyams_i18n.schema import I18nTextLineField
 from pyams_portal.interfaces import IPortletSettings
 from pyams_sequence.schema import InternalReferencesListField
@@ -90,7 +90,7 @@ class IViewItemsPortletSettings(IPortletSettings):
                               description=_("If you select several views, you can select \"merge\" mode, which is "
                                             "the way used to merge items from several views"),
                               vocabulary=VIEWS_MERGERS_VOCABULARY,
-                              default=CONCAT_VIEWS_MERGE_MODE,
+                              default=MergeModes.CONCAT.value,
                               required=True)
 
     def get_merger(self):
