@@ -347,12 +347,8 @@ class SharedToolAdvancedSearchResultsTable(BaseSharedToolDashboardTable):
 class SharedToolAdvancedSearchResultsValues(ContextRequestViewAdapter):
     """Shared tool advanced search results values"""
 
-    @property
-    def values(self):
-        """Shared tool advanced search results values getter"""
-        form = SharedToolAdvancedSearchForm(self.context, self.request)
-        form.update()
-        data, _errors = form.extract_data()
+    def get_params(self, data):
+        """Extract catalog query params from incoming request"""
         intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
         vocabulary = getVocabularyRegistry().get(self.context, SHARED_CONTENT_TYPES_VOCABULARY)
@@ -402,6 +398,16 @@ class SharedToolAdvancedSearchResultsValues(ContextRequestViewAdapter):
         if data.get('collections'):
             tags = [intids.register(term) for term in data['collections']]
             params &= Any(catalog['collections'], tags)
+        return params
+
+    @property
+    def values(self):
+        """Shared tool advanced search results values getter"""
+        form = SharedToolAdvancedSearchForm(self.context, self.request)
+        form.update()
+        data, _errors = form.extract_data()
+        params = self.get_params(data)
+        catalog = get_utility(ICatalog)
         if data.get('status'):
             yield from unique_iter(
                 map(lambda x: sorted(IWorkflowVersions(x).get_versions(data['status']),

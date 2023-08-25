@@ -275,12 +275,8 @@ class SiteRootAdvancedSearchResultsTable(BaseSiteRootDashboardTable):
 class SiteRootAdvancedSearchResultsValues(ContextRequestViewAdapter):
     """Site root advanced search results values"""
 
-    @property
-    def values(self):
-        """Shared tool advanced search results values getter"""
-        form = SiteRootAdvancedSearchForm(self.context, self.request)
-        form.update()
-        data, _errors = form.extract_data()
+    def get_params(self, data):
+        """Extract catalog query params from incoming request"""
         intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
         vocabulary = getVocabularyRegistry().get(self.context, SHARED_CONTENT_TYPES_VOCABULARY)
@@ -327,6 +323,16 @@ class SiteRootAdvancedSearchResultsValues(ContextRequestViewAdapter):
         if data.get('collections'):
             tags = [intids.register(term) for term in data['collections']]
             params &= Any(catalog['collections'], tags)
+        return params
+
+    @property
+    def values(self):
+        """Shared tool advanced search results values getter"""
+        form = SiteRootAdvancedSearchForm(self.context, self.request)
+        form.update()
+        data, _errors = form.extract_data()
+        params = self.get_params(data)
+        catalog = get_utility(ICatalog)
         yield from unique_iter(map(get_last_version,
                                    CatalogResultSet(CatalogQuery(catalog).query(
                                        params, sort_index='modified_date', reverse=True))))
