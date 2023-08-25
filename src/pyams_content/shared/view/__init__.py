@@ -71,6 +71,7 @@ class WfView(WfSharedContent):
     selected_datatypes = FieldProperty(IWfView['selected_datatypes'])
     excluded_content_types = FieldProperty(IWfView['excluded_content_types'])
     excluded_datatypes = FieldProperty(IWfView['excluded_datatypes'])
+    allow_user_params = FieldProperty(IWfView['allow_user_params'])
     order_by = FieldProperty(IWfView['order_by'])
     reversed_order = FieldProperty(IWfView['reversed_order'])
     limit = FieldProperty(IWfView['limit'])

@@ -133,6 +133,12 @@ class IWfView(IWfSharedContent):
                              value_type=Choice(vocabulary=ALL_DATA_TYPES_VOCABULARY),
                              required=False)
 
+    allow_user_params = Bool(title=_("Allow user params?"),
+                             description=_("If 'no', additional user params provided through request "
+                                           "URL will not be analyzed"),
+                             required=True,
+                             default=True)
+
     def get_excluded_data_types(self, context):
         """Get excluded data types for given context"""
 
