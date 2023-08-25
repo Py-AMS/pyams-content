@@ -18,14 +18,15 @@ internal references support and catalog-based queries.
 
 from hypatia.catalog import CatalogQuery
 from hypatia.interfaces import ICatalog
-from hypatia.query import Eq, NotEq
+from hypatia.query import Eq, NotAny, NotEq
 from persistent import Persistent
 from zope.container.contained import Contained
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_catalog.query import CatalogResultSet
 from pyams_content.shared.view import IViewSettings, IWfView
-from pyams_content.shared.view.interfaces.query import IViewQueryFilterExtension, IViewQueryParamsExtension
+from pyams_content.shared.view.interfaces.query import EXCLUDED_VIEW_ITEMS, IViewQueryFilterExtension, \
+    IViewQueryParamsExtension, IViewUserQuery
 from pyams_content.shared.view.interfaces.settings import ALWAYS_REFERENCE_MODE, IViewInternalReferencesSettings, \
     ONLY_REFERENCE_MODE, VIEW_REFERENCES_SETTINGS_KEY
 from pyams_sequence.interfaces import IInternalReferencesList, ISequentialIdInfo
@@ -137,3 +138,21 @@ class ViewReferencesQueryFilterExtension(ContextAdapter):
                                 publication_info.is_visible(request):
                             items.prepend((item,))
         return items
+
+
+@adapter_config(name='exclusions',
+                context=IWfView,
+                provides=IViewUserQuery)
+class ExclusionsViewQueryParamsExtension(ContextAdapter):
+    """Search folder exclusions for Elasticsearch
+
+    This adapter is looking into request's annotations for items which should be excluded
+    from search.
+    """
+
+    @staticmethod
+    def get_user_params(request):
+        excluded_items = request.annotations.get(EXCLUDED_VIEW_ITEMS)
+        if excluded_items:
+            catalog = get_utility(ICatalog)
+            yield NotAny(catalog['oid'], excluded_items)
