@@ -15,6 +15,8 @@
 This module defines views queries interfaces.
 """
 
+from enum import Enum
+
 from zope.interface import Attribute, Interface
 
 __docformat__ = 'restructuredtext'
@@ -37,7 +39,7 @@ class IViewQuery(Interface):
 class IViewUserQuery(Interface):
     """View user search query interface"""
 
-    def get_user_params(self, request=None):
+    def get_user_params(self, request):
         """Get dynamic user query params"""
 
 
@@ -71,12 +73,15 @@ class IViewQueryFilterExtension(IViewQueryExtension):
         """Filter items after catalog query"""
 
 
-VIEWS_MERGERS_VOCABULARY = 'pyams_content.views.mergers'
+class MergeModes(Enum):
+    """Merge modes enumeration"""
+    CONCAT = 'concat'
+    RANDOM = 'random'
+    ZIP = 'zip'
+    RANDOM_ZIP = 'zip_random'
 
-CONCAT_VIEWS_MERGE_MODE = 'concat'
-RANDOM_VIEWS_MERGE_MODE = 'random'
-ZIP_VIEWS_MERGE_MODE = 'zip'
-ZIP_RANDOM_VIEWS_MERGE_MODE = 'zip_random'
+
+VIEWS_MERGERS_VOCABULARY = 'pyams_content.views.mergers'
 
 
 class IViewsMerger(Interface):
@@ -87,3 +92,6 @@ class IViewsMerger(Interface):
 
     def get_results(self, views, context, ignore_cache=False, request=None):
         """Merge results of several views together"""
+
+
+EXCLUDED_VIEW_ITEMS = 'pyams_content.view.excluded'

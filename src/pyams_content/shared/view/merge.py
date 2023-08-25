@@ -25,8 +25,7 @@ from zope.dublincore.interfaces import IZopeDublinCore
 
 from pyams_content.shared.view.interfaces import CREATION_DATE_ORDER, FIRST_PUBLICATION_DATE_ORDER, \
     PUBLICATION_DATE_ORDER, UPDATE_DATE_ORDER
-from pyams_content.shared.view.interfaces.query import CONCAT_VIEWS_MERGE_MODE, IViewsMerger, RANDOM_VIEWS_MERGE_MODE, \
-    VIEWS_MERGERS_VOCABULARY, ZIP_RANDOM_VIEWS_MERGE_MODE, ZIP_VIEWS_MERGE_MODE
+from pyams_content.shared.view.interfaces.query import MergeModes, IViewsMerger, VIEWS_MERGERS_VOCABULARY
 from pyams_utils.registry import utility_config
 from pyams_utils.request import check_request
 from pyams_utils.vocabulary import vocabulary_config
@@ -55,7 +54,7 @@ class ViewsMergersVocabulary(UtilityVocabulary):
         self._terms = dict((title, UtilityTerm(name, title)) for name, title in utils)
 
 
-@utility_config(name=CONCAT_VIEWS_MERGE_MODE,
+@utility_config(name=MergeModes.CONCAT.value,
                 provides=IViewsMerger)
 class ViewsConcatenateMergeMode:
     """Views concatenate merge mode"""
@@ -71,7 +70,7 @@ class ViewsConcatenateMergeMode:
         yield from chain(*results)
 
 
-@utility_config(name=RANDOM_VIEWS_MERGE_MODE,
+@utility_config(name=MergeModes.RANDOM.value,
                 provides=IViewsMerger)
 class ViewsRandomMergeMode:
     """Views random merge mode"""
@@ -89,7 +88,7 @@ class ViewsRandomMergeMode:
         yield from iter(results)
 
 
-@utility_config(name=ZIP_VIEWS_MERGE_MODE,
+@utility_config(name=MergeModes.ZIP.value,
                 provides=IViewsMerger)
 class ViewsZipMergeMode:
     """Views zip merge mode"""
@@ -106,7 +105,7 @@ class ViewsZipMergeMode:
             yield from filter(lambda x: x is not None, array)
 
 
-@utility_config(name=ZIP_RANDOM_VIEWS_MERGE_MODE,
+@utility_config(name=MergeModes.RANDOM_ZIP.value,
                 provides=IViewsMerger)
 class ViewsRandomZipMergeMode:
     """Views random zip merge mode"""
