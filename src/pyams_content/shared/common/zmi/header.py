@@ -17,6 +17,7 @@ This module defines workflow-related content headers.
 
 from datetime import datetime
 
+from pyams_content.shared.site.interfaces import IBaseSiteItem
 from pyams_sequence.interfaces import ISequentialIdTarget
 from pyams_skin.interfaces.view import IModalPage
 from pyams_skin.interfaces.viewlet import IHeaderViewletManager
@@ -25,10 +26,9 @@ from pyams_utils.adapter import NullAdapter
 from pyams_utils.date import format_datetime
 from pyams_utils.timezone import tztime
 from pyams_viewlet.viewlet import Viewlet, viewlet_config
-from pyams_workflow.interfaces import IWorkflowPublicationInfo, IWorkflowPublicationSupport
+from pyams_workflow.interfaces import IWorkflowPublicationInfo
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.zmi.viewlet.header import ContentHeaderViewlet
-
 
 __docformat__ = 'restructuredtext'
 
@@ -41,7 +41,7 @@ override_template(ContentHeaderViewlet,
 
 
 @viewlet_config(name='workflow-status',
-                context=IWorkflowPublicationSupport, layer=IAdminLayer,
+                context=IBaseSiteItem, layer=IAdminLayer,
                 manager=IHeaderViewletManager, weight=20)
 class WorkflowPublicationSupportHeaderViewlet(Viewlet):
     """Workflow publication support header viewlet"""
@@ -86,7 +86,7 @@ class WorkflowPublicationSupportHeaderViewlet(Viewlet):
 
 
 @viewlet_config(name='workflow-status',
-                context=IWorkflowPublicationSupport, layer=IAdminLayer, view=IModalPage,
+                context=IBaseSiteItem, layer=IAdminLayer, view=IModalPage,
                 manager=IHeaderViewletManager, weight=20)
 class WorkflowPublicationSupportModalHeaderViewlet(NullAdapter):
     """Workflow publication support modal header viewlet"""
