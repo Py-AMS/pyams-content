@@ -35,7 +35,6 @@ from pyams_utils.url import absolute_url
 from pyams_workflow.content import HiddenContentPublicationInfo
 from pyams_workflow.interfaces import IWorkflowPublicationInfo
 
-
 __docformat__ = 'restructuredtext'
 
 
@@ -50,7 +49,7 @@ class AssociationItem(Persistent, Contained):
 
     def is_visible(self, request=None):
         """Visibility getter"""
-        return True
+        return self.visible
 
     def get_url(self, request=None, view_name=None):
         """URL getter"""
