@@ -13,6 +13,8 @@
 """PyAMS_*** module
 
 """
+
+from pyramid.decorator import reify
 from zope.interface import Interface
 
 from pyams_content.reference.pictogram import IPictogramTable
@@ -22,7 +24,6 @@ from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_pagelet.pagelet import pagelet_config
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
-from pyams_table.column import GetAttrColumn
 from pyams_table.interfaces import IColumn
 from pyams_utils.adapter import adapter_config
 from pyams_viewlet.manager import viewletmanager_config
@@ -30,7 +31,6 @@ from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu, ISiteManagementMenu
 from pyams_zmi.table import ActionColumn, TableAdminView
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
-
 
 __docformat__ = 'restructuredtext'
 
@@ -63,7 +63,7 @@ class PictogramTableContentsMenu(NavigationMenuItem):
 class PictogramTableContainerTable(ReferenceTableContainerTable):
     """Pictogram container table"""
 
-    @property
+    @reify
     def data_attributes(self):
         attributes = super().data_attributes
         attributes['table'].update({

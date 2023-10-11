@@ -15,6 +15,7 @@
 This module provides site's root view of sites, hubs and blogs.
 """
 
+from pyramid.decorator import reify
 from pyramid.interfaces import IView
 from pyramid.view import view_config
 from zope.container.interfaces import IContainer
@@ -49,7 +50,7 @@ from pyams_content import _
 class SiteRootSitesTable(Table):
     """Site root sub-sites table"""
 
-    @property
+    @reify
     def data_attributes(self):
         attributes = super().data_attributes
         attributes['table'].update({

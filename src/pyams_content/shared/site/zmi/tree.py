@@ -17,6 +17,7 @@ This module defines components which are used to display the whole site tree.
 
 import json
 
+from pyramid.decorator import reify
 from pyramid.interfaces import IView
 from pyramid.location import lineage
 from pyramid.view import view_config
@@ -96,7 +97,7 @@ class SiteContainerTreeTable(Table):
         })
         return classes
 
-    @property
+    @reify
     def data_attributes(self):
         attributes = super().data_attributes
         intids = get_utility(IIntIds)

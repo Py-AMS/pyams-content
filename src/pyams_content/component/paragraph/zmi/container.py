@@ -15,6 +15,7 @@
 """
 
 import json
+
 from pyramid.decorator import reify
 from pyramid.httpexceptions import HTTPInternalServerError, HTTPNotFound, HTTPServiceUnavailable
 from pyramid.interfaces import IView
@@ -67,7 +68,7 @@ from pyams_content import _
 class ParagraphsBaseTable(Table):
     """Paragraphs container table"""
 
-    @property
+    @reify
     def data_attributes(self):
         """Attributes getter"""
         attributes = super().data_attributes

@@ -184,7 +184,7 @@ class BaseSharedToolDashboardTable(Table):
     def values(self):
         return list(super().values)
 
-    @property
+    @reify
     def data_attributes(self):
         attributes = super().data_attributes
         attributes.setdefault('table', {}).update({
