@@ -22,8 +22,8 @@ from zope.container.interfaces import IContainer
 from zope.interface import implementer
 
 from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
+from pyams_content.shared.common import IBaseSharedTool
 from pyams_content.shared.common.interfaces import IDeletableElement
-from pyams_content.shared.site.interfaces import ISiteManager
 from pyams_content.zmi.dashboard import DashboardLabelColumn
 from pyams_content.zmi.interfaces import IDashboardTable
 from pyams_layer.interfaces import IPyAMSLayer
@@ -39,7 +39,6 @@ from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import ISiteManagementMenu
 from pyams_zmi.table import IconColumn, Table, TableAdminView, TrashColumn
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
-
 
 __docformat__ = 'restructuredtext'
 
@@ -69,7 +68,7 @@ class SiteRootSitesTableValues(ContextRequestViewAdapter):
     @property
     def values(self):
         """Site root sites tables values getter"""
-        yield from filter(lambda x: ISiteManager.providedBy(x),
+        yield from filter(IBaseSharedTool.providedBy,
                           IContainer(self.context).values())
 
 
