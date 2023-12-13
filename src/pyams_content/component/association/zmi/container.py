@@ -30,6 +30,7 @@ from pyams_form.interfaces.form import IInnerSubForm
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_layer.skin import apply_skin
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
+from pyams_skin.interfaces.view import IModalDisplayForm
 from pyams_skin.interfaces.viewlet import IContentSuffixViewletManager
 from pyams_table.column import GetAttrColumn
 from pyams_table.interfaces import IColumn, IValues
@@ -38,8 +39,8 @@ from pyams_utils.factory import factory_config
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalDisplayForm
 from pyams_zmi.helper.container import delete_container_element, switch_element_attribute
-from pyams_zmi.interfaces import IAdminLayer
-from pyams_zmi.interfaces.form import IPropertiesEditForm
+from pyams_zmi.interfaces import IAdminLayer, TITLE_SPAN_BREAK
+from pyams_zmi.interfaces.form import IFormTitle, IPropertiesEditForm
 from pyams_zmi.skin import AdminSkin
 from pyams_zmi.table import ActionColumn, ContentTypeColumn, I18nColumnMixin, InnerTableAdminView, \
     NameColumn, ReorderColumn, SortableTable, TableGroupSwitcher, TrashColumn, VisibilityColumn
@@ -77,17 +78,18 @@ class SharedToolTypesAssociationsColumn(ActionColumn):
 class AssociationsModalEditForm(AdminModalDisplayForm):
     """Associations modal edit form"""
 
-    @property
-    def title(self):
-        """Form title getter"""
-        translate = self.request.localizer.translate
-        hint = get_object_hint(self.context, self.request, self)
-        label = get_object_label(self.context, self.request, self)
-        return '<small>{}</small><br />{}'.format(
-            translate(_("{}: {}")).format(hint, label) if hint else label,
-            translate(_("Links and external files")))
-
     modal_class = 'modal-xl'
+
+    subtitle = _("Links and external files")
+
+
+@adapter_config(required=(IAssociationContainerTarget, IAdminLayer, IModalDisplayForm),
+                provides=IFormTitle)
+def association_container_display_form_title(context, request, form):
+    """Association container display form title"""
+    hint = get_object_hint(context, request, form)
+    label = get_object_label(context, request, form)
+    return TITLE_SPAN_BREAK.format(hint, label)
 
 
 @factory_config(IAssociationsTable)
