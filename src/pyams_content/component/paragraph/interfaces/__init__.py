@@ -110,14 +110,16 @@ class IParagraphFactorySettings(Interface):
     for a given shared tool."""
 
     allowed_paragraphs = Set(title=_("Allowed paragraphs"),
-                             description=_("List of paragraphs allowed for this content type"),
+                             description=_("List of paragraphs allowed for this content type; if selection is empty, "
+                                           "all paragraphs types will be allowed"),
                              required=False,
                              value_type=Choice(vocabulary=PARAGRAPH_FACTORIES_VOCABULARY))
 
     auto_created_paragraphs = List(title=_("Default paragraphs types"),
                                    description=_("Empty paragraphs of these types will be added "
                                                  "automatically to new contents of this content "
-                                                 "type"),
+                                                 "type; if paragraphs are associated to content type, these will "
+                                                 "be used instead of these ones"),
                                    required=False,
                                    value_type=Choice(vocabulary=PARAGRAPH_FACTORIES_VOCABULARY))
 
