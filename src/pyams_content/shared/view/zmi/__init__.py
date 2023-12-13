@@ -72,8 +72,8 @@ class ViewPropertiesGroup(FormGroupSwitcher):
                                     'order_by', 'reversed_order', 'limit', 'age_limit')
     switcher_mode = 'always'
 
-    def update_widgets(self, prefix=None):
-        super().update_widgets(prefix)
+    def update_widgets(self, prefix=None, use_form_mode=True):
+        super().update_widgets(prefix, use_form_mode)
         for field in ('selected_datatypes', 'excluded_datatypes'):
             all_datatypes = get_all_data_types(self.request, self.context, field)
             datatypes = self.widgets.get(field)
