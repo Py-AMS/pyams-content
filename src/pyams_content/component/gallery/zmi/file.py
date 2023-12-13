@@ -14,6 +14,7 @@
 
 Gallery files management components.
 """
+
 from pyramid.interfaces import IView
 from zope.component import queryMultiAdapter
 from zope.interface import Interface
@@ -21,7 +22,9 @@ from zope.lifecycleevent import ObjectCreatedEvent
 from zope.schema._bootstrapinterfaces import WrongType
 
 from pyams_content.component.gallery.interfaces import IGalleryContainer, IGalleryFile
-from pyams_content.component.gallery.zmi.interfaces import IGalleryMediasAddFields, \
+from pyams_content.component.gallery.zmi import get_json_gallery_refresh_event
+from pyams_content.component.gallery.zmi.helpers import get_json_gallery_media_refresh_event
+from pyams_content.component.gallery.zmi.interfaces import IGalleryMediaThumbnailView, IGalleryMediasAddFields, \
     IGalleryMediasView
 from pyams_content.component.paragraph.zmi import get_json_paragraph_toolbar_refresh_event
 from pyams_file.file import get_magic_content_type
@@ -34,21 +37,21 @@ from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_security.permission import get_edit_permission
 from pyams_security.security import ProtectedViewObjectMixin
+from pyams_skin.interfaces.view import IModalPage
 from pyams_skin.interfaces.viewlet import IContextActionsViewletManager
 from pyams_skin.viewlet.actions import ContextAction, ContextAddAction
 from pyams_template.template import template_config
-from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
-from pyams_utils.factory import create_object
-from pyams_utils.interfaces import ICacheKeyValue
+from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config, query_adapter
+from pyams_utils.factory import create_object, factory_config
 from pyams_utils.registry import query_utility
 from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
 from pyams_viewlet.viewlet import ViewContentProvider, contentprovider_config, viewlet_config
 from pyams_zmi.form import AdminModalAddForm, AdminModalEditForm, FormGroupSwitcher
-from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
+from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.viewlet import IToolbarViewletManager
 from pyams_zmi.utils import get_object_label
-
 
 __docformat__ = 'restructuredtext'
 
@@ -71,7 +74,8 @@ class GalleryMediaAddAction(ProtectedViewObjectMixin, ContextAddAction):
 class GalleryMediaAddForm(AdminModalAddForm):
     """Gallery media add form"""
 
-    legend = _("New media(s) properties")
+    subtitle = _("New medias")
+    legend = _("New medias properties")
 
     fields = Fields(IGalleryMediasAddFields)
     content_factory = IGalleryFile
@@ -120,23 +124,6 @@ class GalleryMediaAddForm(AdminModalAddForm):
         self.context.append(obj)
 
 
-def get_json_gallery_refresh_event(context, request, view):
-    """Get gallery refresh event"""
-    gallery = get_parent(context, IGalleryContainer)
-    provider = create_object(IGalleryMediasView,
-                             context=gallery, request=request, view=view)
-    if provider is not None:
-        provider.update()
-        return {
-            'callback': 'MyAMS.helpers.refreshElement',
-            'options': {
-                'object_id': f'gallery_{ICacheKeyValue(gallery)}',
-                'content': provider.render()
-            }
-        }
-    return None
-
-
 @adapter_config(required=(IGalleryContainer, IAdminLayer, GalleryMediaAddForm),
                 provides=IAJAXFormRenderer)
 class GalleryMediaAddFormRenderer(ContextRequestViewAdapter):
@@ -163,6 +150,7 @@ class GalleryMediaAddFormRenderer(ContextRequestViewAdapter):
                         context=IGalleryFile, layer=IAdminLayer,
                         view=IGalleryMediasView)
 @template_config(template='templates/gallery-thumbnail.pt', layer=IAdminLayer)
+@factory_config(IGalleryMediaThumbnailView)
 class GalleryMediaPreview(ViewContentProvider):
     """Gallery media preview"""
 
@@ -226,6 +214,24 @@ class GalleryFileShowHideAction(ContextAction):
 # Gallery file properties
 #
 
+@adapter_config(required=(IGalleryFile, IPyAMSLayer, Interface),
+                provides=IObjectLabel)
+def gallery_file_label(context, request, view):
+    """Gallery file label getter"""
+    title = II18n(context).query_attribute('title', request=request)
+    if not title:
+        title = get_object_label(context.data, request, view)
+    return title
+
+
+@adapter_config(required=(IGalleryFile, IAdminLayer, IModalPage),
+                provides=IFormTitle)
+def gallery_file_modal_view_title(context, request, view):
+    """Gallery file modal view title getter"""
+    parent = get_parent(context, IGalleryContainer)
+    return query_adapter(IFormTitle, request, parent, view)
+
+
 @viewlet_config(name='show-properties.action',
                 context=IGalleryFile, layer=IAdminLayer, view=Interface,
                 manager=IContextActionsViewletManager, weight=20,
@@ -247,16 +253,10 @@ class GalleryFilePropertiesEditForm(AdminModalEditForm):
     """Gallery file properties edit form"""
 
     @property
-    def title(self):
+    def subtitle(self):
         translate = self.request.localizer.translate
-        parent = self.context.__parent__
-        title = II18n(self.context).query_attribute('title', request=self.request)
-        if not title:
-            data = self.context.data
-            title = data.title or data.filename
-        return '<small>{}</small><br />{}'.format(
-            get_object_label(parent, self.request, self),
-            translate(_("Media: {}")).format(title))
+        return translate(_("Media: {}")).format(
+            get_object_label(self.context, self.request, self))
 
     legend = _("Gallery media properties")
     modal_class = 'modal-xl'
@@ -279,6 +279,23 @@ class GalleryFilePropertiesEditFormSoundGroup(FormGroupSwitcher):
     legend = _("Audio content")
 
     fields = Fields(IGalleryFile).select('sound', 'sound_title', 'sound_description')
+
+
+@adapter_config(required=(IGalleryFile, IAdminLayer, GalleryFilePropertiesEditForm),
+                provides=IAJAXFormRenderer)
+class GalleryFilePropertiesEditFormRenderer(ContextRequestViewAdapter):
+    """Gallery file properties edit form renderer"""
+
+    def render(self, changes):
+        if not changes:
+            return None
+        return {
+            'status': 'success',
+            'message': self.request.localizer.translate(self.view.success_message),
+            'callbacks': [
+                get_json_gallery_media_refresh_event(self.context, self.request, self.view)
+            ]
+        }
 
 
 #

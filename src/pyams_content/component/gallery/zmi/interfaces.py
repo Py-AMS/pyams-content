@@ -40,3 +40,7 @@ class IGalleryMediasAddFields(Interface):
     author = TextLine(title=_("Author"),
                       description=_("Name of document's author"),
                       required=True)
+
+
+class IGalleryMediaThumbnailView(Interface):
+    """Gallery media thumbnail view marker interface"""

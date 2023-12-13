@@ -118,7 +118,7 @@ class GalleryContainerSublocations(ContextAdapter):
 
     def sublocations(self):
         """Sub-locations getter"""
-        return IGallery(self.context).values()
+        yield from IGallery(self.context).values()
 
 
 @adapter_config(required=IGallery,

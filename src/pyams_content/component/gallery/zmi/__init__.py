@@ -14,27 +14,36 @@
 
 
 """
+from cgi import FieldStorage
 
 from pyramid.decorator import reify
+from pyramid.httpexceptions import HTTPForbidden, HTTPServerError
 from pyramid.view import view_config
 from zope.interface import implementer
+from zope.location import locate
+from zope.schema._bootstrapinterfaces import WrongType
 
-from pyams_content.component.gallery import IGallery, IGalleryTarget
+from pyams_content.component.gallery import IGallery, IGalleryFile, IGalleryTarget
 from pyams_content.component.gallery.interfaces import IGalleryContainer
-from pyams_content.component.gallery.zmi.file import get_json_gallery_refresh_event
+from pyams_content.component.gallery.zmi.helpers import get_json_gallery_refresh_event
 from pyams_content.component.gallery.zmi.interfaces import IGalleryMediasView
 from pyams_content.component.paragraph.zmi import get_json_paragraph_toolbar_refresh_event
+from pyams_file.file import get_magic_content_type
+from pyams_file.interfaces.archive import IArchiveExtractor
 from pyams_form.interfaces.form import IInnerSubForm
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_layer.skin import apply_skin
 from pyams_pagelet.pagelet import pagelet_config
+from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_security.permission import get_edit_permission
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
-from pyams_utils.factory import factory_config, get_object_factory
-from pyams_utils.interfaces import ICacheKeyValue
+from pyams_utils.factory import create_object, factory_config, get_object_factory
+from pyams_utils.interfaces import ICacheKeyValue, MISSING_INFO
+from pyams_utils.registry import query_utility
+from pyams_utils.rest import http_error
 from pyams_viewlet.viewlet import Viewlet, viewlet_config
 from pyams_zmi.helper.container import delete_container_element, switch_element_attribute
 from pyams_zmi.interfaces import IAdminLayer
@@ -89,11 +98,58 @@ class GalleryMediasViewlet(BaseGalleryMediasViewlet):
         super().__init__(context, request, view, manager)
 
 
+@view_config(name='upload-medias-files.json',
+             context=IGalleryContainer, request_type=IPyAMSLayer,
+             request_method='POST', renderer='json', xhr=True, require_csrf=False)
+def upload_medias_files(request):
+    """Upload medias files"""
+    container = IGalleryContainer(request.context)
+    permission_checker = IViewContextPermissionChecker(container, None)
+    if permission_checker is None:
+        return http_error(request, HTTPServerError, "Missing context permission")
+    if not request.has_permission(permission_checker.edit_permission, context=container):
+        return http_error(request, HTTPForbidden)
+    for name in request.params.keys():
+        input_file = request.params.get(name)
+        if isinstance(input_file, FieldStorage):
+            value = input_file.value
+            content_type = get_magic_content_type(value)
+            extractor = query_utility(IArchiveExtractor, name=content_type)
+            if extractor is not None:
+                contents = extractor.get_contents(value)
+            else:
+                contents = ((value, input_file.filename),)
+            for content, filename in contents:
+                try:
+                    gallery_file = create_object(IGalleryFile)
+                    locate(gallery_file, container)
+                    gallery_file.data = filename, content
+                    gallery_file.author = MISSING_INFO
+                except WrongType:
+                    continue
+                else:
+                    container.append(gallery_file, notify=False)
+    apply_skin(request, AdminSkin)
+    result_view = create_object(IGalleryMediasView, context=container, request=request, view=None)
+    result_view.update()
+    result = {
+        'status': 'success',
+        'callbacks': [
+            get_json_gallery_refresh_event(container, request, result_view)
+        ]
+    }
+    event = get_json_paragraph_toolbar_refresh_event(container, request)
+    if event is not None:
+        result.setdefault('callbacks', []).append(event)
+    return result
+
+
 @view_config(name='set-medias-order.json',
              context=IGalleryContainer, request_type=IPyAMSLayer,
              renderer='json', xhr=True)
 def set_medias_order(request):
     """Medias ordering view"""
+
     order = request.params.get('order').split(';')
     request.context.updateOrder(order)
     return {
