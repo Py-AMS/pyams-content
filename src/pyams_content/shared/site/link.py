@@ -16,7 +16,7 @@
 
 from persistent import Persistent
 from zope.container.contained import Contained
-from zope.interface import implementer
+from zope.interface import Interface, implementer
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.illustration import ILinkIllustrationTarget
@@ -25,15 +25,18 @@ from pyams_content.feature.navigation.interfaces import IDynamicMenu
 from pyams_content.interfaces import MANAGE_CONTENT_PERMISSION
 from pyams_content.shared.site.interfaces import IExternalSiteLink, IInternalSiteLink, \
     ISiteElementNavigation, ISiteLink
+from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_sequence.reference import InternalReferenceMixin, get_reference_target
 from pyams_utils.adapter import ContextAdapter, ContextRequestAdapter, adapter_config
 from pyams_utils.factory import factory_config
+from pyams_utils.interfaces import MISSING_INFO
 from pyams_utils.zodb import volatile_property
 from pyams_workflow.interfaces import IWorkflow, IWorkflowPublicationInfo, IWorkflowState, \
     IWorkflowVersion, IWorkflowVersions
-
+from pyams_zmi.interfaces import IObjectLabel
+from pyams_zmi.utils import get_object_label
 
 __docformat__ = 'restructuredtext'
 
@@ -122,6 +125,18 @@ class InternalSiteLinkNavigationAdapter(ContextRequestAdapter):
         return (target is not None) and IWorkflowPublicationInfo(target).is_visible(self.request)
 
 
+@adapter_config(required=(IInternalSiteLink, IPyAMSLayer, Interface),
+                provides=IObjectLabel)
+def internal_site_link_label(context, request, view):
+    """Internal site link label"""
+    label = II18n(context).query_attribute('navigation_title', request=request)
+    if not label:
+        target = context.get_target()
+        if target is not None:
+            label = get_object_label(target, request, view)
+    return label or MISSING_INFO
+
+
 @adapter_config(required=IInternalSiteLink,
                 provides=IWorkflow)
 def internal_site_link_workflow_info(context):
@@ -184,3 +199,11 @@ class ExternalSiteLinkNavigationAdapter(ContextRequestAdapter):
     def visible(self):
         """Navigation link visibility getter"""
         return self.context.visible
+
+
+@adapter_config(required=(IExternalSiteLink, IPyAMSLayer, Interface),
+                provides=IObjectLabel)
+def external_site_link_label(context, request, view):
+    """External site link label"""
+    label = II18n(context).query_attribute('navigation_title', request=request)
+    return label or context.url
