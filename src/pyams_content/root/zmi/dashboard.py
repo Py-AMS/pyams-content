@@ -27,7 +27,7 @@ from zope.schema.vocabulary import getVocabularyRegistry
 from pyams_catalog.query import CatalogResultSet
 from pyams_content.shared.common import IBaseSharedTool, SHARED_CONTENT_TYPES_VOCABULARY
 from pyams_content.shared.common.zmi.dashboard import BaseSharedToolDashboardSingleView, \
-    BaseSharedToolDashboardTable, BaseSharedToolDashboardView, SharedToolAllInterventionsMenu, \
+    DashboardTable, BaseSharedToolDashboardView, SharedToolAllInterventionsMenu, \
     SharedToolArchivedContentsMenu, SharedToolArchivedContentsView, \
     SharedToolDashboardManagerWaitingValues, SharedToolDashboardManagerWaitingView, \
     SharedToolDashboardMenu, SharedToolDashboardOwnerModifiedView, \
@@ -63,7 +63,7 @@ __docformat__ = 'restructuredtext'
 from pyams_content import _
 
 
-class BaseSiteRootDashboardTable(BaseSharedToolDashboardTable):
+class BaseSiteRootDashboardTable(DashboardTable):
     """Base site root dashboard table"""
 
 
