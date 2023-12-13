@@ -33,8 +33,6 @@ from pyams_zmi.form import AdminModalDisplayForm
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_zmi.table import IconColumn, InnerTableAdminView, TableGroupSwitcher
-from pyams_zmi.utils import get_object_hint, get_object_label
-
 
 __docformat__ = 'restructuredtext'
 
@@ -48,17 +46,8 @@ from pyams_content import _
 class MenusModalEditForm(AdminModalDisplayForm):
     """Menus modal edit form"""
 
-    @property
-    def title(self):
-        """Form title getter"""
-        translate = self.request.localizer.translate
-        hint = get_object_hint(self.context, self.request, self)
-        label = get_object_label(self.context, self.request, self)
-        return '<small>{}</small><br />{}'.format(
-            translate(_("{}: {}")).format(hint, label) if hint else label,
-            translate(_("Navigation menus")))
-
     modal_class = 'modal-xl'
+    subtitle = _("Navigation menus")
 
 
 @factory_config(IMenusTable)

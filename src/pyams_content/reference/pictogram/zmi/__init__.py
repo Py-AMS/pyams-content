@@ -29,17 +29,19 @@ from pyams_form.interfaces.form import IAJAXFormRenderer
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
+from pyams_skin.interfaces.view import IModalEditForm, IModalPage
 from pyams_skin.viewlet.actions import ContextAddAction
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.interfaces.form import NO_VALUE_STRING
 from pyams_utils.interfaces.intids import IUniqueID
-from pyams_utils.registry import query_utility
+from pyams_utils.registry import get_utility
 from pyams_utils.traversing import get_parent
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalAddForm, AdminModalEditForm
 from pyams_zmi.helper.event import get_json_table_row_add_callback, \
     get_json_table_row_refresh_callback
-from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces import IAdminLayer, TITLE_SPAN
+from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IToolbarViewletManager
 from pyams_zmi.table import TableElementEditor
@@ -67,13 +69,7 @@ class PictogramAddAction(ContextAddAction):
 class PictogramAddForm(AdminModalAddForm):
     """Pictogram add form"""
 
-    @property
-    def title(self):
-        translate = self.request.localizer.translate
-        return '<small>{}</small><br />{}'.format(
-            get_object_label(self.context, self.request, self),
-            translate(_("New pictogram")))
-
+    subtitle = _("New pictogram")
     legend = _("New pictogram properties")
     modal_class = 'modal-xl'
 
@@ -83,6 +79,13 @@ class PictogramAddForm(AdminModalAddForm):
     def add(self, obj):
         oid = IUniqueID(obj).oid
         self.context[oid] = obj
+
+
+@adapter_config(required=(IPictogramTable, IAdminLayer, IModalPage),
+                provides=IFormTitle)
+def pictogram_add_form_title(context, request, view):
+    """Pictogram add form title"""
+    return get_object_label(context, request, view)
 
 
 @adapter_config(required=(IPictogramTable, IAdminLayer, PictogramAddForm),
@@ -116,18 +119,23 @@ class PictogramEditForm(AdminModalEditForm):
     """Pictogram properties edit form"""
 
     @property
-    def title(self):
+    def subtitle(self):
         translate = self.request.localizer.translate
-        table = query_utility(IPictogramTable)
-        return '<small>{}</small><br />{}'.format(
-            get_object_label(table, self.request, self),
-            translate(_("Pictogram: {}")).format(
-                II18n(self.context).query_attribute('title', request=self.request)))
+        return translate(_("Pictogram: {}")).format(
+            II18n(self.context).query_attribute('title', request=self.request))
 
     legend = _("Pictogram properties")
     modal_class = 'modal-xl'
 
     fields = Fields(IPictogram).omit('__parent__', '__name__')
+
+
+@adapter_config(required=(IPictogram, IAdminLayer, IModalEditForm),
+                provides=IFormTitle)
+def pictogram_edit_form_title(context, request, form):
+    """Pictogram edit form title"""
+    table = get_utility(IPictogramTable)
+    return TITLE_SPAN.format(get_object_label(table, request, form))
 
 
 @adapter_config(required=(IPictogram, IAdminLayer, PictogramEditForm),

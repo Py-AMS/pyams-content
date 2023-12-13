@@ -38,13 +38,12 @@ from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalAddForm, AdminModalEditForm
 from pyams_zmi.helper.event import get_json_table_row_add_callback, \
     get_json_table_row_refresh_callback
-from pyams_zmi.interfaces import IAdminLayer, IObjectHint, IObjectIcon, IObjectLabel
+from pyams_zmi.interfaces import IAdminLayer, IObjectHint, IObjectIcon, IObjectLabel, TITLE_SPAN_BREAK
 from pyams_zmi.interfaces.form import IFormTitle, IPropertiesEditForm
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager, IToolbarViewletManager
 from pyams_zmi.table import TableElementEditor
 from pyams_zmi.utils import get_object_hint, get_object_label
-
 
 __docformat__ = 'restructuredtext'
 
@@ -69,13 +68,6 @@ class MenuLinksContainerSizeColumn(NullAdapter):
 # Menu add form
 #
 
-@adapter_config(required=(IMenu, IAdminLayer, Interface),
-                provides=IObjectLabel)
-def menu_label(context, request, view):
-    """Menu label getter"""
-    return II18n(context).query_attribute('title', request=request)
-
-
 @viewlet_config(name='add-menu.menu',
                 context=IMenusContainerTarget, layer=IAdminLayer, view=IAssociationsTable,
                 manager=IToolbarViewletManager, weight=10)
@@ -96,15 +88,10 @@ class MenuAddAction(ProtectedViewObjectMixin, ContextAddAction):
 class MenuAddForm(AdminModalAddForm):
     """Menu add form"""
 
-    @property
-    def title(self):
-        translate = self.request.localizer.translate
-        return '<small>{}</small><br />{}'.format(
-            get_object_label(self.context, self.request, self),
-            translate(_("New navigation menu")))
-
-    legend = _("New menu properties")
     modal_class = 'modal-xl'
+
+    subtitle = _("New navigation menu")
+    legend = _("New menu properties")
 
     fields = Fields(IMenu).omit('__parent__', '__name__', 'visible')
     fields['pictogram_name'].widget_factory = PictogramSelectFieldWidget
@@ -148,24 +135,17 @@ def menu_hint(context, request, view):
     return request.localizer.translate(Menu.icon_hint)
 
 
+@adapter_config(required=(IMenu, IAdminLayer, Interface),
+                provides=IObjectLabel)
+def menu_label(context, request, view):
+    """Menu label getter"""
+    return II18n(context).query_attribute('title', request=request)
+
+
 @adapter_config(required=(IMenu, IAdminLayer, IMenusTable),
                 provides=ITableElementEditor)
 class MenuTableElementEditor(TableElementEditor):
     """Menu table element editor"""
-
-
-@adapter_config(required=(IMenu, IAdminLayer, IPropertiesEditForm),
-                provides=IFormTitle)
-def menu_edit_form_title(context, request, view):
-    """Menu edit form title getter"""
-    translate = request.localizer.translate
-    parent = get_parent(context, IMenusContainerTarget)
-    hint = get_object_hint(parent, request, view)
-    label = get_object_label(parent, request, view)
-    parent_label = translate(_("{}: {}")).format(hint, label) if hint else label
-    label = translate(_("{}: {}")).format(get_object_hint(context, request, view),
-                                          get_object_label(context, request, view))
-    return f'<small>{parent_label}</small><br />{label}'
 
 
 @ajax_form_config(name='properties.html',
@@ -174,10 +154,28 @@ def menu_edit_form_title(context, request, view):
 class MenuPropertiesEditForm(AdminModalEditForm):
     """Menu properties edit form"""
 
+    @property
+    def subtitle(self):
+        return get_object_label(self.context, self.request, self)
+
     legend = _("Menu properties")
 
     fields = Fields(IMenu).omit('__parent__', '__name__', 'visible')
     fields['pictogram_name'].widget_factory = PictogramSelectFieldWidget
+
+
+@adapter_config(required=(IMenu, IAdminLayer, IPropertiesEditForm),
+                provides=IFormTitle)
+def menu_edit_form_title(context, request, view):
+    """Menu properties edit form title getter"""
+    translate = request.localizer.translate
+    parent = get_parent(context, IMenusContainerTarget)
+    hint = get_object_hint(parent, request, view)
+    label = get_object_label(parent, request, view)
+    parent_label = translate(_("{}: {}")).format(hint, label) if hint else label
+    return TITLE_SPAN_BREAK.format(
+        parent_label,
+        get_object_hint(context, request, view))
 
 
 @adapter_config(required=(IMenu, IAdminLayer, MenuPropertiesEditForm),
