@@ -16,6 +16,7 @@
 
 from uuid import uuid4
 
+from zope.container.interfaces import IContainer
 from zope.interface import Interface, implementer
 from zope.intid import IIntIds
 from zope.schema import Int
@@ -30,7 +31,8 @@ from pyams_content.zmi.interfaces import IDashboardColumn, IDashboardContentLabe
     IDashboardContentModifier, IDashboardContentNumber, IDashboardContentOwner, \
     IDashboardContentStatus, IDashboardContentStatusDatetime, IDashboardContentType, \
     IDashboardContentVersion, IDashboardContentVisibility
-from pyams_zmi.interfaces.form import IPropertiesEditForm
+from pyams_skin.interfaces.view import IModalEditForm
+from pyams_zmi.interfaces.form import IFormTitle, IPropertiesEditForm
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.form import apply_changes
@@ -39,7 +41,7 @@ from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_skin.viewlet.menu import MenuDivider, MenuItem
-from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
+from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config, query_adapter
 from pyams_utils.registry import get_utility
 from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
@@ -47,7 +49,7 @@ from pyams_viewlet.viewlet import viewlet_config
 from pyams_workflow.interfaces import IWorkflowPublicationInfo
 from pyams_zmi.form import AdminModalAddForm, AdminModalEditForm, FormGroupChecker
 from pyams_zmi.helper.event import get_json_table_row_refresh_callback
-from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces import IAdminLayer, TITLE_SPAN_BREAK
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager
 from pyams_zmi.table import TableElementEditor
@@ -62,16 +64,7 @@ from pyams_content import _
 class SiteLinkAddForm(AdminModalAddForm):
     """Base site link add form"""
 
-    @property
-    def title(self):
-        """Title getter"""
-        container = self.context
-        translate = self.request.localizer.translate
-        return '<small>{}</small><br />{}'.format(
-            translate(_("{content_name}: {label}")).format(
-                content_name=translate(_(container.content_name)),
-                label=get_object_label(container, self.request)),
-            translate(_("Create new link")))
+    subtitle = _("New link")
 
     def update_widgets(self, prefix=None):
         super().update_widgets(prefix)
@@ -91,6 +84,18 @@ class SiteLinkAddForm(AdminModalAddForm):
             parent[uuid] = link
         # initialize new link attributes
         apply_changes(self, link, data)
+
+
+@adapter_config(required=(ISiteContainer, IAdminLayer, SiteLinkAddForm),
+                provides=IFormTitle)
+def site_link_add_form_title(context, request, form):
+    """Site link add form title"""
+    manager = get_parent(context, ISiteManager)
+    if manager is context:
+        return get_object_label(manager, request, form)
+    return TITLE_SPAN_BREAK.format(
+        get_object_label(manager, request, form),
+        get_object_label(context, request, form))
 
 
 @adapter_config(required=(ISiteContainer, IAdminLayer, SiteLinkAddForm),
@@ -120,15 +125,12 @@ class SiteLinkPropertiesEditForm(AdminModalEditForm):
     """Site link properties edit form"""
 
     @property
-    def title(self):
+    def subtitle(self):
         """Title getter"""
-        container = self.context.__parent__
         translate = self.request.localizer.translate
-        return '<small>{}</small><br />{}'.format(
-            translate(_("{content_name}: {label}")).format(
-                content_name=translate(container.content_name),
-                label=get_object_label(container, self.request)),
-            translate(self.context.content_name))
+        return translate(_("{content_name}: {label}")).format(
+                content_name=translate(self.context.content_name),
+                label=get_object_label(self.context, self.request, self))
 
     legend = _("Link properties")
 
@@ -220,7 +222,8 @@ class IInternalSiteLinkAddFormFields(IInternalSiteLink):
 class InternalSiteLinkAddForm(SiteLinkAddForm):
     """Internal site link add form"""
 
-    legend = _("Add internal link")
+    subtitle = _("New internal link")
+    legend = _("New internal link properties")
 
     fields = Fields(IInternalSiteLinkAddFormFields).select('reference', 'navigation_title',
                                                            'parent')
@@ -240,6 +243,14 @@ class InternalSiteLinkPropertiesEditForm(SiteLinkPropertiesEditForm):
     """Internal site link properties edit form"""
 
     fields = Fields(IInternalSiteLink).select('reference', 'navigation_title')
+
+
+@adapter_config(required=(IInternalSiteLink, IAdminLayer, IModalEditForm),
+                provides=IFormTitle)
+def internal_site_link_edit_form_title(context, request, form):
+    """Internal site link edit form title"""
+    parent = get_parent(context, IContainer)
+    return query_adapter(IFormTitle, request, parent, form)
 
 
 @adapter_config(required=(IInternalSiteLink, IAdminLayer, IDashboardColumn),
@@ -346,7 +357,8 @@ class IExternalSiteLinkAddFormFields(IExternalSiteLink):
 class ExternalSiteLinkAddForm(SiteLinkAddForm):
     """External site link add form"""
 
-    legend = _("Add external link")
+    subtitle = _("New external link")
+    legend = _("New external link properties")
 
     fields = Fields(IExternalSiteLinkAddFormFields).select('url', 'navigation_title',
                                                            'parent')
@@ -366,6 +378,14 @@ class ExternalSiteLinkPropertiesEditForm(SiteLinkPropertiesEditForm):
     """External site link properties edit form"""
 
     fields = Fields(IExternalSiteLink).select('url', 'navigation_title')
+
+
+@adapter_config(required=(IExternalSiteLink, IAdminLayer, IModalEditForm),
+                provides=IFormTitle)
+def external_site_link_edit_form_title(context, request, form):
+    """External site link edit form title"""
+    parent = get_parent(context, IContainer)
+    return query_adapter(IFormTitle, request, parent, form)
 
 
 @adapter_config(required=(IExternalSiteLink, IAdminLayer, IDashboardColumn),

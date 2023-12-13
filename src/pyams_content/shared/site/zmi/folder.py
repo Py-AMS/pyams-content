@@ -21,7 +21,7 @@ from zope.schema import Int, Text
 from pyams_content.interfaces import IBaseContent, MANAGE_SITE_PERMISSION
 from pyams_content.shared.common.interfaces import IBaseSharedTool
 from pyams_content.zmi.properties import PropertiesEditForm
-from pyams_content.shared.site.interfaces import ISiteContainer, ISiteFolder
+from pyams_content.shared.site.interfaces import ISiteContainer, ISiteFolder, ISiteManager
 from pyams_content.shared.site.zmi.interfaces import ISiteTreeTable
 from pyams_content.shared.site.zmi.widget.folder import SiteManagerFoldersSelectorFieldWidget
 from pyams_form.ajax import AJAXFormRenderer, ajax_form_config
@@ -36,15 +36,18 @@ from pyams_skin.viewlet.breadcrumb import BreadcrumbItem
 from pyams_skin.viewlet.menu import MenuItem
 from pyams_utils.adapter import adapter_config
 from pyams_utils.registry import get_utility
+from pyams_utils.traversing import get_parent
 from pyams_utils.unicode import translate_string
 from pyams_viewlet.manager import viewletmanager_config
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalAddForm, FormGroupSwitcher
-from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
+from pyams_zmi.interfaces import IAdminLayer, IObjectLabel, TITLE_SPAN_BREAK
+from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager, IPropertiesMenu, \
     ISiteManagementMenu
 from pyams_zmi.table import TableElementEditor
+from pyams_zmi.utils import get_object_label
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
 
@@ -96,11 +99,8 @@ class ISiteFolderAddFormFields(Interface):
 class SiteFolderAddForm(AdminModalAddForm):
     """Site folder add form"""
 
-    @property
-    def title(self):
-        return II18n(self.context).query_attribute('title', request=self.request)
-
-    legend = _("Add site folder")
+    subtitle = _("New site folder")
+    legend = _("New site folder properties")
 
     fields = Fields(ISiteFolderAddFormFields)
     fields['parent'].widget_factory = SiteManagerFoldersSelectorFieldWidget
@@ -134,6 +134,18 @@ class SiteFolderAddForm(AdminModalAddForm):
 
     def add(self, content):
         pass
+
+
+@adapter_config(required=(ISiteContainer, IAdminLayer, SiteFolderAddForm),
+                provides=IFormTitle)
+def site_folder_add_form_title(context, request, form):
+    """Site folder add form title"""
+    manager = get_parent(context, ISiteManager)
+    if manager is context:
+        return get_object_label(manager, request, form)
+    return TITLE_SPAN_BREAK.format(
+        get_object_label(manager, request, form),
+        get_object_label(context, request, form))
 
 
 @adapter_config(required=(ISiteFolder, IAdminLayer, Interface),

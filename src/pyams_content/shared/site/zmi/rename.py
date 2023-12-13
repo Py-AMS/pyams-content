@@ -16,7 +16,7 @@ This module defines components which can be used to rename a site element.
 """
 
 from pyramid.events import subscriber
-from zope.container.interfaces import IOrderedContainer
+from zope.container.interfaces import IContainer, IOrderedContainer
 from zope.interface import Invalid
 from zope.lifecycleevent import ObjectMovedEvent
 
@@ -25,17 +25,18 @@ from pyams_content.shared.site.interfaces import IBaseSiteItem
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer, IDataExtractedEvent
-from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_skin.viewlet.menu import MenuItem
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
+from pyams_utils.traversing import get_parent
 from pyams_utils.unicode import translate_string
 from pyams_utils.url import absolute_url
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalEditForm
-from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces import IAdminLayer, TITLE_SPAN_BREAK
+from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.viewlet import IContextActionsDropdownMenu
-
+from pyams_zmi.utils import get_object_label
 
 __docformat__ = 'restructuredtext'
 
@@ -62,11 +63,8 @@ class SiteItemRenameMenu(MenuItem):
 class SiteItemRenameForm(AdminModalEditForm):
     """Site item rename form"""
 
-    @property
-    def title(self):
-        return II18n(self.context).query_attribute('title', request=self.request)
-
-    legend = _("Change item URL")
+    subtitle = _("Change item URL")
+    legend = _("New item URL")
 
     fields = Fields(IBaseSiteItem).select('__name__')
 
@@ -97,6 +95,16 @@ class SiteItemRenameForm(AdminModalEditForm):
                 order[order.index(old_name)] = new_name
                 parent.updateOrder(order)
         return changes
+
+
+@adapter_config(required=(IBaseSiteItem, IAdminLayer, SiteItemRenameForm),
+                provides=IFormTitle)
+def base_site_item_rename_form_title(context, request, form):
+    """Base site item rename form title"""
+    parent = get_parent(context, IContainer, allow_context=False)
+    return TITLE_SPAN_BREAK.format(
+        get_object_label(parent, request, form),
+        get_object_label(context, request, form))
 
 
 @subscriber(IDataExtractedEvent, form_selector=SiteItemRenameForm)
