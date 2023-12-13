@@ -49,7 +49,8 @@ from pyams_viewlet.manager import TemplateBasedViewletManager, WeightOrderedView
 from pyams_viewlet.viewlet import ViewContentProvider, viewlet_config
 from pyams_zmi.form import AdminModalDisplayForm
 from pyams_zmi.helper.container import delete_container_element, switch_element_attribute
-from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces import IAdminLayer, TITLE_SPAN_BREAK
+from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu
 from pyams_zmi.skin import AdminSkin
 from pyams_zmi.table import ActionColumn, AttributeSwitcherColumn, ContentTypeColumn, \
@@ -57,7 +58,6 @@ from pyams_zmi.table import ActionColumn, AttributeSwitcherColumn, ContentTypeCo
     TableAdminView, TrashColumn, VisibilityColumn, get_ordered_data_attributes, get_table_id
 from pyams_zmi.utils import get_object_hint, get_object_icon, get_object_label
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
-
 
 __docformat__ = 'restructuredtext'
 
@@ -80,7 +80,7 @@ class ParagraphsBaseTable(Table):
             })
         })
         container = IParagraphContainer(self.context)
-        get_ordered_data_attributes(attributes, container, self.request)
+        get_ordered_data_attributes(self, attributes, container, self.request)
         return attributes
 
     display_if_empty = True
@@ -391,17 +391,17 @@ class SharedToolTypesParagraphsColumn(ActionColumn):
 class ParagraphsContainerModalView(AdminModalDisplayForm):
     """Paragraphs container modal view"""
 
-    @property
-    def title(self):
-        """Form title getter"""
-        translate = self.request.localizer.translate
-        hint = get_object_hint(self.context, self.request, self)
-        label = get_object_label(self.context, self.request, self)
-        return '<small>{}</small><br />{}'.format(
-            translate(_("{}: {}")).format(hint, label) if hint else label,
-            translate(_("Paragraphs")))
-
+    subtitle = _("Paragraphs")
     modal_class = 'modal-xl'
+
+
+@adapter_config(required=(IParagraphContainerTarget, IAdminLayer, ParagraphsContainerModalView),
+                provides=IFormTitle)
+def paragraph_container_modal_view_title(context, request, view):
+    """Paragraph container modal view title"""
+    hint = get_object_hint(context, request, view)
+    label = get_object_label(context, request, view)
+    return TITLE_SPAN_BREAK.format(hint, label)
 
 
 @viewlet_config(name='paragraphs-modal-table',

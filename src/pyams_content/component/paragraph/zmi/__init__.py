@@ -44,7 +44,7 @@ from pyams_security.security import ProtectedViewObjectMixin
 from pyams_skin.schema.button import ActionButton
 from pyams_skin.viewlet.menu import MenuDivider, MenuItem
 from pyams_utils.adapter import ContextRequestViewAdapter, NullAdapter, adapter_config
-from pyams_utils.factory import get_object_factory
+from pyams_utils.factory import get_all_factories, get_object_factory
 from pyams_utils.request import get_annotations
 from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
@@ -53,7 +53,7 @@ from pyams_viewlet.viewlet import EmptyContentProvider, contentprovider_config, 
 from pyams_zmi.form import AdminEditForm, AdminModalAddForm, AdminModalEditForm
 from pyams_zmi.helper.event import get_json_table_refresh_callback, \
     get_json_table_row_add_callback, get_json_widget_refresh_callback
-from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces import IAdminLayer, TITLE_SPAN_BREAK
 from pyams_zmi.interfaces.form import IEditFormButtons, IFormTitle, IPropertiesEditForm
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager, IPropertiesMenu, \
@@ -62,7 +62,6 @@ from pyams_zmi.table import TableElementEditor
 from pyams_zmi.utils import get_object_hint, get_object_label
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 from pyams_zmi.zmi.viewlet.toolbar import AddingsViewletManager
-
 
 __docformat__ = 'restructuredtext'
 
@@ -139,7 +138,10 @@ class ParagraphAddMenuDivider(ProtectedViewObjectMixin, MenuDivider):
         has_primary = False
         has_secondary = False
         settings = IParagraphFactorySettings(target)
-        for factory_name in settings.allowed_paragraphs or ():
+        factories = settings.allowed_paragraphs or ()
+        if not factories:
+            factories = (name for name, factory in get_all_factories(IBaseParagraph))
+        for factory_name in factories:
             factory = get_object_factory(IBaseParagraph, name=factory_name)
             if factory is None:
                 continue
@@ -161,8 +163,8 @@ class BaseParagraphAddMenu(ProtectedViewObjectMixin, MenuItem):
     def __new__(cls, context, request, view, manager):
         target = get_parent(context, IParagraphFactorySettingsTarget)
         if target is not None:
-            settings = IParagraphFactorySettings(target)
-            if cls.factory_name not in (settings.allowed_paragraphs or ()):
+            allowed = IParagraphFactorySettings(target).allowed_paragraphs or ()
+            if allowed and (cls.factory_name not in allowed):
                 return None
         return MenuItem.__new__(cls)
 
@@ -176,6 +178,13 @@ class BaseParagraphAddForm(AdminModalAddForm):
     """Base paragraph add form"""
 
     prefix = 'addform.'
+
+    @property
+    def subtitle(self):
+        translate = self.request.localizer.translate
+        factory = get_object_factory(self.content_factory)
+        return translate(_("New paragraph: {}")).format(translate(factory.factory.factory_label))
+
     legend = _("New paragraph properties")
     modal_class = 'modal-xl'
 
@@ -197,13 +206,10 @@ class BaseParagraphAddForm(AdminModalAddForm):
                 provides=IFormTitle)
 def paragraph_add_form_title(context, request, view):
     """Paragraph add form title"""
-    translate = request.localizer.translate
     parent = get_parent(context, IParagraphContainerTarget)
-    parent_label = translate(_("{}: {}")).format(get_object_hint(parent, request, view),
-                                                 get_object_label(parent, request, view))
-    factory = get_object_factory(view.content_factory)
-    label = translate(_("New paragraph: {}")).format(translate(factory.factory.factory_label))
-    return f'<small>{parent_label}</small><br />{label}'
+    return TITLE_SPAN_BREAK.format(
+        get_object_hint(parent, request, view),
+        get_object_label(parent, request, view))
 
 
 def get_json_paragraph_editor_open_event(context, request, table_factory, item):
@@ -285,6 +291,9 @@ class IInnerParagraphEditFormButtons(IEditFormButtons):
                 provides=IInnerParagraphEditForm)
 class InnerParagraphPropertiesEditForm(ParagraphPropertiesEditFormMixin, AdminEditForm):
     """Default inner paragraph edit form"""
+
+    hide_section = True
+    title = None
 
     buttons = Buttons(IInnerParagraphEditFormButtons)
     ajax_form_handler = 'properties.json'
@@ -381,14 +390,15 @@ class BaseParagraphPropertiesEditFormRenderer(ContextRequestViewAdapter):
 class BaseParagraphRendererSettingsEditForm(PortletRendererSettingsEditForm):
     """Base paragraph renderer settings edit form"""
 
-    @property
-    def title(self):
-        """Title getter"""
-        translate = self.request.localizer.translate
-        return translate(_("<small>Paragraph: {paragraph}</small><br />"
-                           "Renderer: {renderer}")).format(
-            paragraph=get_object_label(self.context, self.request, self),
-            renderer=translate(self.renderer.label))
+
+@adapter_config(required=(IBaseParagraph, IAdminLayer, BaseParagraphRendererSettingsEditForm),
+                provides=IFormTitle)
+def base_paragraph_renderer_settings_edit_form_title(context, request, form):
+    """Base paragraph renderer settings edit form title"""
+    container = get_parent(context, IParagraphContainerTarget)
+    return TITLE_SPAN_BREAK.format(
+        get_object_label(container, request, form),
+        get_object_label(context, request, form))
 
 
 @adapter_config(required=(IBaseParagraph, IAdminLayer, IParagraphRendererSettingsEditForm),
