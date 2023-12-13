@@ -154,7 +154,7 @@ def can_manage_content(wf, context):
     # local content managers can manage content
     roles = IWfSharedContentRoles(context)
     principal_id = request.principal.id
-    if principal_id in roles.managers:
+    if principal_id in roles.owner | roles.managers:
         return True
     # shared tool managers can manage content if restrictions apply
     restrictions = IManagerRestrictions(context)
