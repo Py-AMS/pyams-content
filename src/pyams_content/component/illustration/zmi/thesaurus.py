@@ -36,7 +36,8 @@ from pyams_content import _
 class ThesaurusTermIllustrationPropertiesEditForm(ThesaurusTermExtensionEditForm):
     """Thesaurus term illustration properties edit form"""
 
-    legend = _("Edit illustration properties")
+    subtitle = _("Associated illustration")
+    legend = _("Illustration properties")
     modal_class = 'modal-xl'
 
     fields = Fields(IBaseIllustration)

@@ -110,16 +110,6 @@ def illustration_form_fields(context, request, form):
 class ParagraphIllustrationRendererSettingsEditForm(BaseParagraphRendererSettingsEditForm):
     """Paragraph illustration renderer settings edit form"""
 
-    @property
-    def title(self):
-        """Title getter"""
-        translate = self.request.localizer.translate
-        paragraph = get_parent(self.context, IBaseParagraph)
-        return translate(_("<small>Paragraph: {paragraph}</small><br />"
-                           "Renderer: {renderer}")).format(
-            paragraph=get_object_label(paragraph, self.request, self),
-            renderer=translate(self.renderer.label))
-
 
 @adapter_config(required=(IParagraphIllustration, IAdminLayer,
                           ParagraphIllustrationRendererSettingsEditForm),
