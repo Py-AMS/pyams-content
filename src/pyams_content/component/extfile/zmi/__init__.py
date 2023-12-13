@@ -34,7 +34,7 @@ from pyams_utils.adapter import adapter_config
 from pyams_utils.traversing import get_parent
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalAddForm, AdminModalEditForm
-from pyams_zmi.interfaces import IAdminLayer, IObjectHint
+from pyams_zmi.interfaces import IAdminLayer, IObjectHint, TITLE_SPAN_BREAK
 from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager
 from pyams_zmi.utils import get_object_hint, get_object_label
@@ -52,30 +52,48 @@ def external_file_hint(context, request, view):  # pylint: disable=unused-argume
     return request.localizer.translate(context.icon_hint)
 
 
-@adapter_config(required=(IAssociationContainer, IAdminLayer, IExtFileAddForm),
-                provides=IFormTitle)
-def base_extfile_add_form_title(context, request, view):
-    """Base external file add form title getter"""
-    translate = request.localizer.translate
-    parent = get_parent(context, IAssociationContainerTarget)
-    parent_label = translate(_("{}: {}")).format(get_object_hint(parent, request, view),
-                                                 get_object_label(parent, request, view))
-    label = translate(_("Add new external file"))
-    return f'<small>{parent_label}</small><br />{label}'
-
-
 @implementer(IExtFileAddForm)
 class ExtFileAddFormMixin(AssociationItemAddFormMixin):
     """External file add form mixin class"""
 
     legend = _("New file properties")
+    modal_class = 'modal-xl'
+
+
+@adapter_config(required=(IAssociationContainer, IAdminLayer, IExtFileAddForm),
+                provides=IFormTitle)
+def base_extfile_add_form_title(context, request, form):
+    """Base external file add form title getter"""
+    parent = get_parent(context, IAssociationContainerTarget)
+    hint = get_object_hint(parent, request, form)
+    label = get_object_label(parent, request, form)
+    return TITLE_SPAN_BREAK.format(hint, label)
 
 
 @implementer(IExtFileEditForm)
 class ExtFileEditFormMixin:
     """External file edit form mixin class"""
 
+    @property
+    def subtitle(self):
+        translate = self.request.localizer.translate
+        return translate(_("{}: {}")).format(
+            translate(self.context.icon_hint),
+            get_object_label(self.context, self.request, self))
+
     legend = _("External file properties")
+    modal_class = 'modal-xl'
+
+
+@adapter_config(required=(IExtFile, IAdminLayer, IExtFileEditForm),
+                provides=IFormTitle)
+def extfile_edit_form_title(context, request, form):
+    """External file edit form title"""
+    parent = get_parent(context, IAssociationContainerTarget)
+    hint = get_object_hint(parent, request, form)
+    label = get_object_label(parent, request, form)
+    return TITLE_SPAN_BREAK.format(
+        hint, label)
 
 
 #
@@ -106,7 +124,8 @@ class ExtFileAddMenu(ProtectedViewObjectMixin, AssociationItemAddMenuMixin, Menu
 class ExtFileAddForm(ExtFileAddFormMixin, AdminModalAddForm):
     """External file add form"""
 
-    legend = _("Add external file")
+    subtitle = _("New external file")
+    legend = _("New external file properties")
 
     fields = Fields(IExtFile).select('data', 'filename', 'title', 'description',
                                      'author', 'language')
@@ -146,7 +165,8 @@ class ExtImageAddMenu(ProtectedViewObjectMixin, AssociationItemAddMenuMixin, Men
 class ExtImageAddForm(ExtFileAddFormMixin, AdminModalAddForm):
     """External image add form"""
 
-    legend = _("Add external image")
+    subtitle = _("New external image")
+    legend = _("New external image properties")
 
     fields = Fields(IExtImage).select('data', 'filename', 'title', 'description',
                                       'author', 'language')
@@ -186,7 +206,8 @@ class ExtVideoAddMenu(ProtectedViewObjectMixin, AssociationItemAddMenuMixin, Men
 class ExtVideoAddForm(ExtFileAddFormMixin, AdminModalAddForm):
     """External video add form"""
 
-    legend = _("Add external video")
+    subtitle = _("New external video")
+    legend = _("New external video properties")
 
     fields = Fields(IExtVideo).select('data', 'filename', 'title', 'description',
                                       'author', 'language')
@@ -226,7 +247,8 @@ class ExtAudioAddMenu(ProtectedViewObjectMixin, AssociationItemAddMenuMixin, Men
 class ExtAudioAddForm(ExtFileAddFormMixin, AdminModalAddForm):
     """External audio add form"""
 
-    legend = _("Add external audio")
+    subtitle = _("New external audio")
+    legend = _("New external audio properties")
 
     fields = Fields(IExtAudio).select('data', 'filename', 'title', 'description',
                                       'author', 'language')
