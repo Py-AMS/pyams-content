@@ -206,8 +206,8 @@ class BaseThesaurusTermsSearchGroup(FormGroupSwitcher):
     label_css_class = 'hidden'
     input_css_class = 'col-12'
 
-    def update_widgets(self, prefix=None):
-        super().update_widgets(prefix)
+    def update_widgets(self, prefix=None, use_form_mode=True):
+        super().update_widgets(prefix, use_form_mode)
         terms = self.widgets.get(self.fieldname)
         if terms is not None:
             manager = self.manager(self.request.root)
