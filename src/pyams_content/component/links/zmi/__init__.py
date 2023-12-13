@@ -10,7 +10,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.component.links.zmi module
 
 """
 
@@ -20,12 +20,12 @@ from zope.interface import implementer
 from pyams_content.component.association.interfaces import IAssociationContainer, IAssociationContainerTarget, \
     IAssociationInfo
 from pyams_content.component.association.zmi import AssociationItemAddFormMixin, \
-    AssociationItemAddMenuMixin, IAssociationsTable
-from pyams_content.component.association.zmi.interfaces import IAssociationItemAddForm, \
-    IAssociationItemEditForm
+    AssociationItemAddMenuMixin
+from pyams_content.component.association.zmi.interfaces import IAssociationsTable
 from pyams_content.component.links import ExternalLink, InternalLink, MailtoLink
-from pyams_content.component.links.interfaces import IExternalLink, IInternalLink, \
+from pyams_content.component.links.interfaces import IBaseLink, IExternalLink, IInternalLink, \
     ILinkContainerTarget, IMailtoLink
+from pyams_content.component.links.zmi.interfaces import ILinkAddForm, ILinkEditForm
 from pyams_content.reference.pictogram.zmi.widget import PictogramSelectFieldWidget
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
@@ -37,36 +37,14 @@ from pyams_utils.adapter import adapter_config
 from pyams_utils.traversing import get_parent
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalAddForm, AdminModalEditForm
-from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces import IAdminLayer, TITLE_SPAN_BREAK
 from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager
 from pyams_zmi.utils import get_object_hint, get_object_label
 
-
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
-
-
-class ILinkAddForm(IAssociationItemAddForm):
-    """Link add form internal marker interface"""
-
-
-class ILinkEditForm(IAssociationItemEditForm):
-    """Link edit form internal marker interface"""
-
-
-@adapter_config(required=(IAssociationContainer, IAdminLayer, ILinkAddForm),
-                provides=IFormTitle)
-def link_add_form_title(context, request, view):
-    """Link add form title getter"""
-    translate = request.localizer.translate
-    parent = get_parent(context, IAssociationContainerTarget)
-    hint = get_object_hint(parent, request, view)
-    label = get_object_label(parent, request, view)
-    parent_label = translate(_("{}: {}")).format(hint, label) if hint else label
-    label = translate(_("Add new link"))
-    return f'<small>{parent_label}</small><br />{label}'
 
 
 @implementer(ILinkAddForm)
@@ -76,11 +54,39 @@ class LinkAddFormMixin(AssociationItemAddFormMixin):
     legend = _("New link properties")
 
 
+@adapter_config(required=(IAssociationContainer, IAdminLayer, ILinkAddForm),
+                provides=IFormTitle)
+def link_add_form_title(context, request, form):
+    """Link add form title getter"""
+    parent = get_parent(context, IAssociationContainerTarget)
+    hint = get_object_hint(parent, request, form)
+    label = get_object_label(parent, request, form)
+    return TITLE_SPAN_BREAK.format(hint, label)
+
+
 @implementer(ILinkEditForm)
 class LinkEditFormMixin:
     """Link edit form mixin class"""
 
+    @property
+    def subtitle(self):
+        translate = self.request.localizer.translate
+        return translate(_("{}: {}")).format(
+            translate(self.context.icon_hint),
+            get_object_label(self.context, self.request, self))
+
     legend = _("Link properties")
+
+
+@adapter_config(required=(IBaseLink, IAdminLayer, ILinkEditForm),
+                provides=IFormTitle)
+def link_edit_form_title(context, request, form):
+    """Link edit form title"""
+    parent = get_parent(context, IAssociationContainerTarget)
+    hint = get_object_hint(parent, request, form)
+    label = get_object_label(parent, request, form)
+    return TITLE_SPAN_BREAK.format(
+        hint, label)
 
 
 #
@@ -104,7 +110,8 @@ class InternalLinkAddMenu(ProtectedViewObjectMixin, AssociationItemAddMenuMixin,
 class InternalLinkAddForm(LinkAddFormMixin, AdminModalAddForm):
     """Internal link add form"""
 
-    legend = _("Add internal link")
+    subtitle = _("New internal link")
+    legend = _("New internal link properties")
 
     fields = Fields(IInternalLink).select('reference', 'force_canonical_url', 'title',
                                           'description', 'pictogram_name')
@@ -143,7 +150,8 @@ class ExternalLinkAddMenu(ProtectedViewObjectMixin, AssociationItemAddMenuMixin,
 class ExternalLinkAddForm(LinkAddFormMixin, AdminModalAddForm):
     """External link add form"""
 
-    legend = _("Add external link")
+    subtitle = _("New external link")
+    legend = _("New external link properties")
 
     fields = Fields(IExternalLink).select('url', 'title', 'description',
                                           'language', 'pictogram_name')
@@ -182,7 +190,8 @@ class MailtoLinkAddMenu(ProtectedViewObjectMixin, AssociationItemAddMenuMixin, M
 class MailtoLinkAddForm(LinkAddFormMixin, AdminModalAddForm):
     """Mailto link add form"""
 
-    legend = _("Add mailto link")
+    subtitle = _("New mailto link")
+    legend = _("New mailto link properties")
 
     fields = Fields(IMailtoLink).select('address', 'address_name', 'title',
                                         'description', 'pictogram_name')
