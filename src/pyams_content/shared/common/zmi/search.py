@@ -32,7 +32,7 @@ from pyams_content.shared.common import IBaseSharedTool, SHARED_CONTENT_TYPES_VO
 from pyams_content.shared.common.interfaces import SHARED_TOOL_WORKFLOW_STATES_VOCABULARY
 from pyams_content.shared.common.interfaces.types import DATA_TYPES_VOCABULARY
 from pyams_content.shared.common.zmi.dashboard import BaseSharedToolDashboardSingleView, \
-    BaseSharedToolDashboardTable, BaseSharedToolDashboardView, SharedToolDashboardView
+    DashboardTable, BaseSharedToolDashboardView, SharedToolDashboardView
 from pyams_content.zmi.interfaces import IAllDashboardMenu
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IFormFields, IGroup
@@ -71,7 +71,7 @@ from pyams_content import _
 
 
 @implementer(IView)
-class SharedToolQuickSearchResultsTable(BaseSharedToolDashboardTable):
+class SharedToolQuickSearchResultsTable(DashboardTable):
     """Shared tool quick search results table"""
 
 
@@ -276,8 +276,8 @@ class BaseThesaurusTermsSearchGroup(FormGroupSwitcher):
     label_css_class = 'hidden'
     input_css_class = 'col-12'
 
-    def update_widgets(self, prefix=None):
-        super().update_widgets(prefix)
+    def update_widgets(self, prefix=None, use_form_mode=True):
+        super().update_widgets(prefix, use_form_mode)
         terms = self.widgets.get(self.fieldname)
         if terms is not None:
             manager = self.manager(self.request.root)
@@ -338,7 +338,7 @@ class SharedToolAdvancedSearchView(SearchView):
     search_form = SharedToolAdvancedSearchForm
 
 
-class SharedToolAdvancedSearchResultsTable(BaseSharedToolDashboardTable):
+class SharedToolAdvancedSearchResultsTable(DashboardTable):
     """Shared tool advanced search results table"""
 
 

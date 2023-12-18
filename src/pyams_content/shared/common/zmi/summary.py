@@ -82,6 +82,7 @@ class SharedContentDublinCoreGroup(Group):
 
     fields = Fields(IWfSharedContent).select('title') + \
         Fields(ISequentialIdInfo).select('public_oid')
+    mode = DISPLAY_MODE
 
 
 @adapter_config(name='workflow-waiting',
@@ -104,13 +105,13 @@ class SharedContentWorkflowWaitingState(Group):
 
     fields = Fields(IWorkflowState).select('state', 'state_urgency') + \
         Fields(IWorkflowStateHistoryItem).select('comment')
-
     mode = DISPLAY_MODE
+
     ignore_context = True
 
-    def update_widgets(self, prefix=None):
+    def update_widgets(self, prefix=None, use_form_mode=True):
         self.parent_form.widgets.ignore_context = True
-        super().update_widgets(prefix)
+        super().update_widgets(prefix, use_form_mode)
         state = IWorkflowState(self.context)
         state_widget = self.widgets.get('state')
         if state_widget is not None:
@@ -151,6 +152,7 @@ class SharedContentPublicationInfo(Group):
                                                      'push_end_date',
                                                      'publication_expiration_date',
                                                      'displayed_publication_date')
+    mode = DISPLAY_MODE
 
 
 @adapter_config(name='version',
@@ -172,9 +174,10 @@ class SharedContentVersionInfo(Group):
         Fields(IWfSharedContent).select('creation_label') + \
         Fields(IWfSharedContentRoles).select('owner') + \
         Fields(IWfSharedContent).select('last_update_label', 'modifiers')
+    mode = DISPLAY_MODE
 
-    def update_widgets(self, prefix=None):
-        super().update_widgets(prefix)
+    def update_widgets(self, prefix=None, use_form_mode=True):
+        super().update_widgets(prefix, use_form_mode)
         version_id = self.widgets.get('version_id')
         if version_id is not None:
             version_id.label = _("Version")
@@ -214,8 +217,10 @@ class SharedContentHistoryInfo(Group):
         fields += Fields(IWfSharedContent).select('first_owner')
         return fields
 
-    def update_widgets(self, prefix=None):
-        super().update_widgets(prefix)
+    mode = DISPLAY_MODE
+
+    def update_widgets(self, prefix=None, use_form_mode=True):
+        super().update_widgets(prefix, use_form_mode)
         info = IWorkflowPublicationInfo(self.context, None)
         version_date = self.widgets.get('first_publication_date')
         if version_date is not None:
