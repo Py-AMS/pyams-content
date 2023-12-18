@@ -22,12 +22,11 @@ from zope.location import ILocation
 from zope.schema import Bool, Choice, List
 
 from pyams_content.reference.pictogram import PICTOGRAM_VOCABULARY
-from pyams_content.shared.common.interfaces import IBaseContentPortalContext, ISharedTool, \
-    IWfSharedContent
+from pyams_content.shared.common import IBaseSharedTool
+from pyams_content.shared.common.interfaces import IBaseContentPortalContext, IWfSharedContent
 from pyams_i18n.schema import I18nTextLineField
 from pyams_portal.interfaces import IPortalContext
 from pyams_sequence.schema import InternalReferenceField
-
 
 __docformat__ = 'restructuredtext'
 
@@ -111,7 +110,7 @@ class ITypedDataManager(IContainer):
         """Iterator on visible data types"""
 
 
-class ITypedSharedTool(ISharedTool):
+class ITypedSharedTool(IBaseSharedTool):
     """Shared tool containing typed data"""
 
     shared_content_info_factory = Attribute("Custom shared content information factory")
