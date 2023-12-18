@@ -44,12 +44,12 @@ from pyams_utils.url import absolute_url
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalEditForm, FormGroupChecker
 from pyams_zmi.helper.event import get_json_table_row_refresh_callback
-from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces import IAdminLayer, TITLE_SPAN_BREAK
+from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.table import I18nColumnMixin, IconColumn, Table, TableAdminView, TableElementEditor
 from pyams_zmi.utils import get_object_label
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
-
 
 __docformat__ = 'restructuredtext'
 
@@ -199,12 +199,8 @@ class ManagerRestrictionsEditForm(AdminModalEditForm):
     """Manager restrictions edit form"""
 
     @property
-    def title(self):
-        """Form title getter"""
-        translate = self.request.localizer.translate
-        return '<small>{}</small><br />{}'.format(
-            get_object_label(self.context, self.request, self),
-            translate(_("Manager restrictions: {}")).format(self.principal.title))
+    def subtitle(self):
+        return self.principal.title
 
     fields = Fields(IPrincipalRestrictions)
 
@@ -226,6 +222,16 @@ class ManagerRestrictionsEditForm(AdminModalEditForm):
         if principal_id is not None:
             principal_id.mode = HIDDEN_MODE
             principal_id.value = self.principal_id
+
+
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, IManagerRestrictionsEditForm),
+                provides=IFormTitle)
+def base_shared_tool_manager_restrictions_form_title(context, request, form):
+    """Base shared tool manager restrictions edit form title getter"""
+    translate = request.localizer.translate
+    return TITLE_SPAN_BREAK.format(
+        get_object_label(context, request, form),
+        translate(_("Manager restrictions")))
 
 
 @adapter_config(required=(IBaseSharedTool, IAdminLayer, IManagerRestrictionsEditForm),
@@ -263,7 +269,7 @@ class ManagerRestrictionsEditFormRenderer(ContextRequestViewAdapter):
 class ManagerRestrictionsWorkflowGroup(Group):
     """Manager restrictions workflow group"""
 
-    legend = _("Manager restrictions")
+    legend = _("Principal restrictions")
     fields = Fields(IManagerWorkflowRestrictions).select('show_workflow_warning')
 
 
@@ -426,12 +432,8 @@ class ContributorRestrictionsEditForm(AdminModalEditForm):
     """Contributor restrictions edit form"""
 
     @property
-    def title(self):
-        """Form title getter"""
-        translate = self.request.localizer.translate
-        return '<small>{}</small><br />{}'.format(
-            get_object_label(self.context, self.request, self),
-            translate(_("Contributor restrictions: {}")).format(self.principal.title))
+    def subtitle(self):
+        return self.principal.title
 
     fields = Fields(IPrincipalRestrictions)
 
@@ -453,6 +455,16 @@ class ContributorRestrictionsEditForm(AdminModalEditForm):
         if principal_id is not None:
             principal_id.mode = HIDDEN_MODE
             principal_id.value = self.principal_id
+
+
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, IContributorRestrictionsEditForm),
+                provides=IFormTitle)
+def base_shared_tool_contributor_restrictions_form_title(context, request, form):
+    """Base shared tool contributor restrictions edit form title getter"""
+    translate = request.localizer.translate
+    return TITLE_SPAN_BREAK.format(
+        get_object_label(context, request, form),
+        translate(_("Contributor restrictions")))
 
 
 @adapter_config(required=(IBaseSharedTool, IAdminLayer, IContributorRestrictionsEditForm),
@@ -490,7 +502,7 @@ class ContributorRestrictionsEditFormRenderer(ContextRequestViewAdapter):
 class ContributorRestrictionsWorkflowGroup(Group):
     """Contributor_restrictions workflow group"""
 
-    legend = _("Contributor restrictions")
+    legend = _("Principal restrictions")
     fields = Fields(IContributorWorkflowRestrictions)
 
     def get_content(self):

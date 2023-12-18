@@ -20,6 +20,12 @@ __docformat__ = 'restructuredtext'
 
 from zope.interface import Interface
 
+from pyams_form.interfaces.form import IAddForm
+
+
+class ISharedContentAddForm(IAddForm):
+    """Shared content add form marker interface"""
+
 
 class ISharedContentPropertiesMenu(Interface):
     """Shared content properties menu marker interface"""

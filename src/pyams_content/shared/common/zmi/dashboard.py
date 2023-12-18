@@ -57,7 +57,7 @@ from pyams_workflow.interfaces import IWorkflow, IWorkflowPublicationInfo, \
     IWorkflowPublicationSupport, IWorkflowState, IWorkflowVersions
 from pyams_workflow.versions import get_last_version_in_state
 from pyams_zmi.interfaces import IAdminLayer
-from pyams_zmi.interfaces.table import IInnerTable
+from pyams_zmi.interfaces.table import IInnerTable, ITableWithActions
 from pyams_zmi.interfaces.viewlet import IContentManagementMenu, IMenuHeader
 from pyams_zmi.table import InnerTableAdminView, MultipleTablesAdminView, Table, TableAdminView
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
@@ -170,9 +170,8 @@ def content_timestamp(context, request, column):
 # Base shared tool dashboard components
 #
 
-@implementer(IDashboardTable)
-class BaseSharedToolDashboardTable(Table):
-    """Base shared tool dashboard"""
+class BaseDashboardTable(Table):
+    """Base dashboard table"""
 
     @property
     def sort_index(self):
@@ -191,6 +190,16 @@ class BaseSharedToolDashboardTable(Table):
             'data-ams-order': f'{self.sort_index},{self.sort_order}'
         })
         return attributes
+
+
+@implementer(IDashboardTable)
+class DashboardTable(BaseDashboardTable):
+    """Dashboard table"""
+
+
+@implementer(ITableWithActions)
+class DashboardTableWithActions(DashboardTable):
+    """Dashboard table with actions"""
 
 
 @implementer(IDashboardView)
@@ -288,7 +297,7 @@ class SharedToolMissingContentWarning(AlertMessage):
 # Manager waiting contents
 #
 
-class SharedToolDashboardManagerWaitingTable(BaseSharedToolDashboardTable):
+class SharedToolDashboardManagerWaitingTable(DashboardTable):
     """Shared tool dashboard manager waiting table"""
 
     @reify
@@ -350,7 +359,7 @@ class SharedToolDashboardManagerWaitingValues(ContextRequestViewAdapter):
 # Last owned contents waiting for action
 #
 
-class SharedToolDashboardOwnerWaitingTable(BaseSharedToolDashboardTable):
+class SharedToolDashboardOwnerWaitingTable(DashboardTable):
     """Table of owned contents waiting for action"""
 
     @reify
@@ -399,7 +408,7 @@ class SharedToolDashboardOwnerWaitingValues(ContextRequestViewAdapter):
 # Last owner modified contents
 #
 
-class SharedToolDashboardOwnerModifiedTable(BaseSharedToolDashboardTable):
+class SharedToolDashboardOwnerModifiedTable(DashboardTable):
     """Shared tool dashboard owner modified table"""
 
     @reify
@@ -486,7 +495,7 @@ class SharedToolPreparationsMenu(NavigationMenuItem):
 
 
 @implementer(IView)
-class SharedToolPreparationsTable(BaseSharedToolDashboardTable):
+class SharedToolPreparationsTable(DashboardTable):
     """Shared tool preparations table"""
 
 
@@ -544,7 +553,7 @@ class SharedToolSubmissionsMenu(NavigationMenuItem):
 
 
 @implementer(IView)
-class SharedToolSubmissionsTable(BaseSharedToolDashboardTable):
+class SharedToolSubmissionsTable(DashboardTable):
     """Shared tool submissions table"""
 
 
@@ -603,7 +612,7 @@ class SharedToolPublicationsMenu(NavigationMenuItem):
 
 
 @implementer(IView)
-class SharedToolPublicationsTable(BaseSharedToolDashboardTable):
+class SharedToolPublicationsTable(DashboardTable):
     """Shared tool publications table"""
 
 
@@ -662,7 +671,7 @@ class SharedToolRetiredContentsMenu(NavigationMenuItem):
 
 
 @implementer(IView)
-class SharedToolRetiredContentsTable(BaseSharedToolDashboardTable):
+class SharedToolRetiredContentsTable(DashboardTable):
     """Shared tool retired contents table"""
 
 
@@ -721,7 +730,7 @@ class SharedToolArchivedContentsMenu(NavigationMenuItem):
 
 
 @implementer(IView)
-class SharedToolArchivedContentsTable(BaseSharedToolDashboardTable):
+class SharedToolArchivedContentsTable(DashboardTable):
     """Shared tool archived contents table"""
 
 
@@ -797,7 +806,7 @@ class SharedToolLastPublicationsMenu(NavigationMenuItem):
 
 
 @implementer(IView)
-class SharedToolLastPublicationsTable(BaseSharedToolDashboardTable):
+class SharedToolLastPublicationsTable(DashboardTable):
     """Shared tool dashboard last publications table"""
 
 
@@ -858,7 +867,7 @@ class SharedToolLastModifiedMenu(NavigationMenuItem):
 
 
 @implementer(IView)
-class SharedToolLastModificationsTable(BaseSharedToolDashboardTable):
+class SharedToolLastModificationsTable(DashboardTable):
     """Shared tool dashboard last modifications table"""
 
 

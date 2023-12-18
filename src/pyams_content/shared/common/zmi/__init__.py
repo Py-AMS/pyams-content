@@ -21,7 +21,7 @@ from uuid import uuid4
 from pyramid.events import subscriber
 from pyramid.location import lineage
 from zope.copy import copy
-from zope.interface import Interface
+from zope.interface import Interface, implementer
 from zope.lifecycleevent import ObjectCreatedEvent
 from zope.location import locate
 
@@ -32,7 +32,7 @@ from pyams_content.shared.common import IBaseSharedTool, ISharedContent, IWfShar
 from pyams_content.shared.common.interfaces import IContributorRestrictions, IManagerRestrictions, \
     ISharedTool, IWfSharedContentRoles
 from pyams_content.shared.common.interfaces.types import ITypedSharedTool
-from pyams_content.shared.common.zmi.interfaces import ISharedContentPropertiesMenu
+from pyams_content.shared.common.zmi.interfaces import ISharedContentAddForm, ISharedContentPropertiesMenu
 from pyams_content.zmi.properties import PropertiesEditForm
 from pyams_content.zmi.widget.seo import I18nSEOTextLineFieldWidget
 from pyams_form.ajax import AJAXFormRenderer, ajax_form_config
@@ -45,6 +45,7 @@ from pyams_layer.interfaces import IFormLayer, IPyAMSLayer
 from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_security.interfaces.base import FORBIDDEN_PERMISSION, VIEW_SYSTEM_PERMISSION
 from pyams_sequence.interfaces import ISequentialIdInfo
+from pyams_skin.interfaces.view import IModalPage
 from pyams_skin.interfaces.viewlet import IBreadcrumbItem, IFormHeaderViewletManager
 from pyams_skin.schema.button import CloseButton, SubmitButton
 from pyams_skin.viewlet.actions import ContextAddAction
@@ -64,15 +65,15 @@ from pyams_workflow.interfaces import IWorkflow, IWorkflowCommentInfo, IWorkflow
 from pyams_workflow.versions import WorkflowHistoryItem
 from pyams_zmi.form import AdminModalAddForm
 from pyams_zmi.helper.event import get_json_widget_refresh_callback
-from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces import IAdminLayer, TITLE_SPAN_BREAK
+from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.table import ITableElementEditor
-from pyams_zmi.interfaces.viewlet import IContextActionsDropdownMenu, IContentManagementMenu, \
-    IMenuHeader, INavigationViewletManager, IPropertiesMenu, ISiteManagementMenu, \
-    IToolbarViewletManager
+from pyams_zmi.interfaces.viewlet import IContentManagementMenu, IContextActionsDropdownMenu, IMenuHeader, \
+    INavigationViewletManager, IPropertiesMenu, ISiteManagementMenu, IToolbarViewletManager
 from pyams_zmi.table import TableElementEditor
+from pyams_zmi.utils import get_object_label
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuHeaderDivider, NavigationMenuItem, \
     SiteManagementMenu
-
 
 __docformat__ = 'restructuredtext'
 
@@ -99,17 +100,16 @@ class SharedContentAddAction(ContextAddAction):
 @ajax_form_config(name='add-shared-content.html',
                   context=ISharedTool, layer=IFormLayer,
                   permission=CREATE_CONTENT_PERMISSION)
+@implementer(ISharedContentAddForm)
 class SharedContentAddForm(AdminModalAddForm):
     """Shared content add form"""
 
     @property
-    def title(self):
+    def subtitle(self):
         translate = self.request.localizer.translate
         factory = self.content_factory
-        return '<small>{}</small><br />{}'.format(
-            II18n(self.context).query_attribute('title', request=self.request),
-            translate(_("Add new content: {}")).format(
-                translate(factory.factory.content_name).lower()))
+        return translate(_("New content: {}")).format(
+            translate(factory.factory.content_name).lower())
 
     legend = _("New content properties")
 
@@ -329,6 +329,16 @@ class SharedContentPropertiesEditForm(PropertiesEditForm):
         return fields
 
 
+@adapter_config(required=(IWfSharedContent, IAdminLayer, IModalPage),
+                provides=IFormTitle)
+def shared_content_modal_page_title(context, request, form):
+    """Shared content modal page title"""
+    translate = request.localizer.translate
+    title = (f"{get_object_label(context, request, form)} "
+             f"(v {IWorkflowState(context).version_id})")
+    return TITLE_SPAN_BREAK.format(translate(context.content_name), title)
+
+
 @subscriber(IDataExtractedEvent, form_selector=SharedContentPropertiesEditForm)
 def handle_content_properties_data_extraction(event):
     """Automatically set short_name as title"""
@@ -436,11 +446,8 @@ class ISharedContentDuplicateButtons(Interface):
 class SharedContentDuplicateForm(AdminModalAddForm):
     """Shared content duplicate form"""
 
-    @property
-    def title(self):
-        return II18n(self.context).query_attribute('title', request=self.request)
-
-    legend = _("Duplicate content")
+    subtitle = _("Duplicate content")
+    legend = _("New content properties")
 
     fields = Fields(IWfSharedContent).select('title') + \
         Fields(IWorkflowCommentInfo)
@@ -483,10 +490,6 @@ class SharedContentDuplicateForm(AdminModalAddForm):
         new_version.modifiers = set()
         roles = IWfSharedContentRoles(new_version)
         roles.owner = request.principal.id
-        # # check comments
-        # comments = IReviewComments(new_version, None)
-        # if comments is not None:
-        #     comments.clear()
         # store new version
         translate = self.request.localizer.translate
         workflow = IWorkflow(new_content)

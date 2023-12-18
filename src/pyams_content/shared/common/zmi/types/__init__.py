@@ -26,6 +26,7 @@ from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
+from pyams_skin.interfaces.view import IModalEditForm
 from pyams_skin.viewlet.actions import ContextAddAction
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.interfaces.intids import IUniqueID
@@ -33,11 +34,12 @@ from pyams_utils.traversing import get_parent
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalAddForm, AdminModalEditForm
 from pyams_zmi.helper.event import get_json_table_row_add_callback, get_json_table_row_refresh_callback
-from pyams_zmi.interfaces import IAdminLayer, IObjectHint, IObjectLabel
+from pyams_zmi.interfaces import IAdminLayer, IObjectHint, IObjectLabel, TITLE_SPAN_BREAK
+from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IToolbarViewletManager
 from pyams_zmi.table import TableElementEditor
-from pyams_zmi.utils import get_object_label
+from pyams_zmi.utils import get_object_hint, get_object_label
 
 
 __docformat__ = 'restructuredtext'
@@ -66,13 +68,7 @@ class DataTypesAddAction(ContextAddAction):
 class DataTypeAddForm(AdminModalAddForm):
     """Data type add form"""
 
-    @property
-    def title(self):
-        translate = self.request.localizer.translate
-        return '<small>{}</small><br />{}'.format(
-            II18n(self.context).query_attribute('title', request=self.request),
-            translate(_("Add new content type")))
-
+    subtitle = _("New content type")
     legend = _("New data type properties")
 
     @property
@@ -137,15 +133,6 @@ class DataTypeEditor(TableElementEditor):
 class DataTypeEditForm(AdminModalEditForm):
     """Data type properties edit form"""
 
-    @property
-    def title(self):
-        translate = self.request.localizer.translate
-        tool = get_parent(self.context, ITypedSharedTool)
-        return '<small>{}</small><br />{}'.format(
-            II18n(tool).query_attribute('title', request=self.request),
-            translate(_("Content type: {}")).format(get_object_label(self.context, self.request))
-        )
-
     legend = _("Content type properties")
 
     @property
@@ -157,6 +144,15 @@ class DataTypeEditForm(AdminModalEditForm):
         if (tool is not None) and not tool.shared_content_info_factory:
             fields = fields.omit('field_names')
         return fields
+
+
+@adapter_config(required=(IDataType, IAdminLayer, IModalEditForm),
+                provides=IFormTitle)
+def data_type_edit_form_title(context, request, form):
+    """Data type edit form title getter"""
+    return TITLE_SPAN_BREAK.format(
+        get_object_hint(context, request, form),
+        get_object_label(context, request, form))
 
 
 @adapter_config(required=(IDataType, IAdminLayer, DataTypeEditForm),

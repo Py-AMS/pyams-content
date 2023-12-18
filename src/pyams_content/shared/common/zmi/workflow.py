@@ -30,7 +30,6 @@ from pyams_form.ajax import ajax_form_config
 from pyams_form.button import Buttons, handler
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer, IDataExtractedEvent
-from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.utility import get_principal
 from pyams_skin.interfaces.viewlet import IFormFooterViewletManager, IFormHeaderViewletManager
@@ -51,7 +50,6 @@ from pyams_workflow.interfaces import IWorkflow, IWorkflowCommentInfo, \
 from pyams_workflow.zmi.transition import WorkflowContentTransitionForm
 from pyams_zmi.interfaces import IAdminLayer
 
-
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
@@ -66,15 +64,6 @@ class ISharedContentWorkflowFormButtons(Interface):
 
 class SharedContentWorkflowTransitionForm(WorkflowContentTransitionForm):
     """Shared content workflow transition form"""
-
-    @property
-    def title(self):
-        translate = self.request.localizer.translate
-        return translate(_('<small>{}: {} (V {})</small><br />{}')).format(
-            translate(self.context.content_name),
-            II18n(self.context).query_attribute('title', request=self.request),
-            IWorkflowState(self.context).version_id,
-            translate(self.transition.title))
 
     legend = _("Action comment")
     buttons = Buttons(ISharedContentWorkflowFormButtons)
@@ -193,7 +182,10 @@ class SharedContentWorkflowTransitionFormInfo(Viewlet):
             position -= 1
             history_item = state.history[position]
             if history_item.transition_id:
-                trigger = workflow.get_transition_by_id(history_item.transition_id).trigger
+                try:
+                    trigger = workflow.get_transition_by_id(history_item.transition_id).trigger
+                except KeyError:
+                    trigger = None
             else:
                 break
         if history_item:
@@ -766,6 +758,6 @@ class SharedContentDeleteFormHelp(AlertMessage):
             return _("This content was never published and is going to be deleted.<br />"
                      "If you confirm deletion, it won't be possible to restore it.")
         return _("The content version is going to be definitely deleted.<br />"
-                 "Will only remain the currently published version.")
+                 "Will only remain the currently published or archived versions.")
 
     message_renderer = 'markdown'
