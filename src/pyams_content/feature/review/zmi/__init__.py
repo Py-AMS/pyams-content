@@ -108,10 +108,7 @@ class IContentReviewButtons(Interface):
 class ContentReviewAskForm(AdminModalAddForm):
     """Content review add form"""
 
-    @property
-    def title(self):
-        return II18n(self.context).query_attribute('title', request=self.request)
-
+    subtitle = _("Content review")
     legend = _("Content review request")
 
     fields = Fields(IContentReviewFormFields)
