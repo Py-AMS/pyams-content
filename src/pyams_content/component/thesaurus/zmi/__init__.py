@@ -36,7 +36,7 @@ from pyams_utils.adapter import adapter_config
 from pyams_utils.registry import query_utility
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminEditForm, AdminModalEditForm, FormGroupChecker
-from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces import IAdminLayer, TITLE_SPAN_BREAK
 from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu
 from pyams_zmi.table import ActionColumn
@@ -128,17 +128,16 @@ class TagsModalEditForm(BaseTagsEditFormMixin, AdminModalEditForm):
     """Tags modal edit form"""
 
     modal_class = 'modal-xl'
+    subtitle = _("Content type default tags")
 
 
 @adapter_config(required=(ITagsTarget, IAdminLayer, TagsModalEditForm),
                 provides=IFormTitle)
 def tags_edit_form_title(context, request, view):
     """Tags edit form title"""
-    translate = request.localizer.translate
-    context_label = translate(_("{}: {}")).format(get_object_hint(context, request, view),
-                                                  get_object_label(context, request, view))
-    label = translate(_("Content tags"))
-    return f'<small>{context_label}</small><br />{label}'
+    return TITLE_SPAN_BREAK.format(
+        get_object_hint(context, request, view),
+        get_object_label(context, request, view))
 
 
 @adapter_config(name='tags',
@@ -221,19 +220,18 @@ class ThemesEditForm(BaseThemesEditFormMixin, AdminEditForm):
 class ThemesModalEditForm(BaseThemesEditFormMixin, AdminModalEditForm):
     """Themes modal edit form"""
 
-    fields = Fields(Interface)
     modal_class = 'modal-xl'
+    subtitle = _("Content type default themes")
+    fields = Fields(Interface)
 
 
 @adapter_config(required=(IThemesTarget, IAdminLayer, ThemesModalEditForm),
                 provides=IFormTitle)
 def themes_edit_form_title(context, request, view):
     """Themes edit form title"""
-    translate = request.localizer.translate
-    context_label = translate(_("{}: {}")).format(get_object_hint(context, request, view),
-                                                  get_object_label(context, request, view))
-    label = translate(_("Content themes"))
-    return f'<small>{context_label}</small><br />{label}'
+    return TITLE_SPAN_BREAK.format(
+        get_object_hint(context, request, view),
+        get_object_label(context, request, view))
 
 
 @adapter_config(name='themes-override',
@@ -323,12 +321,30 @@ class CollectionsMenu(NavigationMenuItem):
 class CollectionsEditForm(BaseThesaurusTermsEditFormMixin, AdminEditForm):
     """Collections edit form"""
 
-    title = _("Content collections")
     legend = _("Content collections selection")
 
     manager = ICollectionsManager
     interface = ICollectionsInfo
     fieldname = 'collections'
+
+
+@ajax_form_config(name='collections-modal.html',
+                  context=ICollectionsTarget, layer=IPyAMSLayer,
+                  permission=VIEW_SYSTEM_PERMISSION)
+class CollectionsModalEditForm(BaseThemesEditFormMixin, AdminModalEditForm):
+    """Collections modal edit form"""
+
+    modal_class = 'modal-xl'
+    subtitle = _("Content type default collections")
+
+
+@adapter_config(required=(ICollectionsTarget, IAdminLayer, CollectionsModalEditForm),
+                provides=IFormTitle)
+def collections_edit_form_title(context, request, form):
+    """Collections modal edit form title"""
+    return TITLE_SPAN_BREAK.format(
+        get_object_hint(context, request, form),
+        get_object_label(context, request, form))
 
 
 @adapter_config(name='collections',
@@ -337,4 +353,6 @@ class CollectionsEditForm(BaseThesaurusTermsEditFormMixin, AdminEditForm):
 def collections_edit_form_thesaurus_adapter(context, request, view):  # pylint: disable=unused-argument
     """Collections edit form thesaurus adapter"""
     manager = ICollectionsManager(request.root, ICollectionsManager)
-    return query_utility(IThesaurus, name=manager.thesaurus_name)
+    if manager.thesaurus_name:
+        return query_utility(IThesaurus, name=manager.thesaurus_name)
+    return None
