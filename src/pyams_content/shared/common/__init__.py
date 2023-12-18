@@ -20,7 +20,7 @@ from pyramid.events import subscriber
 from pyramid.settings import asbool
 from zope.container.contained import Contained
 from zope.dublincore.interfaces import IZopeDublinCore
-from zope.interface import implementer
+from zope.interface import Interface, implementer
 from zope.intid import IIntIds
 from zope.lifecycleevent import IObjectModifiedEvent
 from zope.schema.fieldproperty import FieldProperty
@@ -30,6 +30,8 @@ from pyams_content.interfaces import IBaseContentInfo
 from pyams_content.shared.common.interfaces import CONTENT_TYPES_VOCABULARY, IBaseSharedTool, \
     ISharedContent, IWfSharedContent, IWfSharedContentRoles, SHARED_CONTENT_TYPES_VOCABULARY
 from pyams_i18n.content import I18nManagerMixin
+from pyams_i18n.interfaces import II18n
+from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces import IDefaultProtectionPolicy
 from pyams_security.interfaces.base import VIEW_PERMISSION
 from pyams_security.security import ProtectedObjectMixin
@@ -48,6 +50,7 @@ from pyams_utils.vocabulary import vocabulary_config
 from pyams_utils.zodb import volatile_property
 from pyams_workflow.interfaces import IObjectClonedEvent, IWorkflow, IWorkflowPublicationSupport, \
     IWorkflowTransitionEvent, IWorkflowVersions
+from pyams_zmi.interfaces import IObjectLabel
 
 
 __docformat__ = 'restructuredtext'
@@ -176,6 +179,13 @@ def wf_shared_content_sequence_adapter(context):
     parent = get_parent(context, ISharedContent)
     if parent is not None:
         return ISequentialIdInfo(parent)
+
+
+@adapter_config(required=(IWfSharedContent, IPyAMSLayer),
+                provides=IObjectLabel)
+def wf_shared_content_label(context, request):
+    """Shared content label adapter"""
+    return II18n(context).query_attribute('title', request=request)
 
 
 @adapter_config(required=IWfSharedContent,
