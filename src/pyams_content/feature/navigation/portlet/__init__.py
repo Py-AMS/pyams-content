@@ -16,17 +16,17 @@
 
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content import _
 from pyams_content.component.association import IAssociationContainer
 from pyams_content.component.association.interfaces import ASSOCIATION_CONTAINER_KEY
-from pyams_content.feature.navigation import IMenu, IMenusContainer
+from pyams_content.feature.navigation import IMenusContainer
 from pyams_content.feature.navigation.interfaces import IMenuLinksContainer
 from pyams_content.feature.navigation.portlet.interfaces import IDoubleNavigationPortletSettings, \
-    ISimpleNavigationMenu, \
-    ISimpleNavigationPortletSettings
+    ISimpleNavigationMenu, ISimpleNavigationPortletSettings
 from pyams_portal.portlet import Portlet, PortletSettings, portlet_config
-from pyams_utils.adapter import adapter_config, get_annotation_adapter
+from pyams_utils.adapter import adapter_config
 from pyams_utils.factory import factory_config
+
+from pyams_content import _
 
 
 SIMPLE_NAVIGATION_PORTLET_NAME = 'pyams_content.portlet.navigation'

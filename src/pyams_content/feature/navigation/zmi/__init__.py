@@ -104,6 +104,16 @@ class MenuAddForm(AdminModalAddForm):
 
 
 @adapter_config(required=(IMenusContainer, IAdminLayer, MenuAddForm),
+                provides=IFormTitle)
+def menu_add_form_title(context, request, form):
+    """Menu add form title getter"""
+    parent = get_parent(context, IMenusContainerTarget)
+    hint = get_object_hint(parent, request, form)
+    label = get_object_label(parent, request, form)
+    return TITLE_SPAN_BREAK.format(hint, label)
+
+
+@adapter_config(required=(IMenusContainer, IAdminLayer, MenuAddForm),
                 provides=IAJAXFormRenderer)
 class MenuAddFormRenderer(ContextRequestViewAdapter):
     """Menu add form renderer"""
@@ -168,14 +178,11 @@ class MenuPropertiesEditForm(AdminModalEditForm):
                 provides=IFormTitle)
 def menu_edit_form_title(context, request, view):
     """Menu properties edit form title getter"""
-    translate = request.localizer.translate
     parent = get_parent(context, IMenusContainerTarget)
     hint = get_object_hint(parent, request, view)
     label = get_object_label(parent, request, view)
-    parent_label = translate(_("{}: {}")).format(hint, label) if hint else label
     return TITLE_SPAN_BREAK.format(
-        parent_label,
-        get_object_hint(context, request, view))
+        hint, label)
 
 
 @adapter_config(required=(IMenu, IAdminLayer, MenuPropertiesEditForm),

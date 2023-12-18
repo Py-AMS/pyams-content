@@ -21,7 +21,6 @@ from pyams_content.component.association.zmi.container import AssociationsGroup
 from pyams_content.feature.navigation import IMenuLinksContainerTarget
 from pyams_content.feature.navigation.portlet import IDoubleNavigationPortletSettings, \
     ISimpleNavigationPortletSettings
-from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_form.interfaces.form import IInnerSubForm
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortletPreviewer
@@ -31,7 +30,7 @@ from pyams_portal.zmi.portlet import PortletConfigurationEditForm
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
 from pyams_zmi.interfaces import IAdminLayer
-
+from pyams_zmi.interfaces.form import IPropertiesEditForm
 
 __docformat__ = 'restructuredtext'
 
