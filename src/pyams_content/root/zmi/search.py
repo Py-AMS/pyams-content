@@ -73,7 +73,7 @@ class SiteRootQuickSearchResultsTable(BaseSiteRootDashboardTable):
 
 @adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootQuickSearchResultsTable),
                 provides=IValues)
-class SiteRootQuickSearchResultsTableValues(ContextRequestViewAdapter):
+class SiteRootQuickSearchResultsValues(ContextRequestViewAdapter):
     """Site root quick search results table values adapter"""
 
     @property
