@@ -425,6 +425,36 @@ draft_to_proposed = Transition(transition_id='draft_to_proposed',
                                                 "for content « {title} »"),
                                order=1)
 
+draft_to_prepublished = Transition(transition_id='draft_to_prepublished',
+                                   title=_("Pre-publish content"),
+                                   source=DRAFT,
+                                   destination=PRE_PUBLISHED,
+                                   trigger=SYSTEM_TRANSITION,
+                                   action=prepublish_action,
+                                   history_label=_("Content pre-published"),
+                                   notify_roles={'*'},
+                                   notify_title=_("Content publication"),
+                                   notify_message=_("{principal} pre-published the content "
+                                                    "« {title} »"))
+
+draft_to_published = Transition(transition_id='draft_to_published',
+                                title=_("Publish content"),
+                                source=DRAFT,
+                                destination=PUBLISHED,
+                                permission=PUBLISH_CONTENT_PERMISSION,
+                                condition=can_manage_content,
+                                action=publish_action,
+                                prepared_transition=draft_to_prepublished,
+                                menu_icon_class='fas fa-fw fa-thumbs-up',
+                                view_name='wf-publish.html',
+                                show_operator_warning=True,
+                                history_label=_("Content published"),
+                                notify_roles={'*'},
+                                notify_title=_("Content publication"),
+                                notify_message=_("{principal} published the content "
+                                                 "« {title} »"),
+                                order=4)
+
 retired_to_proposed = Transition(transition_id='retired_to_proposed',
                                  title=_("Propose publication"),
                                  source=RETIRED,
@@ -771,6 +801,8 @@ delete = Transition(transition_id='delete',
 wf_transitions = [
     init,
     draft_to_proposed,
+    draft_to_prepublished,
+    draft_to_published,
     retired_to_proposed,
     proposed_to_canceled,
     canceled_to_draft,
