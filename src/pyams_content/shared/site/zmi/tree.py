@@ -91,7 +91,7 @@ class SiteContainerTreeTable(Table):
 
     @property
     def css_classes(self):
-        classes = super().css_classes
+        classes = super().css_classes.copy()
         classes.update({
             'tr.selected': lambda item, col, row: 'bg-secondary' if item is self.context else ''
         })
