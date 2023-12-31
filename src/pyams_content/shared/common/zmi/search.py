@@ -95,8 +95,8 @@ def get_quick_search_params(query, request, catalog, sequence):
 
 @adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolQuickSearchResultsTable),
                 provides=IValues)
-class SharedToolQuickSearchResultsTableValues(ContextRequestViewAdapter):
-    """Shared tool quick search results table values adapter"""
+class SharedToolQuickSearchResultsValues(ContextRequestViewAdapter):
+    """Shared tool quick search results values adapter"""
 
     @property
     def values(self):
