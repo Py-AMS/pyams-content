@@ -21,9 +21,9 @@ from pyams_content.feature.glossary.interfaces import IGlossaryUpdaterTask
 from pyams_content.feature.glossary.task import GlossaryUpdaterTask
 from pyams_form.ajax import ajax_form_config
 from pyams_layer.interfaces import IPyAMSLayer
-from pyams_scheduler.interfaces import IScheduler, MANAGE_TASKS_PERMISSION
+from pyams_scheduler.interfaces import ITaskContainer, MANAGE_TASKS_PERMISSION
 from pyams_scheduler.task.zmi import BaseTaskAddForm, BaseTaskEditForm
-from pyams_scheduler.zmi import SchedulerTasksTable
+from pyams_scheduler.zmi import TaskContainerTable
 from pyams_skin.interfaces.viewlet import IHelpViewletManager
 from pyams_skin.viewlet.help import AlertMessage
 from pyams_skin.viewlet.menu import MenuItem
@@ -50,7 +50,7 @@ class TagsGlossaryHeader(AlertMessage):
 
 
 @viewlet_config(name='add-glossary-updater-task.menu',
-                context=IScheduler, layer=IAdminLayer, view=SchedulerTasksTable,
+                context=ITaskContainer, layer=IAdminLayer, view=TaskContainerTable,
                 manager=IContextAddingsViewletManager, weight=210,
                 permission=MANAGE_TASKS_PERMISSION)
 class GlossaryUpdaterTaskAddMenu(MenuItem):
@@ -62,7 +62,7 @@ class GlossaryUpdaterTaskAddMenu(MenuItem):
 
 
 @ajax_form_config(name='add-glossary-updater-task.html',
-                  context=IScheduler, layer=IPyAMSLayer,
+                  context=ITaskContainer, layer=IPyAMSLayer,
                   permission=MANAGE_TASKS_PERMISSION)
 class GlossaryUpdaterTaskAddForm(BaseTaskAddForm):
     """Glossary updater task add form"""
