@@ -44,6 +44,7 @@ class IDeletableElement(Interface):
 
 
 CONTENT_MANAGER_ROLES = 'pyams_content.manager.roles'
+CONTENT_MANAGER_CONTRIBUTORS = 'pyams_content.manager.roles::contributor'
 
 
 class IBaseContentManagerRoles(Interface):
