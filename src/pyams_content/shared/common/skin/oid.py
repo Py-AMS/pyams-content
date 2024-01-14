@@ -114,6 +114,8 @@ class OIDTraverser(ContextRequestAdapter):
             raise HTTPNotFound()
         context = self.context
         request = self.request
+        if not hasattr(request, 'context'):
+            request.context = context
         if '::' in name:
             oid, _title = name.split('::', 1)
         else:
