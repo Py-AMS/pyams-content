@@ -31,7 +31,7 @@ from pyams_sequence.schema import InternalReferenceField
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
-
+from pyams_utils.schema import ColorField
 
 DATA_TYPES_VOCABULARY = 'pyams_content.datatypes'
 """Vocabulary of shared content data types"""
@@ -76,10 +76,24 @@ class IDataType(ILocation):
                                                        "instead of default label"),
                                          required=False)
 
+    color = ColorField(title=_("Color"),
+                       description=_("Color used to illustrate this data type"),
+                       required=False)
+
     pictogram = Choice(title=_("Pictogram"),
                        description=_("Pictogram associated with this data type"),
                        vocabulary=PICTOGRAM_VOCABULARY,
                        required=False)
+
+    pictogram_on = Choice(title=_("ON pictogram"),
+                          description=_("'On' state pictogram associated with this data type"),
+                          vocabulary=PICTOGRAM_VOCABULARY,
+                          required=False)
+
+    pictogram_off = Choice(title=_("OFF pictogram"),
+                           description=_("'Off' state pictogram associated with this data type"),
+                           vocabulary=PICTOGRAM_VOCABULARY,
+                           required=False)
 
     display_as_tag = Bool(title=_("Display as tag?"),
                           description=_("Some portlets renderers can display a small tag above "

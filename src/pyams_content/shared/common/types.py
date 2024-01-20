@@ -62,7 +62,10 @@ class DataType(Persistent, Contained):
     source_folder = FieldProperty(IDataType['source_folder'])
     navigation_label = FieldProperty(IDataType['navigation_label'])
     backoffice_label = FieldProperty(IDataType['backoffice_label'])
+    color = FieldProperty(IDataType['color'])
     pictogram = FieldProperty(IDataType['pictogram'])
+    pictogram_on = FieldProperty(IDataType['pictogram_on'])
+    pictogram_off = FieldProperty(IDataType['pictogram_off'])
     display_as_tag = FieldProperty(IDataType['display_as_tag'])
     field_names = FieldProperty(IDataType['field_names'])
 
