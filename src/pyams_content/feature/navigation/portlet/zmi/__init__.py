@@ -49,15 +49,6 @@ class SimpleNavigationPortletPreviewer(PortletPreviewer):
         return IAssociationInfo(link)
 
 
-@adapter_config(name='configuration',
-                required=(ISimpleNavigationPortletSettings, IAdminLayer,
-                          IPortletConfigurationEditor),
-                provides=IInnerSubForm)
-@implementer(IPropertiesEditForm)
-class SimpleNavigationPortletSettingsEditForm(PortletConfigurationEditForm):
-    """Simple navigation portlet settings edit form"""
-
-
 @adapter_config(name='associations-group',
                 required=(ISimpleNavigationPortletSettings, IAdminLayer, IPropertiesEditForm),
                 provides=IInnerSubForm, force_implements=False)
