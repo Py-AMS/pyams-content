@@ -19,11 +19,9 @@ from ZODB.interfaces import IBroken
 from pyramid.events import subscriber
 from zope.copy import copy
 from zope.lifecycleevent import IObjectAddedEvent
-from zope.location import locate
 from zope.location.interfaces import ISublocations
 from zope.traversing.interfaces import ITraversable
 
-from pyams_catalog.utils import index_object
 from pyams_content.component.paragraph import IParagraphContainerTarget
 from pyams_content.component.paragraph.interfaces import IBaseParagraph, IParagraphContainer, \
     IParagraphFactorySettings, IParagraphFactorySettingsTarget, PARAGRAPH_CONTAINER_KEY
@@ -35,27 +33,12 @@ from pyams_utils.factory import factory_config, get_object_factory
 from pyams_utils.traversing import get_parent
 from pyams_workflow.interfaces import IWorkflowState
 
-
 __docformat__ = 'restructuredtext'
 
 
 @factory_config(IParagraphContainer)
 class ParagraphContainer(BTreeOrderedContainer):
     """Paragraph container persistent class"""
-
-    last_id = 1
-
-    def append(self, value, notify=True):
-        """Append item to container"""
-        key = str(self.last_id)
-        if not notify:
-            # pre-locate association item to avoid multiple notifications
-            locate(value, self, key)
-        self[key] = value
-        self.last_id += 1
-        if not notify:
-            # make sure that association item is correctly indexed
-            index_object(value)
 
     def get_visible_paragraphs(self, names=None, anchors_only=False, exclude_anchors=False,
                                factories=None, limit=None):
