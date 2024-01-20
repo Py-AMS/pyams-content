@@ -52,20 +52,6 @@ __docformat__ = 'restructuredtext'
 class GalleryContainer(BTreeOrderedContainer):
     """Gallery medias container"""
 
-    last_id = 1
-
-    def append(self, item, notify=True):
-        """Media item appender"""
-        key = str(self.last_id)
-        if not notify:
-            # pre-locate gallery item to avoid multiple notifications
-            locate(item, self, key)
-        self[key] = item
-        self.last_id += 1
-        if not notify:
-            # make sure that gallery item is correctly indexed
-            index_object(item)
-
     def get_visible_medias(self):
         """Visible medias iterator"""
         yield from filter(lambda x: IGalleryFile(x).visible, self.values())
