@@ -55,7 +55,9 @@ class ViewInternalReferencesSettings(Persistent, Contained):
         refs = []
         if self.select_context_references:
             references = IInternalReferencesList(context, None)
-            if (references is not None) and references.references:
+            if ((references is not None) and
+                    getattr(references, 'use_references_for_views', True) and
+                    references.references):
                 refs.extend(references.references)
         if self.references:
             refs.extend(self.references)
