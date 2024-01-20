@@ -40,13 +40,12 @@ from pyams_portal.interfaces import IPortalContext, IPortalFooterContext, IPorta
 from pyams_security.interfaces import IDefaultProtectionPolicy, IViewContextPermissionChecker
 from pyams_sequence.interfaces import ISequentialIdInfo
 from pyams_utils.adapter import ContextAdapter, adapter_config
-from pyams_utils.container import find_objects_providing
 from pyams_utils.factory import factory_config
+from pyams_utils.finder import find_objects_providing
 from pyams_utils.registry import get_utility
 from pyams_utils.request import query_request
 from pyams_utils.traversing import get_parent
 from pyams_utils.vocabulary import vocabulary_config
-
 
 __docformat__ = 'restructuredtext'
 

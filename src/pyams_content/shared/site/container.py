@@ -25,7 +25,7 @@ from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 from pyams_content.shared.site.interfaces import IBaseSiteItem, ISiteContainer, \
     ISiteElementNavigation, ISiteFolder, ISiteManager, SITE_CONTENT_VOCABULARY
 from pyams_i18n.interfaces import II18n
-from pyams_utils.container import find_objects_providing
+from pyams_utils.finder import find_objects_providing
 from pyams_utils.registry import get_pyramid_registry, get_utility
 from pyams_utils.request import check_request, query_request
 from pyams_utils.traversing import get_parent
