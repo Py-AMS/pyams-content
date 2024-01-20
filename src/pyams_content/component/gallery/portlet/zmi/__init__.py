@@ -17,19 +17,14 @@ This modules defines management components of gallery portlet.
 
 __docformat__ = 'restructuredtext'
 
-from zope.interface import implementer, Interface
+from zope.interface import Interface
 
 from pyams_content.component.gallery.portlet import IGalleryPortletSettings
-from pyams_zmi.interfaces.form import IPropertiesEditForm
-from pyams_form.interfaces.form import IInnerSubForm
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortletPreviewer
 from pyams_portal.zmi import PortletPreviewer
-from pyams_portal.zmi.interfaces import IPortletConfigurationEditor
-from pyams_portal.zmi.portlet import PortletConfigurationEditForm
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
-from pyams_zmi.interfaces import IAdminLayer
 
 
 @adapter_config(required=(Interface, IPyAMSLayer, Interface, IGalleryPortletSettings),
@@ -37,11 +32,3 @@ from pyams_zmi.interfaces import IAdminLayer
 @template_config(template='templates/gallery-preview.pt', layer=IPyAMSLayer)
 class GalleryPortletPreviewer(PortletPreviewer):
     """Gallery portlet previewer"""
-
-
-@adapter_config(name='configuration',
-                required=(IGalleryPortletSettings, IAdminLayer, IPortletConfigurationEditor),
-                provides=IInnerSubForm)
-@implementer(IPropertiesEditForm)
-class GalleryPortletSettingsEditForm(PortletConfigurationEditForm):
-    """Gallery portlet settings edit form"""
