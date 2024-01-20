@@ -32,7 +32,6 @@ from pyams_content import _
 # Custom permissions
 #
 
-
 MANAGE_SITE_ROOT_PERMISSION = 'pyams.ManageSiteRoot'
 '''Permission required to manage main site root properties'''
 
@@ -85,6 +84,17 @@ OPERATOR_ROLE = 'pyams.Operator'
 
 GUEST_ROLE = 'pyams.Guest'
 '''Guest role is allowed to view contents'''
+
+
+#
+# Custom routes
+#
+
+OID_ACCESS_ROUTE = 'pyams_content.oid_access'
+'''"/+/oid" direct access route name'''
+
+OID_ACCESS_PATH = '/+/{oid}*view'
+'''"/+/oid" direct access path'''
 
 
 #

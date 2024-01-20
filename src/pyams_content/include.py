@@ -16,6 +16,7 @@ This module is used for Pyramid integration
 """
 
 import re
+
 from zope.interface import classImplements
 
 from pyams_content.component.extfile.interfaces import IExtFileManagerTarget
@@ -25,8 +26,8 @@ from pyams_content.feature.preview.interfaces import IPreviewTarget
 from pyams_content.interfaces import COMMENT_CONTENT_PERMISSION, CONTRIBUTOR_ROLE, \
     CREATE_CONTENT_PERMISSION, CREATE_VERSION_PERMISSION, GUEST_ROLE, MANAGER_ROLE, \
     MANAGE_CONTENT_PERMISSION, MANAGE_SITE_PERMISSION, MANAGE_SITE_ROOT_PERMISSION, \
-    MANAGE_TOOL_PERMISSION, OPERATOR_ROLE, OWNER_ROLE, PILOT_ROLE, PUBLISH_CONTENT_PERMISSION, \
-    READER_ROLE, WEBMASTER_ROLE
+    MANAGE_TOOL_PERMISSION, OID_ACCESS_PATH, OID_ACCESS_ROUTE, OPERATOR_ROLE, OWNER_ROLE, PILOT_ROLE, \
+    PUBLISH_CONTENT_PERMISSION, READER_ROLE, WEBMASTER_ROLE
 from pyams_layer.interfaces import MANAGE_SKIN_PERMISSION
 from pyams_security.interfaces.base import MANAGE_PERMISSION, MANAGE_ROLES_PERMISSION, \
     PUBLIC_PERMISSION, ROLE_ID, VIEW_PERMISSION, VIEW_SYSTEM_PERMISSION
@@ -34,7 +35,6 @@ from pyams_security.interfaces.names import ADMIN_USER_ID, SYSTEM_ADMIN_ROLE
 from pyams_site.site import BaseSiteRoot
 from pyams_thesaurus.interfaces import ADMIN_THESAURUS_PERMISSION, CREATE_THESAURUS_PERMISSION, \
     MANAGE_THESAURUS_CONTENT_PERMISSION, MANAGE_THESAURUS_EXTRACT_PERMISSION
-
 
 __docformat__ = 'restructuredtext'
 
@@ -221,7 +221,9 @@ def include_package(config):
     classImplements(BaseSiteRoot, IPreviewTarget)
 
     # custom routes
-    config.add_route('oid_access', '/+/{oid}*view')
+    config.add_route(OID_ACCESS_ROUTE,
+                     config.registry.settings.get(f'{OID_ACCESS_ROUTE}_route.path',
+                                                  OID_ACCESS_PATH))
 
     try:
         import pyams_zmi  # pylint: disable=import-outside-toplevel,unused-import

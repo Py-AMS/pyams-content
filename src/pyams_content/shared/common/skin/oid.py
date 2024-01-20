@@ -25,6 +25,7 @@ from pyramid.view import render_view_to_response, view_config
 from zope.interface import Interface
 from zope.traversing.interfaces import ITraversable
 
+from pyams_content.interfaces import OID_ACCESS_ROUTE
 from pyams_content.skin.interfaces import IPublicURL
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_sequence.interfaces import ISequentialIntIds
@@ -56,7 +57,7 @@ def get_target(request: IRequest, oid: str) -> Optional[object]:
     return target
 
 
-@view_config(route_name='oid_access')
+@view_config(route_name=OID_ACCESS_ROUTE)
 def get_oid_access(request):
     """Get direct access to given OID
 
