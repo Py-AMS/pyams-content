@@ -73,7 +73,7 @@ class SiteContainerTopicAddMenuItem(MenuItem):
     """Site container topic add menu item"""
 
     label = _("Add site topic...")
-    icon_class = 'far fa-file-o'
+    icon_class = 'far fa-file'
 
     href = 'add-site-topic.html'
     modal_target = True
