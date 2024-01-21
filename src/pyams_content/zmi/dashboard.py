@@ -28,7 +28,7 @@ from pyams_table.column import GetAttrColumn
 from pyams_table.interfaces import IColumn
 from pyams_utils.adapter import adapter_config
 from pyams_utils.data import ObjectDataManagerMixin
-from pyams_utils.interfaces import ICacheKeyValue
+from pyams_utils.interfaces import ICacheKeyValue, MISSING_INFO
 from pyams_utils.registry import get_utility
 from pyams_utils.request import request_property
 from pyams_zmi.interfaces import IAdminLayer
@@ -63,7 +63,7 @@ class DashboardColumnMixin(ObjectDataManagerMixin):  # pylint: disable=no-member
         value = registry.queryMultiAdapter((target, self.request, self), self.interface)
         if value is None:
             value = registry.queryAdapter(target, self.interface)
-        return value or '--'
+        return value or MISSING_INFO
 
 
 @adapter_config(required=IDashboardColumn,
@@ -75,15 +75,6 @@ def dashboard_column_cache_key(column: IDashboardColumn):
 
 class DashboardVisibilityColumn(DashboardColumnMixin, VisibilityColumn):
     """Dashboard visibility column"""
-
-    @property
-    def css_classes(self):
-        classes = super().css_classes
-        classes.update({
-            'td': lambda item, col: 'action' if
-            ISiteLink.providedBy(item) and col.has_permission(item) else ''
-        })
-        return classes
 
     interface = IDashboardContentVisibility
     permission = MANAGE_CONTENT_PERMISSION
@@ -127,10 +118,10 @@ class DashboardLabelColumn(DashboardColumnMixin, NameColumn):
 
     def get_value(self, obj):
         label = super().get_value(obj)
-        if label == '--':
+        if label == MISSING_INFO:
             target = self.get_target(obj)
             label = get_object_label(target, self.request, self.table)
-        return label or '--'
+        return label or MISSING_INFO
 
 
 @adapter_config(name='content-type',

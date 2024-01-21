@@ -37,6 +37,7 @@ from pyams_sequence.interfaces import IInternalReference, ISequentialIdInfo
 from pyams_sequence.reference import InternalReferenceMixin
 from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.factory import factory_config
+from pyams_utils.interfaces import MISSING_INFO
 from pyams_utils.registry import query_utility
 from pyams_utils.request import check_request
 from pyams_utils.traversing import get_parent
@@ -200,7 +201,7 @@ class InternalLinkAssociationInfoAdapter(BaseLinkInfoAdapter):
             target = self.context.get_target()
             if target is not None:
                 title = II18n(target).query_attribute('title')
-        return title or '--'
+        return title or MISSING_INFO
 
     @property
     def user_header(self):
@@ -220,12 +221,12 @@ class InternalLinkAssociationInfoAdapter(BaseLinkInfoAdapter):
             sequence = ISequentialIdInfo(target)
             return '{0} ({1})'.format(II18n(target).query_attribute('title'),
                                       sequence.get_short_oid())
-        return '--'
+        return MISSING_INFO
 
     @property
     def human_size(self):
         """Human size getter"""
-        return '--'
+        return MISSING_INFO
 
 
 #
@@ -262,7 +263,7 @@ class ExternalLinkAssociationInfoAdapter(BaseLinkInfoAdapter):
         title = II18n(self.context).query_attribute('title')
         if not title:
             title = self.context.url
-        return title or '--'
+        return title or MISSING_INFO
 
     @property
     def user_header(self):
@@ -277,7 +278,7 @@ class ExternalLinkAssociationInfoAdapter(BaseLinkInfoAdapter):
     @property
     def human_size(self):
         """Human size getter"""
-        return '--'
+        return MISSING_INFO
 
 
 #
@@ -315,7 +316,7 @@ class MailtoLinkAssociationInfoAdapter(BaseLinkInfoAdapter):
         title = II18n(self.context).query_attribute('title')
         if not title:
             title = self.context.address_name
-        return title or '--'
+        return title or MISSING_INFO
 
     @property
     def user_header(self):
@@ -332,4 +333,4 @@ class MailtoLinkAssociationInfoAdapter(BaseLinkInfoAdapter):
     @property
     def human_size(self):
         """Human size getter"""
-        return '--'
+        return MISSING_INFO

@@ -39,6 +39,7 @@ from pyams_file.property import I18nFileProperty
 from pyams_i18n.interfaces import II18n, INegotiator
 from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.factory import factory_config
+from pyams_utils.interfaces import MISSING_INFO
 from pyams_utils.registry import get_pyramid_registry, query_utility
 from pyams_utils.request import check_request
 from pyams_utils.size import get_human_size
@@ -104,7 +105,7 @@ class BaseExtFileAssociationInfoAdapter(ContextAdapter):
     @property
     def inner_title(self):
         """Inner title getter"""
-        return self.context.filename or '--'
+        return self.context.filename or MISSING_INFO
 
     @property
     def human_size(self):
@@ -112,7 +113,7 @@ class BaseExtFileAssociationInfoAdapter(ContextAdapter):
         data = II18n(self.context).query_attribute('data')
         if data:
             return get_human_size(data.get_size())
-        return '--'
+        return MISSING_INFO
 
 
 def update_properties(extfile):

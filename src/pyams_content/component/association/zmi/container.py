@@ -36,6 +36,7 @@ from pyams_table.column import GetAttrColumn
 from pyams_table.interfaces import IColumn, IValues
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.factory import factory_config
+from pyams_utils.interfaces import MISSING_INFO
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalDisplayForm
 from pyams_zmi.helper.container import delete_container_element, switch_element_attribute
@@ -176,7 +177,7 @@ class AssociationsTargetColumn(I18nColumnMixin, GetAttrColumn):
         """Column value getter"""
         info = IAssociationInfo(obj, None)
         if info is None:
-            return '--'
+            return MISSING_INFO
         return info.inner_title
 
 
@@ -193,7 +194,7 @@ class AssociationsSizeColumn(I18nColumnMixin, GetAttrColumn):
         """Column value getter"""
         info = IAssociationInfo(obj, None)
         if info is None:
-            return '--'
+            return MISSING_INFO
         return info.human_size
 
 

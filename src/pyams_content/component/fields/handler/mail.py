@@ -28,6 +28,7 @@ from pyams_security.interfaces import ISecurityManager
 from pyams_security.interfaces.notification import INotificationSettings
 from pyams_utils.adapter import adapter_config, get_annotation_adapter
 from pyams_utils.factory import factory_config
+from pyams_utils.interfaces import MISSING_INFO
 from pyams_utils.list import boolean_iter
 from pyams_utils.registry import get_utility, utility_config
 from pyams_utils.request import query_request
@@ -79,7 +80,7 @@ class SimpleMailtoFormHandler:
         if template:
             return template.format(**data)
         return '<br />'.join((
-            f"{k}: {v or '--'}"
+            f"{k}: {v or MISSING_INFO}"
             for k, v in data.items()
         ))
 

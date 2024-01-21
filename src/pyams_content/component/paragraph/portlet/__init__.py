@@ -26,6 +26,7 @@ from pyams_portal.portlet import Portlet, PortletSettings, portlet_config
 from pyams_security.interfaces.base import VIEW_PERMISSION
 from pyams_sequence.reference import InternalReferenceMixin
 from pyams_utils.factory import factory_config, get_object_factory
+from pyams_utils.interfaces import MISSING_INFO
 from pyams_utils.request import check_request
 from pyams_utils.traversing import get_parent
 from pyams_zmi.utils import get_object_label
@@ -39,7 +40,7 @@ class ParagraphPortletSettingsMixin:
     def get_paragraphs_labels(self):
         """Paragraphs labels getter"""
         if not self.paragraphs:
-            yield '--'
+            yield MISSING_INFO
         else:
             target = get_parent(self, IParagraphContainerTarget)
             if target is not None:
@@ -53,7 +54,7 @@ class ParagraphPortletSettingsMixin:
     def get_paragraph_types_labels(self):
         """Paragraphs types labels getter"""
         if not self.factories:
-            yield '--'
+            yield MISSING_INFO
         else:
             request = check_request()
             for factory_name in self.factories:

@@ -28,7 +28,7 @@ from pyams_content.shared.common.interfaces import ISharedToolContainer
 from pyams_site.interfaces import ISiteRoot
 from pyams_utils.adapter import adapter_config, get_annotation_adapter
 from pyams_utils.factory import factory_config, get_object_factory
-
+from pyams_utils.interfaces import MISSING_INFO
 
 __docformat__ = 'restructuredtext'
 
@@ -83,7 +83,7 @@ class SiteRootToolsConfiguration(Persistent, Contained):
                 return table
         factory = registry.settings.get(f'pyams_content.config.{table_name}_factory')
         if factory:
-            if factory.lower in ('--', 'off', 'none', 'disabled'):
+            if factory.lower in (MISSING_INFO, 'off', 'none', 'disabled'):
                 return None
             factory = DottedNameResolver().resolve(factory)
         if factory is None:
@@ -142,7 +142,7 @@ class SiteRootToolsConfiguration(Persistent, Contained):
                 return tool
         factory = registry.settings.get(f'pyams_content.config.{tool_name}_factory')
         if factory:
-            if factory.lower in ('--', 'off', 'none', 'disabled'):
+            if factory.lower in (MISSING_INFO, 'off', 'none', 'disabled'):
                 return None
         if factory is not None:
             factory = DottedNameResolver().resolve(factory)

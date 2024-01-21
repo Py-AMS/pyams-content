@@ -26,6 +26,7 @@ from pyams_pagelet.pagelet import pagelet_config
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_table.interfaces import IColumn
 from pyams_utils.adapter import adapter_config
+from pyams_utils.interfaces import MISSING_INFO
 from pyams_viewlet.manager import viewletmanager_config
 from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu, ISiteManagementMenu
@@ -88,7 +89,7 @@ class PictogramTableImageColumn(ActionColumn):
         image = II18n(item).query_attribute('image', request=self.request)
         if image:
             return render_image(image, 32, 32, self.request, timestamp=True)
-        return '--'
+        return MISSING_INFO
 
 
 @pagelet_config(name='contents.html',
