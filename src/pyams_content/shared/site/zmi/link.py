@@ -32,6 +32,7 @@ from pyams_content.zmi.interfaces import IDashboardColumn, IDashboardContentLabe
     IDashboardContentStatus, IDashboardContentStatusDatetime, IDashboardContentType, \
     IDashboardContentVersion, IDashboardContentVisibility
 from pyams_skin.interfaces.view import IModalEditForm
+from pyams_utils.interfaces import MISSING_INFO
 from pyams_zmi.interfaces.form import IFormTitle, IPropertiesEditForm
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
@@ -272,8 +273,8 @@ def get_internal_link_adapter(context, request, column, interface):
     target = context.target
     if target is not None:
         value = request.registry.queryMultiAdapter((target, request, column), interface)
-        return f'({value.strip()})' if value is not None else '--'
-    return '--'
+        return f'({value.strip()})' if value is not None else MISSING_INFO
+    return MISSING_INFO
 
 
 @adapter_config(required=(IInternalSiteLink, IAdminLayer, IDashboardColumn),

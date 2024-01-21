@@ -31,16 +31,17 @@ from pyams_content.component.thesaurus import IThemesTarget
 from pyams_content.feature.navigation.interfaces import IDynamicMenu
 from pyams_content.feature.preview.interfaces import IPreviewTarget
 from pyams_content.interfaces import MANAGE_SITE_PERMISSION
+from pyams_content.shared.common import ISharedContent
 from pyams_content.shared.common.manager import BaseSharedTool
 from pyams_content.shared.site.container import SiteContainerMixin
 from pyams_content.shared.site.interfaces import ISiteFolder, ISiteManager, \
-    SITE_FOLDERS_VOCABULARY
+    SITE_FOLDERS_VOCABULARY, SITE_TOPIC_CONTENT_TYPE
 from pyams_i18n.interfaces import II18n
 from pyams_portal.interfaces import IPortalContext, IPortalFooterContext, IPortalHeaderContext
 from pyams_security.interfaces import IDefaultProtectionPolicy, IViewContextPermissionChecker
 from pyams_sequence.interfaces import ISequentialIdInfo
 from pyams_utils.adapter import ContextAdapter, adapter_config
-from pyams_utils.factory import factory_config
+from pyams_utils.factory import factory_config, get_object_factory
 from pyams_utils.finder import find_objects_providing
 from pyams_utils.registry import get_utility
 from pyams_utils.request import query_request
@@ -71,6 +72,12 @@ class SiteFolder(SiteContainerMixin, OrderedContainer, BaseSharedTool):
 
     sequence_name = ''  # use default sequence generator
     sequence_prefix = ''
+
+    shared_content_type = SITE_TOPIC_CONTENT_TYPE
+
+    @property
+    def shared_content_factory(self):
+        return get_object_factory(ISharedContent, name=self.shared_content_type)
 
     def is_deletable(self):
         """Check if item can be deleted"""

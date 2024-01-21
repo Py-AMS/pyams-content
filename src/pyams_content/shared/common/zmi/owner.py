@@ -51,6 +51,7 @@ from pyams_table.column import CheckBoxColumn
 from pyams_table.interfaces import IColumn, IValues
 from pyams_template.template import template_config
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
+from pyams_utils.interfaces import MISSING_INFO
 from pyams_utils.interfaces.data import IObjectData
 from pyams_utils.list import unique_iter
 from pyams_utils.registry import get_utility
@@ -93,7 +94,7 @@ def set_owner(context, request, new_owner, keep_owner_as_contributor=False):
                     WorkflowHistoryItem(date=tztime(datetime.utcnow()),
                                         source_state=state.state,
                                         target_state=state.state,
-                                        transition_id='--',
+                                        transition_id=MISSING_INFO,
                                         principal=request.principal.id,
                                         comment=translate(_("Owner changed: {} -> {}")).format(
                                             get_principal(request, previous_owner).title,

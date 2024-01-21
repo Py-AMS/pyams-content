@@ -25,17 +25,18 @@ from pyams_content.component.illustration import IIllustrationTarget, ILinkIllus
 from pyams_content.feature.preview.interfaces import IPreviewTarget
 from pyams_content.interfaces import MANAGE_SITE_PERMISSION
 from pyams_content.reference.pictogram.interfaces import IPictogramManagerTarget
+from pyams_content.shared.common import ISharedContent
 from pyams_content.shared.common.manager import BaseSharedTool
 from pyams_content.shared.common.types import TypedSharedToolMixin
 from pyams_content.shared.site.container import SiteContainerMixin
-from pyams_content.shared.site.interfaces import ISiteManager, PYAMS_SITES_VOCABULARY
+from pyams_content.shared.site.interfaces import ISiteManager, PYAMS_SITES_VOCABULARY, SITE_TOPIC_CONTENT_TYPE
 from pyams_i18n.interfaces import II18n
 from pyams_layer.skin import UserSkinnableContentMixin
 from pyams_portal.interfaces import IPortalContext, IPortalFooterContext, IPortalHeaderContext
 from pyams_security.interfaces import IDefaultProtectionPolicy, IViewContextPermissionChecker
 from pyams_site.interfaces import ISiteRoot
 from pyams_utils.adapter import ContextAdapter, adapter_config
-from pyams_utils.factory import factory_config
+from pyams_utils.factory import factory_config, get_object_factory
 from pyams_utils.registry import get_utilities_for
 from pyams_utils.request import query_request, check_request
 from pyams_utils.traversing import get_parent
@@ -64,11 +65,11 @@ class SiteManager(SiteContainerMixin, OrderedContainer, TypedSharedToolMixin, Ba
 
     content_name = _("Site manager")
 
+    shared_content_type = SITE_TOPIC_CONTENT_TYPE
+
     @property
-    def topic_content_type(self):
-        factory = self.topic_content_factory
-        if factory is not None:
-            return factory.content_class.content_type
+    def shared_content_factory(self):
+        return get_object_factory(ISharedContent, name=self.shared_content_type)
 
     def is_deletable(self):
         for element in self.values():

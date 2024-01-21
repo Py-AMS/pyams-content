@@ -59,7 +59,6 @@ from pyams_zmi.skin import AdminSkin
 from pyams_zmi.table import ReorderColumn, Table, TableAdminView, TrashColumn, get_table_id
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
-
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
@@ -68,9 +67,10 @@ from pyams_content import _
 def get_item_order(item):
     """Get item order value"""
     for item in reversed(list(lineage(item))):
-        if item.__parent__ is None:
+        parent = get_parent(item, ISiteContainer)
+        if parent is None:
             continue
-        index = list(item.__parent__.keys()).index(item.__name__)
+        index = list(parent.__parent__.keys()).index(parent.__name__)
         yield f'{index:03}'
 
 
@@ -163,10 +163,10 @@ class SiteContainerTreeTableValues(ContextRequestViewAdapter):
 
         manager = get_parent(self.context, ISiteManager)
         values = []
-        for container in manager.values():
-            values.append(container)
-            if ISiteContainer.providedBy(container):
-                get_values(container, values)
+        for item in manager.values():
+            values.append(item)
+            if ISiteContainer.providedBy(item):
+                get_values(item, values)
         yield from values
 
 

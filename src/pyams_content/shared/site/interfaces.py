@@ -84,6 +84,10 @@ class ISiteContainer(IContainer, IBaseSiteItem):
                              vocabulary=SITE_CONTAINER_NAVIGATION_MODES_VOCABULARY,
                              default=SITE_CONTAINER_TEMPLATE_MODE)
 
+    shared_content_type = Attribute("Shared content type")
+
+    shared_content_factory = Attribute("Shared content factory")
+
     def get_visible_items(self, request=None):
         """Iterator over container visible items"""
 
@@ -153,9 +157,6 @@ class ISiteManager(ISharedSite, ISiteContainer, IBaseSharedTool,
     contains(ISiteElement)
 
     folder_factory = Attribute("Folder factory")
-
-    topic_content_type = Attribute("Topic content type")
-    topic_content_factory = Attribute("Topic content factory")
 
     header = I18nTextField(title=_("Header"),
                            description=_("Site's header is generally displayed in page header"),

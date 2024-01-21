@@ -27,6 +27,7 @@ from pyams_content.shared.common.interfaces import IWfSharedContent
 from pyams_content.shared.common.types import WfTypedSharedContentMixin
 from pyams_content.shared.site.interfaces import ISiteTopic, IWfSiteTopic, \
     SITE_TOPIC_CONTENT_NAME, SITE_TOPIC_CONTENT_TYPE
+from pyams_portal.interfaces import IPortalContext, IPortalFooterContext, IPortalHeaderContext
 from pyams_utils.factory import factory_config
 from pyams_workflow.interfaces import IWorkflow, IWorkflowState, IWorkflowVersions
 
@@ -36,8 +37,9 @@ __docformat__ = 'restructuredtext'
 
 @factory_config(IWfSiteTopic)
 @factory_config(IWfSharedContent, name=SITE_TOPIC_CONTENT_TYPE)
-@implementer(IIllustrationTarget, ILinkIllustrationTarget, IParagraphContainerTarget,
-             ITagsTarget, IThemesTarget,
+@implementer(IIllustrationTarget, ILinkIllustrationTarget,
+             IParagraphContainerTarget, ITagsTarget, IThemesTarget,
+             IPortalContext, IPortalHeaderContext, IPortalFooterContext,
              IReviewTarget, IPreviewTarget)
 class WfSiteTopic(WfSharedContent, WfTypedSharedContentMixin):
     """Base site topic"""

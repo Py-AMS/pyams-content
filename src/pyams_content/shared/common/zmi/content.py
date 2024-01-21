@@ -17,8 +17,7 @@ This module provides common management components for shared contents.
 
 from zope.interface import Interface
 
-from pyams_content.shared.common import IWfSharedContent
-from pyams_content.shared.common.interfaces import IWfSharedContentRoles
+from pyams_content.shared.common.interfaces import ISharedContent, IWfSharedContent, IWfSharedContentRoles
 from pyams_content.shared.common.interfaces.types import IWfTypedSharedContent
 from pyams_content.zmi.interfaces import IDashboardColumn, IDashboardContentNumber, \
     IDashboardContentOwner, IDashboardContentType, ISiteRootDashboardContentType
@@ -29,7 +28,7 @@ from pyams_sequence.interfaces import ISequentialIdTarget
 from pyams_skin.interfaces.view import IModalPage
 from pyams_skin.interfaces.viewlet import IHeaderViewletManager
 from pyams_template.template import template_config
-from pyams_utils.adapter import NullAdapter, adapter_config
+from pyams_utils.adapter import adapter_config
 from pyams_utils.date import format_datetime
 from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
@@ -39,31 +38,52 @@ from pyams_workflow.interfaces import IWorkflow, IWorkflowPublicationInfo, IWork
 from pyams_zmi.interfaces import IAdminLayer, IObjectHint, IObjectLabel
 from pyams_zmi.zmi.viewlet.header import ContentHeaderViewlet
 
-
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
 
 
+def shared_content_version_getter(context, request, view, interface):
+    """Shared content version generic interface getter"""
+    versions = IWorkflowVersions(context, None)
+    if versions is not None:
+        version = versions.get_last_versions()[0]
+        return request.registry.queryMultiAdapter((version, request, view), interface)
+
+
 @adapter_config(required=(IWfSharedContent, IAdminLayer, Interface),
                 provides=IObjectHint)
-def shared_content_hint(context, request, view):
-    """Shared content hint"""
+def wf_shared_content_hint(context, request, view):
+    """Workflow-managed shared content hint"""
     translate = request.localizer.translate
     return translate(context.content_name)
 
 
+@adapter_config(required=(ISharedContent, IAdminLayer, Interface),
+                provides=IObjectHint)
+def shared_content_hint(context, request, view):
+    """Shared content hint"""
+    return shared_content_version_getter(context, request, view, IObjectHint)
+
+
 @adapter_config(required=(IWfSharedContent, IAdminLayer, Interface),
+                provides=IObjectLabel)
+def wf_shared_content_label(context, request, view):
+    """Workflow-managed shared content label"""
+    return II18n(context).query_attribute('title', request=request)
+
+
+@adapter_config(required=(ISharedContent, IAdminLayer, Interface),
                 provides=IObjectLabel)
 def shared_content_label(context, request, view):
     """Shared content label"""
-    return II18n(context).query_attribute('title', request=request)
+    return shared_content_version_getter(context, request, view, IObjectLabel)
 
 
 @adapter_config(required=(IWfSharedContent, IAdminLayer, IDashboardColumn),
                 provides=IDashboardContentType)
-def shared_content_type(context, request, column):
-    """Shared content type"""
+def wf_shared_content_type(context, request, column):
+    """Workflow-managed shared content type"""
     if IWfTypedSharedContent.providedBy(context):
         data_type = context.get_data_type()
         if data_type is not None:
@@ -73,21 +93,35 @@ def shared_content_type(context, request, column):
     return None
 
 
+@adapter_config(required=(ISharedContent, IAdminLayer, Interface),
+                provides=IDashboardContentType)
+def shared_content_type(context, request, view):
+    """Shared content label"""
+    return shared_content_version_getter(context, request, view, IDashboardContentType)
+
+
 @adapter_config(required=(IWfSharedContent, IAdminLayer, IDashboardColumn),
                 provides=ISiteRootDashboardContentType)
-def site_root_shared_content_type(context, request, column):
-    """Site root shared content type"""
+def wf_site_root_shared_content_type(context, request, column):
+    """Site root workflow-managed shared content type"""
     translate = request.localizer.translate
-    data_type = shared_content_type(context, request, column)
+    data_type = wf_shared_content_type(context, request, column)
     content_name = translate(context.content_name)
     if data_type is None:
         return content_name
     return f'{content_name} ({data_type})'
 
 
+@adapter_config(required=(ISharedContent, IAdminLayer, IDashboardColumn),
+                provides=ISiteRootDashboardContentType)
+def site_root_shared_content_type(context, request, view):
+    """Site root shared content type"""
+    return shared_content_version_getter(context, request, view, ISiteRootDashboardContentType)
+
+
 @adapter_config(required=(IWfSharedContent, IAdminLayer, IDashboardColumn),
                 provides=IDashboardContentNumber)
-def shared_content_number(context, request, column):
+def wf_shared_content_number(context, request, column):
     """Shared content dashboard number getter"""
     target = get_parent(context, ISequentialIdTarget)
     return request.registry.queryMultiAdapter((target, request, column),
@@ -96,12 +130,19 @@ def shared_content_number(context, request, column):
 
 @adapter_config(required=(IWfSharedContent, IAdminLayer, IDashboardColumn),
                 provides=IDashboardContentOwner)
-def shared_content_owner(context, request, column):
-    """Shared content dashboard owner getter"""
+def wf_shared_content_owner(context, request, column):
+    """Workflow-managed shared content dashboard owner getter"""
     owner = IWfSharedContentRoles(context).owner
     if owner:
         return get_principal(request, next(iter(owner))).title
     return None
+
+
+@adapter_config(required=(ISharedContent, IAdminLayer, IDashboardColumn),
+                provides=IDashboardContentOwner)
+def shared_content_owner(context, request, view):
+    """Shared content owner getter"""
+    return shared_content_version_getter(context, request, view, IDashboardContentOwner)
 
 
 @viewlet_config(name='pyams.content_header',

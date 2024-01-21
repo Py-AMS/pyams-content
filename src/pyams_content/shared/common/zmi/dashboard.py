@@ -30,9 +30,9 @@ from zope.schema.vocabulary import getVocabularyRegistry
 
 from pyams_catalog.query import CatalogResultSet
 from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION, PUBLISH_CONTENT_PERMISSION
-from pyams_content.shared.common import IBaseSharedTool, SHARED_CONTENT_TYPES_VOCABULARY
-from pyams_content.shared.common.interfaces import IManagerRestrictions, ISharedContent, \
-    IWfSharedContentRoles
+from pyams_content.shared.common.interfaces import IBaseSharedTool, IManagerRestrictions, ISharedContent, \
+    IWfSharedContentRoles, SHARED_CONTENT_TYPES_VOCABULARY
+from pyams_content.shared.common.zmi.content import shared_content_version_getter
 from pyams_content.zmi.interfaces import IAllDashboardMenu, IDashboardColumn, \
     IDashboardContentModifier, IDashboardContentNumber, IDashboardContentOwner, \
     IDashboardContentStatus, IDashboardContentStatusDatetime, IDashboardContentTimestamp, \
@@ -74,7 +74,9 @@ from pyams_content import _
 def handle_shared_content_table_row_update(event):
     """Shared content table row update event handler"""
     item_key = ICacheKeyValue(event.item)
-    event.object.rows_state[item_key] = IWorkflowVersions(event.context).get_last_versions()[-1]
+    versions = IWorkflowVersions(event.context, None)
+    if versions is not None:
+        event.object.rows_state[item_key] = versions.get_last_versions()[-1]
 
 
 @adapter_config(required=(ISequentialIdTarget, IAdminLayer, IDashboardColumn),
@@ -110,6 +112,13 @@ def content_workflow_status(context, request, column):
     return None
 
 
+@adapter_config(required=(ISharedContent, IAdminLayer, IDashboardColumn),
+                provides=IDashboardContentStatus)
+def shared_content_workflow_status(context, request, view):
+    """Shared content workflow status getter"""
+    return shared_content_version_getter(context, request, view, IDashboardContentStatus)
+
+
 @adapter_config(required=(IWorkflowPublicationSupport, IAdminLayer, IDashboardColumn),
                 provides=IDashboardContentStatusDatetime)
 def content_workflow_status_datetime(context, request, column):
@@ -119,6 +128,13 @@ def content_workflow_status_datetime(context, request, column):
         return format_datetime(state.state_date, SH_DATETIME_FORMAT,
                                request=request)
     return None
+
+
+@adapter_config(required=(ISharedContent, IAdminLayer, IDashboardColumn),
+                provides=IDashboardContentStatusDatetime)
+def shared_content_workflow_status_datetime(context, request, view):
+    """Shared content workflow status datetime getter"""
+    return shared_content_version_getter(context, request, view, IDashboardContentStatusDatetime)
 
 
 @adapter_config(required=(IWorkflowPublicationSupport, IAdminLayer, IDashboardColumn),
@@ -131,6 +147,13 @@ def content_workflow_version(context, request, column):
     return None
 
 
+@adapter_config(required=(ISharedContent, IAdminLayer, IDashboardColumn),
+                provides=IDashboardContentVersion)
+def shared_content_workflow_version(context, request, view):
+    """Shared content workflow version getter"""
+    return shared_content_version_getter(context, request, view, IDashboardContentVersion)
+
+
 @adapter_config(required=(IWorkflowPublicationSupport, IAdminLayer, IDashboardColumn),
                 provides=IDashboardContentModifier)
 def content_workflow_status_principal(context, request, column):
@@ -140,6 +163,13 @@ def content_workflow_status_principal(context, request, column):
         manager = get_utility(ISecurityManager)
         return manager.get_principal(state.state_principal).title
     return None
+
+
+@adapter_config(required=(ISharedContent, IAdminLayer, IDashboardColumn),
+                provides=IDashboardContentModifier)
+def shared_content_workflow_status_principal(context, request, view):
+    """Shared content workflow status principal getter"""
+    return shared_content_version_getter(context, request, view, IDashboardContentModifier)
 
 
 @adapter_config(required=(IWorkflowPublicationSupport, IAdminLayer, IDashboardColumn),
@@ -155,6 +185,13 @@ def content_workflow_owner(context, request, column):
     return None
 
 
+@adapter_config(required=(ISharedContent, IAdminLayer, IDashboardColumn),
+                provides=IDashboardContentOwner)
+def shared_content_workflow_owner(context, request, view):
+    """Shared content workflow owner getter"""
+    return shared_content_version_getter(context, request, view, IDashboardContentOwner)
+
+
 @adapter_config(required=(IAttributeAnnotatable, IAdminLayer, IDashboardColumn),
                 provides=IDashboardContentTimestamp)
 def content_timestamp(context, request, column):
@@ -164,6 +201,13 @@ def content_timestamp(context, request, column):
         return format_datetime(tztime(dc.modified), SH_DATETIME_FORMAT,
                                request=request)
     return None
+
+
+@adapter_config(required=(ISharedContent, IAdminLayer, IDashboardColumn),
+                provides=IDashboardContentTimestamp)
+def shared_content_timestamp(context, request, view):
+    """Shared content timestamp getter"""
+    return shared_content_version_getter(context, request, view, IDashboardContentTimestamp)
 
 
 #

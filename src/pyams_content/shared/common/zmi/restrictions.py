@@ -39,6 +39,7 @@ from pyams_skin.viewlet.help import AlertMessage
 from pyams_table.column import GetAttrColumn
 from pyams_table.interfaces import IColumn, IValues
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
+from pyams_utils.interfaces import MISSING_INFO
 from pyams_utils.registry import get_utility
 from pyams_utils.url import absolute_url
 from pyams_viewlet.viewlet import viewlet_config
@@ -154,7 +155,7 @@ class ManagerOwnersColumn(I18nColumnMixin, GetAttrColumn):
     def get_value(self, obj):
         restrictions = IManagerWorkflowRestrictions(obj[1])
         if not restrictions.owners:
-            return '--'
+            return MISSING_INFO
         sm = get_utility(ISecurityManager)
         return ', '.join((
             sm.get_principal(principal_id).title
@@ -387,7 +388,7 @@ class ContributorSubstitutesColumn(I18nColumnMixin, GetAttrColumn):
     def get_value(self, obj):
         restrictions = IContributorWorkflowRestrictions(obj[1])
         if not restrictions.owners:
-            return '--'
+            return MISSING_INFO
         sm = get_utility(ISecurityManager)
         return ', '.join((
             sm.get_principal(principal_id).title
