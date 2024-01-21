@@ -34,7 +34,7 @@
 		 class="d-flex flex-row">
 		<div class="svg-container icon">
 			<img class="mt-n3 p-3"
-				 src="/--static--/pyams/img/link.svg"
+				 src="/--static--/pyams/css/img/link.svg"
 				 alt="" />
 		</div>
 		<div class="d-flex flex-column links">
