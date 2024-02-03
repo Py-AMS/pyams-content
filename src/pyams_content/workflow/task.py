@@ -39,6 +39,8 @@ from pyams_zmq.interfaces import IZMQProcessStartedEvent
 
 __docformat__ = 'restructuredtext'
 
+from pyams_content import _
+
 
 LOGGER = logging.getLogger('PyAMS (content)')
 
@@ -46,6 +48,9 @@ LOGGER = logging.getLogger('PyAMS (content)')
 @implementer(IWorkflowManagementTask)
 class ContentPublishingTask(Task):
     """Content publisher task"""
+
+    label = _("Content publisher task")
+    icon_class = 'fas fa-share'
 
     settings_view_name = None
     principal_id = INTERNAL_USER_ID
@@ -79,6 +84,9 @@ class ContentPublishingTask(Task):
 @implementer(IWorkflowManagementTask)
 class ContentArchivingTask(Task):
     """Content archiving task"""
+
+    label = _("Content archiver task")
+    icon_class = 'fas fa-reply'
 
     settings_view_name = None
     principal_id = INTERNAL_USER_ID
