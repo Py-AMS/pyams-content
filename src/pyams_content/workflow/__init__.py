@@ -311,12 +311,12 @@ def prepublish_action(wf, context):
     if scheduler is not None:
         intids = get_utility(IIntIds)
         context_id = intids.queryId(context)
-        task_id = 'workflow::{}'.format(context_id)
+        task_id = f'workflow::{context_id}'
         if task_id in scheduler:
             del scheduler[task_id]
         task = ContentPublishingTask(context_id,
                                      prepublished_to_published.transition_id)
-        task.name = 'Planned publication for {}'.format(ISequentialIdInfo(context).public_oid)
+        task.name = f'Planned publication for {ISequentialIdInfo(context).public_oid}'
         task.schedule_mode = SCHEDULER_TASK_DATE_MODE
         pub_info = IWorkflowPublicationInfo(context)
         schedule_info = IDateTaskScheduling(task)
