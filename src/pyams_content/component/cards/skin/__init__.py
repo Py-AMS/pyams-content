@@ -18,7 +18,8 @@ This module defines renderers of Bootstrap cards paragraphs.
 from pyams_content.component.cards import ICardsParagraph
 from pyams_content.component.cards.skin.interfaces import ICardsParagraphDefaultRendererSettings, \
     ICardsParagraphMasonryRendererSettings
-from pyams_content.feature.renderer import BaseContentRenderer, DEFAULT_RENDERER_NAME, IContentRenderer
+from pyams_content.feature.renderer import BaseContentRenderer, IContentRenderer
+from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.portlets.cards.skin import CardsPortletMasonryRendererSettings, CardsPortletRendererSettings
 from pyams_template.template import template_config

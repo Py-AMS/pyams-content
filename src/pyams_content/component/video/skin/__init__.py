@@ -17,7 +17,8 @@ This module defines default external video paragraph renderer.
 
 from pyams_content.component.video.interfaces import IExternalVideoParagraph
 from pyams_content.component.video.skin.interfaces import IExternalVideoRenderer
-from pyams_content.feature.renderer import DEFAULT_RENDERER_NAME, DefaultContentRenderer, IContentRenderer
+from pyams_content.feature.renderer import DefaultContentRenderer, IContentRenderer
+from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config

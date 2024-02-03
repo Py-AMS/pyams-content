@@ -26,15 +26,12 @@ from pyams_content.component.illustration.portlet.interfaces import IIllustratio
 from pyams_content.component.illustration.portlet.skin.interfaces import \
     IIllustrationPortletBaseRendererSettings, IIllustrationPortletDefaultRendererSettings, \
     IIllustrationPortletSideRendererSettings
-from pyams_content.feature.renderer import HIDDEN_RENDERER_NAME
 from pyams_layer.interfaces import IPyAMSLayer
-from pyams_portal.interfaces import IPortalContext, IPortletCSSClass, IPortletRenderer
+from pyams_portal.interfaces import HIDDEN_RENDERER_NAME, IPortalContext, IPortletCSSClass, IPortletRenderer
 from pyams_portal.skin import PortletRenderer
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
 from pyams_utils.factory import factory_config
-from pyams_utils.interfaces import DISPLAY_CONTEXT_KEY_NAME
-
 
 __docformat__ = 'restructuredtext'
 

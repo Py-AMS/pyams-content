@@ -21,8 +21,8 @@ from zope.schema.fieldproperty import FieldProperty
 from pyams_content.component.gallery.interfaces import IGalleryParagraph
 from pyams_content.component.gallery.skin.interfaces import IGalleryCarouselRendererSettings, \
     IGalleryDefaultRendererSettings, IGalleryRandomImageRendererSettings
-from pyams_content.feature.renderer import BaseContentRenderer, DEFAULT_RENDERER_NAME, \
-    IContentRenderer
+from pyams_content.feature.renderer import BaseContentRenderer, IContentRenderer
+from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config

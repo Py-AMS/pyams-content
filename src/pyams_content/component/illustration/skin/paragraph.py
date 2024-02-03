@@ -22,8 +22,8 @@ from zope.schema.fieldproperty import FieldProperty
 from pyams_content.component.illustration.interfaces import IIllustrationParagraph
 from pyams_content.component.illustration.skin.interfaces import \
     IIllustrationDefaultRendererSettings
-from pyams_content.feature.renderer import DEFAULT_RENDERER_NAME, DefaultContentRenderer, \
-    IContentRenderer
+from pyams_content.feature.renderer import DefaultContentRenderer, IContentRenderer
+from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config

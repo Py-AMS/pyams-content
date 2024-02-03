@@ -22,14 +22,14 @@ from pyramid.decorator import reify
 from zope.interface import implementer
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
-from pyams_content.feature.renderer.interfaces import DEFAULT_RENDERER_NAME, HIDDEN_RENDERER_NAME, \
-    IContentRenderer, IRenderedContent, IRendererSettings, RENDERER_SETTINGS_KEY
+from pyams_content.feature.renderer.interfaces import IContentRenderer, IRenderedContent, IRendererSettings, \
+    RENDERER_SETTINGS_KEY
 from pyams_layer.interfaces import IPyAMSLayer
+from pyams_portal.interfaces import DEFAULT_RENDERER_NAME, HIDDEN_RENDERER_NAME
 from pyams_utils.adapter import adapter_config, get_annotation_adapter
 from pyams_utils.factory import get_object_factory
 from pyams_utils.request import check_request
 from pyams_viewlet.viewlet import BaseContentProvider
-
 
 __docformat__ = 'restructuredtext'
 

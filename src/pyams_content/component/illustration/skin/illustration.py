@@ -24,8 +24,8 @@ from pyams_content.component.illustration import IParagraphIllustration
 from pyams_content.component.illustration.skin.interfaces import \
     IIllustrationDefaultRendererSettings, IIllustrationRenderer, ILLUSTRATION_AFTER_BODY, \
     ILLUSTRATION_BEFORE_BODY, IParagraphIllustrationSideRendererSettings
-from pyams_content.feature.renderer import BaseContentRenderer, DEFAULT_RENDERER_NAME, \
-    IContentRenderer
+from pyams_content.feature.renderer import BaseContentRenderer, IContentRenderer
+from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config

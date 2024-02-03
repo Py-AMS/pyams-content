@@ -20,11 +20,11 @@ from zope.interface import Interface
 from pyams_content.component.illustration import IBaseIllustrationTarget, IIllustration, \
     ILinkIllustration, ILinkIllustrationTarget
 from pyams_content.component.links import IInternalLink
-from pyams_content.feature.renderer import HIDDEN_RENDERER_NAME
 from pyams_content.interfaces import IBaseContent
 from pyams_content.shared.common import ISharedContent
 from pyams_content.skin.interfaces import IContentBannerIllustration, IContentNavigationIllustration
 from pyams_layer.interfaces import IPyAMSLayer
+from pyams_portal.interfaces import HIDDEN_RENDERER_NAME
 from pyams_site.interfaces import ISiteRoot
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.interfaces.tales import ITALESExtension

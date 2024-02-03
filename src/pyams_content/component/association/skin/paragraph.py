@@ -15,8 +15,9 @@
 """
 from pyams_content.component.association.interfaces import IAssociationParagraph
 from pyams_content.component.association.skin import AssociationContainerRendererMixin
-from pyams_content.feature.renderer import DEFAULT_RENDERER_NAME, DefaultContentRenderer, \
+from pyams_content.feature.renderer import DefaultContentRenderer, \
     IContentRenderer
+from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config

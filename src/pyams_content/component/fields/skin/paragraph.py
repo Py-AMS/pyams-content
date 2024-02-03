@@ -19,8 +19,8 @@ from zope.interface import Interface
 
 from pyams_content.component.fields.interfaces import IFormFieldsParagraph
 from pyams_content.component.paragraph.portlet.skin import IParagraphContainerPortletRenderer
-from pyams_content.feature.renderer import DEFAULT_RENDERER_NAME, DefaultContentRenderer, \
-    IContentRenderer
+from pyams_content.feature.renderer import DefaultContentRenderer, IContentRenderer
+from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
 from pyams_content.shared.form import IWfForm
 from pyams_fields.interfaces import IFormFieldContainerTarget, IFormHandlersInfo
 from pyams_fields.skin import FormFieldContainerInputForm
