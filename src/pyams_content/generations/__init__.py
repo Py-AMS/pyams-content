@@ -28,7 +28,7 @@ from pyams_catalog.index import DatetimeIndexWithInterface, FieldIndexWithInterf
 from pyams_catalog.interfaces import DATE_RESOLUTION, MINUTE_RESOLUTION
 from pyams_catalog.nltk import get_fulltext_lexicon
 from pyams_content.component.thesaurus import ICollectionsInfo, ITagsInfo, IThemesInfo
-from pyams_content.interfaces import CONTRIBUTOR_ROLE, IBaseContent, MANAGER_ROLE, OWNER_ROLE, \
+from pyams_content.interfaces import CONTRIBUTOR_ROLE, IBaseContent, IObjectTypes, MANAGER_ROLE, OWNER_ROLE, \
     PILOT_ROLE, WEBMASTER_ROLE
 from pyams_content.reference.pictogram import IPictogramTable
 from pyams_content.root import ISiteRootToolsConfiguration
@@ -63,6 +63,10 @@ REQUIRED_TOOLS = (
 )
 
 REQUIRED_INDEXES = [
+    ('object_types', KeywordIndexWithInterface, {
+        'interface': IObjectTypes,
+        'discriminator': 'object_types'
+    }),
     ('content_type', FieldIndexWithInterface, {
         'interface': IBaseContent,
         'discriminator': 'content_type'

@@ -18,7 +18,7 @@ This module defines main content permissions, roles and interfaces.
 from zope.annotation import IAttributeAnnotatable
 from zope.interface import Interface
 from zope.location.interfaces import IContained
-from zope.schema import Datetime, TextLine
+from zope.schema import Datetime, Set, TextLine
 
 from pyams_i18n.schema import I18nTextLineField
 
@@ -129,3 +129,14 @@ class IBaseContentInfo(Interface):
     modified_date = Datetime(title=_("Modification date"),
                              required=False,
                              readonly=False)
+
+
+class IObjectType(Interface):
+    """Object type value interface"""
+
+
+class IObjectTypes(Interface):
+    """Object types """
+
+    object_types = Set(title=_("Object types"),
+                       required=False)

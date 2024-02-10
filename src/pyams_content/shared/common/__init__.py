@@ -20,13 +20,13 @@ from pyramid.events import subscriber
 from pyramid.settings import asbool
 from zope.container.contained import Contained
 from zope.dublincore.interfaces import IZopeDublinCore
-from zope.interface import Interface, implementer
+from zope.interface import implementer
 from zope.intid import IIntIds
 from zope.lifecycleevent import IObjectModifiedEvent
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
-from pyams_content.interfaces import IBaseContentInfo
+from pyams_content.interfaces import IBaseContentInfo, IObjectType
 from pyams_content.shared.common.interfaces import CONTENT_TYPES_VOCABULARY, IBaseSharedTool, \
     ISharedContent, IWfSharedContent, IWfSharedContentRoles, SHARED_CONTENT_TYPES_VOCABULARY
 from pyams_i18n.content import I18nManagerMixin
@@ -39,7 +39,7 @@ from pyams_security.utility import get_principal
 from pyams_sequence.interfaces import ISequentialIdInfo, ISequentialIdTarget
 from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.date import format_datetime
-from pyams_utils.factory import get_all_factories, get_object_factory
+from pyams_utils.factory import get_all_factories, get_interface_base_name, get_object_factory
 from pyams_utils.interfaces.text import IHTMLRenderer
 from pyams_utils.property import ClassPropertyType, classproperty
 from pyams_utils.registry import query_utility
@@ -51,7 +51,6 @@ from pyams_utils.zodb import volatile_property
 from pyams_workflow.interfaces import IObjectClonedEvent, IWorkflow, IWorkflowPublicationSupport, \
     IWorkflowTransitionEvent, IWorkflowVersions
 from pyams_zmi.interfaces import IObjectLabel
-
 
 __docformat__ = 'restructuredtext'
 
@@ -179,6 +178,13 @@ def wf_shared_content_sequence_adapter(context):
     parent = get_parent(context, ISharedContent)
     if parent is not None:
         return ISequentialIdInfo(parent)
+
+
+@adapter_config(required=IWfSharedContent,
+                provides=IObjectType)
+def wf_shared_content_object_type(context):
+    """Shared content object type adapter"""
+    return get_interface_base_name(context.content_intf)
 
 
 @adapter_config(required=(IWfSharedContent, IPyAMSLayer),
