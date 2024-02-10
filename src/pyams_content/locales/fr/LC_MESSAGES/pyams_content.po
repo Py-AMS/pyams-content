@@ -3209,7 +3209,7 @@ msgstr ""
 
 #: src/pyams_content/shared/site/interfaces.py:183
 msgid "Site topic"
-msgstr "Article (dans un site)"
+msgstr "Article au sein d'un site"
 
 #: src/pyams_content/shared/site/interfaces.py:190
 #: src/pyams_content/shared/form/interfaces.py:45
