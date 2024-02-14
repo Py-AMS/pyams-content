@@ -81,7 +81,7 @@ class SiteRootToolsConfiguration(Persistent, Contained):
             table = manager.get(name)
             if table is not None:
                 return table
-        factory = registry.settings.get(f'pyams_content.config.{table_name}_factory')
+        factory = registry.settings.get(f'pyams_content.config.{table_name}_table_factory')
         if factory:
             if factory.lower in (MISSING_INFO, 'off', 'none', 'disabled'):
                 return None
