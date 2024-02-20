@@ -81,6 +81,8 @@ class SiteManagerAddForm(AdminModalAddForm):
     fields = Fields(ISiteManager).select('title', 'short_name')
     content_factory = ISiteManager
 
+    _edit_permission = MANAGE_SITE_TREE_PERMISSION
+
     def add(self, obj):
         short_name = II18n(obj).query_attribute('short_name', request=self.request)
         name = translate_string(short_name, force_lower=True, spaces='-')
