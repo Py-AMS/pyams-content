@@ -18,13 +18,13 @@ This module provides site manager management interface components.
 from pyramid.events import subscriber
 from zope.interface import Interface, Invalid
 
-from pyams_content.interfaces import IBaseContent, MANAGE_SITE_ROOT_PERMISSION
+from pyams_content.interfaces import IBaseContent, MANAGE_SITE_TREE_PERMISSION
 from pyams_content.root.zmi.sites import SiteRootSitesTable
 from pyams_content.shared.common.interfaces import IBaseSharedTool, ISharedSite
-from pyams_content.zmi.properties import PropertiesEditForm
 from pyams_content.shared.site.interfaces import ISiteManager
 from pyams_content.zmi.interfaces import IDashboardColumn, IDashboardContentType, \
     ISiteRootDashboardContentType
+from pyams_content.zmi.properties import PropertiesEditForm
 from pyams_form.ajax import AJAXFormRenderer, ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer, IDataExtractedEvent
@@ -50,7 +50,6 @@ from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager, \
 from pyams_zmi.table import TableElementEditor
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
-
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
@@ -59,7 +58,7 @@ from pyams_content import _
 @viewlet_config(name='add-site-manager.menu',
                 context=ISiteRoot, layer=IAdminLayer, view=SiteRootSitesTable,
                 manager=IContextAddingsViewletManager,
-                permission=MANAGE_SITE_ROOT_PERMISSION)
+                permission=MANAGE_SITE_TREE_PERMISSION)
 class SiteManagerAddMenu(MenuItem):
     """Site manager add menu"""
 
@@ -72,7 +71,7 @@ class SiteManagerAddMenu(MenuItem):
 
 @ajax_form_config(name='add-site-manager.html',
                   context=ISiteRoot, layer=IPyAMSLayer,
-                  permission=MANAGE_SITE_ROOT_PERMISSION)
+                  permission=MANAGE_SITE_TREE_PERMISSION)
 class SiteManagerAddForm(AdminModalAddForm):
     """Site manager add form"""
 

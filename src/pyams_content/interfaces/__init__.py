@@ -35,6 +35,9 @@ from pyams_content import _
 MANAGE_SITE_ROOT_PERMISSION = 'pyams.ManageSiteRoot'
 '''Permission required to manage main site root properties'''
 
+MANAGE_SITE_TREE_PERMISSION = 'pyams.ManageSiteTree'
+'''Permission required to create first level site elements'''
+
 MANAGE_SITE_PERMISSION = 'pyams.ManageSite'
 '''Permission required to manager inner site or blog properties'''
 
@@ -139,4 +142,5 @@ class IObjectTypes(Interface):
     """Object types """
 
     object_types = Set(title=_("Object types"),
+                       value_type=TextLine(),
                        required=False)

@@ -21,7 +21,7 @@ from pyramid.view import view_config
 from zope.container.interfaces import IContainer
 from zope.interface import implementer
 
-from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
+from pyams_content.interfaces import MANAGE_SITE_TREE_PERMISSION
 from pyams_content.shared.common import IBaseSharedTool
 from pyams_content.shared.common.interfaces import IDeletableElement
 from pyams_content.zmi.dashboard import DashboardLabelColumn
@@ -116,7 +116,7 @@ class SiteRootSitesTrashColumn(TrashColumn):
     """Site root sites trash column"""
 
     hint = _("Delete shared site")
-    permission = MANAGE_SITE_ROOT_PERMISSION
+    permission = MANAGE_SITE_TREE_PERMISSION
 
     def checker(self, item):
         """Trash column checker"""
@@ -152,7 +152,7 @@ class SiteRootSitesView(TableAdminView):
 
 @view_config(name='delete-element.json',
              context=ISiteRoot, request_type=IPyAMSLayer,
-             permission=MANAGE_SITE_ROOT_PERMISSION,
+             permission=MANAGE_SITE_TREE_PERMISSION,
              renderer='json', xhr=True)
 def delete_siteroot_element(request):
     """Site root delete view"""
