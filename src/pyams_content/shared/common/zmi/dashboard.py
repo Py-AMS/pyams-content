@@ -177,8 +177,8 @@ def shared_content_workflow_status_principal(context, request, view):
 def content_workflow_owner(context, request, column):
     """Content workflow owner getter"""
     try:
-        owner = context.owner
-    except AttributeError:
+        owner = IWfSharedContentRoles(context).owner
+    except (TypeError, AttributeError):
         return None
     if owner:
         return get_principal(request, next(iter(owner))).title
