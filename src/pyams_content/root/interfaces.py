@@ -91,6 +91,9 @@ class ISiteRootRoles(IContentRoles):
                                role_id=OPERATOR_ROLE,
                                required=False)
 
+    def get_operators_group(self):
+        """Get operators groups instance"""
+
 
 SITE_ROOT_TOOLS_CONFIGURATION_KEY = 'pyams_content.root.configuration'
 

@@ -16,6 +16,7 @@ This module defines roles and permissions checker of site root.
 """
 
 from persistent import Persistent
+from pyramid.events import subscriber
 from zope.container.contained import Contained
 from zope.interface import Interface, implementer
 from zope.schema.fieldproperty import FieldProperty
@@ -27,16 +28,21 @@ from pyams_content.root.interfaces import ISiteRootInfos, ISiteRootRoles, \
     SITE_ROOT_TOOLS_CONFIGURATION_KEY
 from pyams_file.property import FileProperty
 from pyams_layer.interfaces import IPyAMSLayer
-from pyams_security.interfaces import IRolesPolicy, IViewContextPermissionChecker
+from pyams_security.interfaces import IGrantedRoleEvent, IRolesPolicy, ISecurityManager, IViewContextPermissionChecker
+from pyams_security.interfaces.base import IRole
+from pyams_security.interfaces.plugin import ILocalGroup
 from pyams_security.property import RolePrincipalsFieldProperty
 from pyams_security.security import ProtectedObjectRoles
 from pyams_site.interfaces import ISiteRoot
 from pyams_utils.adapter import ContextAdapter, ContextRequestViewAdapter, adapter_config, \
     get_annotation_adapter
 from pyams_utils.factory import factory_config
-
+from pyams_utils.list import next_from
+from pyams_utils.registry import get_utility
 
 __docformat__ = 'restructuredtext'
+
+from pyams_utils.traversing import get_parent
 
 
 @factory_config(provided=ISiteRootInfos)
@@ -77,6 +83,13 @@ class SiteRootRoles(ProtectedObjectRoles):
     designers = RolePrincipalsFieldProperty(ISiteRootRoles['designers'])
     operators = RolePrincipalsFieldProperty(ISiteRootRoles['operators'])
 
+    def get_operators_group(self):
+        """Get operators group"""
+        if not self.operators:
+            return None
+        sm = get_utility(ISecurityManager)
+        return sm.get_raw_principal(next_from(self.operators))
+
 
 @adapter_config(required=ISiteRoot,
                 provides=ISiteRootRoles)
@@ -105,4 +118,17 @@ class SiteRootPermissionChecker(ContextRequestViewAdapter):
     edit_permission = MANAGE_SITE_ROOT_PERMISSION
 
 
-
+@subscriber(IGrantedRoleEvent)
+def handle_granted_role(event):
+    """Handle granted role event"""
+    role = get_utility(IRole, name=event.role_id)
+    if (role is None) or not role.custom_data.get('set_as_operator', True):
+        return
+    root = get_parent(event.object, ISiteRoot)
+    if root is None:
+        return
+    roles = ISiteRootRoles(root)
+    group = roles.get_operators_group()
+    if (group is None) or not ILocalGroup.providedBy(group):
+        return
+    group.principals |= {event.principal_id}
