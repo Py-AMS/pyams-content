@@ -28,5 +28,5 @@ types which allows you to manage a whole website. It relies on several packages 
 PyAMS_workflow for workflow management, PyAMS_portal to handle presentation templates, or
 PyAMS_elastic to handle Elasticsearch integration.
 
-Please note that PyAMS_content doesn't provide any default skin, so you will have to include
-another package like PyAMS_default_theme to handle presentation.
+Please note that PyAMS_content only provide a basic Bootstrap based skin, so you will have to
+include other extension packages (like PyAMS_content_themes) to get more advanced graphical themes.

@@ -1,6 +1,6 @@
-===================
+=====================
 PyAMS content package
-===================
+=====================
 
 Introduction
 ------------
@@ -18,6 +18,8 @@ This package is composed of a set of utility functions, usable into any Pyramid 
     >>> include_security(config)
     >>> from pyams_form import includeme as include_form
     >>> include_form(config)
+    >>> from pyams_table import includeme as include_table
+    >>> include_table(config)
     >>> from pyams_content import includeme as include_content
     >>> include_content(config)
 

@@ -38,7 +38,7 @@ class TagsContentProvider(ViewContentProvider):
     tags_info = None
 
     def update(self):
-        super(TagsContentProvider, self).update()
+        super().update()
         self.tags_info = ITagsInfo(self.context, None)
 
     def render(self, template_name=''):

@@ -23,7 +23,7 @@ DOCS = os.path.join(os.path.dirname(__file__),
 README = os.path.join(DOCS, 'README.rst')
 HISTORY = os.path.join(DOCS, 'HISTORY.rst')
 
-version = '1.0.0'
+version = '1.99.0'
 long_description = open(README).read() + '\n\n' + open(HISTORY).read()
 
 tests_require = [
@@ -77,14 +77,14 @@ setup(name='pyams_content',
           'pyams_pagelet',
           'pyams_portal',
           'pyams_scheduler',
-          'pyams_security',
+          'pyams_security >= 2.2.1',
           'pyams_security_views',
           'pyams_sequence',
           'pyams_site',
           'pyams_skin',
           'pyams_template',
           'pyams_thesaurus',
-          'pyams_utils',
+          'pyams_utils >= 2.3.1',
           'pyams_viewlet',
           'pyams_workflow',
           'pyahocorasick',
