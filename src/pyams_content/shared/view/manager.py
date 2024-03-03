@@ -17,10 +17,8 @@ This module defines views manager shared tool.
 
 from pyramid.events import subscriber
 from zope.component.interfaces import ISite
-from zope.interface import implementer
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
 
-from pyams_content.component.thesaurus import ICollectionsManagerTarget, IThemesManagerTarget
 from pyams_content.shared.common.manager import SharedTool
 from pyams_content.shared.view.interfaces import IViewManager, VIEW_CONTENT_TYPE
 from pyams_utils.factory import factory_config
@@ -30,7 +28,6 @@ __docformat__ = 'restructuredtext'
 
 
 @factory_config(IViewManager)
-@implementer(IThemesManagerTarget, ICollectionsManagerTarget)
 class ViewManager(SharedTool):
     """View manager class"""
 
