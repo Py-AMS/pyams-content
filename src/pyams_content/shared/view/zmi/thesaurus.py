@@ -12,13 +12,12 @@
 
 """PyAMS_content.shared.view.zmi.thesaurus module
 
-This module defines management interface components used to to handle
+This module defines management interface components used to handle
 thesaurus-based views settings.
 """
 
 from pyams_content.component.thesaurus import ICollectionsManager, ITagsManager, IThemesManager
 from pyams_content.shared.view import IWfView
-from pyams_content.shared.view.interfaces import IViewManager
 from pyams_content.shared.view.interfaces.settings import IViewCollectionsSettings, IViewTagsSettings, \
     IViewThemesSettings
 from pyams_form.ajax import ajax_form_config
@@ -26,7 +25,6 @@ from pyams_form.field import Fields
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_thesaurus.zmi.widget import ThesaurusTermsTreeFieldWidget
-from pyams_utils.registry import get_utility
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminEditForm
 from pyams_zmi.interfaces import IAdminLayer
@@ -48,6 +46,12 @@ from pyams_content import _
                 permission=VIEW_SYSTEM_PERMISSION)
 class ViewTagsMenu(NavigationMenuItem):
     """View tags menu"""
+
+    def __new__(cls, context, request, view, manager):
+        manager = ITagsManager(request.root, None)
+        if not manager.thesaurus_name:
+            return None
+        return NavigationMenuItem.__new__(cls)
 
     label = _("Tags")
     href = '#tags.html'
@@ -91,6 +95,12 @@ class ViewTagsEditForm(AdminEditForm):
 class ViewThemesMenu(NavigationMenuItem):
     """View themes menu"""
 
+    def __new__(cls, context, request, view, manager):
+        manager = IThemesManager(request.root, None)
+        if not manager.thesaurus_name:
+            return None
+        return NavigationMenuItem.__new__(cls)
+
     label = _("Themes")
     href = '#themes.html'
 
@@ -114,8 +124,7 @@ class ViewThemesEditForm(AdminEditForm):
         super().update_widgets(prefix)
         widget = self.widgets.get('themes')
         if widget is not None:
-            views = get_utility(IViewManager)
-            manager = IThemesManager(views, None)
+            manager = IThemesManager(self.request.root, None)
             if manager is not None:
                 widget.label_css_class = 'control-label col-md-2'
                 widget.input_css_class = 'col-md-12'
@@ -133,6 +142,12 @@ class ViewThemesEditForm(AdminEditForm):
                 permission=VIEW_SYSTEM_PERMISSION)
 class ViewCollectionsMenu(NavigationMenuItem):
     """View collections menu"""
+
+    def __new__(cls, context, request, view, manager):
+        manager = ICollectionsManager(request.root, None)
+        if not manager.thesaurus_name:
+            return None
+        return NavigationMenuItem.__new__(cls)
 
     label = _("Collections")
     href = '#collections.html'
@@ -157,8 +172,7 @@ class ViewCollectionsEditForm(AdminEditForm):
         super().update_widgets(prefix)
         widget = self.widgets.get('collections')
         if widget is not None:
-            views = get_utility(IViewManager)
-            manager = ICollectionsManager(views, None)
+            manager = ICollectionsManager(self.request.root, None)
             if manager is not None:
                 widget.label_css_class = 'control-label col-md-2'
                 widget.input_css_class = 'col-md-12'
