@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-01-21 16:50+0100\n"
+"POT-Creation-Date: 2024-03-03 12:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,62 +21,66 @@ msgid "Manage main site root properties"
 msgstr ""
 
 #: ./src/pyams_content/include.py:57
-msgid "Manage site, blog or hub properties"
+msgid "Manage first level site tree elements"
 msgstr ""
 
 #: ./src/pyams_content/include.py:61
-msgid "Manage shared tool properties"
+msgid "Manage site, blog or hub properties"
 msgstr ""
 
 #: ./src/pyams_content/include.py:65
-msgid "Create new content"
+msgid "Manage shared tool properties"
 msgstr ""
 
 #: ./src/pyams_content/include.py:69
-msgid "Create new version of existing content"
+msgid "Create new content"
 msgstr ""
 
 #: ./src/pyams_content/include.py:73
-msgid "Manage content properties"
+msgid "Create new version of existing content"
 msgstr ""
 
 #: ./src/pyams_content/include.py:77
-msgid "Comment existing content"
+msgid "Manage content properties"
 msgstr ""
 
 #: ./src/pyams_content/include.py:81
+msgid "Comment existing content"
+msgstr ""
+
+#: ./src/pyams_content/include.py:85
 msgid "Publish or retire existing content"
 msgstr ""
 
-#: ./src/pyams_content/include.py:96
+#: ./src/pyams_content/include.py:101
 msgid "Webmaster (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:114
+#: ./src/pyams_content/include.py:120
 msgid "Pilot (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:130
+#: ./src/pyams_content/include.py:136
 msgid "Manager (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:146
+#: ./src/pyams_content/include.py:152
 msgid "Owner (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:156
+#: ./src/pyams_content/include.py:162
 msgid "Contributor (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:173
+#: ./src/pyams_content/include.py:179
 msgid "Reader (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:190
+#: ./src/pyams_content/include.py:196
 msgid "Operator (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:201
+#: ./src/pyams_content/include.py:207
 msgid "Guest user (role)"
 msgstr ""
 
@@ -92,7 +96,7 @@ msgstr ""
 #: ./src/pyams_content/reference/zmi/table.py:99
 #: ./src/pyams_content/feature/navigation/portlet/interfaces.py:33
 #: ./src/pyams_content/feature/navigation/portlet/interfaces.py:47
-#: ./src/pyams_content/interfaces/__init__.py:113
+#: ./src/pyams_content/interfaces/__init__.py:116
 #: ./src/pyams_content/component/paragraph/zmi/container.py:236
 #: ./src/pyams_content/component/paragraph/portlet/interfaces.py:33
 #: ./src/pyams_content/component/gallery/interfaces.py:118
@@ -153,7 +157,7 @@ msgid "Shortcuts"
 msgstr ""
 
 #: ./src/pyams_content/reference/zmi/table.py:51
-#: ./src/pyams_content/shared/site/zmi/manager.py:166
+#: ./src/pyams_content/shared/site/zmi/manager.py:167
 #: ./src/pyams_content/shared/site/zmi/folder.py:180
 #: ./src/pyams_content/shared/common/zmi/manager.py:82
 #: ./src/pyams_content/shared/common/zmi/__init__.py:305
@@ -518,6 +522,14 @@ msgstr ""
 msgid "publication refused"
 msgstr ""
 
+#: ./src/pyams_content/workflow/task.py:52
+msgid "Content publisher task"
+msgstr ""
+
+#: ./src/pyams_content/workflow/task.py:88
+msgid "Content archiver task"
+msgstr ""
+
 #: ./src/pyams_content/workflow/__init__.py:84
 msgid "Proposed"
 msgstr ""
@@ -793,7 +805,7 @@ msgid "Reviewer comment?"
 msgstr ""
 
 #: ./src/pyams_content/feature/review/interfaces.py:77
-#: ./src/pyams_content/interfaces/__init__.py:125
+#: ./src/pyams_content/interfaces/__init__.py:128
 #: ./src/pyams_content/shared/common/zmi/search.py:225
 #: ./src/pyams_content/root/zmi/search.py:160
 msgid "Creation date"
@@ -1255,8 +1267,8 @@ msgid "Visible in folders list"
 msgstr ""
 
 #: ./src/pyams_content/feature/search/interfaces.py:109
-#: ./src/pyams_content/shared/site/interfaces.py:128
-msgid "If 'no', folder will not be displayed into folders list"
+msgid ""
+"If 'no', search folder will not be displayed into parent's contents list"
 msgstr ""
 
 #: ./src/pyams_content/feature/search/interfaces.py:114
@@ -1288,6 +1300,43 @@ msgstr ""
 msgid "Searched data types; leave empty for all"
 msgstr ""
 
+#: ./src/pyams_content/feature/search/__init__.py:42
+msgid "Search folder"
+msgstr ""
+
+#: ./src/pyams_content/feature/search/zmi/thesaurus.py:39
+#: ./src/pyams_content/component/thesaurus/zmi/manager.py:79
+#: ./src/pyams_content/component/thesaurus/zmi/manager.py:89
+#: ./src/pyams_content/shared/view/zmi/thesaurus.py:62
+msgid "Tags settings"
+msgstr ""
+
+#: ./src/pyams_content/feature/search/zmi/thesaurus.py:40
+msgid "Search folder tags settings"
+msgstr ""
+
+#: ./src/pyams_content/feature/search/zmi/thesaurus.py:62
+#: ./src/pyams_content/component/thesaurus/zmi/manager.py:125
+#: ./src/pyams_content/component/thesaurus/zmi/manager.py:135
+#: ./src/pyams_content/shared/view/zmi/thesaurus.py:104
+msgid "Themes settings"
+msgstr ""
+
+#: ./src/pyams_content/feature/search/zmi/thesaurus.py:63
+msgid "Search folder themes settings"
+msgstr ""
+
+#: ./src/pyams_content/feature/search/zmi/thesaurus.py:85
+#: ./src/pyams_content/component/thesaurus/zmi/manager.py:156
+#: ./src/pyams_content/component/thesaurus/zmi/manager.py:166
+#: ./src/pyams_content/shared/view/zmi/thesaurus.py:147
+msgid "Collections settings"
+msgstr ""
+
+#: ./src/pyams_content/feature/search/zmi/thesaurus.py:86
+msgid "Search folder collections settings"
+msgstr ""
+
 #: ./src/pyams_content/feature/search/zmi/manager.py:50
 #: ./src/pyams_content/feature/search/zmi/manager.py:60
 msgid "Search settings"
@@ -1295,6 +1344,31 @@ msgstr ""
 
 #: ./src/pyams_content/feature/search/zmi/manager.py:61
 msgid "General search settings"
+msgstr ""
+
+#: ./src/pyams_content/feature/search/zmi/__init__.py:65
+msgid "Add search folder..."
+msgstr ""
+
+#: ./src/pyams_content/feature/search/zmi/__init__.py:82
+msgid "New search folder"
+msgstr ""
+
+#: ./src/pyams_content/feature/search/zmi/__init__.py:83
+msgid "New search folder properties"
+msgstr ""
+
+#: ./src/pyams_content/feature/search/zmi/__init__.py:106
+msgid "Search folder management"
+msgstr ""
+
+#: ./src/pyams_content/feature/search/zmi/__init__.py:136
+msgid "Folder search settings"
+msgstr ""
+
+#: ./src/pyams_content/feature/search/zmi/__init__.py:156
+#: ./src/pyams_content/shared/site/zmi/folder.py:222
+msgid "Navigation properties"
 msgstr ""
 
 #: ./src/pyams_content/feature/renderer/__init__.py:139
@@ -1358,33 +1432,37 @@ msgstr ""
 msgid "Open preview in new tab"
 msgstr ""
 
-#: ./src/pyams_content/interfaces/__init__.py:107
+#: ./src/pyams_content/interfaces/__init__.py:110
 msgid "Unique key"
 msgstr ""
 
-#: ./src/pyams_content/interfaces/__init__.py:108
+#: ./src/pyams_content/interfaces/__init__.py:111
 msgid ""
 "WARNING: this key can't be modified after creation!!! Spaces, uppercase "
 "letters or accentuated characters will be replaced automatically."
 msgstr ""
 
-#: ./src/pyams_content/interfaces/__init__.py:114
+#: ./src/pyams_content/interfaces/__init__.py:117
 #: ./src/pyams_content/shared/site/zmi/folder.py:84
 msgid "Visible label used to display content"
 msgstr ""
 
-#: ./src/pyams_content/interfaces/__init__.py:117
+#: ./src/pyams_content/interfaces/__init__.py:120
 msgid "Short name"
 msgstr ""
 
-#: ./src/pyams_content/interfaces/__init__.py:118
+#: ./src/pyams_content/interfaces/__init__.py:121
 msgid "Short name used in breadcrumbs"
 msgstr ""
 
-#: ./src/pyams_content/interfaces/__init__.py:129
+#: ./src/pyams_content/interfaces/__init__.py:132
 #: ./src/pyams_content/shared/common/zmi/search.py:228
 #: ./src/pyams_content/root/zmi/search.py:163
 msgid "Modification date"
+msgstr ""
+
+#: ./src/pyams_content/interfaces/__init__.py:144
+msgid "Object types"
 msgstr ""
 
 #: ./src/pyams_content/component/illustration/interfaces.py:44
@@ -1523,16 +1601,16 @@ msgid ""
 "display image"
 msgstr ""
 
-#: ./src/pyams_content/component/illustration/portlet/skin/__init__.py:92
+#: ./src/pyams_content/component/illustration/portlet/skin/__init__.py:89
 msgid "Full width illustration (default)"
 msgstr ""
 
-#: ./src/pyams_content/component/illustration/portlet/skin/__init__.py:136
+#: ./src/pyams_content/component/illustration/portlet/skin/__init__.py:133
 #: ./src/pyams_content/component/illustration/skin/illustration.py:103
 msgid "Floating illustration to the left"
 msgstr ""
 
-#: ./src/pyams_content/component/illustration/portlet/skin/__init__.py:157
+#: ./src/pyams_content/component/illustration/portlet/skin/__init__.py:154
 #: ./src/pyams_content/component/illustration/skin/illustration.py:115
 msgid "Floating illustration to the right"
 msgstr ""
@@ -1723,11 +1801,11 @@ msgstr ""
 msgid "Presentation template used for cards"
 msgstr ""
 
-#: ./src/pyams_content/component/cards/skin/__init__.py:47
+#: ./src/pyams_content/component/cards/skin/__init__.py:48
 msgid "Bootstrap cards renderer (default)"
 msgstr ""
 
-#: ./src/pyams_content/component/cards/skin/__init__.py:66
+#: ./src/pyams_content/component/cards/skin/__init__.py:67
 msgid "Bootstrap cards Masonry renderer"
 msgstr ""
 
@@ -2028,23 +2106,23 @@ msgstr ""
 msgid "Previous and next topics"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/skin/html.py:55
+#: ./src/pyams_content/component/paragraph/skin/html.py:56
 msgid "HTML source code (default)"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/skin/html.py:65
+#: ./src/pyams_content/component/paragraph/skin/html.py:66
 msgid "Formatted source code"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/skin/html.py:107
+#: ./src/pyams_content/component/paragraph/skin/html.py:108
 msgid "ReStructured text"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/skin/html.py:132
+#: ./src/pyams_content/component/paragraph/skin/html.py:133
 msgid "Markdown text"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/skin/html.py:189
+#: ./src/pyams_content/component/paragraph/skin/html.py:190
 msgid "Rich text (default)"
 msgstr ""
 
@@ -2434,7 +2512,7 @@ msgstr ""
 msgid "Links and external files list"
 msgstr ""
 
-#: ./src/pyams_content/component/association/skin/paragraph.py:38
+#: ./src/pyams_content/component/association/skin/paragraph.py:39
 msgid "Associations list (default)"
 msgstr ""
 
@@ -2476,7 +2554,7 @@ msgstr ""
 msgid "Provider settings"
 msgstr ""
 
-#: ./src/pyams_content/component/video/skin/__init__.py:37
+#: ./src/pyams_content/component/video/skin/__init__.py:38
 msgid "External video renderer (default)"
 msgstr ""
 
@@ -2847,30 +2925,12 @@ msgstr ""
 msgid "Collections"
 msgstr ""
 
-#: ./src/pyams_content/component/thesaurus/zmi/manager.py:79
-#: ./src/pyams_content/component/thesaurus/zmi/manager.py:89
-#: ./src/pyams_content/shared/view/zmi/thesaurus.py:62
-msgid "Tags settings"
-msgstr ""
-
 #: ./src/pyams_content/component/thesaurus/zmi/manager.py:90
 msgid "Selected tags thesaurus"
 msgstr ""
 
-#: ./src/pyams_content/component/thesaurus/zmi/manager.py:125
-#: ./src/pyams_content/component/thesaurus/zmi/manager.py:135
-#: ./src/pyams_content/shared/view/zmi/thesaurus.py:104
-msgid "Themes settings"
-msgstr ""
-
 #: ./src/pyams_content/component/thesaurus/zmi/manager.py:136
 msgid "Selected themes thesaurus"
-msgstr ""
-
-#: ./src/pyams_content/component/thesaurus/zmi/manager.py:156
-#: ./src/pyams_content/component/thesaurus/zmi/manager.py:166
-#: ./src/pyams_content/shared/view/zmi/thesaurus.py:147
-msgid "Collections settings"
 msgstr ""
 
 #: ./src/pyams_content/component/thesaurus/zmi/manager.py:167
@@ -2974,6 +3034,10 @@ msgstr ""
 #: ./src/pyams_content/shared/site/zmi/folder.py:92
 #: ./src/pyams_content/shared/common/interfaces/__init__.py:196
 msgid "Internal information to be known about this content"
+msgstr ""
+
+#: ./src/pyams_content/shared/site/interfaces.py:128
+msgid "If 'no', folder will not be displayed into folders list"
 msgstr ""
 
 #: ./src/pyams_content/shared/site/interfaces.py:140
@@ -3154,32 +3218,32 @@ msgstr ""
 msgid "Between all contents of « {} » site folder"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/zmi/manager.py:66
-#: ./src/pyams_content/shared/site/zmi/manager.py:79
+#: ./src/pyams_content/shared/site/zmi/manager.py:65
+#: ./src/pyams_content/shared/site/zmi/manager.py:78
 msgid "Add site manager"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/zmi/manager.py:80
+#: ./src/pyams_content/shared/site/zmi/manager.py:79
 msgid "New site properties"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/zmi/manager.py:98
+#: ./src/pyams_content/shared/site/zmi/manager.py:99
 msgid "Site name is required!"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/zmi/manager.py:102
+#: ./src/pyams_content/shared/site/zmi/manager.py:103
 msgid "A site manager is already registered with this name!"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/zmi/manager.py:155
+#: ./src/pyams_content/shared/site/zmi/manager.py:156
 msgid "Site management"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/zmi/manager.py:177
+#: ./src/pyams_content/shared/site/zmi/manager.py:178
 msgid "Site manager properties"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/zmi/manager.py:178
+#: ./src/pyams_content/shared/site/zmi/manager.py:179
 #: ./src/pyams_content/root/zmi/__init__.py:74
 msgid "Main site properties"
 msgstr ""
@@ -3206,10 +3270,6 @@ msgstr ""
 
 #: ./src/pyams_content/shared/site/zmi/folder.py:192
 msgid "Main folder properties"
-msgstr ""
-
-#: ./src/pyams_content/shared/site/zmi/folder.py:222
-msgid "Navigation properties"
 msgstr ""
 
 #: ./src/pyams_content/shared/site/zmi/viewlet/__init__.py:40
@@ -3247,8 +3307,8 @@ msgstr ""
 msgid "-- missing value ({}) --"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/__init__.py:118
-#: ./src/pyams_content/shared/common/__init__.py:127
+#: ./src/pyams_content/shared/common/__init__.py:117
+#: ./src/pyams_content/shared/common/__init__.py:126
 #, python-format
 msgid "{date} by {principal}"
 msgstr ""

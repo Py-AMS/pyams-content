@@ -21,8 +21,8 @@ from pyams_content.interfaces import IBaseContent
 from pyams_content.shared.common import SHARED_CONTENT_TYPES_VOCABULARY
 from pyams_content.shared.common.interfaces.types import ALL_DATA_TYPES_VOCABULARY
 from pyams_content.shared.site.interfaces import IBaseSiteItem, ISiteElement
-from pyams_content.shared.view import IViewQuery, IWfView
-from pyams_content.shared.view.interfaces import RELEVANCE_ORDER, USER_VIEW_ORDER_VOCABULARY
+from pyams_content.shared.view.interfaces import IWfView, RELEVANCE_ORDER, USER_VIEW_ORDER_VOCABULARY
+from pyams_content.shared.view.interfaces.query import IViewQuery
 from pyams_i18n.schema import I18nTextLineField
 from pyams_sequence.interfaces import IInternalReferencesList, ISequentialIdTarget
 from pyams_sequence.schema import InternalReferenceField
@@ -106,8 +106,8 @@ class ISearchFolder(IBaseContent, IBaseSiteItem, ISiteElement, IWfView, ISequent
                       default=RELEVANCE_ORDER)
 
     visible_in_list = Bool(title=_("Visible in folders list"),
-                           description=_("If 'no', folder will not be displayed into folders "
-                                         "list"),
+                           description=_("If 'no', search folder will not be displayed into "
+                                         "parent's contents list"),
                            required=True,
                            default=True)
 

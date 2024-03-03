@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-01-21 16:50+0100\n"
+"POT-Creation-Date: 2024-03-03 12:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,62 +20,66 @@ msgid "Manage main site root properties"
 msgstr "Gérer les propriétés globales du site"
 
 #: src/pyams_content/include.py:57
+msgid "Manage first level site tree elements"
+msgstr "Gérer les sites de premier niveau"
+
+#: src/pyams_content/include.py:61
 msgid "Manage site, blog or hub properties"
 msgstr "Gérer les propriétés d'un site, d'un blog ou d'un hub"
 
-#: src/pyams_content/include.py:61
+#: src/pyams_content/include.py:65
 msgid "Manage shared tool properties"
 msgstr "Gérer les propriétés d'un outil partagé"
 
-#: src/pyams_content/include.py:65
+#: src/pyams_content/include.py:69
 msgid "Create new content"
 msgstr "Créer un nouveau contenu"
 
-#: src/pyams_content/include.py:69
+#: src/pyams_content/include.py:73
 msgid "Create new version of existing content"
 msgstr "Créer une nouvelle version d'un contenu"
 
-#: src/pyams_content/include.py:73
+#: src/pyams_content/include.py:77
 msgid "Manage content properties"
 msgstr "Gérer les propriétés d'un contenu"
 
-#: src/pyams_content/include.py:77
+#: src/pyams_content/include.py:81
 msgid "Comment existing content"
 msgstr "Commenter un contenu"
 
-#: src/pyams_content/include.py:81
+#: src/pyams_content/include.py:85
 msgid "Publish or retire existing content"
 msgstr "Publier ou retirer un contenu"
 
-#: src/pyams_content/include.py:96
+#: src/pyams_content/include.py:101
 msgid "Webmaster (role)"
 msgstr "Webmestre (rôle)"
 
-#: src/pyams_content/include.py:114
+#: src/pyams_content/include.py:120
 msgid "Pilot (role)"
 msgstr "Pilote (rôle)"
 
-#: src/pyams_content/include.py:130
+#: src/pyams_content/include.py:136
 msgid "Manager (role)"
 msgstr "Responsable (rôle)"
 
-#: src/pyams_content/include.py:146
+#: src/pyams_content/include.py:152
 msgid "Owner (role)"
 msgstr "Propriétaire (rôle)"
 
-#: src/pyams_content/include.py:156
+#: src/pyams_content/include.py:162
 msgid "Contributor (role)"
 msgstr "Contributeur (rôle)"
 
-#: src/pyams_content/include.py:173
+#: src/pyams_content/include.py:179
 msgid "Reader (role)"
 msgstr "Relecteur (rôle)"
 
-#: src/pyams_content/include.py:190
+#: src/pyams_content/include.py:196
 msgid "Operator (role)"
 msgstr "Opérateur (rôle)"
 
-#: src/pyams_content/include.py:201
+#: src/pyams_content/include.py:207
 msgid "Guest user (role)"
 msgstr "Invité (rôle)"
 
@@ -93,7 +97,7 @@ msgstr ""
 #: src/pyams_content/reference/zmi/table.py:99
 #: src/pyams_content/feature/navigation/portlet/interfaces.py:33
 #: src/pyams_content/feature/navigation/portlet/interfaces.py:47
-#: src/pyams_content/interfaces/__init__.py:113
+#: src/pyams_content/interfaces/__init__.py:116
 #: src/pyams_content/component/paragraph/zmi/container.py:236
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:33
 #: src/pyams_content/component/gallery/interfaces.py:118
@@ -154,7 +158,7 @@ msgid "Shortcuts"
 msgstr "Contenus"
 
 #: src/pyams_content/reference/zmi/table.py:51
-#: src/pyams_content/shared/site/zmi/manager.py:166
+#: src/pyams_content/shared/site/zmi/manager.py:167
 #: src/pyams_content/shared/site/zmi/folder.py:180
 #: src/pyams_content/shared/common/zmi/manager.py:82
 #: src/pyams_content/shared/common/zmi/__init__.py:305
@@ -534,6 +538,14 @@ msgstr "demande de publication annulée"
 msgid "publication refused"
 msgstr "publication refusée"
 
+#: src/pyams_content/workflow/task.py:52
+msgid "Content publisher task"
+msgstr "Publication d'un contenu"
+
+#: src/pyams_content/workflow/task.py:88
+msgid "Content archiver task"
+msgstr "Archivage d'un contenu"
+
 #: src/pyams_content/workflow/__init__.py:84
 msgid "Proposed"
 msgstr "Proposé à la publication"
@@ -812,7 +824,7 @@ msgid "Reviewer comment?"
 msgstr "Commentaire d'un relecteur"
 
 #: src/pyams_content/feature/review/interfaces.py:77
-#: src/pyams_content/interfaces/__init__.py:125
+#: src/pyams_content/interfaces/__init__.py:128
 #: src/pyams_content/shared/common/zmi/search.py:225
 #: src/pyams_content/root/zmi/search.py:160
 msgid "Creation date"
@@ -1322,10 +1334,10 @@ msgid "Visible in folders list"
 msgstr "Visible dans la liste des rubriques"
 
 #: src/pyams_content/feature/search/interfaces.py:109
-#: src/pyams_content/shared/site/interfaces.py:128
-msgid "If 'no', folder will not be displayed into folders list"
+msgid ""
+"If 'no', search folder will not be displayed into parent's contents list"
 msgstr ""
-"Si 'non', la rubrique ne sera pas affichée dans la liste des rubriques du "
+"Si 'non', le moteur de recherche ne sera pas affiché dans la liste des contenus du "
 "niveau parent"
 
 #: src/pyams_content/feature/search/interfaces.py:114
@@ -1364,6 +1376,43 @@ msgstr ""
 "Type de contenus à sélectionner ; laisser la sélection vide pour accepter "
 "tous les types de contenus"
 
+#: src/pyams_content/feature/search/__init__.py:42
+msgid "Search folder"
+msgstr "Moteur de recherche"
+
+#: src/pyams_content/feature/search/zmi/thesaurus.py:39
+#: src/pyams_content/component/thesaurus/zmi/manager.py:79
+#: src/pyams_content/component/thesaurus/zmi/manager.py:89
+#: src/pyams_content/shared/view/zmi/thesaurus.py:62
+msgid "Tags settings"
+msgstr "Paramétrage des tags"
+
+#: src/pyams_content/feature/search/zmi/thesaurus.py:40
+msgid "Search folder tags settings"
+msgstr "Tags appliqués par le moteur de recherche"
+
+#: src/pyams_content/feature/search/zmi/thesaurus.py:62
+#: src/pyams_content/component/thesaurus/zmi/manager.py:125
+#: src/pyams_content/component/thesaurus/zmi/manager.py:135
+#: src/pyams_content/shared/view/zmi/thesaurus.py:104
+msgid "Themes settings"
+msgstr "Paramétrage des thèmes"
+
+#: src/pyams_content/feature/search/zmi/thesaurus.py:63
+msgid "Search folder themes settings"
+msgstr "Thèmes appliqués par le moteur de recherche"
+
+#: src/pyams_content/feature/search/zmi/thesaurus.py:85
+#: src/pyams_content/component/thesaurus/zmi/manager.py:156
+#: src/pyams_content/component/thesaurus/zmi/manager.py:166
+#: src/pyams_content/shared/view/zmi/thesaurus.py:147
+msgid "Collections settings"
+msgstr "Paramétrage des collections"
+
+#: src/pyams_content/feature/search/zmi/thesaurus.py:86
+msgid "Search folder collections settings"
+msgstr "Collections appliquées par le moteur de recherche"
+
 #: src/pyams_content/feature/search/zmi/manager.py:50
 #: src/pyams_content/feature/search/zmi/manager.py:60
 msgid "Search settings"
@@ -1372,6 +1421,31 @@ msgstr "Paramétrage de la recherche"
 #: src/pyams_content/feature/search/zmi/manager.py:61
 msgid "General search settings"
 msgstr "Propriétés du moteur de recherche général"
+
+#: src/pyams_content/feature/search/zmi/__init__.py:65
+msgid "Add search folder..."
+msgstr "Moteur de recherche"
+
+#: src/pyams_content/feature/search/zmi/__init__.py:82
+msgid "New search folder"
+msgstr "Nouveau moteur de recherche"
+
+#: src/pyams_content/feature/search/zmi/__init__.py:83
+msgid "New search folder properties"
+msgstr "Propriétés du nouveau moteur de recherche"
+
+#: src/pyams_content/feature/search/zmi/__init__.py:106
+msgid "Search folder management"
+msgstr "Ce moteur de recherche"
+
+#: src/pyams_content/feature/search/zmi/__init__.py:136
+msgid "Folder search settings"
+msgstr "Paramètres de la recherche"
+
+#: src/pyams_content/feature/search/zmi/__init__.py:156
+#: src/pyams_content/shared/site/zmi/folder.py:222
+msgid "Navigation properties"
+msgstr "Propriétés de navigation"
 
 #: src/pyams_content/feature/renderer/__init__.py:139
 msgid "Hidden content"
@@ -1436,11 +1510,11 @@ msgstr "Aperçu"
 msgid "Open preview in new tab"
 msgstr "Ouvrir l'aperçu dans un nouvel onglet"
 
-#: src/pyams_content/interfaces/__init__.py:107
+#: src/pyams_content/interfaces/__init__.py:110
 msgid "Unique key"
 msgstr "Nom du contenu"
 
-#: src/pyams_content/interfaces/__init__.py:108
+#: src/pyams_content/interfaces/__init__.py:111
 msgid ""
 "WARNING: this key can't be modified after creation!!! Spaces, uppercase "
 "letters or accentuated characters will be replaced automatically."
@@ -1449,24 +1523,28 @@ msgstr ""
 "espaces, majuscules et caractères accentués seront remplacés "
 "automatiquement..."
 
-#: src/pyams_content/interfaces/__init__.py:114
+#: src/pyams_content/interfaces/__init__.py:117
 #: src/pyams_content/shared/site/zmi/folder.py:84
 msgid "Visible label used to display content"
 msgstr "Libellé principal du contenu"
 
-#: src/pyams_content/interfaces/__init__.py:117
+#: src/pyams_content/interfaces/__init__.py:120
 msgid "Short name"
 msgstr "Fil d'Ariane"
 
-#: src/pyams_content/interfaces/__init__.py:118
+#: src/pyams_content/interfaces/__init__.py:121
 msgid "Short name used in breadcrumbs"
 msgstr "Libellé court visible dans le fil d'Ariane"
 
-#: src/pyams_content/interfaces/__init__.py:129
+#: src/pyams_content/interfaces/__init__.py:132
 #: src/pyams_content/shared/common/zmi/search.py:228
 #: src/pyams_content/root/zmi/search.py:163
 msgid "Modification date"
 msgstr "Date de dernière modification"
+
+#: src/pyams_content/interfaces/__init__.py:144
+msgid "Object types"
+msgstr "Types de l'objet"
 
 #: src/pyams_content/component/illustration/interfaces.py:44
 #: src/pyams_content/component/illustration/interfaces.py:120
@@ -1615,16 +1693,16 @@ msgstr ""
 "Si 'oui', un clic sur l'illustration provoque l'ouverture d'une fenêtre "
 "modale pour afficher l'intégralité de l'image"
 
-#: src/pyams_content/component/illustration/portlet/skin/__init__.py:92
+#: src/pyams_content/component/illustration/portlet/skin/__init__.py:89
 msgid "Full width illustration (default)"
 msgstr "Illustration simple (par défaut)"
 
-#: src/pyams_content/component/illustration/portlet/skin/__init__.py:136
+#: src/pyams_content/component/illustration/portlet/skin/__init__.py:133
 #: src/pyams_content/component/illustration/skin/illustration.py:103
 msgid "Floating illustration to the left"
 msgstr "Illustration placée à gauche du texte"
 
-#: src/pyams_content/component/illustration/portlet/skin/__init__.py:157
+#: src/pyams_content/component/illustration/portlet/skin/__init__.py:154
 #: src/pyams_content/component/illustration/skin/illustration.py:115
 msgid "Floating illustration to the right"
 msgstr "Illustration placée à droite du texte"
@@ -1829,11 +1907,11 @@ msgstr "Bootstrap: cartes"
 msgid "Presentation template used for cards"
 msgstr "Mode de rendu utilisé pour ce bloc de contenu"
 
-#: src/pyams_content/component/cards/skin/__init__.py:47
+#: src/pyams_content/component/cards/skin/__init__.py:48
 msgid "Bootstrap cards renderer (default)"
 msgstr "Cartes Bootstrap (par défaut)"
 
-#: src/pyams_content/component/cards/skin/__init__.py:66
+#: src/pyams_content/component/cards/skin/__init__.py:67
 msgid "Bootstrap cards Masonry renderer"
 msgstr "Cartes Bootstrap avec rendu Masonry"
 
@@ -2173,23 +2251,23 @@ msgstr "Navigation au sein des blocs (par défaut)"
 msgid "Previous and next topics"
 msgstr "Contenus précédent et suivant"
 
-#: src/pyams_content/component/paragraph/skin/html.py:55
+#: src/pyams_content/component/paragraph/skin/html.py:56
 msgid "HTML source code (default)"
 msgstr "Code source HTML (par défaut)"
 
-#: src/pyams_content/component/paragraph/skin/html.py:65
+#: src/pyams_content/component/paragraph/skin/html.py:66
 msgid "Formatted source code"
 msgstr "Code source formatté"
 
-#: src/pyams_content/component/paragraph/skin/html.py:107
+#: src/pyams_content/component/paragraph/skin/html.py:108
 msgid "ReStructured text"
 msgstr "Texte restructuré"
 
-#: src/pyams_content/component/paragraph/skin/html.py:132
+#: src/pyams_content/component/paragraph/skin/html.py:133
 msgid "Markdown text"
 msgstr "Markdown"
 
-#: src/pyams_content/component/paragraph/skin/html.py:189
+#: src/pyams_content/component/paragraph/skin/html.py:190
 msgid "Rich text (default)"
 msgstr "Texte enrichi (par défaut)"
 
@@ -2594,7 +2672,7 @@ msgstr "Taille"
 msgid "Links and external files list"
 msgstr "Liste des liens et pièces jointes"
 
-#: src/pyams_content/component/association/skin/paragraph.py:38
+#: src/pyams_content/component/association/skin/paragraph.py:39
 msgid "Associations list (default)"
 msgstr "Liens et pièces jointes (par défaut)"
 
@@ -2636,7 +2714,7 @@ msgstr "Vous devez sélectionner un fournisseur de contenu !"
 msgid "Provider settings"
 msgstr "Propriétés de la vidéo"
 
-#: src/pyams_content/component/video/skin/__init__.py:37
+#: src/pyams_content/component/video/skin/__init__.py:38
 msgid "External video renderer (default)"
 msgstr "Vidéo intégrée dans la page (par défaut)"
 
@@ -3046,31 +3124,13 @@ msgstr "Thèmes"
 msgid "Collections"
 msgstr "Collections"
 
-#: src/pyams_content/component/thesaurus/zmi/manager.py:79
-#: src/pyams_content/component/thesaurus/zmi/manager.py:89
-#: src/pyams_content/shared/view/zmi/thesaurus.py:62
-msgid "Tags settings"
-msgstr "Paramétrage des tags"
-
 #: src/pyams_content/component/thesaurus/zmi/manager.py:90
 msgid "Selected tags thesaurus"
 msgstr "Thésaurus des tags"
 
-#: src/pyams_content/component/thesaurus/zmi/manager.py:125
-#: src/pyams_content/component/thesaurus/zmi/manager.py:135
-#: src/pyams_content/shared/view/zmi/thesaurus.py:104
-msgid "Themes settings"
-msgstr "Paramétrage des thèmes"
-
 #: src/pyams_content/component/thesaurus/zmi/manager.py:136
 msgid "Selected themes thesaurus"
 msgstr "Thésaurus des thèmes"
-
-#: src/pyams_content/component/thesaurus/zmi/manager.py:156
-#: src/pyams_content/component/thesaurus/zmi/manager.py:166
-#: src/pyams_content/shared/view/zmi/thesaurus.py:147
-msgid "Collections settings"
-msgstr "Paramétrage des collections"
 
 #: src/pyams_content/component/thesaurus/zmi/manager.py:167
 msgid "Selected collections thesaurus"
@@ -3183,6 +3243,12 @@ msgid "Internal information to be known about this content"
 msgstr ""
 "Informations internes à l'attention des contributeurs et des gestionnaires "
 "du site"
+
+#: src/pyams_content/shared/site/interfaces.py:128
+msgid "If 'no', folder will not be displayed into folders list"
+msgstr ""
+"Si 'non', la rubrique ne sera pas affichée dans la liste des rubriques du "
+"niveau parent"
 
 #: src/pyams_content/shared/site/interfaces.py:140
 msgid "Folder behaviour when navigating to folder URL"
@@ -3379,32 +3445,32 @@ msgstr "Parmi les contenus du site « {} »"
 msgid "Between all contents of « {} » site folder"
 msgstr "Parmi les contenus de la rubrique « {} »"
 
-#: src/pyams_content/shared/site/zmi/manager.py:66
-#: src/pyams_content/shared/site/zmi/manager.py:79
+#: src/pyams_content/shared/site/zmi/manager.py:65
+#: src/pyams_content/shared/site/zmi/manager.py:78
 msgid "Add site manager"
 msgstr "Ajouter un site"
 
-#: src/pyams_content/shared/site/zmi/manager.py:80
+#: src/pyams_content/shared/site/zmi/manager.py:79
 msgid "New site properties"
 msgstr "Propriétés du nouveau site"
 
-#: src/pyams_content/shared/site/zmi/manager.py:98
+#: src/pyams_content/shared/site/zmi/manager.py:99
 msgid "Site name is required!"
 msgstr "Le nom du site est obligatoire !"
 
-#: src/pyams_content/shared/site/zmi/manager.py:102
+#: src/pyams_content/shared/site/zmi/manager.py:103
 msgid "A site manager is already registered with this name!"
 msgstr "Autre site a déjà été enregistré sous ce nom !"
 
-#: src/pyams_content/shared/site/zmi/manager.py:155
+#: src/pyams_content/shared/site/zmi/manager.py:156
 msgid "Site management"
 msgstr "Gérer ce site"
 
-#: src/pyams_content/shared/site/zmi/manager.py:177
+#: src/pyams_content/shared/site/zmi/manager.py:178
 msgid "Site manager properties"
 msgstr "Propriétés du site"
 
-#: src/pyams_content/shared/site/zmi/manager.py:178
+#: src/pyams_content/shared/site/zmi/manager.py:179
 #: src/pyams_content/root/zmi/__init__.py:74
 msgid "Main site properties"
 msgstr "Propriétés principales du site"
@@ -3432,10 +3498,6 @@ msgstr "Propriétés de la rubrique"
 #: src/pyams_content/shared/site/zmi/folder.py:192
 msgid "Main folder properties"
 msgstr "Propriétés principales"
-
-#: src/pyams_content/shared/site/zmi/folder.py:222
-msgid "Navigation properties"
-msgstr "Propriétés de navigation"
 
 #: src/pyams_content/shared/site/zmi/viewlet/__init__.py:40
 msgid "Sites"
@@ -3478,8 +3540,8 @@ msgstr "En-tête du formulaire"
 msgid "-- missing value ({}) --"
 msgstr "-- valeur manquante ({}) --"
 
-#: src/pyams_content/shared/common/__init__.py:118
-#: src/pyams_content/shared/common/__init__.py:127
+#: src/pyams_content/shared/common/__init__.py:117
+#: src/pyams_content/shared/common/__init__.py:126
 #, python-format
 msgid "{date} by {principal}"
 msgstr "{date} par {principal}"
@@ -5662,15 +5724,12 @@ msgstr "Informations générales"
 #~ "Pas de contenu sélectionné, aucun changement de propriétaire n'a été "
 #~ "effectué !"
 
-#, python-format
 #~ msgid "Manager restrictions: {}"
 #~ msgstr "Responsable : {}"
 
-#, python-format
 #~ msgid "Contributor restrictions: {}"
 #~ msgstr "Contributeur : {}"
 
-#, python-format
 #~ msgid "<small>Paragraph: {paragraph}</small><br />Renderer: {renderer}"
 #~ msgstr ""
 #~ "<small>Bloc de contenu : {paragraph}</small><br />Mode de rendu : "
@@ -5688,22 +5747,17 @@ msgstr "Informations générales"
 #~ msgid "List of paragraphs allowed for this content type"
 #~ msgstr "Liste des types de blocs de contenu autorisés pour ce gabarit"
 
-#, python-format
 #~ msgid "Content type: {}"
 #~ msgstr "Type de contenu : {}"
 
 #~ msgid "Add external file"
 #~ msgstr "Nouveau fichier"
 
-#, python-format
 #~ msgid "<small>{}: {} (V {})</small><br />{}"
 #~ msgstr "<small>{} : {} (V {})</small><br />{}"
 
 #~ msgid "Alerts settings"
 #~ msgstr "Sélection des vues associées aux alertes"
-
-#~ msgid "Site alerts management"
-#~ msgstr "Paramétrage des alertes"
 
 #, fuzzy
 #~ msgid "Video provider settings"
