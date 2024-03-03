@@ -72,7 +72,7 @@ USER_VIEW_ORDERS = OrderedDict((
 ))
 
 USER_VIEW_ORDER_VOCABULARY = SimpleVocabulary([
-    SimpleTerm(v, t)
+    SimpleTerm(v, title=t)
     for v, t in USER_VIEW_ORDERS.items()
 ])
 
