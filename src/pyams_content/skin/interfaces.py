@@ -62,13 +62,22 @@ class IContentSummaryInfo(Interface):
     """Content summary info getter interface"""
 
     context = Attribute("Link to adapted context")
-
     title = Attribute("Content title")
-
     header = Attribute("Content header")
-
     button_title = Attribute("Button title")
 
 
 class IPublicURL(Interface):
     """Public URL target getter interface"""
+
+
+class ISearchResultsView(Interface):
+    """Search results view marker interface"""
+
+
+class ISearchResultsPanelsView(ISearchResultsView):
+    """Search results panels view marker interface"""
+
+
+class ISearchResultsCardsView(ISearchResultsView):
+    """Search results cards view marker interface"""
