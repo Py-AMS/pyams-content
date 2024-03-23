@@ -17,6 +17,7 @@ This module provides management interface components for illustrations.
 
 from pyramid.events import subscriber
 
+from pyams_content.component.illustration import IIllustrationTargetBase, ILinkIllustration
 from pyams_content.component.illustration.interfaces import IBaseIllustration, \
     IBaseIllustrationTarget, IIllustration, IIllustrationTarget, ILinkIllustrationTarget
 from pyams_content.component.paragraph.interfaces import IBaseParagraph
@@ -59,7 +60,7 @@ class BasicIllustrationPropertiesEditForm(FormGroupSwitcher):
         return 'open' if self.get_content().has_data() else 'closed'
 
 
-@adapter_config(required=(IBaseIllustrationTarget, IAdminLayer, BasicIllustrationPropertiesEditForm),
+@adapter_config(required=(IIllustrationTargetBase, IAdminLayer, BasicIllustrationPropertiesEditForm),
                 provides=IFormContent)
 def base_illustration_edit_form_content(context, request, form):
     """Base illustration properties edit form content getter"""
@@ -97,7 +98,7 @@ class LinkIllustrationPropertiesEditForm(BasicIllustrationPropertiesEditForm):
                 provides=IFormContent)
 def link_illustration_edit_form_content(context, request, form):
     """Link illustration properties edit form content getter"""
-    return request.registry.getAdapter(context, IIllustration, name='link')
+    return ILinkIllustration(context)
 
 
 @adapter_config(required=(IBaseIllustrationTarget, IAdminLayer,
