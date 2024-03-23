@@ -67,7 +67,7 @@ class IWfAlert(IWfSharedContent, IInternalReferencesList):
                      description=_("Alert gravity can affect renderer alert style"),
                      required=True,
                      vocabulary=ALERT_GRAVITY_VOCABULARY,
-                     default='info')
+                     default=ALERT_GRAVITY.info.value)
 
     body = I18nTextField(title=_("Message content"),
                          description=_("Message body"),
