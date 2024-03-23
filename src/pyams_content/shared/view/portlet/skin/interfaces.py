@@ -40,20 +40,6 @@ class IViewItemTargetURL(Interface):
     url = Attribute("Reference URL")
 
 
-VIEW_ITEMS_THUMBNAILS = OrderedDict((
-    ('', _("Initial selection")),
-    ('responsive', _("Responsive selection")),
-    ('portrait', _("Portrait selection")),
-    ('pano', _("Panoramic selection")),
-    ('square', _("Square selection"))
-))
-
-VIEW_ITEMS_THUMBNAILS_VOCABULARY = SimpleVocabulary([
-    SimpleTerm(v, title=t)
-    for v, t in VIEW_ITEMS_THUMBNAILS.items()
-])
-
-
 class HEADER_DISPLAY_MODE(Enum):
     """Header display modes"""
     FULL = 'full'
