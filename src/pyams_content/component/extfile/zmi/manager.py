@@ -20,7 +20,9 @@ from pyams_content.component.extfile.interfaces import IExtFileManagerTarget
 from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
+from pyams_form.interfaces.form import IFormContent
 from pyams_layer.interfaces import IPyAMSLayer
+from pyams_utils.adapter import adapter_config
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminEditForm
 from pyams_zmi.interfaces import IAdminLayer
@@ -55,6 +57,9 @@ class ExtFileManagerPropertiesEditForm(AdminEditForm):
 
     fields = Fields(IExtFileManagerInfo)
 
-    def get_content(self):
-        """Content getter"""
-        return IExtFileManagerInfo(self.context)
+
+@adapter_config(required=(IExtFileManagerTarget, IPyAMSLayer, ExtFileManagerPropertiesEditForm),
+                provides=IFormContent)
+def extfile_manager_properties_form_content(context, request, form):
+    """External file manager properties edit form content getter"""
+    return IExtFileManagerInfo(context)

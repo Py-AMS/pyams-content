@@ -20,8 +20,10 @@ from pyams_content.shared.common.zmi import ISharedContentPropertiesMenu
 from pyams_fields.interfaces import IFormHandlersInfo, IFormHandlersTarget
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
+from pyams_form.interfaces.form import IFormContent
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
+from pyams_utils.adapter import adapter_config
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminEditForm
 from pyams_zmi.interfaces import IAdminLayer
@@ -63,7 +65,10 @@ class MailtoFormHandlerSettingsEditForm(AdminEditForm):
 
     fields = Fields(IMailtoHandlerInfo)
 
-    def get_content(self):
-        """Form content getter"""
-        handlers = IFormHandlersInfo(self.context)
-        return IMailtoHandlerInfo(handlers, None)
+
+@adapter_config(required=(IFormHandlersTarget, IPyAMSLayer, MailtoFormHandlerSettingsEditForm),
+                provides=IFormContent)
+def form_handlers_settings_edit_form_content(context, request, form):
+    """Form handlers settings edit form content getter"""
+    handlers = IFormHandlersInfo(context)
+    return IMailtoHandlerInfo(handlers, None)
