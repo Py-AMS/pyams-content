@@ -19,10 +19,12 @@ illustration extension.
 from pyams_content.component.illustration import IBaseIllustration, IIllustration
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
+from pyams_form.interfaces.form import IFormContent
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_thesaurus.interfaces.term import IThesaurusTerm
 from pyams_thesaurus.zmi.extension import ThesaurusTermExtensionEditForm
+from pyams_utils.adapter import adapter_config
 
 
 __docformat__ = 'restructuredtext'
@@ -42,5 +44,9 @@ class ThesaurusTermIllustrationPropertiesEditForm(ThesaurusTermExtensionEditForm
 
     fields = Fields(IBaseIllustration)
 
-    def get_content(self):
-        return IIllustration(self.context)
+
+@adapter_config(required=(IThesaurusTerm, IPyAMSLayer, ThesaurusTermIllustrationPropertiesEditForm),
+                provides=IFormContent)
+def thesaurus_term_illustration_form_content(context, request, form):
+    """Thesaurus term illustration edit form content getter"""
+    return IIllustration(context)

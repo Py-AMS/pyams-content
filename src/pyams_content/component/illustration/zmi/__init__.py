@@ -22,7 +22,7 @@ from pyams_content.component.illustration.interfaces import IBaseIllustration, \
 from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_form.field import Fields
-from pyams_form.interfaces.form import IAJAXFormRenderer, IFormUpdatedEvent, IInnerSubForm
+from pyams_form.interfaces.form import IAJAXFormRenderer, IFormContent, IFormUpdatedEvent, IInnerSubForm
 from pyams_portal.zmi.portlet import PortletRendererSettingsEditForm
 from pyams_portal.zmi.widget import RendererSelectFieldWidget
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
@@ -48,10 +48,6 @@ class BasicIllustrationPropertiesEditForm(FormGroupSwitcher):
     fields = Fields(IBaseIllustration)
     prefix = 'illustration.'
 
-    def get_content(self):
-        """Form content getter"""
-        return IIllustration(self.context)
-
     @property
     def mode(self):
         """Form mode getter"""
@@ -61,6 +57,13 @@ class BasicIllustrationPropertiesEditForm(FormGroupSwitcher):
     def state(self):
         """Form state getter"""
         return 'open' if self.get_content().has_data() else 'closed'
+
+
+@adapter_config(required=(IBaseIllustrationTarget, IAdminLayer, BasicIllustrationPropertiesEditForm),
+                provides=IFormContent)
+def base_illustration_edit_form_content(context, request, form):
+    """Base illustration properties edit form content getter"""
+    return IIllustration(context)
 
 
 @adapter_config(name='illustration',
@@ -89,9 +92,12 @@ class LinkIllustrationPropertiesEditForm(BasicIllustrationPropertiesEditForm):
 
     prefix = 'link_illustration.'
 
-    def get_content(self):
-        """Form content getter"""
-        return self.request.registry.getAdapter(self.context, IIllustration, name='link')
+
+@adapter_config(required=(ILinkIllustrationTarget, IAdminLayer, LinkIllustrationPropertiesEditForm),
+                provides=IFormContent)
+def link_illustration_edit_form_content(context, request, form):
+    """Link illustration properties edit form content getter"""
+    return request.registry.getAdapter(context, IIllustration, name='link')
 
 
 @adapter_config(required=(IBaseIllustrationTarget, IAdminLayer,
