@@ -22,9 +22,9 @@ from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.links import IInternalLink
 from pyams_content.shared.view.portlet import IViewItemsPortletSettings
-from pyams_content.shared.view.portlet.skin.interfaces import HIDDEN_HEADER_DISPLAY, IViewItemTargetURL, \
+from pyams_content.shared.view.portlet.skin.interfaces import HEADER_DISPLAY_MODE, IViewItemTargetURL, \
     IViewItemsPortletHorizontalRendererSettings, IViewItemsPortletPanelsRendererSettings, \
-    IViewItemsPortletVerticalRendererSettings, START_HEADER_DISPLAY
+    IViewItemsPortletVerticalRendererSettings
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortalContext, IPortletRenderer
@@ -133,6 +133,7 @@ class ViewItemsPortletPanelsRendererSettings(Persistent, Contained):
     """View items portlet panels renderer settings"""
 
     display_illustrations = FieldProperty(IViewItemsPortletPanelsRendererSettings['display_illustrations'])
+    thumb_selection = FieldProperty(IViewItemsPortletPanelsRendererSettings['thumb_selection'])
     paginate = FieldProperty(IViewItemsPortletPanelsRendererSettings['paginate'])
     page_size = FieldProperty(IViewItemsPortletPanelsRendererSettings['page_size'])
     header_display_mode = FieldProperty(IViewItemsPortletPanelsRendererSettings['header_display_mode'])
@@ -154,9 +155,9 @@ class ViewItemsPortletPanelsRenderer(BaseViewItemsPortletRenderer):
     def get_header(self, item):
         settings = self.renderer_settings
         display_mode = settings.header_display_mode
-        if display_mode == HIDDEN_HEADER_DISPLAY:
+        if display_mode == HEADER_DISPLAY_MODE.HIDDEN.value:
             return ''
         header = II18n(item).query_attribute('header', request=self.request)
-        if display_mode == START_HEADER_DISPLAY:
+        if display_mode == HEADER_DISPLAY_MODE.START.value:
             header = get_text_start(header, settings.start_length)
         return header

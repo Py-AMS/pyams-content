@@ -21,8 +21,10 @@
 					<tal:if define="image i18n:illustration.data;
 									alt_title i18n:illustration.alt_title;"
 							condition="image">
-						${structure:tales:picture(image, selections=selections,
-												  alt=alt_title, css_class='w-100')}
+						${structure:tales:picture(image,
+												  selections=selections,
+												  alt=alt_title,
+												  css_class='w-100')}
 					</tal:if>
 				</a>
 			</div>

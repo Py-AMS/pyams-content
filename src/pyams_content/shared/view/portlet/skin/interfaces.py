@@ -16,6 +16,7 @@ This module defines interfaces of view items portlet renderers settings.
 """
 
 from collections import OrderedDict
+from enum import Enum
 
 from zope.interface import Attribute, Interface
 from zope.schema import Bool, Choice, Int
@@ -53,19 +54,23 @@ VIEW_ITEMS_THUMBNAILS_VOCABULARY = SimpleVocabulary([
 ])
 
 
-FULL_HEADER_DISPLAY = 'full'
-START_HEADER_DISPLAY = 'start'
-HIDDEN_HEADER_DISPLAY = 'none'
+class HEADER_DISPLAY_MODE(Enum):
+    """Header display modes"""
+    FULL = 'full'
+    START = 'start'
+    HIDDEN = 'none'
 
-PANELS_HEADER_DISPLAY_MODES = OrderedDict((
-    (FULL_HEADER_DISPLAY, _("Display full header")),
-    (START_HEADER_DISPLAY, _("Display only header start")),
-    (HIDDEN_HEADER_DISPLAY, _("Hide header"))
+
+HEADER_DISPLAY_MODES_NAMES = OrderedDict((
+    (HEADER_DISPLAY_MODE.FULL, _("Display full header")),
+    (HEADER_DISPLAY_MODE.START, _("Display only header start")),
+    (HEADER_DISPLAY_MODE.HIDDEN, _("Hide header"))
 ), )
 
-PANELS_HEADER_DISPLAY_MODES_VOCABULARY = SimpleVocabulary([
-    SimpleTerm(k, title=v)
-    for k, v in PANELS_HEADER_DISPLAY_MODES.items()
+
+HEADER_DISPLAY_MODES_VOCABULARY = SimpleVocabulary([
+    SimpleTerm(v.value, title=t)
+    for v, t in HEADER_DISPLAY_MODES_NAMES.items()
 ])
 
 
@@ -147,6 +152,19 @@ class IViewItemsPortletPanelsRendererSettings(Interface):
                                  required=True,
                                  default=True)
 
+    thumb_selection = BootstrapThumbnailsSelectionField(
+        title=_("Thumbnails selection"),
+        description=_("Selection used to display illustrations thumbnails"),
+        default_selection='pano',
+        default_width={
+            'xs': 6,
+            'sm': 6,
+            'md': 4,
+            'lg': 3,
+            'xl': 2
+        },
+        required=True)
+
     paginate = Bool(title=_("Paginate?"),
                     description=_("If 'no', results pagination will be disabled"),
                     required=True,
@@ -160,8 +178,8 @@ class IViewItemsPortletPanelsRendererSettings(Interface):
     header_display_mode = Choice(title=_("Header display mode"),
                                  description=_("Defines how results headers will be rendered"),
                                  required=True,
-                                 vocabulary=PANELS_HEADER_DISPLAY_MODES_VOCABULARY,
-                                 default=FULL_HEADER_DISPLAY)
+                                 vocabulary=HEADER_DISPLAY_MODES_VOCABULARY,
+                                 default=HEADER_DISPLAY_MODE.FULL.value)
 
     start_length = Int(title=_("Start length"),
                        description=_("If you choose to display only header start, you can specify "
