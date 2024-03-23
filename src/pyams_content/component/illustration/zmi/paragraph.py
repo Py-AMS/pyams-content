@@ -19,15 +19,13 @@ from pyams_content.component.illustration import IBaseIllustration, IIllustratio
     IParagraphIllustration
 from pyams_content.component.illustration.interfaces import IIllustrationParagraph, \
     ILLUSTRATION_PARAGRAPH_ICON_CLASS, ILLUSTRATION_PARAGRAPH_NAME, ILLUSTRATION_PARAGRAPH_TYPE
-from pyams_content.component.paragraph import IBaseParagraph, IParagraphContainer, \
-    IParagraphContainerTarget
+from pyams_content.component.paragraph import IParagraphContainer, IParagraphContainerTarget
 from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu, \
     BaseParagraphRendererSettingsEditForm, IParagraphContainerBaseTable, \
     IParagraphContainerFullTable
 from pyams_content.component.paragraph.zmi.container import ParagraphTitleToolbarItemMixin
 from pyams_content.component.paragraph.zmi.interfaces import IParagraphTitleToolbar
 from pyams_content.feature.renderer import IRendererSettings
-from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IFormContent, IFormFields
@@ -35,16 +33,12 @@ from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.zmi.widget import RendererSelectFieldWidget
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_utils.adapter import adapter_config
-from pyams_utils.traversing import get_parent
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager
-from pyams_zmi.utils import get_object_label
-
 
 __docformat__ = 'restructuredtext'
-
-from pyams_content import _
 
 
 @viewlet_config(name='illustration',

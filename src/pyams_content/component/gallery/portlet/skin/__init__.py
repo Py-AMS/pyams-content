@@ -32,7 +32,6 @@ from pyams_utils.adapter import adapter_config
 from pyams_utils.factory import factory_config
 from pyams_utils.list import random_iter
 
-
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
