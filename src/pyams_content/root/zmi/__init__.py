@@ -21,7 +21,7 @@ from pyams_content.root import ISiteRootInfos
 from pyams_content.zmi.properties import PropertiesEditForm
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
-from pyams_form.interfaces.form import IAJAXFormRenderer
+from pyams_form.interfaces.form import IAJAXFormRenderer, IFormContent
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_site.interfaces import ISiteRoot
@@ -76,14 +76,18 @@ class SiteRootPropertiesEditForm(PropertiesEditForm):
 
     fields = Fields(ISiteRootInfos)
 
-    def get_content(self):
-        return ISiteRootInfos(self.context)
-
     def update_widgets(self, prefix=None):
         super().update_widgets(prefix)
         description = self.widgets.get('description')
         if description is not None:
             description.set_widgets_attr('rows', 5)
+
+
+@adapter_config(required=(ISiteRoot, IPyAMSLayer, SiteRootPropertiesEditForm),
+                provides=IFormContent)
+def site_root_properties_form_content(context, request, form):
+    """Site root properties edit form content getter"""
+    return ISiteRootInfos(context)
 
 
 @adapter_config(required=(ISiteRoot, IAdminLayer, SiteRootPropertiesEditForm),

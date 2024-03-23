@@ -18,8 +18,10 @@ from pyams_content.feature.alert import IAlertManagerInfo
 from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
+from pyams_form.interfaces.form import IFormContent
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_site.interfaces import ISiteRoot
+from pyams_utils.adapter import adapter_config
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminEditForm
 from pyams_zmi.interfaces import IAdminLayer
@@ -53,6 +55,9 @@ class AlertsManagerEditForm(AdminEditForm):
 
     fields = Fields(IAlertManagerInfo)
 
-    def get_content(self):
-        """Form content getter"""
-        return IAlertManagerInfo(self.context)
+
+@adapter_config(required=(ISiteRoot, IPyAMSLayer, AlertsManagerEditForm),
+                provides=IFormContent)
+def site_root_alert_edit_form_content(context, request, form):
+    """Site root alerts edit form content getter"""
+    return IAlertManagerInfo(context)
