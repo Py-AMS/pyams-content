@@ -506,5 +506,9 @@ class ContributorRestrictionsWorkflowGroup(Group):
     legend = _("Principal restrictions")
     fields = Fields(IContributorWorkflowRestrictions)
 
-    def get_content(self):
-        return IContributorWorkflowRestrictions(self.parent_form.get_content())
+
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, ContributorRestrictionsWorkflowGroup),
+                provides=IFormContent)
+def base_shared_tool_contributor_restrictions_form_content(context, request, form):
+    """Base shared tool contributor restrictions edit form content getter"""
+    return IContributorWorkflowRestrictions(form.parent_form.get_content())
