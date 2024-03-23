@@ -23,7 +23,7 @@ from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
 from pyams_content.zmi import content_js
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
-from pyams_form.interfaces.form import IGroup
+from pyams_form.interfaces.form import IFormContent, IGroup
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_utils.adapter import adapter_config
 from pyams_utils.fanstatic import get_resource_path
@@ -33,7 +33,6 @@ from pyams_zmi.form import AdminEditForm, FormGroupChecker
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
-
 
 __docformat__ = 'restructuredtext'
 
@@ -91,9 +90,12 @@ class TagsManagerEditForm(BaseThesaurusManagerEditForm):
 
     fields = Fields(ITagsManager).select('thesaurus_name', 'extract_name')
 
-    def get_content(self):
-        """Content getter"""
-        return ITagsManager(self.context)
+
+@adapter_config(required=(ITagsManagerTarget, IAdminLayer, TagsManagerEditForm),
+                provides=IFormContent)
+def tags_manager_edit_form_content(context, request, form):
+    """Tags manager edit form content getter"""
+    return ITagsManager(context)
 
 
 @adapter_config(name='glossary',
@@ -106,9 +108,12 @@ class TagsManagerGlossaryGroup(FormGroupChecker):
     checker_fieldname = 'enable_glossary'
     checker_mode = 'hide'
 
-    def get_content(self):
-        """Content getter"""
-        return ITagsManager(self.context)
+
+@adapter_config(required=(ITagsManagerTarget, IAdminLayer, TagsManagerGlossaryGroup),
+                provides=IFormContent)
+def tags_manager_glossary_group_content(context, request, group):
+    """Tags manager glossary edit form group content getter"""
+    return ITagsManager(context)
 
 
 #
@@ -137,9 +142,12 @@ class ThemesManagerEditForm(BaseThesaurusManagerEditForm):
 
     fields = Fields(IThemesManager)
 
-    def get_content(self):
-        """Content getter"""
-        return IThemesManager(self.context)
+
+@adapter_config(required=(IThemesManagerTarget, IAdminLayer, ThemesManagerEditForm),
+                provides=IFormContent)
+def themes_manager_edit_form_content(context, request, group):
+    """Themes manager edit form content getter"""
+    return IThemesManager(context)
 
 
 #
@@ -168,6 +176,9 @@ class CollectionsManagerEditForm(BaseThesaurusManagerEditForm):
 
     fields = Fields(ICollectionsManager)
 
-    def get_content(self):
-        """Content getter"""
-        return ICollectionsManager(self.context)
+
+@adapter_config(required=(ICollectionsManagerTarget, IAdminLayer, CollectionsManagerEditForm),
+                provides=IFormContent)
+def collections_manager_edit_form_content(context, request, form):
+    """Collections manager edit form content getter"""
+    return ICollectionsManager(context)
