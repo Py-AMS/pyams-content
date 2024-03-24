@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-03-23 11:48+0100\n"
+"POT-Creation-Date: 2024-03-24 02:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1042,6 +1042,7 @@ msgstr "Menu de navigation"
 #: src/pyams_content/component/association/interfaces.py:42
 #: src/pyams_content/shared/site/interfaces.py:223
 #: src/pyams_content/shared/common/interfaces/types.py:52
+#: src/pyams_content/shared/alert/interfaces.py:46
 msgid "Visible?"
 msgstr "Visible ?"
 
@@ -1059,7 +1060,7 @@ msgid "Displayed menu label"
 msgstr "Libellé affiché pour ce menu"
 
 #: src/pyams_content/feature/navigation/interfaces.py:96
-#: src/pyams_content/shared/alert/interfaces.py:76
+#: src/pyams_content/shared/alert/interfaces.py:98
 msgid "Internal reference"
 msgstr "Référence interne"
 
@@ -1097,6 +1098,7 @@ msgstr ""
 #: src/pyams_content/feature/navigation/interfaces.py:113
 #: src/pyams_content/component/links/interfaces.py:49
 #: src/pyams_content/shared/common/interfaces/types.py:83
+#: src/pyams_content/shared/alert/interfaces.py:59
 msgid "Pictogram"
 msgstr "Pictogramme"
 
@@ -1166,13 +1168,13 @@ msgid "Images selection"
 msgstr "Sélection des images"
 
 #: src/pyams_content/feature/navigation/portlet/skin/interfaces.py:31
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:98
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:111
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:128
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:100
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:117
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:134
 #: src/pyams_content/component/gallery/portlet/skin/interfaces.py:32
 #: src/pyams_content/component/gallery/skin/interfaces.py:31
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:88
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:135
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:74
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:121
 msgid "Selection used to display images thumbnails"
 msgstr "Sélections utilisées pour l'affichage des vignettes"
 
@@ -1497,17 +1499,17 @@ msgid "No result found."
 msgstr "Aucun résultat trouvé"
 
 #: src/pyams_content/feature/search/portlet/skin/interfaces.py:44
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:65
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:51
 msgid "Display full header"
 msgstr "Afficher le chapô en entier"
 
 #: src/pyams_content/feature/search/portlet/skin/interfaces.py:45
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:66
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:52
 msgid "Display only header start"
 msgstr "Afficher seulement le début du chapô"
 
 #: src/pyams_content/feature/search/portlet/skin/interfaces.py:46
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:67
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:53
 msgid "Hide header"
 msgstr "Masquer le chapô"
 
@@ -1552,22 +1554,22 @@ msgstr ""
 "option est sélectionnée"
 
 #: src/pyams_content/feature/search/portlet/skin/interfaces.py:80
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:178
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:164
 msgid "Header display mode"
 msgstr "Affichage du chapô"
 
 #: src/pyams_content/feature/search/portlet/skin/interfaces.py:81
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:179
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:165
 msgid "Defines how results headers will be rendered"
 msgstr "Mode d'affichage du chapô des résultats"
 
 #: src/pyams_content/feature/search/portlet/skin/interfaces.py:86
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:184
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:170
 msgid "Start length"
 msgstr "Longueur du chapô"
 
 #: src/pyams_content/feature/search/portlet/skin/interfaces.py:87
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:185
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:171
 msgid ""
 "If you choose to display only header start, you can specify maximum text "
 "length"
@@ -1575,42 +1577,59 @@ msgstr ""
 "Si vous choisissez de n'afficher que le début du chapô, indiquer ici la "
 "longueur maximale du texte en nombre de caractères"
 
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:97
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:110
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:127
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:92
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:66
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:135
+msgid "Display illustrations?"
+msgstr "Afficher l'illustration"
+
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:93
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:67
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:136
+msgid "If 'no', view contents will not display illustrations"
+msgstr "Si 'non', l'illustration des résultats ne sera pas affichée"
+
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:99
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:116
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:133
 #: src/pyams_content/component/gallery/portlet/skin/interfaces.py:31
 #: src/pyams_content/component/gallery/skin/interfaces.py:30
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:87
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:134
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:156
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:73
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:120
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:142
 msgid "Thumbnails selection"
 msgstr "Sélection des vignettes"
 
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:118
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:135
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:124
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:141
 msgid "Button's title"
 msgstr "Libellé du bouton"
 
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:119
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:136
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:125
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:142
 msgid "Optional navigation button's title"
 msgstr ""
 "Un bouton de navigation associé à chaque résultat de recherche sera affiché "
 "si cette option est sélectionnée"
 
-#: src/pyams_content/feature/search/portlet/skin/__init__.py:105
+#: src/pyams_content/feature/search/portlet/skin/zmi.py:83
+#: src/pyams_content/shared/view/portlet/skin/zmi.py:55
+msgid "Header display"
+msgstr "Affichage du chapô"
+
+#: src/pyams_content/feature/search/portlet/skin/__init__.py:107
 msgid "Paginated search results (default)"
 msgstr "Liste de résultats, sans facettes (par défaut)"
 
-#: src/pyams_content/feature/search/portlet/skin/__init__.py:131
+#: src/pyams_content/feature/search/portlet/skin/__init__.py:133
 msgid "Paneled search results"
 msgstr "Grille de résultats, sans facettes, style « page carrefour »"
 
-#: src/pyams_content/feature/search/portlet/skin/__init__.py:157
+#: src/pyams_content/feature/search/portlet/skin/__init__.py:159
 msgid "Bootstrap cards search results"
 msgstr "Grille de résultats, sans facettes, style « cartes Bootstrap »"
 
-#: src/pyams_content/feature/search/portlet/skin/__init__.py:180
+#: src/pyams_content/feature/search/portlet/skin/__init__.py:182
 msgid "Bootstrap Masonry cards search results"
 msgstr "Grille de résultats, sans facettes, style « Masonry »"
 
@@ -1861,15 +1880,15 @@ msgstr "Illustration associée"
 msgid "Illustration properties"
 msgstr "Propriétés de l'illustration"
 
-#: src/pyams_content/component/illustration/zmi/__init__.py:45
+#: src/pyams_content/component/illustration/zmi/__init__.py:46
 msgid "Main illustration"
 msgstr "Illustration principale"
 
-#: src/pyams_content/component/illustration/zmi/__init__.py:90
+#: src/pyams_content/component/illustration/zmi/__init__.py:91
 msgid "Navigation link illustration"
 msgstr "Illustration de navigation"
 
-#: src/pyams_content/component/illustration/zmi/__init__.py:132
+#: src/pyams_content/component/illustration/zmi/__init__.py:133
 msgid "Use responsive selection"
 msgstr "Utiliser les sélections responsives"
 
@@ -4606,6 +4625,8 @@ msgstr "Cliquer pour activer ou désactiver ce type de contenu"
 
 #: src/pyams_content/shared/common/zmi/types/container.py:116
 #: src/pyams_content/shared/common/interfaces/types.py:57
+#: src/pyams_content/shared/alert/interfaces.py:51
+#: src/pyams_content/shared/alert/zmi/types.py:129
 msgid "Label"
 msgstr "Libellé"
 
@@ -4696,14 +4717,17 @@ msgid "Label used for navigation entries"
 msgstr "Libellé utilisé pour les liens de navigation"
 
 #: src/pyams_content/shared/common/interfaces/types.py:74
+#: src/pyams_content/shared/alert/interfaces.py:54
 msgid "Back-office label"
 msgstr "Libellé back-office"
 
 #: src/pyams_content/shared/common/interfaces/types.py:75
+#: src/pyams_content/shared/alert/interfaces.py:55
 msgid "Optional label used in management pages instead of default label"
 msgstr "Libellé utilisé en back-office, à la place du libellé standard"
 
 #: src/pyams_content/shared/common/interfaces/types.py:79
+#: src/pyams_content/shared/alert/interfaces.py:64
 msgid "Color"
 msgstr "Couleur"
 
@@ -5062,7 +5086,7 @@ msgstr ""
 "affichée peut dépendre du mode de rendu sélectionné"
 
 #: src/pyams_content/shared/common/portlet/interfaces.py:68
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:98
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:84
 msgid "Display breadcrumbs?"
 msgstr "Afficher le fil d'Ariane"
 
@@ -5071,7 +5095,7 @@ msgid "Display title?"
 msgstr "Afficher le titre"
 
 #: src/pyams_content/shared/common/portlet/interfaces.py:76
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:104
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:90
 msgid "Display tags?"
 msgstr "Afficher les tags"
 
@@ -5106,48 +5130,45 @@ msgstr "En-tête du contenu (par défaut)"
 msgid "Shared content specificities (default)"
 msgstr "Spécificités du contenu (par défaut)"
 
-#: src/pyams_content/shared/alert/interfaces.py:37
-#: src/pyams_content/shared/alert/interfaces.py:50
+#: src/pyams_content/shared/alert/interfaces.py:47
+msgid "An hidden alert type can't be assigned to new alerts"
+msgstr ""
+"Un type d'alerte inactif ne peut pas être affecté à de nouvelles alertes"
+
+#: src/pyams_content/shared/alert/interfaces.py:60
+msgid "Pictogram associated with this alert type"
+msgstr "Nom du pictogramme associé à ce type d'alerte"
+
+#: src/pyams_content/shared/alert/interfaces.py:65
+msgid "Base color associated with this alert type"
+msgstr "Couleur de base associée à ce type d'alerte"
+
+#: src/pyams_content/shared/alert/interfaces.py:80
 msgid "Alert"
 msgstr "Alerte"
 
-#: src/pyams_content/shared/alert/interfaces.py:51
-msgid "End of alert"
-msgstr "Fin d'alerte"
+#: src/pyams_content/shared/alert/interfaces.py:86
+#: src/pyams_content/shared/alert/zmi/types.py:223
+msgid "Alert type"
+msgstr "Type d'alerte"
 
-#: src/pyams_content/shared/alert/interfaces.py:52
-msgid "Information"
-msgstr "Information"
-
-#: src/pyams_content/shared/alert/interfaces.py:53
-msgid "Warning"
-msgstr "Avertissement"
-
-#: src/pyams_content/shared/alert/interfaces.py:54
-msgid "Recommendation"
-msgstr "Recommandation"
-
-#: src/pyams_content/shared/alert/interfaces.py:66
-msgid "Alert gravity"
-msgstr "Niveau de gravité"
-
-#: src/pyams_content/shared/alert/interfaces.py:67
-msgid "Alert gravity can affect renderer alert style"
+#: src/pyams_content/shared/alert/interfaces.py:87
+msgid "Alert type can affect renderer alert style"
 msgstr ""
-"Le niveau de gravité peut éventuellement, en fonction du thème graphique, "
+"Le type d'alerte peut éventuellement, en fonction du thème graphique, "
 "affecter le rendu de l'alerte"
 
-#: src/pyams_content/shared/alert/interfaces.py:72
+#: src/pyams_content/shared/alert/interfaces.py:94
 msgid "Message content"
 msgstr "Contenu du message"
 
-#: src/pyams_content/shared/alert/interfaces.py:73
+#: src/pyams_content/shared/alert/interfaces.py:95
 msgid "Message body"
 msgstr ""
 "Le contenu du message n'est en général affiché que dans le corps de page, et "
 "non lorsque les alertes sont affichées en bas de page"
 
-#: src/pyams_content/shared/alert/interfaces.py:77
+#: src/pyams_content/shared/alert/interfaces.py:99
 msgid ""
 "Internal link target reference. You can search a reference using '+' "
 "followed by internal number, or by entering text matching content title"
@@ -5156,35 +5177,35 @@ msgstr ""
 "rechercher une référence en indiquant un '+' suivi du numéro interne de ce "
 "moteur de recherche, ou en entrant tout ou partie de son titre"
 
-#: src/pyams_content/shared/alert/interfaces.py:83
+#: src/pyams_content/shared/alert/interfaces.py:105
 msgid "External URL"
 msgstr "URL externe"
 
-#: src/pyams_content/shared/alert/interfaces.py:84
+#: src/pyams_content/shared/alert/interfaces.py:106
 msgid "Alternate external URL"
 msgstr "Adresse d'une page externe à consulter"
 
-#: src/pyams_content/shared/alert/interfaces.py:90
+#: src/pyams_content/shared/alert/interfaces.py:112
 msgid "You can't set internal reference and external URI simultaneously!"
 msgstr ""
 "Vous ne pouvez pas indiquer une référence interne et une URI externe "
 "simultanément !"
 
-#: src/pyams_content/shared/alert/interfaces.py:92
+#: src/pyams_content/shared/alert/interfaces.py:114
 msgid "Concerned contents"
 msgstr "Contenus concernés"
 
-#: src/pyams_content/shared/alert/interfaces.py:93
+#: src/pyams_content/shared/alert/interfaces.py:115
 msgid "If any, these contents will automatically display this alert"
 msgstr ""
 "Si vous sélectionnez des contenus ici, cette alerte leur sera directement "
 "associée et elle pourra être affichée dans leur en-tête de page"
 
-#: src/pyams_content/shared/alert/interfaces.py:97
+#: src/pyams_content/shared/alert/interfaces.py:119
 msgid "Maximum interval"
 msgstr "Intervale d'affichage"
 
-#: src/pyams_content/shared/alert/interfaces.py:98
+#: src/pyams_content/shared/alert/interfaces.py:120
 msgid ""
 "Maximum interval between alert displays on a given device, given in hours; "
 "set to 0 to always display the alert"
@@ -5193,11 +5214,40 @@ msgstr ""
 "exprimé en heures ; indiquer une valeur de 0 pour que l'alerte soit toujours "
 "affichée"
 
-#: src/pyams_content/shared/alert/zmi/__init__.py:41
+#: src/pyams_content/shared/alert/zmi/types.py:62
+#: src/pyams_content/shared/alert/zmi/types.py:154
+msgid "Alert types"
+msgstr "Types d'alertes"
+
+#: src/pyams_content/shared/alert/zmi/types.py:112
+msgid "Click icon to enable or disable alert type"
+msgstr "Cliquer pour activer ou désactiver ce type d'alerte"
+
+#: src/pyams_content/shared/alert/zmi/types.py:157
+msgid "Alert types list"
+msgstr "Liste des types d'alertes"
+
+#: src/pyams_content/shared/alert/zmi/types.py:171
+msgid "Add alert type"
+msgstr "Ajouter un type d'alerte"
+
+#: src/pyams_content/shared/alert/zmi/types.py:181
+msgid "New alert type"
+msgstr "Nouveau type d'alerte"
+
+#: src/pyams_content/shared/alert/zmi/types.py:182
+msgid "New alert type properties"
+msgstr "Propriétés du nouveau type"
+
+#: src/pyams_content/shared/alert/zmi/types.py:238
+msgid "Alert type properties"
+msgstr "Propriétés du type d'alerte"
+
+#: src/pyams_content/shared/alert/zmi/__init__.py:55
 msgid "Alert management"
 msgstr "Cette alerte"
 
-#: src/pyams_content/shared/alert/zmi/__init__.py:59
+#: src/pyams_content/shared/alert/zmi/__init__.py:82
 msgid "Alert settings"
 msgstr "Paramètres de l'alerte"
 
@@ -5663,69 +5713,39 @@ msgstr "Vues sélectionnées :"
 msgid "(no selected view)"
 msgstr "(aucune vue sélectionnée)"
 
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:44
-msgid "Initial selection"
-msgstr "Utiliser les images d'origine"
-
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:45
-msgid "Responsive selection"
-msgstr "Utiliser les sélections responsives"
-
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:46
-msgid "Portrait selection"
-msgstr "Utiliser la sélection en mode portrait"
-
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:47
-msgid "Panoramic selection"
-msgstr "Utiliser la sélection panoramique"
-
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:48
-msgid "Square selection"
-msgstr "Utiliser la sélection carrée"
-
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:80
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:149
-msgid "Display illustrations?"
-msgstr "Afficher l'illustration"
-
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:81
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:150
-msgid "If 'no', view contents will not display illustrations"
-msgstr "Si 'non', l'illustration des résultats ne sera pas affichée"
-
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:99
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:85
 msgid "If 'no', view items breadcrumbs will not be displayed"
 msgstr "Si 'non', le fil d'Ariane des résultats ne sera pas affiché"
 
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:105
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:91
 msgid "If 'no', view items tags will not be displayed"
 msgstr "Si 'non', les tags des résultats ne seront pas affichés"
 
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:109
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:168
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:95
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:154
 msgid "Paginate?"
 msgstr "Pagination"
 
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:110
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:169
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:96
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:155
 msgid "If 'no', results pagination will be disabled"
 msgstr "Si 'non', la pagination des résultats sera désactivée"
 
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:114
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:173
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:100
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:159
 msgid "Page size"
 msgstr "Taille des pages"
 
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:115
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:174
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:101
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:160
 msgid "Number of items per page, if pagination is enabled"
 msgstr "Nombre de résultats par page, si la pagination est activée"
 
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:119
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:105
 msgid "'See all' link target"
 msgstr "Cible du lien 'Voir tous les résultats'"
 
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:120
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:106
 msgid ""
 "Internal reference to site or search folder displaying full list of view's "
 "contents"
@@ -5733,21 +5753,17 @@ msgstr ""
 "Référence interne d'un site ou d'un moteur de recherche permettant d'accéder "
 "à la liste complète des résultats"
 
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:125
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:111
 msgid "Link label"
 msgstr "Libellé du lien"
 
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:126
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:112
 msgid "Label of the link to full list page"
 msgstr "Libellé du lien permettant d'accéder à la liste complète des résultats"
 
-#: src/pyams_content/shared/view/portlet/skin/interfaces.py:157
+#: src/pyams_content/shared/view/portlet/skin/interfaces.py:143
 msgid "Selection used to display illustrations thumbnails"
 msgstr "Sélections utilisées pour l'affichage des vignettes"
-
-#: src/pyams_content/shared/view/portlet/skin/zmi.py:55
-msgid "Header display"
-msgstr "Affichage du chapô"
 
 #: src/pyams_content/shared/view/portlet/skin/__init__.py:97
 msgid "Simple vertical list (default)"
@@ -5887,6 +5903,33 @@ msgstr "Gérer le portail"
 msgid "Site information"
 msgstr "Informations générales"
 
+#~ msgid "End of alert"
+#~ msgstr "Fin d'alerte"
+
+#~ msgid "Information"
+#~ msgstr "Information"
+
+#~ msgid "Warning"
+#~ msgstr "Avertissement"
+
+#~ msgid "Recommendation"
+#~ msgstr "Recommandation"
+
+#~ msgid "Initial selection"
+#~ msgstr "Utiliser les images d'origine"
+
+#~ msgid "Responsive selection"
+#~ msgstr "Utiliser les sélections responsives"
+
+#~ msgid "Portrait selection"
+#~ msgstr "Utiliser la sélection en mode portrait"
+
+#~ msgid "Panoramic selection"
+#~ msgstr "Utiliser la sélection panoramique"
+
+#~ msgid "Square selection"
+#~ msgstr "Utiliser la sélection carrée"
+
 #~ msgid "No owner changed for empty selection!"
 #~ msgstr ""
 #~ "Pas de contenu sélectionné, aucun changement de propriétaire n'a été "
@@ -5927,7 +5970,6 @@ msgstr "Informations générales"
 #~ msgid "Alerts settings"
 #~ msgstr "Sélection des vues associées aux alertes"
 
-#, fuzzy
 #~ msgid "Video provider settings"
 #~ msgstr "Notifications par email"
 
