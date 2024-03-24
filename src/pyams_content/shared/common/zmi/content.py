@@ -88,8 +88,8 @@ def wf_shared_content_type(context, request, column):
         data_type = context.get_data_type()
         if data_type is not None:
             i18n = II18n(data_type)
-            return i18n.query_attribute('backoffice_label', request=request) or \
-                i18n.query_attribute('label', request=request)
+            return i18n.query_attributes_in_order(('backoffice_label', 'label'),
+                                                  request=request)
     return None
 
 

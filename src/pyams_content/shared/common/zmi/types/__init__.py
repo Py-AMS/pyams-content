@@ -111,8 +111,8 @@ class DataTypeAddFormRenderer(ContextRequestViewAdapter):
 def data_type_label(context, request, view):
     """Data type label"""
     i18n = II18n(context)
-    return i18n.query_attribute('backoffice_label', request=request) or \
-        i18n.query_attribute('label', request=request)
+    return i18n.query_attributes_in_order(('backoffice_label', 'label'),
+                                          request=request)
 
 
 @adapter_config(required=(IDataType, IAdminLayer, Interface),
