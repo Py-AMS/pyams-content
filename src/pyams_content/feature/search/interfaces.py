@@ -18,7 +18,7 @@ from zope.interface import Attribute, Interface, Invalid, invariant
 from zope.schema import Bool, Choice, Set
 
 from pyams_content.interfaces import IBaseContent
-from pyams_content.shared.common import SHARED_CONTENT_TYPES_VOCABULARY
+from pyams_content.shared.common import VIEWS_SHARED_CONTENT_TYPES_VOCABULARY
 from pyams_content.shared.common.interfaces.types import ALL_DATA_TYPES_VOCABULARY
 from pyams_content.shared.site.interfaces import IBaseSiteItem, ISiteElement
 from pyams_content.shared.view.interfaces import IWfView, RELEVANCE_ORDER, USER_VIEW_ORDER_VOCABULARY
@@ -119,7 +119,7 @@ class ISearchFolder(IBaseContent, IBaseSiteItem, ISiteElement, IWfView, ISequent
 
     selected_content_types = Set(title=_("Selected content types"),
                                  description=_("Searched content types; leave empty for all"),
-                                 value_type=Choice(vocabulary=SHARED_CONTENT_TYPES_VOCABULARY),
+                                 value_type=Choice(vocabulary=VIEWS_SHARED_CONTENT_TYPES_VOCABULARY),
                                  required=False)
 
     selected_datatypes = Set(title=_("Selected data types"),

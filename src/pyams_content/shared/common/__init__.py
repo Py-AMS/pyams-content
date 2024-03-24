@@ -28,7 +28,8 @@ from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from pyams_content.interfaces import IBaseContentInfo, IObjectType
 from pyams_content.shared.common.interfaces import CONTENT_TYPES_VOCABULARY, IBaseSharedTool, \
-    ISharedContent, IWfSharedContent, IWfSharedContentRoles, SHARED_CONTENT_TYPES_VOCABULARY
+    ISharedContent, IWfSharedContent, IWfSharedContentRoles, SHARED_CONTENT_TYPES_VOCABULARY, \
+    VIEWS_SHARED_CONTENT_TYPES_VOCABULARY
 from pyams_i18n.content import I18nManagerMixin
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
@@ -69,6 +70,23 @@ class ContentTypesVocabulary(SimpleVocabulary):
             SimpleTerm(factory.content_type, title=translate(factory.content_name))
             for _name, factory in get_all_factories(ISharedContent)
             if asbool(settings.get(f'pyams_content.register.{factory.content_type}', True))
+        ], key=lambda x: x.title)
+        super().__init__(terms)
+
+
+@vocabulary_config(name=VIEWS_SHARED_CONTENT_TYPES_VOCABULARY)
+class ViewsContentTypesVocabulary(SimpleVocabulary):
+    """Views and search folders content types vocabulary"""
+
+    def __init__(self, context):
+        request = check_request()
+        settings = request.registry.settings
+        translate = request.localizer.translate
+        terms = sorted([
+            SimpleTerm(factory.content_type, title=translate(factory.content_name))
+            for _name, factory in get_all_factories(ISharedContent)
+            if factory.content_view and
+               asbool(settings.get(f'pyams_content.register.{factory.content_type}', True))
         ], key=lambda x: x.title)
         super().__init__(terms)
 
@@ -233,6 +251,7 @@ class SharedContent(Persistent, Contained, metaclass=ClassPropertyType):
 
     content_type = None
     content_name = None
+    content_view = True
 
     @classproperty
     def content_factory(cls):

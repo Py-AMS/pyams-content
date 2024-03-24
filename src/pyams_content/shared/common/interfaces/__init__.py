@@ -265,6 +265,7 @@ class ISharedContent(IWorkflowManagedContent):
     content_type = Attribute("Content type interface")
     content_name = Attribute("Content name")
     content_factory = Attribute("Content factory attribute")
+    content_view = Attribute("Available for views searching")
 
     visible_version = Attribute("Link to actually visible version")
 
@@ -272,6 +273,8 @@ class ISharedContent(IWorkflowManagedContent):
 CONTENT_TYPES_VOCABULARY = 'pyams_content.content.types'
 
 SHARED_CONTENT_TYPES_VOCABULARY = 'pyams_content.shared_content.types'
+
+VIEWS_SHARED_CONTENT_TYPES_VOCABULARY = 'pyams_content.shared_content.types.views'
 
 
 #

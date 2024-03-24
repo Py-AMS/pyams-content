@@ -22,7 +22,7 @@ from zope.schema import Bool, Choice, Int, Set
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from pyams_content.shared.common.interfaces import ISharedContent, ISharedTool, IWfSharedContent, \
-    SHARED_CONTENT_TYPES_VOCABULARY
+    VIEWS_SHARED_CONTENT_TYPES_VOCABULARY
 from pyams_content.shared.common.interfaces.types import ALL_DATA_TYPES_VOCABULARY
 
 __docformat__ = 'restructuredtext'
@@ -97,7 +97,7 @@ class IWfView(IWfSharedContent):
 
     selected_content_types = Set(title=_("Other content types"),
                                  description=_("Selected content types; leave empty for all"),
-                                 value_type=Choice(vocabulary=SHARED_CONTENT_TYPES_VOCABULARY),
+                                 value_type=Choice(vocabulary=VIEWS_SHARED_CONTENT_TYPES_VOCABULARY),
                                  required=False)
 
     def get_ignored_types(self):
@@ -122,7 +122,7 @@ class IWfView(IWfSharedContent):
 
     excluded_content_types = Set(title=_("Excluded content types"),
                                  description=_("Excluded content types; leave empty for all"),
-                                 value_type=Choice(vocabulary=SHARED_CONTENT_TYPES_VOCABULARY),
+                                 value_type=Choice(vocabulary=VIEWS_SHARED_CONTENT_TYPES_VOCABULARY),
                                  required=False)
 
     def get_excluded_content_types(self, context):

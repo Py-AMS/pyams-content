@@ -202,3 +202,4 @@ class View(SharedContent):
 
     content_type = VIEW_CONTENT_TYPE
     content_name = VIEW_CONTENT_NAME
+    content_view = False
