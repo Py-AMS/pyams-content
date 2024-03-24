@@ -19,7 +19,7 @@ __docformat__ = 'restructuredtext'
 from zope.interface import Interface
 
 from pyams_content.feature.alert import IAlertManagerInfo
-from pyams_content.shared.alert.interfaces import ALERT_GRAVITY, ALERT_GRAVITY_NAMES
+from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_template.template import template_config
 from pyams_viewlet.viewlet import ViewContentProvider, contentprovider_config
@@ -40,7 +40,9 @@ class AlertsContentProvider(ViewContentProvider):
 
     def get_gravity(self, alert):
         """Alert gravity getter"""
-        return self.request.localizer.translate(ALERT_GRAVITY_NAMES.get(ALERT_GRAVITY(alert.gravity)))
+        alert_type = alert.get_alert_type()
+        if alert_type is not None:
+            return II18n(alert_type).query_attribute('label', request=self.request)
 
 
 @contentprovider_config(name='pyams_content.context_alerts',
