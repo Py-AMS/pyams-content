@@ -20,11 +20,13 @@ from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.thesaurus import ITagsTarget, IThemesTarget
 from pyams_content.feature.review import IReviewTarget
-from pyams_content.shared.alert.interfaces import ALERT_CONTENT_NAME, ALERT_CONTENT_TYPE, IAlert, IWfAlert
+from pyams_content.shared.alert.interfaces import ALERT_CONTENT_NAME, ALERT_CONTENT_TYPE, IAlert, IAlertManager, \
+    IAlertTypesManager, IWfAlert
 from pyams_content.shared.common import ISharedContent, IWfSharedContent, SharedContent, WfSharedContent
 from pyams_sequence.reference import InternalReferenceMixin, get_reference_target
 from pyams_utils.factory import factory_config
 from pyams_utils.request import check_request
+from pyams_utils.traversing import get_parent
 
 __docformat__ = 'restructuredtext'
 
@@ -44,12 +46,19 @@ class WfAlert(WfSharedContent, InternalReferenceMixin):
     handle_header = False
     handle_description = False
 
-    gravity = FieldProperty(IWfAlert['gravity'])
+    alert_type = FieldProperty(IWfAlert['alert_type'])
     body = FieldProperty(IWfAlert['body'])
     _reference = FieldProperty(IWfAlert['reference'])
     external_url = FieldProperty(IWfAlert['external_url'])
     references = FieldProperty(IWfAlert['references'])
     maximum_interval = FieldProperty(IWfAlert['maximum_interval'])
+
+    def get_alert_type(self):
+        """Alert type getter"""
+        manager = get_parent(self, IAlertManager)
+        types = IAlertTypesManager(manager, None)
+        if types is not None:
+            return types.get(self.alert_type)
 
     @property
     def reference(self):
@@ -75,3 +84,4 @@ class Alert(SharedContent):
 
     content_type = ALERT_CONTENT_TYPE
     content_name = ALERT_CONTENT_NAME
+    content_view = False

@@ -18,56 +18,78 @@ This module defines interfaces of alerts tool and contents.
 from collections import OrderedDict
 from enum import Enum
 
+from zope.container.constraints import contains
+from zope.container.interfaces import IContainer
 from zope.interface import Invalid, invariant
-from zope.schema import Choice, Int, URI
-from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
+from zope.location.interfaces import ILocation
+from zope.schema import Bool, Choice, Int, TextLine, URI
 
+from pyams_content.reference.pictogram import PICTOGRAM_VOCABULARY
 from pyams_content.shared.common import ISharedContent, IWfSharedContent
 from pyams_content.shared.common.interfaces import ISharedTool
-from pyams_i18n.schema import I18nTextField
+from pyams_i18n.schema import I18nTextField, I18nTextLineField
 from pyams_sequence.interfaces import IInternalReferencesList
 from pyams_sequence.schema import InternalReferenceField, InternalReferencesListField
+from pyams_utils.schema import ColorField
 
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
+
+ALERT_TYPES_MANAGER_ANNOTATION_KEY = 'pyams_content.alerts.types'
+ALERT_TYPES_VOCABULARY = 'pyams_content.alerts.types'
+
+
+class IAlertType(ILocation):
+    """Alert type interface"""
+
+    visible = Bool(title=_("Visible?"),
+                   description=_("An hidden alert type can't be assigned to new alerts"),
+                   required=True,
+                   default=True)
+
+    label = I18nTextLineField(title=_("Label"),
+                              required=True)
+
+    backoffice_label = I18nTextLineField(title=_("Back-office label"),
+                                         description=_("Optional label used in management pages "
+                                                       "instead of default label"),
+                                         required=False)
+
+    pictogram = Choice(title=_("Pictogram"),
+                       description=_("Pictogram associated with this alert type"),
+                       vocabulary=PICTOGRAM_VOCABULARY,
+                       required=False)
+
+    color = ColorField(title=_("Color"),
+                       description=_("Base color associated with this alert type"),
+                       required=False,
+                       default='dc3545')
+
+
+class IAlertTypesManager(IContainer):
+    """Alert types manager interface"""
+
+    contains(IAlertType)
+
+    def get_visible_items(self):
+        """Visible alert types iterator"""
 
 
 ALERT_CONTENT_TYPE = 'alert'
 ALERT_CONTENT_NAME = _("Alert")
 
 
-class ALERT_GRAVITY(Enum):
-    """Alert gravity enumeration"""
-    alert = 'alert'
-    alert_end = 'alert_end'
-    info = 'info'
-    warning = 'warning'
-    recommend = 'recommend'
-
-
-ALERT_GRAVITY_NAMES = OrderedDict((
-    (ALERT_GRAVITY.alert, _("Alert")),
-    (ALERT_GRAVITY.alert_end, _("End of alert")),
-    (ALERT_GRAVITY.info, _("Information")),
-    (ALERT_GRAVITY.warning, _("Warning")),
-    (ALERT_GRAVITY.recommend, _("Recommendation"))
-))
-
-ALERT_GRAVITY_VOCABULARY = SimpleVocabulary([
-    SimpleTerm(v.value, title=t)
-    for v, t in ALERT_GRAVITY_NAMES.items()
-])
-
-
 class IWfAlert(IWfSharedContent, IInternalReferencesList):
     """Alert interface"""
 
-    gravity = Choice(title=_("Alert gravity"),
-                     description=_("Alert gravity can affect renderer alert style"),
-                     required=True,
-                     vocabulary=ALERT_GRAVITY_VOCABULARY,
-                     default=ALERT_GRAVITY.info.value)
+    alert_type = Choice(title=_("Alert type"),
+                        description=_("Alert type can affect renderer alert style"),
+                        required=True,
+                        vocabulary=ALERT_TYPES_VOCABULARY)
+
+    def get_alert_type(self):
+        """Alert type getter"""
 
     body = I18nTextField(title=_("Message content"),
                          description=_("Message body"),
