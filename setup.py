@@ -23,7 +23,7 @@ DOCS = os.path.join(os.path.dirname(__file__),
 README = os.path.join(DOCS, 'README.rst')
 HISTORY = os.path.join(DOCS, 'HISTORY.rst')
 
-version = '1.99.0'
+version = '1.99.1'
 long_description = open(README).read() + '\n\n' + open(HISTORY).read()
 
 tests_require = [
@@ -69,7 +69,7 @@ setup(name='pyams_content',
           'pyams_catalog',
           'pyams_fields',
           'pyams_file',
-          'pyams_form',
+          'pyams_form >= 2.1.0',
           'pyams_i18n',
           'pyams_i18n_views',
           'pyams_layer',
