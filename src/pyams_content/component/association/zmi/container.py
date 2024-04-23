@@ -19,7 +19,7 @@ from pyramid.view import view_config
 from zope.interface import implementer
 
 from pyams_content.component.association import IAssociationContainer, IAssociationContainerTarget
-from pyams_content.component.association.interfaces import IAssociationInfo
+from pyams_content.component.association.interfaces import IAssociationInfo, IAssociationParagraph
 from pyams_content.component.association.zmi import IAssociationsTable
 from pyams_content.component.association.zmi.interfaces import IAssociationsContainerEditForm
 from pyams_content.component.paragraph.zmi.helper import get_json_paragraph_toolbar_refresh_event
@@ -252,3 +252,10 @@ class AssociationsGroup(TableGroupSwitcher):
     container_intf = IAssociationContainer
 
     weight = 20
+
+    @property
+    def state(self):
+        """Always open switcher in associations paragraphs"""
+        if IAssociationParagraph.providedBy(self.context):
+            return 'open'
+        return super().state
