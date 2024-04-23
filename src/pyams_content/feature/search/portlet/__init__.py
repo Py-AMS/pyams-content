@@ -63,6 +63,7 @@ class SearchResultsPortletSettings(PortletSettings):
             renderer_settings = IPortletRendererSettings(self)
             if IAggregatedPortletRenderer.providedBy(renderer_settings):
                 aggregates = renderer_settings.aggregates
+                ignore_cache = True
             else:
                 aggregates = {}
             yield from context.get_results(context, order_by,
