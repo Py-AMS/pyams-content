@@ -17,7 +17,7 @@ This module defines generic components used to handle references tables properti
 from pyramid.view import view_config
 from zope.interface import Interface
 
-from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
+from pyams_content.interfaces import MANAGE_REFERENCE_TABLE_PERMISSION
 from pyams_content.reference import IReferenceTable
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
@@ -34,7 +34,6 @@ from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import IMenuHeader, IPropertiesMenu, ISiteManagementMenu
 from pyams_zmi.table import I18nColumnMixin, Table, TrashColumn
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
-
 
 __docformat__ = 'restructuredtext'
 
@@ -63,7 +62,7 @@ class ReferenceTablePropertiesEditForm(AdminEditForm):
     legend = _("Edit table properties")
 
     fields = Fields(IReferenceTable).omit('__parent__', '__name__')
-    edit_permission = MANAGE_SITE_ROOT_PERMISSION
+    edit_permission = MANAGE_REFERENCE_TABLE_PERMISSION
 
 
 @adapter_config(required=(IReferenceTable, IAdminLayer, Interface, ISiteManagementMenu),
@@ -111,12 +110,13 @@ class ReferenceTableNameColumn(I18nColumnMixin, GetAttrColumn):
 class ReferenceTableTrashColumn(TrashColumn):
     """Reference table trash column"""
 
-    permission = MANAGE_SITE_ROOT_PERMISSION
+    permission = MANAGE_REFERENCE_TABLE_PERMISSION
 
 
 @view_config(name='delete-element.json',
              context=IReferenceTable, request_type=IPyAMSLayer,
-             permission=MANAGE_SITE_ROOT_PERMISSION, renderer='json', xhr=True)
+             permission=MANAGE_REFERENCE_TABLE_PERMISSION,
+             renderer='json', xhr=True)
 def delete_table_element(request):
     """Reference table delete view"""
     return delete_container_element(request)

@@ -20,7 +20,7 @@ from pyramid.response import Response
 from pyramid.view import view_config
 from zope.interface import Interface
 
-from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
+from pyams_content.interfaces import MANAGE_REFERENCE_TABLE_PERMISSION
 from pyams_content.reference.pictogram import IPictogram, IPictogramTable
 from pyams_content.reference.pictogram.zmi.table import PictogramTableContainerTable
 from pyams_form.ajax import ajax_form_config
@@ -55,7 +55,7 @@ from pyams_content import _
 @viewlet_config(name='add-pictogram.menu',
                 context=IPictogramTable, layer=IAdminLayer, view=PictogramTableContainerTable,
                 manager=IToolbarViewletManager, weight=10,
-                permission=MANAGE_SITE_ROOT_PERMISSION)
+                permission=MANAGE_REFERENCE_TABLE_PERMISSION)
 class PictogramAddAction(ContextAddAction):
     """Pictogram add action"""
 
@@ -65,7 +65,7 @@ class PictogramAddAction(ContextAddAction):
 
 @ajax_form_config(name='add-pictogram.html',
                   context=IPictogramTable, layer=IPyAMSLayer,
-                  permission=MANAGE_SITE_ROOT_PERMISSION)
+                  permission=MANAGE_REFERENCE_TABLE_PERMISSION)
 class PictogramAddForm(AdminModalAddForm):
     """Pictogram add form"""
 

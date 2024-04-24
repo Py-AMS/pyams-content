@@ -31,7 +31,6 @@ from pyams_utils.vocabulary import vocabulary_config
 __docformat__ = 'restructuredtext'
 
 
-
 @implementer(ISharedToolRoles)
 class SharedToolRoles(ProtectedObjectRoles):
     """Shared tool roles"""

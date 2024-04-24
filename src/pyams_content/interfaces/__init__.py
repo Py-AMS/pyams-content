@@ -35,6 +35,9 @@ from pyams_content import _
 MANAGE_SITE_ROOT_PERMISSION = 'pyams.ManageSiteRoot'
 '''Permission required to manage main site root properties'''
 
+MANAGE_REFERENCE_TABLE_PERMISSION = 'pyams.ManageReferenceTable'
+'''Permission required to manage reference table properties'''
+
 MANAGE_SITE_TREE_PERMISSION = 'pyams.ManageSiteTree'
 '''Permission required to create first level site elements'''
 
@@ -66,6 +69,9 @@ PUBLISH_CONTENT_PERMISSION = 'pyams.PublishContent'
 
 WEBMASTER_ROLE = 'pyams.Webmaster'
 '''Webmaster role has all permissions on all contents'''
+
+REFERENCE_MANAGER_ROLE = 'pyams.ReferenceManager'
+'''References manager role has permissions to handle references tables'''
 
 PILOT_ROLE = 'pyams.Pilot'
 '''Pilot role is allowed to manage tools configuration and permissions'''

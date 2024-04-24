@@ -23,14 +23,16 @@ from zope.interface import implementer
 from zope.lifecycleevent import IObjectAddedEvent
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
-from pyams_content.reference.interfaces import IReferenceInfo, IReferenceManager, IReferenceTable
+from pyams_content.interfaces import MANAGE_REFERENCE_TABLE_PERMISSION
+from pyams_content.reference.interfaces import IReferenceInfo, IReferenceManager, IReferenceTable, IReferenceTableRoles, \
+    REFERENCE_TABLE_ROLES
 from pyams_i18n.interfaces import II18nManager
-from pyams_security.interfaces import IViewContextPermissionChecker
+from pyams_security.interfaces import IDefaultProtectionPolicy, IRolesPolicy, IViewContextPermissionChecker
+from pyams_security.property import RolePrincipalsFieldProperty
+from pyams_security.security import ProtectedObjectMixin, ProtectedObjectRoles
 from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.factory import factory_config
 from pyams_utils.traversing import get_parent
-
 
 __docformat__ = 'restructuredtext'
 
@@ -60,14 +62,38 @@ def handle_added_references_manager(event):
         registry.registerUtility(event.object, IReferenceManager)
 
 
-@implementer(IReferenceTable, II18nManager)
-class ReferenceTable(Folder):
+@implementer(IDefaultProtectionPolicy, IReferenceTable, II18nManager)
+class ReferenceTable(ProtectedObjectMixin, Folder):
     """References table"""
 
     title = FieldProperty(IReferenceTable['title'])
     short_name = FieldProperty(IReferenceTable['short_name'])
 
     languages = FieldProperty(II18nManager['languages'])
+
+
+@implementer(IReferenceTableRoles)
+class ReferenceTableRoles(ProtectedObjectRoles):
+    """References table roles"""
+
+    managers = RolePrincipalsFieldProperty(IReferenceTableRoles['managers'])
+
+
+@adapter_config(required=IReferenceTable,
+                provides=IReferenceTableRoles)
+def reference_table_roles(context):
+    """References table roles adapter"""
+    return ReferenceTableRoles(context)
+
+
+@adapter_config(name=REFERENCE_TABLE_ROLES,
+                required=IReferenceTable,
+                provides=IRolesPolicy)
+class ReferenceTableRolesPolicy(ContextAdapter):
+    """References table roles policy"""
+
+    roles_interface = IReferenceTableRoles
+    weight = 10
 
 
 @implementer(IReferenceInfo)
@@ -83,4 +109,4 @@ class ReferenceInfo(Persistent, Contained):
 class ReferenceInfoPermissionChecker(ContextAdapter):
     """Reference info permission checker"""
 
-    edit_permission = MANAGE_SITE_ROOT_PERMISSION
+    edit_permission = MANAGE_REFERENCE_TABLE_PERMISSION

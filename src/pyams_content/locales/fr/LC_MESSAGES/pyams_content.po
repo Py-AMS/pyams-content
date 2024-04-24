@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-03-24 02:24+0100\n"
+"POT-Creation-Date: 2024-04-24 23:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,66 +20,74 @@ msgid "Manage main site root properties"
 msgstr "Gérer les propriétés globales du site"
 
 #: src/pyams_content/include.py:57
+msgid "Manage references table"
+msgstr "Gérer les tables de références"
+
+#: src/pyams_content/include.py:61
 msgid "Manage first level site tree elements"
 msgstr "Gérer les sites de premier niveau"
 
-#: src/pyams_content/include.py:61
+#: src/pyams_content/include.py:65
 msgid "Manage site, blog or hub properties"
 msgstr "Gérer les propriétés d'un site, d'un blog ou d'un hub"
 
-#: src/pyams_content/include.py:65
+#: src/pyams_content/include.py:69
 msgid "Manage shared tool properties"
 msgstr "Gérer les propriétés d'un outil partagé"
 
-#: src/pyams_content/include.py:69
+#: src/pyams_content/include.py:73
 msgid "Create new content"
 msgstr "Créer un nouveau contenu"
 
-#: src/pyams_content/include.py:73
+#: src/pyams_content/include.py:77
 msgid "Create new version of existing content"
 msgstr "Créer une nouvelle version d'un contenu"
 
-#: src/pyams_content/include.py:77
+#: src/pyams_content/include.py:81
 msgid "Manage content properties"
 msgstr "Gérer les propriétés d'un contenu"
 
-#: src/pyams_content/include.py:81
+#: src/pyams_content/include.py:85
 msgid "Comment existing content"
 msgstr "Commenter un contenu"
 
-#: src/pyams_content/include.py:85
+#: src/pyams_content/include.py:89
 msgid "Publish or retire existing content"
 msgstr "Publier ou retirer un contenu"
 
-#: src/pyams_content/include.py:101
+#: src/pyams_content/include.py:105
 msgid "Webmaster (role)"
 msgstr "Webmestre (rôle)"
 
-#: src/pyams_content/include.py:120
+#: src/pyams_content/include.py:125
+msgid "References manager (role)"
+msgstr "Gestionnaire de références (rôle)"
+
+#: src/pyams_content/include.py:138
 msgid "Pilot (role)"
 msgstr "Pilote (rôle)"
 
-#: src/pyams_content/include.py:136
+#: src/pyams_content/include.py:154
 msgid "Manager (role)"
 msgstr "Responsable (rôle)"
 
-#: src/pyams_content/include.py:152
+#: src/pyams_content/include.py:170
 msgid "Owner (role)"
 msgstr "Propriétaire (rôle)"
 
-#: src/pyams_content/include.py:162
+#: src/pyams_content/include.py:180
 msgid "Contributor (role)"
 msgstr "Contributeur (rôle)"
 
-#: src/pyams_content/include.py:179
+#: src/pyams_content/include.py:197
 msgid "Reader (role)"
 msgstr "Relecteur (rôle)"
 
-#: src/pyams_content/include.py:196
+#: src/pyams_content/include.py:214
 msgid "Operator (role)"
 msgstr "Opérateur (rôle)"
 
-#: src/pyams_content/include.py:207
+#: src/pyams_content/include.py:225
 msgid "Guest user (role)"
 msgstr "Invité (rôle)"
 
@@ -94,11 +102,11 @@ msgstr ""
 "niveau parent n'est pas publié"
 
 #: src/pyams_content/zmi/dashboard.py:112
-#: src/pyams_content/reference/zmi/table.py:99
+#: src/pyams_content/reference/zmi/table.py:98
 #: src/pyams_content/feature/navigation/portlet/interfaces.py:33
 #: src/pyams_content/feature/navigation/portlet/interfaces.py:47
 #: src/pyams_content/feature/search/portlet/interfaces.py:44
-#: src/pyams_content/interfaces/__init__.py:116
+#: src/pyams_content/interfaces/__init__.py:122
 #: src/pyams_content/component/paragraph/zmi/container.py:236
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:33
 #: src/pyams_content/component/gallery/interfaces.py:118
@@ -158,7 +166,15 @@ msgstr "Dernière modification"
 msgid "Shortcuts"
 msgstr "Contenus"
 
-#: src/pyams_content/reference/zmi/table.py:51
+#: src/pyams_content/reference/interfaces.py:48
+msgid "Table managers"
+msgstr "Gestionnaires"
+
+#: src/pyams_content/reference/interfaces.py:49
+msgid "Table managers can handle all table contents"
+msgstr "Liste des gestionnaires autorisés à gérer le contenu de cette table"
+
+#: src/pyams_content/reference/zmi/table.py:50
 #: src/pyams_content/shared/site/zmi/manager.py:167
 #: src/pyams_content/shared/site/zmi/folder.py:180
 #: src/pyams_content/shared/common/zmi/manager.py:82
@@ -167,15 +183,15 @@ msgstr "Contenus"
 msgid "Properties"
 msgstr "Propriétés"
 
-#: src/pyams_content/reference/zmi/table.py:62
+#: src/pyams_content/reference/zmi/table.py:61
 msgid "Pictograms table"
 msgstr "Table des pictogrammes"
 
-#: src/pyams_content/reference/zmi/table.py:63
+#: src/pyams_content/reference/zmi/table.py:62
 msgid "Edit table properties"
 msgstr "Propriétés de la table"
 
-#: src/pyams_content/reference/zmi/table.py:73
+#: src/pyams_content/reference/zmi/table.py:72
 msgid "Table management"
 msgstr "Gérer cette table"
 
@@ -825,7 +841,7 @@ msgid "Reviewer comment?"
 msgstr "Commentaire d'un relecteur"
 
 #: src/pyams_content/feature/review/interfaces.py:77
-#: src/pyams_content/interfaces/__init__.py:128
+#: src/pyams_content/interfaces/__init__.py:134
 #: src/pyams_content/shared/common/zmi/search.py:225
 #: src/pyams_content/root/zmi/search.py:160
 msgid "Creation date"
@@ -942,8 +958,8 @@ msgid ""
 "You have been requested by ${sender}, contributor of « ${service_name} » "
 "website, to make a review of a content."
 msgstr ""
-"Vous êtes sollicité par ${sender}, contributor du site internet « "
-"${service_name} », qui souhaite recueillir votre commentaire à propos d'un "
+"Vous êtes sollicité par ${sender}, contributor du site internet "
+"« ${service_name} », qui souhaite recueillir votre commentaire à propos d'un "
 "contenu."
 
 #: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:36
@@ -1484,7 +1500,7 @@ msgstr ""
 "canonique, vous pouvez imposer l'affichage de ce contenu dans son contexte "
 "d'origine, s'il est défini"
 
-#: src/pyams_content/feature/search/portlet/__init__.py:113
+#: src/pyams_content/feature/search/portlet/__init__.py:114
 #: src/pyams_content/shared/common/zmi/owner.py:362
 #: src/pyams_content/shared/common/zmi/search.py:430
 msgid "Search results"
@@ -1765,11 +1781,11 @@ msgstr "Aperçu"
 msgid "Open preview in new tab"
 msgstr "Ouvrir l'aperçu dans un nouvel onglet"
 
-#: src/pyams_content/interfaces/__init__.py:110
+#: src/pyams_content/interfaces/__init__.py:116
 msgid "Unique key"
 msgstr "Nom du contenu"
 
-#: src/pyams_content/interfaces/__init__.py:111
+#: src/pyams_content/interfaces/__init__.py:117
 msgid ""
 "WARNING: this key can't be modified after creation!!! Spaces, uppercase "
 "letters or accentuated characters will be replaced automatically."
@@ -1778,26 +1794,26 @@ msgstr ""
 "espaces, majuscules et caractères accentués seront remplacés "
 "automatiquement..."
 
-#: src/pyams_content/interfaces/__init__.py:117
+#: src/pyams_content/interfaces/__init__.py:123
 #: src/pyams_content/shared/site/zmi/folder.py:84
 msgid "Visible label used to display content"
 msgstr "Libellé principal du contenu"
 
-#: src/pyams_content/interfaces/__init__.py:120
+#: src/pyams_content/interfaces/__init__.py:126
 msgid "Short name"
 msgstr "Fil d'Ariane"
 
-#: src/pyams_content/interfaces/__init__.py:121
+#: src/pyams_content/interfaces/__init__.py:127
 msgid "Short name used in breadcrumbs"
 msgstr "Libellé court visible dans le fil d'Ariane"
 
-#: src/pyams_content/interfaces/__init__.py:132
+#: src/pyams_content/interfaces/__init__.py:138
 #: src/pyams_content/shared/common/zmi/search.py:228
 #: src/pyams_content/root/zmi/search.py:163
 msgid "Modification date"
 msgstr "Date de dernière modification"
 
-#: src/pyams_content/interfaces/__init__.py:144
+#: src/pyams_content/interfaces/__init__.py:150
 msgid "Object types"
 msgstr "Types de l'objet"
 
@@ -2322,11 +2338,11 @@ msgstr ""
 msgid "§ Title"
 msgstr "Titre §"
 
-#: src/pyams_content/component/paragraph/interfaces/__init__.py:112
+#: src/pyams_content/component/paragraph/interfaces/__init__.py:115
 msgid "Allowed paragraphs"
 msgstr "Types de blocs autorisés"
 
-#: src/pyams_content/component/paragraph/interfaces/__init__.py:113
+#: src/pyams_content/component/paragraph/interfaces/__init__.py:116
 msgid ""
 "List of paragraphs allowed for this content type; if selection is empty, all "
 "paragraphs types will be allowed"
@@ -2334,11 +2350,11 @@ msgstr ""
 "Liste des types de blocs autorisés au sein de ce gabarit ; une sélection "
 "vide indique que tous les types de blocs seront utilisables"
 
-#: src/pyams_content/component/paragraph/interfaces/__init__.py:118
+#: src/pyams_content/component/paragraph/interfaces/__init__.py:121
 msgid "Default paragraphs types"
 msgstr "Types de blocs par défaut"
 
-#: src/pyams_content/component/paragraph/interfaces/__init__.py:119
+#: src/pyams_content/component/paragraph/interfaces/__init__.py:122
 msgid ""
 "Empty paragraphs of these types will be added automatically to new contents "
 "of this content type; if paragraphs are associated to content type, these "
@@ -2349,7 +2365,7 @@ msgstr ""
 "contenus sont associés au type de contenu sélectionné lors de la création "
 "d'un contenu, ceux-ci seront prioritaires par rapport à ceux sélectionnés ici"
 
-#: src/pyams_content/component/paragraph/interfaces/__init__.py:146
+#: src/pyams_content/component/paragraph/interfaces/__init__.py:149
 msgid "Renderer"
 msgstr "Mode de rendu"
 
@@ -3771,8 +3787,8 @@ msgstr "En-tête du formulaire"
 msgid "-- missing value ({}) --"
 msgstr "-- valeur manquante ({}) --"
 
-#: src/pyams_content/shared/common/__init__.py:117
-#: src/pyams_content/shared/common/__init__.py:126
+#: src/pyams_content/shared/common/__init__.py:135
+#: src/pyams_content/shared/common/__init__.py:144
 #, python-format
 msgid "{date} by {principal}"
 msgstr "{date} par {principal}"
@@ -4970,15 +4986,15 @@ msgstr ""
 "Les invités sont autorisés à consulter les contenus sur lesquels des "
 "restrictions d'accès ont été appliquées"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:303
+#: src/pyams_content/shared/common/interfaces/__init__.py:306
 msgid "Principal ID"
 msgstr "Mandataire"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:333
+#: src/pyams_content/shared/common/interfaces/__init__.py:336
 msgid "Show workflow checks warning"
 msgstr "Activer le tunnel de publication"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:334
+#: src/pyams_content/shared/common/interfaces/__init__.py:337
 msgid ""
 "If 'yes', this contributor will have to confirm that contents have been "
 "checked before asking for publication"
@@ -4986,21 +5002,21 @@ msgstr ""
 "Si 'oui', ce contributeur devra confirmer explicitement que ses contenus ont "
 "été prévisualisés et vérifiés avant de pouvoir demander leur publication"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:340
+#: src/pyams_content/shared/common/interfaces/__init__.py:343
 msgid "Substitute for"
 msgstr "Suppléant de"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:341
+#: src/pyams_content/shared/common/interfaces/__init__.py:344
 msgid "Contributor will have access to contents owned by these principals"
 msgstr ""
 "Le contributeur aura accès aux contenus dont ces mandataires sont "
 "propriétaires"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:363
+#: src/pyams_content/shared/common/interfaces/__init__.py:366
 msgid "Publication checks"
 msgstr "Activer le tunnel de publication"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:364
+#: src/pyams_content/shared/common/interfaces/__init__.py:367
 msgid ""
 "If 'yes', this manager will have to confirm that contents have been "
 "previewed and checked before publishing a content"
@@ -5009,11 +5025,11 @@ msgstr ""
 "lui ont été transmis ont été prévisualisés et vérifiés avant de pouvoir les "
 "publier"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:370
+#: src/pyams_content/shared/common/interfaces/__init__.py:373
 msgid "Restricted contents"
 msgstr "Activer des restrictions d'accès"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:371
+#: src/pyams_content/shared/common/interfaces/__init__.py:374
 msgid ""
 "If 'yes', this manager will get restricted access to manage contents based "
 "on selected settings"
@@ -5021,11 +5037,11 @@ msgstr ""
 "Si 'oui', ce responsable ne pourra gérer que des contenus dont les "
 "propriétés correspondent à au moins l'un des paramètres indiqués ci-dessous"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:376
+#: src/pyams_content/shared/common/interfaces/__init__.py:379
 msgid "Selected owners"
 msgstr "Propriétaires"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:377
+#: src/pyams_content/shared/common/interfaces/__init__.py:380
 msgid "Manager will have access to contents owned by these principals"
 msgstr "Ce responsable aura accès aux contenus de ces propriétaires"
 
@@ -5148,7 +5164,7 @@ msgid "Alert"
 msgstr "Alerte"
 
 #: src/pyams_content/shared/alert/interfaces.py:86
-#: src/pyams_content/shared/alert/zmi/types.py:223
+#: src/pyams_content/shared/alert/zmi/types.py:222
 msgid "Alert type"
 msgstr "Type d'alerte"
 
@@ -5239,7 +5255,7 @@ msgstr "Nouveau type d'alerte"
 msgid "New alert type properties"
 msgstr "Propriétés du nouveau type"
 
-#: src/pyams_content/shared/alert/zmi/types.py:238
+#: src/pyams_content/shared/alert/zmi/types.py:237
 msgid "Alert type properties"
 msgstr "Propriétés du type d'alerte"
 

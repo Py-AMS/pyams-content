@@ -14,12 +14,16 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
 from zope.container.constraints import containers, contains
 from zope.container.interfaces import IContainer
+from zope.interface import Interface
 
-from pyams_content.interfaces import IBaseContent
+from pyams_content.interfaces import IBaseContent, REFERENCE_MANAGER_ROLE
+from pyams_security.schema import PrincipalsSetField
+
+__docformat__ = 'restructuredtext'
+
+from pyams_content import _
 
 
 class IReferenceInfo(IBaseContent):
@@ -33,6 +37,18 @@ class IReferenceTable(IBaseContent):
 
     containers('.IReferenceTableContainer')
     contains(IReferenceInfo)
+
+
+REFERENCE_TABLE_ROLES = 'pyams_content.reference.roles'
+
+
+class IReferenceTableRoles(Interface):
+    """Reference table roles interface"""
+
+    managers = PrincipalsSetField(title=_("Table managers"),
+                                  description=_("Table managers can handle all table contents"),
+                                  role_id=REFERENCE_MANAGER_ROLE,
+                                  required=False)
 
 
 class IReferenceManager(IBaseContent, IContainer):

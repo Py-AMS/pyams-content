@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-03-24 02:24+0100\n"
+"POT-Creation-Date: 2024-04-24 23:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,66 +21,74 @@ msgid "Manage main site root properties"
 msgstr ""
 
 #: ./src/pyams_content/include.py:57
-msgid "Manage first level site tree elements"
+msgid "Manage references table"
 msgstr ""
 
 #: ./src/pyams_content/include.py:61
-msgid "Manage site, blog or hub properties"
+msgid "Manage first level site tree elements"
 msgstr ""
 
 #: ./src/pyams_content/include.py:65
-msgid "Manage shared tool properties"
+msgid "Manage site, blog or hub properties"
 msgstr ""
 
 #: ./src/pyams_content/include.py:69
-msgid "Create new content"
+msgid "Manage shared tool properties"
 msgstr ""
 
 #: ./src/pyams_content/include.py:73
-msgid "Create new version of existing content"
+msgid "Create new content"
 msgstr ""
 
 #: ./src/pyams_content/include.py:77
-msgid "Manage content properties"
+msgid "Create new version of existing content"
 msgstr ""
 
 #: ./src/pyams_content/include.py:81
-msgid "Comment existing content"
+msgid "Manage content properties"
 msgstr ""
 
 #: ./src/pyams_content/include.py:85
+msgid "Comment existing content"
+msgstr ""
+
+#: ./src/pyams_content/include.py:89
 msgid "Publish or retire existing content"
 msgstr ""
 
-#: ./src/pyams_content/include.py:101
+#: ./src/pyams_content/include.py:105
 msgid "Webmaster (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:120
+#: ./src/pyams_content/include.py:125
+msgid "References manager (role)"
+msgstr ""
+
+#: ./src/pyams_content/include.py:138
 msgid "Pilot (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:136
+#: ./src/pyams_content/include.py:154
 msgid "Manager (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:152
+#: ./src/pyams_content/include.py:170
 msgid "Owner (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:162
+#: ./src/pyams_content/include.py:180
 msgid "Contributor (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:179
+#: ./src/pyams_content/include.py:197
 msgid "Reader (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:196
+#: ./src/pyams_content/include.py:214
 msgid "Operator (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:207
+#: ./src/pyams_content/include.py:225
 msgid "Guest user (role)"
 msgstr ""
 
@@ -93,11 +101,11 @@ msgid "Visible element?"
 msgstr ""
 
 #: ./src/pyams_content/zmi/dashboard.py:112
-#: ./src/pyams_content/reference/zmi/table.py:99
+#: ./src/pyams_content/reference/zmi/table.py:98
 #: ./src/pyams_content/feature/navigation/portlet/interfaces.py:33
 #: ./src/pyams_content/feature/navigation/portlet/interfaces.py:47
 #: ./src/pyams_content/feature/search/portlet/interfaces.py:44
-#: ./src/pyams_content/interfaces/__init__.py:116
+#: ./src/pyams_content/interfaces/__init__.py:122
 #: ./src/pyams_content/component/paragraph/zmi/container.py:236
 #: ./src/pyams_content/component/paragraph/portlet/interfaces.py:33
 #: ./src/pyams_content/component/gallery/interfaces.py:118
@@ -157,7 +165,15 @@ msgstr ""
 msgid "Shortcuts"
 msgstr ""
 
-#: ./src/pyams_content/reference/zmi/table.py:51
+#: ./src/pyams_content/reference/interfaces.py:48
+msgid "Table managers"
+msgstr ""
+
+#: ./src/pyams_content/reference/interfaces.py:49
+msgid "Table managers can handle all table contents"
+msgstr ""
+
+#: ./src/pyams_content/reference/zmi/table.py:50
 #: ./src/pyams_content/shared/site/zmi/manager.py:167
 #: ./src/pyams_content/shared/site/zmi/folder.py:180
 #: ./src/pyams_content/shared/common/zmi/manager.py:82
@@ -166,15 +182,15 @@ msgstr ""
 msgid "Properties"
 msgstr ""
 
-#: ./src/pyams_content/reference/zmi/table.py:62
+#: ./src/pyams_content/reference/zmi/table.py:61
 msgid "Pictograms table"
 msgstr ""
 
-#: ./src/pyams_content/reference/zmi/table.py:63
+#: ./src/pyams_content/reference/zmi/table.py:62
 msgid "Edit table properties"
 msgstr ""
 
-#: ./src/pyams_content/reference/zmi/table.py:73
+#: ./src/pyams_content/reference/zmi/table.py:72
 msgid "Table management"
 msgstr ""
 
@@ -806,7 +822,7 @@ msgid "Reviewer comment?"
 msgstr ""
 
 #: ./src/pyams_content/feature/review/interfaces.py:77
-#: ./src/pyams_content/interfaces/__init__.py:128
+#: ./src/pyams_content/interfaces/__init__.py:134
 #: ./src/pyams_content/shared/common/zmi/search.py:225
 #: ./src/pyams_content/root/zmi/search.py:160
 msgid "Creation date"
@@ -1402,7 +1418,7 @@ msgid ""
 " target in it's attachment context (if defined)"
 msgstr ""
 
-#: ./src/pyams_content/feature/search/portlet/__init__.py:113
+#: ./src/pyams_content/feature/search/portlet/__init__.py:114
 #: ./src/pyams_content/shared/common/zmi/owner.py:362
 #: ./src/pyams_content/shared/common/zmi/search.py:430
 msgid "Search results"
@@ -1670,36 +1686,36 @@ msgstr ""
 msgid "Open preview in new tab"
 msgstr ""
 
-#: ./src/pyams_content/interfaces/__init__.py:110
+#: ./src/pyams_content/interfaces/__init__.py:116
 msgid "Unique key"
 msgstr ""
 
-#: ./src/pyams_content/interfaces/__init__.py:111
+#: ./src/pyams_content/interfaces/__init__.py:117
 msgid ""
 "WARNING: this key can't be modified after creation!!! Spaces, uppercase "
 "letters or accentuated characters will be replaced automatically."
 msgstr ""
 
-#: ./src/pyams_content/interfaces/__init__.py:117
+#: ./src/pyams_content/interfaces/__init__.py:123
 #: ./src/pyams_content/shared/site/zmi/folder.py:84
 msgid "Visible label used to display content"
 msgstr ""
 
-#: ./src/pyams_content/interfaces/__init__.py:120
+#: ./src/pyams_content/interfaces/__init__.py:126
 msgid "Short name"
 msgstr ""
 
-#: ./src/pyams_content/interfaces/__init__.py:121
+#: ./src/pyams_content/interfaces/__init__.py:127
 msgid "Short name used in breadcrumbs"
 msgstr ""
 
-#: ./src/pyams_content/interfaces/__init__.py:132
+#: ./src/pyams_content/interfaces/__init__.py:138
 #: ./src/pyams_content/shared/common/zmi/search.py:228
 #: ./src/pyams_content/root/zmi/search.py:163
 msgid "Modification date"
 msgstr ""
 
-#: ./src/pyams_content/interfaces/__init__.py:144
+#: ./src/pyams_content/interfaces/__init__.py:150
 msgid "Object types"
 msgstr ""
 
@@ -2193,28 +2209,28 @@ msgstr ""
 msgid "§ Title"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:112
+#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:115
 msgid "Allowed paragraphs"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:113
+#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:116
 msgid ""
 "List of paragraphs allowed for this content type; if selection is empty, all "
 "paragraphs types will be allowed"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:118
+#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:121
 msgid "Default paragraphs types"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:119
+#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:122
 msgid ""
 "Empty paragraphs of these types will be added automatically to new contents "
 "of this content type; if paragraphs are associated to content type, these "
 "will be used instead of these ones"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:146
+#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:149
 msgid "Renderer"
 msgstr ""
 
@@ -3525,8 +3541,8 @@ msgstr ""
 msgid "-- missing value ({}) --"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/__init__.py:117
-#: ./src/pyams_content/shared/common/__init__.py:126
+#: ./src/pyams_content/shared/common/__init__.py:135
+#: ./src/pyams_content/shared/common/__init__.py:144
 #, python-format
 msgid "{date} by {principal}"
 msgstr ""
@@ -4601,53 +4617,53 @@ msgid ""
 "Guests are users which are allowed to view contents with restricted access"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:303
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:306
 msgid "Principal ID"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:333
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:336
 msgid "Show workflow checks warning"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:334
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:337
 msgid ""
 "If 'yes', this contributor will have to confirm that contents have been "
 "checked before asking for publication"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:340
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:343
 msgid "Substitute for"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:341
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:344
 msgid "Contributor will have access to contents owned by these principals"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:363
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:366
 msgid "Publication checks"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:364
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:367
 msgid ""
 "If 'yes', this manager will have to confirm that contents have been previewed"
 " and checked before publishing a content"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:370
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:373
 msgid "Restricted contents"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:371
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:374
 msgid ""
 "If 'yes', this manager will get restricted access to manage contents based on"
 " selected settings"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:376
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:379
 msgid "Selected owners"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:377
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:380
 msgid "Manager will have access to contents owned by these principals"
 msgstr ""
 
@@ -4761,7 +4777,7 @@ msgid "Alert"
 msgstr ""
 
 #: ./src/pyams_content/shared/alert/interfaces.py:86
-#: ./src/pyams_content/shared/alert/zmi/types.py:223
+#: ./src/pyams_content/shared/alert/zmi/types.py:222
 msgid "Alert type"
 msgstr ""
 
@@ -4838,7 +4854,7 @@ msgstr ""
 msgid "New alert type properties"
 msgstr ""
 
-#: ./src/pyams_content/shared/alert/zmi/types.py:238
+#: ./src/pyams_content/shared/alert/zmi/types.py:237
 msgid "Alert type properties"
 msgstr ""
 

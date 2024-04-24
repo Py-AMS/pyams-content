@@ -25,9 +25,9 @@ from pyams_content.component.thesaurus import ICollectionsManagerTarget, ITagsMa
 from pyams_content.feature.preview.interfaces import IPreviewTarget
 from pyams_content.interfaces import COMMENT_CONTENT_PERMISSION, CONTRIBUTOR_ROLE, \
     CREATE_CONTENT_PERMISSION, CREATE_VERSION_PERMISSION, GUEST_ROLE, MANAGER_ROLE, \
-    MANAGE_CONTENT_PERMISSION, MANAGE_SITE_PERMISSION, MANAGE_SITE_ROOT_PERMISSION, \
+    MANAGE_CONTENT_PERMISSION, MANAGE_REFERENCE_TABLE_PERMISSION, MANAGE_SITE_PERMISSION, MANAGE_SITE_ROOT_PERMISSION, \
     MANAGE_SITE_TREE_PERMISSION, MANAGE_TOOL_PERMISSION, OID_ACCESS_PATH, OID_ACCESS_ROUTE, OPERATOR_ROLE, OWNER_ROLE, \
-    PILOT_ROLE, PUBLISH_CONTENT_PERMISSION, READER_ROLE, WEBMASTER_ROLE
+    PILOT_ROLE, PUBLISH_CONTENT_PERMISSION, READER_ROLE, REFERENCE_MANAGER_ROLE, WEBMASTER_ROLE
 from pyams_layer.interfaces import MANAGE_SKIN_PERMISSION
 from pyams_security.interfaces.base import MANAGE_PERMISSION, MANAGE_ROLES_PERMISSION, \
     PUBLIC_PERMISSION, ROLE_ID, VIEW_PERMISSION, VIEW_SYSTEM_PERMISSION
@@ -51,6 +51,10 @@ def include_package(config):
     config.register_permission({
         'id': MANAGE_SITE_ROOT_PERMISSION,
         'title': _("Manage main site root properties")
+    })
+    config.register_permission({
+        'id': MANAGE_REFERENCE_TABLE_PERMISSION,
+        'title': _("Manage references table")
     })
     config.register_permission({
         'id': MANAGE_SITE_TREE_PERMISSION,
@@ -88,11 +92,11 @@ def include_package(config):
     # upgrade system manager roles
     config.upgrade_role(SYSTEM_ADMIN_ROLE,
                         permissions={
-                            COMMENT_CONTENT_PERMISSION, CREATE_CONTENT_PERMISSION,
+                            MANAGE_SITE_ROOT_PERMISSION, MANAGE_REFERENCE_TABLE_PERMISSION,
+                            MANAGE_SITE_TREE_PERMISSION, MANAGE_SITE_PERMISSION,
+                            MANAGE_TOOL_PERMISSION, CREATE_CONTENT_PERMISSION,
                             CREATE_VERSION_PERMISSION, MANAGE_CONTENT_PERMISSION,
-                            MANAGE_SITE_PERMISSION, MANAGE_SITE_ROOT_PERMISSION,
-                            MANAGE_SITE_TREE_PERMISSION, MANAGE_TOOL_PERMISSION,
-                            PUBLISH_CONTENT_PERMISSION
+                            COMMENT_CONTENT_PERMISSION, PUBLISH_CONTENT_PERMISSION
                         })
 
     # register new roles
@@ -104,15 +108,29 @@ def include_package(config):
             VIEW_SYSTEM_PERMISSION, MANAGE_ROLES_PERMISSION,
             CREATE_THESAURUS_PERMISSION, ADMIN_THESAURUS_PERMISSION,
             MANAGE_THESAURUS_CONTENT_PERMISSION, MANAGE_THESAURUS_EXTRACT_PERMISSION,
-            MANAGE_SITE_ROOT_PERMISSION, MANAGE_SITE_TREE_PERMISSION,
-            MANAGE_SITE_PERMISSION, MANAGE_TOOL_PERMISSION,
-            CREATE_CONTENT_PERMISSION, MANAGE_CONTENT_PERMISSION,
-            CREATE_VERSION_PERMISSION, MANAGE_SKIN_PERMISSION,
-            COMMENT_CONTENT_PERMISSION, PUBLISH_CONTENT_PERMISSION
+            MANAGE_SITE_ROOT_PERMISSION, MANAGE_REFERENCE_TABLE_PERMISSION,
+            MANAGE_SITE_TREE_PERMISSION, MANAGE_SITE_PERMISSION,
+            MANAGE_TOOL_PERMISSION, CREATE_CONTENT_PERMISSION,
+            CREATE_VERSION_PERMISSION, MANAGE_CONTENT_PERMISSION,
+            COMMENT_CONTENT_PERMISSION, PUBLISH_CONTENT_PERMISSION,
+            MANAGE_SKIN_PERMISSION
         },
         'managers': {
             ADMIN_USER_ID,
             ROLE_ID.format(SYSTEM_ADMIN_ROLE)
+        }
+    })
+    config.register_role({
+        'id': REFERENCE_MANAGER_ROLE,
+        'title': _("References manager (role)"),
+        'permissions': {
+            PUBLIC_PERMISSION, VIEW_PERMISSION, VIEW_SYSTEM_PERMISSION,
+            MANAGE_REFERENCE_TABLE_PERMISSION
+        },
+        'managers': {
+            ADMIN_USER_ID,
+            ROLE_ID.format(SYSTEM_ADMIN_ROLE),
+            ROLE_ID.format(WEBMASTER_ROLE)
         }
     })
     config.register_role({
