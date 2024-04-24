@@ -40,6 +40,16 @@ __docformat__ = 'restructuredtext'
 class ParagraphContainer(BTreeOrderedContainer):
     """Paragraph container persistent class"""
 
+    def get_paragraphs(self, factories):
+        """Get paragraphs matching given factories"""
+        if not isinstance(factories, (list, tuple, set)):
+            factories = {factories}
+        yield from (
+            paragraph
+            for paragraph in self.values()
+            if paragraph.factory_name in (factories or ())
+        )
+
     def get_visible_paragraphs(self, names=None, anchors_only=False, exclude_anchors=False,
                                factories=None, limit=None):
         """Visible paragraphs getter"""

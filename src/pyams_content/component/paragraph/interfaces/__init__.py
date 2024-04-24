@@ -81,6 +81,9 @@ class IParagraphContainer(IOrderedContainer):
     def append(self, value):
         """Add given value to container"""
 
+    def get_paragraphs(self, factories):
+        """Get paragraphs matching given factories"""
+
     def get_visible_paragraphs(self, names=None, anchors_only=False, exclude_anchors=False,
                                factories=None, limit=None):
         """Get visible paragraphs matching given arguments"""
