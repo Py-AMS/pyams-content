@@ -20,16 +20,12 @@ from pyramid.events import subscriber
 from zope.component.interfaces import ISite
 from zope.lifecycleevent import IObjectAddedEvent
 from zope.schema.fieldproperty import FieldProperty
-from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
-from pyams_content.reference import ReferenceInfo, ReferenceTable
+from pyams_content.reference import ReferenceInfo, ReferenceTable, ReferencesVocabulary
 from pyams_content.reference.pictogram.interfaces import IPictogram, IPictogramTable, \
     PICTOGRAM_VOCABULARY
 from pyams_file.property import I18nFileProperty
-from pyams_i18n.interfaces import II18n
 from pyams_utils.factory import factory_config
-from pyams_utils.registry import query_utility
-from pyams_utils.request import check_request
 from pyams_utils.traversing import get_parent
 from pyams_utils.vocabulary import vocabulary_config
 
@@ -58,18 +54,7 @@ class Pictogram(ReferenceInfo):
 
 
 @vocabulary_config(name=PICTOGRAM_VOCABULARY)
-class PictogramsVocabulary(SimpleVocabulary):
+class PictogramsVocabulary(ReferencesVocabulary):
     """Pictograms vocabulary"""
 
-    def __init__(self, context=None):
-        table = query_utility(IPictogramTable)
-        if table is not None:
-            request = check_request()
-            terms = [
-                SimpleTerm(v.__name__,
-                           title=II18n(v).query_attribute('title', request=request))
-                for v in table.values()
-            ]
-        else:
-            terms = []
-        super(PictogramsVocabulary, self).__init__(terms)
+    table_interface = IPictogramTable
