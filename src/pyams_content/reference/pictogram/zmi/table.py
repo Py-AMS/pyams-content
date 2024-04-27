@@ -29,6 +29,7 @@ from pyams_utils.adapter import adapter_config
 from pyams_utils.interfaces import MISSING_INFO
 from pyams_viewlet.manager import viewletmanager_config
 from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
+from pyams_zmi.interfaces.form import IFormTitle, IPropertiesEditForm
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu, ISiteManagementMenu
 from pyams_zmi.table import ActionColumn, TableAdminView
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
@@ -99,5 +100,14 @@ class PictogramTableContentsView(TableAdminView):
     """Pictograms table contents view"""
 
     title = _("Pictograms")
+
     table_class = PictogramTableContainerTable
     table_label = _("Pictograms list")
+
+
+@adapter_config(required=(IPictogramTable, IAdminLayer, IPropertiesEditForm),
+                provides=IFormTitle)
+def pictograms_table_title(context, request, form):
+    """Pictograms table edit form title getter"""
+    translate = request.localizer.translate
+    return translate(_("Pictograms table"))
