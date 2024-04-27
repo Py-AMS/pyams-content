@@ -242,7 +242,7 @@ class ContentReviewCommentsView(InnerAdminView):
              context=IReviewTarget, request_type=IPyAMSLayer,
              renderer='json', xhr=True,
              permission=COMMENT_CONTENT_PERMISSION)
-def review_comment_add_view(request):
+def add_review_comment(request):
     """Review comment add view"""
     translate = request.localizer.translate
     comment_body = request.params.get('comment')
