@@ -22,16 +22,19 @@ from zope.container.folder import Folder
 from zope.interface import implementer
 from zope.lifecycleevent import IObjectAddedEvent
 from zope.schema.fieldproperty import FieldProperty
+from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from pyams_content.interfaces import MANAGE_REFERENCE_TABLE_PERMISSION
 from pyams_content.reference.interfaces import IReferenceInfo, IReferenceManager, IReferenceTable, IReferenceTableRoles, \
     REFERENCE_TABLE_ROLES
-from pyams_i18n.interfaces import II18nManager
+from pyams_i18n.interfaces import II18n, II18nManager
 from pyams_security.interfaces import IDefaultProtectionPolicy, IRolesPolicy, IViewContextPermissionChecker
 from pyams_security.property import RolePrincipalsFieldProperty
 from pyams_security.security import ProtectedObjectMixin, ProtectedObjectRoles
 from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.factory import factory_config
+from pyams_utils.registry import query_utility
+from pyams_utils.request import check_request
 from pyams_utils.traversing import get_parent
 
 __docformat__ = 'restructuredtext'
@@ -110,3 +113,22 @@ class ReferenceInfoPermissionChecker(ContextAdapter):
     """Reference info permission checker"""
 
     edit_permission = MANAGE_REFERENCE_TABLE_PERMISSION
+
+
+class ReferencesVocabulary(SimpleVocabulary):
+    """Base references vocabulary"""
+
+    table_interface = None
+
+    def __init__(self, context=None):
+        table = query_utility(self.table_interface)
+        if table is not None:
+            request = check_request()
+            terms = [
+                SimpleTerm(v.__name__,
+                           title=II18n(v).query_attribute('title', request=request))
+                for v in table.values()
+            ]
+        else:
+            terms = []
+        super().__init__(terms)
