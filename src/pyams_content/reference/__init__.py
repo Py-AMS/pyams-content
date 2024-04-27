@@ -124,11 +124,11 @@ class ReferencesVocabulary(SimpleVocabulary):
         table = query_utility(self.table_interface)
         if table is not None:
             request = check_request()
-            terms = [
+            terms = sorted([
                 SimpleTerm(v.__name__,
                            title=II18n(v).query_attribute('title', request=request))
                 for v in table.values()
-            ]
+            ], key=lambda t: t.title)
         else:
             terms = []
         super().__init__(terms)
