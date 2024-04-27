@@ -15,7 +15,7 @@
 This module defines generic components used to handle references tables properties.
 """
 from pyramid.view import view_config
-from zope.interface import Interface
+from zope.interface import Interface, implementer
 
 from pyams_content.interfaces import MANAGE_REFERENCE_TABLE_PERMISSION
 from pyams_content.reference import IReferenceTable
@@ -31,6 +31,7 @@ from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminEditForm
 from pyams_zmi.helper.container import delete_container_element
 from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_zmi.interfaces.viewlet import IMenuHeader, IPropertiesMenu, ISiteManagementMenu
 from pyams_zmi.table import I18nColumnMixin, Table, TrashColumn
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
@@ -55,10 +56,10 @@ class ReferenceTablePropertiesMenu(NavigationMenuItem):
 @ajax_form_config(name='properties.html',
                   context=IReferenceTable, layer=IPyAMSLayer,
                   permission=VIEW_SYSTEM_PERMISSION)
+@implementer(IPropertiesEditForm)
 class ReferenceTablePropertiesEditForm(AdminEditForm):
     """Reference table properties edit form"""
 
-    title = _("Pictograms table")
     legend = _("Edit table properties")
 
     fields = Fields(IReferenceTable).omit('__parent__', '__name__')
