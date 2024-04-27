@@ -39,7 +39,7 @@ class IGalleryMediasAddFields(Interface):
 
     author = TextLine(title=_("Author"),
                       description=_("Name of document's author"),
-                      required=True)
+                      required=False)
 
 
 class IGalleryMediaThumbnailView(Interface):

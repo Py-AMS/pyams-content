@@ -63,7 +63,7 @@ class IGalleryFile(IGalleryItem):
 
     author = TextLine(title=_("Author"),
                       description=_("Name of media's author"),
-                      required=True)
+                      required=False)
 
     sound = AudioField(title=_("Audio data"),
                        description=_("Sound file associated with the current media"),
