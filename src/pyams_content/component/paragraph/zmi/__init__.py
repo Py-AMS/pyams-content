@@ -70,7 +70,7 @@ from pyams_content import _
 
 @viewlet_config(name='paragraph-types.menu',
                 context=IParagraphFactorySettingsTarget, layer=IAdminLayer,
-                manager=IPropertiesMenu, weight=610,
+                manager=IPropertiesMenu, weight=400,
                 permission=MANAGE_TOOL_PERMISSION)
 class ParagraphFactorySettingsMenu(NavigationMenuItem):
     """Paragraph factory settings menu"""
