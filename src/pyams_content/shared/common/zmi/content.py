@@ -17,6 +17,7 @@ This module provides common management components for shared contents.
 
 from zope.interface import Interface
 
+from pyams_content.shared.common import IBaseSharedTool
 from pyams_content.shared.common.interfaces import ISharedContent, IWfSharedContent, IWfSharedContentRoles
 from pyams_content.shared.common.interfaces.types import IWfTypedSharedContent
 from pyams_content.zmi.interfaces import IDashboardColumn, IDashboardContentNumber, \
@@ -151,6 +152,14 @@ def shared_content_owner(context, request, view):
 @template_config(template='templates/content-header.pt')
 class SharedContentHeaderViewlet(ContentHeaderViewlet):
     """Shared content header viewlet"""
+
+    @property
+    def parent_target_url(self):
+        """Parent target URL"""
+        tool = get_parent(self.context, IBaseSharedTool)
+        if tool is None:
+            return None
+        return absolute_url(tool, self.request, 'admin#dashboard.html')
 
     @property
     def owner(self):

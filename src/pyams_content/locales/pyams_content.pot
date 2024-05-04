@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-04-24 23:44+0200\n"
+"POT-Creation-Date: 2024-05-04 04:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -101,7 +101,7 @@ msgid "Visible element?"
 msgstr ""
 
 #: ./src/pyams_content/zmi/dashboard.py:112
-#: ./src/pyams_content/reference/zmi/table.py:98
+#: ./src/pyams_content/reference/zmi/table.py:99
 #: ./src/pyams_content/feature/navigation/portlet/interfaces.py:33
 #: ./src/pyams_content/feature/navigation/portlet/interfaces.py:47
 #: ./src/pyams_content/feature/search/portlet/interfaces.py:44
@@ -173,7 +173,7 @@ msgstr ""
 msgid "Table managers can handle all table contents"
 msgstr ""
 
-#: ./src/pyams_content/reference/zmi/table.py:50
+#: ./src/pyams_content/reference/zmi/table.py:51
 #: ./src/pyams_content/shared/site/zmi/manager.py:167
 #: ./src/pyams_content/shared/site/zmi/folder.py:180
 #: ./src/pyams_content/shared/common/zmi/manager.py:82
@@ -182,15 +182,11 @@ msgstr ""
 msgid "Properties"
 msgstr ""
 
-#: ./src/pyams_content/reference/zmi/table.py:61
-msgid "Pictograms table"
-msgstr ""
-
-#: ./src/pyams_content/reference/zmi/table.py:62
+#: ./src/pyams_content/reference/zmi/table.py:63
 msgid "Edit table properties"
 msgstr ""
 
-#: ./src/pyams_content/reference/zmi/table.py:72
+#: ./src/pyams_content/reference/zmi/table.py:73
 msgid "Table management"
 msgstr ""
 
@@ -244,18 +240,22 @@ msgstr ""
 msgid "List of selected pictograms which will be available to shared contents"
 msgstr ""
 
-#: ./src/pyams_content/reference/pictogram/zmi/table.py:41
-#: ./src/pyams_content/reference/pictogram/zmi/table.py:101
+#: ./src/pyams_content/reference/pictogram/zmi/table.py:42
+#: ./src/pyams_content/reference/pictogram/zmi/table.py:102
 #: ./src/pyams_content/shared/common/zmi/types/__init__.py:187
 msgid "Pictograms"
 msgstr ""
 
-#: ./src/pyams_content/reference/pictogram/zmi/table.py:59
+#: ./src/pyams_content/reference/pictogram/zmi/table.py:60
 msgid "Table contents"
 msgstr ""
 
-#: ./src/pyams_content/reference/pictogram/zmi/table.py:103
+#: ./src/pyams_content/reference/pictogram/zmi/table.py:105
 msgid "Pictograms list"
+msgstr ""
+
+#: ./src/pyams_content/reference/pictogram/zmi/table.py:113
+msgid "Pictograms table"
 msgstr ""
 
 #: ./src/pyams_content/reference/pictogram/zmi/manager.py:49
@@ -3938,7 +3938,7 @@ msgid ""
 msgstr ""
 
 #: ./src/pyams_content/shared/common/zmi/dashboard.py:110
-#: ./src/pyams_content/shared/common/zmi/content.py:214
+#: ./src/pyams_content/shared/common/zmi/content.py:223
 msgid "Content publication start date is not passed yet"
 msgstr ""
 
@@ -4199,39 +4199,39 @@ msgstr ""
 msgid "Entered text will be search in title only"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/content.py:161
+#: ./src/pyams_content/shared/common/zmi/content.py:170
 #, python-format
 msgid "from {}"
 msgstr ""
 
 #. init state format
-#: ./src/pyams_content/shared/common/zmi/content.py:200
+#: ./src/pyams_content/shared/common/zmi/content.py:209
 #, python-format
 msgid "{state} <span class=\"px-1\">by</span> {principal}"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/content.py:239
+#: ./src/pyams_content/shared/common/zmi/content.py:248
 #, python-format
 msgid "since {date}"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/content.py:252
+#: ./src/pyams_content/shared/common/zmi/content.py:261
 msgid "access published version"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/content.py:261
+#: ./src/pyams_content/shared/common/zmi/content.py:270
 msgid "access new version"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/content.py:273
+#: ./src/pyams_content/shared/common/zmi/content.py:282
 msgid "access waiting version"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/content.py:288
+#: ./src/pyams_content/shared/common/zmi/content.py:297
 msgid "access retired version"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/content.py:301
+#: ./src/pyams_content/shared/common/zmi/content.py:310
 msgid "access archived version"
 msgstr ""
 
@@ -4366,6 +4366,10 @@ msgstr ""
 
 #: ./src/pyams_content/shared/common/zmi/templates/quick-search.pt:20
 msgid "Advanced search..."
+msgstr ""
+
+#: ./src/pyams_content/shared/common/zmi/templates/content-header.pt:7
+msgid "Back to dashboard"
 msgstr ""
 
 #: ./src/pyams_content/shared/common/zmi/viewlet/__init__.py:40
