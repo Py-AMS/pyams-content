@@ -33,6 +33,7 @@ from pyams_content.workflow.task import ContentArchivingTask, ContentPublishingT
 from pyams_scheduler.interfaces import IScheduler
 from pyams_scheduler.interfaces.task import IDateTaskScheduling, SCHEDULER_TASK_DATE_MODE
 from pyams_security.interfaces import IRoleProtectedObject
+from pyams_security.interfaces.names import INTERNAL_USER_ID
 from pyams_sequence.interfaces import ISequentialIdInfo
 from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.date import format_datetime
@@ -139,6 +140,12 @@ ARCHIVED_STATES = (ARCHIVED, )
 #
 # Workflow conditions
 #
+
+def is_internal_user_id(wf, context):
+    """Check if current request principal is internal user ID"""
+    request = check_request()
+    return request.principal.id == INTERNAL_USER_ID
+
 
 def can_propose_content(wf, context):
     """Check if a content can be proposed"""
@@ -342,7 +349,8 @@ def publish_action(wf, context):
                                                             RETIRED, ARCHIVING)):
         if version is not context:
             IWorkflowInfo(version).fire_transition_toward(
-                ARCHIVED, comment=translate(_("Published version {0}")).format(version_id))
+                ARCHIVED,
+                comment=translate(_("Published version {0}")).format(version_id))
     # check expiration date and create auto-archiving task if needed
     # we compare expiration date with current date to handle the case where content is
     # published automatically at application startup, and we add a small amount of time
@@ -615,8 +623,26 @@ published_to_retired = Transition(transition_id='published_to_retired',
                                   title=_("Retired content"),
                                   source=PUBLISHED,
                                   destination=RETIRED,
-                                  trigger=SYSTEM_TRANSITION,
-                                  history_label=_("Content retired after passed expiration date"))
+                                  permission=PUBLISH_CONTENT_PERMISSION,
+                                  condition=can_manage_content,
+                                  action=unpublish_action,
+                                  menu_icon_class='far fa-fw fa-stop-circle',
+                                  view_name='wf-retire.html',
+                                  show_operator_warning=True,
+                                  history_label=_("Content retired"),
+                                  notify_roles={WEBMASTER_ROLE, PILOT_ROLE, MANAGER_ROLE,
+                                                OWNER_ROLE},
+                                  notify_title=_("Content removal"),
+                                  notify_message=_("{principal} retired content « {title} »"),
+                                  order=9)
+
+published_to_retired_by_task = Transition(transition_id='published_to_retired_by_task',
+                                          title=_("Retired content"),
+                                          source=PUBLISHED,
+                                          destination=RETIRED,
+                                          trigger=SYSTEM_TRANSITION,
+                                          condition=is_internal_user_id,
+                                          history_label=_("Content retired after passed expiration date"))
 
 retiring_to_published = Transition(transition_id='retiring_to_published',
                                    title=_("Cancel retiring request"),
@@ -651,12 +677,42 @@ retiring_to_retired = Transition(transition_id='retiring_to_retired',
                                  notify_message=_("{principal} retired content « {title} »"),
                                  order=9)
 
+retired_to_prepublished = Transition(transition_id='retired_to_prepublished',
+                                     title=_("Pre-publish retired content"),
+                                     source=RETIRED,
+                                     destination=PRE_PUBLISHED,
+                                     trigger=SYSTEM_TRANSITION,
+                                     action=prepublish_action,
+                                     history_label=_("Content pre-published"),
+                                     notify_roles={'*'},
+                                     notify_title=_("Content publication"),
+                                     notify_message=_("{principal} pre-published the content "
+                                                      "« {title} »"))
+
+retired_to_published = Transition(transition_id='retired_to_published',
+                                  title=_("Publish retired content"),
+                                  source=RETIRED,
+                                  destination=PUBLISHED,
+                                  permission=PUBLISH_CONTENT_PERMISSION,
+                                  condition=can_manage_content,
+                                  action=publish_action,
+                                  prepared_transition=retired_to_prepublished,
+                                  menu_icon_class='fas fa-fw fa-thumbs-up',
+                                  view_name='wf-publish.html',
+                                  show_operator_warning=True,
+                                  history_label=_("Content published"),
+                                  notify_roles={'*'},
+                                  notify_title=_("Content publication"),
+                                  notify_message=_("{principal} published the content "
+                                                   "« {title} »"),
+                                  order=4)
+
 retired_to_archiving = Transition(transition_id='retired_to_archiving',
                                   title=_("Request archive"),
                                   source=RETIRED,
                                   destination=ARCHIVING,
                                   permission=MANAGE_CONTENT_PERMISSION,
-                                  menu_icon_class='fas fa-fw fa-archive',
+                                  menu_icon_class='fas fa-fw fa-eye',
                                   view_name='wf-archiving.html',
                                   history_label=_("Archive request"),
                                   next_step=_("content managers authorized to take charge of "
@@ -668,6 +724,23 @@ retired_to_archiving = Transition(transition_id='retired_to_archiving',
                                   notify_message=_("{principal} submitted an archive request "
                                                    "for content « {title} »"),
                                   order=10)
+
+retired_to_archived = Transition(transition_id='retired_to_archived',
+                                 title=_("Archive content"),
+                                 source=RETIRED,
+                                 destination=ARCHIVED,
+                                 permission=PUBLISH_CONTENT_PERMISSION,
+                                 condition=can_manage_content,
+                                 action=archive_action,
+                                 menu_icon_class='fas fa-fw fa-archive',
+                                 view_name='wf-archive.html',
+                                 show_operator_warning=True,
+                                 history_label=_("Content archived"),
+                                 notify_roles={WEBMASTER_ROLE, PILOT_ROLE, MANAGER_ROLE,
+                                               OWNER_ROLE},
+                                 notify_title=_("Content archiving"),
+                                 notify_message=_("{principal} archived content « {title} »"),
+                                 order=12)
 
 archiving_to_retired = Transition(transition_id='archiving_to_retired',
                                   title=_("Cancel archiving request"),
@@ -702,29 +775,21 @@ archiving_to_archived = Transition(transition_id='archiving_to_archived',
                                    notify_message=_("{principal} archived content « {title} »"),
                                    order=12)
 
-published_to_archived = Transition(transition_id='published_to_archived',
-                                   title=_("Archive published content"),
-                                   source=PUBLISHED,
-                                   destination=ARCHIVED,
-                                   trigger=SYSTEM_TRANSITION,
-                                   history_label=_("Content archived after version publication"),
-                                   action=archive_action)
+published_to_archived_by_version = Transition(transition_id='published_to_archived',
+                                              title=_("Archive published content"),
+                                              source=PUBLISHED,
+                                              destination=ARCHIVED,
+                                              trigger=SYSTEM_TRANSITION,
+                                              history_label=_("Content archived after version publication"),
+                                              action=archive_action)
 
-retiring_to_archived = Transition(transition_id='retiring_to_archived',
-                                  title=_("Archive retiring content"),
-                                  source=RETIRING,
-                                  destination=ARCHIVED,
-                                  trigger=SYSTEM_TRANSITION,
-                                  history_label=_("Content archived after version publication"),
-                                  action=archive_action)
-
-retired_to_archived = Transition(transition_id='retired_to_archived',
-                                 title=_("Archive retired content"),
-                                 source=RETIRED,
-                                 destination=ARCHIVED,
-                                 trigger=SYSTEM_TRANSITION,
-                                 history_label=_("Content archived after version publication"),
-                                 action=archive_action)
+retiring_to_archived_by_version = Transition(transition_id='retiring_to_archived',
+                                             title=_("Archive retiring content"),
+                                             source=RETIRING,
+                                             destination=ARCHIVED,
+                                             trigger=SYSTEM_TRANSITION,
+                                             history_label=_("Content archived after version publication"),
+                                             action=archive_action)
 
 published_to_draft = Transition(transition_id='published_to_draft',
                                 title=_("Create new version"),
@@ -734,6 +799,7 @@ published_to_draft = Transition(transition_id='published_to_draft',
                                 condition=can_create_new_version,
                                 action=clone_action,
                                 menu_icon_class='far fa-fw fa-file',
+                                menu_divider=True,
                                 view_name='wf-clone.html',
                                 history_label=_("New version created"),
                                 order=13)
@@ -746,6 +812,7 @@ retiring_to_draft = Transition(transition_id='retiring_to_draft',
                                condition=can_create_new_version,
                                action=clone_action,
                                menu_icon_class='far fa-fw fa-file',
+                               menu_divider=True,
                                view_name='wf-clone.html',
                                history_label=_("New version created"),
                                order=14)
@@ -758,6 +825,7 @@ retired_to_draft = Transition(transition_id='retired_to_draft',
                               condition=can_create_new_version,
                               action=clone_action,
                               menu_icon_class='far fa-fw fa-file',
+                              menu_divider=True,
                               view_name='wf-clone.html',
                               history_label=_("New version created"),
                               order=15)
@@ -770,6 +838,7 @@ archiving_to_draft = Transition(transition_id='archiving_to_draft',
                                 condition=can_create_new_version,
                                 action=clone_action,
                                 menu_icon_class='far fa-fw fa-file',
+                                menu_divider=True,
                                 view_name='wf-clone.html',
                                 history_label=_("New version created"),
                                 order=16)
@@ -782,6 +851,7 @@ archived_to_draft = Transition(transition_id='archived_to_draft',
                                condition=can_create_new_version,
                                action=clone_action,
                                menu_icon_class='far fa-fw fa-file',
+                               menu_divider=True,
                                view_name='wf-clone.html',
                                history_label=_("New version created"),
                                order=17)
@@ -794,6 +864,7 @@ delete = Transition(transition_id='delete',
                     condition=can_delete_version,
                     action=delete_action,
                     menu_icon_class='fas fa-fw fa-trash',
+                    menu_divider=True,
                     view_name='wf-delete.html',
                     history_label=_("Version deleted"),
                     order=99)
@@ -816,14 +887,17 @@ wf_transitions = [
     proposed_to_published,
     published_to_retiring,
     published_to_retired,
+    published_to_retired_by_task,
     retiring_to_published,
     retiring_to_retired,
     retired_to_archiving,
     archiving_to_retired,
-    published_to_archived,
-    retiring_to_archived,
+    retired_to_prepublished,
+    retired_to_published,
     retired_to_archived,
     archiving_to_archived,
+    published_to_archived_by_version,
+    retiring_to_archived_by_version,
     published_to_draft,
     retiring_to_draft,
     retired_to_draft,
