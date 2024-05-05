@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.99.3
+------
+ - updated shared content header viewlet to add button to go back to dashboard
+ - added status to scheduler tasks execution result
+ - added support for direct content retiring or archiving for managers
+ - added support for custom modal content class
+
 1.99.2
 ------
  - added permission and role to manage references tables
