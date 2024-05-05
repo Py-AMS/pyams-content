@@ -26,7 +26,7 @@ from zope.intid import IIntIds
 
 from pyams_content.workflow.interfaces import IWorkflowManagementTask
 from pyams_scheduler.interfaces import ISchedulerProcess, SCHEDULER_NAME
-from pyams_scheduler.interfaces.task import IDateTaskScheduling
+from pyams_scheduler.interfaces.task import IDateTaskScheduling, TASK_STATUS_OK
 from pyams_scheduler.process import TaskResettingThread
 from pyams_scheduler.task import Task
 from pyams_security.interfaces.names import INTERNAL_USER_ID
@@ -79,6 +79,7 @@ class ContentPublishingTask(Task):
         # remove task after execution!
         if self.__parent__ is not None:
             del self.__parent__[self.__name__]
+        return TASK_STATUS_OK, None
 
 
 @implementer(IWorkflowManagementTask)
@@ -114,6 +115,7 @@ class ContentArchivingTask(Task):
         # remove task after execution!
         if self.__parent__ is not None:
             del self.__parent__[self.__name__]
+        return TASK_STATUS_OK, None
 
 
 @subscriber(IZMQProcessStartedEvent, context_selector=ISchedulerProcess)
