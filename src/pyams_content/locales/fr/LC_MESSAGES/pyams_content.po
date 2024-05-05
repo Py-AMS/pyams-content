@@ -2234,7 +2234,10 @@ msgstr "Cliquer pour afficher/masquer l'éditeur du bloc"
 
 #: src/pyams_content/component/paragraph/zmi/container.py:307
 msgid "Click to lock/unlock paragraph"
-msgstr "Cliquer pour (dé)verrouiller ce bloc"
+msgstr ""
+"Cliquer pour (dé)verrouiller ce bloc ; un bloc verrouillé ne pourra pas "
+"être supprimé par les contributeurs au sein des contenus de ce type "
+"(mais il pourra être masqué)"
 
 #: src/pyams_content/component/paragraph/zmi/container.py:309
 msgid "This paragraph is locked and can't be removed!"
