@@ -1,5 +1,5 @@
 <div class="modal-dialog ${view.modal_class | ''}">
-	<div class="modal-content">
+	<div class="modal-content ${view.modal_content_class | ''}">
 		<div class="modal-header">
 			<div tal:define="header provider:pyams.header"
 				 tal:condition="header">

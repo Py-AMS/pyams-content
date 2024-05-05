@@ -393,6 +393,7 @@ class ParagraphsContainerModalView(AdminModalDisplayForm):
 
     subtitle = _("Paragraphs")
     modal_class = 'modal-xl'
+    modal_content_class = 'min-height-50vh'
 
 
 @adapter_config(required=(IParagraphContainerTarget, IAdminLayer, ParagraphsContainerModalView),
