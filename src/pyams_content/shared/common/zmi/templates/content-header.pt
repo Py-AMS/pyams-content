@@ -1,4 +1,4 @@
-<div class="h2 d-flex align-items-baseline text-truncate"
+<div class="h2 mb-0 d-flex align-items-baseline text-truncate"
 	 i18n:domain="pyams_content">
 	<a tal:define="target view.parent_target_url"
 	   tal:condition="target is not None"
