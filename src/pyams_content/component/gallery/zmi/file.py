@@ -187,6 +187,8 @@ class GalleryFileShowHideAction(ContextAction):
             return _("Show/hide media")
         return None
 
+    css_class = 'btn-sm px-1'
+
     @property
     def icon_class(self):
         """Icon class getter"""
@@ -240,6 +242,7 @@ class GalleryFilePropertiesAction(ContextAction):
     """Gallery file properties action"""
 
     hint = _("Media properties")
+    css_class = 'btn-sm px-1'
     icon_class = 'far fa-edit'
 
     href = 'properties.html'
@@ -304,7 +307,7 @@ class GalleryFilePropertiesEditFormRenderer(ContextRequestViewAdapter):
 
 @viewlet_config(name='delete-media.action',
                 context=IGalleryFile, layer=IAdminLayer, view=Interface,
-                manager=IContextActionsViewletManager, weight=30,
+                manager=IContextActionsViewletManager, weight=99,
                 permission=VIEW_SYSTEM_PERMISSION)
 class GalleryFileDeleteAction(ContextAction):
     """Gallery file delete action"""
@@ -318,6 +321,7 @@ class GalleryFileDeleteAction(ContextAction):
         return ContextAction.__new__(cls)
 
     hint = _("Delete media")
+    css_class = 'btn-sm px-1'
     icon_class = 'fas fa-trash'
 
     def get_href(self):
