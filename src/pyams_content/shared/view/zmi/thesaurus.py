@@ -48,8 +48,8 @@ class ViewTagsMenu(NavigationMenuItem):
     """View tags menu"""
 
     def __new__(cls, context, request, view, manager):
-        manager = ITagsManager(request.root, None)
-        if not manager.thesaurus_name:
+        tags_manager = ITagsManager(request.root, None)
+        if (tags_manager is None) or not tags_manager.thesaurus_name:
             return None
         return NavigationMenuItem.__new__(cls)
 
@@ -96,8 +96,8 @@ class ViewThemesMenu(NavigationMenuItem):
     """View themes menu"""
 
     def __new__(cls, context, request, view, manager):
-        manager = IThemesManager(request.root, None)
-        if not manager.thesaurus_name:
+        themes_manager = IThemesManager(request.root, None)
+        if (themes_manager is None) or not themes_manager.thesaurus_name:
             return None
         return NavigationMenuItem.__new__(cls)
 
@@ -144,8 +144,8 @@ class ViewCollectionsMenu(NavigationMenuItem):
     """View collections menu"""
 
     def __new__(cls, context, request, view, manager):
-        manager = ICollectionsManager(request.root, None)
-        if not manager.thesaurus_name:
+        collections_manager = ICollectionsManager(request.root, None)
+        if (collections_manager is None) or not collections_manager.thesaurus_name:
             return None
         return NavigationMenuItem.__new__(cls)
 

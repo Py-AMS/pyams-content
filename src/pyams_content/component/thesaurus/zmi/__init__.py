@@ -93,8 +93,8 @@ class TagsMenu(NavigationMenuItem):
     """Tags menu"""
 
     def __new__(cls, context, request, view, manager):  # pylint: disable=unused-argument
-        manager = ITagsManager(request.root, None)
-        if (manager is None) or not manager.thesaurus_name:
+        tags_manager = ITagsManager(request.root, None)
+        if (tags_manager is None) or not tags_manager.thesaurus_name:
             return None
         return NavigationMenuItem.__new__(cls)
 
@@ -178,8 +178,8 @@ class ThemesMenu(NavigationMenuItem):
     """Themes menu"""
 
     def __new__(cls, context, request, view, manager):  # pylint: disable=unused-argument
-        manager = IThemesManager(request.root, None)
-        if (manager is None) or not manager.thesaurus_name:
+        themes_manager = IThemesManager(request.root, None)
+        if (themes_manager is None) or not themes_manager.thesaurus_name:
             return None
         return NavigationMenuItem.__new__(cls)
 
@@ -306,8 +306,8 @@ class CollectionsMenu(NavigationMenuItem):
     """Collections menu"""
 
     def __new__(cls, context, request, view, manager):  # pylint: disable=unused-argument
-        manager = ICollectionsManager(request.root, None)
-        if (manager is None) or not manager.thesaurus_name:
+        collections_manager = ICollectionsManager(request.root, None)
+        if (collections_manager is None) or not collections_manager.thesaurus_name:
             return None
         return NavigationMenuItem.__new__(cls)
 
