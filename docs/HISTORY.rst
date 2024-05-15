@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.99.4
+------
+ - removed arguments override in thesaurus handlers components
+
 1.99.3
 ------
  - updated shared content header viewlet to add button to go back to dashboard
