@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-05-05 16:18+0200\n"
+"POT-Creation-Date: 2024-05-19 01:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -975,8 +975,8 @@ msgid ""
 "You have been requested by ${sender}, contributor of « ${service_name} » "
 "website, to make a review of a content."
 msgstr ""
-"Vous êtes sollicité par ${sender}, contributor du site internet « "
-"${service_name} », qui souhaite recueillir votre commentaire à propos d'un "
+"Vous êtes sollicité par ${sender}, contributor du site internet "
+"« ${service_name} », qui souhaite recueillir votre commentaire à propos d'un "
 "contenu."
 
 #: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:36
@@ -1218,6 +1218,52 @@ msgstr "Grille de liens avec illustrations (par défaut)"
 #: src/pyams_content/feature/navigation/portlet/skin/__init__.py:86
 msgid "Horizontal tabs of grids links with illustrations (default)"
 msgstr "Grilles de liens avec illustrations par onglets (par défaut)"
+
+#: src/pyams_content/feature/header/portlet/interfaces.py:33
+msgid "Display logo"
+msgstr "Afficher le logo"
+
+#: src/pyams_content/feature/header/portlet/interfaces.py:34
+msgid "Uncheck option to disable logo display"
+msgstr "Désactiver cette option pour ne pas afficher le logo du site"
+
+#: src/pyams_content/feature/header/portlet/interfaces.py:38
+msgid "Display context title"
+msgstr "Afficher le titre"
+
+#: src/pyams_content/feature/header/portlet/interfaces.py:39
+msgid "Title is extracted from context"
+msgstr "Le titre est normalement extrait du contexte d'affichage"
+
+#: src/pyams_content/feature/header/portlet/interfaces.py:43
+msgid "Display profile link"
+msgstr "Afficher le lien vers le profil"
+
+#: src/pyams_content/feature/header/portlet/interfaces.py:44
+msgid "Display link to get access to login form or user profile"
+msgstr ""
+"Permet d'afficher le lien permettant d'accéder à la fenêtre de connexion "
+"ou au menu d'accès au profil utilisateur"
+
+#: src/pyams_content/feature/header/portlet/__init__.py:43
+msgid "Page header"
+msgstr "En-tête de page"
+
+#: src/pyams_content/feature/header/portlet/skin/__init__.py:40
+msgid "Simple banner (default)"
+msgstr "Bandeau simple (par défaut)"
+
+#: src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:22
+msgid "Login..."
+msgstr "Connexion..."
+
+#: src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:33
+msgid "User profile"
+msgstr "Mon profil"
+
+#: src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:37
+msgid "Logout"
+msgstr "Se déconnecter"
 
 #: src/pyams_content/feature/alert/interfaces.py:33
 msgid "Global alerts view"
@@ -2819,24 +2865,24 @@ msgstr "Propriétés des nouveaux médias"
 msgid "Show/hide media"
 msgstr "Afficher/masquer le média"
 
-#: src/pyams_content/component/gallery/zmi/file.py:242
+#: src/pyams_content/component/gallery/zmi/file.py:244
 msgid "Media properties"
 msgstr "Propriétés"
 
-#: src/pyams_content/component/gallery/zmi/file.py:258
+#: src/pyams_content/component/gallery/zmi/file.py:261
 #, python-format
 msgid "Media: {}"
 msgstr "Média : {}"
 
-#: src/pyams_content/component/gallery/zmi/file.py:261
+#: src/pyams_content/component/gallery/zmi/file.py:264
 msgid "Gallery media properties"
 msgstr "Propriétés du média"
 
-#: src/pyams_content/component/gallery/zmi/file.py:279
+#: src/pyams_content/component/gallery/zmi/file.py:282
 msgid "Audio content"
 msgstr "Contenu audio associé"
 
-#: src/pyams_content/component/gallery/zmi/file.py:320
+#: src/pyams_content/component/gallery/zmi/file.py:323
 msgid "Delete media"
 msgstr "Supprimer le média"
 
@@ -4821,7 +4867,7 @@ msgid "List of fields associated with this data type"
 msgstr "Liste des champs spécifiques du gabarit associés à ce type de contenu"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:53
-#: src/pyams_content/root/interfaces.py:76
+#: src/pyams_content/root/interfaces.py:80
 msgid "Webmasters"
 msgstr "Webmestres"
 
@@ -5885,7 +5931,15 @@ msgstr ""
 "URL de base du site public ; cette adresse est notamment utilisée par les "
 "codes QR"
 
-#: src/pyams_content/root/interfaces.py:77
+#: src/pyams_content/root/interfaces.py:69
+msgid "Support email"
+msgstr "Adresse de support"
+
+#: src/pyams_content/root/interfaces.py:70
+msgid "Public support email address"
+msgstr "Adresse de messagerie du support aux utilisateurs"
+
+#: src/pyams_content/root/interfaces.py:81
 msgid ""
 "These principals can handle all settings and contents of web site, except "
 "for a few ones which require administrator access"
@@ -5893,19 +5947,19 @@ msgstr ""
 "Ces mandataires peuvent gérer la majorité des propriétés et des contenus du "
 "site, à l'exception de quelques paramètres réservés aux administrateurs"
 
-#: src/pyams_content/root/interfaces.py:83
+#: src/pyams_content/root/interfaces.py:87
 msgid "Templates managers"
 msgstr "Designers"
 
-#: src/pyams_content/root/interfaces.py:84
+#: src/pyams_content/root/interfaces.py:88
 msgid "These principals can only handle presentation templates"
 msgstr "Ces mandataires peuvent uniquement gérer les modèles de présentation"
 
-#: src/pyams_content/root/interfaces.py:89
+#: src/pyams_content/root/interfaces.py:93
 msgid "Operators group"
 msgstr "Groupe des opérateurs"
 
-#: src/pyams_content/root/interfaces.py:90
+#: src/pyams_content/root/interfaces.py:94
 msgid "Name of group containing all roles owners"
 msgstr "Groupe de mandataires contenant tous les détenteurs d'un rôle"
 
