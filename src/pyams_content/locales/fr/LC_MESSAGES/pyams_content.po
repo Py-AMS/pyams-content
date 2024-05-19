@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-05-19 03:04+0200\n"
+"POT-Creation-Date: 2024-05-19 20:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1249,7 +1249,7 @@ msgstr ""
 msgid "Page header"
 msgstr "En-tête de page"
 
-#: src/pyams_content/feature/header/portlet/skin/__init__.py:40
+#: src/pyams_content/feature/header/portlet/skin/__init__.py:42
 msgid "Simple banner (default)"
 msgstr "Bandeau simple (par défaut)"
 
@@ -1571,7 +1571,7 @@ msgstr ""
 #: src/pyams_content/shared/common/zmi/owner.py:362
 #: src/pyams_content/shared/common/zmi/search.py:430
 msgid "Search results"
-msgstr "Résultats de la recherche"
+msgstr "Résultats de recherche"
 
 #: src/pyams_content/feature/search/portlet/zmi/templates/search-preview.pt:5
 msgid "First search results sample:"
@@ -2565,7 +2565,7 @@ msgstr "Blocs de contenu"
 
 #: src/pyams_content/component/paragraph/portlet/__init__.py:121
 msgid "Paragraphs navigation anchors"
-msgstr "Navigation au sein des blocs"
+msgstr "Navigation au sein des blocs de contenu"
 
 #: src/pyams_content/component/paragraph/portlet/zmi/__init__.py:52
 #: src/pyams_content/component/paragraph/portlet/zmi/__init__.py:53

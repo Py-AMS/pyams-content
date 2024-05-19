@@ -23,7 +23,7 @@
 			   class="hint"
 			   title="Login..." i18n:attributes="title"
 			   href="/login.html">
-				<i class="fa fa-faw fa-3x fas fa-user-circle"></i>
+				<i class="fa fa-faw fa-3x far fa-user-circle"></i>
 			</a>
 			<div tal:case="True"
 				 class="dropdown">

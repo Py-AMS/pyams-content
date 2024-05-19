@@ -15,8 +15,10 @@
 """
 
 from pyramid.security import Authenticated
+from pyramid.traversal import lineage
 from zope.interface import Interface
 
+from pyams_content.feature.header.interfaces import IPageHeaderTitle
 from pyams_content.feature.header.portlet import IPageHeaderPortletSettings
 from pyams_content.root import ISiteRootInfos
 from pyams_i18n.interfaces import II18n
@@ -51,6 +53,12 @@ class PageHeaderPortletDefaultRenderer(PortletRenderer):
 
     @property
     def title(self):
+        request  =self.request
+        registry = request.registry
+        for context in lineage(self.context):
+            header = registry.queryMultiAdapter((context, self.request), IPageHeaderTitle)
+            if header is not None:
+                return header
         infos = ISiteRootInfos(self.request.root, None)
         return II18n(infos).query_attribute('title', request=self.request)
 

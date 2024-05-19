@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-05-19 03:04+0200\n"
+"POT-Creation-Date: 2024-05-19 20:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1205,7 +1205,7 @@ msgstr ""
 msgid "Page header"
 msgstr ""
 
-#: ./src/pyams_content/feature/header/portlet/skin/__init__.py:40
+#: ./src/pyams_content/feature/header/portlet/skin/__init__.py:42
 msgid "Simple banner (default)"
 msgstr ""
 
