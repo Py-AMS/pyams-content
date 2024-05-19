@@ -5,9 +5,11 @@
 		<div class="logo mx-3 my-2"
 			 tal:define="logo view.logo"
 			 tal:condition="logo">
-			${structure:tales:picture(logo,
-									  xl_width=1, lg_width=1, md_width=2, sm_width=0, xs_width=0,
-									  alt='Logo', css_class='logo-img')}
+			<a href="/" title="Home" i18n:attributes="title">
+				${structure:tales:picture(logo,
+										  xl_width=1, lg_width=1, md_width=2, sm_width=0, xs_width=0,
+										  alt='Logo', css_class='logo-img')}
+			</a>
 		</div>
 	</tal:if>
 	<div tal:condition="settings.display_context_title"

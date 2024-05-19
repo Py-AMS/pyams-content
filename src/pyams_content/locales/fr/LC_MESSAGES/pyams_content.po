@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-05-19 01:56+0200\n"
+"POT-Creation-Date: 2024-05-19 03:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1242,8 +1242,8 @@ msgstr "Afficher le lien vers le profil"
 #: src/pyams_content/feature/header/portlet/interfaces.py:44
 msgid "Display link to get access to login form or user profile"
 msgstr ""
-"Permet d'afficher le lien permettant d'accéder à la fenêtre de connexion "
-"ou au menu d'accès au profil utilisateur"
+"Permet d'afficher le lien permettant d'accéder à la fenêtre de connexion ou "
+"au menu d'accès au profil utilisateur"
 
 #: src/pyams_content/feature/header/portlet/__init__.py:43
 msgid "Page header"
@@ -1253,15 +1253,19 @@ msgstr "En-tête de page"
 msgid "Simple banner (default)"
 msgstr "Bandeau simple (par défaut)"
 
-#: src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:22
+#: src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:8
+msgid "Home"
+msgstr "Accueil"
+
+#: src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:24
 msgid "Login..."
 msgstr "Connexion..."
 
-#: src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:33
+#: src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:35
 msgid "User profile"
 msgstr "Mon profil"
 
-#: src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:37
+#: src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:39
 msgid "Logout"
 msgstr "Se déconnecter"
 

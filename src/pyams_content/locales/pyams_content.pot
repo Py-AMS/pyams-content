@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-05-19 01:56+0200\n"
+"POT-Creation-Date: 2024-05-19 03:04+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1209,15 +1209,19 @@ msgstr ""
 msgid "Simple banner (default)"
 msgstr ""
 
-#: ./src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:22
+#: ./src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:8
+msgid "Home"
+msgstr ""
+
+#: ./src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:24
 msgid "Login..."
 msgstr ""
 
-#: ./src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:33
+#: ./src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:35
 msgid "User profile"
 msgstr ""
 
-#: ./src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:37
+#: ./src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:39
 msgid "Logout"
 msgstr ""
 
