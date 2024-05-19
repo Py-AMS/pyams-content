@@ -29,7 +29,7 @@ from pyams_security.schema import PrincipalField, PrincipalsSetField
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
-
+from pyams_utils.schema import MailAddressField
 
 SITE_ROOT_INFOS_KEY = 'pyams_content.root'
 
@@ -65,6 +65,10 @@ class ISiteRootInfos(Interface):
     public_url = URI(title=_("Public site URI"),
                      description=_("Base URL of the public site"),
                      required=False)
+
+    support_email = MailAddressField(title=_("Support email"),
+                                     description=_("Public support email address"),
+                                     required=False)
 
 
 SITEROOT_ROLES = 'pyams_content.root.roles'
