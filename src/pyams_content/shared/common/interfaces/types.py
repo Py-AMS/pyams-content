@@ -71,10 +71,20 @@ class IDataType(ILocation):
                                          description=_("Label used for navigation entries"),
                                          required=False)
 
-    backoffice_label = I18nTextLineField(title=_("Back-office label"),
-                                         description=_("Optional label used in management pages "
-                                                       "instead of default label"),
-                                         required=False)
+    facets_label = I18nTextLineField(title=_("Facets label"),
+                                     description=_("Label used for the facets of views or search engines, "
+                                                   "instead of the standard label"),
+                                     required=False)
+
+    facets_type_label = I18nTextLineField(title=_("Facets type label"),
+                                          description=_("Label used for the facets of views or search engine, "
+                                                        "instead of the standard label, when facets are "
+                                                        "configured in \"content-type\" mode"),
+                                          required=False)
+
+    dashboard_label = I18nTextLineField(title=_("Dashboards label"),
+                                        description=_("Optional label used for dashboards presentation"),
+                                        required=False)
 
     color = ColorField(title=_("Color"),
                        description=_("Color used to illustrate this data type"),

@@ -23,6 +23,7 @@ from pyams_content.shared.common.interfaces.types import IDataType, ITypedDataMa
 from pyams_content.shared.common.zmi.types.interfaces import ISharedToolTypesTable
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
+from pyams_form.group import Group
 from pyams_form.interfaces.form import IAJAXFormRenderer, IGroup
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
@@ -74,8 +75,8 @@ class DataTypeAddForm(AdminModalAddForm):
     @property
     def fields(self):
         """Form fields getter"""
-        fields = Fields(IDataType).omit('__name__', '__parent__',
-                                        'pictogram_on', 'pictogram_off', 'visible')
+        fields = Fields(IDataType).select('label', 'source_folder',
+                                          'color', 'pictogram', 'field_names')
         fields['pictogram'].widget_factory = PictogramSelectFieldWidget
         if not self.context.shared_content_info_factory:
             fields = fields.omit('field_names')
@@ -111,8 +112,7 @@ class DataTypeAddFormRenderer(ContextRequestViewAdapter):
 def data_type_label(context, request, view):
     """Data type label"""
     i18n = II18n(context)
-    return i18n.query_attributes_in_order(('backoffice_label', 'label'),
-                                          request=request)
+    return i18n.query_attribute('label', request=request)
 
 
 @adapter_config(required=(IDataType, IAdminLayer, Interface),
@@ -139,8 +139,8 @@ class DataTypeEditForm(AdminModalEditForm):
     @property
     def fields(self):
         """Form fields getter"""
-        fields = Fields(IDataType).omit('__name__', '__parent__',
-                                        'pictogram_on', 'pictogram_off', 'visible')
+        fields = Fields(IDataType).select('label', 'source_folder',
+                                          'color', 'pictogram', 'field_names')
         fields['pictogram'].widget_factory = PictogramSelectFieldWidget
         tool = get_parent(self.context, ITypedSharedTool)
         if (tool is not None) and not tool.shared_content_info_factory:
@@ -175,16 +175,33 @@ class DataTypeEditFormRenderer(ContextRequestViewAdapter):
         }
 
 
-@adapter_config(name='add-data-type-pictograms.group',
+@adapter_config(name='labels.group',
                 required=(ITypedSharedTool, IAdminLayer, DataTypeAddForm),
                 provides=IGroup)
-@adapter_config(name='edit-data-type-pictograms.group',
+@adapter_config(name='labels.group',
+                required=(IDataType, IAdminLayer, DataTypeEditForm),
+                provides=IGroup)
+class DataTypeLabelsGroup(Group):
+    """Data type labels group"""
+
+    legend = _("Contents labels")
+    weight = 10
+
+    fields = Fields(IDataType).select('display_as_tag', 'navigation_label', 'facets_label',
+                                      'facets_type_label', 'dashboard_label')
+
+
+@adapter_config(name='pictograms.group',
+                required=(ITypedSharedTool, IAdminLayer, DataTypeAddForm),
+                provides=IGroup)
+@adapter_config(name='pictograms.group',
                 required=(IDataType, IAdminLayer, DataTypeEditForm),
                 provides=IGroup)
 class DataTypePictogramsGroup(FormGroupSwitcher):
     """Data type pictograms group"""
 
     legend = _("Pictograms")
+    weight = 20
 
     fields = Fields(IDataType).select('pictogram_on', 'pictogram_off')
     fields['pictogram_on'].widget_factory = PictogramSelectFieldWidget

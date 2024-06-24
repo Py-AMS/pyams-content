@@ -64,6 +64,12 @@ class SharedTool(Folder, BaseSharedTool):
     shared_content_type = None
     '''Shared content type must be defined by subclasses'''
 
+    label = FieldProperty(ISharedTool['label'])
+    navigation_label = FieldProperty(ISharedTool['navigation_label'])
+    facets_label = FieldProperty(ISharedTool['facets_label'])
+    facets_type_label = FieldProperty(ISharedTool['facets_type_label'])
+    dashboard_label = FieldProperty(ISharedTool['dashboard_label'])
+
     @property
     def shared_content_factory(self):
         return get_object_factory(ISharedContent, name=self.shared_content_type)

@@ -23,7 +23,7 @@ from zope.schema import Bool, Choice, Text, TextLine
 
 from pyams_content.interfaces import CONTRIBUTOR_ROLE, GUEST_ROLE, IBaseContent, MANAGER_ROLE, \
     OWNER_ROLE, PILOT_ROLE, READER_ROLE, WEBMASTER_ROLE
-from pyams_i18n.schema import I18nTextField
+from pyams_i18n.schema import I18nTextField, I18nTextLineField
 from pyams_portal.interfaces import DESIGNER_ROLE, IPortalContext, IPortalPage
 from pyams_security.schema import PrincipalField, PrincipalsSetField
 from pyams_site.interfaces import ISiteRoot
@@ -125,6 +125,30 @@ class ISharedTool(IBaseSharedTool):
     contains('.ISharedContent')
 
     shared_content_type = Attribute("Shared data content type name")
+
+    label = I18nTextLineField(title=_("Single content label"),
+                              description=_("This label can be used to tag content type of a single content "
+                                            "in place of shared tool title"),
+                              required=False)
+
+    navigation_label = I18nTextLineField(title=_("Navigation label"),
+                                         description=_("Label used for navigation entries"),
+                                         required=False)
+
+    facets_label = I18nTextLineField(title=_("Facets label"),
+                                     description=_("Label used for the facets of views or search engines, "
+                                                   "instead of the standard label"),
+                                     required=False)
+
+    facets_type_label = I18nTextLineField(title=_("Facets type label"),
+                                          description=_("Label used for the facets of views or search engine, "
+                                                        "instead of the standard label, when facets are "
+                                                        "configured in \"content-type\" mode"),
+                                          required=False)
+
+    dashboard_label = I18nTextLineField(title=_("Dashboards label"),
+                                        description=_("Optional label used for dashboards presentation"),
+                                        required=False)
 
 
 class ISharedToolPortalContext(ISharedTool, IPortalContext):

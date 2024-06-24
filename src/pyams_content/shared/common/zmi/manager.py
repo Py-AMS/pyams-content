@@ -24,7 +24,8 @@ from pyams_content.shared.common.manager import BaseSharedTool
 from pyams_content.zmi.properties import PropertiesEditForm
 from pyams_form.ajax import AJAXFormRenderer, ajax_form_config
 from pyams_form.field import Fields
-from pyams_form.interfaces.form import IAJAXFormRenderer
+from pyams_form.group import Group
+from pyams_form.interfaces.form import IAJAXFormRenderer, IGroup
 from pyams_i18n.interfaces import II18n
 from pyams_i18n_views.zmi.manager import I18nManagerLanguagesEditForm
 from pyams_layer.interfaces import IPyAMSLayer
@@ -85,10 +86,10 @@ class SharedToolPropertiesMenu(NavigationMenuItem):
 
 
 @ajax_form_config(name='properties.html',
-                  context=ISharedTool, layer=IPyAMSLayer,
+                  context=IBaseSharedTool, layer=IPyAMSLayer,
                   permission=VIEW_SYSTEM_PERMISSION)
-class SharedToolPropertiesEditForm(PropertiesEditForm):
-    """Shared tool properties edit form"""
+class BaseSharedToolPropertiesEditForm(PropertiesEditForm):
+    """Base shared tool properties edit form"""
 
     title = _("Shared tool properties")
     legend = _("Main tool properties")
@@ -96,7 +97,20 @@ class SharedToolPropertiesEditForm(PropertiesEditForm):
     fields = Fields(IBaseSharedTool).omit('__name__', '__parent__')
 
 
-@adapter_config(required=(ISharedTool, IAdminLayer, SharedToolPropertiesEditForm),
+@adapter_config(name='labels',
+                required=(ISharedTool, IAdminLayer, BaseSharedToolPropertiesEditForm),
+                provides=IGroup)
+class SharedToolLabelsGroup(Group):
+    """Shared tool properties edit form"""
+
+    legend = _("Contents labels")
+
+    fields = Fields(ISharedTool).select('label', 'navigation_label',
+                                        'facets_label', 'facets_type_label',
+                                        'dashboard_label')
+
+
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, BaseSharedToolPropertiesEditForm),
                 provides=IAJAXFormRenderer)
 class SharedToolPropertiesEditFormRenderer(AJAXFormRenderer):
     """Shared tool properties edit form renderer"""

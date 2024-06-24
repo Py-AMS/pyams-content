@@ -61,7 +61,9 @@ class DataType(Persistent, Contained):
     label = FieldProperty(IDataType['label'])
     source_folder = FieldProperty(IDataType['source_folder'])
     navigation_label = FieldProperty(IDataType['navigation_label'])
-    backoffice_label = FieldProperty(IDataType['backoffice_label'])
+    facets_label = FieldProperty(IDataType['facets_label'])
+    facets_type_label = FieldProperty(IDataType['facets_type_label'])
+    dashboard_label = FieldProperty(IDataType['dashboard_label'])
     color = FieldProperty(IDataType['color'])
     pictogram = FieldProperty(IDataType['pictogram'])
     pictogram_on = FieldProperty(IDataType['pictogram_on'])
@@ -215,10 +217,7 @@ class AllTypedSharedToolDataTypesVocabulary(SimpleVocabulary):
                 continue
             terms.extend([
                 SimpleTerm(datatype.__name__,
-                           title=II18n(datatype).query_attribute('backoffice_label',
-                                                                 request=request) or
-                                 II18n(datatype).query_attribute('label',
-                                                                 request=request))
+                           title=II18n(datatype).query_attribute('label', request=request))
                 for datatype in manager.values()
             ])
         terms.sort(key=lambda x: x.title)
@@ -252,10 +251,7 @@ def get_all_data_types(request, context=None, fieldname=None):
         terms = [
             {
                 'id': datatype.__name__,
-                'text': II18n(datatype).query_attribute('backoffice_label',
-                                                        request=request) or
-                        II18n(datatype).query_attribute('label',
-                                                        request=request),
+                'text': II18n(datatype).query_attribute('label', request=request),
                 'selected': datatype.__name__ in values
             }
             for datatype in manager.values()
@@ -281,10 +277,7 @@ class TypedSharedToolDataTypesVocabulary(SimpleVocabulary):
             manager = ITypedDataManager(parent)
             terms = [
                 SimpleTerm(datatype.__name__,
-                           title=II18n(datatype).query_attribute('backoffice_label',
-                                                                 request=request) or
-                                 II18n(datatype).query_attribute('label',
-                                                                 request=request))
+                           title=II18n(datatype).query_attribute('label', request=request))
                 for datatype in manager.values()
             ]
         super().__init__(terms)
@@ -302,10 +295,7 @@ class TypedSharedToolVisibleDataTypesVocabulary(SimpleVocabulary):
             manager = ITypedDataManager(parent)
             terms = [
                 SimpleTerm(datatype.__name__,
-                           title=II18n(datatype).query_attribute('backoffice_label',
-                                                                 request=request) or
-                                 II18n(datatype).query_attribute('label',
-                                                                 request=request))
+                           title=II18n(datatype).query_attribute('label', request=request))
                 for datatype in manager.get_visible_items()
             ]
         super().__init__(terms)
