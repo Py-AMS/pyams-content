@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-05-19 20:16+0200\n"
+"POT-Creation-Date: 2024-05-26 16:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,7 +113,7 @@ msgstr ""
 #: src/pyams_content/component/gallery/portlet/interfaces.py:33
 #: src/pyams_content/shared/site/zmi/folder.py:83
 #: src/pyams_content/shared/form/interfaces.py:49
-#: src/pyams_content/shared/view/portlet/interfaces.py:64
+#: src/pyams_content/shared/view/portlet/interfaces.py:69
 #: src/pyams_content/root/interfaces.py:40
 msgid "Title"
 msgstr "Titre"
@@ -123,7 +123,7 @@ msgstr "Titre"
 #: src/pyams_content/shared/form/interfaces.py:44
 #: src/pyams_content/shared/common/zmi/search.py:221
 #: src/pyams_content/shared/common/zmi/types/__init__.py:122
-#: src/pyams_content/shared/common/interfaces/types.py:144
+#: src/pyams_content/shared/common/interfaces/types.py:154
 #: src/pyams_content/shared/topic/interfaces.py:37
 msgid "Data type"
 msgstr "Type de contenu"
@@ -158,7 +158,7 @@ msgid "Owner"
 msgstr "Propriétaire"
 
 #: src/pyams_content/zmi/dashboard.py:227
-#: src/pyams_content/shared/common/interfaces/__init__.py:175
+#: src/pyams_content/shared/common/interfaces/__init__.py:199
 msgid "Last update"
 msgstr "Dernière modification"
 
@@ -177,7 +177,7 @@ msgstr "Liste des gestionnaires autorisés à gérer le contenu de cette table"
 #: src/pyams_content/reference/zmi/table.py:51
 #: src/pyams_content/shared/site/zmi/manager.py:167
 #: src/pyams_content/shared/site/zmi/folder.py:180
-#: src/pyams_content/shared/common/zmi/manager.py:82
+#: src/pyams_content/shared/common/zmi/manager.py:83
 #: src/pyams_content/shared/common/zmi/__init__.py:305
 #: src/pyams_content/root/zmi/__init__.py:63
 msgid "Properties"
@@ -248,7 +248,7 @@ msgstr ""
 
 #: src/pyams_content/reference/pictogram/zmi/table.py:42
 #: src/pyams_content/reference/pictogram/zmi/table.py:102
-#: src/pyams_content/shared/common/zmi/types/__init__.py:187
+#: src/pyams_content/shared/common/zmi/types/__init__.py:203
 msgid "Pictograms"
 msgstr "Pictogrammes"
 
@@ -975,8 +975,8 @@ msgid ""
 "You have been requested by ${sender}, contributor of « ${service_name} » "
 "website, to make a review of a content."
 msgstr ""
-"Vous êtes sollicité par ${sender}, contributor du site internet "
-"« ${service_name} », qui souhaite recueillir votre commentaire à propos d'un "
+"Vous êtes sollicité par ${sender}, contributor du site internet « "
+"${service_name} », qui souhaite recueillir votre commentaire à propos d'un "
 "contenu."
 
 #: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:36
@@ -1071,6 +1071,7 @@ msgid "Navigation menu"
 msgstr "Menu de navigation"
 
 #: src/pyams_content/feature/navigation/interfaces.py:84
+#: src/pyams_content/feature/filter/interfaces.py:135
 #: src/pyams_content/component/paragraph/interfaces/__init__.py:49
 #: src/pyams_content/component/association/interfaces.py:42
 #: src/pyams_content/shared/site/interfaces.py:223
@@ -1093,7 +1094,7 @@ msgid "Displayed menu label"
 msgstr "Libellé affiché pour ce menu"
 
 #: src/pyams_content/feature/navigation/interfaces.py:96
-#: src/pyams_content/shared/alert/interfaces.py:98
+#: src/pyams_content/shared/alert/interfaces.py:97
 msgid "Internal reference"
 msgstr "Référence interne"
 
@@ -1130,8 +1131,8 @@ msgstr ""
 
 #: src/pyams_content/feature/navigation/interfaces.py:113
 #: src/pyams_content/component/links/interfaces.py:49
-#: src/pyams_content/shared/common/interfaces/types.py:83
-#: src/pyams_content/shared/alert/interfaces.py:59
+#: src/pyams_content/shared/common/interfaces/types.py:93
+#: src/pyams_content/shared/alert/interfaces.py:58
 msgid "Pictogram"
 msgstr "Pictogramme"
 
@@ -1218,6 +1219,193 @@ msgstr "Grille de liens avec illustrations (par défaut)"
 #: src/pyams_content/feature/navigation/portlet/skin/__init__.py:86
 msgid "Horizontal tabs of grids links with illustrations (default)"
 msgstr "Grilles de liens avec illustrations par onglets (par défaut)"
+
+#: src/pyams_content/feature/filter/interfaces.py:54
+msgid "Alphabetical"
+msgstr "Alphabétique"
+
+#: src/pyams_content/feature/filter/interfaces.py:55
+msgid "Alphabetical (reversed)"
+msgstr "Alphabétique (inversé)"
+
+#: src/pyams_content/feature/filter/interfaces.py:56
+msgid "Results count"
+msgstr "Nombre de résultats"
+
+#: src/pyams_content/feature/filter/interfaces.py:57
+msgid "Results count (reversed)"
+msgstr "Nombre de résultats (inversé)"
+
+#: src/pyams_content/feature/filter/interfaces.py:58
+#: src/pyams_content/feature/filter/interfaces.py:68
+msgid "Manual"
+msgstr "Manuel"
+
+#: src/pyams_content/feature/filter/interfaces.py:87
+msgid "List"
+msgstr "Liste à choix multiples"
+
+#: src/pyams_content/feature/filter/interfaces.py:88
+msgid "Choice"
+msgstr "Sélection simple"
+
+#: src/pyams_content/feature/filter/interfaces.py:108
+msgid "Content-type label"
+msgstr "Gabarit"
+
+#: src/pyams_content/feature/filter/interfaces.py:109
+msgid "Data type label"
+msgstr "Type de contenu"
+
+#: src/pyams_content/feature/filter/interfaces.py:136
+msgid "Is this filter visible in front-office?"
+msgstr "Ce filtre est-il visible en front-office ?"
+
+#: src/pyams_content/feature/filter/interfaces.py:140
+#: src/pyams_content/feature/filter/zmi/__init__.py:119
+#: src/pyams_content/shared/common/zmi/types/container.py:116
+#: src/pyams_content/shared/common/interfaces/types.py:57
+#: src/pyams_content/shared/alert/interfaces.py:51
+#: src/pyams_content/shared/alert/zmi/types.py:129
+msgid "Label"
+msgstr "Libellé"
+
+#: src/pyams_content/feature/filter/interfaces.py:141
+msgid "This is the label displayed in filter header"
+msgstr "Libellé affiché en tête du filtre"
+
+#: src/pyams_content/feature/filter/interfaces.py:144
+msgid "Display mode"
+msgstr "Mode d'affichage"
+
+#: src/pyams_content/feature/filter/interfaces.py:145
+#: src/pyams_content/feature/filter/interfaces.py:181
+msgid "Filter entries display mode"
+msgstr "Mode d'affichage du contenu du filtre"
+
+#: src/pyams_content/feature/filter/interfaces.py:150
+msgid "Default open state"
+msgstr "Ouvert par défaut"
+
+#: src/pyams_content/feature/filter/interfaces.py:151
+msgid "If 'no', options list will be collapsed by default"
+msgstr "Si 'non', la liste des options sera masquée par défaut"
+
+#: src/pyams_content/feature/filter/interfaces.py:155
+msgid "Displayed entries"
+msgstr "Entrées affichées"
+
+#: src/pyams_content/feature/filter/interfaces.py:156
+msgid "Number of entries displayed in search filter"
+msgstr ""
+"Nombre d'options affichées dans le filtre de recherche en mode \"liste\""
+
+#: src/pyams_content/feature/filter/interfaces.py:160
+msgid "Select placeholder"
+msgstr "Texte d'attente"
+
+#: src/pyams_content/feature/filter/interfaces.py:161
+msgid "Placeholder text displayed in the select widget"
+msgstr ""
+"Texte affiché dans le filtre en mode \"sélection simple\" lorsque aucune "
+"option n'est sélectionnée"
+
+#: src/pyams_content/feature/filter/interfaces.py:165
+msgid "Sorting mode"
+msgstr "Mode de tri"
+
+#: src/pyams_content/feature/filter/interfaces.py:166
+msgid "Filter entries sorting mode"
+msgstr "Méthode utilisée pour trier les options du filtre"
+
+#: src/pyams_content/feature/filter/interfaces.py:180
+msgid "Content-type display mode"
+msgstr "Libellé affiché"
+
+#: src/pyams_content/feature/filter/interfaces.py:190
+msgid "Thesaurus name"
+msgstr "Nom du thésaurus"
+
+#: src/pyams_content/feature/filter/interfaces.py:191
+msgid "Name of thesaurus used to get filter terms"
+msgstr "Nom du thésaurus contenant les termes utilisés par ce filtre"
+
+#: src/pyams_content/feature/filter/interfaces.py:195
+msgid "Thesaurus extract"
+msgstr "Nom de l'extrait"
+
+#: src/pyams_content/feature/filter/interfaces.py:196
+msgid "Name of thesaurus extract containing terms used by this filter"
+msgstr ""
+"Nom de l'extrait du thésaurus contenant les termes utilisés par ce filtre"
+
+#: src/pyams_content/feature/filter/zmi/portlet.py:49
+msgid "Multiple views are not supported with aggregated portlets renderers!"
+msgstr ""
+"Les modes de rendus comportant des filtres ne peuvent pas prendre en charge "
+"plusieurs vues !"
+
+#: src/pyams_content/feature/filter/zmi/__init__.py:102
+msgid "Click icon to show or hide filter"
+msgstr "Afficher/masquer le filtre"
+
+#: src/pyams_content/feature/filter/zmi/__init__.py:146
+msgid "List of filters"
+msgstr "Liste des filtres"
+
+#: src/pyams_content/feature/filter/zmi/__init__.py:165
+msgid "New filter"
+msgstr "Nouveau filtre"
+
+#: src/pyams_content/feature/filter/zmi/__init__.py:166
+msgid "New filter properties"
+msgstr "Propriétés du nouveau filtre"
+
+#: src/pyams_content/feature/filter/zmi/__init__.py:213
+#, python-format
+msgid "Filter: {}"
+msgstr "Filtre : {}"
+
+#: src/pyams_content/feature/filter/zmi/__init__.py:215
+msgid "Filter properties"
+msgstr "Propriétés du filtre"
+
+#: src/pyams_content/feature/filter/zmi/__init__.py:248
+msgid "Content-type filter"
+msgstr "Filtre des types de contenus"
+
+#: src/pyams_content/feature/filter/zmi/__init__.py:285
+#: src/pyams_content/feature/filter/zmi/__init__.py:317
+msgid "(no selected thesaurus)"
+msgstr "(aucun thésaurus sélectionné)"
+
+#: src/pyams_content/feature/filter/zmi/__init__.py:342
+msgid "Tag filter"
+msgstr "Filtre des tags"
+
+#: src/pyams_content/feature/filter/zmi/__init__.py:368
+msgid "Theme filter"
+msgstr "Filtre des thèmes"
+
+#: src/pyams_content/feature/filter/zmi/__init__.py:394
+msgid "Collection filter"
+msgstr "Filtre des collections"
+
+#: src/pyams_content/feature/filter/skin/processor.py:66
+msgid "-- No selected option --"
+msgstr "-- aucune option sélectionnée --"
+
+#: src/pyams_content/feature/filter/skin/processor.py:78
+msgid "Show more"
+msgstr "Afficher tout"
+
+#: src/pyams_content/feature/filter/skin/processor.py:79
+msgid "Show less"
+msgstr "Réduire"
+
+#: src/pyams_content/feature/filter/skin/templates/filters-default.pt:96
+msgid "Reset all filters"
+msgstr "Réinitialiser tous les filtres"
 
 #: src/pyams_content/feature/header/portlet/interfaces.py:33
 msgid "Display logo"
@@ -1550,13 +1738,13 @@ msgstr ""
 
 #: src/pyams_content/feature/search/portlet/interfaces.py:54
 #: src/pyams_content/component/links/interfaces.py:67
-#: src/pyams_content/shared/view/portlet/interfaces.py:111
+#: src/pyams_content/shared/view/portlet/interfaces.py:116
 msgid "Force canonical URL?"
 msgstr "Imposer l'URL canonique"
 
 #: src/pyams_content/feature/search/portlet/interfaces.py:55
 #: src/pyams_content/component/links/interfaces.py:68
-#: src/pyams_content/shared/view/portlet/interfaces.py:112
+#: src/pyams_content/shared/view/portlet/interfaces.py:117
 msgid ""
 "By default, internal links use a \"relative\" URL, which tries to display "
 "link target in the current context; by using a canonical URL, you can "
@@ -3517,7 +3705,7 @@ msgstr ""
 #: src/pyams_content/shared/site/interfaces.py:111
 #: src/pyams_content/shared/site/interfaces.py:161
 #: src/pyams_content/shared/form/interfaces.py:54
-#: src/pyams_content/shared/common/interfaces/__init__.py:178
+#: src/pyams_content/shared/common/interfaces/__init__.py:202
 msgid "Header"
 msgstr "Chapô"
 
@@ -3529,7 +3717,7 @@ msgstr ""
 
 #: src/pyams_content/shared/site/interfaces.py:115
 #: src/pyams_content/shared/site/interfaces.py:165
-#: src/pyams_content/shared/common/interfaces/__init__.py:183
+#: src/pyams_content/shared/common/interfaces/__init__.py:207
 msgid "Meta-description"
 msgstr "Méta-description"
 
@@ -3547,14 +3735,14 @@ msgstr ""
 #: src/pyams_content/shared/site/interfaces.py:123
 #: src/pyams_content/shared/site/interfaces.py:173
 #: src/pyams_content/shared/site/zmi/folder.py:91
-#: src/pyams_content/shared/common/interfaces/__init__.py:195
+#: src/pyams_content/shared/common/interfaces/__init__.py:219
 msgid "Notepad"
 msgstr "Bloc-notes"
 
 #: src/pyams_content/shared/site/interfaces.py:124
 #: src/pyams_content/shared/site/interfaces.py:174
 #: src/pyams_content/shared/site/zmi/folder.py:92
-#: src/pyams_content/shared/common/interfaces/__init__.py:196
+#: src/pyams_content/shared/common/interfaces/__init__.py:220
 msgid "Internal information to be known about this content"
 msgstr ""
 "Informations internes à l'attention des contributeurs et des gestionnaires "
@@ -3595,7 +3783,7 @@ msgstr "Article au sein d'un site"
 
 #: src/pyams_content/shared/site/interfaces.py:190
 #: src/pyams_content/shared/form/interfaces.py:45
-#: src/pyams_content/shared/common/interfaces/types.py:145
+#: src/pyams_content/shared/common/interfaces/types.py:155
 #: src/pyams_content/shared/topic/interfaces.py:38
 msgid "Type of content data"
 msgstr "Type spécifique associé au contenu"
@@ -3851,13 +4039,13 @@ msgstr "Ce formulaire"
 msgid "Form header"
 msgstr "En-tête du formulaire"
 
-#: src/pyams_content/shared/common/types.py:234
+#: src/pyams_content/shared/common/types.py:233
 #, python-format
 msgid "-- missing value ({}) --"
 msgstr "-- valeur manquante ({}) --"
 
-#: src/pyams_content/shared/common/__init__.py:135
-#: src/pyams_content/shared/common/__init__.py:144
+#: src/pyams_content/shared/common/__init__.py:136
+#: src/pyams_content/shared/common/__init__.py:145
 #, python-format
 msgid "{date} by {principal}"
 msgstr "{date} par {principal}"
@@ -4627,17 +4815,22 @@ msgstr "accéder à la version retirée"
 msgid "access archived version"
 msgstr "accéder à la version archivée"
 
-#: src/pyams_content/shared/common/zmi/manager.py:71
+#: src/pyams_content/shared/common/zmi/manager.py:72
 msgid "Shared content management"
 msgstr "Gérer ce gabarit"
 
-#: src/pyams_content/shared/common/zmi/manager.py:93
+#: src/pyams_content/shared/common/zmi/manager.py:94
 msgid "Shared tool properties"
 msgstr "Propriétés du gabarit"
 
-#: src/pyams_content/shared/common/zmi/manager.py:94
+#: src/pyams_content/shared/common/zmi/manager.py:95
 msgid "Main tool properties"
 msgstr "Propriétés principales"
+
+#: src/pyams_content/shared/common/zmi/manager.py:106
+#: src/pyams_content/shared/common/zmi/types/__init__.py:187
+msgid "Contents labels"
+msgstr "Libellés des contenus"
 
 #: src/pyams_content/shared/common/zmi/__init__.py:94
 #, python-format
@@ -4708,26 +4901,19 @@ msgstr "Types de contenus"
 msgid "Click icon to enable or disable content type"
 msgstr "Cliquer pour activer ou désactiver ce type de contenu"
 
-#: src/pyams_content/shared/common/zmi/types/container.py:116
-#: src/pyams_content/shared/common/interfaces/types.py:57
-#: src/pyams_content/shared/alert/interfaces.py:51
-#: src/pyams_content/shared/alert/zmi/types.py:129
-msgid "Label"
-msgstr "Libellé"
-
 #: src/pyams_content/shared/common/zmi/types/container.py:144
 msgid "Shared tool content types list"
 msgstr "Liste des types de contenus"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:61
+#: src/pyams_content/shared/common/zmi/types/__init__.py:62
 msgid "Add content type"
 msgstr "Ajouter un type de contenu"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:71
+#: src/pyams_content/shared/common/zmi/types/__init__.py:72
 msgid "New content type"
 msgstr "Nouveau type de contenu"
 
-#: src/pyams_content/shared/common/zmi/types/__init__.py:72
+#: src/pyams_content/shared/common/zmi/types/__init__.py:73
 msgid "New data type properties"
 msgstr "Propriétés du nouveau type"
 
@@ -4798,61 +4984,97 @@ msgstr ""
 "basée sur l'URL de cette référence"
 
 #: src/pyams_content/shared/common/interfaces/types.py:70
+#: src/pyams_content/shared/common/interfaces/__init__.py:134
 msgid "Navigation label"
 msgstr "Libellé de navigation"
 
 #: src/pyams_content/shared/common/interfaces/types.py:71
+#: src/pyams_content/shared/common/interfaces/__init__.py:135
 msgid "Label used for navigation entries"
 msgstr "Libellé utilisé pour les liens de navigation"
 
 #: src/pyams_content/shared/common/interfaces/types.py:74
-#: src/pyams_content/shared/alert/interfaces.py:54
-msgid "Back-office label"
-msgstr "Libellé back-office"
+#: src/pyams_content/shared/common/interfaces/__init__.py:138
+msgid "Facets label"
+msgstr "Libellé facette \"Gabarit\""
 
 #: src/pyams_content/shared/common/interfaces/types.py:75
-#: src/pyams_content/shared/alert/interfaces.py:55
-msgid "Optional label used in management pages instead of default label"
-msgstr "Libellé utilisé en back-office, à la place du libellé standard"
+#: src/pyams_content/shared/common/interfaces/__init__.py:139
+msgid ""
+"Label used for the facets of views or search engines, instead of the "
+"standard label"
+msgstr ""
+"Libellé utilisé par les filtres appliqués aux composants d'affichage des "
+"vues ou des moteurs de recherche, à la place du libellé ou du nom du "
+"gabarit, lorsqu'ils sont paramétrés en mode \"Gabarit\""
 
 #: src/pyams_content/shared/common/interfaces/types.py:79
-#: src/pyams_content/shared/alert/interfaces.py:64
+#: src/pyams_content/shared/common/interfaces/__init__.py:143
+msgid "Facets type label"
+msgstr "Libellé facette \"Type de contenu\""
+
+#: src/pyams_content/shared/common/interfaces/types.py:80
+#: src/pyams_content/shared/common/interfaces/__init__.py:144
+msgid ""
+"Label used for the facets of views or search engine, instead of the standard "
+"label, when facets are configured in \"content-type\" mode"
+msgstr ""
+"Libellé utilisé par les filtres appliqués aux composants d'affichage des "
+"vues ou des moteurs de recherche, à la place du libellé ou du nom du "
+"gabarit, lorsqu'ils sont paramétrés en mode \"Type de contenu\""
+
+#: src/pyams_content/shared/common/interfaces/types.py:85
+#: src/pyams_content/shared/common/interfaces/__init__.py:149
+#: src/pyams_content/shared/alert/interfaces.py:54
+msgid "Dashboards label"
+msgstr "Libellé tableaux de bord"
+
+#: src/pyams_content/shared/common/interfaces/types.py:86
+#: src/pyams_content/shared/common/interfaces/__init__.py:150
+#: src/pyams_content/shared/alert/interfaces.py:55
+msgid "Optional label used for dashboards presentation"
+msgstr ""
+"Libellé optionnel utilisé pour l'affichage des contenus de ce gabarit ou de "
+"ce type dans les tableaux de bord"
+
+#: src/pyams_content/shared/common/interfaces/types.py:89
+#: src/pyams_content/shared/alert/interfaces.py:63
 msgid "Color"
 msgstr "Couleur"
 
-#: src/pyams_content/shared/common/interfaces/types.py:80
+#: src/pyams_content/shared/common/interfaces/types.py:90
 msgid "Color used to illustrate this data type"
 msgstr "Couleur utilisée pour représenter ce type de contenu"
 
-#: src/pyams_content/shared/common/interfaces/types.py:84
+#: src/pyams_content/shared/common/interfaces/types.py:94
 msgid "Pictogram associated with this data type"
 msgstr "Nom du pictogramme associé à ce type de contenu"
 
-#: src/pyams_content/shared/common/interfaces/types.py:88
+#: src/pyams_content/shared/common/interfaces/types.py:98
 msgid "ON pictogram"
 msgstr "Pictogramme 'actif'"
 
-#: src/pyams_content/shared/common/interfaces/types.py:89
+#: src/pyams_content/shared/common/interfaces/types.py:99
 msgid "'On' state pictogram associated with this data type"
 msgstr ""
 "Pictogramme utilisé par certains modes de rendu pour illustrer le statut "
 "\"actif\" de ce type de contenu"
 
-#: src/pyams_content/shared/common/interfaces/types.py:93
+#: src/pyams_content/shared/common/interfaces/types.py:103
 msgid "OFF pictogram"
 msgstr "Pictogramme 'inactif'"
 
-#: src/pyams_content/shared/common/interfaces/types.py:94
+#: src/pyams_content/shared/common/interfaces/types.py:104
 msgid "'Off' state pictogram associated with this data type"
 msgstr ""
 "Pictogramme utilisé par certains modes de rendu pour illustrer le statut "
 "\"inactif\" de ce type de contenu"
 
-#: src/pyams_content/shared/common/interfaces/types.py:98
+#: src/pyams_content/shared/common/interfaces/types.py:108
 msgid "Display as tag?"
 msgstr "Afficher comme étiquette"
 
-#: src/pyams_content/shared/common/interfaces/types.py:99
+#: src/pyams_content/shared/common/interfaces/types.py:109
 msgid ""
 "Some portlets renderers can display a small tag above each content to show "
 "their content type; if this option is checked, data type label will be "
@@ -4862,11 +5084,11 @@ msgstr ""
 "si cette option est sélectionnée, c'est le libellé de ce type de contenu qui "
 "sera affiché en lieu et place du nom du gabarit"
 
-#: src/pyams_content/shared/common/interfaces/types.py:106
+#: src/pyams_content/shared/common/interfaces/types.py:116
 msgid "Field names"
 msgstr "Champs associés"
 
-#: src/pyams_content/shared/common/interfaces/types.py:107
+#: src/pyams_content/shared/common/interfaces/types.py:117
 msgid "List of fields associated with this data type"
 msgstr "Liste des champs spécifiques du gabarit associés à ce type de contenu"
 
@@ -4894,12 +5116,12 @@ msgstr ""
 "droits d'accès et gérer les restrictions d'accès des responsables"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:66
-#: src/pyams_content/shared/common/interfaces/__init__.py:230
+#: src/pyams_content/shared/common/interfaces/__init__.py:254
 msgid "Managers"
 msgstr "Responsables"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:67
-#: src/pyams_content/shared/common/interfaces/__init__.py:231
+#: src/pyams_content/shared/common/interfaces/__init__.py:255
 msgid ""
 "Managers can handle main operations in tool's workflow, like publish or "
 "retire contents"
@@ -4909,7 +5131,7 @@ msgstr ""
 "contenus (dans le cadre des restrictions d'accès qui leurs sont appliquées)"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:72
-#: src/pyams_content/shared/common/interfaces/__init__.py:236
+#: src/pyams_content/shared/common/interfaces/__init__.py:260
 msgid "Contributors"
 msgstr "Contributeurs"
 
@@ -4920,12 +5142,12 @@ msgstr ""
 "peuvent pas prendre en charge leur publication ou leur retrait"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:78
-#: src/pyams_content/shared/common/interfaces/__init__.py:243
+#: src/pyams_content/shared/common/interfaces/__init__.py:267
 msgid "Designers"
 msgstr "Designers"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:79
-#: src/pyams_content/shared/common/interfaces/__init__.py:244
+#: src/pyams_content/shared/common/interfaces/__init__.py:268
 msgid "Designers are users which are allowed to manage presentation templates"
 msgstr ""
 "Les designers sont autorisés à gérer les modèles de présentation des contenus"
@@ -4939,11 +5161,23 @@ msgid "Name of workflow utility used to manage tool contents"
 msgstr ""
 "Nom du workflow utilisé pour gérer le cycle de publication des contenus"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:146
+#: src/pyams_content/shared/common/interfaces/__init__.py:129
+msgid "Single content label"
+msgstr "Libellé d'un contenu"
+
+#: src/pyams_content/shared/common/interfaces/__init__.py:130
+msgid ""
+"This label can be used to tag content type of a single content in place of "
+"shared tool title"
+msgstr ""
+"Ce libellé peut être utilisé par certains composants comme étiquette pour "
+"identifier le gabarit d'un contenu, à la place du nom du gabarit"
+
+#: src/pyams_content/shared/common/interfaces/__init__.py:170
 msgid "Content URL"
 msgstr "URL du contenu"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:147
+#: src/pyams_content/shared/common/interfaces/__init__.py:171
 msgid ""
 "URL used to access this content; this is important for SEO and should "
 "include most important words describing content; spaces and underscores will "
@@ -4954,11 +5188,11 @@ msgstr ""
 "intégrer des mots qui décrivent ce contenu ; les espaces et underscores "
 "seront remplacés automatiquement par des tirets"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:153
+#: src/pyams_content/shared/common/interfaces/__init__.py:177
 msgid "Version creator"
 msgstr "Créateur de cette version"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:154
+#: src/pyams_content/shared/common/interfaces/__init__.py:178
 msgid ""
 "Name of content's version creator. The creator of the first version is also "
 "it's owner."
@@ -4966,39 +5200,39 @@ msgstr ""
 "Nom du créateur de cette version. Le créateur de la première version est "
 "aussi son propriétaire"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:159
+#: src/pyams_content/shared/common/interfaces/__init__.py:183
 msgid "First owner"
 msgstr "Premier propriétaire"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:160
+#: src/pyams_content/shared/common/interfaces/__init__.py:184
 msgid "Name of content's first version owner"
 msgstr "Nom du premier propriétaire du contenu"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:164
+#: src/pyams_content/shared/common/interfaces/__init__.py:188
 msgid "Version creation"
 msgstr "Création"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:167
+#: src/pyams_content/shared/common/interfaces/__init__.py:191
 msgid "Version modifiers"
 msgstr "Intervenants"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:168
+#: src/pyams_content/shared/common/interfaces/__init__.py:192
 msgid "List of principals who modified this content"
 msgstr "Liste des mandataires ayant modifié ce contenu"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:171
+#: src/pyams_content/shared/common/interfaces/__init__.py:195
 msgid "Last modifier"
 msgstr "Dernière modification"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:172
+#: src/pyams_content/shared/common/interfaces/__init__.py:196
 msgid "Last principal who modified this content"
 msgstr "Nom du dernier mandataire étant intervenu sur ce contenu"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:179
+#: src/pyams_content/shared/common/interfaces/__init__.py:203
 msgid "Content's header is generally displayed in page header"
 msgstr "Le chapô est généralement affiché dans l'en-tête de page"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:184
+#: src/pyams_content/shared/common/interfaces/__init__.py:208
 msgid ""
 "The content's description is 'hidden' into HTML's page headers; but it can "
 "be seen, for example, in some search engines results as content's "
@@ -5008,19 +5242,19 @@ msgstr ""
 "essentiellement utilisée par les moteurs de recherche pour l'indexation des "
 "contenus et leur présentation dans les résultats de recherches"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:191
+#: src/pyams_content/shared/common/interfaces/__init__.py:215
 msgid "Keywords"
 msgstr "Mots-clés"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:192
+#: src/pyams_content/shared/common/interfaces/__init__.py:216
 msgid "They will be included into HTML pages metadata"
 msgstr "Ces mots-clés sont intégrés dans les en-têtes HTML"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:222
+#: src/pyams_content/shared/common/interfaces/__init__.py:246
 msgid "Content owner"
 msgstr "Propriétaire"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:223
+#: src/pyams_content/shared/common/interfaces/__init__.py:247
 msgid ""
 "The owner is the creator of content's first version, except if it was "
 "transferred afterwards to another owner"
@@ -5028,7 +5262,7 @@ msgstr ""
 "Le propriétaire est le créateur de la première version d'un contenu, sauf si "
 "cette propriété est transmise ensuite à un autre propriétaire"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:237
+#: src/pyams_content/shared/common/interfaces/__init__.py:261
 msgid ""
 "Contributors are users which are allowed to update this content in addition "
 "to it's owner"
@@ -5036,11 +5270,11 @@ msgstr ""
 "Les contributeurs sont autorisés à modifier ce contenu, en plus de son "
 "propriétaire"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:249
+#: src/pyams_content/shared/common/interfaces/__init__.py:273
 msgid "Readers"
 msgstr "Relecteurs"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:250
+#: src/pyams_content/shared/common/interfaces/__init__.py:274
 msgid ""
 "Readers are users which are asked to verify and comment contents before they "
 "are published"
@@ -5048,26 +5282,26 @@ msgstr ""
 "Les relecteurs sont sollicités pour vérifier et apporter des commentaires "
 "sur un contenu avant leur publication"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:255
+#: src/pyams_content/shared/common/interfaces/__init__.py:279
 msgid "Guests"
 msgstr "Invités"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:256
+#: src/pyams_content/shared/common/interfaces/__init__.py:280
 msgid ""
 "Guests are users which are allowed to view contents with restricted access"
 msgstr ""
 "Les invités sont autorisés à consulter les contenus sur lesquels des "
 "restrictions d'accès ont été appliquées"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:306
+#: src/pyams_content/shared/common/interfaces/__init__.py:330
 msgid "Principal ID"
 msgstr "Mandataire"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:336
+#: src/pyams_content/shared/common/interfaces/__init__.py:360
 msgid "Show workflow checks warning"
 msgstr "Activer le tunnel de publication"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:337
+#: src/pyams_content/shared/common/interfaces/__init__.py:361
 msgid ""
 "If 'yes', this contributor will have to confirm that contents have been "
 "checked before asking for publication"
@@ -5075,21 +5309,21 @@ msgstr ""
 "Si 'oui', ce contributeur devra confirmer explicitement que ses contenus ont "
 "été prévisualisés et vérifiés avant de pouvoir demander leur publication"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:343
+#: src/pyams_content/shared/common/interfaces/__init__.py:367
 msgid "Substitute for"
 msgstr "Suppléant de"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:344
+#: src/pyams_content/shared/common/interfaces/__init__.py:368
 msgid "Contributor will have access to contents owned by these principals"
 msgstr ""
 "Le contributeur aura accès aux contenus dont ces mandataires sont "
 "propriétaires"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:366
+#: src/pyams_content/shared/common/interfaces/__init__.py:390
 msgid "Publication checks"
 msgstr "Activer le tunnel de publication"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:367
+#: src/pyams_content/shared/common/interfaces/__init__.py:391
 msgid ""
 "If 'yes', this manager will have to confirm that contents have been "
 "previewed and checked before publishing a content"
@@ -5098,11 +5332,11 @@ msgstr ""
 "lui ont été transmis ont été prévisualisés et vérifiés avant de pouvoir les "
 "publier"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:373
+#: src/pyams_content/shared/common/interfaces/__init__.py:397
 msgid "Restricted contents"
 msgstr "Activer des restrictions d'accès"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:374
+#: src/pyams_content/shared/common/interfaces/__init__.py:398
 msgid ""
 "If 'yes', this manager will get restricted access to manage contents based "
 "on selected settings"
@@ -5110,11 +5344,11 @@ msgstr ""
 "Si 'oui', ce responsable ne pourra gérer que des contenus dont les "
 "propriétés correspondent à au moins l'un des paramètres indiqués ci-dessous"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:379
+#: src/pyams_content/shared/common/interfaces/__init__.py:403
 msgid "Selected owners"
 msgstr "Propriétaires"
 
-#: src/pyams_content/shared/common/interfaces/__init__.py:380
+#: src/pyams_content/shared/common/interfaces/__init__.py:404
 msgid "Manager will have access to contents owned by these principals"
 msgstr "Ce responsable aura accès aux contenus de ces propriétaires"
 
@@ -5224,40 +5458,40 @@ msgid "An hidden alert type can't be assigned to new alerts"
 msgstr ""
 "Un type d'alerte inactif ne peut pas être affecté à de nouvelles alertes"
 
-#: src/pyams_content/shared/alert/interfaces.py:60
+#: src/pyams_content/shared/alert/interfaces.py:59
 msgid "Pictogram associated with this alert type"
 msgstr "Nom du pictogramme associé à ce type d'alerte"
 
-#: src/pyams_content/shared/alert/interfaces.py:65
+#: src/pyams_content/shared/alert/interfaces.py:64
 msgid "Base color associated with this alert type"
 msgstr "Couleur de base associée à ce type d'alerte"
 
-#: src/pyams_content/shared/alert/interfaces.py:80
+#: src/pyams_content/shared/alert/interfaces.py:79
 msgid "Alert"
 msgstr "Alerte"
 
-#: src/pyams_content/shared/alert/interfaces.py:86
+#: src/pyams_content/shared/alert/interfaces.py:85
 #: src/pyams_content/shared/alert/zmi/types.py:222
 msgid "Alert type"
 msgstr "Type d'alerte"
 
-#: src/pyams_content/shared/alert/interfaces.py:87
+#: src/pyams_content/shared/alert/interfaces.py:86
 msgid "Alert type can affect renderer alert style"
 msgstr ""
 "Le type d'alerte peut éventuellement, en fonction du thème graphique, "
 "affecter le rendu de l'alerte"
 
-#: src/pyams_content/shared/alert/interfaces.py:94
+#: src/pyams_content/shared/alert/interfaces.py:93
 msgid "Message content"
 msgstr "Contenu du message"
 
-#: src/pyams_content/shared/alert/interfaces.py:95
+#: src/pyams_content/shared/alert/interfaces.py:94
 msgid "Message body"
 msgstr ""
 "Le contenu du message n'est en général affiché que dans le corps de page, et "
 "non lorsque les alertes sont affichées en bas de page"
 
-#: src/pyams_content/shared/alert/interfaces.py:99
+#: src/pyams_content/shared/alert/interfaces.py:98
 msgid ""
 "Internal link target reference. You can search a reference using '+' "
 "followed by internal number, or by entering text matching content title"
@@ -5266,35 +5500,35 @@ msgstr ""
 "rechercher une référence en indiquant un '+' suivi du numéro interne de ce "
 "moteur de recherche, ou en entrant tout ou partie de son titre"
 
-#: src/pyams_content/shared/alert/interfaces.py:105
+#: src/pyams_content/shared/alert/interfaces.py:104
 msgid "External URL"
 msgstr "URL externe"
 
-#: src/pyams_content/shared/alert/interfaces.py:106
+#: src/pyams_content/shared/alert/interfaces.py:105
 msgid "Alternate external URL"
 msgstr "Adresse d'une page externe à consulter"
 
-#: src/pyams_content/shared/alert/interfaces.py:112
+#: src/pyams_content/shared/alert/interfaces.py:111
 msgid "You can't set internal reference and external URI simultaneously!"
 msgstr ""
 "Vous ne pouvez pas indiquer une référence interne et une URI externe "
 "simultanément !"
 
-#: src/pyams_content/shared/alert/interfaces.py:114
+#: src/pyams_content/shared/alert/interfaces.py:113
 msgid "Concerned contents"
 msgstr "Contenus concernés"
 
-#: src/pyams_content/shared/alert/interfaces.py:115
+#: src/pyams_content/shared/alert/interfaces.py:114
 msgid "If any, these contents will automatically display this alert"
 msgstr ""
 "Si vous sélectionnez des contenus ici, cette alerte leur sera directement "
 "associée et elle pourra être affichée dans leur en-tête de page"
 
-#: src/pyams_content/shared/alert/interfaces.py:119
+#: src/pyams_content/shared/alert/interfaces.py:118
 msgid "Maximum interval"
 msgstr "Intervale d'affichage"
 
-#: src/pyams_content/shared/alert/interfaces.py:120
+#: src/pyams_content/shared/alert/interfaces.py:119
 msgid ""
 "Maximum interval between alert displays on a given device, given in hours; "
 "set to 0 to always display the alert"
@@ -5340,37 +5574,37 @@ msgstr "Cette alerte"
 msgid "Alert settings"
 msgstr "Paramètres de l'alerte"
 
-#: src/pyams_content/shared/view/merge.py:62
+#: src/pyams_content/shared/view/merge.py:76
 msgid "Concatenate views items in order"
 msgstr "Concaténer les résultats de chaque vue dans l'ordre sélectionné"
 
-#: src/pyams_content/shared/view/merge.py:78
+#: src/pyams_content/shared/view/merge.py:99
 msgid "Extract items randomly"
 msgstr "Extraire les résultats en ordre aléatoire"
 
-#: src/pyams_content/shared/view/merge.py:96
+#: src/pyams_content/shared/view/merge.py:124
 msgid "Take items from views one by one, in views order"
 msgstr ""
 "Extraire les résultats de chaque vue, une par une, dans l'ordre des vues"
 
-#: src/pyams_content/shared/view/merge.py:113
+#: src/pyams_content/shared/view/merge.py:148
 msgid "Take items from views one by one, in random order"
 msgstr "Extraire les résultats de chaque vue, une par une, en ordre aléatoire"
 
-#: src/pyams_content/shared/view/merge.py:148
+#: src/pyams_content/shared/view/merge.py:197
 msgid "Sort all results by creation date"
 msgstr "Trier tous les résultats sur la date de création"
 
-#: src/pyams_content/shared/view/merge.py:161
+#: src/pyams_content/shared/view/merge.py:210
 msgid "Sort all results by last update date"
 msgstr "Trier tous les résultats sur la date de dernière mise à jour"
 
-#: src/pyams_content/shared/view/merge.py:174
+#: src/pyams_content/shared/view/merge.py:223
 msgid "Sort all results by current publication date"
 msgstr ""
 "Trier tous les résultats sur la date de publication de la version actuelle"
 
-#: src/pyams_content/shared/view/merge.py:187
+#: src/pyams_content/shared/view/merge.py:236
 msgid "Sort all results by first publication date"
 msgstr "Trier tous les résultats sur la date de première publication"
 
@@ -5560,7 +5794,7 @@ msgstr ""
 "choisir l'ordre inverse en choisissant cette option"
 
 #: src/pyams_content/shared/view/interfaces/__init__.py:159
-#: src/pyams_content/shared/view/portlet/interfaces.py:99
+#: src/pyams_content/shared/view/portlet/interfaces.py:104
 msgid "Results count limit"
 msgstr "Limite au nombre de résultats"
 
@@ -5687,19 +5921,19 @@ msgstr ""
 msgid "Other collections"
 msgstr "Autres collections"
 
-#: src/pyams_content/shared/view/portlet/interfaces.py:42
+#: src/pyams_content/shared/view/portlet/interfaces.py:43
 msgid "Display context"
 msgstr "Contexte d'affichage"
 
-#: src/pyams_content/shared/view/portlet/interfaces.py:43
+#: src/pyams_content/shared/view/portlet/interfaces.py:44
 msgid "Content context"
 msgstr "Contexte du contenu"
 
-#: src/pyams_content/shared/view/portlet/interfaces.py:67
+#: src/pyams_content/shared/view/portlet/interfaces.py:72
 msgid "Selected views"
 msgstr "Vues sélectionnées"
 
-#: src/pyams_content/shared/view/portlet/interfaces.py:68
+#: src/pyams_content/shared/view/portlet/interfaces.py:73
 msgid ""
 "Reference to the view(s) from which items are extracted; you can combine "
 "several views together and specify in which order they should be mixed"
@@ -5708,11 +5942,11 @@ msgstr ""
 "les résultats de plusieurs vues ensemble en indiquant la façon de mélanger "
 "leurs résultats"
 
-#: src/pyams_content/shared/view/portlet/interfaces.py:77
+#: src/pyams_content/shared/view/portlet/interfaces.py:82
 msgid "Views context"
 msgstr "Contexte des vues"
 
-#: src/pyams_content/shared/view/portlet/interfaces.py:78
+#: src/pyams_content/shared/view/portlet/interfaces.py:83
 msgid ""
 "When searching for items, a view receives a \"context\" which is the object "
 "from which settings can be extracted; this context can be the \"display\" "
@@ -5731,11 +5965,11 @@ msgstr ""
 "partagé, le contexte de contenu est le contenu partagé, tandis que le "
 "contexte d'affichage est le conteneur au sein duquel ce contenu est affiché"
 
-#: src/pyams_content/shared/view/portlet/interfaces.py:89
+#: src/pyams_content/shared/view/portlet/interfaces.py:94
 msgid "Views merge mode"
 msgstr "Mode de fusion des vues"
 
-#: src/pyams_content/shared/view/portlet/interfaces.py:90
+#: src/pyams_content/shared/view/portlet/interfaces.py:95
 msgid ""
 "If you select several views, you can select \"merge\" mode, which is the way "
 "used to merge items from several views"
@@ -5745,28 +5979,28 @@ msgstr ""
 "ne sélectionnez qu'une seule vue, car l'ordre des résultats est alors basé "
 "uniquement sur les paramètres de la vue"
 
-#: src/pyams_content/shared/view/portlet/interfaces.py:100
+#: src/pyams_content/shared/view/portlet/interfaces.py:105
 msgid ""
 "Maximum number of results that the component may extract from merged views"
 msgstr ""
 "Nombre maximal de résultats que le composant doit extraire des vues "
 "fusionnées"
 
-#: src/pyams_content/shared/view/portlet/interfaces.py:103
+#: src/pyams_content/shared/view/portlet/interfaces.py:108
 msgid "Starting from..."
 msgstr "À partir de"
 
-#: src/pyams_content/shared/view/portlet/interfaces.py:104
+#: src/pyams_content/shared/view/portlet/interfaces.py:109
 msgid "You can skip several results if specifying an integer value here..."
 msgstr ""
 "Vous pouvez écarter un certain nombre de résultats en indiquant ici la "
 "position du premier élément à prendre en compte"
 
-#: src/pyams_content/shared/view/portlet/interfaces.py:118
+#: src/pyams_content/shared/view/portlet/interfaces.py:123
 msgid "Exclude from search results"
 msgstr "Exclure des résultats de recherche"
 
-#: src/pyams_content/shared/view/portlet/interfaces.py:119
+#: src/pyams_content/shared/view/portlet/interfaces.py:124
 msgid ""
 "If 'yes', and if this portlet is associated with a search engine in the same "
 "page template, items displayed by this portlet will be excluded from search "
@@ -5776,11 +6010,11 @@ msgstr ""
 "même modèle de présentation, les contenus qu'il affiche seront exclus des "
 "résultats du moteur de recherche"
 
-#: src/pyams_content/shared/view/portlet/interfaces.py:125
+#: src/pyams_content/shared/view/portlet/interfaces.py:130
 msgid "Display on first page only"
 msgstr "Seulement sur la première page"
 
-#: src/pyams_content/shared/view/portlet/interfaces.py:126
+#: src/pyams_content/shared/view/portlet/interfaces.py:131
 msgid ""
 "If 'yes', and if this portlet is associated with a search engine in the same "
 "page template, view contents will only be displayed on the first page of "
@@ -5790,7 +6024,7 @@ msgstr ""
 "même modèle de présentation, ce composant ne sera affiché que sur la "
 "première page de résultats"
 
-#: src/pyams_content/shared/view/portlet/__init__.py:105
+#: src/pyams_content/shared/view/portlet/__init__.py:123
 msgid "View items"
 msgstr "Contenu d'une vue"
 
@@ -5999,6 +6233,20 @@ msgstr "Gérer le portail"
 #: src/pyams_content/root/zmi/__init__.py:75
 msgid "Site information"
 msgstr "Informations générales"
+
+#~ msgid ""
+#~ "Label used for the facets of views or search engines, instead of the "
+#~ "standard label, when facets are configured in \"content-type\" mode"
+#~ msgstr ""
+#~ "Libellé utilisé par les filtres appliqués aux vues ou aux moteurs de "
+#~ "recherche, à la place du libellé ou du nom du gabarit, lorsqu'ils sont "
+#~ "paramétrés en mode \"Type de contenu\""
+
+#~ msgid "Selected display mode for content type entries"
+#~ msgstr "Gabarits sélectionnés"
+
+#~ msgid "Optional label used in management pages instead of default label"
+#~ msgstr "Libellé utilisé en back-office, à la place du libellé standard"
 
 #~ msgid "Archive retired content"
 #~ msgstr "Archivage automatique d'un contenu retiré"
@@ -6253,9 +6501,6 @@ msgstr "Informations générales"
 
 #~ msgid "Links and files properties"
 #~ msgstr "Propriétés des contenus"
-
-#~ msgid "File properties"
-#~ msgstr "Propriétés du fichier"
 
 #~ msgid "Add mailto link..."
 #~ msgstr "Lien mailto:"
