@@ -43,7 +43,7 @@ class AlertType(Persistent, Contained):
     """Alert type persistent class"""
 
     visible = FieldProperty(IAlertType['visible'])
-    backoffice_label = FieldProperty(IAlertType['backoffice_label'])
+    dashboard_label = FieldProperty(IAlertType['dashboard_label'])
     pictogram = FieldProperty(IAlertType['pictogram'])
     color = FieldProperty(IAlertType['color'])
 
@@ -109,8 +109,7 @@ class AlertTypesVocabulary(SimpleVocabulary):
             manager = IAlertTypesManager(parent)
             terms = [
                 SimpleTerm(alert_type.__name__,
-                           title=II18n(alert_type).query_attributes_in_order(('backoffice_label', 'label'),
-                                                                             request=request))
+                           title=II18n(alert_type).query_attribute('label', request=request))
                 for alert_type in manager.values()
             ]
         super().__init__(terms)

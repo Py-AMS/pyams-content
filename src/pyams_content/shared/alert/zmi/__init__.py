@@ -44,7 +44,7 @@ def wf_alert_content_type(context, request, column):
     alert_type = context.get_alert_type()
     if alert_type is not None:
         i18n = II18n(alert_type)
-        return i18n.query_attributes_in_order(('backoffice_label', 'label'),
+        return i18n.query_attributes_in_order(('dashboard_label', 'label'),
                                               request=request)
 
 

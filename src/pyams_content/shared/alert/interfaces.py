@@ -51,10 +51,9 @@ class IAlertType(ILocation):
     label = I18nTextLineField(title=_("Label"),
                               required=True)
 
-    backoffice_label = I18nTextLineField(title=_("Back-office label"),
-                                         description=_("Optional label used in management pages "
-                                                       "instead of default label"),
-                                         required=False)
+    dashboard_label = I18nTextLineField(title=_("Dashboards label"),
+                                        description=_("Optional label used for dashboards presentation"),
+                                        required=False)
 
     pictogram = Choice(title=_("Pictogram"),
                        description=_("Pictogram associated with this alert type"),
