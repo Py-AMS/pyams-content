@@ -1,6 +1,6 @@
 <div tal:define="settings view.settings;
 				 renderer_settings view.renderer_settings;
-				 start request.params.get('start', 0);
+				 start int(request.params.get('start', 0));
 				 length view.current_page_length;"
 	 tal:condition="settings.allow_empty_query or settings.has_user_query(request)"
 	 i18n:domain="pyams_content">
