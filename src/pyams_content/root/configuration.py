@@ -94,7 +94,8 @@ class SiteRootToolsConfiguration(Persistent, Contained):
             registry.notify(ObjectCreatedEvent(table))
             name = registry.settings.get(f'pyams_content.config.{table_name}_table_name',
                                          table_name)
-            manager[name] = table
+            if name not in manager:
+                manager[name] = table
             self.tables_names[interface] = name
         return table
 
