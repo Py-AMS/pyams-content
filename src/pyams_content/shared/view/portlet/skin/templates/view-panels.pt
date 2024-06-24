@@ -1,7 +1,7 @@
 <div i18n:domain="pyams_darkgreen_theme"
 	 tal:define="settings view.settings;
 				 renderer_settings view.renderer_settings;
-				 start int(request.params.get('vstart', 0));
+				 start int(request.params.get('start', 0));
 				 limit (start + renderer_settings.page_size) if renderer_settings.paginate else settings.limit;
 				 items settings.get_items(request, limit);
 				 (has_items, results) tales:boolean_iter(items);"
@@ -20,7 +20,7 @@
 			<tal:var define="global count count + 1;
 							 target view.get_url(item);
 							 illustration tales:pyams_illustration(item);">
-				<div tal:define="illustration tales:pyams_illustration(item)"
+				<div tal:define="illustration tales:pyams_navigation_illustration(item)"
 					 tal:condition="illustration"
 					 class="d-none d-sm-block">
 					<a href="${target}">

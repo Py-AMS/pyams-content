@@ -90,7 +90,8 @@ class IViewsMerger(Interface):
     Mergers are used to merge results of several views.
     """
 
-    def get_results(self, views, context, ignore_cache=False, request=None):
+    def get_results(self, views, context, ignore_cache=False, request=None,
+                    aggregates=None, settings=None):
         """Merge results of several views together"""
 
 
