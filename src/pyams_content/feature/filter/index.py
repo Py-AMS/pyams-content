@@ -16,12 +16,11 @@
 
 from zope.interface import Interface
 
-__docformat__ = 'restructuredtext'
-
 from pyams_content.feature.filter.interfaces import IFilterIndexInfo, IFilterValues
-from pyams_content.shared.common import IWfSharedContent
 from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.registry import get_pyramid_registry
+
+__docformat__ = 'restructuredtext'
 
 
 @adapter_config(required=Interface,
