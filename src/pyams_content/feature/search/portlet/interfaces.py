@@ -32,8 +32,8 @@ SEARCH_RESULTS_PORTLET_FLAG = 'pyams_content.portlet.search.has_results'
 """Request annotations flag for portlet search results"""
 
 
-class IAggregatedPortletRenderer(Interface):
-    """Aggregated portlet renderer marker interface"""
+class ISearchResultsAggregates(Interface):
+    """Aggregated search results portlet renderer marker interface"""
 
     aggregates = Attribute("Search results aggregates")
 

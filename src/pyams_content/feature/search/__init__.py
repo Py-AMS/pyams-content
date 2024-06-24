@@ -60,17 +60,6 @@ class SearchFolder(WfView):
     def is_deletable():
         return True
 
-    def get_results(self, context, sort_index=None, reverse=None, limit=None,
-                    start=0, length=None, ignore_cache=False, get_count=False, request=None,
-                    aggregates=None, settings=None, **kwargs):
-        if not ignore_cache:
-            if request is None:
-                request = check_request()
-            ignore_cache = bool(request.params)
-        return super().get_results(context, sort_index, reverse, limit, start,
-                                   length, ignore_cache, get_count, request,
-                                   aggregates, settings, **kwargs)
-
 
 @adapter_config(required=ISearchFolder,
                 provides=IViewContextPermissionChecker)

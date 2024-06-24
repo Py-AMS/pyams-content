@@ -20,7 +20,7 @@ from itertools import tee
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.feature.search import ISearchFolder
-from pyams_content.feature.search.portlet.interfaces import IAggregatedPortletRenderer, \
+from pyams_content.feature.search.portlet.interfaces import ISearchResultsAggregates, \
     ISearchResultsPortletSettings, SEARCH_RESULTS_ICON_CLASS, SEARCH_RESULTS_PORTLET_FLAG, SEARCH_RESULTS_PORTLET_NAME
 from pyams_content.shared.view.interfaces import RELEVANCE_ORDER, VISIBLE_PUBLICATION_DATE_ORDER
 from pyams_portal.interfaces import IPortletRendererSettings
@@ -61,8 +61,8 @@ class SearchResultsPortletSettings(PortletSettings):
                     not self.has_user_query(request):
                 request.GET['order_by'] = order_by = VISIBLE_PUBLICATION_DATE_ORDER
             renderer_settings = IPortletRendererSettings(self)
-            if IAggregatedPortletRenderer.providedBy(renderer_settings):
-                aggregates = renderer_settings.aggregates
+            aggregates = ISearchResultsAggregates(renderer_settings, None)
+            if aggregates is not None:
                 ignore_cache = True
             else:
                 aggregates = {}
