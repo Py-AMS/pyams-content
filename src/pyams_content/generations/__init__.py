@@ -19,15 +19,17 @@ __docformat__ = 'restructuredtext'
 import logging
 from importlib import import_module
 
+from hypatia.interfaces import ICatalog
 from zope.dublincore.interfaces import IZopeDublinCore
 
 from pyams_catalog.generations import check_required_indexes
 from pyams_catalog.i18n import I18nTextIndexWithInterface
-from pyams_catalog.index import DatetimeIndexWithInterface, FieldIndexWithInterface, \
-    KeywordIndexWithInterface
+from pyams_catalog.index import DatetimeIndexWithInterface, FacetIndexWithInterface, \
+    FieldIndexWithInterface, KeywordIndexWithInterface
 from pyams_catalog.interfaces import DATE_RESOLUTION, MINUTE_RESOLUTION
 from pyams_catalog.nltk import get_fulltext_lexicon
 from pyams_content.component.thesaurus import ICollectionsInfo, ITagsInfo, IThemesInfo
+from pyams_content.feature.filter.interfaces import IFilterIndexInfo
 from pyams_content.interfaces import CONTRIBUTOR_ROLE, IBaseContent, IObjectTypes, MANAGER_ROLE, OWNER_ROLE, \
     PILOT_ROLE, WEBMASTER_ROLE
 from pyams_content.reference.pictogram import IPictogramTable
@@ -42,6 +44,7 @@ from pyams_security.index import PrincipalsRoleIndex
 from pyams_site.generations import check_required_utilities
 from pyams_site.interfaces import ISiteGenerations
 from pyams_thesaurus.index import ThesaurusTermsListFieldIndex
+from pyams_utils.factory import get_all_factories
 from pyams_utils.interfaces.traversing import IPathElements
 from pyams_utils.registry import get_pyramid_registry, utility_config
 from pyams_workflow.interfaces import IWorkflowPublicationInfo, IWorkflowState
@@ -180,6 +183,11 @@ REQUIRED_INDEXES = [
         'discriminator': 'collections',
         'include_parents': False,
         'include_synonyms': False
+    }),
+    ('facets', FacetIndexWithInterface, {
+        'interface': IFilterIndexInfo,
+        'discriminator': 'facets',
+        'facets': []
     })
 ]
 
@@ -259,6 +267,24 @@ def get_required_indexes():
     return indexes
 
 
+def check_required_facets(site, catalog_name=''):
+    """Check facets index for required values"""
+    sm = site.getSiteManager()
+    catalog = sm.queryUtility(ICatalog, name=catalog_name)
+    if catalog is None:
+        LOGGER.warning("No catalog found! Facets index check ignored...")
+        return
+    index = catalog.get('facets')
+    if index is None:
+        LOGGER.warning("No facets index found! Facets index check ignored...")
+    facets = index.facets
+    for name, factory in get_all_factories(IWfSharedContent):
+        facet_name = f'content_type:{factory.content_type}'
+        if facet_name not in facets:
+            facets.add(facet_name)
+    index.facets = facets
+
+
 @utility_config(name='PyAMS content', provides=ISiteGenerations)
 class WebsiteGenerationsChecker:
     """PyAMS content package generations checker"""
@@ -269,9 +295,10 @@ class WebsiteGenerationsChecker:
     def evolve(self, site, current=None):
         """Check for required utilities, tables and tools"""
         check_required_utilities(site, REQUIRED_UTILITIES)
-        check_required_indexes(site, get_required_indexes())
         check_required_tables(site, REQUIRED_TABLES)
         check_required_tools(site, REQUIRED_TOOLS)
+        check_required_indexes(site, get_required_indexes())
+        check_required_facets(site)
 
         if not current:
             current = 1
