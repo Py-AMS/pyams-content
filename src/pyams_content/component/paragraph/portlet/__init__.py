@@ -86,7 +86,7 @@ class ParagraphContainerPortletSettings(ParagraphPortletSettingsMixin, InternalR
     limit = FieldProperty(IParagraphContainerPortletSettings['limit'])
 
 
-@portlet_config(permission=VIEW_PERMISSION)
+@portlet_config(permission=None)
 class ParagraphContainerPortlet(Portlet):
     """Paragraphs container portlet"""
 
@@ -113,7 +113,7 @@ class ParagraphNavigationPortletSettings(ParagraphPortletSettingsMixin, PortletS
     anchors_only = FieldProperty(IParagraphNavigationPortletSettings['anchors_only'])
 
 
-@portlet_config(permission=VIEW_PERMISSION)
+@portlet_config(permission=None)
 class ParagraphNavigationPortlet(Portlet):
     """Paragraphs navigation portlet"""
 
