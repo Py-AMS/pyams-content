@@ -20,9 +20,9 @@ from itertools import islice, tee
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.shared.view.interfaces.query import IViewsMerger
-from pyams_content.shared.view.portlet.interfaces import IViewItemsPortletSettings, SEARCH_EXCLUDED_ITEMS, \
-    VIEW_DISPLAY_CONTEXT, VIEW_ITEMS_PORTLET_NAME
-from pyams_portal.interfaces import PREVIEW_MODE
+from pyams_content.shared.view.portlet.interfaces import IViewItemsAggregates, \
+    IViewItemsPortletSettings, SEARCH_EXCLUDED_ITEMS, VIEW_DISPLAY_CONTEXT, VIEW_ITEMS_PORTLET_NAME
+from pyams_portal.interfaces import IPortletRendererSettings, PREVIEW_MODE
 from pyams_portal.portlet import Portlet, PortletSettings, portlet_config
 from pyams_sequence.interfaces import ISequentialIdInfo
 from pyams_sequence.workflow import get_last_version, get_sequence_target, get_visible_version
@@ -70,7 +70,7 @@ class ViewItemsPortletSettings(PortletSettings):
             request = check_request()
         return request.registry.queryUtility(IViewsMerger, name=self.views_merge_mode)
 
-    def get_items(self, request=None, limit=None, ignore_cache=False):
+    def get_items(self, request=None, start=0, length=999, limit=None, ignore_cache=False):
         """Merged view items iterator"""
         if request is None:
             request = check_request()
@@ -82,11 +82,24 @@ class ViewItemsPortletSettings(PortletSettings):
             ignore_cache = request.annotations.get(PREVIEW_MODE, False)
         merger = self.get_merger(request)
         if merger is not None:
-            start = int(request.params.get('vstart', 0))
-            items = islice(unique_iter(merger.get_results(self.get_views(),
-                                                          context,
-                                                          ignore_cache=ignore_cache,
-                                                          request=request)),
+            renderer_settings = IPortletRendererSettings(self)
+            aggregates = IViewItemsAggregates(renderer_settings)
+            if aggregates is not None:
+                ignore_cache = True
+            else:
+                aggregates = {}
+            get_count = aggregates is not None
+            results = merger.get_results(self.get_views(),
+                                         context,
+                                         ignore_cache=ignore_cache,
+                                         request=request,
+                                         aggregates=aggregates,
+                                         settings=self,
+                                         get_count=get_count)
+            if get_count:
+                count = next(results)
+                aggregations = next(results)
+            items = islice(unique_iter(results),
                            start + (self.start or 1) - 1,
                            limit or self.limit or 999)
             if (request is not None) and self.exclude_from_search:
@@ -94,6 +107,9 @@ class ViewItemsPortletSettings(PortletSettings):
                 excluded_items = request.annotations.get(SEARCH_EXCLUDED_ITEMS) or set()
                 excluded_items |= set((ISequentialIdInfo(item).hex_oid for item in excluded))
                 request.annotations[SEARCH_EXCLUDED_ITEMS] = excluded_items
+            if get_count:
+                yield count
+                yield aggregations
             yield from items
 
 

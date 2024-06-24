@@ -35,6 +35,7 @@ from pyams_utils.cache import get_cache
 from pyams_utils.factory import factory_config, get_all_factories
 from pyams_utils.interfaces import ICacheKeyValue
 from pyams_utils.registry import get_pyramid_registry, get_utility
+from pyams_utils.request import check_request
 
 
 LOGGER = logging.getLogger('PyAMS (content)')
@@ -137,7 +138,11 @@ class WfView(WfSharedContent):
                     start=0, length=999, ignore_cache=False, get_count=False, request=None,
                     aggregates=None, settings=None, **kwargs):
         """Get query results"""
-        results, count, aggregations = _MARKER, 0, {}
+        count, aggregations, results = 0, {}, _MARKER
+        if (not ignore_cache) and self.allow_user_params:
+            if request is None:
+                request = check_request()
+            ignore_cache = bool(request.params)
         if not ignore_cache:
             # check for cache
             views_cache = get_cache(VIEWS_CACHE_NAME, VIEWS_CACHE_REGION, VIEWS_CACHE_NAMESPACE)
@@ -159,7 +164,7 @@ class WfView(WfSharedContent):
             if not sort_index:
                 sort_index = self.order_by
             # Get query results
-            results, count, aggregations = adapter.get_results(context,
+            count, aggregations, results = adapter.get_results(context,
                                                                sort_index,
                                                                reverse if reverse is not None
                                                                    else self.reversed_order,
@@ -179,7 +184,7 @@ class WfView(WfSharedContent):
         else:
             results = CatalogResultSet(results)
             LOGGER.debug(f"Retrieving view items from cache key {cache_key}")
-        return (results, count, aggregations) if get_count else results
+        return (count, aggregations, results) if get_count else results
 
 
 @subscriber(IObjectModifiedEvent, context_selector=IWfView)

@@ -17,6 +17,7 @@ This module defines interfaces of view items portlet settings.
 
 from collections import OrderedDict
 
+from zope.interface import Interface
 from zope.schema import Bool, Choice, Int
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
@@ -56,6 +57,10 @@ SEARCH_EXCLUDED_ITEMS = 'search.excluded'
 #
 
 VIEW_ITEMS_PORTLET_NAME = 'pyams_content.portlet.view'
+
+
+class IViewItemsAggregates(Interface):
+    """View items aggregates interface"""
 
 
 class IViewItemsPortletSettings(IPortletSettings):
