@@ -26,6 +26,7 @@ from zope.lifecycleevent import IObjectModifiedEvent
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
+from pyams_content.feature.filter.interfaces import IFilterValues
 from pyams_content.interfaces import IBaseContentInfo, IObjectType
 from pyams_content.shared.common.interfaces import CONTENT_TYPES_VOCABULARY, IBaseSharedTool, \
     ISharedContent, IWfSharedContent, IWfSharedContentRoles, SHARED_CONTENT_TYPES_VOCABULARY, \
@@ -234,6 +235,14 @@ def wf_shared_content_workflow_adapter(context):
     """Shared content workflow adapter"""
     parent = get_parent(context, IBaseSharedTool)
     return query_utility(IWorkflow, name=parent.shared_content_workflow)
+
+
+@adapter_config(name='content_type',
+                required=IWfSharedContent,
+                provides=IFilterValues)
+def shared_content_filter_values(context):
+    """Shared content filter values"""
+    yield f"content_type:{context.content_type}"
 
 
 #
