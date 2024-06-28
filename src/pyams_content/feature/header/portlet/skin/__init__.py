@@ -30,7 +30,7 @@ from pyams_utils.adapter import adapter_config
 
 __docformat__ = 'restructuredtext'
 
-from pyams_app_msc import _
+from pyams_content import _
 
 
 @adapter_config(required=(IPortalContext, IPyAMSLayer, Interface, IPageHeaderPortletSettings),

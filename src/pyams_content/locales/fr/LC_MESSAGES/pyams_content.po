@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-05-26 16:26+0200\n"
+"POT-Creation-Date: 2024-06-28 10:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -975,8 +975,8 @@ msgid ""
 "You have been requested by ${sender}, contributor of « ${service_name} » "
 "website, to make a review of a content."
 msgstr ""
-"Vous êtes sollicité par ${sender}, contributor du site internet « "
-"${service_name} », qui souhaite recueillir votre commentaire à propos d'un "
+"Vous êtes sollicité par ${sender}, contributor du site internet "
+"« ${service_name} », qui souhaite recueillir votre commentaire à propos d'un "
 "contenu."
 
 #: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:36
@@ -1322,19 +1322,19 @@ msgstr "Méthode utilisée pour trier les options du filtre"
 msgid "Content-type display mode"
 msgstr "Libellé affiché"
 
-#: src/pyams_content/feature/filter/interfaces.py:190
+#: src/pyams_content/feature/filter/interfaces.py:194
 msgid "Thesaurus name"
 msgstr "Nom du thésaurus"
 
-#: src/pyams_content/feature/filter/interfaces.py:191
+#: src/pyams_content/feature/filter/interfaces.py:195
 msgid "Name of thesaurus used to get filter terms"
 msgstr "Nom du thésaurus contenant les termes utilisés par ce filtre"
 
-#: src/pyams_content/feature/filter/interfaces.py:195
+#: src/pyams_content/feature/filter/interfaces.py:199
 msgid "Thesaurus extract"
 msgstr "Nom de l'extrait"
 
-#: src/pyams_content/feature/filter/interfaces.py:196
+#: src/pyams_content/feature/filter/interfaces.py:200
 msgid "Name of thesaurus extract containing terms used by this filter"
 msgstr ""
 "Nom de l'extrait du thésaurus contenant les termes utilisés par ce filtre"
@@ -1374,20 +1374,24 @@ msgstr "Propriétés du filtre"
 msgid "Content-type filter"
 msgstr "Filtre des types de contenus"
 
-#: src/pyams_content/feature/filter/zmi/__init__.py:285
-#: src/pyams_content/feature/filter/zmi/__init__.py:317
+#: src/pyams_content/feature/filter/zmi/__init__.py:282
+msgid "Title filter"
+msgstr "Libellé du filtre"
+
+#: src/pyams_content/feature/filter/zmi/__init__.py:319
+#: src/pyams_content/feature/filter/zmi/__init__.py:351
 msgid "(no selected thesaurus)"
 msgstr "(aucun thésaurus sélectionné)"
 
-#: src/pyams_content/feature/filter/zmi/__init__.py:342
+#: src/pyams_content/feature/filter/zmi/__init__.py:376
 msgid "Tag filter"
 msgstr "Filtre des tags"
 
-#: src/pyams_content/feature/filter/zmi/__init__.py:368
+#: src/pyams_content/feature/filter/zmi/__init__.py:402
 msgid "Theme filter"
 msgstr "Filtre des thèmes"
 
-#: src/pyams_content/feature/filter/zmi/__init__.py:394
+#: src/pyams_content/feature/filter/zmi/__init__.py:428
 msgid "Collection filter"
 msgstr "Filtre des collections"
 
@@ -1403,7 +1407,7 @@ msgstr "Afficher tout"
 msgid "Show less"
 msgstr "Réduire"
 
-#: src/pyams_content/feature/filter/skin/templates/filters-default.pt:96
+#: src/pyams_content/feature/filter/skin/templates/filters-default.pt:98
 msgid "Reset all filters"
 msgstr "Réinitialiser tous les filtres"
 
@@ -6024,7 +6028,7 @@ msgstr ""
 "même modèle de présentation, ce composant ne sera affiché que sur la "
 "première page de résultats"
 
-#: src/pyams_content/shared/view/portlet/__init__.py:123
+#: src/pyams_content/shared/view/portlet/__init__.py:121
 msgid "View items"
 msgstr "Contenu d'une vue"
 

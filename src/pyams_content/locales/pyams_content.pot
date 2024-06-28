@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-05-26 16:26+0200\n"
+"POT-Creation-Date: 2024-06-28 10:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1277,19 +1277,19 @@ msgstr ""
 msgid "Content-type display mode"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/interfaces.py:190
+#: ./src/pyams_content/feature/filter/interfaces.py:194
 msgid "Thesaurus name"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/interfaces.py:191
+#: ./src/pyams_content/feature/filter/interfaces.py:195
 msgid "Name of thesaurus used to get filter terms"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/interfaces.py:195
+#: ./src/pyams_content/feature/filter/interfaces.py:199
 msgid "Thesaurus extract"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/interfaces.py:196
+#: ./src/pyams_content/feature/filter/interfaces.py:200
 msgid "Name of thesaurus extract containing terms used by this filter"
 msgstr ""
 
@@ -1326,20 +1326,24 @@ msgstr ""
 msgid "Content-type filter"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/zmi/__init__.py:285
-#: ./src/pyams_content/feature/filter/zmi/__init__.py:317
+#: ./src/pyams_content/feature/filter/zmi/__init__.py:282
+msgid "Title filter"
+msgstr ""
+
+#: ./src/pyams_content/feature/filter/zmi/__init__.py:319
+#: ./src/pyams_content/feature/filter/zmi/__init__.py:351
 msgid "(no selected thesaurus)"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/zmi/__init__.py:342
+#: ./src/pyams_content/feature/filter/zmi/__init__.py:376
 msgid "Tag filter"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/zmi/__init__.py:368
+#: ./src/pyams_content/feature/filter/zmi/__init__.py:402
 msgid "Theme filter"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/zmi/__init__.py:394
+#: ./src/pyams_content/feature/filter/zmi/__init__.py:428
 msgid "Collection filter"
 msgstr ""
 
@@ -1355,7 +1359,7 @@ msgstr ""
 msgid "Show less"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/skin/templates/filters-default.pt:96
+#: ./src/pyams_content/feature/filter/skin/templates/filters-default.pt:98
 msgid "Reset all filters"
 msgstr ""
 
@@ -5524,7 +5528,7 @@ msgid ""
 "search results"
 msgstr ""
 
-#: ./src/pyams_content/shared/view/portlet/__init__.py:123
+#: ./src/pyams_content/shared/view/portlet/__init__.py:121
 msgid "View items"
 msgstr ""
 
