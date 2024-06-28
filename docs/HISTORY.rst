@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.99.5.1
+--------
+ - corrected error in I18n translation domain
+
 1.99.5
 ------
  - added aggregated filters support
