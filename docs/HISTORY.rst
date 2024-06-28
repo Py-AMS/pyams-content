@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.99.5
+------
+ - added aggregated filters support
+ - many internal updates
+
 1.99.4
 ------
  - removed arguments override in thesaurus handlers components
