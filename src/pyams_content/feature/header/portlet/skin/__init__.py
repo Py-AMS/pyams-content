@@ -14,7 +14,7 @@
 
 """
 
-from pyramid.security import Authenticated
+from pyramid.authorization import Authenticated
 from pyramid.traversal import lineage
 from zope.interface import Interface
 
