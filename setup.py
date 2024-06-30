@@ -13,6 +13,7 @@
 """
 This module contains PyAMS content package
 """
+
 import os
 from setuptools import setup, find_packages
 
@@ -23,7 +24,7 @@ DOCS = os.path.join(os.path.dirname(__file__),
 README = os.path.join(DOCS, 'README.rst')
 HISTORY = os.path.join(DOCS, 'HISTORY.rst')
 
-version = '1.99.5.1'
+version = '1.99.6'
 long_description = open(README).read() + '\n\n' + open(HISTORY).read()
 
 tests_require = [

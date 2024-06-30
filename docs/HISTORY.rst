@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.99.6
+------
+ - added filter add and edit forms title adapters
+ - updated viewlet manager interface in tables views
+ - updated deprecated Python imports
+ - updated filters add menus labels
+
 1.99.5.1
 --------
  - corrected error in I18n translation domain
