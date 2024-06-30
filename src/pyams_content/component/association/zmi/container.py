@@ -31,7 +31,7 @@ from pyams_layer.interfaces import IPyAMSLayer
 from pyams_layer.skin import apply_skin
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_skin.interfaces.view import IModalDisplayForm
-from pyams_skin.interfaces.viewlet import IContentSuffixViewletManager
+from pyams_skin.interfaces.viewlet import IContentPrefixViewletManager
 from pyams_table.column import GetAttrColumn
 from pyams_table.interfaces import IColumn, IValues
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
@@ -46,7 +46,6 @@ from pyams_zmi.skin import AdminSkin
 from pyams_zmi.table import ActionColumn, ContentTypeColumn, I18nColumnMixin, InnerTableAdminView, \
     NameColumn, ReorderColumn, SortableTable, TableGroupSwitcher, TrashColumn, VisibilityColumn
 from pyams_zmi.utils import get_object_hint, get_object_label
-
 
 __docformat__ = 'restructuredtext'
 
@@ -226,7 +225,7 @@ def delete_data_type(request):
 @viewlet_config(name='associations-table',
                 context=IAssociationContainerTarget, layer=IAdminLayer,
                 view=IAssociationsContainerEditForm,
-                manager=IContentSuffixViewletManager, weight=10)
+                manager=IContentPrefixViewletManager, weight=10)
 class AssociationsTableView(InnerTableAdminView):
     """Associations table view"""
 

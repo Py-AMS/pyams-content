@@ -38,7 +38,7 @@ from pyams_layer.interfaces import IPyAMSLayer
 from pyams_layer.skin import apply_skin
 from pyams_pagelet.pagelet import pagelet_config
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
-from pyams_skin.interfaces.viewlet import IContentSuffixViewletManager
+from pyams_skin.interfaces.viewlet import IContentPrefixViewletManager
 from pyams_table.interfaces import IColumn, IValues
 from pyams_template.template import template_config
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
@@ -408,7 +408,7 @@ def paragraph_container_modal_view_title(context, request, view):
 @viewlet_config(name='paragraphs-modal-table',
                 context=IParagraphContainerTarget, layer=IAdminLayer,
                 view=ParagraphsContainerModalView,
-                manager=IContentSuffixViewletManager, weight=10)
+                manager=IContentPrefixViewletManager, weight=10)
 class ParagraphsContainerTableView(ParagraphsContainerViewMixin, InnerTableAdminView):
     """Paragraphs container table view"""
 
