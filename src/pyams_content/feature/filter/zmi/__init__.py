@@ -25,7 +25,7 @@ from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer
 from pyams_layer.interfaces import IPyAMSLayer
-from pyams_portal.interfaces import MANAGE_TEMPLATE_PERMISSION
+from pyams_portal.interfaces import IPortletSettings, MANAGE_TEMPLATE_PERMISSION
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_skin.interfaces.view import IModalPage
 from pyams_skin.interfaces.viewlet import IContentSuffixViewletManager
@@ -172,6 +172,14 @@ class FilterAddForm(AdminModalAddForm):
 
 
 @adapter_config(required=(IFiltersContainer, IAdminLayer, FilterAddForm),
+                provides=IFormTitle)
+def filter_add_form_title(context, request, view):
+    """Filter add form title"""
+    target = get_parent(context, IPortletSettings)
+    return query_adapter(IFormTitle, request, target, view)
+
+
+@adapter_config(required=(IFiltersContainer, IAdminLayer, FilterAddForm),
                 provides=IAJAXFormRenderer)
 class FilterAddFormRenderer(ContextRequestViewAdapter):
     """Filter add form renderer"""
@@ -199,8 +207,8 @@ class FilterElementEditor(TableElementEditor):
                 provides=IFormTitle)
 def filter_edit_form_title(context, request, view):
     """Filter edit form title"""
-    container = get_parent(context, IFiltersContainer)
-    return query_adapter(IFormTitle, request, container, view)
+    target = get_parent(context, IPortletSettings)
+    return query_adapter(IFormTitle, request, target, view)
 
 
 class FilterEditForm(AdminModalEditForm):
@@ -235,46 +243,12 @@ class FilterEditFormRenderer(ContextRequestViewAdapter):
 
 
 #
-# Content-type filter forms
-#
-
-@viewlet_config(name='add-content-type-filter.menu',
-                context=IFiltersContainer, layer=IAdminLayer, view=FiltersTable,
-                manager=IContextAddingsViewletManager, weight=10,
-                permission=MANAGE_TEMPLATE_PERMISSION)
-class ContentTypeFilterAddMenu(FilterAddMenu):
-    """Content-type filter add menu"""
-
-    label = _("Content-type filter")
-    href = 'add-content-type-filter.html'
-
-
-@ajax_form_config(name='add-content-type-filter.html',
-                  context=IFiltersContainer, layer=IPyAMSLayer,
-                  permission=MANAGE_TEMPLATE_PERMISSION)
-class ContentTypeFilterAddForm(FilterAddForm):
-    """Content-type filter add form"""
-
-    fields = Fields(IContentTypesFilter).omit('visible')
-    content_factory = IContentTypesFilter
-
-
-@ajax_form_config(name='properties.html',
-                  context=IContentTypesFilter, layer=IPyAMSLayer,
-                  permission=VIEW_SYSTEM_PERMISSION)
-class ContentTypeFilterEditForm(FilterEditForm):
-    """Content-type filter edit form"""
-
-    fields = Fields(IContentTypesFilter).omit('visible')
-
-
-#
 # Title filter forms
 #
 
 @viewlet_config(name='add-title-filter.menu',
                 context=IFiltersContainer, layer=IAdminLayer, view=FiltersTable,
-                manager=IContextAddingsViewletManager, weight=15,
+                manager=IContextAddingsViewletManager, weight=10,
                 permission=MANAGE_TEMPLATE_PERMISSION)
 class TitleFilterAddMenu(FilterAddMenu):
     """Title filter add menu"""
@@ -300,6 +274,40 @@ class TitleFilterEditForm(FilterEditForm):
     """Title filter edit form"""
 
     fields = Fields(ITitleFilter).omit('visible')
+
+
+#
+# Content-type filter forms
+#
+
+@viewlet_config(name='add-content-type-filter.menu',
+                context=IFiltersContainer, layer=IAdminLayer, view=FiltersTable,
+                manager=IContextAddingsViewletManager, weight=15,
+                permission=MANAGE_TEMPLATE_PERMISSION)
+class ContentTypeFilterAddMenu(FilterAddMenu):
+    """Content-type filter add menu"""
+
+    label = _("Content-type filter")
+    href = 'add-content-type-filter.html'
+
+
+@ajax_form_config(name='add-content-type-filter.html',
+                  context=IFiltersContainer, layer=IPyAMSLayer,
+                  permission=MANAGE_TEMPLATE_PERMISSION)
+class ContentTypeFilterAddForm(FilterAddForm):
+    """Content-type filter add form"""
+
+    fields = Fields(IContentTypesFilter).omit('visible')
+    content_factory = IContentTypesFilter
+
+
+@ajax_form_config(name='properties.html',
+                  context=IContentTypesFilter, layer=IPyAMSLayer,
+                  permission=VIEW_SYSTEM_PERMISSION)
+class ContentTypeFilterEditForm(FilterEditForm):
+    """Content-type filter edit form"""
+
+    fields = Fields(IContentTypesFilter).omit('visible')
 
 
 #
