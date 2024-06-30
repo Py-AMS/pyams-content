@@ -1372,11 +1372,11 @@ msgstr "Propriétés du filtre"
 
 #: src/pyams_content/feature/filter/zmi/__init__.py:248
 msgid "Content-type filter"
-msgstr "Filtre des types de contenus"
+msgstr "Filtrage par type de contenu"
 
 #: src/pyams_content/feature/filter/zmi/__init__.py:282
 msgid "Title filter"
-msgstr "Libellé du filtre"
+msgstr "Filtrage par titre"
 
 #: src/pyams_content/feature/filter/zmi/__init__.py:319
 #: src/pyams_content/feature/filter/zmi/__init__.py:351
@@ -1385,15 +1385,15 @@ msgstr "(aucun thésaurus sélectionné)"
 
 #: src/pyams_content/feature/filter/zmi/__init__.py:376
 msgid "Tag filter"
-msgstr "Filtre des tags"
+msgstr "Filtrage par tag"
 
 #: src/pyams_content/feature/filter/zmi/__init__.py:402
 msgid "Theme filter"
-msgstr "Filtre des thèmes"
+msgstr "Filtrage par thème"
 
 #: src/pyams_content/feature/filter/zmi/__init__.py:428
 msgid "Collection filter"
-msgstr "Filtre des collections"
+msgstr "Filtrage par collection"
 
 #: src/pyams_content/feature/filter/skin/processor.py:66
 msgid "-- No selected option --"
