@@ -14,7 +14,7 @@
 
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 from uuid import uuid4
 
 from persistent import Persistent
@@ -32,11 +32,9 @@ from pyams_utils.adapter import ContextAdapter, adapter_config, get_annotation_a
 from pyams_utils.container import BTreeOrderedContainer
 from pyams_utils.factory import factory_config
 from pyams_utils.registry import get_pyramid_registry, get_utility
-
+from pyams_workflow.interfaces import IObjectClonedEvent
 
 __docformat__ = 'restructuredtext'
-
-from pyams_workflow.interfaces import IObjectClonedEvent
 
 
 @factory_config(IReviewComment)
@@ -60,7 +58,7 @@ class ReviewComment(Persistent, Contained):
                 principal.title
                 for principal in (sm.get_principal(reviewer) for reviewer in reviewers)
             ))
-        self.creation_date = datetime.utcnow()
+        self.creation_date = datetime.now(timezone.utc)
 
 
 @factory_config(IReviewComments)

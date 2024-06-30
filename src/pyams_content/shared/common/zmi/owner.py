@@ -15,7 +15,7 @@
 """
 
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 
 from hypatia.catalog import CatalogQuery
 from hypatia.interfaces import ICatalog
@@ -91,7 +91,7 @@ def set_owner(context, request, new_owner, keep_owner_as_contributor=False):
                         contributors.remove(previous_owner)
                 roles.contributors = contributors
                 state.history.append(
-                    WorkflowHistoryItem(date=tztime(datetime.utcnow()),
+                    WorkflowHistoryItem(date=tztime(datetime.now(timezone.utc)),
                                         source_state=state.state,
                                         target_state=state.state,
                                         transition_id=MISSING_INFO,

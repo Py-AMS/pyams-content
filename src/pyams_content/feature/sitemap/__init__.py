@@ -17,7 +17,7 @@ This module defines main sitemap management components.
 
 __docformat__ = 'restructuredtext'
 
-from datetime import datetime
+from datetime import datetime, timezone
 from itertools import product
 
 from hypatia.catalog import CatalogQuery
@@ -35,7 +35,7 @@ from pyams_i18n.interfaces import II18nManager
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_site.interfaces import ISiteRoot
 from pyams_utils.list import unique_iter
-from pyams_utils.registry import get_all_utilities_registered_for, get_utility
+from pyams_utils.registry import get_all_utilities_registered_for, get_utilities_for, get_utility
 from pyams_utils.timezone import tztime
 from pyams_workflow.interfaces import IWorkflow, IWorkflowPublicationInfo
 
@@ -81,9 +81,9 @@ class SiteRootSitemapView:
     @property
     def sources(self):
         """Sitemap sources"""
-        timestamp = tztime(datetime.utcnow()).isoformat()
-        for tool in get_all_utilities_registered_for(IBaseSharedTool):
-            if not tool.shared_content_menu:
+        timestamp = tztime(datetime.now(timezone.utc)).isoformat()
+        for name, tool in get_utilities_for(IBaseSharedTool):
+            if (not name) or (not tool.shared_content_menu):
                 continue
             publication_info = IWorkflowPublicationInfo(tool, None)
             if (publication_info is None) or publication_info.is_visible(self.request):

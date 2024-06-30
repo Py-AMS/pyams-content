@@ -16,7 +16,7 @@
 
 __docformat__ = 'restructuredtext'
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from hypatia.interfaces import ICatalog
 from hypatia.catalog import CatalogQuery
@@ -53,7 +53,7 @@ class AlertManager(SharedTool):
         sequence_info = ISequentialIdInfo(context, None)
         if sequence_info is None:
             return
-        now = tztime(datetime.utcnow())
+        now = tztime(datetime.now(timezone.utc))
         catalog = get_utility(ICatalog)
         workflow = IWorkflow(self)
         params = And(Eq(catalog['content_type'], self.shared_content_type),

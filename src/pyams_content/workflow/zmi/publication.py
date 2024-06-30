@@ -14,7 +14,7 @@
 
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from pyams_content.interfaces import MANAGE_SITE_PERMISSION
 from pyams_content.shared.site.interfaces import IBaseSiteItem
@@ -69,7 +69,7 @@ class SiteItemPublicationDatesEditForm(AdminEditForm):
             if (pub_info is not None) and \
                     (pub_info.first_publication_date is None) and \
                     (pub_info.publication_effective_date is None):
-                effective_date.value = tztime(datetime.utcnow())
+                effective_date.value = tztime(datetime.now(timezone.utc))
 
 
 @adapter_config(required=(IBaseSiteItem, IAdminLayer, SiteItemPublicationDatesEditForm),

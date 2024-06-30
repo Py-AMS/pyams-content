@@ -20,7 +20,7 @@ A comment can be associated to each history item, as well as a copy of any
 email message which could has been sent during the operation.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from persistent import Persistent
 from zope.container.btree import BTreeContainer
@@ -72,7 +72,7 @@ class HistoryContainer(BTreeContainer):
         """Add context history"""
         item = create_object(IHistoryItem)
         if item is not None:
-            item.timestamp = tztime(datetime.utcnow())
+            item.timestamp = tztime(datetime.now(timezone.utc))
             if request is not None:
                 item.principal = request.principal.id
             item.message = message

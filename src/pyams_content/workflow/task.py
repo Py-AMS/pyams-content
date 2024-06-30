@@ -17,7 +17,7 @@ contents which were published with a future publication date of with a planned r
 """
 
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from pyramid.events import subscriber
 from transaction.interfaces import ITransactionManager
@@ -142,7 +142,7 @@ def handle_scheduler_start(event):
                 schedule_info = IDateTaskScheduling(task, None)
                 if schedule_info is None:  # no date scheduling
                     continue
-                now = gmtime(datetime.utcnow())
+                now = datetime.now(timezone.utc)
                 if schedule_info.active and (schedule_info.start_date < now):
                     # we add a small amount of time to be sure that scheduler and indexer
                     # processes are started...

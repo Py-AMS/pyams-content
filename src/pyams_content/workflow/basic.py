@@ -15,7 +15,7 @@
 This module defines a basic PyAMS content workflow.
 """
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from zope.copy import copy
 from zope.interface import implementer
@@ -240,7 +240,7 @@ def publish_action(wf, context):
     request = check_request()
     translate = request.localizer.translate
     publication_info = IWorkflowPublicationInfo(context)
-    publication_info.publication_date = datetime.utcnow()
+    publication_info.publication_date = datetime.now(timezone.utc)
     publication_info.publisher = request.principal.id
     version_id = IWorkflowState(context).version_id
     for version in IWorkflowVersions(context).get_versions((PRE_PUBLISHED, PUBLISHED)):
@@ -263,7 +263,7 @@ def publish_action(wf, context):
             task.name = 'Planned archiving for {}'.format(ISequentialIdInfo(context).public_oid)
             task.schedule_mode = SCHEDULER_TASK_DATE_MODE
             pub_info = IWorkflowPublicationInfo(context)
-            now = gmtime(datetime.utcnow())
+            now = datetime.now(timezone.utc)
             schedule_info = IDateTaskScheduling(task)
             schedule_info.active = True
             schedule_info.start_date = max(now + timedelta(seconds=10),

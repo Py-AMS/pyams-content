@@ -15,7 +15,7 @@
 This module defines base management components for all shared contents.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 from uuid import uuid4
 
 from pyramid.events import subscriber
@@ -502,7 +502,7 @@ class SharedContentDuplicateForm(AdminModalAddForm):
         source_state = IWorkflowState(self.context)
         state = IWorkflowState(new_version)
         state.history.clear()
-        history = WorkflowHistoryItem(date=datetime.utcnow(),
+        history = WorkflowHistoryItem(date=datetime.now(timezone.utc),
                                       principal=request.principal.id,
                                       comment=translate(
                                           _("Clone created from version {source} of {oid} "
@@ -512,7 +512,7 @@ class SharedContentDuplicateForm(AdminModalAddForm):
                                           state=translate(IWorkflow(self.context).get_state_label(
                                               source_state.state))))
         state.history.append(history)
-        history = WorkflowHistoryItem(date=datetime.utcnow(),
+        history = WorkflowHistoryItem(date=datetime.now(timezone.utc),
                                       target_state=workflow.initial_state,
                                       principal=request.principal.id,
                                       comment=data.get('comment'))

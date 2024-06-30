@@ -17,7 +17,7 @@ views queries. These adapters can be overriden, for example by packages
 providing Elasticsearch support (see :py:mod:`pyams_content_es`).
 """
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from hypatia.catalog import CatalogQuery
 from hypatia.interfaces import ICatalog
@@ -47,7 +47,7 @@ class ViewQuery(ContextAdapter):
         catalog = get_utility(ICatalog)
         registry = get_pyramid_registry()
         # check publication dates
-        now = tztime(datetime.utcnow())
+        now = tztime(datetime.now(timezone.utc))
         params = Lt(catalog['effective_date'], now)
         # check workflow states
         if 'state' in kwargs:

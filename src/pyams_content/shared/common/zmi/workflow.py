@@ -14,7 +14,7 @@
 
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from pyramid.events import subscriber
 from zope.interface import Interface, Invalid
@@ -229,7 +229,7 @@ class SharedContentPublicationRequestForm(SharedContentWorkflowTransitionForm):
         widget = self.widgets.get('publication_effective_date')
         if widget is not None:
             widget.required = True
-            widget.value = tztime(datetime.utcnow()).isoformat()
+            widget.value = tztime(datetime.now(timezone.utc)).isoformat()
         if pub_info.push_end_date:
             widget = self.widgets.get('push_end_date')
             if widget is not None:
@@ -365,7 +365,7 @@ class SharedContentPublicationForm(SharedContentWorkflowTransitionForm):
         widget = self.widgets.get('publication_effective_date')
         if widget is not None:
             widget.required = True
-            now = gmtime(datetime.utcnow())
+            now = datetime.now(timezone.utc)
             if pub_info.publication_effective_date:
                 widget.value = tztime(max(now, pub_info.publication_effective_date)).isoformat()
             else:
@@ -390,7 +390,7 @@ class SharedContentPublicationForm(SharedContentWorkflowTransitionForm):
         pub_info.publication_expiration_date = data.get('publication_expiration_date')
         if 'displayed_publication_date' in data:
             pub_info.displayed_publication_date = data.get('displayed_publication_date')
-        now = gmtime(datetime.utcnow())
+        now = datetime.now(timezone.utc)
         if pub_info.publication_effective_date <= now:
             # immediate publication
             return super().create_and_add(data)

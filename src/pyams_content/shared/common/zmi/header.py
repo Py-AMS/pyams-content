@@ -15,7 +15,7 @@
 This module defines workflow-related content headers.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from pyams_content.shared.site.interfaces import IBaseSiteItem
 from pyams_sequence.interfaces import ISequentialIdTarget
@@ -54,7 +54,7 @@ class WorkflowPublicationSupportHeaderViewlet(Viewlet):
     def render(self):
         """Status getter"""
         translate = self.request.localizer.translate
-        now = tztime(datetime.utcnow())
+        now = tztime(datetime.now(timezone.utc))
         pub_info = IWorkflowPublicationInfo(self.context)
         if pub_info.publication_effective_date:
             if pub_info.publication_effective_date <= now:
