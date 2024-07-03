@@ -27,7 +27,7 @@ from pyams_content.component.paragraph.zmi.interfaces import IInnerParagraphEdit
     IParagraphAddForm, IParagraphContainerBaseTable, IParagraphContainerFullTable, \
     IParagraphContainerView, IParagraphRendererSettingsEditForm
 from pyams_content.feature.renderer.interfaces import IRendererSettings
-from pyams_content.interfaces import MANAGE_TOOL_PERMISSION
+from pyams_content.interfaces import IBaseContent, MANAGE_TOOL_PERMISSION
 from pyams_content.shared.common.interfaces import IWfSharedContent
 from pyams_form.ajax import ajax_form_config
 from pyams_form.button import Buttons, handler
@@ -235,7 +235,7 @@ class ParagraphAddFormRenderer(ContextRequestViewAdapter):
         if changes is None:
             return None
         target = get_parent(self.context, IParagraphContainerTarget)
-        table_factory = IParagraphContainerFullTable if IWfSharedContent.providedBy(target) \
+        table_factory = IParagraphContainerFullTable if IBaseContent.providedBy(target) \
             else IParagraphContainerBaseTable
         callbacks = [
             get_json_table_row_add_callback(self.context, self.request,
