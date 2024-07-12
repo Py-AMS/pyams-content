@@ -17,8 +17,6 @@
 from datetime import datetime, timezone
 
 from pyams_content.interfaces import MANAGE_SITE_PERMISSION
-from pyams_content.shared.site.interfaces import IBaseSiteItem
-
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer
@@ -26,12 +24,11 @@ from pyams_layer.interfaces import IPyAMSLayer
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.timezone import tztime
 from pyams_viewlet.viewlet import viewlet_config
-from pyams_workflow.interfaces import IWorkflowPublicationInfo
+from pyams_workflow.interfaces import IWorkflowPublicationInfo, IWorkflowPublicationSupport
 from pyams_zmi.form import AdminEditForm
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
-
 
 __docformat__ = 'restructuredtext'
 
@@ -39,7 +36,7 @@ from pyams_content import _
 
 
 @viewlet_config(name='workflow-publication.menu',
-                context=IBaseSiteItem, layer=IAdminLayer,
+                context=IWorkflowPublicationSupport, layer=IAdminLayer,
                 manager=IPropertiesMenu, weight=510,
                 permission=MANAGE_SITE_PERMISSION)
 class SiteItemPublicationDatesMenu(NavigationMenuItem):
@@ -50,7 +47,7 @@ class SiteItemPublicationDatesMenu(NavigationMenuItem):
 
 
 @ajax_form_config(name='workflow-publication.html',
-                  context=IBaseSiteItem, layer=IPyAMSLayer,
+                  context=IWorkflowPublicationSupport, layer=IPyAMSLayer,
                   permission=MANAGE_SITE_PERMISSION)
 class SiteItemPublicationDatesEditForm(AdminEditForm):
     """Site item publication dates edit form"""
@@ -72,7 +69,7 @@ class SiteItemPublicationDatesEditForm(AdminEditForm):
                 effective_date.value = tztime(datetime.now(timezone.utc))
 
 
-@adapter_config(required=(IBaseSiteItem, IAdminLayer, SiteItemPublicationDatesEditForm),
+@adapter_config(required=(IWorkflowPublicationSupport, IAdminLayer, SiteItemPublicationDatesEditForm),
                 provides=IAJAXFormRenderer)
 class SiteItemPublicationDatesEditFormRenderer(ContextRequestViewAdapter):
     """Site item publication dates edit form renderer"""
