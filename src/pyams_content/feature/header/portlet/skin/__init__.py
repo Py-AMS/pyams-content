@@ -48,8 +48,8 @@ class PageHeaderPortletDefaultRenderer(PortletRenderer):
     def logo(self):
         infos = ISiteRootInfos(self.request.root, None)
         if infos is None:
-            return None
-        return infos.logo
+            return None, None
+        return self.request.root, infos.logo
 
     @property
     def title(self):

@@ -3,9 +3,10 @@
 	 i18n:domain="pyams_content">
 	<tal:if condition="settings.display_logo">
 		<div class="logo mx-3 my-2"
-			 tal:define="logo view.logo"
+			 tal:define="(target, logo) view.logo"
 			 tal:condition="logo">
-			<a href="/" title="Home" i18n:attributes="title">
+			<a href="${tales:absolute_url(target)}"
+			   title="Home" i18n:attributes="title">
 				${structure:tales:picture(logo,
 										  xl_width=1, lg_width=1, md_width=2, sm_width=0, xs_width=0,
 										  alt='Logo', css_class='logo-img')}
