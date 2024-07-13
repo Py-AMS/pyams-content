@@ -17,6 +17,7 @@
 from datetime import datetime, timezone
 
 from pyams_content.interfaces import MANAGE_SITE_PERMISSION
+from pyams_content.shared.common import IWfSharedContent
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer
@@ -44,6 +45,11 @@ class SiteItemPublicationDatesMenu(NavigationMenuItem):
 
     label = _("Publication dates")
     href = '#workflow-publication.html'
+
+    def __new__(cls, context, request, view, manager):
+        if IWfSharedContent.providedBy(context):
+            return None
+        return NavigationMenuItem.__new__(cls)
 
 
 @ajax_form_config(name='workflow-publication.html',
