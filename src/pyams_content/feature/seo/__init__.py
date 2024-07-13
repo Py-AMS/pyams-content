@@ -10,8 +10,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-"""PyAMS_*** module
+"""PyAMS_content.feature.seo module
 
+This module provides SEO related classes and default adapters.
 """
 
 from persistent import Persistent

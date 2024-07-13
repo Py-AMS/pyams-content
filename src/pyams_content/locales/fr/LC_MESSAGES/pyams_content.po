@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-07-13 11:58+0200\n"
+"POT-Creation-Date: 2024-07-13 14:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -815,16 +815,16 @@ msgstr "Archivage automatique d'un contenu en attente de retrait"
 msgid "PyAMS content workflow"
 msgstr "Workflow standard"
 
-#: src/pyams_content/workflow/zmi/publication.py:45
+#: src/pyams_content/workflow/zmi/publication.py:46
 #: src/pyams_content/shared/common/zmi/summary.py:148
 msgid "Publication dates"
 msgstr "Dates de publication"
 
-#: src/pyams_content/workflow/zmi/publication.py:55
+#: src/pyams_content/workflow/zmi/publication.py:61
 msgid "Workflow management"
 msgstr "Gestion du workflow"
 
-#: src/pyams_content/workflow/zmi/publication.py:56
+#: src/pyams_content/workflow/zmi/publication.py:62
 msgid "Content publication dates"
 msgstr "Dates de publication"
 
@@ -1065,6 +1065,19 @@ msgstr "Commentaire interne"
 #: src/pyams_content/feature/history/interfaces.py:55
 msgid "History item value"
 msgstr "Historique"
+
+#: src/pyams_content/feature/seo/interfaces.py:32
+msgid "Include sitemap"
+msgstr "Inclure dans la sitemap"
+
+#: src/pyams_content/feature/seo/interfaces.py:33
+msgid "If unchecked, this content will be excluded from sitemap"
+msgstr ""
+"Si 'non', le contenu sera exclu de la sitemap du site"
+
+#: src/pyams_content/feature/seo/zmi/__init__.py:38
+msgid "SEO configuration"
+msgstr "Configuration SEO"
 
 #: src/pyams_content/feature/navigation/interfaces.py:76
 msgid "Navigation menu"
@@ -1308,8 +1321,8 @@ msgstr "Afficher le nombre de résultats"
 msgid ""
 "In 'list' mode, display number of entries matching each search filter value"
 msgstr ""
-"En mode 'liste', affiche le nombre de résultats correspondant à chaque option "
-"proposée dans le filtre"
+"En mode 'liste', affiche le nombre de résultats correspondant à chaque "
+"option proposée dans le filtre"
 
 #: src/pyams_content/feature/filter/interfaces.py:166
 msgid "Select placeholder"
