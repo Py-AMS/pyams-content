@@ -28,6 +28,7 @@ from zope.intid import IIntIds
 from zope.schema.vocabulary import getVocabularyRegistry
 
 from pyams_catalog.query import CatalogResultSet
+from pyams_content.feature.seo import ISEOContentInfo
 from pyams_content.feature.sitemap.interfaces import ISitemapExtension
 from pyams_content.root import ISiteRootToolsConfiguration
 from pyams_content.shared.common import IBaseSharedTool, SHARED_CONTENT_TYPES_VOCABULARY
@@ -35,8 +36,9 @@ from pyams_i18n.interfaces import II18nManager
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_site.interfaces import ISiteRoot
 from pyams_utils.list import unique_iter
-from pyams_utils.registry import get_all_utilities_registered_for, get_utilities_for, get_utility
+from pyams_utils.registry import get_utilities_for, get_utility
 from pyams_utils.timezone import tztime
+from pyams_utils.traversing import get_path
 from pyams_workflow.interfaces import IWorkflow, IWorkflowPublicationInfo
 
 
@@ -46,13 +48,25 @@ from pyams_workflow.interfaces import IWorkflow, IWorkflowPublicationInfo
 def site_root_robots_view(request):
     """Site root robots.txt view"""
     request.response.content_type = 'text/plain'
+    disallow = []
+    for name, tool in get_utilities_for(IBaseSharedTool):
+        if not name:
+            continue
+        seo_info = ISEOContentInfo(tool, None)
+        if seo_info is None:
+            if not tool.shared_content_menu:
+                disallow.append(get_path(tool))
+                continue
+        else:
+            if not seo_info.include_sitemap:
+                disallow.append(get_path(tool))
+                continue
+        publication_info = IWorkflowPublicationInfo(tool, None)
+        if (publication_info is not None) and not publication_info.is_visible(request):
+            disallow.append(get_path(tool))
     return {
         'tools_configuration': ISiteRootToolsConfiguration(request.root),
-        'disallow': [
-            tool
-            for tool in get_all_utilities_registered_for(IBaseSharedTool)
-            if not tool.shared_content_menu
-        ]
+        'disallow': disallow
     }
 
 
@@ -81,16 +95,23 @@ class SiteRootSitemapView:
     @property
     def sources(self):
         """Sitemap sources"""
+        request = self.request
         timestamp = tztime(datetime.now(timezone.utc)).isoformat()
         for name, tool in get_utilities_for(IBaseSharedTool):
-            if (not name) or (not tool.shared_content_menu):
+            if not name:
                 continue
+            seo_info = ISEOContentInfo(tool, None)
+            if seo_info is None:
+                if not tool.shared_content_menu:
+                    continue
+            else:
+                if not seo_info.include_sitemap:
+                    continue
             publication_info = IWorkflowPublicationInfo(tool, None)
-            if (publication_info is None) or publication_info.is_visible(self.request):
+            if (publication_info is None) or publication_info.is_visible(request):
                 yield timestamp, tool
-        for name, adapter in self.request.registry.getAdapters(
-                (self.request.context, self.request),
-                ISitemapExtension):
+        for name, adapter in request.registry.getAdapters((request.context, request),
+                                                          ISitemapExtension):
             source = adapter.source
             if source is not None:
                 yield timestamp, source
@@ -121,4 +142,6 @@ class SharedToolSitemapView:
             Any(catalog['content_type'], vocabulary.by_value.keys()) & \
             Any(catalog['workflow_state'], workflow.visible_states)
         for version in unique_iter(CatalogResultSet(CatalogQuery(catalog).query(params))):
-            yield from product(II18nManager(version).get_languages(), (version,))
+            seo_info = ISEOContentInfo(version, None)
+            if (seo_info is None) or seo_info.include_sitemap:
+                yield from product(II18nManager(version).get_languages(), (version,))
