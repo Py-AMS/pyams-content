@@ -157,6 +157,12 @@ class IFilter(Interface):
                             required=True,
                             default=5)
 
+    display_count = Bool(title=_("Display results count"),
+                         description=_("In 'list' mode, display number of entries matching "
+                                       "each search filter value"),
+                         required=True,
+                         default=True)
+
     select_placeholder = I18nTextLineField(title=_("Select placeholder"),
                                            description=_("Placeholder text displayed in the "
                                                          "select widget"),

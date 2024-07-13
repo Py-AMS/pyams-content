@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-06-28 10:19+0200\n"
+"POT-Creation-Date: 2024-07-13 11:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -796,16 +796,16 @@ msgstr ""
 msgid "PyAMS content workflow"
 msgstr ""
 
-#: ./src/pyams_content/workflow/zmi/publication.py:48
+#: ./src/pyams_content/workflow/zmi/publication.py:45
 #: ./src/pyams_content/shared/common/zmi/summary.py:148
 msgid "Publication dates"
 msgstr ""
 
-#: ./src/pyams_content/workflow/zmi/publication.py:58
+#: ./src/pyams_content/workflow/zmi/publication.py:55
 msgid "Workflow management"
 msgstr ""
 
-#: ./src/pyams_content/workflow/zmi/publication.py:59
+#: ./src/pyams_content/workflow/zmi/publication.py:56
 msgid "Content publication dates"
 msgstr ""
 
@@ -1237,7 +1237,7 @@ msgid "Display mode"
 msgstr ""
 
 #: ./src/pyams_content/feature/filter/interfaces.py:145
-#: ./src/pyams_content/feature/filter/interfaces.py:181
+#: ./src/pyams_content/feature/filter/interfaces.py:187
 msgid "Filter entries display mode"
 msgstr ""
 
@@ -1258,38 +1258,47 @@ msgid "Number of entries displayed in search filter"
 msgstr ""
 
 #: ./src/pyams_content/feature/filter/interfaces.py:160
-msgid "Select placeholder"
+msgid "Display results count"
 msgstr ""
 
 #: ./src/pyams_content/feature/filter/interfaces.py:161
-msgid "Placeholder text displayed in the select widget"
-msgstr ""
-
-#: ./src/pyams_content/feature/filter/interfaces.py:165
-msgid "Sorting mode"
+msgid ""
+"In 'list' mode, display number of entries matching each search filter value"
 msgstr ""
 
 #: ./src/pyams_content/feature/filter/interfaces.py:166
+msgid "Select placeholder"
+msgstr ""
+
+#: ./src/pyams_content/feature/filter/interfaces.py:167
+msgid "Placeholder text displayed in the select widget"
+msgstr ""
+
+#: ./src/pyams_content/feature/filter/interfaces.py:171
+msgid "Sorting mode"
+msgstr ""
+
+#: ./src/pyams_content/feature/filter/interfaces.py:172
 msgid "Filter entries sorting mode"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/interfaces.py:180
+#: ./src/pyams_content/feature/filter/interfaces.py:186
 msgid "Content-type display mode"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/interfaces.py:194
+#: ./src/pyams_content/feature/filter/interfaces.py:200
 msgid "Thesaurus name"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/interfaces.py:195
+#: ./src/pyams_content/feature/filter/interfaces.py:201
 msgid "Name of thesaurus used to get filter terms"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/interfaces.py:199
+#: ./src/pyams_content/feature/filter/interfaces.py:205
 msgid "Thesaurus extract"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/interfaces.py:200
+#: ./src/pyams_content/feature/filter/interfaces.py:206
 msgid "Name of thesaurus extract containing terms used by this filter"
 msgstr ""
 
@@ -1313,37 +1322,37 @@ msgstr ""
 msgid "New filter properties"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/zmi/__init__.py:213
+#: ./src/pyams_content/feature/filter/zmi/__init__.py:221
 #, python-format
 msgid "Filter: {}"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/zmi/__init__.py:215
+#: ./src/pyams_content/feature/filter/zmi/__init__.py:223
 msgid "Filter properties"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/zmi/__init__.py:248
-msgid "Content-type filter"
-msgstr ""
-
-#: ./src/pyams_content/feature/filter/zmi/__init__.py:282
+#: ./src/pyams_content/feature/filter/zmi/__init__.py:256
 msgid "Title filter"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/zmi/__init__.py:319
-#: ./src/pyams_content/feature/filter/zmi/__init__.py:351
+#: ./src/pyams_content/feature/filter/zmi/__init__.py:290
+msgid "Content-type filter"
+msgstr ""
+
+#: ./src/pyams_content/feature/filter/zmi/__init__.py:327
+#: ./src/pyams_content/feature/filter/zmi/__init__.py:359
 msgid "(no selected thesaurus)"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/zmi/__init__.py:376
+#: ./src/pyams_content/feature/filter/zmi/__init__.py:384
 msgid "Tag filter"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/zmi/__init__.py:402
+#: ./src/pyams_content/feature/filter/zmi/__init__.py:410
 msgid "Theme filter"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/zmi/__init__.py:428
+#: ./src/pyams_content/feature/filter/zmi/__init__.py:436
 msgid "Collection filter"
 msgstr ""
 
@@ -1359,7 +1368,7 @@ msgstr ""
 msgid "Show less"
 msgstr ""
 
-#: ./src/pyams_content/feature/filter/skin/templates/filters-default.pt:98
+#: ./src/pyams_content/feature/filter/skin/templates/filters-default.pt:102
 msgid "Reset all filters"
 msgstr ""
 
@@ -1395,19 +1404,19 @@ msgstr ""
 msgid "Simple banner (default)"
 msgstr ""
 
-#: ./src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:8
+#: ./src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:9
 msgid "Home"
 msgstr ""
 
-#: ./src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:24
+#: ./src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:25
 msgid "Login..."
 msgstr ""
 
-#: ./src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:35
+#: ./src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:36
 msgid "User profile"
 msgstr ""
 
-#: ./src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:39
+#: ./src/pyams_content/feature/header/portlet/skin/templates/header-default.pt:40
 msgid "Logout"
 msgstr ""
 
@@ -2972,28 +2981,28 @@ msgstr ""
 msgid "Presentation template used for associations"
 msgstr ""
 
-#: ./src/pyams_content/component/association/zmi/container.py:62
+#: ./src/pyams_content/component/association/zmi/container.py:61
 msgid "Default links and external files"
 msgstr ""
 
-#: ./src/pyams_content/component/association/zmi/container.py:84
-#: ./src/pyams_content/component/association/zmi/container.py:249
+#: ./src/pyams_content/component/association/zmi/container.py:83
+#: ./src/pyams_content/component/association/zmi/container.py:248
 msgid "Links and external files"
 msgstr ""
 
-#: ./src/pyams_content/component/association/zmi/container.py:164
+#: ./src/pyams_content/component/association/zmi/container.py:163
 msgid "Public label"
 msgstr ""
 
-#: ./src/pyams_content/component/association/zmi/container.py:173
+#: ./src/pyams_content/component/association/zmi/container.py:172
 msgid "Internal target"
 msgstr ""
 
-#: ./src/pyams_content/component/association/zmi/container.py:190
+#: ./src/pyams_content/component/association/zmi/container.py:189
 msgid "Size"
 msgstr ""
 
-#: ./src/pyams_content/component/association/zmi/container.py:234
+#: ./src/pyams_content/component/association/zmi/container.py:233
 msgid "Links and external files list"
 msgstr ""
 

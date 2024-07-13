@@ -8,7 +8,7 @@
 				<fieldset>
 					<legend class="d-flex justify-content-start justify-content-md-end">
 						<a role="button"
-						   class="btn text-primary mt-2"
+						   class="btn text-primary text-truncate mt-2"
 						   data-toggle="collapse"
 						   aria-expanded="true" aria-controls="filter_${filter.filter_type}${repeat.filter.index}"
 						   href="#filter_${filter.filter_type}${repeat.filter.index}">
@@ -41,7 +41,7 @@
 						<tal:if case="'list'">
 							<div class="options">
 								<div tal:repeat="filter_option filter.initial_options"
-									 class="custom-control custom-checkbox">
+									 class="custom-control custom-checkbox text-truncate">
 									<input id="filter_${filter_option.key}_${repeat.filter_option.index}"
 									       name="filter"
 									       type="checkbox"
@@ -52,7 +52,8 @@
 									       data-ams-change-handler="PyAMS_search.updateSearchFilters" />
 									<label for="filter_${filter_option.key}_${repeat.filter_option.index}"
 									       class="custom-control-label">
-										${filter_option.label} (${filter_option.doc_count})
+										${filter_option.label}
+										<tal:if condition="filter.filter.display_count">(${filter_option.doc_count})</tal:if>
 									</label>
 								</div>
 								<tal:if condition="filter.show_more">
@@ -62,17 +63,20 @@
 									        "shown.bs.collapse": "PyAMS_search.switchMoreFilters",
 									        "hidden.bs.collapse": "PyAMS_search.switchMoreFilters"
 									     }'>
-										<div class="checkbox"
+										<div class="custom-control custom-checkbox text-truncate"
 										     tal:repeat="extra_option filter.additional_options">
 											<input id="extraFilter_${extra_option.key}_${repeat.extra_option.index}"
 											       name="filter"
 											       type="checkbox"
+											       class="custom-control-input"
 											       value="${extra_option.key}"
 											       checked="${extra_option.key in filter.current_filters and 'checked' or None}"
 											       data-filter-type="${filter.filter_type}"
 											       data-ams-change-handler="PyAMS_search.updateSearchFilters"/>
-											<label for="extraFilter_${extra_option.key}_${repeat.extra_option.index}">
-												${extra_option.label} (${extra_option.doc_count})
+											<label for="extraFilter_${extra_option.key}_${repeat.extra_option.index}"
+											       class="custom-control-label">
+												${extra_option.label}
+												<tal:if condition="filter.filter.display_count">(${extra_option.doc_count})</tal:if>
 											</label>
 										</div>
 									</div>
