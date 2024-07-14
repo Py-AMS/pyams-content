@@ -15,14 +15,13 @@
 This module defines main sitemap management components.
 """
 
-__docformat__ = 'restructuredtext'
-
 from datetime import datetime, timezone
 from itertools import product
 
 from hypatia.catalog import CatalogQuery
 from hypatia.interfaces import ICatalog
 from hypatia.query import Any, Eq
+from pyramid.traversal import resource_path
 from pyramid.view import view_config
 from zope.intid import IIntIds
 from zope.schema.vocabulary import getVocabularyRegistry
@@ -38,8 +37,9 @@ from pyams_site.interfaces import ISiteRoot
 from pyams_utils.list import unique_iter
 from pyams_utils.registry import get_utilities_for, get_utility
 from pyams_utils.timezone import tztime
-from pyams_utils.traversing import get_path
 from pyams_workflow.interfaces import IWorkflow, IWorkflowPublicationInfo
+
+__docformat__ = 'restructuredtext'
 
 
 @view_config(name='robots.txt',
@@ -55,15 +55,15 @@ def site_root_robots_view(request):
         seo_info = ISEOContentInfo(tool, None)
         if seo_info is None:
             if not tool.shared_content_menu:
-                disallow.append(get_path(tool))
+                disallow.append(resource_path(tool))
                 continue
         else:
             if not seo_info.include_sitemap:
-                disallow.append(get_path(tool))
+                disallow.append(resource_path(tool))
                 continue
         publication_info = IWorkflowPublicationInfo(tool, None)
         if (publication_info is not None) and not publication_info.is_visible(request):
-            disallow.append(get_path(tool))
+            disallow.append(resource_path(tool))
     return {
         'tools_configuration': ISiteRootToolsConfiguration(request.root),
         'disallow': disallow
