@@ -203,7 +203,7 @@ class InternalSiteLinkAddMenu(MenuItem):
     """Internal site link add menu"""
 
     label = _("Add internal link...")
-    icon_class = 'fas fa-external-link-square-alt fa-rotate-90'
+    icon_class = 'fas fa-sign-in-alt fa-rotate-270'
 
     href = 'add-internal-link.html'
     modal_target = True
@@ -264,7 +264,7 @@ def internal_content_link_dashboard_label(context, request, column):
         if target is not None:
             label = get_object_label(target, request)
     translate = request.localizer.translate
-    return f'{label} <i class="ml-1 fas fa-external-link-square-alt fa-rotate-90 hint" ' \
+    return f'{label} <i class="ml-1 fas fa-sign-in-alt fa-rotate-270 hint" ' \
            f'data-original-title="{translate(context.content_name)}"></i>'
 
 
@@ -338,7 +338,7 @@ class ExternalSiteLinkAddMenu(MenuItem):
     """External site link add menu"""
 
     label = _("Add external link...")
-    icon_class = 'fas fa-external-link-alt'
+    icon_class = 'fas fa-link'
 
     href = 'add-external-link.html'
     modal_target = True
@@ -397,5 +397,5 @@ def external_site_link_dashboard_label(context, request, column):
     if not label:
         label = context.url
     translate = request.localizer.translate
-    return f'{label} <i class="ml-1 fas fa-external-link-alt hint" ' \
+    return f'{label} <i class="ml-1 fas fa-link hint" ' \
            f'data-original-title="{translate(context.content_name)}"></i>'

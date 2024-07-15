@@ -57,7 +57,7 @@ class IBaseLink(IAssociationItem):
         """Get URL for use in HTML editor"""
 
 
-INTERNAL_LINK_ICON_CLASS = 'fas fa-external-link-square-alt fa-rotate-90'
+INTERNAL_LINK_ICON_CLASS = 'fas fa-sign-in-alt fa-rotate-270'
 INTERNAL_LINK_ICON_HINT = _("Internal link")
 
 
@@ -104,7 +104,7 @@ class IInternalLinkCustomInfo(Interface):
         """Get custom params to generate link URL"""
 
 
-EXTERNAL_LINK_ICON_CLASS = 'fas fa-external-link-alt'
+EXTERNAL_LINK_ICON_CLASS = 'fas fa-link'
 EXTERNAL_LINK_ICON_HINT = _("External link")
 
 
