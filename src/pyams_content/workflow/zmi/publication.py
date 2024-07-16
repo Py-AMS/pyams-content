@@ -23,6 +23,7 @@ from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
+from pyams_utils.interfaces.form import NO_VALUE
 from pyams_utils.timezone import tztime
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_workflow.interfaces import IWorkflowPublicationInfo, IWorkflowPublicationSupport
@@ -67,12 +68,14 @@ class SiteItemPublicationDatesEditForm(AdminEditForm):
     def update_widgets(self, prefix=None):
         super().update_widgets(prefix)
         effective_date = self.widgets.get('publication_effective_date')
-        if effective_date is not None:
-            pub_info = IWorkflowPublicationInfo(self.context)
-            if (pub_info is not None) and \
-                    (pub_info.first_publication_date is None) and \
-                    (pub_info.publication_effective_date is None):
-                effective_date.value = tztime(datetime.now(timezone.utc))
+        if (effective_date is not None) and not effective_date.value:
+            value = effective_date.extract()
+            if value is NO_VALUE:
+                pub_info = IWorkflowPublicationInfo(self.context)
+                if (pub_info is not None) and \
+                        (pub_info.first_publication_date is None) and \
+                        (pub_info.publication_effective_date is None):
+                    effective_date.value = tztime(datetime.now(timezone.utc))
 
 
 @adapter_config(required=(IWorkflowPublicationSupport, IAdminLayer, SiteItemPublicationDatesEditForm),
