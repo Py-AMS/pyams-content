@@ -28,6 +28,7 @@ from pyams_content.component.association import IAssociationContainer
 from pyams_content.component.association.container import AssociationContainer
 from pyams_content.component.association.interfaces import ASSOCIATION_CONTAINER_KEY
 from pyams_content.component.illustration import ILinkIllustrationTarget
+from pyams_content.component.links import IInternalLink
 from pyams_content.feature.navigation.interfaces import IDynamicMenu, IMenu, IMenuLinksContainer, \
     IMenuLinksContainerTarget, IMenusContainer, IMenusContainerTarget, MENUS_CONTAINER_KEY, \
     MENU_ICON_CLASS, MENU_ICON_HINT
@@ -74,8 +75,8 @@ class Menu(InternalReferenceMixin, Persistent, Contained):
     visible = FieldProperty(IMenu['visible'])
     title = FieldProperty(IMenu['title'])
     reference = FieldProperty(IMenu['reference'])
-    use_canonical_url = FieldProperty(IMenu['use_canonical_url'])
     dynamic_menu = FieldProperty(IMenu['dynamic_menu'])
+    force_canonical_url = FieldProperty(IMenu['force_canonical_url'])
     _pictogram_name = FieldProperty(IMenu['pictogram_name'])
 
     @property
@@ -117,9 +118,12 @@ class Menu(InternalReferenceMixin, Persistent, Contained):
     def get_visible_items(self, request=None):
         """Visible items iterator getter"""
         if self.dynamic_menu and ISiteContainer.providedBy(self.target):
-            yield from filter(None,
-                              map(lambda x: IDynamicMenu(x, None),
-                                  self.target.get_visible_items(request)))
+            for item in filter(None,
+                               map(lambda x: IDynamicMenu(x, None),
+                                   self.target.get_visible_items(request))):
+                if IInternalLink.providedBy(item):
+                    item.force_canonical_url = self.force_canonical_url
+                yield item
         yield from IMenuLinksContainer(self).get_visible_items(request)
 
     def get_url(self, request=None, view_name=None):
@@ -128,7 +132,7 @@ class Menu(InternalReferenceMixin, Persistent, Contained):
         if target is not None:
             if request is None:
                 request = check_request()
-            if self.use_canonical_url:
+            if self.force_canonical_url:
                 return canonical_url(target, request, view_name=view_name)
             return relative_url(target, request, view_name=view_name)
         return None

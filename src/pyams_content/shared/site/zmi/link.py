@@ -226,8 +226,8 @@ class InternalSiteLinkAddForm(SiteLinkAddForm):
     subtitle = _("New internal link")
     legend = _("New internal link properties")
 
-    fields = Fields(IInternalSiteLinkAddFormFields).select('reference', 'navigation_title',
-                                                           'parent')
+    fields = Fields(IInternalSiteLinkAddFormFields).select('reference', 'force_canonical_url',
+                                                           'navigation_title', 'parent')
     fields['parent'].widget_factory = SiteManagerFoldersSelectorFieldWidget
     content_factory = IInternalSiteLink
 
@@ -243,7 +243,8 @@ class InternalSiteLinkAddForm(SiteLinkAddForm):
 class InternalSiteLinkPropertiesEditForm(SiteLinkPropertiesEditForm):
     """Internal site link properties edit form"""
 
-    fields = Fields(IInternalSiteLink).select('reference', 'navigation_title')
+    fields = Fields(IInternalSiteLink).select('reference', 'force_canonical_url',
+                                              'navigation_title')
 
 
 @adapter_config(required=(IInternalSiteLink, IAdminLayer, IModalEditForm),

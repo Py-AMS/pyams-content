@@ -202,7 +202,7 @@ class ISiteTopic(ITopic, ISiteElement):
 
 class ISiteLink(ISiteElement):
     """Content link interface"""
-
+    
     navigation_title = I18nTextLineField(title=_("Navigation title"),
                                          description=_("Alternate content's title displayed in "
                                                        "navigation pages; original title will be "
@@ -228,6 +228,12 @@ class ISiteLink(ISiteElement):
 
 class IInternalSiteLink(ISiteLink, IInternalReference):
     """Internal content site link interface"""
+
+    force_canonical_url = Bool(title=_("Force canonical URL?"),
+                               description=_("If 'yes', link to internal references will "
+                                             "use their canonical instead of relative URL"),
+                               required=True,
+                               default=False)
 
 
 class IExternalSiteLink(ISiteLink, IAttributeAnnotatable):

@@ -97,18 +97,18 @@ class IMenu(IMenuLinksContainerTarget, IInternalReference):
                                        description=_("Direct reference to menu target"),
                                        required=False)
 
-    use_canonical_url = Bool(title=_("Use canonical URL"),
-                             description=_("If 'yes', link to internal reference will "
-                                           "use it's canonical URL instead of relative URL"),
-                             required=True,
-                             default=True)
-
     dynamic_menu = Bool(title=_("Dynamic menu?"),
                         description=_("If 'yes', menu items will be built from internal "
                                       "reference navigation items; other static items will be "
                                       "placed after dynamic items"),
                         required=False,
                         default=False)
+
+    force_canonical_url = Bool(title=_("Force canonical URL?"),
+                               description=_("If 'yes', link to internal references will "
+                                             "use their canonical instead of relative URL"),
+                               required=True,
+                               default=False)
 
     pictogram_name = Choice(title=_("Pictogram"),
                             description=_("Name of the pictogram associated with this menu; "

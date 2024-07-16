@@ -79,6 +79,7 @@ class InternalSiteLink(InternalReferenceMixin, SiteLink):
     """
 
     _reference = FieldProperty(IInternalSiteLink['reference'])
+    force_canonical_url = FieldProperty(IInternalSiteLink['force_canonical_url'])
 
     content_name = _("Internal link")
 
@@ -107,6 +108,7 @@ def internal_site_link_dynamic_menu(context):
         result = InternalLink()
         result.title = context.navigation_title.copy() if context.navigation_title else {}
         result.reference = context.reference
+        result.force_canonical_url = context.force_canonical_url
         return result
     return None
 
