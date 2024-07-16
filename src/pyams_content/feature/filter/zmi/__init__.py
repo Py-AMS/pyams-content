@@ -26,6 +26,7 @@ from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortletSettings, MANAGE_TEMPLATE_PERMISSION
+from pyams_portal.zmi.interfaces import IPortletRendererSettingsEditForm
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_skin.interfaces.view import IModalPage
 from pyams_skin.interfaces.viewlet import IContentSuffixViewletManager
@@ -138,6 +139,10 @@ def delete_filter(request):
 @viewlet_config(name='filters-content-table',
                 context=IFiltersContainer, layer=IAdminLayer,
                 view=IPropertiesEditForm,
+                manager=IContentSuffixViewletManager, weight=10)
+@viewlet_config(name='filters-content-table',
+                context=IFiltersContainer, layer=IAdminLayer,
+                view=IPortletRendererSettingsEditForm,
                 manager=IContentSuffixViewletManager, weight=10)
 class FiltersTableView(InnerTableAdminView):
     """Filters table view"""
