@@ -1,6 +1,17 @@
 Changelog
 =========
 
+1.99.7
+------
+ - updated paragraph add form renderer
+ - updated header logo getter
+ - updated content publication support views
+ - added property to search filters to hide results count
+ - extended sitemap, SEO settings and "robots.txt" view
+ - added OpenGraph metas support
+ - updated internal and external links pictograms to match TinyMCE editor
+ - updated canonical URL support in navigation menus and internal sites links
+
 1.99.6
 ------
  - added filter add and edit forms title adapters
