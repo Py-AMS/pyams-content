@@ -15,10 +15,10 @@
 This module defines interfaces of HTML paragraph default renderer.
 """
 
-from zope.schema import Choice
+from zope.schema import Bool, Choice
 
 from pyams_content.feature.renderer import IRendererSettings
-
+from pyams_skin.interfaces import BOOTSTRAP_STATUS_VOCABULARY
 
 __docformat__ = 'restructuredtext'
 
@@ -26,7 +26,7 @@ from pyams_content import _
 
 
 class IHTMLParagraphRendererSettings(IRendererSettings):
-    """HTML paragraph renderer settings"""
+    """HTML paragraph renderer settings interface"""
 
     xs_horizontal_padding = Choice(title=_("XS horizontal padding"),
                                    description=_("Define horizontal padding for smartphones"),
@@ -59,3 +59,18 @@ class IHTMLParagraphRendererSettings(IRendererSettings):
 
     def get_padding(self):
         """Get settings padding"""
+
+
+class IHTMLParagraphAlertRendererSettings(IHTMLParagraphRendererSettings):
+    """HTML paragraph alert renderer settings interface"""
+
+    status = Choice(title=_("Alert status"),
+                    description=_("Bootstrap alert status defines alert rendering color"),
+                    required=True,
+                    vocabulary=BOOTSTRAP_STATUS_VOCABULARY,
+                    default='info')
+
+    display_dismiss_button = Bool(title=_("Display dismiss button"),
+                                  description=_("Select this option to display a dismiss button"),
+                                  required=True,
+                                  default=False)

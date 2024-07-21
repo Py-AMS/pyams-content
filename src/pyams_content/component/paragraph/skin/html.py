@@ -21,12 +21,12 @@ from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.illustration import IIllustration
 from pyams_content.component.paragraph.interfaces.html import IHTMLParagraph, IRawParagraph
-from pyams_content.component.paragraph.skin.interfaces.html import IHTMLParagraphRendererSettings
-from pyams_content.feature.renderer import DefaultContentRenderer, \
-    IContentRenderer
-from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
+from pyams_content.component.paragraph.skin.interfaces.html import IHTMLParagraphAlertRendererSettings, \
+    IHTMLParagraphRendererSettings
+from pyams_content.feature.renderer import DefaultContentRenderer, IContentRenderer
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
+from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
 from pyams_template.template import template_config
 from pyams_utils import library
 from pyams_utils.adapter import adapter_config
@@ -35,7 +35,6 @@ from pyams_utils.fanstatic import ExternalResource
 from pyams_utils.interfaces.pygments import IPygmentsCodeConfiguration
 from pyams_utils.interfaces.text import IHTMLRenderer
 from pyams_utils.pygments import render_source
-
 
 __docformat__ = 'restructuredtext'
 
@@ -201,3 +200,27 @@ class HTMLParagraphRenderer(DefaultContentRenderer):
             self.illustration = illustration
             self.illustration_renderer = illustration.get_renderer(self.request)
             self.illustration_renderer.update()
+
+
+#
+# HTML rich text 'alert' renderer
+#
+
+@factory_config(IHTMLParagraphAlertRendererSettings)
+class HTMLParagraphAlertRendererSettings(HTMLParagraphRendererSettings):
+    """HTML paragraph alert renderer settings"""
+
+    status = FieldProperty(IHTMLParagraphAlertRendererSettings['status'])
+    display_dismiss_button = FieldProperty(IHTMLParagraphAlertRendererSettings['display_dismiss_button'])
+
+
+@adapter_config(name='alert',
+                required=(IHTMLParagraph, IPyAMSLayer),
+                provides=IContentRenderer)
+@template_config(template='templates/html-alert.pt', layer=IPyAMSLayer)
+class HTMLParagraphAlertRenderer(HTMLParagraphRenderer):
+    """HTML paragraph alert renderer"""
+
+    label = _("Bootstrap alert")
+
+    settings_interface = IHTMLParagraphAlertRendererSettings
