@@ -38,6 +38,7 @@ from pyams_content.shared.alert.interfaces import IAlertManager
 from pyams_content.shared.common.interfaces import IWfSharedContent
 from pyams_content.shared.common.interfaces.types import IWfTypedSharedContent
 from pyams_content.shared.form.interfaces import IFormManager
+from pyams_content.shared.news.interfaces import INewsManager
 from pyams_content.shared.topic.interfaces import ITopicManager
 from pyams_content.shared.view.interfaces import IViewManager
 from pyams_security.index import PrincipalsRoleIndex
@@ -62,6 +63,7 @@ REQUIRED_TOOLS = (
     (IViewManager, 'views'),
     (IAlertManager, 'alerts'),
     (IFormManager, 'forms'),
+    (INewsManager, 'news'),
     (ITopicManager, 'topics')
 )
 
