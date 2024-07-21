@@ -2741,8 +2741,8 @@ msgid ""
 "If 'yes', link to internal references will use their canonical instead of "
 "relative URL"
 msgstr ""
-"Si 'oui', les liens vers les contenus internes au site utiliseront leur adresse "
-"canonique plutôt qu'une adresse relative"
+"Si 'oui', les liens vers les contenus internes au site utiliseront leur "
+"adresse canonique plutôt qu'une adresse relative"
 
 #: src/pyams_content/shared/site/interfaces.py:242
 #: src/pyams_content/component/links/interfaces.py:114
@@ -3703,8 +3703,8 @@ msgid ""
 "You have been requested by ${sender}, contributor of « ${service_name} » "
 "website, to make a review of a content."
 msgstr ""
-"Vous êtes sollicité par ${sender}, contributor du site internet « "
-"${service_name} », qui souhaite recueillir votre commentaire à propos d'un "
+"Vous êtes sollicité par ${sender}, contributor du site internet "
+"« ${service_name} », qui souhaite recueillir votre commentaire à propos d'un "
 "contenu."
 
 #: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:36
