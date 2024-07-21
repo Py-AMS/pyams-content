@@ -93,6 +93,15 @@ class BaseParagraphIllustrationSideRenderer(BaseIllustrationRenderer):
 
     css_class = None
 
+    def get_css_class(self):
+        """CSS class getter"""
+        selection = self.settings.thumb_selection
+        cols = ' '.join((
+            f'col-{selection.cols}' if device == 'xs' else f'col-{device}-{selection.cols}'
+            for device, selection in selection.items()
+        ))
+        return f'{self.css_class} {cols}'
+
 
 @adapter_config(name='float-left',
                 required=(IParagraphIllustration, IPyAMSLayer),
@@ -101,7 +110,7 @@ class ParagraphIllustrationLeftFloatRenderer(BaseParagraphIllustrationSideRender
     """Left floating illustration renderer"""
 
     label = _("Floating illustration to the left")
-    css_class = 'float-left'
+    css_class = 'float-left mr-3'
 
     weight = 20
 
@@ -113,7 +122,7 @@ class ParagraphIllustrationRightFloatRenderer(BaseParagraphIllustrationSideRende
     """Right floating illustration renderer"""
 
     label = _("Floating illustration to the right")
-    css_class = 'float-right'
+    css_class = 'float-right ml-3'
 
     weight = 30
 

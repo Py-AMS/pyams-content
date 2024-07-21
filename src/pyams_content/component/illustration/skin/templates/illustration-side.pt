@@ -1,4 +1,4 @@
-<div class="illustration ${view.css_class} col-12 col-sm-6 mr-3 mb-3 px-0"
+<div class="illustration ${view.get_css_class()} mb-3 px-0"
 	 tal:define="settings view.settings;
 				 image i18n:context.data;"
 	 tal:condition="image"
@@ -14,7 +14,7 @@
 		   data-target="#illustration_${tales:cache_key(context)}">
 			${structure:tales:picture(image,
 									  selections=selections,
-									  alt=alt_title)}
+									  alt=alt_title, css_class='w-100')}
 			<ul class="d-flex m-0 py-1 px-2 legend list-inline list-separated position-absolute small text-white-50"
 				tal:define="title i18n:context.title;
 							author context.author;"
