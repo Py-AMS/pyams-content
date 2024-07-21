@@ -38,6 +38,10 @@ __docformat__ = 'restructuredtext'
 from pyams_content import _
 
 
+#
+# Simple navigation portlet renderers
+#
+
 class BaseSimpleNavigationPortletRenderer(PortletRenderer):
     """Base simple navigation portlet renderer"""
 
@@ -67,6 +71,23 @@ class SimpleNavigationPortletDefaultRenderer(BaseSimpleNavigationPortletRenderer
     settings_interface = ISimpleNavigationPortletDefaultRendererSettings
     weight = 10
 
+
+@adapter_config(name='footer-simple',
+                required=(IPortalContext, IPyAMSLayer, Interface,
+                          ISimpleNavigationPortletSettings),
+                provides=IPortletRenderer)
+@template_config(template='templates/simple-footer.pt', layer=IPyAMSLayer)
+class SimpleNavigationPortletFooterRenderer(BaseSimpleNavigationPortletRenderer):
+    """Simple navigation portlet footer renderer"""
+
+    label = _("Simple footer links")
+
+    weight = 20
+
+
+#
+# Double navigation portlet renderers
+#
 
 @factory_config(IDoubleNavigationPortletDefaultRendererSettings)
 class DoubleNavigationPortletDefaultRendererSettings(Persistent, Contained):
