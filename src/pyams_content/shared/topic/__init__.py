@@ -39,7 +39,7 @@ __docformat__ = 'restructuredtext'
 @implementer(IIllustrationTarget, ILinkIllustrationTarget, IParagraphContainerTarget,
              ITagsTarget, IThemesTarget, IReviewTarget, IPreviewTarget)
 class WfTopic(WfSharedContent, WfTypedSharedContentMixin):
-    """Base topic"""
+    """Base topic content"""
 
     content_type = TOPIC_CONTENT_TYPE
     content_name = TOPIC_CONTENT_NAME

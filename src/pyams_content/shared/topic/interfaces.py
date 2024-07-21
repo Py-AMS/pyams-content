@@ -14,7 +14,6 @@
 
 """
 
-from zope.interface import Interface
 from zope.schema import Choice
 
 from pyams_content.shared.common.interfaces import ISharedContent, ISharedToolPortalContext, \
