@@ -20,6 +20,7 @@ import re
 from zope.interface import classImplements
 
 from pyams_content.component.extfile.interfaces import IExtFileManagerTarget
+from pyams_content.component.links.interfaces import IExternalLinksManagerTarget
 from pyams_content.component.thesaurus import ICollectionsManagerTarget, ITagsManagerTarget, \
     IThemesManagerTarget
 from pyams_content.feature.preview.interfaces import IPreviewTarget
@@ -239,6 +240,7 @@ def include_package(config):
 
     # site root extensions
     classImplements(BaseSiteRoot, IExtFileManagerTarget)
+    classImplements(BaseSiteRoot, IExternalLinksManagerTarget)
     classImplements(BaseSiteRoot, ITagsManagerTarget)
     classImplements(BaseSiteRoot, IThemesManagerTarget)
     classImplements(BaseSiteRoot, ICollectionsManagerTarget)

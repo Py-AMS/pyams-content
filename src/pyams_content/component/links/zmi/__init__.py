@@ -14,8 +14,9 @@
 
 """
 
+from pyramid.events import subscriber
 from pyramid.view import view_config
-from zope.interface import implementer
+from zope.interface import Invalid, implementer
 
 from pyams_content.component.association.interfaces import IAssociationContainer, IAssociationContainerTarget, \
     IAssociationInfo
@@ -23,12 +24,13 @@ from pyams_content.component.association.zmi import AssociationItemAddFormMixin,
     AssociationItemAddMenuMixin
 from pyams_content.component.association.zmi.interfaces import IAssociationsTable
 from pyams_content.component.links import ExternalLink, InternalLink, MailtoLink
-from pyams_content.component.links.interfaces import IBaseLink, IExternalLink, IInternalLink, \
+from pyams_content.component.links.interfaces import IBaseLink, IExternalLink, IExternalLinksManagerInfo, IInternalLink, \
     ILinkContainerTarget, IMailtoLink
 from pyams_content.component.links.zmi.interfaces import ILinkAddForm, ILinkEditForm
 from pyams_content.reference.pictogram.zmi.widget import PictogramSelectFieldWidget
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
+from pyams_form.interfaces.form import IDataExtractedEvent
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_security.security import ProtectedViewObjectMixin
@@ -167,6 +169,23 @@ class ExternalLinkPropertiesEditForm(LinkEditFormMixin, AdminModalEditForm):
     fields = Fields(IExternalLink).select('url', 'title', 'description',
                                           'language', 'pictogram_name')
     fields['pictogram_name'].widget_factory = PictogramSelectFieldWidget
+
+
+@subscriber(IDataExtractedEvent, form_selector=ExternalLinkAddForm)
+@subscriber(IDataExtractedEvent, form_selector=ExternalLinkPropertiesEditForm)
+def extract_external_link_data(event):
+    """External link data extraction event"""
+    form = event.form
+    request = form.request
+    settings = IExternalLinksManagerInfo(request.root, None)
+    if (settings is None) or not settings.check_external_links:
+        return
+    url = event.data.get('url')
+    for host in settings.forbidden_hosts or ():
+        if host and url.startswith(host):
+            form.widgets.errors += (Invalid(_("You can't create an external link to this site! "
+                                              "Use an internal link instead...")),)
+            return
 
 
 #

@@ -23,8 +23,7 @@ from pyams_content.reference.pictogram.interfaces import SELECTED_PICTOGRAM_VOCA
 from pyams_i18n.interfaces import BASE_LANGUAGES_VOCABULARY_NAME
 from pyams_i18n.schema import I18nTextField, I18nTextLineField
 from pyams_sequence.interfaces import IInternalReference
-from pyams_utils.schema import MailAddressField
-
+from pyams_utils.schema import MailAddressField, TextLineListField
 
 __docformat__ = 'restructuredtext'
 
@@ -139,3 +138,29 @@ class IMailtoLink(IBaseLink):
 
 class ILinkContainerTarget(IAssociationContainerTarget):
     """Links container marker interface"""
+
+
+#
+# External links management
+#
+
+EXTERNAL_LINKS_MANAGER_INFO_KEY = 'pyams_content.links.manager'
+
+
+class IExternalLinksManagerInfo(Interface):
+    """External links manager info interface"""
+
+    check_external_links = Bool(title=_("Check external links"),
+                                description=_("If selected, contributors will not be able to create "
+                                              "external links to internal site contents"),
+                                required=True,
+                                default=False)
+
+    forbidden_hosts = TextLineListField(title=_("Forbidden hosts"),
+                                        description=_("List of hosts (including protocol) for which "
+                                                      "creation of external links is forbidden"),
+                                        required=False)
+
+
+class IExternalLinksManagerTarget(Interface):
+    """External links manager target interface"""
