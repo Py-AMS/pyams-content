@@ -74,7 +74,7 @@ MANUAL_FILTER_SORTING_VOCABULARY = SimpleVocabulary([
 
 
 #
-# Filter dispay mode
+# Filter display mode
 #
 
 class FILTER_DISPLAY_MODE(Enum):
@@ -83,14 +83,33 @@ class FILTER_DISPLAY_MODE(Enum):
     SELECT = 'select'
 
 
-FILTER_DISPLAY_MODE_LABEL = (
+FILTER_DISPLAY_MODE_LABEL = OrderedDict((
     (FILTER_DISPLAY_MODE.LIST.value, _("List")),
     (FILTER_DISPLAY_MODE.SELECT.value, _("Choice")),
-)
+))
 
 FILTER_DISPLAY_MODE_VOCABULARY = SimpleVocabulary([
     SimpleTerm(key, title=value)
-    for key, value in FILTER_DISPLAY_MODE_LABEL
+    for key, value in FILTER_DISPLAY_MODE_LABEL.items()
+])
+
+
+class FILTER_ALIGNMENT(Enum):
+    """Filter label alignment enumeration"""
+    LEFT = 'left'
+    RIGHT = 'right'
+    CENTER = 'center'
+
+
+FILTER_ALIGNMENT_LABEL = OrderedDict((
+    (FILTER_ALIGNMENT.LEFT.value, _("Left")),
+    (FILTER_ALIGNMENT.RIGHT.value, _("Right")),
+    (FILTER_ALIGNMENT.CENTER.value, _("Center"))
+))
+
+FILTER_ALIGNMENT_VOCABULARY = SimpleVocabulary([
+    SimpleTerm(key, title=value)
+    for key, value in FILTER_ALIGNMENT_LABEL.items()
 ])
 
 
@@ -156,6 +175,19 @@ class IFilter(Interface):
                             description=_("Number of entries displayed in search filter"),
                             required=True,
                             default=5)
+
+    labels_alignment = Choice(title=_("Labels alignment"),
+                              description=_("Labels display alignment for search filter in "
+                                            "list mode"),
+                              required=True,
+                              vocabulary=FILTER_ALIGNMENT_VOCABULARY,
+                              default=FILTER_ALIGNMENT.LEFT.value)
+
+    truncate_labels = Bool(title=_("Truncated labels"),
+                           description=_("Activate this option to truncate labels and "
+                                         "remove line breaks"),
+                           required=True,
+                           default=True)
 
     display_count = Bool(title=_("Display results count"),
                          description=_("In 'list' mode, display number of entries matching "

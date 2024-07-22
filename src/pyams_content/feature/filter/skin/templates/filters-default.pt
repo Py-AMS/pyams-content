@@ -41,7 +41,7 @@
 						<tal:if case="'list'">
 							<div class="options">
 								<div tal:repeat="filter_option filter.initial_options"
-									 class="custom-control custom-checkbox text-truncate">
+									 class="custom-control custom-checkbox text-left text-md-${filter.filter.labels_alignment} ${'text-truncate' if filter.filter.truncate_labels else ''}">
 									<input id="filter_${filter_option.key}_${repeat.filter_option.index}"
 									       name="filter"
 									       type="checkbox"
@@ -63,8 +63,8 @@
 									        "shown.bs.collapse": "PyAMS_search.switchMoreFilters",
 									        "hidden.bs.collapse": "PyAMS_search.switchMoreFilters"
 									     }'>
-										<div class="custom-control custom-checkbox text-truncate"
-										     tal:repeat="extra_option filter.additional_options">
+										<div tal:repeat="extra_option filter.additional_options"
+											 class="custom-control custom-checkbox text-left text-md-${filter.filter.labels_alignment} ${'text-truncate' if filter.filter.truncate_labels else ''}">
 											<input id="extraFilter_${extra_option.key}_${repeat.extra_option.index}"
 											       name="filter"
 											       type="checkbox"

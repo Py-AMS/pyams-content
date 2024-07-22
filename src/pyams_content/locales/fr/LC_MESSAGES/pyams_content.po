@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-07-22 02:26+0200\n"
+"POT-Creation-Date: 2024-07-22 10:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1083,7 +1083,7 @@ msgid "Navigation menu"
 msgstr "Menu de navigation"
 
 #: src/pyams_content/feature/navigation/interfaces.py:84
-#: src/pyams_content/feature/filter/interfaces.py:135
+#: src/pyams_content/feature/filter/interfaces.py:154
 #: src/pyams_content/component/paragraph/interfaces/__init__.py:49
 #: src/pyams_content/component/association/interfaces.py:42
 #: src/pyams_content/shared/site/interfaces.py:223
@@ -1270,19 +1270,31 @@ msgstr "Liste à choix multiples"
 msgid "Choice"
 msgstr "Sélection simple"
 
-#: src/pyams_content/feature/filter/interfaces.py:108
+#: src/pyams_content/feature/filter/interfaces.py:105
+msgid "Left"
+msgstr "Gauche"
+
+#: src/pyams_content/feature/filter/interfaces.py:106
+msgid "Right"
+msgstr "Droite"
+
+#: src/pyams_content/feature/filter/interfaces.py:107
+msgid "Center"
+msgstr "Centré"
+
+#: src/pyams_content/feature/filter/interfaces.py:127
 msgid "Content-type label"
 msgstr "Gabarit"
 
-#: src/pyams_content/feature/filter/interfaces.py:109
+#: src/pyams_content/feature/filter/interfaces.py:128
 msgid "Data type label"
 msgstr "Type de contenu"
 
-#: src/pyams_content/feature/filter/interfaces.py:136
+#: src/pyams_content/feature/filter/interfaces.py:155
 msgid "Is this filter visible in front-office?"
 msgstr "Ce filtre est-il visible en front-office ?"
 
-#: src/pyams_content/feature/filter/interfaces.py:140
+#: src/pyams_content/feature/filter/interfaces.py:159
 #: src/pyams_content/feature/filter/zmi/__init__.py:120
 #: src/pyams_content/shared/common/zmi/types/container.py:116
 #: src/pyams_content/shared/common/interfaces/types.py:57
@@ -1291,82 +1303,98 @@ msgstr "Ce filtre est-il visible en front-office ?"
 msgid "Label"
 msgstr "Libellé"
 
-#: src/pyams_content/feature/filter/interfaces.py:141
+#: src/pyams_content/feature/filter/interfaces.py:160
 msgid "This is the label displayed in filter header"
 msgstr "Libellé affiché en tête du filtre"
 
-#: src/pyams_content/feature/filter/interfaces.py:144
+#: src/pyams_content/feature/filter/interfaces.py:163
 msgid "Display mode"
 msgstr "Mode d'affichage"
 
-#: src/pyams_content/feature/filter/interfaces.py:145
-#: src/pyams_content/feature/filter/interfaces.py:187
+#: src/pyams_content/feature/filter/interfaces.py:164
+#: src/pyams_content/feature/filter/interfaces.py:218
 msgid "Filter entries display mode"
 msgstr "Mode d'affichage du contenu du filtre"
 
-#: src/pyams_content/feature/filter/interfaces.py:150
+#: src/pyams_content/feature/filter/interfaces.py:169
 msgid "Default open state"
 msgstr "Ouvert par défaut"
 
-#: src/pyams_content/feature/filter/interfaces.py:151
+#: src/pyams_content/feature/filter/interfaces.py:170
 msgid "If 'no', options list will be collapsed by default"
 msgstr "Si 'non', la liste des options sera masquée par défaut"
 
-#: src/pyams_content/feature/filter/interfaces.py:155
+#: src/pyams_content/feature/filter/interfaces.py:174
 msgid "Displayed entries"
 msgstr "Entrées affichées"
 
-#: src/pyams_content/feature/filter/interfaces.py:156
+#: src/pyams_content/feature/filter/interfaces.py:175
 msgid "Number of entries displayed in search filter"
 msgstr ""
 "Nombre d'options affichées dans le filtre de recherche en mode \"liste\""
 
-#: src/pyams_content/feature/filter/interfaces.py:160
+#: src/pyams_content/feature/filter/interfaces.py:179
+msgid "Labels alignment"
+msgstr "Alignement des libellés"
+
+#: src/pyams_content/feature/filter/interfaces.py:180
+msgid "Labels display alignment for search filter in list mode"
+msgstr "Alignement des libellés en mode \"liste\""
+
+#: src/pyams_content/feature/filter/interfaces.py:185
+msgid "Truncated labels"
+msgstr "Tronquer les libellés"
+
+#: src/pyams_content/feature/filter/interfaces.py:186
+msgid "Activate this option to truncate labels and remove line breaks"
+msgstr "Activer cette option pour tronquer les libellés et éviter les retours à la ligne"
+
+#: src/pyams_content/feature/filter/interfaces.py:191
 msgid "Display results count"
 msgstr "Afficher le nombre de résultats"
 
-#: src/pyams_content/feature/filter/interfaces.py:161
+#: src/pyams_content/feature/filter/interfaces.py:192
 msgid ""
 "In 'list' mode, display number of entries matching each search filter value"
 msgstr ""
 "En mode 'liste', affiche le nombre de résultats correspondant à chaque "
 "option proposée dans le filtre"
 
-#: src/pyams_content/feature/filter/interfaces.py:166
+#: src/pyams_content/feature/filter/interfaces.py:197
 msgid "Select placeholder"
 msgstr "Texte d'attente"
 
-#: src/pyams_content/feature/filter/interfaces.py:167
+#: src/pyams_content/feature/filter/interfaces.py:198
 msgid "Placeholder text displayed in the select widget"
 msgstr ""
 "Texte affiché dans le filtre en mode \"sélection simple\" lorsque aucune "
 "option n'est sélectionnée"
 
-#: src/pyams_content/feature/filter/interfaces.py:171
+#: src/pyams_content/feature/filter/interfaces.py:202
 msgid "Sorting mode"
 msgstr "Mode de tri"
 
-#: src/pyams_content/feature/filter/interfaces.py:172
+#: src/pyams_content/feature/filter/interfaces.py:203
 msgid "Filter entries sorting mode"
 msgstr "Méthode utilisée pour trier les options du filtre"
 
-#: src/pyams_content/feature/filter/interfaces.py:186
+#: src/pyams_content/feature/filter/interfaces.py:217
 msgid "Content-type display mode"
 msgstr "Libellé affiché"
 
-#: src/pyams_content/feature/filter/interfaces.py:200
+#: src/pyams_content/feature/filter/interfaces.py:231
 msgid "Thesaurus name"
 msgstr "Nom du thésaurus"
 
-#: src/pyams_content/feature/filter/interfaces.py:201
+#: src/pyams_content/feature/filter/interfaces.py:232
 msgid "Name of thesaurus used to get filter terms"
 msgstr "Nom du thésaurus contenant les termes utilisés par ce filtre"
 
-#: src/pyams_content/feature/filter/interfaces.py:205
+#: src/pyams_content/feature/filter/interfaces.py:236
 msgid "Thesaurus extract"
 msgstr "Nom de l'extrait"
 
-#: src/pyams_content/feature/filter/interfaces.py:206
+#: src/pyams_content/feature/filter/interfaces.py:237
 msgid "Name of thesaurus extract containing terms used by this filter"
 msgstr ""
 "Nom de l'extrait du thésaurus contenant les termes utilisés par ce filtre"
@@ -2472,6 +2500,15 @@ msgstr "Cartes Bootstrap (par défaut)"
 msgid "Bootstrap cards Masonry renderer"
 msgstr "Cartes Bootstrap avec rendu Masonry"
 
+#: src/pyams_content/component/paragraph/zmi/html.py:138
+#: src/pyams_content/component/links/zmi/__init__.py:186
+msgid ""
+"You can't create an external link to this site! Use an internal link "
+"instead..."
+msgstr ""
+"L'administrateur a interdit la création de liens externes vers ce site ; le "
+"cas échéant, utilisez un lien interne."
+
 #: src/pyams_content/component/paragraph/zmi/container.py:158
 msgid "Click to set/unset paragraph as navigation anchor"
 msgstr "Cliquer pour (dés)activer l'ancre de navigation sur ce bloc"
@@ -3032,14 +3069,6 @@ msgstr "Nouveau lien externe"
 #: src/pyams_content/shared/site/zmi/link.py:363
 msgid "New external link properties"
 msgstr "Propriétés du nouveau lien"
-
-#: src/pyams_content/component/links/zmi/__init__.py:186
-msgid ""
-"You can't create an external link to this site! Use an internal link "
-"instead..."
-msgstr ""
-"L'administrateur a interdit la création de liens externes vers ce site ; "
-"le cas échéant, utilisez un lien interne."
 
 #: src/pyams_content/component/links/zmi/__init__.py:212
 msgid "New mailto link"

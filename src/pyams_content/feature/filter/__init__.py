@@ -43,6 +43,8 @@ class Filter(Persistent, Contained):
     display_mode = FieldProperty(IFilter['display_mode'])
     open_state = FieldProperty(IFilter['open_state'])
     displayed_entries = FieldProperty(IFilter['displayed_entries'])
+    labels_alignment = FieldProperty(IFilter['labels_alignment'])
+    truncate_labels = FieldProperty(IFilter['truncate_labels'])
     display_count = FieldProperty(IFilter['display_count'])
     select_placeholder = FieldProperty(IFilter['select_placeholder'])
     sorting_mode = FieldProperty(IFilter['sorting_mode'])
