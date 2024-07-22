@@ -24,7 +24,6 @@ from zope.lifecycleevent import IObjectAddedEvent
 from pyams_content.component.paragraph.interfaces import IParagraphFactorySettingsTarget
 from pyams_content.reference.pictogram.interfaces import IPictogramManagerTarget
 from pyams_content.shared.common.manager import SharedTool
-from pyams_content.shared.common.types import TypedSharedToolMixin
 from pyams_content.shared.news import NEWS_CONTENT_TYPE
 from pyams_content.shared.news.interfaces import INewsManager
 from pyams_utils.factory import factory_config
@@ -33,7 +32,7 @@ from pyams_utils.traversing import get_parent
 
 @factory_config(INewsManager)
 @implementer(IParagraphFactorySettingsTarget, IPictogramManagerTarget)
-class NewsManager(SharedTool, TypedSharedToolMixin):
+class NewsManager(SharedTool):
     """News manager class"""
 
     shared_content_type = NEWS_CONTENT_TYPE
