@@ -19,6 +19,7 @@ components.
 __docformat__ = 'restructuredtext'
 
 import re
+
 from pyquery import PyQuery
 from zope.lifecycleevent import ObjectCreatedEvent
 
@@ -32,7 +33,6 @@ from pyams_utils.registry import get_pyramid_registry, get_utility
 from pyams_utils.request import check_request
 from pyams_utils.url import absolute_url
 
-
 FULL_EMAIL = re.compile(r'(.*) <(.*)>')
 
 
@@ -42,7 +42,7 @@ def check_content_links(context, body, lang, notify=True):  # pylint: disable=to
     if associations is None:
         return
     registry = get_pyramid_registry()
-    html = PyQuery('<html>{0}</html>'.format(body))
+    html = PyQuery(f'<html>{body}</html>')
     for link in html('a[href]'):
         link_info = None
         has_link = False
