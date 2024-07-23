@@ -121,7 +121,7 @@ class HTMLParagraphAddForm(BaseParagraphAddForm):
 
 @subscriber(IDataExtractedEvent, form_selector=HTMLParagraphAddForm)
 @subscriber(IDataExtractedEvent, context_selector=IHTMLParagraph)
-def extract_paragraph_data(event):
+def extract_html_paragraph_data(event):
     """Extract paragraph data"""
     form = event.form
     request = form.request
