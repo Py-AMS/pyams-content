@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-07-22 10:26+0200\n"
+"POT-Creation-Date: 2024-07-23 03:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1148,6 +1148,7 @@ msgstr ""
 
 #: src/pyams_content/feature/navigation/interfaces.py:113
 #: src/pyams_content/component/links/interfaces.py:48
+#: src/pyams_content/component/frame/skin/interfaces.py:59
 #: src/pyams_content/shared/common/interfaces/types.py:93
 #: src/pyams_content/shared/alert/interfaces.py:58
 msgid "Pictogram"
@@ -1271,10 +1272,12 @@ msgid "Choice"
 msgstr "Sélection simple"
 
 #: src/pyams_content/feature/filter/interfaces.py:105
+#: src/pyams_content/component/frame/skin/interfaces.py:41
 msgid "Left"
 msgstr "Gauche"
 
 #: src/pyams_content/feature/filter/interfaces.py:106
+#: src/pyams_content/component/frame/skin/interfaces.py:42
 msgid "Right"
 msgstr "Droite"
 
@@ -1312,7 +1315,7 @@ msgid "Display mode"
 msgstr "Mode d'affichage"
 
 #: src/pyams_content/feature/filter/interfaces.py:164
-#: src/pyams_content/feature/filter/interfaces.py:218
+#: src/pyams_content/feature/filter/interfaces.py:219
 msgid "Filter entries display mode"
 msgstr "Mode d'affichage du contenu du filtre"
 
@@ -1341,60 +1344,62 @@ msgstr "Alignement des libellés"
 msgid "Labels display alignment for search filter in list mode"
 msgstr "Alignement des libellés en mode \"liste\""
 
-#: src/pyams_content/feature/filter/interfaces.py:185
+#: src/pyams_content/feature/filter/interfaces.py:186
 msgid "Truncated labels"
 msgstr "Tronquer les libellés"
 
-#: src/pyams_content/feature/filter/interfaces.py:186
+#: src/pyams_content/feature/filter/interfaces.py:187
 msgid "Activate this option to truncate labels and remove line breaks"
-msgstr "Activer cette option pour tronquer les libellés et éviter les retours à la ligne"
+msgstr ""
+"Activer cette option pour tronquer les libellés et éviter les retours à la "
+"ligne"
 
-#: src/pyams_content/feature/filter/interfaces.py:191
+#: src/pyams_content/feature/filter/interfaces.py:192
 msgid "Display results count"
 msgstr "Afficher le nombre de résultats"
 
-#: src/pyams_content/feature/filter/interfaces.py:192
+#: src/pyams_content/feature/filter/interfaces.py:193
 msgid ""
 "In 'list' mode, display number of entries matching each search filter value"
 msgstr ""
 "En mode 'liste', affiche le nombre de résultats correspondant à chaque "
 "option proposée dans le filtre"
 
-#: src/pyams_content/feature/filter/interfaces.py:197
+#: src/pyams_content/feature/filter/interfaces.py:198
 msgid "Select placeholder"
 msgstr "Texte d'attente"
 
-#: src/pyams_content/feature/filter/interfaces.py:198
+#: src/pyams_content/feature/filter/interfaces.py:199
 msgid "Placeholder text displayed in the select widget"
 msgstr ""
 "Texte affiché dans le filtre en mode \"sélection simple\" lorsque aucune "
 "option n'est sélectionnée"
 
-#: src/pyams_content/feature/filter/interfaces.py:202
+#: src/pyams_content/feature/filter/interfaces.py:203
 msgid "Sorting mode"
 msgstr "Mode de tri"
 
-#: src/pyams_content/feature/filter/interfaces.py:203
+#: src/pyams_content/feature/filter/interfaces.py:204
 msgid "Filter entries sorting mode"
 msgstr "Méthode utilisée pour trier les options du filtre"
 
-#: src/pyams_content/feature/filter/interfaces.py:217
+#: src/pyams_content/feature/filter/interfaces.py:218
 msgid "Content-type display mode"
 msgstr "Libellé affiché"
 
-#: src/pyams_content/feature/filter/interfaces.py:231
+#: src/pyams_content/feature/filter/interfaces.py:232
 msgid "Thesaurus name"
 msgstr "Nom du thésaurus"
 
-#: src/pyams_content/feature/filter/interfaces.py:232
+#: src/pyams_content/feature/filter/interfaces.py:233
 msgid "Name of thesaurus used to get filter terms"
 msgstr "Nom du thésaurus contenant les termes utilisés par ce filtre"
 
-#: src/pyams_content/feature/filter/interfaces.py:236
+#: src/pyams_content/feature/filter/interfaces.py:237
 msgid "Thesaurus extract"
 msgstr "Nom de l'extrait"
 
-#: src/pyams_content/feature/filter/interfaces.py:237
+#: src/pyams_content/feature/filter/interfaces.py:238
 msgid "Name of thesaurus extract containing terms used by this filter"
 msgstr ""
 "Nom de l'extrait du thésaurus contenant les termes utilisés par ce filtre"
@@ -3077,6 +3082,50 @@ msgstr "Nouveau lien mailto"
 #: src/pyams_content/component/links/zmi/__init__.py:213
 msgid "New mailto link properties"
 msgstr "Propriétés du nouveau lien"
+
+#: src/pyams_content/component/frame/interfaces.py:31
+msgid "Frame body"
+msgstr "Contenu HTML"
+
+#: src/pyams_content/component/frame/interfaces.py:36
+msgid "Framed text"
+msgstr "Encadré"
+
+#: src/pyams_content/component/frame/skin/interfaces.py:54
+msgid "Frame alert status"
+msgstr "Statut de l'encadré"
+
+#: src/pyams_content/component/frame/skin/interfaces.py:55
+msgid "Bootstrap alert status defines rendering color"
+msgstr "Le statut détermine la couleur associée à l'encadré"
+
+#: src/pyams_content/component/frame/skin/interfaces.py:60
+msgid "Name of the pictogram associated with this frame paragraph"
+msgstr "Sélection du pictogramme associé à cet encadré"
+
+#: src/pyams_content/component/frame/skin/interfaces.py:70
+msgid "Frame position"
+msgstr "Position de l'encadré"
+
+#: src/pyams_content/component/frame/skin/interfaces.py:71
+msgid "Frame position relatively to it's parent paragraph"
+msgstr "Position relativement au bloc de contenu suivant"
+
+#: src/pyams_content/component/frame/skin/interfaces.py:76
+msgid "Devices width"
+msgstr "Largeur de l'encadré"
+
+#: src/pyams_content/component/frame/skin/interfaces.py:77
+msgid "Select frame size for all available devices"
+msgstr "Largeur appliquée à l'encadré sur les différents types de périphériques"
+
+#: src/pyams_content/component/frame/skin/__init__.py:76
+msgid "Full width frame (default)"
+msgstr "Encadré en pleine largeur (par défaut)"
+
+#: src/pyams_content/component/frame/skin/__init__.py:119
+msgid "Floating lateral frame"
+msgstr "Encadré latéral flottant"
 
 #: src/pyams_content/component/gallery/interfaces.py:56
 msgid "Alternate title used to describe media content"
