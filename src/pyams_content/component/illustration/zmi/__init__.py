@@ -21,6 +21,7 @@ from pyams_content.component.illustration import IIllustrationTargetBase, ILinkI
 from pyams_content.component.illustration.interfaces import IBaseIllustration, \
     IBaseIllustrationTarget, IIllustration, IIllustrationTarget, ILinkIllustrationTarget
 from pyams_content.component.paragraph.interfaces import IBaseParagraph
+from pyams_portal.interfaces import IPortletSettings
 from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer, IFormContent, IFormUpdatedEvent, IInnerSubForm
@@ -75,6 +76,12 @@ class IllustrationPropertiesEditForm(BasicIllustrationPropertiesEditForm):
 
     fields = Fields(IIllustration)
     fields['renderer'].widget_factory = RendererSelectFieldWidget
+
+    def update_widgets(self, prefix=None, use_form_mode=True):
+        super().update_widgets(prefix, use_form_mode)
+        renderer = self.widgets.get('renderer')
+        if (renderer is not None) and IPortletSettings.providedBy(self.context):
+            renderer.format_renderers = False
 
     @property
     def state(self):
