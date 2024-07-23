@@ -57,7 +57,7 @@ class OIDHTMLRenderer(ContextRequestAdapter):
                     publication_info = IWorkflowPublicationInfo(target, None)
                     if (publication_info is not None) and \
                             publication_info.is_visible(request):
-                        link.attrib['href'] = canonical_url(target, request, context)
+                        link.attrib['href'] = canonical_url(target, request)
                         continue
                 # invalid link => remove href!
                 del link.attrib['href']
