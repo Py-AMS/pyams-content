@@ -19,6 +19,7 @@ from pyramid.events import subscriber
 
 from pyams_content.component.frame.interfaces import FRAME_PARAGRAPH_ICON_CLASS, FRAME_PARAGRAPH_NAME, \
     FRAME_PARAGRAPH_TYPE, IFrameParagraph
+from pyams_content.component.frame.portlet import IFramePortletSettings
 from pyams_content.component.paragraph import IParagraphContainer, IParagraphContainerTarget
 from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu, \
     IParagraphContainerBaseTable
@@ -26,6 +27,7 @@ from pyams_content.component.paragraph.zmi.html import extract_html_paragraph_da
 from pyams_form.ajax import ajax_form_config
 from pyams_form.interfaces.form import IDataExtractedEvent
 from pyams_layer.interfaces import IPyAMSLayer
+from pyams_portal.zmi.interfaces import IPortletConfigurationEditor
 from pyams_skin.interfaces.widget import IHTMLEditorConfiguration
 from pyams_utils.adapter import adapter_config
 from pyams_viewlet.viewlet import viewlet_config
@@ -70,6 +72,9 @@ def extract_frame_paragraph_data(event):
                 provides=IHTMLEditorConfiguration)
 @adapter_config(name='body',
                 required=(IFrameParagraph, IAdminLayer, IPropertiesEditForm),
+                provides=IHTMLEditorConfiguration)
+@adapter_config(name='body',
+                required=(IFramePortletSettings, IAdminLayer, IPropertiesEditForm),
                 provides=IHTMLEditorConfiguration)
 def frame_paragraph_editor_configuration(context, request, view):
     """Frame paragraph editor configuration"""
