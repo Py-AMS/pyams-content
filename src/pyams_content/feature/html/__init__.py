@@ -30,9 +30,8 @@ from pyams_utils.interfaces.text import IHTMLRenderer
 from pyams_utils.registry import get_utility
 from pyams_utils.request import get_display_context
 from pyams_utils.text import text_to_html
-from pyams_utils.url import relative_url
+from pyams_utils.url import canonical_url
 from pyams_workflow.interfaces import IWorkflowPublicationInfo
-
 
 __docformat__ = 'restructuredtext'
 
@@ -58,7 +57,7 @@ class OIDHTMLRenderer(ContextRequestAdapter):
                     publication_info = IWorkflowPublicationInfo(target, None)
                     if (publication_info is not None) and \
                             publication_info.is_visible(request):
-                        link.attrib['href'] = relative_url(target, request, context)
+                        link.attrib['href'] = canonical_url(target, request, context)
                         continue
                 # invalid link => remove href!
                 del link.attrib['href']
