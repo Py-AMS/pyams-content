@@ -1,6 +1,16 @@
 Changelog
 =========
 
+1.99.8
+------
+ - added framed text paragraph and portlet
+ - added simple navigation portlet renderer
+ - added rich text paragraph "alert" renderer
+ - added "news" shared content
+ - added site settings to check host-based external links restrictions
+ - added display options to search filters options labels
+ - updated illustration side renderers
+
 1.99.7
 ------
  - updated paragraph add form renderer
