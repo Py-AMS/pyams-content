@@ -49,7 +49,7 @@ class BaseViewItemsPortletRenderer(PortletRenderer):
         """Internal link checker"""
         return IInternalLink.providedBy(link)
 
-    def get_url(self, target):
+    def get_url(self, target, view_name=None, query=None):
         """Item URL getter"""
         target_url = self.request.registry.queryMultiAdapter((target, self.request),
                                                              IViewItemTargetURL)
@@ -58,8 +58,8 @@ class BaseViewItemsPortletRenderer(PortletRenderer):
                 return target_url.url
             target = target_url.target
         if self.settings.force_canonical_url:
-            return canonical_url(target, self.request)
-        return relative_url(target, self.request)
+            return canonical_url(target, self.request, view_name, query)
+        return relative_url(target, self.request, view_name=view_name, query=query)
 
     def render(self, template_name=''):
         result = super().render(template_name)
