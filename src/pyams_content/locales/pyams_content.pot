@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-07-23 03:46+0200\n"
+"POT-Creation-Date: 2024-09-04 23:07+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,79 +16,79 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Lingua 4.15.0\n"
 
-#: ./src/pyams_content/include.py:54
+#: ./src/pyams_content/include.py:55
 msgid "Manage main site root properties"
 msgstr ""
 
-#: ./src/pyams_content/include.py:58
+#: ./src/pyams_content/include.py:59
 msgid "Manage references table"
 msgstr ""
 
-#: ./src/pyams_content/include.py:62
+#: ./src/pyams_content/include.py:63
 msgid "Manage first level site tree elements"
 msgstr ""
 
-#: ./src/pyams_content/include.py:66
+#: ./src/pyams_content/include.py:67
 msgid "Manage site, blog or hub properties"
 msgstr ""
 
-#: ./src/pyams_content/include.py:70
+#: ./src/pyams_content/include.py:71
 msgid "Manage shared tool properties"
 msgstr ""
 
-#: ./src/pyams_content/include.py:74
+#: ./src/pyams_content/include.py:75
 msgid "Create new content"
 msgstr ""
 
-#: ./src/pyams_content/include.py:78
+#: ./src/pyams_content/include.py:79
 msgid "Create new version of existing content"
 msgstr ""
 
-#: ./src/pyams_content/include.py:82
+#: ./src/pyams_content/include.py:83
 msgid "Manage content properties"
 msgstr ""
 
-#: ./src/pyams_content/include.py:86
+#: ./src/pyams_content/include.py:87
 msgid "Comment existing content"
 msgstr ""
 
-#: ./src/pyams_content/include.py:90
+#: ./src/pyams_content/include.py:91
 msgid "Publish or retire existing content"
 msgstr ""
 
-#: ./src/pyams_content/include.py:106
+#: ./src/pyams_content/include.py:107
 msgid "Webmaster (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:126
+#: ./src/pyams_content/include.py:127
 msgid "References manager (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:139
+#: ./src/pyams_content/include.py:140
 msgid "Pilot (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:155
+#: ./src/pyams_content/include.py:156
 msgid "Manager (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:171
+#: ./src/pyams_content/include.py:172
 msgid "Owner (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:181
+#: ./src/pyams_content/include.py:182
 msgid "Contributor (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:198
+#: ./src/pyams_content/include.py:199
 msgid "Reader (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:215
+#: ./src/pyams_content/include.py:216
 msgid "Operator (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:226
+#: ./src/pyams_content/include.py:227
 msgid "Guest user (role)"
 msgstr ""
 
@@ -108,6 +108,7 @@ msgstr ""
 #: ./src/pyams_content/interfaces/__init__.py:122
 #: ./src/pyams_content/component/paragraph/zmi/container.py:236
 #: ./src/pyams_content/component/paragraph/portlet/interfaces.py:33
+#: ./src/pyams_content/component/frame/portlet/interfaces.py:31
 #: ./src/pyams_content/component/gallery/interfaces.py:118
 #: ./src/pyams_content/component/gallery/portlet/interfaces.py:33
 #: ./src/pyams_content/shared/site/zmi/folder.py:83
@@ -1045,6 +1046,109 @@ msgstr ""
 msgid "SEO configuration"
 msgstr ""
 
+#: ./src/pyams_content/feature/script/interfaces.py:34
+msgid "Active script?"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/interfaces.py:35
+msgid "An inactive script is not included into page resources"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/interfaces.py:39
+#: ./src/pyams_content/feature/script/zmi/__init__.py:149
+msgid "Script name"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/interfaces.py:40
+msgid "This is just a descriptive name given to the script"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/interfaces.py:43
+msgid "Script body"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/interfaces.py:44
+#, python-format
+msgid ""
+"Script source code, including the HTML wrapping tag; you can use variables by"
+" embracing them with {} characters"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/interfaces.py:48
+msgid "Bottom script?"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/interfaces.py:49
+msgid ""
+"If 'yes', script will be included in page bottom instead of page HTML head"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/interfaces.py:82
+msgid "Scripts params"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/interfaces.py:83
+msgid ""
+"If your scripts have to use parameters, you can set their values here, using "
+"\"NAME=value\" syntax for each parameter; you can add comments by prefixing "
+"lines with #"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/zmi/__init__.py:63
+#: ./src/pyams_content/feature/script/zmi/__init__.py:179
+msgid "External scripts"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/zmi/__init__.py:126
+msgid "Click icon to switch script activity"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/zmi/__init__.py:128
+msgid "This script is active"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/zmi/__init__.py:130
+msgid "This script is not active"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/zmi/__init__.py:182
+msgid "External scripts list"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/zmi/__init__.py:217
+msgid "Add script"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/zmi/__init__.py:227
+msgid "New script"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/zmi/__init__.py:228
+msgid "New script properties"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/zmi/__init__.py:264
+msgid "Custom script"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/zmi/__init__.py:279
+msgid "Script properties"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/zmi/__init__.py:292
+#, python-format
+msgid "Custom script: {}"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/zmi/settings.py:44
+#: ./src/pyams_content/feature/script/zmi/settings.py:55
+msgid "Scripts variables"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/zmi/settings.py:54
+msgid "External scripts settings"
+msgstr ""
+
 #: ./src/pyams_content/feature/navigation/interfaces.py:76
 msgid "Navigation menu"
 msgstr ""
@@ -1108,7 +1212,7 @@ msgstr ""
 
 #: ./src/pyams_content/feature/navigation/interfaces.py:113
 #: ./src/pyams_content/component/links/interfaces.py:48
-#: ./src/pyams_content/component/frame/skin/interfaces.py:59
+#: ./src/pyams_content/component/frame/skin/interfaces.py:60
 #: ./src/pyams_content/shared/common/interfaces/types.py:93
 #: ./src/pyams_content/shared/alert/interfaces.py:58
 msgid "Pictogram"
@@ -1230,12 +1334,12 @@ msgid "Choice"
 msgstr ""
 
 #: ./src/pyams_content/feature/filter/interfaces.py:105
-#: ./src/pyams_content/component/frame/skin/interfaces.py:41
+#: ./src/pyams_content/component/frame/skin/interfaces.py:42
 msgid "Left"
 msgstr ""
 
 #: ./src/pyams_content/feature/filter/interfaces.py:106
-#: ./src/pyams_content/component/frame/skin/interfaces.py:42
+#: ./src/pyams_content/component/frame/skin/interfaces.py:43
 msgid "Right"
 msgstr ""
 
@@ -2098,15 +2202,15 @@ msgstr ""
 msgid "Illustration properties"
 msgstr ""
 
-#: ./src/pyams_content/component/illustration/zmi/__init__.py:46
+#: ./src/pyams_content/component/illustration/zmi/__init__.py:47
 msgid "Main illustration"
 msgstr ""
 
-#: ./src/pyams_content/component/illustration/zmi/__init__.py:91
+#: ./src/pyams_content/component/illustration/zmi/__init__.py:98
 msgid "Navigation link illustration"
 msgstr ""
 
-#: ./src/pyams_content/component/illustration/zmi/__init__.py:133
+#: ./src/pyams_content/component/illustration/zmi/__init__.py:140
 msgid "Use responsive selection"
 msgstr ""
 
@@ -2903,43 +3007,46 @@ msgid "Frame body"
 msgstr ""
 
 #: ./src/pyams_content/component/frame/interfaces.py:36
+#: ./src/pyams_content/component/frame/portlet/__init__.py:59
 msgid "Framed text"
 msgstr ""
 
-#: ./src/pyams_content/component/frame/skin/interfaces.py:54
-msgid "Frame alert status"
-msgstr ""
-
-#: ./src/pyams_content/component/frame/skin/interfaces.py:55
-msgid "Bootstrap alert status defines rendering color"
-msgstr ""
-
-#: ./src/pyams_content/component/frame/skin/interfaces.py:60
-msgid "Name of the pictogram associated with this frame paragraph"
-msgstr ""
-
-#: ./src/pyams_content/component/frame/skin/interfaces.py:70
-msgid "Frame position"
-msgstr ""
-
-#: ./src/pyams_content/component/frame/skin/interfaces.py:71
-msgid "Frame position relatively to it's parent paragraph"
-msgstr ""
-
-#: ./src/pyams_content/component/frame/skin/interfaces.py:76
-msgid "Devices width"
-msgstr ""
-
-#: ./src/pyams_content/component/frame/skin/interfaces.py:77
-msgid "Select frame size for all available devices"
-msgstr ""
-
-#: ./src/pyams_content/component/frame/skin/__init__.py:76
+#: ./src/pyams_content/component/frame/portlet/skin/__init__.py:40
+#: ./src/pyams_content/component/frame/skin/__init__.py:77
 msgid "Full width frame (default)"
 msgstr ""
 
-#: ./src/pyams_content/component/frame/skin/__init__.py:119
+#: ./src/pyams_content/component/frame/portlet/skin/__init__.py:63
+#: ./src/pyams_content/component/frame/skin/__init__.py:120
 msgid "Floating lateral frame"
+msgstr ""
+
+#: ./src/pyams_content/component/frame/skin/interfaces.py:55
+msgid "Frame alert status"
+msgstr ""
+
+#: ./src/pyams_content/component/frame/skin/interfaces.py:56
+msgid "Bootstrap alert status defines rendering color"
+msgstr ""
+
+#: ./src/pyams_content/component/frame/skin/interfaces.py:61
+msgid "Name of the pictogram associated with this frame paragraph"
+msgstr ""
+
+#: ./src/pyams_content/component/frame/skin/interfaces.py:71
+msgid "Frame position"
+msgstr ""
+
+#: ./src/pyams_content/component/frame/skin/interfaces.py:72
+msgid "Frame position relatively to it's parent paragraph"
+msgstr ""
+
+#: ./src/pyams_content/component/frame/skin/interfaces.py:77
+msgid "Devices width"
+msgstr ""
+
+#: ./src/pyams_content/component/frame/skin/interfaces.py:78
+msgid "Select frame size for all available devices"
 msgstr ""
 
 #: ./src/pyams_content/component/gallery/interfaces.py:56

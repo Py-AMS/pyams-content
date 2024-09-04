@@ -24,6 +24,7 @@ from pyams_content.component.links.interfaces import IExternalLinksManagerTarget
 from pyams_content.component.thesaurus import ICollectionsManagerTarget, ITagsManagerTarget, \
     IThemesManagerTarget
 from pyams_content.feature.preview.interfaces import IPreviewTarget
+from pyams_content.feature.script.interfaces import IScriptContainerTarget
 from pyams_content.interfaces import COMMENT_CONTENT_PERMISSION, CONTRIBUTOR_ROLE, \
     CREATE_CONTENT_PERMISSION, CREATE_VERSION_PERMISSION, GUEST_ROLE, MANAGER_ROLE, \
     MANAGE_CONTENT_PERMISSION, MANAGE_REFERENCE_TABLE_PERMISSION, MANAGE_SITE_PERMISSION, MANAGE_SITE_ROOT_PERMISSION, \
@@ -244,6 +245,7 @@ def include_package(config):
     classImplements(BaseSiteRoot, ITagsManagerTarget)
     classImplements(BaseSiteRoot, IThemesManagerTarget)
     classImplements(BaseSiteRoot, ICollectionsManagerTarget)
+    classImplements(BaseSiteRoot, IScriptContainerTarget)
     classImplements(BaseSiteRoot, IPreviewTarget)
 
     # custom routes
