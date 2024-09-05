@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.99.10
+-------
+ - added external scripts feature
+
 1.99.9
 ------
  - added view name and query to base view items URL getter arguments list
