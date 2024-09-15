@@ -39,9 +39,11 @@ class TitleMetasAdapter(ContextRequestViewAdapter):
     order = 1
 
     def get_metas(self):
+        site_infos = ISiteRootInfos(self.request.root)
+        site_title = II18n(site_infos).query_attribute('title', request=self.request)
         title = II18n(self.context).query_attribute('title', request=self.request)
-        if title:
-            yield HTMLTagMeta('title', title)
+        yield HTMLTagMeta('title',
+                          f'{site_title} -- {title}' if (site_title and title) else (title or site_title or '--'))
 
 
 @adapter_config(name='canonical',
