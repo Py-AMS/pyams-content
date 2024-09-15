@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.99.11
+-------
+ - added H3 and H3 title levels to frames HTML editors
+ - added and updated HTML title and metas headers
+
 1.99.10
 -------
  - added external scripts feature
