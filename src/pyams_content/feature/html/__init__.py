@@ -45,7 +45,6 @@ class OIDHTMLRenderer(ContextRequestAdapter):
     def render(self):
         """Render oid:// links"""
         request = self.request
-        context = get_display_context(request)
         html = PyQuery(f'<div>{self.context}</div>')
         sequence = get_utility(ISequentialIntIds)
         for link in html('a[href]'):
