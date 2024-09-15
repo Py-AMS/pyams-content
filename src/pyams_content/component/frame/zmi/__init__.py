@@ -81,7 +81,7 @@ def frame_paragraph_editor_configuration(context, request, view):
     return {
         'menubar': False,
         'plugins': 'paste textcolor lists charmap link pyams_link',
-        'toolbar': 'undo redo | pastetext | bold italic superscript | '
+        'toolbar': 'undo redo | pastetext | h3 h4 | bold italic superscript | '
                    'forecolor backcolor | bullist numlist | '
                    'charmap pyams_link link',
         'toolbar1': False,
