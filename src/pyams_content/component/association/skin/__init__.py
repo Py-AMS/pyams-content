@@ -32,8 +32,14 @@ __docformat__ = 'restructuredtext'
 class AssociationContainerRendererMixin:
     """Associations container renderer mixin"""
 
-    attachments = None
-    links = None
+    description_format = 'text'
+    template_name = ''
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.attachments = []
+        self.links = []
+        self.state = {}
 
     def get_associations(self):
         """Associations getter"""
@@ -44,8 +50,12 @@ class AssociationContainerRendererMixin:
         """Association item information getter"""
         return IAssociationInfo(item)
 
-    def update(self):
+    def update(self, settings=None, template_name='', **state):
         super().update()
+        if settings is not None:
+            self.description_format = settings.description_format
+        self.template_name = template_name
+        self.state.update(state)
         self.attachments = []
         self.links = []
         for item in self.get_associations():
@@ -53,6 +63,9 @@ class AssociationContainerRendererMixin:
                 self.attachments.append(item)
             elif IBaseLink.providedBy(item):
                 self.links.append(item)
+                
+    def render(self, template_name=''):
+        return super().render(self.template_name)
 
 
 @contentprovider_config(name='pyams_content.associations',

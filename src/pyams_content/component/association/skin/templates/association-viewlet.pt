@@ -2,7 +2,8 @@
 	tal:define="items view.attachments;
 				(has_attachments, attachments) tales:boolean_iter(items);
 				items view.links;
-				(has_links, links) tales:boolean_iter(items);"
+				(has_links, links) tales:boolean_iter(items);
+				renderer_style view.description_format + chr(59) + 'glossary';"
 	tal:condition="has_attachments or has_links">
 	<div tal:condition="has_attachments"
 		 class="d-flex flex-row">
@@ -18,8 +19,8 @@
 								 data i18n:item.data;">
 					<p class="d-flex flex-column">
 						<tal:if condition="description">
-							${structure:tales:html(description, 'text;glossary')}
-							<br />
+							${structure:tales:html(description, renderer_style)}
+							<br tal:condition="view.description_format == 'text'" />
 						</tal:if>
 						<a tal:define="href_data tales:absolute_url(data);"
 						   href="${href_data}" target="_blank">
