@@ -1,6 +1,10 @@
 Changelog
 =========
 
+1.99.12
+-------
+ - updated associations paragraph default rendered
+
 1.99.11
 -------
  - added H3 and H3 title levels to frames HTML editors
