@@ -25,9 +25,10 @@ from hypatia.query import Any, Eq, Gt, Lt, NotAny, Or
 
 from pyams_catalog.query import CatalogResultSet, or_
 from pyams_content.shared.view import IViewQuery, IWfView
-from pyams_content.shared.view.interfaces import RELEVANCE_ORDER
+from pyams_content.shared.view.interfaces import RELEVANCE_ORDER, TITLE_ORDER
 from pyams_content.shared.view.interfaces.query import END_PARAMS_MARKER, IViewQueryFilterExtension, \
     IViewQueryParamsExtension, IViewUserQuery
+from pyams_i18n.interfaces import INegotiator
 from pyams_utils.adapter import ContextAdapter, adapter_config, get_adapter_weight
 from pyams_utils.list import unique_iter
 from pyams_utils.registry import get_pyramid_registry, get_utility
@@ -123,6 +124,9 @@ class ViewQuery(ContextAdapter):
         else:
             if (not sort_index) or (sort_index == RELEVANCE_ORDER):
                 sort_index = None
+            elif sort_index == TITLE_ORDER:
+                negotiator = get_utility(INegotiator)
+                sort_index = f'title:{negotiator.server_language}'
             query = CatalogQuery(catalog).query(params,
                                                 sort_index=sort_index,
                                                 reverse=reverse,

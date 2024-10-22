@@ -35,6 +35,7 @@ VIEW_CONTENT_NAME = _('View')
 
 
 RELEVANCE_ORDER = 'relevance'
+TITLE_ORDER = 'title'
 CREATION_DATE_ORDER = 'created_date'
 UPDATE_DATE_ORDER = 'modified_date'
 PUBLICATION_DATE_ORDER = 'publication_date'
@@ -45,6 +46,7 @@ EXPIRATION_DATE_ORDER = 'expiration_date'
 
 
 VIEW_ORDERS = OrderedDict((
+    (TITLE_ORDER, _("Alphabetical")),
     (CREATION_DATE_ORDER, _("Published version creation date")),
     (UPDATE_DATE_ORDER, _("Published version last update date")),
     (PUBLICATION_DATE_ORDER, _("Current version publication date")),
@@ -62,6 +64,7 @@ VIEW_ORDER_VOCABULARY = SimpleVocabulary([
 
 USER_VIEW_ORDERS = OrderedDict((
     (RELEVANCE_ORDER, _("Relevance (on user search; if not on visible publication date)")),
+    (TITLE_ORDER, _("Alphabetical")),
     (CREATION_DATE_ORDER, _("Published version creation date")),
     (UPDATE_DATE_ORDER, _("Published version last update date")),
     (PUBLICATION_DATE_ORDER, _("Current version publication date")),
