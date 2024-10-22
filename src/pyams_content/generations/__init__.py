@@ -260,7 +260,7 @@ def get_required_indexes():
     for code, language in map(lambda x: x.split(':'),
                               registry.settings.get('pyams_content.lexicon.languages',
                                                     'en:english').split()):
-        indexes.append(('title:{0}'.format(code), I18nTextIndexWithInterface, {
+        indexes.append((f'title:{code}', I18nTextIndexWithInterface, {
             'language': code,
             'interface': IBaseContent,
             'discriminator': 'title',
@@ -279,6 +279,7 @@ def check_required_facets(site, catalog_name=''):
     index = catalog.get('facets')
     if index is None:
         LOGGER.warning("No facets index found! Facets index check ignored...")
+        return
     facets = index.facets
     for name, factory in get_all_factories(IWfSharedContent):
         facet_name = f'content_type:{factory.content_type}'
@@ -305,6 +306,6 @@ class WebsiteGenerationsChecker:
         if not current:
             current = 1
         for generation in range(current, self.generation):
-            module_name = 'pyams_content.generations.evolve{}'.format(generation)
+            module_name = f'pyams_content.generations.evolve{generation}'
             module = import_module(module_name)
             module.evolve(site)
