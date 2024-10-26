@@ -21,7 +21,7 @@ before_script:
 bootstrap:
     stage: .pre
     script:
-        - pip install pip==22.3.1 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
+        - pip install pip==24.0 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
         - buildout
 
 test-3.7:
@@ -100,7 +100,7 @@ sonarcloud:
 build-3.7:
     stage: build
     script:
-        - pip install zc.buildout==3.0.1
+        - pip install zc.buildout==3.2.0
         - buildout setup setup.py clean --all sdist
     artifacts:
         paths:
@@ -112,7 +112,7 @@ build-3.7:
 dist-3.7:
     stage: dist
     script:
-        - pip install pip==22.3.1 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
+        - pip install pip==24.0 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
         - buildout
         - ./bin/test
         - buildout setup setup.py sdist bdist_wheel
@@ -132,7 +132,7 @@ dist-3.8:
     stage: dist
     image: python:3.8
     script:
-        - pip install pip==22.3.1 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
+        - pip install pip==24.0 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
         - buildout
         - ./bin/test
         - buildout setup setup.py bdist_wheel
@@ -152,7 +152,7 @@ dist-3.9:
     stage: dist
     image: python:3.9
     script:
-        - pip install pip==22.3.1 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
+        - pip install pip==24.0 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
         - buildout
         - ./bin/test
         - buildout setup setup.py bdist_wheel
@@ -172,7 +172,7 @@ dist-3.10:
     stage: dist
     image: python:3.10
     script:
-        - pip install pip==22.3.1 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
+        - pip install pip==24.0 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
         - buildout
         - ./bin/test
         - buildout setup setup.py bdist_wheel
@@ -192,7 +192,7 @@ dist-3.11:
     stage: dist
     image: python:3.11
     script:
-        - pip install pip==22.3.1 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
+        - pip install pip==24.0 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
         - buildout
         - ./bin/test
         - buildout setup setup.py bdist_wheel
@@ -212,7 +212,7 @@ dist-3.12:
     stage: dist
     image: python:3.12
     script:
-        - pip install pip==22.3.1 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
+        - pip install pip==24.0 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
         - buildout
         - ./bin/test
         - buildout setup setup.py bdist_wheel
