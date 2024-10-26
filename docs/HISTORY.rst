@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.0.0
+-----
+ - first production release!
+ - added support for views alphabetical ordering
+ - added PyAMS_gis package dependency
+
 1.99.12
 -------
  - updated associations paragraph default rendered
