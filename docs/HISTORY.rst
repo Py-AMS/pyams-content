@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.0.1
+-----
+ - updated CI for GDAL support
+ - added support for Python 3.12
+
 2.0.0
 -----
  - first production release!
