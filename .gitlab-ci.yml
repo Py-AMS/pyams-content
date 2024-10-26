@@ -21,13 +21,13 @@ before_script:
 bootstrap:
     stage: .pre
     script:
-        - pip install pip==22.3.1 setuptools==65.6.3 zc.buildout==3.0.1 zc.recipe.egg==2.0.7
+        - pip install pip==22.3.1 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
         - buildout
 
 test-3.7:
     stage: test
     script:
-        - pip install anybadge==1.14.0 coverage==7.2.7 zc.buildout==3.0.1
+        - pip install anybadge==1.14.0 coverage==7.2.7 zc.buildout==3.2.0
         - buildout
         - mkdir ./coverage
         - coverage erase
@@ -45,7 +45,7 @@ pylint:
     stage: quality
     allow_failure: true
     script:
-        - pip install pylint-exit anybadge zc.buildout==3.0.1
+        - pip install pylint-exit anybadge zc.buildout==3.2.0
         - buildout
         - mkdir ./pylint
         - ./bin/pylint src/pyams_content/ | tee ./pylint/pylint.log || pylint-exit $?
@@ -112,7 +112,7 @@ build-3.7:
 dist-3.7:
     stage: dist
     script:
-        - pip install pip==22.3.1 setuptools==65.6.3 zc.buildout==3.0.1 zc.recipe.egg==2.0.7
+        - pip install pip==22.3.1 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
         - buildout
         - ./bin/test
         - buildout setup setup.py sdist bdist_wheel
@@ -132,7 +132,7 @@ dist-3.8:
     stage: dist
     image: python:3.8
     script:
-        - pip install pip==22.3.1 setuptools==65.6.3 zc.buildout==3.0.1 zc.recipe.egg==2.0.7
+        - pip install pip==22.3.1 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
         - buildout
         - ./bin/test
         - buildout setup setup.py bdist_wheel
@@ -152,7 +152,7 @@ dist-3.9:
     stage: dist
     image: python:3.9
     script:
-        - pip install pip==22.3.1 setuptools==65.6.3 zc.buildout==3.0.1 zc.recipe.egg==2.0.7
+        - pip install pip==22.3.1 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
         - buildout
         - ./bin/test
         - buildout setup setup.py bdist_wheel
@@ -172,7 +172,7 @@ dist-3.10:
     stage: dist
     image: python:3.10
     script:
-        - pip install pip==22.3.1 setuptools==65.6.3 zc.buildout==3.0.1 zc.recipe.egg==2.0.7
+        - pip install pip==22.3.1 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
         - buildout
         - ./bin/test
         - buildout setup setup.py bdist_wheel
@@ -192,7 +192,7 @@ dist-3.11:
     stage: dist
     image: python:3.11
     script:
-        - pip install pip==22.3.1 setuptools==65.6.3 zc.buildout==3.0.1 zc.recipe.egg==2.0.7
+        - pip install pip==22.3.1 setuptools==68.0.0 zc.buildout==3.2.0 zc.recipe.egg==2.0.7
         - buildout
         - ./bin/test
         - buildout setup setup.py bdist_wheel
