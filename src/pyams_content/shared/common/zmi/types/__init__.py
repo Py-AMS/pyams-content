@@ -187,7 +187,7 @@ class DataTypeLabelsGroup(Group):
     legend = _("Contents labels")
     weight = 10
 
-    fields = Fields(IDataType).select('display_as_tag', 'navigation_label', 'facets_label',
+    fields = Fields(IDataType).select('navigation_label', 'display_as_tag', 'facets_label',
                                       'facets_type_label', 'dashboard_label')
 
 

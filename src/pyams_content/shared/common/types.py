@@ -61,6 +61,7 @@ class DataType(Persistent, Contained):
     label = FieldProperty(IDataType['label'])
     source_folder = FieldProperty(IDataType['source_folder'])
     navigation_label = FieldProperty(IDataType['navigation_label'])
+    display_as_tag = FieldProperty(IDataType['display_as_tag'])
     facets_label = FieldProperty(IDataType['facets_label'])
     facets_type_label = FieldProperty(IDataType['facets_type_label'])
     dashboard_label = FieldProperty(IDataType['dashboard_label'])
@@ -68,7 +69,6 @@ class DataType(Persistent, Contained):
     pictogram = FieldProperty(IDataType['pictogram'])
     pictogram_on = FieldProperty(IDataType['pictogram_on'])
     pictogram_off = FieldProperty(IDataType['pictogram_off'])
-    display_as_tag = FieldProperty(IDataType['display_as_tag'])
     field_names = FieldProperty(IDataType['field_names'])
 
     def get_source_folder(self):

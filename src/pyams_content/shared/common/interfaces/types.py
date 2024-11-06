@@ -71,6 +71,14 @@ class IDataType(ILocation):
                                          description=_("Label used for navigation entries"),
                                          required=False)
 
+    display_as_tag = Bool(title=_("Display as tag?"),
+                          description=_("Some portlets renderers can display a small tag above "
+                                        "each content to show their content type; if this option "
+                                        "is checked, data type label will be displayed instead "
+                                        "of content type"),
+                          required=True,
+                          default=False)
+
     facets_label = I18nTextLineField(title=_("Facets label"),
                                      description=_("Label used for the facets of views or search engines, "
                                                    "instead of the standard label"),
@@ -104,14 +112,6 @@ class IDataType(ILocation):
                            description=_("'Off' state pictogram associated with this data type"),
                            vocabulary=PICTOGRAM_VOCABULARY,
                            required=False)
-
-    display_as_tag = Bool(title=_("Display as tag?"),
-                          description=_("Some portlets renderers can display a small tag above "
-                                        "each content to show their content type; if this option "
-                                        "is checked, data type label will be displayed instead "
-                                        "of content type"),
-                          required=True,
-                          default=False)
 
     field_names = List(title=_("Field names"),
                        description=_("List of fields associated with this data type"),
