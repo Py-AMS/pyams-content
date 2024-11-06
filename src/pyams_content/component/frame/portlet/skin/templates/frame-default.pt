@@ -4,7 +4,7 @@
 						position getattr(illustration_renderer, 'position', None) if illustration_renderer is not None else None;
 						pictogram renderer_settings.pictogram;"
 			tal:switch="position"
-			class="blockquote alert alert-${renderer_settings.status}">
+			class="blockquote alert alert-${renderer_settings.status} my-3">
 	<tal:var case="'before-title'">${structure:illustration_renderer.render()}</tal:var>
 	<tal:if condition="pictogram">
 		<div class="float-left my-2 mx-3 pictogram hidden-sm hidden-xs"
