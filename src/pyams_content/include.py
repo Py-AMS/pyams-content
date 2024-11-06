@@ -30,7 +30,6 @@ from pyams_content.interfaces import COMMENT_CONTENT_PERMISSION, CONTRIBUTOR_ROL
     MANAGE_CONTENT_PERMISSION, MANAGE_REFERENCE_TABLE_PERMISSION, MANAGE_SITE_PERMISSION, MANAGE_SITE_ROOT_PERMISSION, \
     MANAGE_SITE_TREE_PERMISSION, MANAGE_TOOL_PERMISSION, OID_ACCESS_PATH, OID_ACCESS_ROUTE, OPERATOR_ROLE, OWNER_ROLE, \
     PILOT_ROLE, PUBLISH_CONTENT_PERMISSION, READER_ROLE, REFERENCE_MANAGER_ROLE, WEBMASTER_ROLE
-from pyams_gis.interfaces import MANAGE_MAPS_PERMISSION
 from pyams_layer.interfaces import MANAGE_SKIN_PERMISSION
 from pyams_security.interfaces.base import MANAGE_PERMISSION, MANAGE_ROLES_PERMISSION, \
     PUBLIC_PERMISSION, ROLE_ID, VIEW_PERMISSION, VIEW_SYSTEM_PERMISSION
@@ -39,6 +38,11 @@ from pyams_site.site import BaseSiteRoot
 from pyams_thesaurus.interfaces import ADMIN_THESAURUS_PERMISSION, CREATE_THESAURUS_PERMISSION, \
     MANAGE_THESAURUS_CONTENT_PERMISSION, MANAGE_THESAURUS_EXTRACT_PERMISSION
 
+try:
+    from pyams_gis.interfaces import MANAGE_MAPS_PERMISSION
+except ImportError:
+    MANAGE_MAPS_PERMISSION = None
+    
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
@@ -101,6 +105,9 @@ def include_package(config):
                             CREATE_VERSION_PERMISSION, MANAGE_CONTENT_PERMISSION,
                             COMMENT_CONTENT_PERMISSION, PUBLISH_CONTENT_PERMISSION
                         })
+    if MANAGE_MAPS_PERMISSION:
+        config.upgrade_role(SYSTEM_ADMIN_ROLE,
+                            permissions={MANAGE_MAPS_PERMISSION})
 
     # register new roles
     config.register_role({
@@ -116,13 +123,17 @@ def include_package(config):
             MANAGE_TOOL_PERMISSION, CREATE_CONTENT_PERMISSION,
             CREATE_VERSION_PERMISSION, MANAGE_CONTENT_PERMISSION,
             COMMENT_CONTENT_PERMISSION, PUBLISH_CONTENT_PERMISSION,
-            MANAGE_SKIN_PERMISSION, MANAGE_MAPS_PERMISSION
+            MANAGE_SKIN_PERMISSION
         },
         'managers': {
             ADMIN_USER_ID,
             ROLE_ID.format(SYSTEM_ADMIN_ROLE)
         }
     })
+    if MANAGE_MAPS_PERMISSION:
+        config.upgrade_role(WEBMASTER_ROLE,
+                            permissions={MANAGE_MAPS_PERMISSION})
+        
     config.register_role({
         'id': REFERENCE_MANAGER_ROLE,
         'title': _("References manager (role)"),
@@ -136,6 +147,7 @@ def include_package(config):
             ROLE_ID.format(WEBMASTER_ROLE)
         }
     })
+
     config.register_role({
         'id': PILOT_ROLE,
         'title': _("Pilot (role)"),
@@ -152,6 +164,7 @@ def include_package(config):
             ROLE_ID.format(WEBMASTER_ROLE)
         }
     })
+    
     config.register_role({
         'id': MANAGER_ROLE,
         'title': _("Manager (role)"),
@@ -168,6 +181,7 @@ def include_package(config):
             ROLE_ID.format(PILOT_ROLE)
         }
     })
+
     config.register_role({
         'id': OWNER_ROLE,
         'title': _("Owner (role)"),
@@ -178,6 +192,7 @@ def include_package(config):
             COMMENT_CONTENT_PERMISSION
         }
     })
+
     config.register_role({
         'id': CONTRIBUTOR_ROLE,
         'title': _("Contributor (role)"),
@@ -195,6 +210,7 @@ def include_package(config):
             ROLE_ID.format(OWNER_ROLE)
         }
     })
+
     config.register_role({
         'id': READER_ROLE,
         'title': _("Reader (role)"),
@@ -212,6 +228,7 @@ def include_package(config):
             ROLE_ID.format(CONTRIBUTOR_ROLE)
         }
     })
+    
     config.register_role({
         'id': OPERATOR_ROLE,
         'title': _("Operator (role)"),
@@ -223,6 +240,7 @@ def include_package(config):
             ROLE_ID.format(SYSTEM_ADMIN_ROLE)
         }
     })
+    
     config.register_role({
         'id': GUEST_ROLE,
         'title': _("Guest user (role)"),
