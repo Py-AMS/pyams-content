@@ -27,7 +27,6 @@ from pyams_content.component.paragraph.zmi.html import extract_html_paragraph_da
 from pyams_form.ajax import ajax_form_config
 from pyams_form.interfaces.form import IDataExtractedEvent
 from pyams_layer.interfaces import IPyAMSLayer
-from pyams_portal.zmi.interfaces import IPortletConfigurationEditor
 from pyams_skin.interfaces.widget import IHTMLEditorConfiguration
 from pyams_utils.adapter import adapter_config
 from pyams_viewlet.viewlet import viewlet_config

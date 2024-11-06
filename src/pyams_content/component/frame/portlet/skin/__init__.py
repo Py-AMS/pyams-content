@@ -18,19 +18,27 @@ This module defines renderers for framed text portlet.
 from zope.interface import Interface
 
 from pyams_content.component.frame.portlet import IFramePortletSettings
-from pyams_content.component.frame.skin import IFrameDefaultRendererSettings, IFrameLateralRendererSettings
+from pyams_content.component.frame.portlet.skin.interfaces import IFramePortletDefaultRendererSettings, \
+    IFramePortletLateralRendererSettings
+from pyams_content.component.frame.skin import FrameDefaultRendererSettings, FrameLateralRendererSettings
 from pyams_content.component.illustration import IIllustration
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortalContext, IPortletRenderer
 from pyams_portal.skin import PortletRenderer
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
+from pyams_utils.factory import factory_config
 
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
 
 
+@factory_config(IFramePortletDefaultRendererSettings)
+class FramePortletDefaultRendererSettings(FrameDefaultRendererSettings):
+    """Frame portlet default renderer settings"""
+    
+    
 @adapter_config(required=(IPortalContext, IPyAMSLayer, Interface, IFramePortletSettings),
                 provides=IPortletRenderer)
 @template_config(template='templates/frame-default.pt', layer=IPyAMSLayer)
@@ -39,7 +47,7 @@ class FramePortletDefaultRenderer(PortletRenderer):
 
     label = _("Full width frame (default)")
 
-    settings_interface = IFrameDefaultRendererSettings
+    settings_interface = IFramePortletDefaultRendererSettings
 
     illustration = None
     illustration_renderer = None
@@ -53,6 +61,11 @@ class FramePortletDefaultRenderer(PortletRenderer):
             self.illustration_renderer.update()
 
 
+@factory_config(IFramePortletLateralRendererSettings)
+class FramePortletLateralRendererSettings(FrameLateralRendererSettings):
+    """Frame portlet lateral renderer settings"""
+    
+    
 @adapter_config(name='lateral',
                 required=(IPortalContext, IPyAMSLayer, Interface, IFramePortletSettings),
                 provides=IPortletRenderer)
@@ -62,4 +75,4 @@ class FramePortletLateralRenderer(FramePortletDefaultRenderer):
 
     label = _("Floating lateral frame")
 
-    settings_interface = IFrameLateralRendererSettings
+    settings_interface = IFramePortletLateralRendererSettings

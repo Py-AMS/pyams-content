@@ -39,6 +39,6 @@ def frame_paragraph_default_renderer_settings_form_fields(context, request, view
                 provides=IFormFields)
 def frame_paragraph_lateral_renderer_settings_form_fields(context, request, view):
     fields = Fields(IFrameLateralRendererSettings).select('position', 'width', 'status',
-                                                                   'pictogram_name')
+                                                          'pictogram_name')
     fields['pictogram_name'].widget_factory = PictogramSelectFieldWidget
     return fields
