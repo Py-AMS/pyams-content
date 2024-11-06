@@ -140,13 +140,3 @@ DEFAULT_PARAGRAPH_RENDERER_NAME = 'default'
 
 class IParagraphRenderer(IContentRenderer):
     """Paragraph renderer interface"""
-
-
-class ParagraphRendererChoice(Choice):
-    """Paragraph renderer choice schema field factory"""
-
-    def __init__(self, description, renderers):
-        super().__init__(title=_("Renderer"),
-                         description=description,
-                         vocabulary=renderers,
-                         default=DEFAULT_PARAGRAPH_RENDERER_NAME)

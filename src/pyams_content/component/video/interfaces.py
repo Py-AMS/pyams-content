@@ -20,7 +20,7 @@ from zope.interface import Attribute, Interface
 from zope.schema import TextLine, Choice
 
 from pyams_content.component.paragraph import IBaseParagraph
-from pyams_content.component.paragraph.interfaces import ParagraphRendererChoice
+from pyams_content.component.paragraph.schema import ParagraphRendererChoice
 from pyams_i18n.schema import I18nTextField, I18nTextLineField
 
 __docformat__ = 'restructuredtext'

@@ -15,7 +15,8 @@
 This module defines interfaces of HTML paragraphs
 """
 
-from pyams_content.component.paragraph.interfaces import IBaseParagraph, ParagraphRendererChoice
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
+from pyams_content.component.paragraph.schema import ParagraphRendererChoice
 from pyams_i18n.schema import I18nHTMLField, I18nTextField
 
 

@@ -19,8 +19,8 @@ from zope.container.constraints import containers, contains
 from zope.container.interfaces import IOrderedContainer
 from zope.interface import Attribute, Interface
 from zope.schema import Bool, Choice
-from pyams_content.component.paragraph.interfaces import IBaseParagraph, ParagraphRendererChoice
-
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
+from pyams_content.component.paragraph.schema import ParagraphRendererChoice
 
 __docformat__ = 'restructuredtext'
 

@@ -22,7 +22,7 @@ from zope.interface import Interface
 from zope.schema import Choice, TextLine
 
 from pyams_content.component.paragraph import IBaseParagraph
-from pyams_content.component.paragraph.interfaces import ParagraphRendererChoice
+from pyams_content.component.paragraph.schema import ParagraphRendererChoice
 from pyams_content.feature.renderer import IRenderedContent
 from pyams_file.schema import I18nThumbnailMediaField
 from pyams_i18n.schema import I18nTextField, I18nTextLineField

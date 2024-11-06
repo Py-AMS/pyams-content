@@ -17,7 +17,7 @@ This module defines interfaces common to all text frames components.
 
 from zope.interface import Interface
 from pyams_content.component.paragraph import IBaseParagraph
-from pyams_content.component.paragraph.interfaces import ParagraphRendererChoice
+from pyams_content.component.paragraph.schema import ParagraphRendererChoice
 from pyams_i18n.schema import I18nHTMLField
 
 __docformat__ = 'restructuredtext'
@@ -41,5 +41,5 @@ FRAME_PARAGRAPH_ICON_CLASS = 'fas fa-window-maximize'
 class IFrameParagraph(IFrameInfo, IBaseParagraph):
     """Frame paragraph interface"""
 
-    renderer = ParagraphRendererChoice(description=_(""),
+    renderer = ParagraphRendererChoice(description=_("Presentation template used for this frame"),
                                        renderers=FRAME_PARAGRAPH_RENDERERS)
