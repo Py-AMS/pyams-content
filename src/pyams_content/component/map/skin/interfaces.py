@@ -43,6 +43,17 @@ else:
                          required=True,
                          default=400)
 
+        display_marker = Bool(title=_("Display location mark?"),
+                              description=_("If 'yes', a location marker will be displayed on map"),
+                              required=True,
+                              default=True)
+
+        display_coordinates = Bool(title=_("Display coordinates?"),
+                                   description=_("If 'yes', GPS coordinates (if GPS position "
+                                                 "is defined) will be displayed below the map"),
+                                   required=True,
+                                   default=False)
+
 
     class IMapDefaultRendererSettings(IRendererSettings, IBaseMapRendererSettings):
         """Map default renderer settings"""

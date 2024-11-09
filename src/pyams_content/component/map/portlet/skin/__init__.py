@@ -28,6 +28,7 @@ else:
     from pyams_portal.skin import PortletRenderer
     from pyams_template.template import template_config
     from pyams_utils.adapter import adapter_config
+    from pyams_utils.dict import update_dict
     from pyams_utils.factory import factory_config
 
     from pyams_content import _
@@ -47,15 +48,3 @@ else:
         label = _("Simple map (default)")
 
         settings_interface = IMapPortletDefaultRendererSettings
-
-        def get_map_configuration(self):
-            settings = self.settings
-            renderer_settings = self.renderer_settings
-            configuration = renderer_settings.configuration.get_configuration()
-            if settings.display_marker and settings.position:
-                coordinates = settings.position.wgs_coordinates
-                configuration['marker'] = {
-                    'lon': float(coordinates['longitude']),
-                    'lat': float(coordinates['latitude'])
-                }
-            return json.dumps(configuration)

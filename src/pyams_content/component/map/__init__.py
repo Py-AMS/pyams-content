@@ -48,9 +48,7 @@ else:
         icon_class = MAP_PARAGRAPH_ICON_CLASS
         
         position = FieldProperty(IMapParagraph['position'])
-        display_marker = FieldProperty(IMapParagraph['display_marker'])
-        display_coordinates = FieldProperty(IMapParagraph['display_coordinates'])
-    
+
     
     @vocabulary_config(name=MAP_PARAGRAPH_RENDERERS)
     class MapParagraphRenderersVocabulary(RenderersVocabulary):

@@ -29,7 +29,8 @@ else:
     @adapter_config(required=(IMapDefaultRendererSettings, IAdminLayer, IParagraphRendererSettingsEditForm),
                     provides=IFormFields)
     def map_paragraph_default_renderer_settings_form_fields(context, request, view):
-        return Fields(IMapDefaultRendererSettings).select('map_height')
+        return Fields(IMapDefaultRendererSettings).select('map_height', 'display_marker',
+                                                          'display_coordinates')
 
 
     @adapter_config(name='map-configuration',

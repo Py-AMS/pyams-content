@@ -39,7 +39,6 @@ else:
         """Map portlet settings edit form"""
 
         fields = Fields(IMapPortletSettings).select('title', 'position',
-                                                    'display_marker', 'display_coordinates',
                                                     'renderer', 'devices_visibility', 'css_class')
         fields['renderer'].widget_factory = RendererSelectFieldWidget
 

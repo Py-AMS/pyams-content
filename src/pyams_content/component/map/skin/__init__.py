@@ -18,8 +18,6 @@ else:
 
     import json
     
-    from persistent import Persistent
-    from zope.container.contained import Contained
     from zope.interface import implementer
     from zope.schema.fieldproperty import FieldProperty
     
@@ -33,6 +31,7 @@ else:
     from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
     from pyams_template.template import template_config
     from pyams_utils.adapter import adapter_config
+    from pyams_utils.dict import update_dict
     from pyams_utils.factory import factory_config
     from pyams_utils.registry import get_utility
     
@@ -44,10 +43,10 @@ else:
         """Map default renderer settings"""
         
         use_default_map_configuration = FieldProperty(IBaseMapRendererSettings['use_default_map_configuration'])
-        
-        # _configuration = FieldProperty(IBaseMapRendererSettings['configuration'])
         map_height = FieldProperty(IBaseMapRendererSettings['map_height'])
-        
+        display_marker = FieldProperty(IBaseMapRendererSettings['display_marker'])
+        display_coordinates = FieldProperty(IBaseMapRendererSettings['display_coordinates'])
+
         @property
         def no_use_default_map_configuration(self):
             return not bool(self.use_default_map_configuration)
@@ -61,10 +60,23 @@ else:
             if self.use_default_map_configuration:
                 manager = get_utility(IMapManager)
                 return IMapConfiguration(manager)
-            # return self._configuration
             return self
-    
-    
+
+        def get_marker(self, context):
+            """Marker position getter"""
+            if self.display_marker and context.position:
+                coordinates = context.position.wgs_coordinates
+                return {
+                    'lon': float(coordinates['longitude']),
+                    'lat': float(coordinates['latitude'])
+                }
+
+        def get_map_configuration(self, context):
+            configuration = self.configuration.get_configuration()
+            update_dict(configuration, 'marker', self.get_marker(context))
+            return json.dumps(configuration)
+
+
     @factory_config(IMapDefaultRendererSettings)
     class MapDefaultRendererSettings(BaseMapRendererSettings):
         """Map default renderer settings"""
@@ -81,14 +93,3 @@ else:
         label = _("Simple map renderer (default)")
         
         settings_interface = IMapDefaultRendererSettings
-        
-        def get_map_configuration(self):
-            configuration = self.settings.configuration.get_configuration()
-            if self.context.display_marker and self.context.position:
-                coordinates = self.context.position.wgs_coordinates
-                configuration['marker'] = {
-                    'lon': float(coordinates['longitude']),
-                    'lat': float(coordinates['latitude'])
-                }
-            return json.dumps(configuration)
-        

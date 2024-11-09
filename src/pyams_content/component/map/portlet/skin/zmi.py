@@ -31,7 +31,8 @@ else:
                     provides=IFormFields)
     def map_portlet_default_settings_form_fields(context, request, view):
         """Map portlet default renderer settings form fields"""
-        return Fields(IMapDefaultRendererSettings).select('map_height')
+        return Fields(IMapDefaultRendererSettings).select('map_height', 'display_marker',
+                                                          'display_coordinates')
 
 
     @adapter_config(name='map-configuration',

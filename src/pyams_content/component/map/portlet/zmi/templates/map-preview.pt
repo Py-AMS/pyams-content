@@ -8,6 +8,4 @@
 			<i18n:var translate="">latitude=</i18n:var>${'{:.6f}'.format(gps_position['latitude'])}
 		</div>
 	</tal:if>
-	${structure:view.get_setting(settings, 'display_marker')}
-	${structure:view.get_setting(settings, 'display_coordinates')}
 </tal:var>

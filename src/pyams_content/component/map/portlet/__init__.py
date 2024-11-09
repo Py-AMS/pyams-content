@@ -34,9 +34,7 @@ else:
         
         title = FieldProperty(IMapPortletSettings['title'])
         position = FieldProperty(IMapPortletSettings['position'])
-        display_marker = FieldProperty(IMapPortletSettings['display_marker'])
-        display_coordinates = FieldProperty(IMapPortletSettings['display_coordinates'])
-        
+
         
     @portlet_config(permission=None)
     class MapPortlet(Portlet):

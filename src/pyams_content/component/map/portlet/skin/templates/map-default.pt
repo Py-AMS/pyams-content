@@ -9,9 +9,9 @@
 		 style="height: ${renderer_settings.map_height}px;">
 		<div id="osmmap_${tales:cache_key(settings)}"
 			 class="osmmap-map w-100 h-100"
-			 data-map-configuration='${view.get_map_configuration()}'></div>
+			 data-map-configuration='${renderer_settings.get_map_configuration(settings)}'></div>
 	</div>
-	<tal:if condition="settings.display_coordinates">
+	<tal:if condition="renderer_settings.display_coordinates">
 		<tal:var define="position settings.position"
 				 condition="position">
 			<div class="opsmap-location"

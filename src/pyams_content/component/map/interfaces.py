@@ -38,18 +38,7 @@ else:
         position = GeoPointField(title=_("Map position"),
                                  description=_("GPS coordinates used to locate map"),
                                  required=False)
-        
-        display_marker = Bool(title=_("Display location mark?"),
-                              description=_("If 'yes', a location marker will be displayed on map"),
-                              required=True,
-                              default=True)
 
-        display_coordinates = Bool(title=_("Display coordinates?"),
-                                   description=_("If 'yes', GPS coordinates (if GPS position "
-                                                 "is defined) will be displayed below the map"),
-                                   required=True,
-                                   default=False)
-        
         
     class IMapParagraph(IMapInfo, IBaseParagraph):
         """Map paragraph interface"""
