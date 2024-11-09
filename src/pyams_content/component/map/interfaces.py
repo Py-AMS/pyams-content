@@ -8,40 +8,33 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
+from zope.interface import Interface
+
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
+from pyams_content.component.paragraph.schema import ParagraphRendererChoice
+from pyams_gis.schema import GeoPointField
+
 __docformat__ = 'restructuredtext'
 
-try:
-    import pyams_gis
-except ImportError:
-    pyams_gis = None
-else:
-    
-    from zope.interface import Interface
-    from zope.schema import Bool
-    
-    from pyams_content.component.paragraph.interfaces import IBaseParagraph
-    from pyams_content.component.paragraph.schema import ParagraphRendererChoice
-    from pyams_gis.schema import GeoPointField
-    
-    from pyams_content import _
-    
-    
-    MAP_PARAGRAPH_TYPE = 'map'
-    MAP_PARAGRAPH_NAME = _("Location map")
-    MAP_PARAGRAPH_RENDERERS = 'PyAMS_content.paragraph.map.renderers'
-    MAP_PARAGRAPH_ICON_CLASS = 'fas fa-map-marker'
-    
-    
-    class IMapInfo(Interface):
-        """Base map settings interface"""
-        
-        position = GeoPointField(title=_("Map position"),
-                                 description=_("GPS coordinates used to locate map"),
-                                 required=False)
+from pyams_content import _
 
-        
-    class IMapParagraph(IMapInfo, IBaseParagraph):
-        """Map paragraph interface"""
-        
-        renderer = ParagraphRendererChoice(description=_("Presentation template used for this map"),
-                                           renderers=MAP_PARAGRAPH_RENDERERS)
+
+MAP_PARAGRAPH_TYPE = 'map'
+MAP_PARAGRAPH_NAME = _("Location map")
+MAP_PARAGRAPH_RENDERERS = 'PyAMS_content.paragraph.map.renderers'
+MAP_PARAGRAPH_ICON_CLASS = 'fas fa-map-marker'
+
+
+class IMapInfo(Interface):
+    """Base map settings interface"""
+
+    position = GeoPointField(title=_("Map position"),
+                             description=_("GPS coordinates used to locate map"),
+                             required=False)
+
+
+class IMapParagraph(IMapInfo, IBaseParagraph):
+    """Map paragraph interface"""
+
+    renderer = ParagraphRendererChoice(description=_("Presentation template used for this map"),
+                                       renderers=MAP_PARAGRAPH_RENDERERS)

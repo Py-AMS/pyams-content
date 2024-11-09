@@ -15,43 +15,37 @@
 This is the base module of location maps paragraphs and portlets.
 """
 
+from zope.schema.fieldproperty import FieldProperty
+
+from pyams_content.component.map.interfaces import IMapParagraph, MAP_PARAGRAPH_ICON_CLASS, MAP_PARAGRAPH_NAME, \
+    MAP_PARAGRAPH_RENDERERS, MAP_PARAGRAPH_TYPE
+from pyams_content.component.paragraph import BaseParagraph
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
+from pyams_content.feature.renderer import RenderersVocabulary
+from pyams_utils.factory import factory_config
+from pyams_utils.vocabulary import vocabulary_config
+
 __docformat__ = 'restructuredtext'
 
-try:
-    import pyams_gis
-except ImportError:
-    pyams_gis = None
-else:
-    
-    from zope.schema.fieldproperty import FieldProperty
-    
-    from pyams_content.component.map.interfaces import IMapParagraph, MAP_PARAGRAPH_ICON_CLASS, MAP_PARAGRAPH_NAME, \
-        MAP_PARAGRAPH_RENDERERS, MAP_PARAGRAPH_TYPE
-    from pyams_content.component.paragraph import BaseParagraph
-    from pyams_content.component.paragraph.interfaces import IBaseParagraph
-    from pyams_content.feature.renderer import RenderersVocabulary
-    from pyams_utils.factory import factory_config
-    from pyams_utils.vocabulary import vocabulary_config
-    
-    
-    @factory_config(IMapParagraph)
-    @factory_config(IBaseParagraph, name=MAP_PARAGRAPH_TYPE)
-    class MapParagraph(BaseParagraph):
-        """Map paragraph persistent class"""
-        
-        factory_name = MAP_PARAGRAPH_TYPE
-        factory_label = MAP_PARAGRAPH_NAME
-        factory_intf = IMapParagraph
-        
-        secondary = True
-        
-        icon_class = MAP_PARAGRAPH_ICON_CLASS
-        
-        position = FieldProperty(IMapParagraph['position'])
 
-    
-    @vocabulary_config(name=MAP_PARAGRAPH_RENDERERS)
-    class MapParagraphRenderersVocabulary(RenderersVocabulary):
-        """Map paragraph renderers vocabulary"""
-        
-        content_interface = IMapParagraph
+@factory_config(IMapParagraph)
+@factory_config(IBaseParagraph, name=MAP_PARAGRAPH_TYPE)
+class MapParagraph(BaseParagraph):
+    """Map paragraph persistent class"""
+
+    factory_name = MAP_PARAGRAPH_TYPE
+    factory_label = MAP_PARAGRAPH_NAME
+    factory_intf = IMapParagraph
+
+    secondary = True
+
+    icon_class = MAP_PARAGRAPH_ICON_CLASS
+
+    position = FieldProperty(IMapParagraph['position'])
+
+
+@vocabulary_config(name=MAP_PARAGRAPH_RENDERERS)
+class MapParagraphRenderersVocabulary(RenderersVocabulary):
+    """Map paragraph renderers vocabulary"""
+
+    content_interface = IMapParagraph

@@ -8,23 +8,17 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
+from pyams_content.component.map.interfaces import IMapInfo
+from pyams_i18n.schema import I18nTextLineField
+from pyams_portal.interfaces import IPortletSettings
+
 __docformat__ = 'restructuredtext'
 
-try:
-    import pyams_gis
-except ImportError:
-    pyams_gis = None
-else:
-    
-    from pyams_content.component.map.interfaces import IMapInfo
-    from pyams_i18n.schema import I18nTextLineField
-    from pyams_portal.interfaces import IPortletSettings
-    
-    from pyams_content import _
-    
-    
-    class IMapPortletSettings(IPortletSettings, IMapInfo):
-        """Map portlet settings interface"""
-        
-        title = I18nTextLineField(title=_("Title"),
-                                  required=False)
+from pyams_content import _
+
+
+class IMapPortletSettings(IPortletSettings, IMapInfo):
+    """Map portlet settings interface"""
+
+    title = I18nTextLineField(title=_("Title"),
+                              required=False)

@@ -8,43 +8,34 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
+from zope.interface import Interface
+
+from pyams_content.component.map.portlet.interfaces import IMapPortletSettings
+from pyams_content.component.map.portlet.skin.interfaces import IMapPortletDefaultRendererSettings
+from pyams_content.component.map.skin import MapDefaultRendererSettings
+from pyams_layer.interfaces import IPyAMSLayer
+from pyams_portal.interfaces import IPortalContext, IPortletRenderer
+from pyams_portal.skin import PortletRenderer
+from pyams_template.template import template_config
+from pyams_utils.adapter import adapter_config
+from pyams_utils.factory import factory_config
+
 __docformat__ = 'restructuredtext'
 
-try:
-    import pyams_gis
-except ImportError:
-    pyams_gis = None
-else:
-
-    import json
-
-    from zope.interface import Interface
-
-    from pyams_content.component.map.portlet.interfaces import IMapPortletSettings
-    from pyams_content.component.map.portlet.skin.interfaces import IMapPortletDefaultRendererSettings
-    from pyams_content.component.map.skin import MapDefaultRendererSettings
-    from pyams_layer.interfaces import IPyAMSLayer
-    from pyams_portal.interfaces import IPortalContext, IPortletRenderer
-    from pyams_portal.skin import PortletRenderer
-    from pyams_template.template import template_config
-    from pyams_utils.adapter import adapter_config
-    from pyams_utils.dict import update_dict
-    from pyams_utils.factory import factory_config
-
-    from pyams_content import _
+from pyams_content import _
 
 
-    @factory_config(IMapPortletDefaultRendererSettings)
-    class MapPortletDefaultRendererSettings(MapDefaultRendererSettings):
-        """Map portlet default renderer settings persistent class"""
+@factory_config(IMapPortletDefaultRendererSettings)
+class MapPortletDefaultRendererSettings(MapDefaultRendererSettings):
+    """Map portlet default renderer settings persistent class"""
 
 
-    @adapter_config(required=(IPortalContext, IPyAMSLayer, Interface, IMapPortletSettings),
-                    provides=IPortletRenderer)
-    @template_config(template='templates/map-default.pt', layer=IPyAMSLayer)
-    class MapPortletDefaultRenderer(PortletRenderer):
-        """Map portlet default renderer"""
+@adapter_config(required=(IPortalContext, IPyAMSLayer, Interface, IMapPortletSettings),
+                provides=IPortletRenderer)
+@template_config(template='templates/map-default.pt', layer=IPyAMSLayer)
+class MapPortletDefaultRenderer(PortletRenderer):
+    """Map portlet default renderer"""
 
-        label = _("Simple map (default)")
+    label = _("Simple map (default)")
 
-        settings_interface = IMapPortletDefaultRendererSettings
+    settings_interface = IMapPortletDefaultRendererSettings

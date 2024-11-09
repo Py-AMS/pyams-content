@@ -8,17 +8,11 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
+from pyams_content.component.map.skin.interfaces import IMapDefaultRendererSettings
+from pyams_portal.interfaces import IPortletRendererSettings
+
 __docformat__ = 'restructuredtext'
 
-try:
-    import pyams_gis
-except ImportError:
-    pyams_gis = None
-else:
 
-    from pyams_content.component.map.skin.interfaces import IMapDefaultRendererSettings
-    from pyams_portal.interfaces import IPortletRendererSettings
-
-
-    class IMapPortletDefaultRendererSettings(IPortletRendererSettings, IMapDefaultRendererSettings):
-        """Map portlet default renderer settings interface"""
+class IMapPortletDefaultRendererSettings(IPortletRendererSettings, IMapDefaultRendererSettings):
+    """Map portlet default renderer settings interface"""
