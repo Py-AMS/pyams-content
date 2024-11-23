@@ -978,8 +978,8 @@ msgid ""
 "You have been requested by ${sender}, contributor of « ${service_name} » "
 "website, to make a review of a content."
 msgstr ""
-"Vous êtes sollicité par ${sender}, contributor du site internet "
-"« ${service_name} », qui souhaite recueillir votre commentaire à propos d'un "
+"Vous êtes sollicité par ${sender}, contributeurr du site internet « "
+"${service_name} », qui souhaite recueillir votre commentaire à propos d'un "
 "contenu."
 
 #: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:36
@@ -4102,8 +4102,7 @@ msgstr "Structure ou établissement"
 
 #: src/pyams_content/component/contact/interfaces.py:56
 msgid "Business name of the employer"
-msgstr ""
-"Nom de la structure de rattachement ou de l'établissement du contact"
+msgstr "Nom de la structure de rattachement ou de l'établissement du contact"
 
 #: src/pyams_content/component/contact/interfaces.py:59
 msgid "Email address"
@@ -4119,7 +4118,9 @@ msgstr "Numéro de téléphone"
 
 #: src/pyams_content/component/contact/interfaces.py:64
 msgid "Phone number in international format. E.g. +33 ...."
-msgstr "Numéro de téléphone au format international, et incluant donc le préfixe si besoin"
+msgstr ""
+"Numéro de téléphone au format international, et incluant donc le préfixe si "
+"besoin"
 
 #: src/pyams_content/component/contact/interfaces.py:67
 msgid "Contact form"
@@ -4127,7 +4128,8 @@ msgstr "Formulaire de contact"
 
 #: src/pyams_content/component/contact/interfaces.py:68
 msgid "Reference of contact form"
-msgstr "Référence d'un formulaire de contact vers lequel redigiger l'utilisateur"
+msgstr ""
+"Référence d'un formulaire de contact vers lequel redigiger l'utilisateur"
 
 #: src/pyams_content/component/contact/interfaces.py:72
 msgid "Photo"
@@ -4135,7 +4137,8 @@ msgstr "Photo d'identité"
 
 #: src/pyams_content/component/contact/interfaces.py:73
 msgid "Use 'browse' button to select contact picture"
-msgstr "Utilisez le bouton \"Parcourir...\" pour sélectionner une photo du contact"
+msgstr ""
+"Utilisez le bouton \"Parcourir...\" pour sélectionner une photo du contact"
 
 #: src/pyams_content/component/contact/interfaces.py:76
 msgid "Address"
