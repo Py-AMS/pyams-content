@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.1.0
+-----
+ - added location map paragraph and portlet
+ - added contact card paragraph and portlet
+
 2.0.2
 -----
  - updated PIP version in Gitlab CI
