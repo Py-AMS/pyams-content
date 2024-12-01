@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-12-01 10:27+0100\n"
+"POT-Creation-Date: 2024-12-01 13:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -833,6 +833,57 @@ msgstr "Gestion du workflow"
 msgid "Content publication dates"
 msgstr "Dates de publication"
 
+#: src/pyams_content/feature/qrcode/zmi/__init__.py:119
+msgid "QR code"
+msgstr "QRCode"
+
+#: src/pyams_content/feature/qrcode/zmi/__init__.py:134
+msgid "Content QR codes"
+msgstr "QRCode du contenu"
+
+#: src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:3
+msgid "Available QRCodes"
+msgstr "Format disponibles"
+
+#: src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:7
+msgid "Content public URL"
+msgstr "URL publique du contenu"
+
+#: src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:21
+msgid "Copy value to clipboard"
+msgstr "Copier dans le presse-papier"
+
+#: src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:33
+msgid "QR codes are available in PNG and SVG formats."
+msgstr "Les QRCodes sont disponibles en formats PNG ou SVG."
+
+#: src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:34
+msgid "SVG format is to be preferred for high size printings."
+msgstr "Le format SVG est à privilégier pour des impressions de grande taille."
+
+#: src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:38
+msgid "PNG format"
+msgstr "Format PNG"
+
+#: src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:40
+#: src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:41
+msgid "QR code in PNG format"
+msgstr "QRCode au format PNG"
+
+#: src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:48
+#: src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:62
+msgid "Download..."
+msgstr "Télécharger..."
+
+#: src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:52
+msgid "SVG format"
+msgstr "Format SVG"
+
+#: src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:54
+#: src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:55
+msgid "QR code in SVG format"
+msgstr "QRCode au format SVG"
+
 #: src/pyams_content/feature/review/interfaces.py:34
 #: src/pyams_content/feature/review/chat.py:54
 msgid "Review request"
@@ -1277,8 +1328,8 @@ msgid ""
 "Test URL must only contain absolute path, without protocol and hostname, but "
 "can include optional query parameters"
 msgstr ""
-"L'URL de test ne doit contenir que le chemin absolu, sans protocole ni "
-"nom de domaine, mais peut inclure d'éventuels paramètres"
+"L'URL de test ne doit contenir que le chemin absolu, sans protocole ni nom "
+"de domaine, mais peut inclure d'éventuels paramètres"
 
 #: src/pyams_content/feature/redirect/zmi/container.py:358
 msgid "Test inactive rules?"

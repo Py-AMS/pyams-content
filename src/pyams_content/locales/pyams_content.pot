@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-12-01 10:27+0100\n"
+"POT-Creation-Date: 2024-12-01 13:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -812,6 +812,57 @@ msgstr ""
 
 #: ./src/pyams_content/workflow/zmi/publication.py:63
 msgid "Content publication dates"
+msgstr ""
+
+#: ./src/pyams_content/feature/qrcode/zmi/__init__.py:119
+msgid "QR code"
+msgstr ""
+
+#: ./src/pyams_content/feature/qrcode/zmi/__init__.py:134
+msgid "Content QR codes"
+msgstr ""
+
+#: ./src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:3
+msgid "Available QRCodes"
+msgstr ""
+
+#: ./src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:7
+msgid "Content public URL"
+msgstr ""
+
+#: ./src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:21
+msgid "Copy value to clipboard"
+msgstr ""
+
+#: ./src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:33
+msgid "QR codes are available in PNG and SVG formats."
+msgstr ""
+
+#: ./src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:34
+msgid "SVG format is to be preferred for high size printings."
+msgstr ""
+
+#: ./src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:38
+msgid "PNG format"
+msgstr ""
+
+#: ./src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:40
+#: ./src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:41
+msgid "QR code in PNG format"
+msgstr ""
+
+#: ./src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:48
+#: ./src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:62
+msgid "Download..."
+msgstr ""
+
+#: ./src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:52
+msgid "SVG format"
+msgstr ""
+
+#: ./src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:54
+#: ./src/pyams_content/feature/qrcode/zmi/templates/qrcodes.pt:55
+msgid "QR code in SVG format"
 msgstr ""
 
 #: ./src/pyams_content/feature/review/interfaces.py:34
