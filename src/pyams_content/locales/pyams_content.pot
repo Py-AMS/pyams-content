@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-11-30 10:41+0100\n"
+"POT-Creation-Date: 2024-12-01 10:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,79 +16,79 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Lingua 4.15.0\n"
 
-#: ./src/pyams_content/include.py:60
+#: ./src/pyams_content/include.py:61
 msgid "Manage main site root properties"
 msgstr ""
 
-#: ./src/pyams_content/include.py:64
+#: ./src/pyams_content/include.py:65
 msgid "Manage references table"
 msgstr ""
 
-#: ./src/pyams_content/include.py:68
+#: ./src/pyams_content/include.py:69
 msgid "Manage first level site tree elements"
 msgstr ""
 
-#: ./src/pyams_content/include.py:72
+#: ./src/pyams_content/include.py:73
 msgid "Manage site, blog or hub properties"
 msgstr ""
 
-#: ./src/pyams_content/include.py:76
+#: ./src/pyams_content/include.py:77
 msgid "Manage shared tool properties"
 msgstr ""
 
-#: ./src/pyams_content/include.py:80
+#: ./src/pyams_content/include.py:81
 msgid "Create new content"
 msgstr ""
 
-#: ./src/pyams_content/include.py:84
+#: ./src/pyams_content/include.py:85
 msgid "Create new version of existing content"
 msgstr ""
 
-#: ./src/pyams_content/include.py:88
+#: ./src/pyams_content/include.py:89
 msgid "Manage content properties"
 msgstr ""
 
-#: ./src/pyams_content/include.py:92
+#: ./src/pyams_content/include.py:93
 msgid "Comment existing content"
 msgstr ""
 
-#: ./src/pyams_content/include.py:96
+#: ./src/pyams_content/include.py:97
 msgid "Publish or retire existing content"
 msgstr ""
 
-#: ./src/pyams_content/include.py:115
+#: ./src/pyams_content/include.py:116
 msgid "Webmaster (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:139
+#: ./src/pyams_content/include.py:140
 msgid "References manager (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:153
+#: ./src/pyams_content/include.py:154
 msgid "Pilot (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:170
+#: ./src/pyams_content/include.py:171
 msgid "Manager (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:187
+#: ./src/pyams_content/include.py:188
 msgid "Owner (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:198
+#: ./src/pyams_content/include.py:199
 msgid "Contributor (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:216
+#: ./src/pyams_content/include.py:217
 msgid "Reader (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:234
+#: ./src/pyams_content/include.py:235
 msgid "Operator (role)"
 msgstr ""
 
-#: ./src/pyams_content/include.py:246
+#: ./src/pyams_content/include.py:247
 msgid "Guest user (role)"
 msgstr ""
 
@@ -1050,6 +1050,238 @@ msgstr ""
 msgid "SEO configuration"
 msgstr ""
 
+#: ./src/pyams_content/feature/redirect/interfaces.py:37
+msgid "Active rule?"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/interfaces.py:38
+msgid "If 'no', selected rule is inactive"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/interfaces.py:42
+msgid "Chained rule?"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/interfaces.py:43
+msgid ""
+"If 'no', and if this rule is matching received request URL, the rule returns "
+"a redirection response; otherwise, the rule just rewrites the input URL which"
+" is forwarded to the next rule"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/interfaces.py:49
+#: ./src/pyams_content/feature/filter/interfaces.py:159
+#: ./src/pyams_content/feature/filter/zmi/__init__.py:120
+#: ./src/pyams_content/shared/common/zmi/types/container.py:116
+#: ./src/pyams_content/shared/common/interfaces/types.py:57
+#: ./src/pyams_content/shared/alert/interfaces.py:51
+#: ./src/pyams_content/shared/alert/zmi/types.py:129
+msgid "Label"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/interfaces.py:50
+msgid "The label of the redirection rule"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/interfaces.py:53
+msgid "Permanent redirect?"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/interfaces.py:54
+msgid "Define if this redirection should be permanent or temporary"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/interfaces.py:58
+#: ./src/pyams_content/feature/redirect/zmi/container.py:220
+#: ./src/pyams_content/feature/redirect/zmi/templates/test-results.pt:12
+msgid "URL pattern"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/interfaces.py:59
+msgid "Regexp pattern of matching URLs for this redirection rule"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/interfaces.py:64
+msgid "Internal redirection target"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/interfaces.py:65
+msgid ""
+"Internal redirection reference. You can search a reference using '+' followed"
+" by internal number, of by entering text matching content title."
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/interfaces.py:70
+#: ./src/pyams_content/component/links/interfaces.py:113
+#: ./src/pyams_content/shared/site/interfaces.py:242
+msgid "Target URL"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/interfaces.py:71
+msgid "URL to which source URL should be redirected"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/interfaces.py:74
+#: ./src/pyams_content/shared/site/interfaces.py:123
+#: ./src/pyams_content/shared/site/interfaces.py:173
+#: ./src/pyams_content/shared/site/zmi/folder.py:91
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:219
+msgid "Notepad"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/interfaces.py:80
+msgid "You must provide an internal reference OR a target URL"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/container.py:65
+msgid "not matching"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:71
+msgid "Redirections"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:83
+msgid "Site redirections"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:85
+msgid "List of site redirections"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:97
+msgid ""
+"Redirection rules are used to provide redirections responses when a request generates\n"
+"a famous « 404 NotFound » error.<br />\n"
+"Redirections are particularly useful when you are migrating from a previous site and don't want to lose\n"
+"your SEO.<br />\n"
+"You can define a set of rules which will be applied on every \"NotFound\" exception; rules are based on\n"
+"regular expressions which are applied to input URL: if the rule is \"matching\", the target URL is rewritten\n"
+"and a \"Redirect\" response is send.<br />\n"
+"You can chain rules together: when a rule is chained, it's rewritten URL is passed as input URL to the\n"
+"next rule, until a matching rule is found.\n"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:156
+msgid "Click icon to enable or disable redirection rule"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:182
+msgid "Click icon to enable or disable rule chain"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:208
+msgid "Rule label"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:261
+msgid "Target has no published version"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:267
+msgid "Target is published"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:270
+msgid "Target is not published"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:286
+#: ./src/pyams_content/component/links/interfaces.py:107
+#: ./src/pyams_content/shared/site/link.py:182
+msgid "External link"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:295
+msgid "Target"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:306
+#, python-format
+msgid "Internal reference: {0} (not found)"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:344
+#: ./src/pyams_content/feature/redirect/zmi/container.py:367
+msgid "Test rules"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:353
+msgid "Test URL"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:354
+msgid ""
+"Test URL must only contain absolute path, without protocol and hostname, but "
+"can include optional query parameters"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:358
+msgid "Test inactive rules?"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:359
+msgid "If 'yes', inactive rules will also be tested"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/container.py:368
+#: ./src/pyams_content/feature/glossary/skin/templates/glossary-term.pt:9
+#: ./src/pyams_content/feature/glossary/skin/templates/glossary-term.pt:28
+#: ./src/pyams_content/component/paragraph/skin/templates/html-alert.pt:16
+msgid "Close"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/__init__.py:56
+msgid "Add redirection rule"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/__init__.py:71
+msgid "New redirection rule"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/__init__.py:72
+msgid "New redirection rule properties"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/__init__.py:109
+msgid "Redirection rule"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/__init__.py:124
+msgid "Redirection rule properties"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/__init__.py:137
+#, python-format
+msgid "Redirection rule: {}"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/__init__.py:160
+msgid ""
+"URL pattern and target URL are defined by *regular expressions* (see \n"
+"[Python Regular Expressions](https://docs.python.org/3/library/re.html)).<br />\n"
+"In an URL pattern, you can use any valid regular expression element, notably:\n"
+"\n"
+" - « .* » to match any list of characters\n"
+" - « ( ) » to \"memorize\" parts of the URL which can be replaced into target URL\n"
+" - « \\ » to protect special characters (like \"+\").\n"
+" \n"
+"In target URL, memorized parts can be reused using « \\1 », « \\2 » and so on, where given number is\n"
+"the order of the matching pattern element.\n"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/templates/test-results.pt:3
+msgid "Test results"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/templates/test-results.pt:11
+msgid "Input URL"
+msgstr ""
+
+#: ./src/pyams_content/feature/redirect/zmi/templates/test-results.pt:13
+msgid "Output URL"
+msgstr ""
+
 #: ./src/pyams_content/feature/script/interfaces.py:34
 msgid "Active script?"
 msgstr ""
@@ -1366,15 +1598,6 @@ msgstr ""
 
 #: ./src/pyams_content/feature/filter/interfaces.py:155
 msgid "Is this filter visible in front-office?"
-msgstr ""
-
-#: ./src/pyams_content/feature/filter/interfaces.py:159
-#: ./src/pyams_content/feature/filter/zmi/__init__.py:120
-#: ./src/pyams_content/shared/common/zmi/types/container.py:116
-#: ./src/pyams_content/shared/common/interfaces/types.py:57
-#: ./src/pyams_content/shared/alert/interfaces.py:51
-#: ./src/pyams_content/shared/alert/zmi/types.py:129
-msgid "Label"
 msgstr ""
 
 #: ./src/pyams_content/feature/filter/interfaces.py:160
@@ -2090,12 +2313,6 @@ msgstr ""
 msgid "Note"
 msgstr ""
 
-#: ./src/pyams_content/feature/glossary/skin/templates/glossary-term.pt:9
-#: ./src/pyams_content/feature/glossary/skin/templates/glossary-term.pt:28
-#: ./src/pyams_content/component/paragraph/skin/templates/html-alert.pt:16
-msgid "Close"
-msgstr ""
-
 #: ./src/pyams_content/feature/preview/zmi/__init__.py:53
 #: ./src/pyams_content/component/paragraph/zmi/__init__.py:287
 #: ./src/pyams_content/component/paragraph/zmi/__init__.py:310
@@ -2161,7 +2378,7 @@ msgstr ""
 #: ./src/pyams_content/component/illustration/interfaces.py:58
 #: ./src/pyams_content/component/extfile/interfaces.py:51
 #: ./src/pyams_content/component/verbatim/interfaces.py:40
-#: ./src/pyams_content/component/verbatim/zmi/__init__.py:125
+#: ./src/pyams_content/component/verbatim/zmi/__init__.py:144
 #: ./src/pyams_content/component/gallery/interfaces.py:64
 #: ./src/pyams_content/component/gallery/zmi/interfaces.py:40
 #: ./src/pyams_content/component/video/interfaces.py:51
@@ -2198,6 +2415,7 @@ msgstr ""
 #: ./src/pyams_content/component/illustration/interfaces.py:112
 #: ./src/pyams_content/component/illustration/thesaurus.py:34
 #: ./src/pyams_content/component/illustration/portlet/__init__.py:42
+#: ./src/pyams_content/component/verbatim/zmi/__init__.py:129
 msgid "Illustration"
 msgstr ""
 
@@ -2986,16 +3204,6 @@ msgstr ""
 msgid "Info properties interface"
 msgstr ""
 
-#: ./src/pyams_content/component/links/interfaces.py:107
-#: ./src/pyams_content/shared/site/link.py:182
-msgid "External link"
-msgstr ""
-
-#: ./src/pyams_content/component/links/interfaces.py:113
-#: ./src/pyams_content/shared/site/interfaces.py:242
-msgid "Target URL"
-msgstr ""
-
 #: ./src/pyams_content/component/links/interfaces.py:114
 #: ./src/pyams_content/shared/site/interfaces.py:243
 msgid "URL used to access external resource"
@@ -3137,36 +3345,36 @@ msgstr ""
 msgid "Presentation template used for this verbatim"
 msgstr ""
 
-#: ./src/pyams_content/component/verbatim/zmi/__init__.py:108
+#: ./src/pyams_content/component/verbatim/zmi/__init__.py:111
 msgid "Click icon to show or hide verbatim"
 msgstr ""
 
-#: ./src/pyams_content/component/verbatim/zmi/__init__.py:137
+#: ./src/pyams_content/component/verbatim/zmi/__init__.py:160
 msgid "Quote"
 msgstr ""
 
-#: ./src/pyams_content/component/verbatim/zmi/__init__.py:171
+#: ./src/pyams_content/component/verbatim/zmi/__init__.py:195
 msgid "List of verbatim"
 msgstr ""
 
-#: ./src/pyams_content/component/verbatim/zmi/__init__.py:185
+#: ./src/pyams_content/component/verbatim/zmi/__init__.py:209
 msgid "Add verbatim"
 msgstr ""
 
-#: ./src/pyams_content/component/verbatim/zmi/__init__.py:200
+#: ./src/pyams_content/component/verbatim/zmi/__init__.py:224
 msgid "New verbatim"
 msgstr ""
 
-#: ./src/pyams_content/component/verbatim/zmi/__init__.py:201
+#: ./src/pyams_content/component/verbatim/zmi/__init__.py:225
 msgid "New verbatim properties"
 msgstr ""
 
-#: ./src/pyams_content/component/verbatim/zmi/__init__.py:246
+#: ./src/pyams_content/component/verbatim/zmi/__init__.py:270
 #, python-format
 msgid "Verbatim: {}"
 msgstr ""
 
-#: ./src/pyams_content/component/verbatim/zmi/__init__.py:248
+#: ./src/pyams_content/component/verbatim/zmi/__init__.py:272
 msgid "Verbatim properties"
 msgstr ""
 
@@ -4086,13 +4294,6 @@ msgid ""
 "The folder's description is 'hidden' into HTML's page headers; but it can be "
 "seen, for example, in some search engines results as content's description; "
 "if description is empty, content's header will be used."
-msgstr ""
-
-#: ./src/pyams_content/shared/site/interfaces.py:123
-#: ./src/pyams_content/shared/site/interfaces.py:173
-#: ./src/pyams_content/shared/site/zmi/folder.py:91
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:219
-msgid "Notepad"
 msgstr ""
 
 #: ./src/pyams_content/shared/site/interfaces.py:124
