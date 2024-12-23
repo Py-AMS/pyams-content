@@ -97,6 +97,8 @@ class TitleFilter(Filter):
 class ThesaurusFilter(Filter):
     """Thesaurus base filter"""
 
+    sorting_mode = FieldProperty(IThesaurusFilter['sorting_mode'])
+
     thesaurus_name = FieldProperty(IThesaurusFilter['thesaurus_name'])
     extract_name = FieldProperty(IThesaurusFilter['extract_name'])
 

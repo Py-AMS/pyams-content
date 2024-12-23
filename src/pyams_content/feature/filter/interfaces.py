@@ -54,8 +54,7 @@ FILTER_SORTING_LABEL = OrderedDict((
     (FILTER_SORTING.ALPHA.value, _("Alphabetical")),
     (FILTER_SORTING.ALPHA_DESC.value, _("Alphabetical (reversed)")),
     (FILTER_SORTING.COUNT.value, _("Results count")),
-    (FILTER_SORTING.COUNT_DESC.value, _("Results count (reversed)")),
-    (FILTER_SORTING.MANUAL.value, _("Manual"))
+    (FILTER_SORTING.COUNT_DESC.value, _("Results count (reversed)"))
 ))
 
 FILTER_SORTING_VOCABULARY = SimpleVocabulary([
@@ -65,7 +64,7 @@ FILTER_SORTING_VOCABULARY = SimpleVocabulary([
 
 
 MANUAL_FILTER_SORTING_LABEL = FILTER_SORTING_LABEL.copy()
-MANUAL_FILTER_SORTING_LABEL['manual'] = _("Manual")
+MANUAL_FILTER_SORTING_LABEL[FILTER_SORTING.MANUAL.value] = _("Manual")
 
 MANUAL_FILTER_SORTING_VOCABULARY = SimpleVocabulary([
     SimpleTerm(k, title=v)
@@ -228,6 +227,12 @@ class ITitleFilter(IFilter):
 
 class IThesaurusFilter(IFilter, IThesaurusContextManager):
     """Thesaurus-based filter interface"""
+
+    sorting_mode = Choice(title=_("Sorting mode"),
+                          description=_("Filter entries sorting mode"),
+                          vocabulary=MANUAL_FILTER_SORTING_VOCABULARY,
+                          default=FILTER_SORTING.MANUAL.value,
+                          required=True)
 
     thesaurus_name = Choice(title=_("Thesaurus name"),
                             description=_("Name of thesaurus used to get filter terms"),

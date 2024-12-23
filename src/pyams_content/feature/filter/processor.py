@@ -18,7 +18,7 @@ from pyams_content.feature.filter import IFilter
 from pyams_content.feature.filter.interfaces import IAggregatedPortletRendererSettings, IFilterProcessor, \
     IFilterProcessorAggregationsHandler
 from pyams_layer.interfaces import IPyAMSLayer
-from pyams_utils.adapter import ContextRequestAdapter, adapter_config
+from pyams_utils.adapter import adapter_config
 
 __docformat__ = 'restructuredtext'
 
