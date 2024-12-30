@@ -148,7 +148,8 @@ class ParagraphPermissionChecker(ContextAdapter):
     @property
     def edit_permission(self):
         """Edit permission checker"""
-        parent = get_parent(self.context, IParagraphContainerTarget)
+        parent = get_parent(self.context, IParagraphContainerTarget,
+                            condition=lambda x: not IBaseParagraph.providedBy(x))
         if parent is not None:
             return IViewContextPermissionChecker(parent).edit_permission
         return None
@@ -174,6 +175,7 @@ class ParagraphDeletePermissionChecker(ParagraphPermissionChecker):
 @subscriber(IObjectRemovedEvent, context_selector=IBaseParagraph)
 def handle_paragraph_event(event):
     """Handle added paragraph"""
-    content = get_parent(event.object, IParagraphContainerTarget)
+    content = get_parent(event.object, IParagraphContainerTarget,
+                         condition=lambda x: not IBaseParagraph.providedBy(x))
     if content is not None:
         get_pyramid_registry().notify(ObjectModifiedEvent(content))

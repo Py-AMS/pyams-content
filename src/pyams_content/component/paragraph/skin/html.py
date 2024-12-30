@@ -49,6 +49,10 @@ from pyams_content import _
                 required=(IRawParagraph, IPyAMSLayer),
                 provides=IContentRenderer)
 @template_config(template='templates/raw.pt', layer=IPyAMSLayer)
+@template_config(name='group',
+                 template='templates/raw-group.pt', layer=IPyAMSLayer)
+@template_config(name='group:tab',
+                 template='templates/raw-group-tab.pt', layer=IPyAMSLayer)
 class RawParagraphDefaultRenderer(DefaultContentRenderer):
     """Raw paragraph default renderer"""
 
@@ -59,6 +63,10 @@ class RawParagraphDefaultRenderer(DefaultContentRenderer):
                 required=(IRawParagraph, IPyAMSLayer),
                 provides=IContentRenderer)
 @template_config(template='templates/raw-code.pt', layer=IPyAMSLayer)
+@template_config(name='group',
+                 template='templates/raw-code-group.pt', layer=IPyAMSLayer)
+@template_config(name='group:tab',
+                 template='templates/raw-code-group-tab.pt', layer=IPyAMSLayer)
 class RawParagraphSourceCodeRenderer(DefaultContentRenderer):
     """Raw paragraph source code renderer"""
 
@@ -101,6 +109,10 @@ class RawParagraphSourceCodeRenderer(DefaultContentRenderer):
                 required=(IRawParagraph, IPyAMSLayer),
                 provides=IContentRenderer)
 @template_config(template='templates/raw-code.pt', layer=IPyAMSLayer)
+@template_config(name='group',
+                 template='templates/raw-code-group.pt', layer=IPyAMSLayer)
+@template_config(name='group:tab',
+                 template='templates/raw-code-group-tab.pt', layer=IPyAMSLayer)
 class RawParagraphRestRenderer(DefaultContentRenderer):
     """Raw paragraph ReStructured text renderer"""
 
@@ -126,6 +138,10 @@ class RawParagraphRestRenderer(DefaultContentRenderer):
                 required=(IRawParagraph, IPyAMSLayer),
                 provides=IContentRenderer)
 @template_config(template='templates/raw-code.pt', layer=IPyAMSLayer)
+@template_config(name='group',
+                 template='templates/raw-code-group.pt', layer=IPyAMSLayer)
+@template_config(name='group:tab',
+                 template='templates/raw-code-group-tab.pt', layer=IPyAMSLayer)
 class RawParagraphMarkdownRenderer(DefaultContentRenderer):
     """Raw paragraph Markdown text renderer"""
 
@@ -183,6 +199,10 @@ class HTMLParagraphRendererSettings(Persistent, Contained):
                 required=(IHTMLParagraph, IPyAMSLayer),
                 provides=IContentRenderer)
 @template_config(template='templates/html.pt', layer=IPyAMSLayer)
+@template_config(name='group',
+                 template='templates/html-group.pt', layer=IPyAMSLayer)
+@template_config(name='group:tab',
+                 template='templates/html-group-tab.pt', layer=IPyAMSLayer)
 class HTMLParagraphRenderer(DefaultContentRenderer):
     """HTML paragraph default renderer"""
 
@@ -218,6 +238,10 @@ class HTMLParagraphAlertRendererSettings(HTMLParagraphRendererSettings):
                 required=(IHTMLParagraph, IPyAMSLayer),
                 provides=IContentRenderer)
 @template_config(template='templates/html-alert.pt', layer=IPyAMSLayer)
+@template_config(name='group',
+                 template='templates/html-alert.pt', layer=IPyAMSLayer)
+@template_config(name='group:tab',
+                 template='templates/html-alert-group-tab.pt', layer=IPyAMSLayer)
 class HTMLParagraphAlertRenderer(HTMLParagraphRenderer):
     """HTML paragraph alert renderer"""
 

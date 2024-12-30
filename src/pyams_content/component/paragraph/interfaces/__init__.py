@@ -96,12 +96,11 @@ class IParagraphContainerTarget(IAttributeAnnotatable):
     """Paragraphs container marker interface"""
 
 
-PARAGRAPH_FACTORIES_VOCABULARY = 'pyams_content.paragraph.factories'
-
-
 #
 # Paragraph factory settings
 #
+
+PARAGRAPH_FACTORIES_VOCABULARY = 'pyams_content.paragraph.factories'
 
 PARAGRAPH_FACTORY_SETTINGS_KEY = 'pyams_content.paragraph.settings'
 

@@ -280,7 +280,7 @@ const content = {
         refreshTitle: (form, params) => {
             const
                 row = $(`tr[data-ams-element-name="${params.element_name}"]`);
-            $('.title', row).text(params.title);
+            $('span.title', row).text(params.title);
         }
     },
 
