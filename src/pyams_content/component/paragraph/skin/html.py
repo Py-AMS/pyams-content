@@ -57,6 +57,11 @@ class RawParagraphDefaultRenderer(DefaultContentRenderer):
     """Raw paragraph default renderer"""
 
     label = _("HTML source code (default)")
+    
+    @property
+    def body(self):
+        """Raw body getter"""
+        return II18n(self.context).query_attribute('body', request=self.request)
 
 
 @adapter_config(name='source-code',
