@@ -59,7 +59,9 @@ class OIDHTMLRenderer(ContextRequestAdapter):
                         link.attrib['href'] = canonical_url(target, request)
                         continue
                 # invalid link => remove href!
-                del link.attrib['href']
+                link.tag = 'span'
+                for name in link.attrib.keys()[:]:
+                    del link.attrib[name]
         return html.html()
 
 
