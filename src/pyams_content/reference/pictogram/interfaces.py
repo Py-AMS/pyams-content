@@ -13,6 +13,7 @@
 """PyAMS_content.reference.pictogram.interfaces module
 
 """
+
 from zope.annotation import IAttributeAnnotatable
 from zope.container.constraints import containers, contains
 from zope.interface import Interface
@@ -21,7 +22,6 @@ from zope.schema import Choice, List
 from pyams_content.reference.interfaces import IReferenceInfo, IReferenceTable
 from pyams_file.schema import I18nImageField
 from pyams_i18n.schema import I18nTextLineField
-
 
 __docformat__ = 'restructuredtext'
 

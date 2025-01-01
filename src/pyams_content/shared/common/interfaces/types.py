@@ -27,11 +27,12 @@ from pyams_content.shared.common.interfaces import IBaseContentPortalContext, IW
 from pyams_i18n.schema import I18nTextLineField
 from pyams_portal.interfaces import IPortalContext
 from pyams_sequence.schema import InternalReferenceField
+from pyams_utils.schema import ColorField
 
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
-from pyams_utils.schema import ColorField
+
 
 DATA_TYPES_VOCABULARY = 'pyams_content.datatypes'
 """Vocabulary of shared content data types"""
