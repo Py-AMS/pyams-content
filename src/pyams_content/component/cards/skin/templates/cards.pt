@@ -12,15 +12,11 @@
 				<tal:if define="illustration card.illustration"
 						condition="illustration">
 					${structure:tales:picture(illustration,
-											  xs_thumb=settings.thumb_selection,
+											  selections=settings.thumb_selection,
 											  xs_width=6,
-											  sm_thumb=settings.thumb_selection,
 											  sm_width=6,
-											  md_thumb=settings.thumb_selection,
 											  md_width=4,
-											  lg_thumb=settings.thumb_selection,
 											  lg_width=3,
-											  xl_thumb=settings.thumb_selection,
 											  xl_width=3,
 											  css_class='card-img-top w-100')}
 				</tal:if>
