@@ -280,7 +280,11 @@ const content = {
         refreshTitle: (form, params) => {
             const
                 row = $(`tr[data-ams-element-name="${params.element_name}"]`);
-            $('span.title', row).text(params.title);
+            if (row.attr('data-ams-url')) {
+                $('td.title', row).text(params.title);
+            } else {
+                $('span.title', row).text(params.title);
+            }
         }
     },
 
