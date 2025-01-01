@@ -97,6 +97,8 @@ class BaseLink(AssociationItem):
     @volatile_property
     def pictogram(self):
         """Pictogram getter"""
+        if not self.pictogram_name:
+            return None
         table = query_utility(IPictogramTable)
         if table is not None:
             return table.get(self._pictogram_name)
