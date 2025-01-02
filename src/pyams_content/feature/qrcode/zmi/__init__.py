@@ -16,14 +16,15 @@ This module defines components which can be used to display QRCodes for
 shared contents.
 """
 
-import qrcode
 from io import BytesIO
+
+import qrcode
 from pyramid.httpexceptions import HTTPNotFound, HTTPPreconditionFailed
+from pyramid.interfaces import IView
 from pyramid.response import Response
 from pyramid.view import view_config
 from qrcode.image.pil import PilImage
 from qrcode.image.svg import SvgPathImage
-from zope.interface import Interface
 
 from pyams_content.root import ISiteRootInfos
 from pyams_content.shared.common import IWfSharedContent
@@ -105,16 +106,17 @@ def qrcode_svg(request):
 #
 
 @viewlet_config(name='qrcodes.action',
-                context=ISequentialIdTarget, layer=IAdminLayer, view=Interface,
+                context=ISequentialIdTarget, layer=IAdminLayer, view=IView,
                 manager=IToolbarViewletManager, weight=7,
                 permission=VIEW_SYSTEM_PERMISSION)
 @viewlet_config(name='qrcodes.action',
-                context=IWfSharedContent, layer=IAdminLayer, view=Interface,
+                context=IWfSharedContent, layer=IAdminLayer, view=IView,
                 manager=IToolbarViewletManager, weight=7,
                 permission=VIEW_SYSTEM_PERMISSION)
 class QRCodeAction(ContextAction):
     """QRCode action"""
 
+    css_class = 'btn-sm mx-1'
     icon_class = 'fas fa-qrcode'
     hint = _("QR code")
 
