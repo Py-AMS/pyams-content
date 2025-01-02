@@ -1,6 +1,19 @@
 Changelog
 =========
 
+2.2.0
+-----
+ - added verbatim paragraph and portlet
+ - added paragraphs group paragraph type
+ - added redirections manager
+ - added QRCodes generator
+ - removed all attributes of invalid internal links in HTML renderer
+ - updated glossary alert rendering
+ - updated thesaurus-based filters sorting
+ - updated paragraph title refresh handler
+ - updated cards renderers
+ - updated search results portlet renderers templates
+
 2.1.0
 -----
  - added location map paragraph and portlet
