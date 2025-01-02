@@ -19,7 +19,7 @@
 			   value="${length}" />
 	</form>
 	<div class="search-results"
-		 tal:define="(items, count, aggregations) settings.get_items(request, start, length)"
+		 tal:define="(count, aggregations, items) settings.get_items(request, start, length)"
 		 tal:condition="count or (renderer_settings.display_if_empty and not request.annotations.get('pyams_content.portlet.search.has_results'))">
 		<header class="d-flex flex-row flex-wrap justify-content-between align-items-baseline">
 			<div tal:condition="renderer_settings.display_results_count">
