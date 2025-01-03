@@ -15,11 +15,8 @@
 This module defines management components for search folders.
 """
 
-__docformat__ = 'restructuredtext'
-
 from zope.interface import Interface
 
-from pyams_content import _
 from pyams_content.feature.search import ISearchFolder
 from pyams_content.interfaces import CREATE_CONTENT_PERMISSION, MANAGE_CONTENT_PERMISSION, MANAGE_SITE_PERMISSION
 from pyams_content.shared.site.interfaces import ISiteContainer
@@ -27,6 +24,7 @@ from pyams_content.shared.site.zmi.folder import ISiteFolderAddFormFields, SiteF
 from pyams_content.shared.site.zmi.interfaces import ISiteTreeTable
 from pyams_content.shared.site.zmi.widget.folder import SiteManagerFoldersSelectorFieldWidget
 from pyams_content.shared.view.zmi import ViewPropertiesEditForm, ViewPropertiesGroup
+from pyams_content.workflow.zmi.publication import SiteItemPublicationDatesMenu
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IGroup
@@ -43,8 +41,13 @@ from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
 from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IContentManagementMenu, IContextActionsDropdownMenu, \
-    IContextAddingsViewletManager, IMenuHeader
+    IContextAddingsViewletManager, IMenuHeader, IPropertiesMenu
 from pyams_zmi.table import TableElementEditor
+
+__docformat__ = 'restructuredtext'
+
+from pyams_content import _
+from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
 
 @viewlet_config(name='add-search-folder.divider',
@@ -113,6 +116,17 @@ class SearchFolderTableElementEditor(TableElementEditor):
 
     view_name = 'admin'
     modal_target = False
+
+
+@viewlet_config(name='workflow-publication.menu',
+                context=ISearchFolder, layer=IAdminLayer,
+                manager=IPropertiesMenu, weight=510,
+                permission=MANAGE_SITE_PERMISSION)
+class SearchFolderPublicationDatesMenu(SiteItemPublicationDatesMenu):
+    """Search folder publication dates menu"""
+
+    def __new__(cls, context, request, view, manager):
+        return NavigationMenuItem.__new__(cls)
 
 
 @adapter_config(required=(ISearchFolder, IAdminLayer, Interface),
