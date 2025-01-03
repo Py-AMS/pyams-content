@@ -334,8 +334,10 @@ class SharedContentPropertiesEditForm(PropertiesEditForm):
 def shared_content_modal_page_title(context, request, form):
     """Shared content modal page title"""
     translate = request.localizer.translate
-    title = (f"{get_object_label(context, request, form)} "
-             f"(v {IWorkflowState(context).version_id})")
+    state = IWorkflowState(context, None)
+    title = f"{get_object_label(context, request, form)}"
+    if state:
+        title += f" (v {state.version_id})"
     return TITLE_SPAN_BREAK.format(translate(context.content_name), title)
 
 
