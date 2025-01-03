@@ -14,7 +14,6 @@
 
 """
 
-from zope.interface import Attribute, Interface
 from zope.schema import Bool
 
 from pyams_i18n.schema import I18nTextLineField
@@ -30,12 +29,6 @@ SEARCH_RESULTS_ICON_CLASS = 'fas fa-search'
 
 SEARCH_RESULTS_PORTLET_FLAG = 'pyams_content.portlet.search.has_results'
 """Request annotations flag for portlet search results"""
-
-
-class ISearchResultsAggregates(Interface):
-    """Aggregated search results portlet renderer marker interface"""
-
-    aggregates = Attribute("Search results aggregates")
 
 
 class ISearchResultsPortletSettings(IPortletSettings):

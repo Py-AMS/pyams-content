@@ -19,9 +19,10 @@ from enum import Enum
 
 from zope.contentprovider.interfaces import IContentProvider
 from zope.interface import Attribute, Interface
-from zope.schema import Bool, Choice, Int
+from zope.schema import Bool, Choice, Int, TextLine
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
+from pyams_content.feature.filter.interfaces import IAggregatedPortletRendererSettings
 from pyams_i18n.schema import I18nTextLineField
 from pyams_skin.schema import BootstrapThumbnailsSelectionField
 
@@ -53,7 +54,7 @@ HEADER_DISPLAY_MODES_VOCABULARY = SimpleVocabulary([
 ])
 
 
-class ISearchResultsPortletBaseRendererSettings(Interface):
+class ISearchResultsPortletBaseRendererSettings(IAggregatedPortletRendererSettings):
     """Search results portlet renderer base settings interface"""
 
     display_if_empty = Bool(title=_("Display if empty?"),
@@ -76,6 +77,14 @@ class ISearchResultsPortletBaseRendererSettings(Interface):
                             description=_("If 'no', results will not be paginated"),
                             required=True,
                             default=True)
+
+    filters_css_class = TextLine(title=_('Filters CSS class'),
+                                 description=_("CSS class used for filters column"),
+                                 default='col col-12 col-md-4 col-lg-3 col-xl-2 float-left text-md-right')
+
+    results_css_class = TextLine(title=_('Results CSS class'),
+                                 description=_("CSS class used for view items container"),
+                                 default='row mx-0 col col-12 col-md-8 col-lg-9 col-xl-10 float-right')
 
     header_display_mode = Choice(title=_("Header display mode"),
                                  description=_("Defines how results headers will be rendered"),

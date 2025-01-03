@@ -20,9 +20,11 @@ from zope.interface import Interface, implementer
 from zope.location.interfaces import ILocation
 from zope.schema.fieldproperty import FieldProperty
 
+from pyams_content.feature.filter.container import FilterContainer
+from pyams_content.feature.filter.interfaces import IAggregatedPortletRendererSettings
 from pyams_content.feature.search.portlet import ISearchResultsPortletSettings
 from pyams_content.feature.search.portlet.skin.interfaces import HEADER_DISPLAY_MODE, ISearchResultHeader, \
-    ISearchResultRenderer, ISearchResultURL, ISearchResultTitle, ISearchResultsPortletBaseRendererSettings, \
+    ISearchResultRenderer, ISearchResultTitle, ISearchResultURL, ISearchResultsPortletBaseRendererSettings, \
     ISearchResultsPortletCardsRendererSettings, ISearchResultsPortletDefaultRendererSettings, \
     ISearchResultsPortletMasonryCardsRendererSettings, ISearchResultsPortletPanelsRendererSettings
 from pyams_content.shared.common import IWfSharedContent
@@ -37,11 +39,11 @@ from pyams_utils.adapter import NullAdapter, adapter_config
 from pyams_utils.factory import factory_config
 from pyams_utils.text import get_text_start
 from pyams_utils.url import canonical_url, relative_url
+from pyams_viewlet.viewlet import ViewContentProvider
 
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
-from pyams_viewlet.viewlet import ViewContentProvider
 
 
 class SearchResultsPortletBaseRendererSettings(Persistent, Contained):
@@ -53,6 +55,8 @@ class SearchResultsPortletBaseRendererSettings(Persistent, Contained):
         ISearchResultsPortletBaseRendererSettings['display_results_count'])
     allow_sorting = FieldProperty(ISearchResultsPortletBaseRendererSettings['allow_sorting'])
     allow_pagination = FieldProperty(ISearchResultsPortletBaseRendererSettings['allow_pagination'])
+    filters_css_class = FieldProperty(ISearchResultsPortletBaseRendererSettings['filters_css_class'])
+    results_css_class = FieldProperty(ISearchResultsPortletBaseRendererSettings['results_css_class'])
     header_display_mode = FieldProperty(
         ISearchResultsPortletBaseRendererSettings['header_display_mode'])
     start_length = FieldProperty(ISearchResultsPortletBaseRendererSettings['start_length'])
@@ -78,12 +82,12 @@ class SearchResultsPortletBaseRenderer(PortletRenderer):
             self.current_page_length = str(self.default_page_length)
         super().update()
 
-    def render_item(self, item):
+    def render_item(self, item, template_name=''):
         renderer = self.request.registry.queryMultiAdapter((item, self.request, self),
                                                            ISearchResultRenderer)
         if renderer is not None:
             renderer.update()
-            return renderer.render()
+            return renderer.render(template_name)
         return ''
 
 
@@ -92,7 +96,8 @@ class SearchResultsPortletBaseRenderer(PortletRenderer):
 #
 
 @factory_config(ISearchResultsPortletDefaultRendererSettings)
-class SearchResultsPortletDefaultRendererSettings(SearchResultsPortletBaseRendererSettings):
+@implementer(IAggregatedPortletRendererSettings)
+class SearchResultsPortletDefaultRendererSettings(SearchResultsPortletBaseRendererSettings, FilterContainer):
     """Search results portlet default renderer settings"""
 
     thumb_selection = FieldProperty(ISearchResultsPortletDefaultRendererSettings['thumb_selection'])
@@ -115,7 +120,8 @@ class SearchResultsPortletDefaultRenderer(SearchResultsPortletBaseRenderer):
 #
 
 @factory_config(ISearchResultsPortletPanelsRendererSettings)
-class SearchResultsPortletPanelsRendererSettings(SearchResultsPortletBaseRendererSettings):
+@implementer(IAggregatedPortletRendererSettings)
+class SearchResultsPortletPanelsRendererSettings(SearchResultsPortletBaseRendererSettings, FilterContainer):
     """Search results portlet panels renderer settings"""
 
     thumb_selection = FieldProperty(ISearchResultsPortletPanelsRendererSettings['thumb_selection'])
@@ -141,7 +147,8 @@ class SearchResultsPortletPanelsRenderer(SearchResultsPortletBaseRenderer):
 #
 
 @factory_config(ISearchResultsPortletCardsRendererSettings)
-class SearchResultsPortletCardsRendererSettings(SearchResultsPortletBaseRendererSettings):
+@implementer(IAggregatedPortletRendererSettings)
+class SearchResultsPortletCardsRendererSettings(SearchResultsPortletBaseRendererSettings, FilterContainer):
     """Search results portlet cards renderer settings"""
 
     thumb_selection = FieldProperty(ISearchResultsPortletCardsRendererSettings['thumb_selection'])
@@ -167,7 +174,8 @@ class SearchResultsPortletCardsRenderer(SearchResultsPortletBaseRenderer):
 #
 
 @factory_config(ISearchResultsPortletMasonryCardsRendererSettings)
-class SearchResultsPortletMasonryCardsRendererSettings(SearchResultsPortletCardsRendererSettings):
+@implementer(IAggregatedPortletRendererSettings)
+class SearchResultsPortletMasonryCardsRendererSettings(SearchResultsPortletCardsRendererSettings, FilterContainer):
     """Search results portlet Masonry cards renderer settings"""
 
 
@@ -218,9 +226,17 @@ def shared_content_result_target_adapter(context, request, view):
     return relative_url(context, request)
 
 
+#
+# Search results renderers
+#
+
 @adapter_config(context=(IWfSharedContent, IPyAMSUserLayer, ISearchResultsView),
                 provides=ISearchResultRenderer)
 @template_config(template='templates/search-result.pt', layer=IPyAMSUserLayer)
+@template_config(name='panel',
+                 template='templates/search-panel.pt', layer=IPyAMSUserLayer)
+@template_config(name='card',
+                 template='templates/search-card.pt', layer=IPyAMSUserLayer)
 class WfSharedContentSearchResultRenderer(ViewContentProvider):
     """Shared content search result renderer"""
 
@@ -249,15 +265,15 @@ class WfSharedContentSearchResultRenderer(ViewContentProvider):
                                                        ISearchResultURL)
 
 
-@adapter_config(context=(IWfSharedContent, IPyAMSUserLayer, ISearchResultsPanelsView),
-                provides=ISearchResultRenderer)
-@template_config(template='templates/search-panel.pt', layer=IPyAMSUserLayer)
-class WfSharedContentSearchResultPanelRenderer(WfSharedContentSearchResultRenderer):
-    """Shared content search result panel renderer"""
-
-
-@adapter_config(context=(IWfSharedContent, IPyAMSUserLayer, ISearchResultsCardsView),
-                provides=ISearchResultRenderer)
-@template_config(template='templates/search-card.pt', layer=IPyAMSUserLayer)
-class WfSharedContentSearchResultCardRenderer(WfSharedContentSearchResultRenderer):
-    """Shared content search result card renderer"""
+# @adapter_config(context=(IWfSharedContent, IPyAMSUserLayer, ISearchResultsPanelsView),
+#                 provides=ISearchResultRenderer)
+# @template_config(template='templates/search-panel.pt', layer=IPyAMSUserLayer)
+# class WfSharedContentSearchResultPanelRenderer(WfSharedContentSearchResultRenderer):
+#     """Shared content search result panel renderer"""
+#
+#
+# @adapter_config(context=(IWfSharedContent, IPyAMSUserLayer, ISearchResultsCardsView),
+#                 provides=ISearchResultRenderer)
+# @template_config(template='templates/search-card.pt', layer=IPyAMSUserLayer)
+# class WfSharedContentSearchResultCardRenderer(WfSharedContentSearchResultRenderer):
+#     """Shared content search result card renderer"""

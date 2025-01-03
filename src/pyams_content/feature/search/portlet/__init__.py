@@ -15,14 +15,14 @@
 """
 
 import math
-from itertools import tee
 
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.feature.search import ISearchFolder
-from pyams_content.feature.search.portlet.interfaces import ISearchResultsAggregates, \
-    ISearchResultsPortletSettings, SEARCH_RESULTS_ICON_CLASS, SEARCH_RESULTS_PORTLET_FLAG, SEARCH_RESULTS_PORTLET_NAME
+from pyams_content.feature.search.portlet.interfaces import ISearchResultsPortletSettings, SEARCH_RESULTS_ICON_CLASS, \
+    SEARCH_RESULTS_PORTLET_FLAG, SEARCH_RESULTS_PORTLET_NAME
 from pyams_content.shared.view.interfaces import RELEVANCE_ORDER, VISIBLE_PUBLICATION_DATE_ORDER
+from pyams_content.shared.view.portlet import IViewItemsAggregates
 from pyams_portal.interfaces import IPortletRendererSettings
 from pyams_portal.portlet import Portlet, PortletSettings, portlet_config
 from pyams_utils.factory import factory_config
@@ -61,7 +61,7 @@ class SearchResultsPortletSettings(PortletSettings):
                     not self.has_user_query(request):
                 request.GET['order_by'] = order_by = VISIBLE_PUBLICATION_DATE_ORDER
             renderer_settings = IPortletRendererSettings(self)
-            aggregates = ISearchResultsAggregates(renderer_settings, None)
+            aggregates = IViewItemsAggregates(renderer_settings, None)
             if aggregates is not None:
                 ignore_cache = True
             else:
@@ -80,21 +80,22 @@ class SearchResultsPortletSettings(PortletSettings):
     def get_items(self, request=None, start=0, length=10, limit=None, ignore_cache=False):
         """Search results getter"""
         if not (self.allow_empty_query or self.has_user_query(request)):
-            yield from iter(((), 0, {}), )
+            yield from iter((0, {}, ()), )
         else:
             has_items, items = boolean_iter(self._get_items(request, start, length, limit,
                                                             ignore_cache))
             if not has_items:
-                yield from iter(((), 0, {}), )
+                yield from iter((0, {}, ()), )
             else:
                 # verify real items count
-                check, items = tee(items)
-                _values = next(check)
-                count = next(check)
+                count = next(items)
+                aggregations = next(items)
                 if count:
                     if request is None:
                         request = check_request()
                     request.annotations[SEARCH_RESULTS_PORTLET_FLAG] = True
+                yield count
+                yield aggregations
                 yield from items
 
     @staticmethod

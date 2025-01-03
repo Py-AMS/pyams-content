@@ -61,11 +61,23 @@
 			</div>
 		</header>
 		<hr tal:condition="renderer_settings.display_results_count or renderer_settings.allow_sorting or renderer_settings.allow_pagination" />
-		<div class="summary row row-cols-1 row-cols-sm-2 row-cols-md-3">
-			<tal:loop repeat="item items">
-				${structure:view.render_item(item)}
-			</tal:loop>
-		</div>
+		<tal:var define="visible_filters renderer_settings.get_visible_filters();
+						 (has_filters, filters) tales:boolean_iter(visible_filters);">
+			<div tal:condition="has_filters"
+				 class="${renderer_settings.filters_css_class}">
+				<i tal:omit-tag="">
+					${structure:provider:filters_default(renderer_settings=renderer_settings, aggregations=aggregations)}
+				</i>
+			</div>
+			<div tal:omit-tag="not:has_filters"
+				 class="${renderer_settings.results_css_class}">
+				<div class="summary row row-cols-1 row-cols-sm-2 row-cols-md-3">
+					<tal:loop repeat="item items">
+						${structure:view.render_item(item, 'panel')}
+					</tal:loop>
+				</div>
+			</div>
+		</tal:var>
 		<div class="clearfix"></div>
 		<div class="col-md-12 text-center">
 			<nav role="navigation"

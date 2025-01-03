@@ -14,8 +14,6 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
 from pyams_content.feature.search.portlet.skin import ISearchResultsPortletBaseRendererSettings, \
     ISearchResultsPortletCardsRendererSettings, ISearchResultsPortletPanelsRendererSettings
 from pyams_form.field import Fields
@@ -25,6 +23,8 @@ from pyams_portal.zmi.interfaces import IPortletRendererSettingsEditForm
 from pyams_utils.adapter import adapter_config
 from pyams_zmi.form import FormGroupChecker
 from pyams_zmi.interfaces import IAdminLayer
+
+__docformat__ = 'restructuredtext'
 
 from pyams_content import _
 
@@ -38,7 +38,8 @@ from pyams_content import _
 def search_results_portlet_renderer_settings_fields(context, request, form):
     """Search results portlet renderer settings fields getter"""
     return Fields(ISearchResultsPortletBaseRendererSettings).select(
-        'display_if_empty', 'display_results_count', 'allow_sorting', 'allow_pagination')
+        'display_if_empty', 'display_results_count', 'allow_sorting', 'allow_pagination',
+        'filters_css_class', 'results_css_class')
 
 
 @adapter_config(name='illustration',
