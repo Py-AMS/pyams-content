@@ -211,8 +211,8 @@ class SharedContentHistoryInfo(Group):
     @property
     def fields(self):
         fields = Fields(IWorkflowPublicationInfo).select('first_publication_date')
-        state = IWorkflowState(self.context)
-        if state.version_id > 1:
+        state = IWorkflowState(self.context, None)
+        if state and state.version_id > 1:
             fields += Fields(IWorkflowPublicationInfo).select('content_publication_date')
         fields += Fields(IWfSharedContent).select('first_owner')
         return fields
