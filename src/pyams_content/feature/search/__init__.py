@@ -18,7 +18,7 @@ This module defines search folder class and adapters.
 from zope.interface import implementer
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.component.illustration import IIllustrationTarget, ILinkIllustrationTarget
+from pyams_content.component.illustration.interfaces import IIllustrationTarget, ILinkIllustrationTarget
 from pyams_content.feature.preview.interfaces import IPreviewTarget
 from pyams_content.feature.search.interfaces import ISearchFolder
 from pyams_content.interfaces import MANAGE_SITE_PERMISSION
@@ -27,13 +27,13 @@ from pyams_portal.interfaces import IPortalContext, IPortalFooterContext, IPorta
 from pyams_security.interfaces import IDefaultProtectionPolicy, IViewContextPermissionChecker
 from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.factory import factory_config
+from pyams_workflow.interfaces import IWorkflowPublicationSupport
 
 from pyams_content import _
-from pyams_utils.request import check_request
 
 
 @factory_config(ISearchFolder)
-@implementer(IDefaultProtectionPolicy,
+@implementer(IDefaultProtectionPolicy, IWorkflowPublicationSupport,
              IIllustrationTarget, ILinkIllustrationTarget,
              IPortalContext, IPortalHeaderContext, IPortalFooterContext, IPreviewTarget)
 class SearchFolder(WfView):
