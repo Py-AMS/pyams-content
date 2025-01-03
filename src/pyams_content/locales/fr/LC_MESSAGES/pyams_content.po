@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2024-12-30 15:24+0100\n"
+"POT-Creation-Date: 2025-01-03 13:51+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -98,7 +98,7 @@ msgstr "Invité (rôle)"
 #: src/pyams_content/shared/form/interfaces.py:49
 #: src/pyams_content/feature/navigation/portlet/interfaces.py:33
 #: src/pyams_content/feature/navigation/portlet/interfaces.py:47
-#: src/pyams_content/feature/search/portlet/interfaces.py:44
+#: src/pyams_content/feature/search/portlet/interfaces.py:37
 #: src/pyams_content/interfaces/__init__.py:122
 #: src/pyams_content/component/gallery/interfaces.py:118
 #: src/pyams_content/component/gallery/portlet/interfaces.py:33
@@ -368,7 +368,7 @@ msgstr ""
 #: src/pyams_content/zmi/dashboard.py:133
 #: src/pyams_content/shared/common/zmi/search.py:221
 #: src/pyams_content/shared/common/zmi/types/__init__.py:122
-#: src/pyams_content/shared/common/interfaces/types.py:154
+#: src/pyams_content/shared/common/interfaces/types.py:155
 #: src/pyams_content/shared/site/interfaces.py:189
 #: src/pyams_content/shared/topic/interfaces.py:36
 #: src/pyams_content/shared/form/interfaces.py:44
@@ -423,7 +423,7 @@ msgid "Workflow action"
 msgstr "Action du workflow"
 
 #: src/pyams_content/shared/common/zmi/workflow.py:62
-#: src/pyams_content/shared/common/zmi/__init__.py:440
+#: src/pyams_content/shared/common/zmi/__init__.py:442
 #: src/pyams_content/shared/common/zmi/owner.py:423
 #: src/pyams_content/feature/review/zmi/__init__.py:102
 msgid "Cancel"
@@ -632,7 +632,7 @@ msgstr "Recherche de contenus"
 
 #: src/pyams_content/shared/common/zmi/search.py:430
 #: src/pyams_content/shared/common/zmi/owner.py:362
-#: src/pyams_content/feature/search/portlet/__init__.py:114
+#: src/pyams_content/feature/search/portlet/__init__.py:115
 msgid "Search results"
 msgstr "Résultats de recherche"
 
@@ -753,7 +753,7 @@ msgid "New content: {}"
 msgstr "Nouveau contenu : {}"
 
 #: src/pyams_content/shared/common/zmi/__init__.py:114
-#: src/pyams_content/shared/common/zmi/__init__.py:450
+#: src/pyams_content/shared/common/zmi/__init__.py:452
 msgid "New content properties"
 msgstr "Propriétés du nouveau contenu"
 
@@ -773,23 +773,23 @@ msgstr "Propriétés du contenu"
 msgid "Main content properties"
 msgstr "Propriétés élémentaires"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:429
-#: src/pyams_content/shared/common/zmi/__init__.py:449
+#: src/pyams_content/shared/common/zmi/__init__.py:431
+#: src/pyams_content/shared/common/zmi/__init__.py:451
 msgid "Duplicate content"
 msgstr "Dupliquer le contenu"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:439
+#: src/pyams_content/shared/common/zmi/__init__.py:441
 msgid "Duplicate this content"
 msgstr "Dupliquer ce contenu"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:508
+#: src/pyams_content/shared/common/zmi/__init__.py:510
 #, python-format
 msgid "Clone created from version {source} of {oid} (in « {state} » state)"
 msgstr ""
 "Contenu créé à partir de la version {source} de {oid} (alors en statut "
 "« {state} »)"
 
-#: src/pyams_content/shared/common/zmi/__init__.py:544
+#: src/pyams_content/shared/common/zmi/__init__.py:546
 msgid ""
 "You are going to duplicate a whole content.<br />The new copy is going to be "
 "created in 'draft' mode, so that you can modify it before publication.<br /"
@@ -1318,7 +1318,7 @@ msgid "Click icon to enable or disable content type"
 msgstr "Cliquer pour activer ou désactiver ce type de contenu"
 
 #: src/pyams_content/shared/common/zmi/types/container.py:116
-#: src/pyams_content/shared/common/interfaces/types.py:57
+#: src/pyams_content/shared/common/interfaces/types.py:58
 #: src/pyams_content/shared/alert/interfaces.py:51
 #: src/pyams_content/shared/alert/zmi/types.py:129
 #: src/pyams_content/feature/redirect/interfaces.py:49
@@ -1438,22 +1438,22 @@ msgstr ""
 "identifier le gabarit d'un contenu, à la place du nom du gabarit"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:134
-#: src/pyams_content/shared/common/interfaces/types.py:70
+#: src/pyams_content/shared/common/interfaces/types.py:71
 msgid "Navigation label"
 msgstr "Libellé de navigation"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:135
-#: src/pyams_content/shared/common/interfaces/types.py:71
+#: src/pyams_content/shared/common/interfaces/types.py:72
 msgid "Label used for navigation entries"
 msgstr "Libellé utilisé pour les liens de navigation"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:138
-#: src/pyams_content/shared/common/interfaces/types.py:82
+#: src/pyams_content/shared/common/interfaces/types.py:83
 msgid "Facets label"
 msgstr "Libellé facette \"Gabarit\""
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:139
-#: src/pyams_content/shared/common/interfaces/types.py:83
+#: src/pyams_content/shared/common/interfaces/types.py:84
 msgid ""
 "Label used for the facets of views or search engines, instead of the "
 "standard label"
@@ -1463,12 +1463,12 @@ msgstr ""
 "gabarit, lorsqu'ils sont paramétrés en mode \"Gabarit\""
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:143
-#: src/pyams_content/shared/common/interfaces/types.py:87
+#: src/pyams_content/shared/common/interfaces/types.py:88
 msgid "Facets type label"
 msgstr "Libellé facette \"Type de contenu\""
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:144
-#: src/pyams_content/shared/common/interfaces/types.py:88
+#: src/pyams_content/shared/common/interfaces/types.py:89
 msgid ""
 "Label used for the facets of views or search engine, instead of the standard "
 "label, when facets are configured in \"content-type\" mode"
@@ -1478,13 +1478,13 @@ msgstr ""
 "gabarit, lorsqu'ils sont paramétrés en mode \"Type de contenu\""
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:149
-#: src/pyams_content/shared/common/interfaces/types.py:93
+#: src/pyams_content/shared/common/interfaces/types.py:94
 #: src/pyams_content/shared/alert/interfaces.py:54
 msgid "Dashboards label"
 msgstr "Libellé tableaux de bord"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:150
-#: src/pyams_content/shared/common/interfaces/types.py:94
+#: src/pyams_content/shared/common/interfaces/types.py:95
 #: src/pyams_content/shared/alert/interfaces.py:55
 msgid "Optional label used for dashboards presentation"
 msgstr ""
@@ -1700,7 +1700,7 @@ msgstr "Propriétaires"
 msgid "Manager will have access to contents owned by these principals"
 msgstr "Ce responsable aura accès aux contenus de ces propriétaires"
 
-#: src/pyams_content/shared/common/interfaces/types.py:52
+#: src/pyams_content/shared/common/interfaces/types.py:53
 #: src/pyams_content/shared/site/interfaces.py:223
 #: src/pyams_content/shared/alert/interfaces.py:46
 #: src/pyams_content/feature/navigation/interfaces.py:84
@@ -1711,16 +1711,16 @@ msgstr "Ce responsable aura accès aux contenus de ces propriétaires"
 msgid "Visible?"
 msgstr "Visible ?"
 
-#: src/pyams_content/shared/common/interfaces/types.py:53
+#: src/pyams_content/shared/common/interfaces/types.py:54
 msgid "An hidden data type can't be assigned to new contents"
 msgstr ""
 "Un type de contenu inactif ne peut pas être affecté à de nouveau contenus"
 
-#: src/pyams_content/shared/common/interfaces/types.py:60
+#: src/pyams_content/shared/common/interfaces/types.py:61
 msgid "Source folder"
 msgstr "Rubrique d'origine"
 
-#: src/pyams_content/shared/common/interfaces/types.py:61
+#: src/pyams_content/shared/common/interfaces/types.py:62
 msgid ""
 "Source folder (or search engine) to which content is attached; if this "
 "reference is set, canonical URL will be based on this object's URL"
@@ -1729,11 +1729,11 @@ msgstr ""
 "rattaché ; si cette référence est indiquée, l'URL canonique tu contenu sera "
 "basée sur l'URL de cette référence"
 
-#: src/pyams_content/shared/common/interfaces/types.py:74
+#: src/pyams_content/shared/common/interfaces/types.py:75
 msgid "Display as tag?"
 msgstr "Afficher comme étiquette"
 
-#: src/pyams_content/shared/common/interfaces/types.py:75
+#: src/pyams_content/shared/common/interfaces/types.py:76
 msgid ""
 "Some portlets renderers can display a small tag above each content to show "
 "their content type; if this option is checked, data type label will be "
@@ -1743,16 +1743,16 @@ msgstr ""
 "si cette option est sélectionnée, c'est le libellé de ce type de contenu qui "
 "sera affiché en lieu et place du nom du gabarit"
 
-#: src/pyams_content/shared/common/interfaces/types.py:97
+#: src/pyams_content/shared/common/interfaces/types.py:98
 #: src/pyams_content/shared/alert/interfaces.py:63
 msgid "Color"
 msgstr "Couleur"
 
-#: src/pyams_content/shared/common/interfaces/types.py:98
+#: src/pyams_content/shared/common/interfaces/types.py:99
 msgid "Color used to illustrate this data type"
 msgstr "Couleur utilisée pour représenter ce type de contenu"
 
-#: src/pyams_content/shared/common/interfaces/types.py:101
+#: src/pyams_content/shared/common/interfaces/types.py:102
 #: src/pyams_content/shared/alert/interfaces.py:58
 #: src/pyams_content/feature/navigation/interfaces.py:113
 #: src/pyams_content/component/links/interfaces.py:48
@@ -1760,39 +1760,39 @@ msgstr "Couleur utilisée pour représenter ce type de contenu"
 msgid "Pictogram"
 msgstr "Pictogramme"
 
-#: src/pyams_content/shared/common/interfaces/types.py:102
+#: src/pyams_content/shared/common/interfaces/types.py:103
 msgid "Pictogram associated with this data type"
 msgstr "Nom du pictogramme associé à ce type de contenu"
 
-#: src/pyams_content/shared/common/interfaces/types.py:106
+#: src/pyams_content/shared/common/interfaces/types.py:107
 msgid "ON pictogram"
 msgstr "Pictogramme 'actif'"
 
-#: src/pyams_content/shared/common/interfaces/types.py:107
+#: src/pyams_content/shared/common/interfaces/types.py:108
 msgid "'On' state pictogram associated with this data type"
 msgstr ""
 "Pictogramme utilisé par certains modes de rendu pour illustrer le statut "
 "\"actif\" de ce type de contenu"
 
-#: src/pyams_content/shared/common/interfaces/types.py:111
+#: src/pyams_content/shared/common/interfaces/types.py:112
 msgid "OFF pictogram"
 msgstr "Pictogramme 'inactif'"
 
-#: src/pyams_content/shared/common/interfaces/types.py:112
+#: src/pyams_content/shared/common/interfaces/types.py:113
 msgid "'Off' state pictogram associated with this data type"
 msgstr ""
 "Pictogramme utilisé par certains modes de rendu pour illustrer le statut "
 "\"inactif\" de ce type de contenu"
 
-#: src/pyams_content/shared/common/interfaces/types.py:116
+#: src/pyams_content/shared/common/interfaces/types.py:117
 msgid "Field names"
 msgstr "Champs associés"
 
-#: src/pyams_content/shared/common/interfaces/types.py:117
+#: src/pyams_content/shared/common/interfaces/types.py:118
 msgid "List of fields associated with this data type"
 msgstr "Liste des champs spécifiques du gabarit associés à ce type de contenu"
 
-#: src/pyams_content/shared/common/interfaces/types.py:155
+#: src/pyams_content/shared/common/interfaces/types.py:156
 #: src/pyams_content/shared/site/interfaces.py:190
 #: src/pyams_content/shared/topic/interfaces.py:37
 #: src/pyams_content/shared/form/interfaces.py:45
@@ -2379,13 +2379,13 @@ msgstr ""
 #: src/pyams_content/shared/view/portlet/interfaces.py:116
 #: src/pyams_content/shared/site/interfaces.py:232
 #: src/pyams_content/feature/navigation/interfaces.py:107
-#: src/pyams_content/feature/search/portlet/interfaces.py:54
+#: src/pyams_content/feature/search/portlet/interfaces.py:47
 #: src/pyams_content/component/links/interfaces.py:66
 msgid "Force canonical URL?"
 msgstr "Imposer l'URL canonique"
 
 #: src/pyams_content/shared/view/portlet/interfaces.py:117
-#: src/pyams_content/feature/search/portlet/interfaces.py:55
+#: src/pyams_content/feature/search/portlet/interfaces.py:48
 #: src/pyams_content/component/links/interfaces.py:67
 msgid ""
 "By default, internal links use a \"relative\" URL, which tries to display "
@@ -2446,38 +2446,38 @@ msgid "Three vertical panels with panoramic illustrations"
 msgstr "Panneaux avec illustrations panoramiques"
 
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:51
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:44
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:45
 msgid "Display full header"
 msgstr "Afficher le chapô en entier"
 
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:52
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:45
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:46
 msgid "Display only header start"
 msgstr "Afficher seulement le début du chapô"
 
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:53
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:46
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:47
 msgid "Hide header"
 msgstr "Masquer le chapô"
 
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:66
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:135
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:92
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:101
 msgid "Display illustrations?"
 msgstr "Afficher l'illustration"
 
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:67
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:136
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:93
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:102
 msgid "If 'no', view contents will not display illustrations"
 msgstr "Si 'non', l'illustration des résultats ne sera pas affichée"
 
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:73
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:120
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:142
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:99
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:116
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:133
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:108
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:125
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:142
 #: src/pyams_content/component/gallery/portlet/skin/interfaces.py:31
 #: src/pyams_content/component/gallery/skin/interfaces.py:30
 msgid "Thumbnails selection"
@@ -2486,9 +2486,9 @@ msgstr "Sélection des vignettes"
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:74
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:121
 #: src/pyams_content/feature/navigation/portlet/skin/interfaces.py:31
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:100
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:117
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:134
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:109
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:126
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:143
 #: src/pyams_content/component/gallery/portlet/skin/interfaces.py:32
 #: src/pyams_content/component/gallery/skin/interfaces.py:31
 msgid "Selection used to display images thumbnails"
@@ -2547,22 +2547,22 @@ msgid "Selection used to display illustrations thumbnails"
 msgstr "Sélections utilisées pour l'affichage des vignettes"
 
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:164
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:80
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:89
 msgid "Header display mode"
 msgstr "Affichage du chapô"
 
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:165
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:81
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:90
 msgid "Defines how results headers will be rendered"
 msgstr "Mode d'affichage du chapô des résultats"
 
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:170
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:86
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:95
 msgid "Start length"
 msgstr "Longueur du chapô"
 
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:171
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:87
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:96
 msgid ""
 "If you choose to display only header start, you can specify maximum text "
 "length"
@@ -2571,34 +2571,34 @@ msgstr ""
 "longueur maximale du texte en nombre de caractères"
 
 #: src/pyams_content/shared/view/portlet/skin/zmi.py:55
-#: src/pyams_content/feature/search/portlet/skin/zmi.py:83
+#: src/pyams_content/feature/search/portlet/skin/zmi.py:84
 msgid "Header display"
 msgstr "Affichage du chapô"
 
 #: src/pyams_content/shared/view/portlet/skin/templates/view-panels.pt:51
 #: src/pyams_content/shared/view/portlet/skin/templates/view-list-vertical.pt:60
-#: src/pyams_content/feature/search/portlet/skin/templates/search-panels.pt:73
-#: src/pyams_content/feature/search/portlet/skin/templates/search-default.pt:70
-#: src/pyams_content/feature/search/portlet/skin/templates/search-cards-masonry.pt:73
-#: src/pyams_content/feature/search/portlet/skin/templates/search-cards.pt:73
+#: src/pyams_content/feature/search/portlet/skin/templates/search-panels.pt:85
+#: src/pyams_content/feature/search/portlet/skin/templates/search-default.pt:82
+#: src/pyams_content/feature/search/portlet/skin/templates/search-cards-masonry.pt:85
+#: src/pyams_content/feature/search/portlet/skin/templates/search-cards.pt:85
 msgid "Pagination"
 msgstr "Pagination"
 
 #: src/pyams_content/shared/view/portlet/skin/templates/view-panels.pt:59
 #: src/pyams_content/shared/view/portlet/skin/templates/view-list-vertical.pt:68
-#: src/pyams_content/feature/search/portlet/skin/templates/search-panels.pt:82
-#: src/pyams_content/feature/search/portlet/skin/templates/search-default.pt:79
-#: src/pyams_content/feature/search/portlet/skin/templates/search-cards-masonry.pt:82
-#: src/pyams_content/feature/search/portlet/skin/templates/search-cards.pt:82
+#: src/pyams_content/feature/search/portlet/skin/templates/search-panels.pt:94
+#: src/pyams_content/feature/search/portlet/skin/templates/search-default.pt:91
+#: src/pyams_content/feature/search/portlet/skin/templates/search-cards-masonry.pt:94
+#: src/pyams_content/feature/search/portlet/skin/templates/search-cards.pt:94
 msgid "Previous page"
 msgstr "Page précédente"
 
 #: src/pyams_content/shared/view/portlet/skin/templates/view-panels.pt:66
 #: src/pyams_content/shared/view/portlet/skin/templates/view-list-vertical.pt:75
-#: src/pyams_content/feature/search/portlet/skin/templates/search-panels.pt:120
-#: src/pyams_content/feature/search/portlet/skin/templates/search-default.pt:117
-#: src/pyams_content/feature/search/portlet/skin/templates/search-cards-masonry.pt:120
-#: src/pyams_content/feature/search/portlet/skin/templates/search-cards.pt:120
+#: src/pyams_content/feature/search/portlet/skin/templates/search-panels.pt:132
+#: src/pyams_content/feature/search/portlet/skin/templates/search-default.pt:129
+#: src/pyams_content/feature/search/portlet/skin/templates/search-cards-masonry.pt:132
+#: src/pyams_content/feature/search/portlet/skin/templates/search-cards.pt:132
 msgid "Next page"
 msgstr "Page suivante"
 
@@ -2840,7 +2840,7 @@ msgid "Main folder properties"
 msgstr "Propriétés principales"
 
 #: src/pyams_content/shared/site/zmi/folder.py:222
-#: src/pyams_content/feature/search/zmi/__init__.py:156
+#: src/pyams_content/feature/search/zmi/__init__.py:170
 msgid "Navigation properties"
 msgstr "Propriétés de navigation"
 
@@ -3557,11 +3557,11 @@ msgstr "URL source"
 msgid "Output URL"
 msgstr "URL de destination"
 
-#: src/pyams_content/feature/qrcode/zmi/__init__.py:119
+#: src/pyams_content/feature/qrcode/zmi/__init__.py:121
 msgid "QR code"
 msgstr "QRCode"
 
-#: src/pyams_content/feature/qrcode/zmi/__init__.py:134
+#: src/pyams_content/feature/qrcode/zmi/__init__.py:136
 msgid "Content QR codes"
 msgstr "QRCode du contenu"
 
@@ -3685,7 +3685,7 @@ msgstr "Liens de navigation à deux niveaux"
 
 #: src/pyams_content/feature/navigation/portlet/interfaces.py:34
 #: src/pyams_content/feature/navigation/portlet/interfaces.py:48
-#: src/pyams_content/feature/search/portlet/interfaces.py:45
+#: src/pyams_content/feature/search/portlet/interfaces.py:38
 msgid "Portlet main title"
 msgstr "Titre du composant"
 
@@ -4401,23 +4401,23 @@ msgstr ""
 "Type de contenus à sélectionner ; laisser la sélection vide pour accepter "
 "tous les types de contenus"
 
-#: src/pyams_content/feature/search/zmi/__init__.py:65
+#: src/pyams_content/feature/search/zmi/__init__.py:68
 msgid "Add search folder..."
 msgstr "Moteur de recherche"
 
-#: src/pyams_content/feature/search/zmi/__init__.py:82
+#: src/pyams_content/feature/search/zmi/__init__.py:85
 msgid "New search folder"
 msgstr "Nouveau moteur de recherche"
 
-#: src/pyams_content/feature/search/zmi/__init__.py:83
+#: src/pyams_content/feature/search/zmi/__init__.py:86
 msgid "New search folder properties"
 msgstr "Propriétés du nouveau moteur de recherche"
 
-#: src/pyams_content/feature/search/zmi/__init__.py:106
+#: src/pyams_content/feature/search/zmi/__init__.py:109
 msgid "Search folder management"
 msgstr "Ce moteur de recherche"
 
-#: src/pyams_content/feature/search/zmi/__init__.py:136
+#: src/pyams_content/feature/search/zmi/__init__.py:150
 msgid "Folder search settings"
 msgstr "Paramètres de la recherche"
 
@@ -4442,11 +4442,11 @@ msgstr "Thèmes appliqués par le moteur de recherche"
 msgid "Search folder collections settings"
 msgstr "Collections appliquées par le moteur de recherche"
 
-#: src/pyams_content/feature/search/portlet/interfaces.py:48
+#: src/pyams_content/feature/search/portlet/interfaces.py:41
 msgid "Allow empty query?"
 msgstr "Recherche sans critère"
 
-#: src/pyams_content/feature/search/portlet/interfaces.py:49
+#: src/pyams_content/feature/search/portlet/interfaces.py:42
 msgid ""
 "If 'no', no result will be displayed if user didn't entered a search string"
 msgstr ""
@@ -4461,69 +4461,85 @@ msgstr "Premiers résultats de la recherche :"
 msgid "No result found."
 msgstr "Aucun résultat trouvé"
 
-#: src/pyams_content/feature/search/portlet/skin/__init__.py:107
+#: src/pyams_content/feature/search/portlet/skin/__init__.py:112
 msgid "Paginated search results (default)"
 msgstr "Liste de résultats, sans facettes (par défaut)"
 
-#: src/pyams_content/feature/search/portlet/skin/__init__.py:133
+#: src/pyams_content/feature/search/portlet/skin/__init__.py:139
 msgid "Paneled search results"
 msgstr "Grille de résultats, sans facettes, style « page carrefour »"
 
-#: src/pyams_content/feature/search/portlet/skin/__init__.py:159
+#: src/pyams_content/feature/search/portlet/skin/__init__.py:166
 msgid "Bootstrap cards search results"
 msgstr "Grille de résultats, sans facettes, style « cartes Bootstrap »"
 
-#: src/pyams_content/feature/search/portlet/skin/__init__.py:182
+#: src/pyams_content/feature/search/portlet/skin/__init__.py:190
 msgid "Bootstrap Masonry cards search results"
 msgstr "Grille de résultats, sans facettes, style « Masonry »"
 
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:59
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:60
 msgid "Display if empty?"
 msgstr "Afficher sans résultat"
 
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:60
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:61
 msgid ""
 "If 'no', and if no result is found, the portlet will not display anything"
 msgstr ""
 "Si cette option n'est pas sélectionnée et qu'aucun résultat n'est trouvé, le "
 "composant ne sera pas affiché"
 
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:65
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:66
 msgid "Display results count?"
 msgstr "Afficher le nombre de résultats"
 
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:66
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:67
 msgid "If 'no', results count will not be displayed"
 msgstr ""
 "Le nombre de résultats de la recherche ne sera affiché que si cette option "
 "est sélectionnée"
 
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:70
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:71
 msgid "Allow results sorting?"
 msgstr "Autoriser le tri"
 
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:71
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:72
 msgid "If 'no', results will not be sortable"
 msgstr ""
 "Le tri des résultats ne sera possible que si cette option est sélectionnée"
 
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:75
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:76
 msgid "Allow pagination?"
 msgstr "Autoriser la pagination"
 
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:76
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:77
 msgid "If 'no', results will not be paginated"
 msgstr ""
 "LA navigation entre les pages de résultats ne sera possible que si cette "
 "option est sélectionnée"
 
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:124
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:141
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:81
+msgid "Filters CSS class"
+msgstr "Classe CSS des filtres"
+
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:82
+msgid "CSS class used for filters column"
+msgstr "Classe CSS utilisée pour l'affichage des filtres, s'il y en a"
+
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:85
+msgid "Results CSS class"
+msgstr "Classe CSS des résultats"
+
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:86
+msgid "CSS class used for view items container"
+msgstr "Classe CSS utilisée pour l'affichage des résultats"
+
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:133
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:150
 msgid "Button's title"
 msgstr "Libellé du bouton"
 
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:125
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:142
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:134
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:151
 msgid "Optional navigation button's title"
 msgstr ""
 "Un bouton de navigation associé à chaque résultat de recherche sera affiché "
@@ -4570,6 +4586,18 @@ msgstr "Trier sur la date de dernière modification"
 #: src/pyams_content/feature/search/portlet/skin/templates/search-cards.pt:53
 msgid "Page length:"
 msgstr "Longueur des pages :"
+
+#: src/pyams_content/feature/search/skin/templates/specificities-header.pt:7
+msgid "Your search"
+msgstr "Affiner la recherche..."
+
+#: src/pyams_content/feature/search/skin/templates/specificities-header.pt:7
+msgid "Search"
+msgstr "Recherche"
+
+#: src/pyams_content/feature/search/skin/templates/specificities-header.pt:15
+msgid "Refine search"
+msgstr "Rechercher"
 
 #: src/pyams_content/interfaces/__init__.py:116
 msgid "Unique key"
@@ -6310,23 +6338,23 @@ msgstr "Onglets verticaux"
 msgid "HTML source code (default)"
 msgstr "Code source HTML (par défaut)"
 
-#: src/pyams_content/component/paragraph/skin/html.py:73
+#: src/pyams_content/component/paragraph/skin/html.py:78
 msgid "Formatted source code"
 msgstr "Code source formatté"
 
-#: src/pyams_content/component/paragraph/skin/html.py:119
+#: src/pyams_content/component/paragraph/skin/html.py:124
 msgid "ReStructured text"
 msgstr "Texte restructuré"
 
-#: src/pyams_content/component/paragraph/skin/html.py:148
+#: src/pyams_content/component/paragraph/skin/html.py:153
 msgid "Markdown text"
 msgstr "Markdown"
 
-#: src/pyams_content/component/paragraph/skin/html.py:209
+#: src/pyams_content/component/paragraph/skin/html.py:214
 msgid "Rich text (default)"
 msgstr "Texte enrichi (par défaut)"
 
-#: src/pyams_content/component/paragraph/skin/html.py:248
+#: src/pyams_content/component/paragraph/skin/html.py:253
 msgid "Bootstrap alert"
 msgstr "Bootstrap: alerte"
 

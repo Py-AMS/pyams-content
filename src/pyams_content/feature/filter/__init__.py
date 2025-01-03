@@ -27,6 +27,7 @@ from pyams_portal.interfaces import MANAGE_TEMPLATE_PERMISSION
 from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.factory import factory_config
+from pyams_utils.interfaces import ICacheKeyValue
 from pyams_zmi.interfaces import IObjectLabel
 
 __docformat__ = 'restructuredtext'
@@ -48,6 +49,10 @@ class Filter(Persistent, Contained):
     display_count = FieldProperty(IFilter['display_count'])
     select_placeholder = FieldProperty(IFilter['select_placeholder'])
     sorting_mode = FieldProperty(IFilter['sorting_mode'])
+
+    @property
+    def filter_name(self):
+        return ICacheKeyValue(self)
 
 
 @adapter_config(required=(IFilter, IPyAMSLayer, Interface),
@@ -101,7 +106,7 @@ class ThesaurusFilter(Filter):
 
     thesaurus_name = FieldProperty(IThesaurusFilter['thesaurus_name'])
     extract_name = FieldProperty(IThesaurusFilter['extract_name'])
-
+    
 
 @factory_config(ITagsFilter)
 class TagsFilter(ThesaurusFilter):

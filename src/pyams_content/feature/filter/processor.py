@@ -36,14 +36,16 @@ class BaseFilterProcessor:
     def process(self, aggregations, filter_type=None):
         filter = self.filter
         request = self.request
-        filter_type = filter_type or filter.filter_type
-        aggr = self.get_aggregations(aggregations[filter_type])
+        aggr = None
+        filter_name = filter.filter_name
+        if filter_name in aggregations:
+            aggr = self.get_aggregations(aggregations[filter_name])
         if not aggr:
             return None
         handler = request.registry.queryMultiAdapter((filter, request, self.renderer_settings),
                                                      IFilterProcessorAggregationsHandler)
         if handler is not None:
-            return handler.get_aggregations(aggr, filter_type)
+            return handler.get_aggregations(aggr, filter_type or filter.filter_type)
 
     def get_aggregations(self, aggregations):
         raise NotImplementedError

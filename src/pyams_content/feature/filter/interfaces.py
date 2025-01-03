@@ -206,6 +206,8 @@ class IFilter(Interface):
                           required=True)
 
     filter_type = Attribute("Filter type")
+    
+    filter_name = Attribute("Filter name")
 
     def is_visible(self, request=None):
         """Is association item published?"""
