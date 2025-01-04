@@ -4463,19 +4463,19 @@ msgstr "Aucun résultat trouvé"
 
 #: src/pyams_content/feature/search/portlet/skin/__init__.py:112
 msgid "Paginated search results (default)"
-msgstr "Liste de résultats, sans facettes (par défaut)"
+msgstr "Liste de résultats, avec ou sans facettes (par défaut)"
 
 #: src/pyams_content/feature/search/portlet/skin/__init__.py:139
 msgid "Paneled search results"
-msgstr "Grille de résultats, sans facettes, style « page carrefour »"
+msgstr "Grille de résultats, avec ou sans facettes, style « page carrefour »"
 
 #: src/pyams_content/feature/search/portlet/skin/__init__.py:166
 msgid "Bootstrap cards search results"
-msgstr "Grille de résultats, sans facettes, style « cartes Bootstrap »"
+msgstr "Grille de résultats, avec ou sans facettes, style « cartes Bootstrap »"
 
 #: src/pyams_content/feature/search/portlet/skin/__init__.py:190
 msgid "Bootstrap Masonry cards search results"
-msgstr "Grille de résultats, sans facettes, style « Masonry »"
+msgstr "Grille de résultats, avec ou sans facettes, style « Masonry »"
 
 #: src/pyams_content/feature/search/portlet/skin/interfaces.py:60
 msgid "Display if empty?"
