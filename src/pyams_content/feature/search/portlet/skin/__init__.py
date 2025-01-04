@@ -263,17 +263,3 @@ class WfSharedContentSearchResultRenderer(ViewContentProvider):
     def url(self):
         return self.request.registry.queryMultiAdapter((self.context, self.request, self.view),
                                                        ISearchResultURL)
-
-
-# @adapter_config(context=(IWfSharedContent, IPyAMSUserLayer, ISearchResultsPanelsView),
-#                 provides=ISearchResultRenderer)
-# @template_config(template='templates/search-panel.pt', layer=IPyAMSUserLayer)
-# class WfSharedContentSearchResultPanelRenderer(WfSharedContentSearchResultRenderer):
-#     """Shared content search result panel renderer"""
-#
-#
-# @adapter_config(context=(IWfSharedContent, IPyAMSUserLayer, ISearchResultsCardsView),
-#                 provides=ISearchResultRenderer)
-# @template_config(template='templates/search-card.pt', layer=IPyAMSUserLayer)
-# class WfSharedContentSearchResultCardRenderer(WfSharedContentSearchResultRenderer):
-#     """Shared content search result card renderer"""
