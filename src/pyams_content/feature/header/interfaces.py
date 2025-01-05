@@ -14,9 +14,35 @@
 
 """
 
+from collections import OrderedDict
+from enum import Enum
+
 from zope.interface import Interface
+from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 __docformat__ = 'restructuredtext'
+
+from pyams_content import _
+
+
+class HEADER_DISPLAY_MODE(Enum):
+    """Header display modes"""
+    FULL = 'full'
+    START = 'start'
+    HIDDEN = 'none'
+
+
+HEADER_DISPLAY_MODES_NAMES = OrderedDict((
+    (HEADER_DISPLAY_MODE.FULL, _("Display full header")),
+    (HEADER_DISPLAY_MODE.START, _("Display only header start")),
+    (HEADER_DISPLAY_MODE.HIDDEN, _("Hide header"))
+), )
+
+
+HEADER_DISPLAY_MODES_VOCABULARY = SimpleVocabulary([
+    SimpleTerm(v.value, title=t)
+    for v, t in HEADER_DISPLAY_MODES_NAMES.items()
+])
 
 
 class IPageHeaderTitle(Interface):

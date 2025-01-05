@@ -15,13 +15,10 @@
 This module defines interfaces of view items portlet renderers settings.
 """
 
-from collections import OrderedDict
-from enum import Enum
-
 from zope.interface import Attribute, Interface
 from zope.schema import Bool, Choice, Int
-from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
+from pyams_content.feature.header.interfaces import HEADER_DISPLAY_MODE, HEADER_DISPLAY_MODES_VOCABULARY
 from pyams_i18n.schema import I18nTextLineField
 from pyams_sequence.interfaces import IInternalReference
 from pyams_sequence.schema import InternalReferenceField
@@ -38,26 +35,6 @@ class IViewItemTargetURL(Interface):
     target = Attribute("Reference target")
 
     url = Attribute("Reference URL")
-
-
-class HEADER_DISPLAY_MODE(Enum):
-    """Header display modes"""
-    FULL = 'full'
-    START = 'start'
-    HIDDEN = 'none'
-
-
-HEADER_DISPLAY_MODES_NAMES = OrderedDict((
-    (HEADER_DISPLAY_MODE.FULL, _("Display full header")),
-    (HEADER_DISPLAY_MODE.START, _("Display only header start")),
-    (HEADER_DISPLAY_MODE.HIDDEN, _("Hide header"))
-), )
-
-
-HEADER_DISPLAY_MODES_VOCABULARY = SimpleVocabulary([
-    SimpleTerm(v.value, title=t)
-    for v, t in HEADER_DISPLAY_MODES_NAMES.items()
-])
 
 
 class IViewItemsPortletVerticalRendererSettings(IInternalReference):

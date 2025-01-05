@@ -66,11 +66,11 @@ from pyams_content import _
 
 def get_item_order(item):
     """Get item order value"""
-    for item in reversed(list(lineage(item))):
-        parent = get_parent(item, ISiteContainer)
+    for site_item in reversed(list(lineage(item))):
+        parent = get_parent(site_item, ISiteContainer)
         if parent is None:
             continue
-        index = list(parent.__parent__.keys()).index(parent.__name__)
+        index = list(site_item.__parent__.keys()).index(site_item.__name__)
         yield f'{index:03}'
 
 

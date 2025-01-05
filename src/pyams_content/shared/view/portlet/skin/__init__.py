@@ -21,8 +21,9 @@ from zope.interface import Interface
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.links import IInternalLink
+from pyams_content.feature.header.interfaces import HEADER_DISPLAY_MODE
 from pyams_content.shared.view.portlet import IViewItemsPortletSettings
-from pyams_content.shared.view.portlet.skin.interfaces import HEADER_DISPLAY_MODE, IViewItemTargetURL, \
+from pyams_content.shared.view.portlet.skin.interfaces import IViewItemTargetURL, \
     IViewItemsPortletHorizontalRendererSettings, IViewItemsPortletPanelsRendererSettings, \
     IViewItemsPortletVerticalRendererSettings
 from pyams_i18n.interfaces import II18n

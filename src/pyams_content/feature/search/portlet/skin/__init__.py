@@ -23,10 +23,11 @@ from zope.schema.fieldproperty import FieldProperty
 from pyams_content.feature.filter.container import FilterContainer
 from pyams_content.feature.filter.interfaces import IAggregatedPortletRendererSettings
 from pyams_content.feature.search.portlet import ISearchResultsPortletSettings
-from pyams_content.feature.search.portlet.skin.interfaces import HEADER_DISPLAY_MODE, ISearchResultHeader, \
+from pyams_content.feature.search.portlet.skin.interfaces import ISearchResultHeader, \
     ISearchResultRenderer, ISearchResultTitle, ISearchResultURL, ISearchResultsPortletBaseRendererSettings, \
     ISearchResultsPortletCardsRendererSettings, ISearchResultsPortletDefaultRendererSettings, \
     ISearchResultsPortletMasonryCardsRendererSettings, ISearchResultsPortletPanelsRendererSettings
+from pyams_content.feature.header.interfaces import HEADER_DISPLAY_MODE
 from pyams_content.shared.common import IWfSharedContent
 from pyams_content.skin.interfaces import ISearchResultsCardsView, ISearchResultsPanelsView, ISearchResultsView
 from pyams_i18n.interfaces import II18n
@@ -197,27 +198,27 @@ class SearchResultsPortletMasonryCardsRenderer(SearchResultsPortletBaseRenderer)
 # Search results adapters
 #
 
-@adapter_config(context=(ILocation, IPyAMSUserLayer, ISearchResultsView),
+@adapter_config(required=(ILocation, IPyAMSUserLayer, ISearchResultsView),
                 provides=IBreadcrumbs)
 class LocationBreadcrumbsAdapter(NullAdapter):
     """Disable breadcrumbs in search results view"""
 
 
-@adapter_config(context=(IWfSharedContent, IPyAMSUserLayer, ISearchResultsView),
+@adapter_config(required=(IWfSharedContent, IPyAMSUserLayer, ISearchResultsView),
                 provides=ISearchResultTitle)
 def shared_content_result_title_adapter(context, request, view):
     """Shared content result title adapter"""
     return II18n(context).query_attribute('title', request=request)
 
 
-@adapter_config(context=(IWfSharedContent, IPyAMSUserLayer, ISearchResultsView),
+@adapter_config(required=(IWfSharedContent, IPyAMSUserLayer, ISearchResultsView),
                 provides=ISearchResultHeader)
 def shared_content_result_header_adapter(context, request, view):
     """Shared content result header adapter"""
     return II18n(context).query_attribute('header', request=request)
 
 
-@adapter_config(context=(IWfSharedContent, IPyAMSUserLayer, ISearchResultsView),
+@adapter_config(required=(IWfSharedContent, IPyAMSUserLayer, ISearchResultsView),
                 provides=ISearchResultURL)
 def shared_content_result_target_adapter(context, request, view):
     """Shared content result target URL adapter"""
@@ -230,7 +231,7 @@ def shared_content_result_target_adapter(context, request, view):
 # Search results renderers
 #
 
-@adapter_config(context=(IWfSharedContent, IPyAMSUserLayer, ISearchResultsView),
+@adapter_config(required=(IWfSharedContent, IPyAMSUserLayer, ISearchResultsView),
                 provides=ISearchResultRenderer)
 @template_config(template='templates/search-result.pt', layer=IPyAMSUserLayer)
 @template_config(name='panel',
