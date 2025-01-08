@@ -14,21 +14,20 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
 from pyramid.events import subscriber
 from zope.component.interfaces import ISite
 from zope.interface import implementer
-from zope.lifecycleevent import IObjectAddedEvent
+from zope.lifecycleevent.interfaces import IObjectAddedEvent
 
 from pyams_content.component.paragraph.interfaces import IParagraphFactorySettingsTarget
 from pyams_content.reference.pictogram.interfaces import IPictogramManagerTarget
 from pyams_content.shared.common.manager import SharedTool
 from pyams_content.shared.common.types import TypedSharedToolMixin
-from pyams_content.shared.topic import TOPIC_CONTENT_TYPE
-from pyams_content.shared.topic.interfaces import ITopicManager
+from pyams_content.shared.topic.interfaces import ITopicManager, TOPIC_CONTENT_TYPE
 from pyams_utils.factory import factory_config
 from pyams_utils.traversing import get_parent
+
+__docformat__ = 'restructuredtext'
 
 
 @factory_config(ITopicManager)
