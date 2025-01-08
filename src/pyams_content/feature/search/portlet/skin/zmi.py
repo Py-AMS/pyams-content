@@ -53,6 +53,32 @@ class SearchResultsPortletRendererIllustrationSettingsGroup(FormGroupChecker):
     weight = 10
 
 
+@adapter_config(name='header',
+                required=(ISearchResultsPortletBaseRendererSettings, IAdminLayer, IPortletRendererSettingsEditForm),
+                provides=IGroup)
+class SearchResultsPortletRendererHeaderSettingsGroup(Group):
+    """Search results portlet renderer header settings group"""
+
+    legend = _("Header display")
+
+    fields = Fields(ISearchResultsPortletBaseRendererSettings).select(
+        'header_display_mode', 'start_length')
+    weight = 20
+
+
+#
+# Custom panels renderers settings edit form
+#
+
+@adapter_config(required=(ISearchResultsPortletPanelsRendererSettings, IAdminLayer, IPortletRendererSettingsEditForm),
+                provides=IFormFields)
+def search_results_portlet_panels_renderer_settings_fields(context, request, form):
+    """Search results portlet renderer settings fields getter"""
+    return Fields(ISearchResultsPortletPanelsRendererSettings).select(
+        'display_if_empty', 'display_results_count', 'allow_sorting', 'allow_pagination',
+        'filters_css_class', 'results_css_class', 'columns_count')
+
+
 @adapter_config(name='illustration',
                 required=(ISearchResultsPortletPanelsRendererSettings, IAdminLayer, IPortletRendererSettingsEditForm),
                 provides=IGroup)
@@ -62,6 +88,19 @@ class SearchResultsPortletPanelsRendererIllustrationSettingsGroup(FormGroupCheck
     fields = Fields(ISearchResultsPortletPanelsRendererSettings).select(
         'display_illustrations', 'thumb_selection')
     weight = 10
+
+
+#
+# Custom cards renderers settings edit form
+#
+
+@adapter_config(required=(ISearchResultsPortletCardsRendererSettings, IAdminLayer, IPortletRendererSettingsEditForm),
+                provides=IFormFields)
+def search_results_portlet_cards_renderer_settings_fields(context, request, form):
+    """Search results portlet renderer settings fields getter"""
+    return Fields(ISearchResultsPortletCardsRendererSettings).select(
+        'display_if_empty', 'display_results_count', 'allow_sorting', 'allow_pagination',
+        'filters_css_class', 'results_css_class', 'columns_count')
 
 
 @adapter_config(name='illustration',
@@ -75,24 +114,11 @@ class SearchResultsPortletCardsRendererIllustrationSettingsGroup(FormGroupChecke
     weight = 10
 
 
-@adapter_config(name='header',
-                required=(ISearchResultsPortletBaseRendererSettings, IAdminLayer, IPortletRendererSettingsEditForm),
-                provides=IGroup)
-class SEarchResultsPortletRendererHeaderSettingsGroup(Group):
-    """Search results portlet renderer header settings group"""
-
-    legend = _("Header display")
-
-    fields = Fields(ISearchResultsPortletBaseRendererSettings).select(
-        'header_display_mode', 'start_length')
-    weight = 20
-
-
 @adapter_config(name='button',
                 required=(ISearchResultsPortletCardsRendererSettings, IAdminLayer, IPortletRendererSettingsEditForm),
                 provides=IGroup)
-class ViewItemsPanelsRendererButtonSettingsGroup(Group):
-    """View item portlet panels renderer button settings group"""
+class SearchResultsPortletCardsRendererButtonSettingsGroup(Group):
+    """Search results portlet cards renderer button settings group"""
 
     fields = Fields(ISearchResultsPortletCardsRendererSettings).select('button_title')
     weight = 30

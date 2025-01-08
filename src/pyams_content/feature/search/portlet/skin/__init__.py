@@ -126,7 +126,15 @@ class SearchResultsPortletPanelsRendererSettings(SearchResultsPortletBaseRendere
     """Search results portlet panels renderer settings"""
 
     thumb_selection = FieldProperty(ISearchResultsPortletPanelsRendererSettings['thumb_selection'])
+    columns_count = FieldProperty(ISearchResultsPortletPanelsRendererSettings['columns_count'])
     button_title = FieldProperty(ISearchResultsPortletPanelsRendererSettings['button_title'])
+
+    def get_css_class(self):
+        columns = self.columns_count
+        return ' '.join((
+            f'row-cols-{selection.cols}' if device == 'xs' else f'row-cols-{device}-{selection.cols}'
+            for device, selection in columns.items()
+        ))
 
 
 @adapter_config(name='panels',
@@ -153,7 +161,15 @@ class SearchResultsPortletCardsRendererSettings(SearchResultsPortletBaseRenderer
     """Search results portlet cards renderer settings"""
 
     thumb_selection = FieldProperty(ISearchResultsPortletCardsRendererSettings['thumb_selection'])
+    columns_count = FieldProperty(ISearchResultsPortletCardsRendererSettings['columns_count'])
     button_title = FieldProperty(ISearchResultsPortletCardsRendererSettings['button_title'])
+
+    def get_css_class(self):
+        columns = self.columns_count
+        return ' '.join((
+            f'row-cols-{selection.cols}' if device == 'xs' else f'row-cols-{device}-{selection.cols}'
+            for device, selection in columns.items()
+        ))
 
 
 @adapter_config(name='cards',
@@ -178,6 +194,13 @@ class SearchResultsPortletCardsRenderer(SearchResultsPortletBaseRenderer):
 @implementer(IAggregatedPortletRendererSettings)
 class SearchResultsPortletMasonryCardsRendererSettings(SearchResultsPortletCardsRendererSettings, FilterContainer):
     """Search results portlet Masonry cards renderer settings"""
+
+    def get_css_class(self):
+        columns = self.columns_count
+        return ' '.join((
+            f'columns-{selection.cols}' if device == 'xs' else f'columns-{device}-{selection.cols}'
+            for device, selection in columns.items()
+        ))
 
 
 @adapter_config(name='cards::masonry',
@@ -235,9 +258,11 @@ def shared_content_result_target_adapter(context, request, view):
                 provides=ISearchResultRenderer)
 @template_config(template='templates/search-result.pt', layer=IPyAMSUserLayer)
 @template_config(name='panel',
-                 template='templates/search-panel.pt', layer=IPyAMSUserLayer)
+                 template='templates/search-result-panel.pt', layer=IPyAMSUserLayer)
 @template_config(name='card',
-                 template='templates/search-card.pt', layer=IPyAMSUserLayer)
+                 template='templates/search-result-card.pt', layer=IPyAMSUserLayer)
+@template_config(name='masonry',
+                 template='templates/search-result-masonry.pt', layer=IPyAMSUserLayer)
 class WfSharedContentSearchResultRenderer(ViewContentProvider):
     """Shared content search result renderer"""
 

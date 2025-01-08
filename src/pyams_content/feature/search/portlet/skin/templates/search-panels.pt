@@ -71,7 +71,7 @@
 			</div>
 			<div tal:omit-tag="not:has_filters"
 				 class="${renderer_settings.results_css_class}">
-				<div class="summary row row-cols-1 row-cols-sm-2 row-cols-md-3">
+				<div class="summary summary-panels row ${renderer_settings.get_css_class()}">
 					<tal:loop repeat="item items">
 						${structure:view.render_item(item, 'panel')}
 					</tal:loop>

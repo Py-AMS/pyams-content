@@ -107,6 +107,19 @@ class ISearchResultsPortletPanelsRendererSettings(ISearchResultsPortletBaseRende
         change_width=False,
         required=False)
 
+    columns_count = BootstrapThumbnailsSelectionField(
+         title=_("Columns count"),
+         description=_("Select the number of panels columns for all available devices"),
+         required=True,
+         change_selection=False,
+         default_width={
+             'xs': 1,
+             'sm': 2,
+             'md': 3,
+             'lg': 3,
+             'xl': 4
+         })
+
     button_title = I18nTextLineField(title=_("Button's title"),
                                      description=_("Optional navigation button's title"),
                                      required=False)
@@ -123,6 +136,19 @@ class ISearchResultsPortletCardsRendererSettings(ISearchResultsPortletBaseRender
         default_width=12,
         change_width=False,
         required=False)
+
+    columns_count = BootstrapThumbnailsSelectionField(
+         title=_("Columns count"),
+         description=_("Select the number of panels columns for all available devices"),
+         required=True,
+         change_selection=False,
+         default_width={
+             'xs': 1,
+             'sm': 2,
+             'md': 3,
+             'lg': 3,
+             'xl': 4
+         })
 
     button_title = I18nTextLineField(title=_("Button's title"),
                                      description=_("Optional navigation button's title"),

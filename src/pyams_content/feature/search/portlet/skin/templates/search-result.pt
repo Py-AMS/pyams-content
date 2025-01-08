@@ -12,7 +12,8 @@
 						condition="image">
 					${structure:tales:picture(image,
 											  selections=selections,
-											  alt=alt_title, css_class='result_media')}
+											  alt=alt_title,
+											  css_class='result_media')}
 				</tal:if>
 			</a>
 		</tal:if>

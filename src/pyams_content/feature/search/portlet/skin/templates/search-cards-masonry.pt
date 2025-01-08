@@ -71,9 +71,9 @@
 			</div>
 			<div tal:omit-tag="not:has_filters"
 				 class="${renderer_settings.results_css_class}">
-				<div class="card-columns">
+				<div class="summary summary-masonry ${renderer_settings.get_css_class()}">
 					<tal:loop repeat="item items">
-						${structure:view.render_item(item, 'card')}
+						${structure:view.render_item(item, 'masonry')}
 					</tal:loop>
 				</div>
 			</div>
