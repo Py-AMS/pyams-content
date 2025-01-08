@@ -20,7 +20,7 @@ from hypatia.interfaces import ICatalog
 from hypatia.query import Any
 from zope.intid.interfaces import IIntIds
 
-from pyams_content.component.thesaurus import ICollectionsManager, ITagsManager
+from pyams_content.component.thesaurus import ICollectionsManager, ITagsManager, IThemesManager
 from pyams_content.feature.search.interfaces import ISearchFolder, ISearchFolderQuery, ISearchFormRequestParams
 from pyams_content.shared.view.interfaces.query import IViewUserQuery
 from pyams_layer.interfaces import IPyAMSUserLayer
@@ -41,8 +41,8 @@ class SearchFolderTagQuery(ContextAdapter):
 
     @staticmethod
     def get_user_params(request):
-        tag = request.params.get('tag')
-        if not tag:
+        tags = request.params.getall('tag')
+        if not tags:
             return
         manager = ITagsManager(request.root, None)
         if manager is None:
@@ -50,11 +50,19 @@ class SearchFolderTagQuery(ContextAdapter):
         thesaurus = query_utility(IThesaurus, name=manager.thesaurus_name)
         if thesaurus is None:
             return
-        term = thesaurus.terms.get(tag)
-        if term is not None:
-            catalog = get_utility(ICatalog)
-            intids = query_utility(IIntIds)
-            yield Any(catalog['tags'], (intids.queryId(term),))
+        if isinstance(tags, str):
+            tags = tags.split(',')
+        catalog = get_utility(ICatalog)
+        intids = query_utility(IIntIds)
+        yield Any(catalog['tags'], [
+            intids.queryId(term)
+            for term in [
+                thesaurus.terms.get(value)
+                for tag in tags
+                for value in tag.split(',')
+            ]
+            if term is not None
+        ])
 
 
 @adapter_config(name='tags',
@@ -65,8 +73,7 @@ class SearchFormTagsRequestParams(ContextRequestAdapter):
 
     def get_params(self):
         """Request params getter"""
-        tag = self.request.params.get('tag')
-        if tag:
+        for tag in self.request.params.getall('tag'):
             yield {
                 'name': 'tag',
                 'value': tag
@@ -76,6 +83,38 @@ class SearchFormTagsRequestParams(ContextRequestAdapter):
 #
 # Themes search adapters
 #
+
+@adapter_config(name='themes',
+                required=ISearchFolderQuery,
+                provides=IViewUserQuery)
+class SearchFolderThemeQuery(ContextAdapter):
+    """Search folder themes query"""
+
+    @staticmethod
+    def get_user_params(request):
+        themes = request.params.get('theme')
+        if not themes:
+            return
+        manager = IThemesManager(request.root, None)
+        if manager is None:
+            return
+        thesaurus = query_utility(IThesaurus, name=manager.thesaurus_name)
+        if thesaurus is None:
+            return
+        if isinstance(themes, str):
+            themes = themes.split(',')
+        catalog = get_utility(ICatalog)
+        intids = query_utility(IIntIds)
+        yield Any(catalog['themes'], [
+            intids.queryId(term)
+            for term in [
+                thesaurus.terms.get(value)
+                for theme in themes
+                for value in theme.split(',')
+            ]
+            if term is not None
+        ])
+
 
 @adapter_config(name='themes',
                 required=(ISearchFolder, IPyAMSUserLayer),
@@ -104,8 +143,8 @@ class SearchFolderCollectionQuery(ContextAdapter):
 
     @staticmethod
     def get_user_params(request):
-        collection = request.params.get('collection')
-        if not collection:
+        collections = request.params.getall('collection')
+        if not collections:
             return
         manager = ICollectionsManager(request.root, None)
         if manager is None:
@@ -113,11 +152,19 @@ class SearchFolderCollectionQuery(ContextAdapter):
         thesaurus = query_utility(IThesaurus, name=manager.thesaurus_name)
         if thesaurus is None:
             return
-        term = thesaurus.terms.get(collection)
-        if term is not None:
-            catalog = get_utility(ICatalog)
-            intids = query_utility(IIntIds)
-            yield Any(catalog['collections'], (intids.queryId(term),))
+        if isinstance(collections, str):
+            collections = collections.split(',')
+        catalog = get_utility(ICatalog)
+        intids = query_utility(IIntIds)
+        yield Any(catalog['collections'], [
+            intids.queryId(term)
+            for term in [
+                thesaurus.terms.get(value)
+                for collection in collections
+                for value in collection.split(',')
+            ]
+            if term is not None
+        ])
 
 
 @adapter_config(name='collections',
@@ -127,8 +174,7 @@ class SearchFormCollectionsRequestParams(ContextRequestAdapter):
     """Search form tags request params"""
 
     def get_params(self):
-        collection = self.request.params.get('collection')
-        if collection:
+        for collection in self.request.params.getall('collection'):
             yield {
                 'name': 'collection',
                 'value': collection

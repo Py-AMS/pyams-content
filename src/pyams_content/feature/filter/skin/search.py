@@ -80,7 +80,7 @@ class SearchFormTitleRequestParams(BaseFormRequestParams):
 class SearchFormTagsRequestParams(BaseFormRequestParams):
     """Search form tags request parameters adapter"""
     
-    param_name = 'tags'
+    param_name = 'tag'
 
 
 @adapter_config(name='themes',
@@ -89,7 +89,7 @@ class SearchFormTagsRequestParams(BaseFormRequestParams):
 class SearchFormThemesRequestParams(BaseFormRequestParams):
     """Search form themes request parameters adapter"""
     
-    param_name = 'themes'
+    param_name = 'theme'
 
 
 @adapter_config(name='collections',
@@ -98,4 +98,4 @@ class SearchFormThemesRequestParams(BaseFormRequestParams):
 class SearchFormCollectionsRequestParams(BaseFormRequestParams):
     """Search form collections request parameters adapter"""
     
-    param_name = 'collections'
+    param_name = 'collection'

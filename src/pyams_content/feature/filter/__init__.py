@@ -112,18 +112,18 @@ class ThesaurusFilter(Filter):
 class TagsFilter(ThesaurusFilter):
     """Tags filter"""
 
-    filter_type = 'tags'
+    filter_type = 'tag'
 
 
 @factory_config(ICollectionsFilter)
 class CollectionsFilter(ThesaurusFilter):
     """Collections filter"""
 
-    filter_type = 'collections'
+    filter_type = 'collection'
 
 
 @factory_config(IThemesFilter)
 class ThemesFilter(ThesaurusFilter):
     """Themes filter"""
 
-    filter_type = 'themes'
+    filter_type = 'theme'
