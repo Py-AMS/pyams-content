@@ -6,7 +6,7 @@
 		<span class="position-absolute underline"></span>
 	</h3>
 	<div>
-		<div class="summary row ${renderer_settings.get_css_class()}">
+		<div class="summary summary-cards row ${renderer_settings.get_css_class()}">
 			<tal:loop repeat="item view.visible_items">
 				${structure:view.render_item(item, 'card')}
 			</tal:loop>

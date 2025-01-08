@@ -6,7 +6,7 @@
 		<span class="position-absolute underline"></span>
 	</h3>
 	<div>
-		<div class="columns ${renderer_settings.get_css_class()}">
+		<div class="summary summary-masonry columns ${renderer_settings.get_css_class()}">
 			<tal:loop repeat="item view.visible_items">
 				${structure:view.render_item(item, 'masonry')}
 			</tal:loop>
