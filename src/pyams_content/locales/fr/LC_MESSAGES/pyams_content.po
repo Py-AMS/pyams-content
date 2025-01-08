@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-01-05 14:22+0100\n"
+"POT-Creation-Date: 2025-01-07 17:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -144,6 +144,7 @@ msgstr ""
 "peut être utilisée par les moteurs de recherche"
 
 #: src/pyams_content/root/interfaces.py:53
+#: src/pyams_content/shared/resource/interfaces.py:44
 #: src/pyams_content/component/gallery/interfaces.py:64
 #: src/pyams_content/component/gallery/zmi/interfaces.py:40
 #: src/pyams_content/component/extfile/interfaces.py:51
@@ -370,6 +371,7 @@ msgstr ""
 #: src/pyams_content/shared/common/zmi/search.py:221
 #: src/pyams_content/shared/common/zmi/types/__init__.py:122
 #: src/pyams_content/shared/common/interfaces/types.py:155
+#: src/pyams_content/shared/resource/interfaces.py:130
 #: src/pyams_content/shared/site/interfaces.py:189
 #: src/pyams_content/shared/topic/interfaces.py:36
 #: src/pyams_content/shared/form/interfaces.py:44
@@ -1794,6 +1796,7 @@ msgid "List of fields associated with this data type"
 msgstr "Liste des champs spécifiques du gabarit associés à ce type de contenu"
 
 #: src/pyams_content/shared/common/interfaces/types.py:156
+#: src/pyams_content/shared/resource/interfaces.py:131
 #: src/pyams_content/shared/site/interfaces.py:190
 #: src/pyams_content/shared/topic/interfaces.py:37
 #: src/pyams_content/shared/form/interfaces.py:45
@@ -1900,6 +1903,270 @@ msgstr "Titre du contenu (par défaut)"
 #: src/pyams_content/shared/common/portlet/skin/header.py:39
 msgid "Shared content header (default)"
 msgstr "En-tête du contenu (par défaut)"
+
+#: src/pyams_content/shared/resource/interfaces.py:29
+msgid "Resource"
+msgstr "Ressource"
+
+#: src/pyams_content/shared/resource/interfaces.py:38
+msgid "Original country"
+msgstr "Pays d'origine"
+
+#: src/pyams_content/shared/resource/interfaces.py:41
+msgid "Original title"
+msgstr "Titre original"
+
+#: src/pyams_content/shared/resource/interfaces.py:47
+msgid "Translator"
+msgstr "Traducteur"
+
+#: src/pyams_content/shared/resource/interfaces.py:50
+msgid "Illustrator"
+msgstr "Illustrateur"
+
+#: src/pyams_content/shared/resource/interfaces.py:53
+msgid "Drawer"
+msgstr "Dessinateur"
+
+#: src/pyams_content/shared/resource/interfaces.py:56
+msgid "Colourist"
+msgstr "Coloriste"
+
+#: src/pyams_content/shared/resource/interfaces.py:59
+msgid "Lettering"
+msgstr "Lettrage"
+
+#: src/pyams_content/shared/resource/interfaces.py:62
+msgid "Producer"
+msgstr "Producteur"
+
+#: src/pyams_content/shared/resource/interfaces.py:65
+msgid "Director"
+msgstr "Réalisateur"
+
+#: src/pyams_content/shared/resource/interfaces.py:68
+msgid "Actors"
+msgstr "Acteurs"
+
+#: src/pyams_content/shared/resource/interfaces.py:71
+msgid "Editor"
+msgstr "Éditeur"
+
+#: src/pyams_content/shared/resource/interfaces.py:74
+msgid "Collection"
+msgstr "Collection"
+
+#: src/pyams_content/shared/resource/interfaces.py:77
+msgid "Series"
+msgstr "Série"
+
+#: src/pyams_content/shared/resource/interfaces.py:80
+msgid "Volume"
+msgstr "Volume"
+
+#: src/pyams_content/shared/resource/interfaces.py:83
+msgid "Format"
+msgstr "Format"
+
+#: src/pyams_content/shared/resource/interfaces.py:86
+msgid "Nb pages"
+msgstr "Nombre de pages"
+
+#: src/pyams_content/shared/resource/interfaces.py:90
+msgid "Duration"
+msgstr "Durée"
+
+#: src/pyams_content/shared/resource/interfaces.py:93
+msgid "Age range"
+msgstr "Tranche d'âge"
+
+#: src/pyams_content/shared/resource/interfaces.py:96
+msgid "Release year"
+msgstr "Année de publication"
+
+#: src/pyams_content/shared/resource/interfaces.py:100
+msgid "Awards"
+msgstr "Récompenses"
+
+#: src/pyams_content/shared/resource/interfaces.py:103
+msgid "Editor reference"
+msgstr "Référence éditeur"
+
+#: src/pyams_content/shared/resource/interfaces.py:106
+msgid "ISBN number"
+msgstr "Numéro ISBN"
+
+#: src/pyams_content/shared/resource/interfaces.py:109
+msgid "Price"
+msgstr "Tarif"
+
+#: src/pyams_content/shared/resource/interfaces.py:113
+msgid "Source URI"
+msgstr "URL source"
+
+#: src/pyams_content/shared/resource/interfaces.py:114
+msgid "External URL used to get more information about resource"
+msgstr "URL externe utilisée pour accéder à plus d'informations sur la ressource"
+
+#: src/pyams_content/shared/resource/interfaces.py:117
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:208
+msgid "Summary"
+msgstr "Sommaire"
+
+#: src/pyams_content/shared/resource/interfaces.py:120
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:213
+msgid "Synopsis"
+msgstr "Synopsis"
+
+#: src/pyams_content/shared/resource/interfaces.py:123
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:218
+msgid "Publisher's words"
+msgstr "Le mot du site"
+
+#: src/pyams_content/shared/resource/schema.py:25
+msgid "Minimum age"
+msgstr "Âge minimum"
+
+#: src/pyams_content/shared/resource/schema.py:28
+msgid "Maximum age"
+msgstr "Âge maximum"
+
+#: src/pyams_content/shared/resource/zmi/__init__.py:39
+msgid "Resource management"
+msgstr "Cette ressource"
+
+#: src/pyams_content/shared/resource/zmi/__init__.py:58
+msgid "Resource details"
+msgstr "Spécificités"
+
+#: src/pyams_content/shared/resource/zmi/__init__.py:68
+msgid "Resource information"
+msgstr "Spécificités de la ressource"
+
+#: src/pyams_content/shared/resource/zmi/__init__.py:69
+msgid "Custom properties"
+msgstr "Propriétés spécifiques"
+
+#: src/pyams_content/shared/resource/skin/specificities.py:55
+msgid "from {0.min_value} to {0.max_value}"
+msgstr "de {0.min_value} à {0.max_value} ans"
+
+#: src/pyams_content/shared/resource/skin/specificities.py:57
+msgid "from {0.min_value}"
+msgstr "à partir de {0.min_value} ans"
+
+#: src/pyams_content/shared/resource/skin/specificities.py:59
+msgid "up to {0.max_value}"
+msgstr "jusqu'à {0.max_value} ans"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:88
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:152
+msgid "Collection:"
+msgstr "Collection :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:90
+msgid "Collections:"
+msgstr "Collections :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:104
+msgid "Original country:"
+msgstr "Pays d'origine :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:108
+msgid "Original title:"
+msgstr "Titre original :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:112
+msgid "Author:"
+msgstr "Auteur :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:116
+msgid "Translator:"
+msgstr "Traducteur :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:120
+msgid "Illustrator:"
+msgstr "Illustrateur :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:124
+msgid "Drawer:"
+msgstr "Dessinateur :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:128
+msgid "Colourist:"
+msgstr "Coloriste :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:132
+msgid "Lettering:"
+msgstr "Lettrage :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:136
+msgid "Producer:"
+msgstr "Producteur :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:140
+msgid "Director:"
+msgstr "Réalisateur :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:144
+msgid "Actors:"
+msgstr "Acteurs :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:148
+msgid "Editor:"
+msgstr "Éditeur :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:156
+msgid "Series:"
+msgstr "Série :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:160
+msgid "Volume:"
+msgstr "Volume :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:164
+msgid "Format:"
+msgstr "Format :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:168
+msgid "Number of pages:"
+msgstr "Nombre de pages :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:172
+msgid "Duration:"
+msgstr "Durée :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:176
+msgid "Age range:"
+msgstr "Tranche d'âge :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:180
+msgid "Release year:"
+msgstr "Année de parution :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:184
+msgid "Awards:"
+msgstr "Récompenses :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:192
+msgid "Editor reference:"
+msgstr "Référence chez l'éditeur :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:196
+msgid "ISBN number:"
+msgstr "Numéro ISBN :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:200
+msgid "Price:"
+msgstr "Tarif :"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:201
+msgid "€ ${price}"
+msgstr "${price} €"
+
+#: src/pyams_content/shared/resource/skin/templates/specificities.pt:223
+msgid "More resource info:"
+msgstr "En savoir plus :"
 
 #: src/pyams_content/shared/view/merge.py:76
 msgid "Concatenate views items in order"
