@@ -8,12 +8,15 @@
 		        condition="renderer_settings.display_illustrations and illustration">
 			<a href="${target_url}">
 				<tal:if define="image i18n:illustration.data;
-								alt i18n:illustration.alt_title;
-								selections view.view.renderer_settings.thumb_selection;"
+								alt_title i18n:illustration.alt_title;"
 						condition="image">
 					${structure:tales:picture(image,
-											  selections=selections,
-											  alt=alt,
+											  xs_thumb='portrait', xs_width=12,
+											  sm_thumb='portrait', sm_width=3,
+											  md_thumb='portrait', md_width=2,
+											  lg_thumb='portrait', lg_width=2,
+											  xl_thumb='portrait', xl_width=2,
+											  alt=alt_title,
 											  css_class='result_media card-img-top w-100')}
 				</tal:if>
 			</a>
