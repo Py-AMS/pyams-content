@@ -1,4 +1,4 @@
-<div class="col mb-3 break-avoid"
+<div class="col px-0 mb-3 break-avoid"
 	 tal:define="target_url view.url;
 				 renderer_settings view.view.renderer_settings;
 				 button_title i18n:renderer_settings.button_title;"
