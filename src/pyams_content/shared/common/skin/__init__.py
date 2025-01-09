@@ -19,10 +19,10 @@ from pyams_content.shared.common import ISharedContent, IWfSharedContent
 from pyams_content.shared.common.interfaces import ISharedTool
 from pyams_content.shared.common.interfaces.types import IWfTypedSharedContent
 from pyams_content.shared.site.interfaces import ISiteElementNavigation
-from pyams_content.shared.site.portlet.skin import ISiteContainerSummaryItemButtonTitle, \
+from pyams_content.shared.site.portlet.skin.interfaces import ISiteContainerSummaryItemButtonTitle, \
     ISiteContainerSummaryItemHeader, ISiteContainerSummaryItemTitle, \
     ISiteContainerSummaryItemURL
-from pyams_content.skin.interfaces import ISiteContainerSummaryView
+from pyams_content.shared.site.skin.interfaces import ISiteContainerSummaryView
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_utils.adapter import ContextRequestAdapter, adapter_config

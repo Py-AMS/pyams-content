@@ -12,7 +12,7 @@ __docformat__ = 'restructuredtext'
 
 from pyams_content.interfaces import IBaseContent
 from pyams_content.shared.site.portlet.skin import ISiteContainerSummaryItemTitle
-from pyams_content.skin.interfaces import ISiteContainerSummaryView
+from pyams_content.shared.site.skin.interfaces import ISiteContainerSummaryView
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_utils.adapter import adapter_config

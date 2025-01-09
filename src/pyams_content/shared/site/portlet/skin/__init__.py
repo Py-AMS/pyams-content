@@ -23,7 +23,8 @@ from pyams_content.shared.site.portlet.skin.interfaces import ISiteContainerSumm
     ISiteContainerSummaryItemURL, ISiteContainerSummaryPortletBaseRendererSettings, \
     ISiteContainerSummaryPortletCardsRendererSettings, ISiteContainerSummaryPortletDefaultRendererSettings, \
     ISiteContainerSummaryPortletMasonryCardsRendererSettings, ISiteContainerSummaryPortletPanelsRendererSettings
-from pyams_content.skin.interfaces import IContentNavigationIllustration, ISiteContainerSummaryView
+from pyams_content.skin.interfaces import IContentNavigationIllustration
+from pyams_content.shared.site.skin.interfaces import ISiteContainerSummaryView
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer, IPyAMSUserLayer
 from pyams_portal.interfaces import IPortalContext, IPortletRenderer

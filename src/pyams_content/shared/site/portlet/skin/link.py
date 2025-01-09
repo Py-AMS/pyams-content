@@ -9,10 +9,10 @@
 #
 
 from pyams_content.shared.site.interfaces import IExternalSiteLink, IInternalSiteLink
-from pyams_content.shared.site.portlet.skin import ISiteContainerSummaryItemButtonTitle, \
+from pyams_content.shared.site.portlet.skin.interfaces import ISiteContainerSummaryItemButtonTitle, \
     ISiteContainerSummaryItemHeader, ISiteContainerSummaryItemTitle, \
     ISiteContainerSummaryItemURL
-from pyams_content.skin.interfaces import ISiteContainerSummaryView
+from pyams_content.shared.site.skin.interfaces import ISiteContainerSummaryView
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_utils.adapter import adapter_config

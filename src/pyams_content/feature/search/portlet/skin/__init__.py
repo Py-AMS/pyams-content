@@ -22,14 +22,15 @@ from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.feature.filter.container import FilterContainer
 from pyams_content.feature.filter.interfaces import IAggregatedPortletRendererSettings
-from pyams_content.feature.search.portlet import ISearchResultsPortletSettings
+from pyams_content.feature.search.portlet.interfaces import ISearchResultsPortletSettings
 from pyams_content.feature.search.portlet.skin.interfaces import ISearchResultHeader, \
     ISearchResultRenderer, ISearchResultTitle, ISearchResultURL, ISearchResultsPortletBaseRendererSettings, \
     ISearchResultsPortletCardsRendererSettings, ISearchResultsPortletDefaultRendererSettings, \
     ISearchResultsPortletMasonryCardsRendererSettings, ISearchResultsPortletPanelsRendererSettings
 from pyams_content.feature.header.interfaces import HEADER_DISPLAY_MODE
-from pyams_content.shared.common import IWfSharedContent
-from pyams_content.skin.interfaces import ISearchResultsCardsView, ISearchResultsPanelsView, ISearchResultsView
+from pyams_content.shared.common.interfaces import IWfSharedContent
+from pyams_content.feature.search.skin.interfaces import ISearchResultsCardsView, ISearchResultsPanelsView, \
+    ISearchResultsView
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer, IPyAMSUserLayer
 from pyams_portal.interfaces import IPortalContext, IPortletRenderer

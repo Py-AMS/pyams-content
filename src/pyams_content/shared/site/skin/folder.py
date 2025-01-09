@@ -11,9 +11,9 @@
 from pyramid.httpexceptions import HTTPSeeOther
 
 from pyams_content.shared.site.interfaces import ISiteElementNavigation, ISiteFolder, SITE_CONTAINER_REDIRECT_MODE
-from pyams_content.shared.site.portlet.skin import ISiteContainerSummaryItemHeader, ISiteContainerSummaryItemTitle, \
-    ISiteContainerSummaryItemURL
-from pyams_content.skin.interfaces import ISiteContainerSummaryView
+from pyams_content.shared.site.portlet.skin.interfaces import ISiteContainerSummaryItemHeader, \
+    ISiteContainerSummaryItemTitle, ISiteContainerSummaryItemURL
+from pyams_content.shared.site.skin.interfaces import ISiteContainerSummaryView
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_pagelet.pagelet import pagelet_config
