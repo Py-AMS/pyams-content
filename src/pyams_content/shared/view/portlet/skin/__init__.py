@@ -17,31 +17,51 @@ This module defines several renderers of view items portlet.
 
 from persistent import Persistent
 from zope.container.contained import Contained
-from zope.interface import Interface
+from zope.interface import Interface, implementer
+from zope.location.interfaces import ILocation
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.links import IInternalLink
+from pyams_content.feature.filter.container import FilterContainer
+from pyams_content.feature.filter.interfaces import IAggregatedPortletRendererSettings
 from pyams_content.feature.header.interfaces import HEADER_DISPLAY_MODE
+from pyams_content.shared.common import IWfSharedContent
 from pyams_content.shared.view.portlet import IViewItemsPortletSettings
-from pyams_content.shared.view.portlet.skin.interfaces import IViewItemTargetURL, \
-    IViewItemsPortletHorizontalRendererSettings, IViewItemsPortletPanelsRendererSettings, \
-    IViewItemsPortletVerticalRendererSettings
+from pyams_content.shared.view.portlet.skin.interfaces import IViewItemHeader, IViewItemRenderer, IViewItemTargetURL, \
+    IViewItemTitle, IViewItemURL, IViewItemsPortletBaseRendererSettings, IViewItemsPortletCardsRendererSettings, \
+    IViewItemsPortletMasonryCardsRendererSettings, IViewItemsPortletPanelsRendererSettings, \
+    IViewItemsPortletThumbnailsRendererSettings, IViewItemsPortletVerticalRendererSettings
+from pyams_content.shared.view.skin.interfaces import IViewItemsView
 from pyams_i18n.interfaces import II18n
-from pyams_layer.interfaces import IPyAMSLayer
+from pyams_layer.interfaces import IPyAMSLayer, IPyAMSUserLayer
 from pyams_portal.interfaces import IPortalContext, IPortletRenderer
 from pyams_portal.skin import PortletRenderer
 from pyams_sequence.reference import InternalReferenceMixin
+from pyams_skin.interfaces.viewlet import IBreadcrumbs
 from pyams_template.template import template_config
-from pyams_utils.adapter import adapter_config
+from pyams_utils.adapter import NullAdapter, adapter_config
 from pyams_utils.factory import factory_config
 from pyams_utils.text import get_text_start
 from pyams_utils.url import canonical_url, relative_url
+from pyams_viewlet.viewlet import ViewContentProvider
 
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
 
 
+@implementer(IAggregatedPortletRendererSettings)
+class BaseViewItemsPortletRendererSettings(FilterContainer):
+    """Base view items portlet renderer settings"""
+
+    paginate = FieldProperty(IViewItemsPortletBaseRendererSettings['paginate'])
+    page_size = FieldProperty(IViewItemsPortletBaseRendererSettings['page_size'])
+    filters_css_class = FieldProperty(IViewItemsPortletBaseRendererSettings['filters_css_class'])
+    results_css_class = FieldProperty(IViewItemsPortletBaseRendererSettings['results_css_class'])
+    display_illustrations = FieldProperty(IViewItemsPortletBaseRendererSettings['display_illustrations'])
+
+    
+@implementer(IViewItemsView)
 class BaseViewItemsPortletRenderer(PortletRenderer):
     """Base view items portlet renderer"""
 
@@ -70,28 +90,33 @@ class BaseViewItemsPortletRenderer(PortletRenderer):
                 return ''
         return result
 
+    def render_item(self, item, template_name=''):
+        renderer = self.request.registry.queryMultiAdapter((item, self.request, self),
+                                                           IViewItemRenderer)
+        if renderer is not None:
+            renderer.update()
+            return renderer.render(template_name)
+        return ''
+
 
 #
 # Vertical list view items renderer
 #
 
 @factory_config(IViewItemsPortletVerticalRendererSettings)
-class ViewItemsPortletVerticalRendererSettings(InternalReferenceMixin, Persistent, Contained):
+class ViewItemsPortletVerticalRendererSettings(InternalReferenceMixin, BaseViewItemsPortletRendererSettings):
     """View items portlet vertical renderer settings"""
 
-    display_illustrations = FieldProperty(IViewItemsPortletVerticalRendererSettings['display_illustrations'])
     thumb_selection = FieldProperty(IViewItemsPortletVerticalRendererSettings['thumb_selection'])
     display_breadcrumbs = FieldProperty(IViewItemsPortletVerticalRendererSettings['display_breadcrumbs'])
     display_tags = FieldProperty(IViewItemsPortletVerticalRendererSettings['display_tags'])
-    paginate = FieldProperty(IViewItemsPortletVerticalRendererSettings['paginate'])
-    page_size = FieldProperty(IViewItemsPortletVerticalRendererSettings['page_size'])
     reference = FieldProperty(IViewItemsPortletVerticalRendererSettings['reference'])
     link_label = FieldProperty(IViewItemsPortletVerticalRendererSettings['link_label'])
 
 
 @adapter_config(required=(IPortalContext, IPyAMSLayer, Interface, IViewItemsPortletSettings),
                 provides=IPortletRenderer)
-@template_config(template='templates/view-list-vertical.pt', layer=IPyAMSLayer)
+@template_config(template='templates/view-list-default.pt', layer=IPyAMSLayer)
 class ViewItemsPortletVerticalRenderer(BaseViewItemsPortletRenderer):
     """View items portlet vertical renderer"""
 
@@ -105,24 +130,27 @@ class ViewItemsPortletVerticalRenderer(BaseViewItemsPortletRenderer):
 # Horizontal list view items renderer
 #
 
-@factory_config(IViewItemsPortletHorizontalRendererSettings)
-class ViewItemsPortletHorizontalRendererSettings(Persistent, Contained):
-    """View items portlet horizontal renderer settings"""
+@factory_config(IViewItemsPortletThumbnailsRendererSettings)
+class ViewItemsPortletThumbnailsRendererSettings(BaseViewItemsPortletRendererSettings):
+    """View items portlet thumbnails renderer settings"""
 
-    thumb_selection = FieldProperty(IViewItemsPortletHorizontalRendererSettings['thumb_selection'])
+    paginate = None
+    page_size = None
+    
+    thumb_selection = FieldProperty(IViewItemsPortletThumbnailsRendererSettings['thumb_selection'])
 
 
-@adapter_config(name='horizontal',
+@adapter_config(name='thumbnails',
                 required=(IPortalContext, IPyAMSLayer, Interface, IViewItemsPortletSettings),
                 provides=IPortletRenderer)
-@template_config(template='templates/view-list-horizontal.pt', layer=IPyAMSLayer)
-class ViewItemsPortletHorizontalRenderer(BaseViewItemsPortletRenderer):
+@template_config(template='templates/view-list-thumbnails.pt', layer=IPyAMSLayer)
+class ViewItemsPortletThumbnailsRenderer(BaseViewItemsPortletRenderer):
     """View items portlet horizontal renderer"""
 
     label = _("Horizontal thumbnails list")
     weight = 10
 
-    settings_interface = IViewItemsPortletHorizontalRendererSettings
+    settings_interface = IViewItemsPortletThumbnailsRendererSettings
 
 
 #
@@ -130,21 +158,26 @@ class ViewItemsPortletHorizontalRenderer(BaseViewItemsPortletRenderer):
 #
 
 @factory_config(IViewItemsPortletPanelsRendererSettings)
-class ViewItemsPortletPanelsRendererSettings(Persistent, Contained):
+class ViewItemsPortletPanelsRendererSettings(BaseViewItemsPortletRendererSettings):
     """View items portlet panels renderer settings"""
 
-    display_illustrations = FieldProperty(IViewItemsPortletPanelsRendererSettings['display_illustrations'])
     thumb_selection = FieldProperty(IViewItemsPortletPanelsRendererSettings['thumb_selection'])
-    paginate = FieldProperty(IViewItemsPortletPanelsRendererSettings['paginate'])
-    page_size = FieldProperty(IViewItemsPortletPanelsRendererSettings['page_size'])
+    columns_count = FieldProperty(IViewItemsPortletPanelsRendererSettings['columns_count'])
     header_display_mode = FieldProperty(IViewItemsPortletPanelsRendererSettings['header_display_mode'])
     start_length = FieldProperty(IViewItemsPortletPanelsRendererSettings['start_length'])
+
+    def get_css_class(self):
+        columns = self.columns_count
+        return ' '.join((
+            f'row-cols-{selection.cols}' if device == 'xs' else f'row-cols-{device}-{selection.cols}'
+            for device, selection in columns.items()
+        ))
 
 
 @adapter_config(name='panels',
                 required=(IPortalContext, IPyAMSLayer, Interface, IViewItemsPortletSettings),
                 provides=IPortletRenderer)
-@template_config(template='templates/view-panels.pt', layer=IPyAMSLayer)
+@template_config(template='templates/view-list-panels.pt', layer=IPyAMSLayer)
 class ViewItemsPortletPanelsRenderer(BaseViewItemsPortletRenderer):
     """View items portlet panels renderer"""
 
@@ -162,3 +195,130 @@ class ViewItemsPortletPanelsRenderer(BaseViewItemsPortletRenderer):
         if display_mode == HEADER_DISPLAY_MODE.START.value:
             header = get_text_start(header, settings.start_length)
         return header
+
+
+#
+# Cards view items renderer
+#
+
+@factory_config(IViewItemsPortletCardsRendererSettings)
+class ViewItemsPortletCardsRendererSettings(ViewItemsPortletPanelsRendererSettings):
+    """View items portlet cards renderer settings"""
+
+
+@adapter_config(name='cards',
+                required=(IPortalContext, IPyAMSLayer, Interface, IViewItemsPortletSettings),
+                provides=IPortletRenderer)
+@template_config(template='templates/view-list-cards.pt', layer=IPyAMSLayer)
+class ViewItemsPortletCardsRenderer(BaseViewItemsPortletRenderer):
+    """View items portlet cards renderer"""
+
+    label = _("Bootstrap cards")
+    weight = 40
+
+    settings_interface = IViewItemsPortletCardsRendererSettings
+
+
+#
+# Masonry cards view items renderer
+#
+
+@factory_config(IViewItemsPortletMasonryCardsRendererSettings)
+class ViewItemsPortletMasonryCardsRendererSettings(ViewItemsPortletCardsRendererSettings):
+    """View items portlet Masonry cards renderer settings"""
+
+    def get_css_class(self):
+        columns = self.columns_count
+        return ' '.join((
+            f'columns-{selection.cols}' if device == 'xs' else f'columns-{device}-{selection.cols}'
+            for device, selection in columns.items()
+        ))
+
+
+@adapter_config(name='cards::masonry',
+                required=(IPortalContext, IPyAMSLayer, Interface, IViewItemsPortletSettings),
+                provides=IPortletRenderer)
+@template_config(template='templates/view-list-cards-masonry.pt', layer=IPyAMSLayer)
+class ViewItemsPortletMasonryCardsRenderer(BaseViewItemsPortletRenderer):
+    """View items portlet Masonry cards renderer"""
+
+    label = _("Bootstrap cards, Masonry style")
+    weight = 50
+
+    settings_interface = IViewItemsPortletMasonryCardsRendererSettings
+
+
+#
+# View items adapters
+#
+
+@adapter_config(required=(ILocation, IPyAMSUserLayer, IViewItemsView),
+                provides=IBreadcrumbs)
+class LocationBreadcrumbsAdapter(NullAdapter):
+    """Disable breadcrumbs in view items view"""
+
+
+@adapter_config(required=(IWfSharedContent, IPyAMSUserLayer, IViewItemsView),
+                provides=IViewItemTitle)
+def shared_content_result_title_adapter(context, request, view):
+    """Shared content result title adapter"""
+    return II18n(context).query_attribute('title', request=request)
+
+
+@adapter_config(required=(IWfSharedContent, IPyAMSUserLayer, IViewItemsView),
+                provides=IViewItemHeader)
+def shared_content_result_header_adapter(context, request, view):
+    """Shared content result header adapter"""
+    return II18n(context).query_attribute('header', request=request)
+
+
+@adapter_config(required=(IWfSharedContent, IPyAMSUserLayer, IViewItemsView),
+                provides=IViewItemURL)
+def shared_content_result_target_adapter(context, request, view):
+    """Shared content result target URL adapter"""
+    if view.settings.force_canonical_url:
+        return canonical_url(context, request)
+    return relative_url(context, request)
+
+
+#
+# View items renderers
+#
+
+@adapter_config(required=(IWfSharedContent, IPyAMSUserLayer, IViewItemsView),
+                provides=IViewItemRenderer)
+@template_config(template='templates/view-item.pt', layer=IPyAMSUserLayer)
+@template_config(name='thumbnail',
+                 template='templates/view-item-thumbnail.pt', layer=IPyAMSUserLayer)
+@template_config(name='panel',
+                 template='templates/view-item-panel.pt', layer=IPyAMSUserLayer)
+@template_config(name='card',
+                 template='templates/view-item-card.pt', layer=IPyAMSUserLayer)
+@template_config(name='masonry',
+                 template='templates/view-item-masonry.pt', layer=IPyAMSUserLayer)
+class WfSharedContentViewItemRenderer(ViewContentProvider):
+    """Shared content view item renderer"""
+
+    @property
+    def title(self):
+        return self.request.registry.queryMultiAdapter((self.context, self.request, self.view),
+                                                       IViewItemTitle)
+
+    @property
+    def header(self):
+        display_mode = HEADER_DISPLAY_MODE.FULL.value
+        settings = self.view.renderer_settings
+        if IViewItemsPortletPanelsRendererSettings.providedBy(settings):
+            display_mode = settings.header_display_mode
+        if display_mode == HEADER_DISPLAY_MODE.HIDDEN.value:
+            return ''
+        header = self.request.registry.queryMultiAdapter((self.context, self.request, self.view),
+                                                         IViewItemHeader)
+        if display_mode == HEADER_DISPLAY_MODE.START.value:
+            header = get_text_start(header, settings.start_length)
+        return header
+
+    @property
+    def url(self):
+        return self.request.registry.queryMultiAdapter((self.context, self.request, self.view),
+                                                       IViewItemURL)

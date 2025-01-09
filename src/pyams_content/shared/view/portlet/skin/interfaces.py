@@ -15,8 +15,9 @@
 This module defines interfaces of view items portlet renderers settings.
 """
 
+from zope.contentprovider.interfaces import IContentProvider
 from zope.interface import Attribute, Interface
-from zope.schema import Bool, Choice, Int
+from zope.schema import Bool, Choice, Int, TextLine
 
 from pyams_content.feature.header.interfaces import HEADER_DISPLAY_MODE, HEADER_DISPLAY_MODES_VOCABULARY
 from pyams_i18n.schema import I18nTextLineField
@@ -37,14 +38,36 @@ class IViewItemTargetURL(Interface):
     url = Attribute("Reference URL")
 
 
-class IViewItemsPortletVerticalRendererSettings(IInternalReference):
-    """View items portlet vertical renderer settings interface"""
+class IViewItemsPortletBaseRendererSettings(Interface):
+    """View items portlet base renderer settings interface"""
+
+    paginate = Bool(title=_("Paginate?"),
+                    description=_("If 'no', results pagination will be disabled"),
+                    required=True,
+                    default=True)
+
+    page_size = Int(title=_("Page size"),
+                    description=_("Number of items per page, if pagination is enabled"),
+                    required=False,
+                    default=10)
+
+    filters_css_class = TextLine(title=_('Filters CSS class'),
+                                 description=_("CSS class used for filters column"),
+                                 default='col col-12 col-md-4 col-lg-3 col-xl-2 float-left text-md-right')
+
+    results_css_class = TextLine(title=_('Results CSS class'),
+                                 description=_("CSS class used for view items container"),
+                                 default='row mx-0 col col-12 col-md-8 col-lg-9 col-xl-10 float-right')
 
     display_illustrations = Bool(title=_("Display illustrations?"),
                                  description=_("If 'no', view contents will not display "
                                                "illustrations"),
                                  required=True,
                                  default=True)
+
+
+class IViewItemsPortletVerticalRendererSettings(IViewItemsPortletBaseRendererSettings, IInternalReference):
+    """View items portlet vertical renderer settings interface"""
 
     thumb_selection = BootstrapThumbnailsSelectionField(
         title=_("Thumbnails selection"),
@@ -69,16 +92,6 @@ class IViewItemsPortletVerticalRendererSettings(IInternalReference):
                         required=True,
                         default=True)
 
-    paginate = Bool(title=_("Paginate?"),
-                    description=_("If 'no', results pagination will be disabled"),
-                    required=True,
-                    default=True)
-
-    page_size = Int(title=_("Page size"),
-                    description=_("Number of items per page, if pagination is enabled"),
-                    required=False,
-                    default=10)
-
     reference = InternalReferenceField(title=_("'See all' link target"),
                                        description=_("Internal reference to site or search "
                                                      "folder displaying full list of view's "
@@ -90,9 +103,12 @@ class IViewItemsPortletVerticalRendererSettings(IInternalReference):
                                    required=False)
 
 
-class IViewItemsPortletHorizontalRendererSettings(Interface):
-    """View items portlet horizontal renderer settings interface"""
+class IViewItemsPortletThumbnailsRendererSettings(IViewItemsPortletBaseRendererSettings):
+    """View items portlet thumbnails renderer settings interface"""
 
+    paginate = Attribute("Removed attribute")
+    page_size = Attribute("Removed attribute")
+    
     thumb_selection = BootstrapThumbnailsSelectionField(
         title=_("Thumbnails selection"),
         description=_("Selection used to display images thumbnails"),
@@ -106,37 +122,30 @@ class IViewItemsPortletHorizontalRendererSettings(Interface):
         required=True)
 
 
-class IViewItemsPortletPanelsRendererSettings(Interface):
+class IViewItemsPortletPanelsRendererSettings(IViewItemsPortletBaseRendererSettings):
     """View items portlet panels renderer settings interface"""
-
-    display_illustrations = Bool(title=_("Display illustrations?"),
-                                 description=_("If 'no', view contents will not display "
-                                               "illustrations"),
-                                 required=True,
-                                 default=True)
 
     thumb_selection = BootstrapThumbnailsSelectionField(
         title=_("Thumbnails selection"),
-        description=_("Selection used to display illustrations thumbnails"),
+        description=_("Selection used to display images thumbnails"),
         default_selection='pano',
-        default_width={
-            'xs': 6,
-            'sm': 6,
-            'md': 4,
-            'lg': 3,
-            'xl': 2
-        },
-        required=True)
+        change_selection=True,
+        default_width=12,
+        change_width=False,
+        required=False)
 
-    paginate = Bool(title=_("Paginate?"),
-                    description=_("If 'no', results pagination will be disabled"),
-                    required=True,
-                    default=True)
-
-    page_size = Int(title=_("Page size"),
-                    description=_("Number of items per page, if pagination is enabled"),
-                    required=False,
-                    default=9)
+    columns_count = BootstrapThumbnailsSelectionField(
+         title=_("Columns count"),
+         description=_("Select the number of panels columns for all available devices"),
+         required=True,
+         change_selection=False,
+         default_width={
+             'xs': 1,
+             'sm': 2,
+             'md': 3,
+             'lg': 3,
+             'xl': 4
+         })
 
     header_display_mode = Choice(title=_("Header display mode"),
                                  description=_("Defines how results headers will be rendered"),
@@ -149,3 +158,35 @@ class IViewItemsPortletPanelsRendererSettings(Interface):
                                      "maximum text length"),
                        required=True,
                        default=120)
+
+
+class IViewItemsPortletCardsRendererSettings(IViewItemsPortletPanelsRendererSettings):
+    """View items portlet cards renderer settings interface"""
+
+
+class IViewItemsPortletMasonryCardsRendererSettings(IViewItemsPortletCardsRendererSettings):
+    """View items portlet Masonry cards renderer settings interface"""
+
+
+#
+# View items renderers interfaces
+#
+
+class IViewItemTitle(Interface):
+    """View item title interface"""
+
+
+class IViewItemHeader(Interface):
+    """View item header interface"""
+
+
+class IViewItemURL(Interface):
+    """View item target URL interface"""
+
+
+class IViewItemRenderer(IContentProvider):
+    """View item renderer interface"""
+
+    title = Attribute("View item title")
+    header = Attribute("View item header")
+    url = Attribute("View item URL")
