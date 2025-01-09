@@ -83,7 +83,7 @@ class ViewItemsPortletSettings(PortletSettings):
         merger = self.get_merger(request)
         if merger is not None:
             renderer_settings = IPortletRendererSettings(self)
-            aggregates = IViewItemsAggregates(renderer_settings)
+            aggregates = IViewItemsAggregates(renderer_settings, None)
             if aggregates is not None:
                 ignore_cache = True
             else:
