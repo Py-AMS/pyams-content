@@ -13,7 +13,7 @@
 					${structure:tales:picture(image,
 											  selections=selections,
 											  alt=alt_title,
-											  css_class='result_media')}
+											  css_class='result_media w-100')}
 				</tal:if>
 			</a>
 		</div>
