@@ -3305,19 +3305,19 @@ msgstr ""
 
 #: src/pyams_content/shared/site/portlet/skin/__init__.py:100
 msgid "Simple items list (default)"
-msgstr "Liste verticale simple (par défaut)"
+msgstr "Liste d'éléments simple (par défaut)"
 
 #: src/pyams_content/shared/site/portlet/skin/__init__.py:133
 msgid "Paneled items list"
-msgstr "Panneaux simples"
+msgstr "Grille d'éléments simple"
 
 #: src/pyams_content/shared/site/portlet/skin/__init__.py:166
 msgid "Bootstrap cards list"
-msgstr "Cartes Bootstrap"
+msgstr "Grille d'éléments, stype « cartes Bootstrap »"
 
 #: src/pyams_content/shared/site/portlet/skin/__init__.py:195
 msgid "Bootstrap Masonry cards list"
-msgstr "Cartes Bootstrap, style « Masonry »"
+msgstr "Grille d'éléments, style « Masonry »"
 
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:86
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:119
@@ -7295,7 +7295,7 @@ msgstr "Cartes Bootstrap (par défaut)"
 
 #: src/pyams_content/component/cards/skin/__init__.py:67
 msgid "Bootstrap cards Masonry renderer"
-msgstr "Cartes Bootstrap avec rendu Masonry"
+msgstr "Cartes Bootstrap avec rendu « Masonry »"
 
 #: src/pyams_content/component/fields/interfaces.py:31
 msgid "Form fields"
