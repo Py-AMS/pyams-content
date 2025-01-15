@@ -1,6 +1,17 @@
 Changelog
 =========
 
+2.3.0
+-----
+ - added site summary portlet
+ - added resource shared content
+ - updated QRCode action position and marker view
+ - updated form title for unversioned contents
+ - updated search folders interfaces, settings, filters and results portlets renderers
+ - updated thesaurus filters types and parameters names
+ - updated panels and cards renderers
+ - updated scheduler tasks (require PyAMS_scheduler >= 2.6.0)
+
 2.2.0
 -----
  - added verbatim paragraph and portlet
