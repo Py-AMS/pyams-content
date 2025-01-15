@@ -54,6 +54,8 @@ class ContentPublishingTask(Task):
 
     settings_view_name = None
     principal_id = INTERNAL_USER_ID
+    
+    is_zodb_task = True
 
     def __init__(self, oid, transition_id):
         super().__init__()
@@ -91,6 +93,8 @@ class ContentArchivingTask(Task):
 
     settings_view_name = None
     principal_id = INTERNAL_USER_ID
+    
+    is_zodb_task = True
 
     def __init__(self, oid):
         super().__init__()

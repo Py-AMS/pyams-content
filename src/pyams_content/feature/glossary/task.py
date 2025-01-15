@@ -33,6 +33,7 @@ from pyams_scheduler.task import Task
 from pyams_site.interfaces import ISiteRoot
 from pyams_thesaurus.interfaces.term import IThesaurusTerm
 from pyams_utils.factory import factory_config
+from pyams_utils.finder import find_objects_providing
 from pyams_utils.registry import get_utility
 from pyams_utils.request import check_request
 from pyams_utils.traversing import get_parent
@@ -49,6 +50,8 @@ class GlossaryUpdaterTask(Task):
 
     label = _("Glossary updater task")
     icon_class = 'fas fa-book'
+    
+    is_zodb_task = True
 
     def run(self, report, **kwargs):  # pylint: disable=unused-argument
         """Run glossary automaton update"""
@@ -78,7 +81,6 @@ def handle_updated_thesaurus_term(event):
     if not tags_manager.enable_glossary:
         return
     scheduler = get_utility(IScheduler)
-    for task in scheduler.values():
-        if IGlossaryUpdaterTask.providedBy(task):
-            task.launch()
-            break
+    for task in find_objects_providing(scheduler, IGlossaryUpdaterTask):
+        task.launch()
+        break
