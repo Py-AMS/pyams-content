@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-01-09 15:29+0100\n"
+"POT-Creation-Date: 2025-01-18 10:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2460,16 +2460,15 @@ msgid "Horizontal thumbnails list"
 msgstr ""
 
 #: ./src/pyams_content/shared/view/portlet/skin/__init__.py:184
-msgid "Three vertical panels with panoramic illustrations"
+msgid "Vertical panels with illustrations"
 msgstr ""
 
 #: ./src/pyams_content/shared/view/portlet/skin/__init__.py:216
-#: ./src/pyams_content/component/cards/interfaces.py:28
-msgid "Bootstrap cards"
+msgid "Bootstrap cards grid"
 msgstr ""
 
 #: ./src/pyams_content/shared/view/portlet/skin/__init__.py:245
-msgid "Bootstrap cards, Masonry style"
+msgid "Bootstrap cards grid, Masonry style"
 msgstr ""
 
 #: ./src/pyams_content/shared/view/portlet/skin/interfaces.py:44
@@ -3012,19 +3011,19 @@ msgid ""
 " you can override this label by giving a custom title here"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/portlet/skin/__init__.py:100
+#: ./src/pyams_content/shared/site/portlet/skin/__init__.py:101
 msgid "Simple items list (default)"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/portlet/skin/__init__.py:133
+#: ./src/pyams_content/shared/site/portlet/skin/__init__.py:134
 msgid "Paneled items list"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/portlet/skin/__init__.py:166
+#: ./src/pyams_content/shared/site/portlet/skin/__init__.py:167
 msgid "Bootstrap cards list"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/portlet/skin/__init__.py:195
+#: ./src/pyams_content/shared/site/portlet/skin/__init__.py:196
 msgid "Bootstrap Masonry cards list"
 msgstr ""
 
@@ -3700,7 +3699,7 @@ msgstr ""
 msgid "Images selection"
 msgstr ""
 
-#: ./src/pyams_content/feature/glossary/task.py:50
+#: ./src/pyams_content/feature/glossary/task.py:51
 msgid "Glossary updater task"
 msgstr ""
 
@@ -4396,19 +4395,19 @@ msgstr ""
 msgid "No result found."
 msgstr ""
 
-#: ./src/pyams_content/feature/search/portlet/skin/__init__.py:113
+#: ./src/pyams_content/feature/search/portlet/skin/__init__.py:114
 msgid "Paginated search results (default)"
 msgstr ""
 
-#: ./src/pyams_content/feature/search/portlet/skin/__init__.py:148
+#: ./src/pyams_content/feature/search/portlet/skin/__init__.py:149
 msgid "Paneled search results"
 msgstr ""
 
-#: ./src/pyams_content/feature/search/portlet/skin/__init__.py:183
+#: ./src/pyams_content/feature/search/portlet/skin/__init__.py:184
 msgid "Bootstrap cards search results"
 msgstr ""
 
-#: ./src/pyams_content/feature/search/portlet/skin/__init__.py:214
+#: ./src/pyams_content/feature/search/portlet/skin/__init__.py:215
 msgid "Bootstrap Masonry cards search results"
 msgstr ""
 
@@ -4731,7 +4730,7 @@ msgstr ""
 msgid "Content publisher task"
 msgstr ""
 
-#: ./src/pyams_content/workflow/task.py:89
+#: ./src/pyams_content/workflow/task.py:91
 msgid "Content archiver task"
 msgstr ""
 
@@ -6713,6 +6712,10 @@ msgstr ""
 
 #: ./src/pyams_content/component/frame/skin/interfaces.py:78
 msgid "Select frame size for all available devices"
+msgstr ""
+
+#: ./src/pyams_content/component/cards/interfaces.py:28
+msgid "Bootstrap cards"
 msgstr ""
 
 #: ./src/pyams_content/component/cards/interfaces.py:36

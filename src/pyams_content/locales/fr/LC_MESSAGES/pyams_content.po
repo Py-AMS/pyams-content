@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-01-09 15:29+0100\n"
+"POT-Creation-Date: 2025-01-18 10:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2711,16 +2711,15 @@ msgid "Horizontal thumbnails list"
 msgstr "Liste horizontale de vignettes"
 
 #: src/pyams_content/shared/view/portlet/skin/__init__.py:184
-msgid "Three vertical panels with panoramic illustrations"
+msgid "Vertical panels with illustrations"
 msgstr "Grille de résultats, avec ou sans facettes, style « page carrefour »"
 
 #: src/pyams_content/shared/view/portlet/skin/__init__.py:216
-#: src/pyams_content/component/cards/interfaces.py:28
-msgid "Bootstrap cards"
+msgid "Bootstrap cards grid"
 msgstr "Grille de résultats, avec ou sans facettes, style « cartes Bootstrap »"
 
 #: src/pyams_content/shared/view/portlet/skin/__init__.py:245
-msgid "Bootstrap cards, Masonry style"
+msgid "Bootstrap cards grid, Masonry style"
 msgstr "Grille de résultats, avec ou sans facettes, style « Masonry »"
 
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:44
@@ -3303,19 +3302,19 @@ msgstr ""
 "contenu de la cible des liens ; vous pouvez redéfinir ce libellé l'indiquant "
 "ici"
 
-#: src/pyams_content/shared/site/portlet/skin/__init__.py:100
+#: src/pyams_content/shared/site/portlet/skin/__init__.py:101
 msgid "Simple items list (default)"
 msgstr "Liste d'éléments simple (par défaut)"
 
-#: src/pyams_content/shared/site/portlet/skin/__init__.py:133
+#: src/pyams_content/shared/site/portlet/skin/__init__.py:134
 msgid "Paneled items list"
 msgstr "Grille d'éléments simple"
 
-#: src/pyams_content/shared/site/portlet/skin/__init__.py:166
+#: src/pyams_content/shared/site/portlet/skin/__init__.py:167
 msgid "Bootstrap cards list"
 msgstr "Grille d'éléments, stype « cartes Bootstrap »"
 
-#: src/pyams_content/shared/site/portlet/skin/__init__.py:195
+#: src/pyams_content/shared/site/portlet/skin/__init__.py:196
 msgid "Bootstrap Masonry cards list"
 msgstr "Grille d'éléments, style « Masonry »"
 
@@ -4079,7 +4078,7 @@ msgstr "Grilles de liens avec illustrations par onglets (par défaut)"
 msgid "Images selection"
 msgstr "Sélection des images"
 
-#: src/pyams_content/feature/glossary/task.py:50
+#: src/pyams_content/feature/glossary/task.py:51
 msgid "Glossary updater task"
 msgstr "Mise à jour du glossaire"
 
@@ -4831,19 +4830,19 @@ msgstr "Premiers résultats de la recherche :"
 msgid "No result found."
 msgstr "Aucun résultat trouvé"
 
-#: src/pyams_content/feature/search/portlet/skin/__init__.py:113
+#: src/pyams_content/feature/search/portlet/skin/__init__.py:114
 msgid "Paginated search results (default)"
 msgstr "Liste de résultats, avec ou sans facettes (par défaut)"
 
-#: src/pyams_content/feature/search/portlet/skin/__init__.py:148
+#: src/pyams_content/feature/search/portlet/skin/__init__.py:149
 msgid "Paneled search results"
 msgstr "Grille de résultats, avec ou sans facettes, style « page carrefour »"
 
-#: src/pyams_content/feature/search/portlet/skin/__init__.py:183
+#: src/pyams_content/feature/search/portlet/skin/__init__.py:184
 msgid "Bootstrap cards search results"
 msgstr "Grille de résultats, avec ou sans facettes, style « cartes Bootstrap »"
 
-#: src/pyams_content/feature/search/portlet/skin/__init__.py:214
+#: src/pyams_content/feature/search/portlet/skin/__init__.py:215
 msgid "Bootstrap Masonry cards search results"
 msgstr "Grille de résultats, avec ou sans facettes, style « Masonry »"
 
@@ -5176,7 +5175,7 @@ msgstr "publication refusée"
 msgid "Content publisher task"
 msgstr "Publication d'un contenu"
 
-#: src/pyams_content/workflow/task.py:89
+#: src/pyams_content/workflow/task.py:91
 msgid "Content archiver task"
 msgstr "Archivage d'un contenu"
 
@@ -7284,6 +7283,10 @@ msgstr "Largeur de l'encadré"
 msgid "Select frame size for all available devices"
 msgstr ""
 "Largeur appliquée à l'encadré sur les différents types de périphériques"
+
+#: src/pyams_content/component/cards/interfaces.py:28
+msgid "Bootstrap cards"
+msgstr "Cartes Bootstrap"
 
 #: src/pyams_content/component/cards/interfaces.py:36
 msgid "Presentation template used for cards"

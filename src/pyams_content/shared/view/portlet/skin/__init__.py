@@ -181,7 +181,7 @@ class ViewItemsPortletPanelsRendererSettings(BaseViewItemsPortletRendererSetting
 class ViewItemsPortletPanelsRenderer(BaseViewItemsPortletRenderer):
     """View items portlet panels renderer"""
 
-    label = _("Three vertical panels with panoramic illustrations")
+    label = _("Vertical panels with illustrations")
     weight = 30
 
     settings_interface = IViewItemsPortletPanelsRendererSettings
@@ -213,7 +213,7 @@ class ViewItemsPortletCardsRendererSettings(ViewItemsPortletPanelsRendererSettin
 class ViewItemsPortletCardsRenderer(BaseViewItemsPortletRenderer):
     """View items portlet cards renderer"""
 
-    label = _("Bootstrap cards")
+    label = _("Bootstrap cards grid")
     weight = 40
 
     settings_interface = IViewItemsPortletCardsRendererSettings
@@ -242,7 +242,7 @@ class ViewItemsPortletMasonryCardsRendererSettings(ViewItemsPortletCardsRenderer
 class ViewItemsPortletMasonryCardsRenderer(BaseViewItemsPortletRenderer):
     """View items portlet Masonry cards renderer"""
 
-    label = _("Bootstrap cards, Masonry style")
+    label = _("Bootstrap cards grid, Masonry style")
     weight = 50
 
     settings_interface = IViewItemsPortletMasonryCardsRendererSettings
