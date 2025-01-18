@@ -83,7 +83,7 @@ class SiteRootToolsConfiguration(Persistent, Contained):
                 return table
         factory = registry.settings.get(f'pyams_content.config.{table_name}_table_factory')
         if factory:
-            if factory.lower in (MISSING_INFO, 'off', 'none', 'disabled'):
+            if factory.lower() in (MISSING_INFO, 'off', 'none', 'disabled'):
                 return None
             factory = DottedNameResolver().resolve(factory)
         if factory is None:
@@ -141,11 +141,10 @@ class SiteRootToolsConfiguration(Persistent, Contained):
             if interface.providedBy(tool):
                 self.tools_names[interface] = name
                 return tool
-        factory = registry.settings.get(f'pyams_content.config.{tool_name}_factory')
+        factory = registry.settings.get(f'pyams_content.config.{tool_name}_tool_factory')
         if factory:
-            if factory.lower in (MISSING_INFO, 'off', 'none', 'disabled'):
+            if factory.lower() in (MISSING_INFO, 'off', 'none', 'disabled'):
                 return None
-        if factory is not None:
             factory = DottedNameResolver().resolve(factory)
         if factory is None:
             factory = get_object_factory(interface)
