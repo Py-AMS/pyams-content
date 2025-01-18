@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.3.1
+-----
+ - updated renderers label
+ - updated method call in configuration tools and tables checker
+
 2.3.0
 -----
  - added site summary portlet
