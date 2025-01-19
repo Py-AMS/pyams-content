@@ -393,7 +393,7 @@ class SharedToolDashboardManagerWaitingValues(ContextRequestViewAdapter):
         roles = IWfSharedContentRoles(content)
         if self.request.principal.id in roles.managers:
             return True
-        restrictions = IManagerRestrictions(content)
+        restrictions = IManagerRestrictions(content, None)
         if restrictions is not None:
             return restrictions.can_access(content, PUBLISH_CONTENT_PERMISSION, self.request)
         return False

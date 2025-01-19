@@ -133,7 +133,7 @@ class SiteFolderAddForm(AdminModalAddForm):
             parent[name] = content
 
     def add(self, content):
-        pass
+        """Don't do anything as folder was added in `update_content` method!"""
 
 
 @adapter_config(required=(ISiteContainer, IAdminLayer, SiteFolderAddForm),

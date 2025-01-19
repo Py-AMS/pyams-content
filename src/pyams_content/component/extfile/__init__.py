@@ -27,10 +27,7 @@ from pyams_content.component.association import AssociationItem
 from pyams_content.component.association.interfaces import IAssociationInfo
 from pyams_content.component.extfile.interfaces import EXTAUDIO_ICON_CLASS, EXTAUDIO_ICON_HINT, \
     EXTFILE_ICON_CLASS, EXTFILE_ICON_HINT, EXTIMAGE_ICON_CLASS, EXTIMAGE_ICON_HINT, \
-    EXTVIDEO_ICON_CLASS, \
-    EXTVIDEO_ICON_HINT, \
-    IBaseExtFile, \
-    IExtAudio, IExtFile, \
+    EXTVIDEO_ICON_CLASS, EXTVIDEO_ICON_HINT, IBaseExtFile, IExtAudio, IExtFile, \
     IExtFileManagerInfo, IExtImage, IExtVideo
 from pyams_content.shared.common import IWfSharedContent
 from pyams_file.file import EXTENSIONS_THUMBNAILS
@@ -81,7 +78,7 @@ class BaseExtFileAssociationInfoAdapter(ContextAdapter):
         if not title:
             title = self.context.filename
             if '.' in title:
-                title, extension = title.rsplit('.', 1)
+                title, _extension = title.rsplit('.', 1)
         prefix = II18n(manager_info).query_attribute('default_title_prefix',
                                                      request=request) or ''
         return f'{prefix} {title}'
@@ -97,7 +94,7 @@ class BaseExtFileAssociationInfoAdapter(ContextAdapter):
         """User icon getter"""
         filename = self.context.filename
         if filename:
-            name, ext = os.path.splitext(filename)
+            _name, ext = os.path.splitext(filename)
             return f'''<img class="mx-3 align-top"''' \
                    f''' src="/--static--/pyams_file_views/img/16x16/''' \
                    f'''{EXTENSIONS_THUMBNAILS.get(ext, 'unknown.png')}" />'''

@@ -184,8 +184,8 @@ class SharedToolOwnerChangeCheckedColumn(CheckBoxColumn):
         return False
 
     def render_head_cell(self):
-        return (f'<input type="checkbox" '
-                f'       data-ams-change-handler="MyAMS.container.selectAllElements" />')
+        return ('<input type="checkbox" '
+                '       data-ams-change-handler="MyAMS.container.selectAllElements" />')
 
     def render_cell(self, item):
         return super().render_cell(item).replace(' />',

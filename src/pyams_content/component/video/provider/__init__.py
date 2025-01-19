@@ -27,7 +27,6 @@ from pyams_content.component.video.provider.interfaces import ICustomVideoSettin
 from pyams_utils.adapter import adapter_config, get_adapter_weight
 from pyams_utils.factory import factory_config
 from pyams_utils.registry import get_utilities_for, utility_config
-from pyams_utils.request import check_request
 from pyams_utils.vocabulary import vocabulary_config
 
 __docformat__ = 'restructuredtext'
@@ -42,8 +41,6 @@ class VideoProvidersVocabulary(SimpleVocabulary):
     interface = IExternalVideoProvider
 
     def __init__(self, context):
-        request = check_request()
-        translate = request.localizer.translate
         utils = sorted(get_utilities_for(self.interface),
                        key=get_adapter_weight)
         terms = [

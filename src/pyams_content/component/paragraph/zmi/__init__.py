@@ -347,17 +347,16 @@ class BaseParagraphPropertiesEditFormRenderer(ContextRequestViewAdapter):
         if not changes:
             return None
         result = {}
-        if changes:
-            event = get_json_paragraph_toolbar_refresh_event(self.context, self.request)
-            if event is not None:
-                result.setdefault('callbacks', []).append(event)
-            result.setdefault('callbacks', []).append({
-                'callback': 'MyAMS.content.paragraphs.refreshTitle',
-                'options': {
-                    'element_name': self.context.__name__,
-                    'title': get_object_label(self.context, self.request)
-                }
-            })
+        event = get_json_paragraph_toolbar_refresh_event(self.context, self.request)
+        if event is not None:
+            result.setdefault('callbacks', []).append(event)
+        result.setdefault('callbacks', []).append({
+            'callback': 'MyAMS.content.paragraphs.refreshTitle',
+            'options': {
+                'element_name': self.context.__name__,
+                'title': get_object_label(self.context, self.request)
+            }
+        })
         if 'renderer' in changes.get(self.context.factory_intf, ()):
             result.setdefault('callbacks', []).append(
                 get_json_widget_refresh_callback(self.view, 'renderer', self.request))

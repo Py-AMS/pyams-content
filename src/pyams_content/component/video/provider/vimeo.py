@@ -32,7 +32,7 @@ __docformat__ = 'restructuredtext'
 from pyams_content import _
 
 
-VIMEO_BASE_URL = re.compile('https://vimeo.com/([0-9]+)')
+VIMEO_BASE_URL = re.compile('https://vimeo.com/(\d+)')
 
 
 @factory_config(IVimeoVideoSettings)

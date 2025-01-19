@@ -28,10 +28,10 @@ from pyams_viewlet.viewlet import BaseContentProvider
 
 
 def time_to_seconds(value):
-    """Convert min:sec value to seconds"""
+    """Convert minutes:seconds value to seconds"""
     if value and (':' in value):
-        min, sec = value.split(':', 1)
-        return str(int(min)*60 + int(sec))
+        minutes, seconds = value.split(':', 1)
+        return str(int(minutes) * 60 + int(seconds))
     return value or ''
 
 
