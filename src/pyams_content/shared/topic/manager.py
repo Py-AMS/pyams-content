@@ -20,6 +20,7 @@ from zope.interface import implementer
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
 
 from pyams_content.component.paragraph.interfaces import IParagraphFactorySettingsTarget
+from pyams_content.component.thesaurus.interfaces import IThemesManagerTarget
 from pyams_content.reference.pictogram.interfaces import IPictogramManagerTarget
 from pyams_content.shared.common.manager import SharedTool
 from pyams_content.shared.common.types import TypedSharedToolMixin
@@ -31,7 +32,7 @@ __docformat__ = 'restructuredtext'
 
 
 @factory_config(ITopicManager)
-@implementer(IParagraphFactorySettingsTarget, IPictogramManagerTarget)
+@implementer(IParagraphFactorySettingsTarget, IThemesManagerTarget, IPictogramManagerTarget)
 class TopicManager(SharedTool, TypedSharedToolMixin):
     """Topic manager class"""
 

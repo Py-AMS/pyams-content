@@ -17,15 +17,16 @@
 from pyramid.events import subscriber
 from zope.container.ordered import OrderedContainer
 from zope.interface import implementer
-from zope.lifecycleevent import IObjectAddedEvent, IObjectMovedEvent, IObjectRemovedEvent
+from zope.lifecycleevent.interfaces import IObjectAddedEvent, IObjectMovedEvent, IObjectRemovedEvent
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
-from pyams_content.component.illustration import IIllustrationTarget, ILinkIllustrationTarget
+from pyams_content.component.illustration.interfaces import IIllustrationTarget, ILinkIllustrationTarget
+from pyams_content.component.thesaurus.interfaces import IThemesManagerTarget
 from pyams_content.feature.preview.interfaces import IPreviewTarget
 from pyams_content.interfaces import MANAGE_SITE_PERMISSION
 from pyams_content.reference.pictogram.interfaces import IPictogramManagerTarget
-from pyams_content.shared.common import ISharedContent
+from pyams_content.shared.common.interfaces import ISharedContent
 from pyams_content.shared.common.manager import BaseSharedTool
 from pyams_content.shared.common.types import TypedSharedToolMixin
 from pyams_content.shared.site.container import SiteContainerMixin
@@ -48,7 +49,7 @@ from pyams_content import _
 
 
 @factory_config(ISiteManager)
-@implementer(IDefaultProtectionPolicy, IPictogramManagerTarget,
+@implementer(IDefaultProtectionPolicy, IPictogramManagerTarget, IThemesManagerTarget,
              IIllustrationTarget, ILinkIllustrationTarget,
              IPortalContext, IPortalHeaderContext, IPortalFooterContext, IPreviewTarget)
 class SiteManager(SiteContainerMixin, OrderedContainer, TypedSharedToolMixin, BaseSharedTool,

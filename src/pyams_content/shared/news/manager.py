@@ -19,9 +19,10 @@ __docformat__ = 'restructuredtext'
 from pyramid.events import subscriber
 from zope.component.interfaces import ISite
 from zope.interface import implementer
-from zope.lifecycleevent import IObjectAddedEvent
+from zope.lifecycleevent.interfaces import IObjectAddedEvent
 
 from pyams_content.component.paragraph.interfaces import IParagraphFactorySettingsTarget
+from pyams_content.component.thesaurus.interfaces import IThemesManagerTarget
 from pyams_content.reference.pictogram.interfaces import IPictogramManagerTarget
 from pyams_content.shared.common.manager import SharedTool
 from pyams_content.shared.news import NEWS_CONTENT_TYPE
@@ -31,7 +32,7 @@ from pyams_utils.traversing import get_parent
 
 
 @factory_config(INewsManager)
-@implementer(IParagraphFactorySettingsTarget, IPictogramManagerTarget)
+@implementer(IParagraphFactorySettingsTarget, IThemesManagerTarget, IPictogramManagerTarget)
 class NewsManager(SharedTool):
     """News manager class"""
 

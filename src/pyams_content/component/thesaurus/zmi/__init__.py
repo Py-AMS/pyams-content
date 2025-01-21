@@ -15,6 +15,7 @@
 
 """
 
+from pyramid.traversal import lineage
 from zope.interface import Interface, alsoProvides, implementer
 
 from pyams_content.component.thesaurus import ICollectionsInfo, ICollectionsManager, \
@@ -75,10 +76,12 @@ class BaseThesaurusTermsEditFormMixin:
         super().update_widgets(prefix)
         widget = self.widgets.get(self.fieldname)
         if widget is not None:
-            manager = self.manager(self.request.root, None)
-            if manager is not None:
-                widget.thesaurus_name = manager.thesaurus_name
-                widget.extract_name = manager.extract_name
+            for parent in lineage(self.context):
+                manager = self.manager(parent, None)
+                if manager is not None:
+                    widget.thesaurus_name = manager.thesaurus_name
+                    widget.extract_name = manager.extract_name
+                    break
 
 
 #
@@ -178,10 +181,11 @@ class ThemesMenu(NavigationMenuItem):
     """Themes menu"""
 
     def __new__(cls, context, request, view, manager):  # pylint: disable=unused-argument
-        themes_manager = IThemesManager(request.root, None)
-        if (themes_manager is None) or not themes_manager.thesaurus_name:
-            return None
-        return NavigationMenuItem.__new__(cls)
+        for parent in lineage(context):
+            themes_manager = IThemesManager(parent, None)
+            if themes_manager is not None:
+                return NavigationMenuItem.__new__(cls) if themes_manager.thesaurus_name else None
+        return None
 
     label = _("Themes")
     href = '#themes.html'
@@ -273,9 +277,10 @@ class ThemesInnerEditForm(BaseThemesEditFormMixin, InnerEditForm):
                 provides=IThesaurus)
 def themes_edit_form_thesaurus_adapter(context, request, view):  # pylint: disable=unused-argument
     """Themes edit form thesaurus adapter"""
-    manager = IThemesManager(request.root, IThemesManager)
-    if manager.thesaurus_name:
-        return query_utility(IThesaurus, name=manager.thesaurus_name)
+    for parent in lineage(context):
+        manager = IThemesManager(parent, None)
+        if manager is not None:
+            return query_utility(IThesaurus, name=manager.thesaurus_name) if manager.thesaurus_name else None
     return None
 
 
