@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-01-22 13:20+0100\n"
+"POT-Creation-Date: 2025-01-22 18:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,7 +188,7 @@ msgid "Public support email address"
 msgstr ""
 
 #: ./src/pyams_content/root/interfaces.py:80
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:56
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:58
 msgid "Webmasters"
 msgstr ""
 
@@ -392,7 +392,7 @@ msgid "Modifier"
 msgstr ""
 
 #: ./src/pyams_content/zmi/dashboard.py:227
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:231
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:233
 msgid "Last update"
 msgstr ""
 
@@ -1298,217 +1298,217 @@ msgstr ""
 msgid "Shared tools"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:57
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:59
 msgid "Webmasters can handle all contents, including published ones"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:62
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:64
 msgid "Pilots"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:63
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:65
 msgid ""
 "Pilots can handle tool configuration, manage access rules, grant users roles "
 "and manage managers restrictions"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:69
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:286
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:71
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:288
 msgid "Managers"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:70
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:287
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:72
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:289
 msgid ""
 "Managers can handle main operations in tool's workflow, like publish or "
 "retire contents"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:75
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:292
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:77
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:294
 msgid "Contributors"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:76
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:78
 msgid "Contributors are users which are allowed to create new contents"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:81
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:299
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:83
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:301
 msgid "Designers"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:82
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:300
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:84
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:302
 msgid "Designers are users which are allowed to manage presentation templates"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:115
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:117
 msgid "Don't use inner folders"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:116
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:118
 msgid "Use inner year folders"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:117
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:119
 msgid "Use inner year and month folders"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:134
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:136
 msgid "Workflow name"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:135
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:137
 msgid "Name of workflow utility used to manage tool contents"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:140
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:142
 msgid "Use inner folders"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:141
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:143
 msgid "Defines if inner folders are used to store shared contents"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:157
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:159
 msgid "Single content label"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:158
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:160
 msgid ""
 "This label can be used to tag content type of a single content in place of "
 "shared tool title"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:162
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:164
 #: ./src/pyams_content/shared/common/interfaces/types.py:71
 msgid "Navigation label"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:163
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:165
 #: ./src/pyams_content/shared/common/interfaces/types.py:72
 msgid "Label used for navigation entries"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:166
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:168
 #: ./src/pyams_content/shared/common/interfaces/types.py:83
 msgid "Facets label"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:167
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:169
 #: ./src/pyams_content/shared/common/interfaces/types.py:84
 msgid ""
 "Label used for the facets of views or search engines, instead of the standard"
 " label"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:171
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:173
 #: ./src/pyams_content/shared/common/interfaces/types.py:88
 msgid "Facets type label"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:172
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:174
 #: ./src/pyams_content/shared/common/interfaces/types.py:89
 msgid ""
 "Label used for the facets of views or search engine, instead of the standard "
 "label, when facets are configured in \"content-type\" mode"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:177
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:179
 #: ./src/pyams_content/shared/common/interfaces/types.py:94
 #: ./src/pyams_content/shared/alert/interfaces.py:54
 msgid "Dashboards label"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:178
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:180
 #: ./src/pyams_content/shared/common/interfaces/types.py:95
 #: ./src/pyams_content/shared/alert/interfaces.py:55
 msgid "Optional label used for dashboards presentation"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:202
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:204
 msgid "Content URL"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:203
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:205
 msgid ""
 "URL used to access this content; this is important for SEO and should include"
 " most important words describing content; spaces and underscores will be "
 "automatically replaced by hyphens"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:209
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:211
 msgid "Version creator"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:210
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:212
 msgid ""
 "Name of content's version creator. The creator of the first version is also "
 "it's owner."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:215
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:217
 msgid "First owner"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:216
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:218
 msgid "Name of content's first version owner"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:220
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:222
 msgid "Version creation"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:223
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:225
 msgid "Version modifiers"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:224
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:226
 msgid "List of principals who modified this content"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:227
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:229
 msgid "Last modifier"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:228
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:230
 msgid "Last principal who modified this content"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:234
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:236
 #: ./src/pyams_content/shared/site/interfaces.py:111
 #: ./src/pyams_content/shared/site/interfaces.py:161
 #: ./src/pyams_content/shared/form/interfaces.py:54
 msgid "Header"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:235
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:237
 msgid "Content's header is generally displayed in page header"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:239
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:241
 #: ./src/pyams_content/shared/site/interfaces.py:115
 #: ./src/pyams_content/shared/site/interfaces.py:165
 msgid "Meta-description"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:240
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:242
 msgid ""
 "The content's description is 'hidden' into HTML's page headers; but it can be"
 " seen, for example, in some search engines results as content's description; "
 "if description is empty, content's header will be used."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:247
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:249
 msgid "Keywords"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:248
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:250
 msgid "They will be included into HTML pages metadata"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:251
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:253
 #: ./src/pyams_content/shared/site/interfaces.py:123
 #: ./src/pyams_content/shared/site/interfaces.py:173
 #: ./src/pyams_content/shared/site/zmi/folder.py:91
@@ -1516,96 +1516,105 @@ msgstr ""
 msgid "Notepad"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:252
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:254
 #: ./src/pyams_content/shared/site/interfaces.py:124
 #: ./src/pyams_content/shared/site/interfaces.py:174
 #: ./src/pyams_content/shared/site/zmi/folder.py:92
 msgid "Internal information to be known about this content"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:278
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:280
 msgid "Content owner"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:279
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:281
 msgid ""
 "The owner is the creator of content's first version, except if it was "
 "transferred afterwards to another owner"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:293
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:295
 msgid ""
 "Contributors are users which are allowed to update this content in addition "
 "to it's owner"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:305
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:307
 msgid "Readers"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:306
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:308
 msgid ""
 "Readers are users which are asked to verify and comment contents before they "
 "are published"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:311
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:313
 msgid "Guests"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:312
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:314
 msgid ""
 "Guests are users which are allowed to view contents with restricted access"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:362
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:364
 msgid "Principal ID"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:392
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:394
 msgid "Show workflow checks warning"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:393
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:395
 msgid ""
 "If 'yes', this contributor will have to confirm that contents have been "
 "checked before asking for publication"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:399
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:401
 msgid "Substitute for"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:400
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:402
 msgid "Contributor will have access to contents owned by these principals"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:422
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:424
 msgid "Publication checks"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:423
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:425
 msgid ""
 "If 'yes', this manager will have to confirm that contents have been previewed"
 " and checked before publishing a content"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:429
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:431
 msgid "Restricted contents"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:430
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:432
 msgid ""
 "If 'yes', this manager will get restricted access to manage contents based on"
 " selected settings"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:435
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:437
 msgid "Selected owners"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:436
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:438
 msgid "Manager will have access to contents owned by these principals"
+msgstr ""
+
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:448
+#: ./src/pyams_content/shared/common/portlet/specificities.py:41
+msgid "Content specificities"
+msgstr ""
+
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:456
+msgid "Presentation template used for these specificities"
 msgstr ""
 
 #: ./src/pyams_content/shared/common/interfaces/types.py:53
@@ -1697,10 +1706,6 @@ msgstr ""
 msgid "Type of content data"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/portlet/specificities.py:41
-msgid "Content specificities"
-msgstr ""
-
 #: ./src/pyams_content/shared/common/portlet/title.py:44
 msgid "Content title"
 msgstr ""
@@ -1779,6 +1784,7 @@ msgid "Content header"
 msgstr ""
 
 #: ./src/pyams_content/shared/common/portlet/skin/specificities.py:38
+#: ./src/pyams_content/shared/common/skin/specificities.py:68
 msgid "Shared content specificities (default)"
 msgstr ""
 
@@ -5944,8 +5950,6 @@ msgid "Paragraphs types"
 msgstr ""
 
 #: ./src/pyams_content/component/paragraph/zmi/__init__.py:88
-#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:55
-#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:98
 msgid "Paragraph types"
 msgstr ""
 
@@ -6058,11 +6062,11 @@ msgstr ""
 msgid "Presentation template used for this paragraph"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/portlet/__init__.py:94
+#: ./src/pyams_content/component/paragraph/portlet/__init__.py:95
 msgid "Content paragraphs"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/portlet/__init__.py:121
+#: ./src/pyams_content/component/paragraph/portlet/__init__.py:123
 msgid "Paragraphs navigation anchors"
 msgstr ""
 
@@ -6083,7 +6087,7 @@ msgid ""
 msgstr ""
 
 #: ./src/pyams_content/component/paragraph/portlet/interfaces.py:48
-#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:90
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:101
 msgid "Selected paragraphs"
 msgstr ""
 
@@ -6094,65 +6098,91 @@ msgid ""
 "priority"
 msgstr ""
 
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:55
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:109
+msgid "Selected paragraph types"
+msgstr ""
+
 #: ./src/pyams_content/component/paragraph/portlet/interfaces.py:56
 msgid ""
 "Select list of paragraph types you want to include; an empty selection means "
-"that all paragraphs types will be selected"
+"that all paragraphs types will be selected; this setting is not applied when "
+"paragraphs are selected explicitly in the previous field"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:61
-#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:105
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:63
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:116
+msgid "Excluded paragraph types"
+msgstr ""
+
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:64
+msgid ""
+"Select list of paragraph types you want to exclude; an empty selection means "
+"that all paragraphs types will be selected, except if factories are selected "
+"in the previous field; this setting is not applied when paragraphs are "
+"selected explicitly in the previous field"
+msgstr ""
+
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:72
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:124
 msgid "Anchors only"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:62
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:73
 msgid "If 'yes', only paragraphs set as 'anchors' will be selected"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:67
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:78
 msgid "Exclude anchors"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:68
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:79
 msgid ""
 "If 'yes', paragraphs set as 'anchors' will be excluded; take care to not "
 "activate this option and the previous one simultaneously, or no paragraph "
 "will be displayed!"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:75
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:86
 msgid "Paragraphs count limit"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:76
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:87
 msgid ""
 "If specified, the number of displayed paragraphs will be limited to this "
 "number"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:80
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:91
 msgid "Display navigation links"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:81
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:92
 msgid ""
 "If 'no', navigation links to previous and next contents will not be displayed"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:91
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:102
 msgid ""
 "List of paragraphs selected for navigation; an empty selection means that all"
 " paragraphs will be selectable by following filters; otherwise, this "
 "selection will have priority"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:99
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:110
 msgid ""
 "Select list of paragraph types you want to use for navigation; an empty "
 "selection means that all paragraphs types will be selected"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:106
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:117
+msgid ""
+"Select list of paragraph types you want to exclude from navigation; an empty "
+"selection means that all paragraphs types will be selected, except if "
+"factories are selected in the previous field"
+msgstr ""
+
+#: ./src/pyams_content/component/paragraph/portlet/interfaces.py:125
 msgid "If 'no', all paragraphs will be used as navigation anchors"
 msgstr ""
 
@@ -6172,7 +6202,7 @@ msgstr ""
 msgid "Paragraphs list (default)"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/portlet/skin/__init__.py:176
+#: ./src/pyams_content/component/paragraph/portlet/skin/__init__.py:177
 msgid "Paragraphs navigation (default)"
 msgstr ""
 
@@ -6204,15 +6234,15 @@ msgstr ""
 msgid "ReStructured text"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/skin/html.py:153
+#: ./src/pyams_content/component/paragraph/skin/html.py:149
 msgid "Markdown text"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/skin/html.py:214
+#: ./src/pyams_content/component/paragraph/skin/html.py:206
 msgid "Rich text (default)"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/skin/html.py:253
+#: ./src/pyams_content/component/paragraph/skin/html.py:245
 msgid "Bootstrap alert"
 msgstr ""
 
