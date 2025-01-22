@@ -33,8 +33,8 @@ from pyams_utils.adapter import adapter_config
 from pyams_utils.factory import factory_config
 from pyams_utils.fanstatic import ExternalResource
 from pyams_utils.interfaces.pygments import IPygmentsCodeConfiguration
-from pyams_utils.interfaces.text import IHTMLRenderer
 from pyams_utils.pygments import render_source
+from pyams_utils.text import text_to_html
 
 __docformat__ = 'restructuredtext'
 
@@ -132,11 +132,7 @@ class RawParagraphRestRenderer(DefaultContentRenderer):
         body = II18n(self.context).query_attribute('body', request=self.request)
         if not body:
             return ''
-        renderer = self.request.registry.queryMultiAdapter((body, self.request),
-                                                           IHTMLRenderer, name='rest')
-        if renderer is None:
-            return ''
-        return renderer.render()
+        return text_to_html(body, 'rest;oid_to_href;glossary', request=self.request)
 
 
 @adapter_config(name='markdown',
@@ -161,11 +157,7 @@ class RawParagraphMarkdownRenderer(DefaultContentRenderer):
         body = II18n(self.context).query_attribute('body', request=self.request)
         if not body:
             return ''
-        renderer = self.request.registry.queryMultiAdapter((body, self.request),
-                                                           IHTMLRenderer, name='markdown')
-        if renderer is None:
-            return ''
-        return renderer.render()
+        return text_to_html(body, 'markdown;oid_to_href;glossary', request=self.request)
 
 
 #
