@@ -24,6 +24,8 @@ from zope.interface import Attribute, Interface
 from zope.schema import Bool, Choice, Text, TextLine
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
+from pyams_content.component.paragraph.schema import ParagraphRendererChoice
 from pyams_content.interfaces import CONTRIBUTOR_ROLE, GUEST_ROLE, IBaseContent, MANAGER_ROLE, \
     OWNER_ROLE, PILOT_ROLE, READER_ROLE, WEBMASTER_ROLE
 from pyams_i18n.schema import I18nTextField, I18nTextLineField
@@ -436,3 +438,20 @@ class IManagerWorkflowRestrictions(IRestrictionInfo):
                                 description=_("Manager will have access to contents owned "
                                               "by these principals"),
                                 required=False)
+
+
+#
+# Shared content specificities paragraph
+#
+
+SPECIFICITIES_PARAGRAPH_TYPE = 'specificities'
+SPECIFICITIES_PARAGRAPH_NAME = _("Content specificities")
+SPECIFICITIES_PARAGRAPH_RENDERERS = 'PyAMS_content.paragraph.specificities.renderers'
+SPECIFICITIES_PARAGRAPH_ICON_CLASS = 'fas fa-tools'
+
+
+class ISpecificitiesParagraph(IBaseParagraph):
+    """Specificities paragraph interface"""
+
+    renderer = ParagraphRendererChoice(description=_("Presentation template used for these specificities"),
+                                       renderers=SPECIFICITIES_PARAGRAPH_RENDERERS)

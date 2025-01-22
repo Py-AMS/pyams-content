@@ -326,7 +326,7 @@ class SharedContentTextWithOIDRenderer:
         self.context = context
         self.value = value
 
-    def render(self):
+    def render(self, **kwargs):
         sequence = ISequentialIdInfo(self.context, None)
         if sequence is None:
             return self.value
