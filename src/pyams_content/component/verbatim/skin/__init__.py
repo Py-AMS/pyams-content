@@ -14,9 +14,9 @@
 
 This module defines renderers for verbatim paragraph.
 """
-
+from pyams_content.component.illustration import IIllustration
 from pyams_content.component.verbatim.interfaces import IVerbatimParagraph
-from pyams_content.feature.renderer import DefaultContentRenderer
+from pyams_content.feature.renderer import DefaultContentRenderer, IRendererSettings
 from pyams_content.feature.renderer.interfaces import IContentRenderer
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
@@ -37,3 +37,20 @@ class VerbatimParagraphDefaultRenderer(DefaultContentRenderer):
     """Verbatim paragraph default renderer"""
 
     label = _("Full width verbatim (default)")
+
+    @property
+    def illustration_selections(self):
+        illustration = IIllustration(self.context, None)
+        if (illustration is not None) and illustration.has_data():
+            renderer_settings = IRendererSettings(illustration, None)
+            selection = getattr(renderer_settings, 'thumb_selection', None)
+            if selection:
+                selection = selection.copy()
+                selection['xs'].cols = 12
+                selection['sm'].cols = 3
+                selection['md'].cols = 2
+                selection['lg'].cols = 2
+                selection['xl'].cols = 2
+            return selection
+        return None
+        

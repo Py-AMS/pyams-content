@@ -52,7 +52,7 @@ class SharedContentSummaryAction(ContextAction):
     """Shared content summary action"""
 
     status = 'transparent'
-    css_class = 'btn-xs rounded-circle border-primary mx-1'
+    css_class = 'btn-xs rounded-circle border-primary mr-3'
     icon_class = 'fas fa-info text-primary px-0 py-1'
 
     hint = _("Content information")

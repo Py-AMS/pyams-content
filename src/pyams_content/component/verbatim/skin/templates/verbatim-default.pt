@@ -14,16 +14,12 @@
 					 class="illustration col-md-2 col-sm-3 px-0 hidden-xs">
 					<a tal:define="thumbnails tales:thumbnails(image);
 								   target thumbnails.get_thumbnail('800x600');
-								   alt_title i18n:illustration.alt_title;"
+								   alt_title i18n:illustration.alt_title;
+								   selections view.illustration_selections;"
 					   href="${tales:absolute_url(target)}"
 					   data-toggle="modal"
 					   data-target="#illustration_${tales:cache_key(illustration)}">
-						${structure:tales:picture(image,
-												  xl_thumb='portrait', xl_width=2,
-												  lg_thumb='portrait', lg_width=2,
-												  md_thumb='portrait', md_width=2,
-												  sm_thumb='portrait', sm_width=3,
-												  xs_thumb='portrait', xs_width=12,
+						${structure:tales:picture(image, selections=selections,
 												  alt=alt_title, css_class='w-100')}
 						<ul class="d-flex m-0 py-1 px-2 legend list-inline list-separated position-absolute small text-white-50"
 							tal:define="title i18n:illustration.title;
