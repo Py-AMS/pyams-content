@@ -17,13 +17,14 @@
 from datetime import datetime, timezone
 
 from pyramid.events import subscriber
+from zope.container.interfaces import IContainer
 from zope.interface import Interface, Invalid
 from zope.lifecycleevent import ObjectModifiedEvent
 
 from pyams_content.interfaces import CREATE_VERSION_PERMISSION, MANAGE_CONTENT_PERMISSION, \
     PUBLISH_CONTENT_PERMISSION
-from pyams_content.shared.common.interfaces import IBaseSharedTool, ISharedContent, IWfSharedContent, \
-    IWfSharedContentRoles
+from pyams_content.shared.common.interfaces import IBaseSharedTool, ISharedContent, ISharedToolInnerFolder, \
+    IWfSharedContent, IWfSharedContentRoles
 from pyams_content.shared.common.zmi.interfaces import IWorkflowDeleteFormTarget
 from pyams_content.workflow import DELETED, DRAFT, PROPOSED, PUBLISHED
 from pyams_form.ajax import ajax_form_config
@@ -39,7 +40,7 @@ from pyams_template.template import template_config
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.date import format_datetime
 from pyams_utils.text import text_to_html
-from pyams_utils.timezone import gmtime, tztime
+from pyams_utils.timezone import tztime
 from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
 from pyams_viewlet.viewlet import Viewlet, viewlet_config
@@ -709,9 +710,9 @@ class SharedContentDeleteForm(SharedContentWorkflowTransitionForm):
         state = IWorkflowState(self.context)
         if state.version_id == 1:  # remove the first and only version => remove all
             content = get_parent(self.context, ISharedContent)
-            parent = get_parent(content, IBaseSharedTool)
-            del parent[content.__name__]
-            target = self.request.registry.queryMultiAdapter((parent, self.request, self),
+            container = get_parent(content, IContainer)
+            del container[content.__name__]
+            target = self.request.registry.queryMultiAdapter((container, self.request, self),
                                                              IWorkflowDeleteFormTarget)
         else:
             versions = IWorkflowVersions(self.context)
@@ -726,6 +727,13 @@ class SharedContentDeleteForm(SharedContentWorkflowTransitionForm):
 def shared_content_workflow_delete_form_target(context, request, form):
     """Shared content workflow delete form target"""
     return context
+
+
+@adapter_config(required=(ISharedToolInnerFolder, IAdminLayer, SharedContentDeleteForm),
+                provides=IWorkflowDeleteFormTarget)
+def shared_tool_folder_folder_workflow_delete_form_target(context, request, form):
+    """Shared tool inner folder workflow delete form target"""
+    return get_parent(context, IBaseSharedTool)
 
 
 @adapter_config(required=(IWorkflowVersion, IAdminLayer, SharedContentDeleteForm),

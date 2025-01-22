@@ -15,22 +15,23 @@
 This module defines base management components for all shared contents.
 """
 
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from uuid import uuid4
 
 from pyramid.events import subscriber
 from pyramid.location import lineage
+from zope.container.folder import Folder
 from zope.copy import copy
-from zope.interface import Interface, implementer
+from zope.interface import Interface, alsoProvides, implementer
 from zope.lifecycleevent import ObjectCreatedEvent
 from zope.location import locate
 
 from pyams_content.interfaces import CREATE_CONTENT_PERMISSION, IBaseContent, \
     MANAGE_CONTENT_PERMISSION, MANAGE_SITE_ROOT_PERMISSION, PUBLISH_CONTENT_PERMISSION
-from pyams_content.shared.common import IBaseSharedTool, ISharedContent, IWfSharedContent, \
-    WfSharedContent
-from pyams_content.shared.common.interfaces import IContributorRestrictions, IManagerRestrictions, \
-    ISharedTool, IWfSharedContentRoles
+from pyams_content.shared.common import WfSharedContent
+from pyams_content.shared.common.interfaces import IBaseSharedTool, IContributorRestrictions, IManagerRestrictions, \
+    ISharedContent, ISharedTool, ISharedToolInnerFolder, IWfSharedContent, IWfSharedContentRoles, \
+    SHARED_TOOL_FOLDER_MODES
 from pyams_content.shared.common.interfaces.types import ITypedSharedTool
 from pyams_content.shared.common.zmi.interfaces import ISharedContentAddForm, ISharedContentPropertiesMenu
 from pyams_content.zmi.properties import PropertiesEditForm
@@ -136,6 +137,25 @@ class SharedContentAddForm(AdminModalAddForm):
     @property
     def container_target(self):
         """New content container getter"""
+        mode = self.context.inner_folders_mode
+        if mode in (SHARED_TOOL_FOLDER_MODES.MONTH_FOLDER.value,
+                    SHARED_TOOL_FOLDER_MODES.YEAR_FOLDER.value):
+            today = date.today()
+            year = f'{today.year:04}'
+            folder = self.context.get(year)
+            if folder is None:
+                folder = Folder()
+                alsoProvides(folder, ISharedToolInnerFolder)
+                self.context[year] = folder
+            if mode == SHARED_TOOL_FOLDER_MODES.MONTH_FOLDER.value:
+                month = f'{today.month:02}'
+                month_folder = folder.get(month)
+                if month_folder is None:
+                    month_folder = Folder()
+                    alsoProvides(month_folder, ISharedToolInnerFolder)
+                    folder[month] = month_folder
+                folder = month_folder
+            return folder
         return self.context
 
     def update_content(self, obj, data):

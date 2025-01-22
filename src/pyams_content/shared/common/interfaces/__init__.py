@@ -14,12 +14,15 @@
 
 This module defines interfaces which are common to all shared contents.
 """
+from collections import OrderedDict
+from enum import Enum
 
-from zope.annotation import IAttributeAnnotatable
+from zope.annotation.interfaces import IAttributeAnnotatable
 from zope.container.constraints import containers, contains
 from zope.container.interfaces import IContainer
 from zope.interface import Attribute, Interface
 from zope.schema import Bool, Choice, Text, TextLine
+from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from pyams_content.interfaces import CONTRIBUTOR_ROLE, GUEST_ROLE, IBaseContent, MANAGER_ROLE, \
     OWNER_ROLE, PILOT_ROLE, READER_ROLE, WEBMASTER_ROLE
@@ -101,6 +104,25 @@ DEFAULT_CONTENT_WORKFLOW = 'pyams_content.workflow.default'
 BASIC_CONTENT_WORKFLOW = 'pyams_content.workflow.basic'
 
 
+class SHARED_TOOL_FOLDER_MODES(Enum):
+    """Shared tool inner folder modes"""
+    NONE = None
+    YEAR_FOLDER = 'year'
+    MONTH_FOLDER = 'month'
+
+
+SHARED_TOOL_FOLDER_MODES_LABELS = OrderedDict((
+    (SHARED_TOOL_FOLDER_MODES.NONE.value, _("Don't use inner folders")),
+    (SHARED_TOOL_FOLDER_MODES.YEAR_FOLDER.value, _("Use inner year folders")),
+    (SHARED_TOOL_FOLDER_MODES.MONTH_FOLDER.value, _("Use inner year and month folders"))
+))
+
+SHARED_TOOL_FOLDER_MODES_VOCABULARY = SimpleVocabulary([
+    SimpleTerm(v, title=t)
+    for v, t in SHARED_TOOL_FOLDER_MODES_LABELS.items()
+])
+
+
 class IBaseSharedTool(IBaseContent, IContainer):
     """Base shared tool interface"""
 
@@ -114,9 +136,15 @@ class IBaseSharedTool(IBaseContent, IContainer):
                                                    "contents"),
                                      vocabulary=WORKFLOWS_VOCABULARY,
                                      default=DEFAULT_CONTENT_WORKFLOW)
+    
+    inner_folders_mode = Choice(title=_("Use inner folders"),
+                                description=_("Defines if inner folders are used to store shared contents"),
+                                vocabulary=SHARED_TOOL_FOLDER_MODES_VOCABULARY,
+                                default=SHARED_TOOL_FOLDER_MODES.NONE.value,
+                                required=True)
 
 
-SHARED_TOOL_WORKFLOW_STATES_VOCABULARY = 'PyAMS workflow states'
+SHARED_TOOL_WORKFLOW_STATES_VOCABULARY = 'pyams_content.workflow.states'
 
 
 class ISharedTool(IBaseSharedTool):
@@ -157,6 +185,10 @@ class ISharedToolPortalContext(ISharedTool, IPortalContext):
 
 class ISharedToolRoles(IBaseContentManagerRoles):
     """Shared tool roles"""
+    
+    
+class ISharedToolInnerFolder(Interface):
+    """Shared tool inner folder marker interface"""
 
 
 class IWfSharedContent(IBaseContent):

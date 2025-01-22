@@ -22,8 +22,7 @@ from zope.lifecycleevent.interfaces import IObjectAddedEvent
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.interfaces import MANAGE_TOOL_PERMISSION
-from pyams_content.shared.common import ISharedContent
-from pyams_content.shared.common.interfaces import IBaseSharedTool, ISharedTool, \
+from pyams_content.shared.common.interfaces import IBaseSharedTool, ISharedContent, ISharedTool, \
     ISharedToolContainer
 from pyams_i18n.content import I18nManagerMixin
 from pyams_security.interfaces import IDefaultProtectionPolicy, IViewContextPermissionChecker
@@ -33,7 +32,6 @@ from pyams_utils.factory import factory_config, get_object_factory
 from pyams_utils.registry import query_utility
 from pyams_utils.traversing import get_parent
 from pyams_workflow.interfaces import IWorkflow
-
 
 __docformat__ = 'restructuredtext'
 
@@ -55,6 +53,7 @@ class BaseSharedTool(ProtectedObjectMixin, I18nManagerMixin):
 
     shared_content_menu = True
     shared_content_workflow = FieldProperty(IBaseSharedTool['shared_content_workflow'])
+    inner_folders_mode = FieldProperty(IBaseSharedTool['inner_folders_mode'])
 
 
 @implementer(ISharedTool)
@@ -69,6 +68,7 @@ class SharedTool(Folder, BaseSharedTool):
     facets_label = FieldProperty(ISharedTool['facets_label'])
     facets_type_label = FieldProperty(ISharedTool['facets_type_label'])
     dashboard_label = FieldProperty(ISharedTool['dashboard_label'])
+    
 
     @property
     def shared_content_factory(self):
