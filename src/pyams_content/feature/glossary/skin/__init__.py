@@ -50,7 +50,7 @@ LOGGER = logging.getLogger('PyAMS (content)')
 class GlossaryHTMLRenderer(ContextRequestAdapter):
     """Glossary HTML renderer"""
 
-    def render(self):
+    def render(self, **kwargs):
         """Glossary terms renderer"""
         source = self.context
         # check tags manager configuration

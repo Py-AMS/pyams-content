@@ -42,7 +42,7 @@ __docformat__ = 'restructuredtext'
 class OIDHTMLRenderer(ContextRequestAdapter):
     """An HTML renderer converting all "oid://" URLs to internal relative links"""
 
-    def render(self):
+    def render(self, **kwargs):
         """Render oid:// links"""
         request = self.request
         html = PyQuery(f'<div>{self.context}</div>')
@@ -71,7 +71,7 @@ class OIDHTMLRenderer(ContextRequestAdapter):
 class TagsRemoveHTMLRenderer(ContextRequestAdapter):
     """Remove all tags from HTML code"""
 
-    def render(self):
+    def render(self, **kwargs):
         """Render HTML source without tags"""
         html = PyQuery('<div>{}</div>'.format(self.context))
         return text_to_html(html.text())
