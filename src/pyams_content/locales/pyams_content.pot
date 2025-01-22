@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-01-18 10:22+0100\n"
+"POT-Creation-Date: 2025-01-22 13:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -188,7 +188,7 @@ msgid "Public support email address"
 msgstr ""
 
 #: ./src/pyams_content/root/interfaces.py:80
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:53
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:56
 msgid "Webmasters"
 msgstr ""
 
@@ -264,7 +264,7 @@ msgstr ""
 #: ./src/pyams_content/shared/common/zmi/search.py:294
 #: ./src/pyams_content/shared/view/zmi/thesaurus.py:56
 #: ./src/pyams_content/component/thesaurus/interfaces.py:67
-#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:101
+#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:104
 msgid "Tags"
 msgstr ""
 
@@ -274,7 +274,7 @@ msgstr ""
 #: ./src/pyams_content/shared/common/zmi/search.py:308
 #: ./src/pyams_content/shared/view/zmi/thesaurus.py:104
 #: ./src/pyams_content/component/thesaurus/interfaces.py:94
-#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:186
+#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:190
 msgid "Themes"
 msgstr ""
 
@@ -284,7 +284,7 @@ msgstr ""
 #: ./src/pyams_content/shared/common/zmi/search.py:322
 #: ./src/pyams_content/shared/view/zmi/thesaurus.py:152
 #: ./src/pyams_content/component/thesaurus/interfaces.py:121
-#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:314
+#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:319
 msgid "Collections"
 msgstr ""
 
@@ -320,8 +320,8 @@ msgid "Main site management"
 msgstr ""
 
 #: ./src/pyams_content/root/zmi/__init__.py:63
-#: ./src/pyams_content/shared/common/zmi/__init__.py:305
-#: ./src/pyams_content/shared/common/zmi/manager.py:83
+#: ./src/pyams_content/shared/common/zmi/__init__.py:325
+#: ./src/pyams_content/shared/common/zmi/manager.py:84
 #: ./src/pyams_content/shared/site/zmi/folder.py:180
 #: ./src/pyams_content/shared/site/zmi/manager.py:167
 #: ./src/pyams_content/reference/zmi/table.py:51
@@ -392,7 +392,7 @@ msgid "Modifier"
 msgstr ""
 
 #: ./src/pyams_content/zmi/dashboard.py:227
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:199
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:231
 msgid "Last update"
 msgstr ""
 
@@ -411,32 +411,32 @@ msgstr ""
 msgid "-- missing value ({}) --"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:61
+#: ./src/pyams_content/shared/common/zmi/workflow.py:62
 msgid "Workflow action"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:62
-#: ./src/pyams_content/shared/common/zmi/__init__.py:442
+#: ./src/pyams_content/shared/common/zmi/workflow.py:63
+#: ./src/pyams_content/shared/common/zmi/__init__.py:462
 #: ./src/pyams_content/shared/common/zmi/owner.py:423
 #: ./src/pyams_content/feature/review/zmi/__init__.py:102
 msgid "Cancel"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:68
+#: ./src/pyams_content/shared/common/zmi/workflow.py:69
 msgid "Action comment"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:115
+#: ./src/pyams_content/shared/common/zmi/workflow.py:116
 msgid ""
 "WARNING: this request was made by a contributor which is not the owner of "
 "this content"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:134
+#: ./src/pyams_content/shared/common/zmi/workflow.py:135
 msgid "RECALL: you are not the owner of the content on which you operate!"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:166
+#: ./src/pyams_content/shared/common/zmi/workflow.py:167
 #: ./src/pyams_content/workflow/basic.py:447
 #: ./src/pyams_content/workflow/basic.py:484
 #: ./src/pyams_content/workflow/__init__.py:933
@@ -445,97 +445,97 @@ msgstr ""
 msgid "{state} {date}"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:169
+#: ./src/pyams_content/shared/common/zmi/workflow.py:170
 #, python-format
 msgid "{state} | by {principal}"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:212
-#: ./src/pyams_content/shared/common/zmi/workflow.py:349
+#: ./src/pyams_content/shared/common/zmi/workflow.py:213
+#: ./src/pyams_content/shared/common/zmi/workflow.py:350
 msgid "Publication settings"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:261
-#: ./src/pyams_content/shared/common/zmi/workflow.py:414
+#: ./src/pyams_content/shared/common/zmi/workflow.py:262
+#: ./src/pyams_content/shared/common/zmi/workflow.py:415
 msgid "Publication start date is required"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:273
+#: ./src/pyams_content/shared/common/zmi/workflow.py:274
 msgid ""
 "This publication request is going to be transmitted to a content manager."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:296
+#: ./src/pyams_content/shared/common/zmi/workflow.py:297
 msgid ""
 "If you cancel this publication request, this content will be updatable again."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:320
-#: ./src/pyams_content/shared/common/zmi/workflow.py:482
+#: ./src/pyams_content/shared/common/zmi/workflow.py:321
+#: ./src/pyams_content/shared/common/zmi/workflow.py:483
 msgid "A comment is required"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:332
+#: ./src/pyams_content/shared/common/zmi/workflow.py:333
 msgid ""
 "As a content manager, you considerate that this content can't be published "
 "'as is'.<br />The contributor will be notified of this and will be able to "
 "update the content before doing a new publication request."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:426
+#: ./src/pyams_content/shared/common/zmi/workflow.py:427
 msgid ""
 "As a manager, you considerate that this content is complete and can be "
 "published 'as is'.<br />This operation will make the content publicly "
 "available (except if restricted access has been set)."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:453
+#: ./src/pyams_content/shared/common/zmi/workflow.py:454
 msgid ""
 "After cancelling the publication, the content will return to proposed "
 "publication state."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:494
+#: ./src/pyams_content/shared/common/zmi/workflow.py:495
 msgid ""
 "You considerate that the currently published version should no more be "
 "publicly visible.<br />WARNING: the content will remain visible until a "
 "manager validate your request."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:521
+#: ./src/pyams_content/shared/common/zmi/workflow.py:522
 msgid ""
 "After cancelling this request, the content will return to it's normal "
 "published state."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:545
+#: ./src/pyams_content/shared/common/zmi/workflow.py:546
 msgid ""
 "As a content manager, you considerate that this content should no longer be "
 "published.<br />Retired content won't be visible anymore, but it can be "
 "updated and published again, or archived."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:576
+#: ./src/pyams_content/shared/common/zmi/workflow.py:577
 msgid ""
 "This content is already retired and not visible.<br />After archiving, it "
 "will be backed up but you will not be able to publish it again except by "
 "creating a new version."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:602
+#: ./src/pyams_content/shared/common/zmi/workflow.py:603
 msgid ""
 "After cancelling this request, the content will return to it's previous "
 "retired state."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:626
+#: ./src/pyams_content/shared/common/zmi/workflow.py:627
 msgid ""
 "As a manager, you considerate that this content must be archived.<br />After "
 "archiving, it will be backed up but you will not be able to publish it again "
 "except by creating a new version."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:671
+#: ./src/pyams_content/shared/common/zmi/workflow.py:672
 msgid ""
 "You considerate that the currently published must evolve.<br />By creating a "
 "new version, you can update it's content without impacting the currently "
@@ -544,17 +544,17 @@ msgid ""
 "(which will be archived automatically)."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:705
+#: ./src/pyams_content/shared/common/zmi/workflow.py:706
 msgid "Delete definitively"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:758
+#: ./src/pyams_content/shared/common/zmi/workflow.py:766
 msgid ""
 "This content was never published and is going to be deleted.<br />If you "
 "confirm deletion, it won't be possible to restore it."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/workflow.py:760
+#: ./src/pyams_content/shared/common/zmi/workflow.py:768
 msgid ""
 "The content version is going to be definitely deleted.<br />Will only remain "
 "the currently published or archived versions."
@@ -693,52 +693,52 @@ msgstr ""
 msgid "access archived version"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:94
+#: ./src/pyams_content/shared/common/zmi/__init__.py:95
 #, python-format
 msgid "Add new: {}"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:111
+#: ./src/pyams_content/shared/common/zmi/__init__.py:112
 #, python-format
 msgid "New content: {}"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:114
-#: ./src/pyams_content/shared/common/zmi/__init__.py:452
+#: ./src/pyams_content/shared/common/zmi/__init__.py:115
+#: ./src/pyams_content/shared/common/zmi/__init__.py:472
 msgid "New content properties"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:281
+#: ./src/pyams_content/shared/common/zmi/__init__.py:301
 msgid "Content management"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:292
+#: ./src/pyams_content/shared/common/zmi/__init__.py:312
 msgid "Composition"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:315
+#: ./src/pyams_content/shared/common/zmi/__init__.py:335
 msgid "Content properties"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:316
+#: ./src/pyams_content/shared/common/zmi/__init__.py:336
 msgid "Main content properties"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:431
 #: ./src/pyams_content/shared/common/zmi/__init__.py:451
+#: ./src/pyams_content/shared/common/zmi/__init__.py:471
 msgid "Duplicate content"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:441
+#: ./src/pyams_content/shared/common/zmi/__init__.py:461
 msgid "Duplicate this content"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:510
+#: ./src/pyams_content/shared/common/zmi/__init__.py:530
 #, python-format
 msgid "Clone created from version {source} of {oid} (in « {state} » state)"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/__init__.py:546
+#: ./src/pyams_content/shared/common/zmi/__init__.py:566
 msgid ""
 "You are going to duplicate a whole content.<br />The new copy is going to be "
 "created in 'draft' mode, so that you can modify it before publication.<br />A"
@@ -746,21 +746,33 @@ msgid ""
 "shared by all content's versions."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/manager.py:72
+#: ./src/pyams_content/shared/common/zmi/manager.py:73
 msgid "Shared content management"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/manager.py:94
+#: ./src/pyams_content/shared/common/zmi/manager.py:95
 msgid "Shared tool properties"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/manager.py:95
+#: ./src/pyams_content/shared/common/zmi/manager.py:96
 msgid "Main tool properties"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/manager.py:106
+#: ./src/pyams_content/shared/common/zmi/manager.py:109
+msgid ""
+"**WARNING**: workflow shouldn't be modified if this tool already contains "
+"shared contents!"
+msgstr ""
+
+#: ./src/pyams_content/shared/common/zmi/manager.py:120
 #: ./src/pyams_content/shared/common/zmi/types/__init__.py:187
 msgid "Contents labels"
+msgstr ""
+
+#: ./src/pyams_content/shared/common/zmi/manager.py:135
+msgid ""
+"**WARNING**: if contents already exist for this tool, changing labels may "
+"require a complete Elasticsearch index rebuild!"
 msgstr ""
 
 #: ./src/pyams_content/shared/common/zmi/header.py:63
@@ -1079,6 +1091,22 @@ msgid ""
 "you share it."
 msgstr ""
 
+#: ./src/pyams_content/shared/common/zmi/reverse.py:51
+msgid "Reverse links"
+msgstr ""
+
+#: ./src/pyams_content/shared/common/zmi/reverse.py:74
+msgid "Portal template"
+msgstr ""
+
+#: ./src/pyams_content/shared/common/zmi/reverse.py:119
+msgid "Shared content reverse links"
+msgstr ""
+
+#: ./src/pyams_content/shared/common/zmi/reverse.py:122
+msgid "List of internal links"
+msgstr ""
+
 #: ./src/pyams_content/shared/common/zmi/owner.py:99
 #, python-format
 msgid "Owner changed: {} -> {}"
@@ -1270,197 +1298,217 @@ msgstr ""
 msgid "Shared tools"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:54
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:57
 msgid "Webmasters can handle all contents, including published ones"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:59
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:62
 msgid "Pilots"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:60
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:63
 msgid ""
 "Pilots can handle tool configuration, manage access rules, grant users roles "
 "and manage managers restrictions"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:66
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:254
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:69
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:286
 msgid "Managers"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:67
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:255
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:70
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:287
 msgid ""
 "Managers can handle main operations in tool's workflow, like publish or "
 "retire contents"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:72
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:260
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:75
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:292
 msgid "Contributors"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:73
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:76
 msgid "Contributors are users which are allowed to create new contents"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:78
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:267
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:81
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:299
 msgid "Designers"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:79
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:268
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:82
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:300
 msgid "Designers are users which are allowed to manage presentation templates"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:112
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:115
+msgid "Don't use inner folders"
+msgstr ""
+
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:116
+msgid "Use inner year folders"
+msgstr ""
+
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:117
+msgid "Use inner year and month folders"
+msgstr ""
+
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:134
 msgid "Workflow name"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:113
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:135
 msgid "Name of workflow utility used to manage tool contents"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:129
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:140
+msgid "Use inner folders"
+msgstr ""
+
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:141
+msgid "Defines if inner folders are used to store shared contents"
+msgstr ""
+
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:157
 msgid "Single content label"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:130
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:158
 msgid ""
 "This label can be used to tag content type of a single content in place of "
 "shared tool title"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:134
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:162
 #: ./src/pyams_content/shared/common/interfaces/types.py:71
 msgid "Navigation label"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:135
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:163
 #: ./src/pyams_content/shared/common/interfaces/types.py:72
 msgid "Label used for navigation entries"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:138
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:166
 #: ./src/pyams_content/shared/common/interfaces/types.py:83
 msgid "Facets label"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:139
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:167
 #: ./src/pyams_content/shared/common/interfaces/types.py:84
 msgid ""
 "Label used for the facets of views or search engines, instead of the standard"
 " label"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:143
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:171
 #: ./src/pyams_content/shared/common/interfaces/types.py:88
 msgid "Facets type label"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:144
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:172
 #: ./src/pyams_content/shared/common/interfaces/types.py:89
 msgid ""
 "Label used for the facets of views or search engine, instead of the standard "
 "label, when facets are configured in \"content-type\" mode"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:149
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:177
 #: ./src/pyams_content/shared/common/interfaces/types.py:94
 #: ./src/pyams_content/shared/alert/interfaces.py:54
 msgid "Dashboards label"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:150
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:178
 #: ./src/pyams_content/shared/common/interfaces/types.py:95
 #: ./src/pyams_content/shared/alert/interfaces.py:55
 msgid "Optional label used for dashboards presentation"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:170
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:202
 msgid "Content URL"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:171
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:203
 msgid ""
 "URL used to access this content; this is important for SEO and should include"
 " most important words describing content; spaces and underscores will be "
 "automatically replaced by hyphens"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:177
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:209
 msgid "Version creator"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:178
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:210
 msgid ""
 "Name of content's version creator. The creator of the first version is also "
 "it's owner."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:183
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:215
 msgid "First owner"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:184
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:216
 msgid "Name of content's first version owner"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:188
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:220
 msgid "Version creation"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:191
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:223
 msgid "Version modifiers"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:192
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:224
 msgid "List of principals who modified this content"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:195
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:227
 msgid "Last modifier"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:196
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:228
 msgid "Last principal who modified this content"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:202
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:234
 #: ./src/pyams_content/shared/site/interfaces.py:111
 #: ./src/pyams_content/shared/site/interfaces.py:161
 #: ./src/pyams_content/shared/form/interfaces.py:54
 msgid "Header"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:203
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:235
 msgid "Content's header is generally displayed in page header"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:207
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:239
 #: ./src/pyams_content/shared/site/interfaces.py:115
 #: ./src/pyams_content/shared/site/interfaces.py:165
 msgid "Meta-description"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:208
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:240
 msgid ""
 "The content's description is 'hidden' into HTML's page headers; but it can be"
 " seen, for example, in some search engines results as content's description; "
 "if description is empty, content's header will be used."
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:215
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:247
 msgid "Keywords"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:216
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:248
 msgid "They will be included into HTML pages metadata"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:219
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:251
 #: ./src/pyams_content/shared/site/interfaces.py:123
 #: ./src/pyams_content/shared/site/interfaces.py:173
 #: ./src/pyams_content/shared/site/zmi/folder.py:91
@@ -1468,95 +1516,95 @@ msgstr ""
 msgid "Notepad"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:220
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:252
 #: ./src/pyams_content/shared/site/interfaces.py:124
 #: ./src/pyams_content/shared/site/interfaces.py:174
 #: ./src/pyams_content/shared/site/zmi/folder.py:92
 msgid "Internal information to be known about this content"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:246
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:278
 msgid "Content owner"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:247
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:279
 msgid ""
 "The owner is the creator of content's first version, except if it was "
 "transferred afterwards to another owner"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:261
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:293
 msgid ""
 "Contributors are users which are allowed to update this content in addition "
 "to it's owner"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:273
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:305
 msgid "Readers"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:274
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:306
 msgid ""
 "Readers are users which are asked to verify and comment contents before they "
 "are published"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:279
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:311
 msgid "Guests"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:280
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:312
 msgid ""
 "Guests are users which are allowed to view contents with restricted access"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:330
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:362
 msgid "Principal ID"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:360
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:392
 msgid "Show workflow checks warning"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:361
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:393
 msgid ""
 "If 'yes', this contributor will have to confirm that contents have been "
 "checked before asking for publication"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:367
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:399
 msgid "Substitute for"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:368
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:400
 msgid "Contributor will have access to contents owned by these principals"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:390
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:422
 msgid "Publication checks"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:391
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:423
 msgid ""
 "If 'yes', this manager will have to confirm that contents have been previewed"
 " and checked before publishing a content"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:397
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:429
 msgid "Restricted contents"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:398
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:430
 msgid ""
 "If 'yes', this manager will get restricted access to manage contents based on"
 " selected settings"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:403
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:435
 msgid "Selected owners"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/interfaces/__init__.py:404
+#: ./src/pyams_content/shared/common/interfaces/__init__.py:436
 msgid "Manager will have access to contents owned by these principals"
 msgstr ""
 
@@ -2681,7 +2729,7 @@ msgstr ""
 msgid "External link"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/manager.py:66
+#: ./src/pyams_content/shared/site/manager.py:67
 msgid "Site manager"
 msgstr ""
 
@@ -5403,47 +5451,47 @@ msgstr ""
 msgid "You must specify a glossary thesaurus to activate it!"
 msgstr ""
 
-#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:108
+#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:111
 msgid "Content tags selection"
 msgstr ""
 
-#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:121
+#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:124
 msgid "Content tags"
 msgstr ""
 
-#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:131
+#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:134
 msgid "Content type default tags"
 msgstr ""
 
-#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:160
+#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:163
 msgid "Default tags"
 msgstr ""
 
-#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:193
+#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:197
 msgid "Content themes selection"
 msgstr ""
 
-#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:213
+#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:217
 msgid "Content themes"
 msgstr ""
 
-#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:224
+#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:228
 msgid "Content type default themes"
 msgstr ""
 
-#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:251
+#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:255
 msgid "Don't inherit parent themes"
 msgstr ""
 
-#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:288
+#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:293
 msgid "Default themes"
 msgstr ""
 
-#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:324
+#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:329
 msgid "Content collections selection"
 msgstr ""
 
-#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:338
+#: ./src/pyams_content/component/thesaurus/zmi/__init__.py:343
 msgid "Content type default collections"
 msgstr ""
 
@@ -5918,11 +5966,11 @@ msgstr ""
 msgid "Paragraph properties"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/__init__.py:370
+#: ./src/pyams_content/component/paragraph/zmi/__init__.py:369
 msgid "Updated renderer"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/__init__.py:371
+#: ./src/pyams_content/component/paragraph/zmi/__init__.py:370
 msgid ""
 "You changed renderer selection. Don't omit to check renderer properties..."
 msgstr ""
@@ -6433,7 +6481,7 @@ msgstr ""
 msgid "Provider settings"
 msgstr ""
 
-#: ./src/pyams_content/component/video/provider/__init__.py:72
+#: ./src/pyams_content/component/video/provider/__init__.py:69
 msgid "Other provider"
 msgstr ""
 
