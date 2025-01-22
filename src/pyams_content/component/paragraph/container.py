@@ -51,7 +51,7 @@ class ParagraphContainer(BTreeOrderedContainer):
         )
 
     def get_visible_paragraphs(self, names=None, anchors_only=False, exclude_anchors=False,
-                               factories=None, limit=None):
+                               factories=None, excluded_factories=None, limit=None):
         """Visible paragraphs getter"""
         count = 0
         if names:
@@ -73,6 +73,8 @@ class ParagraphContainer(BTreeOrderedContainer):
                 if exclude_anchors and paragraph.anchor:
                     continue
                 if factories and (paragraph.factory_name not in factories):
+                    continue
+                if excluded_factories and (paragraph.factory_name in excluded_factories):
                     continue
                 yield paragraph
                 count += 1
