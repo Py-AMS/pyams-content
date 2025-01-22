@@ -31,14 +31,15 @@ from pyams_i18n_views.zmi.manager import I18nManagerLanguagesEditForm
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
-from pyams_skin.interfaces.viewlet import IBreadcrumbItem
+from pyams_skin.interfaces.viewlet import IBreadcrumbItem, IHelpViewletManager
 from pyams_skin.viewlet.breadcrumb import BreadcrumbItem
+from pyams_skin.viewlet.help import AlertMessage
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_viewlet.manager import viewletmanager_config
+from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
 from pyams_zmi.interfaces.viewlet import IMenuHeader, IPropertiesMenu, ISiteManagementMenu
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
-
 
 __docformat__ = 'restructuredtext'
 
@@ -97,6 +98,19 @@ class BaseSharedToolPropertiesEditForm(PropertiesEditForm):
     fields = Fields(IBaseSharedTool).omit('__name__', '__parent__')
 
 
+@viewlet_config(name='properties-help',
+                context=ISharedTool, layer=IAdminLayer, view=BaseSharedToolPropertiesEditForm,
+                manager=IHelpViewletManager, weight=10)
+class SharedToolPropertiesHelpViewlet(AlertMessage):
+    """Shared tool properties help viewlet"""
+    
+    status = 'warning'
+    
+    _message = _("**WARNING**: workflow shouldn't be modified if this tool already contains "
+                 "shared contents!")
+    message_renderer = 'markdown'
+
+
 @adapter_config(name='labels',
                 required=(ISharedTool, IAdminLayer, BaseSharedToolPropertiesEditForm),
                 provides=IGroup)
@@ -109,6 +123,19 @@ class SharedToolLabelsGroup(Group):
                                         'facets_label', 'facets_type_label',
                                         'dashboard_label')
 
+
+@viewlet_config(name='labels-help',
+                context=ISharedTool, layer=IAdminLayer, view=SharedToolLabelsGroup,
+                manager=IHelpViewletManager, weight=10)
+class SharedToolLabelsGroupHelpViewlet(AlertMessage):
+    """Shared tool labels group help viewlet"""
+    
+    status = 'warning'
+
+    _message = _("**WARNING**: if contents already exist for this tool, changing labels may "
+                 "require a complete Elasticsearch index rebuild!")
+    message_renderer = 'markdown'
+    
 
 @adapter_config(required=(IBaseSharedTool, IAdminLayer, BaseSharedToolPropertiesEditForm),
                 provides=IAJAXFormRenderer)
