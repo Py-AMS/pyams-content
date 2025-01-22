@@ -79,6 +79,7 @@ class ParagraphContainerPortletSettings(ParagraphPortletSettingsMixin, InternalR
     button_label = FieldProperty(IParagraphContainerPortletSettings['button_label'])
     paragraphs = FieldProperty(IParagraphContainerPortletSettings['paragraphs'])
     factories = FieldProperty(IParagraphContainerPortletSettings['factories'])
+    excluded_factories = FieldProperty(IParagraphContainerPortletSettings['excluded_factories'])
     anchors_only = FieldProperty(IParagraphContainerPortletSettings['anchors_only'])
     exclude_anchors = FieldProperty(IParagraphContainerPortletSettings['exclude_anchors'])
     display_navigation_links = FieldProperty(
@@ -110,6 +111,7 @@ class ParagraphNavigationPortletSettings(ParagraphPortletSettingsMixin, PortletS
 
     paragraphs = FieldProperty(IParagraphNavigationPortletSettings['paragraphs'])
     factories = FieldProperty(IParagraphNavigationPortletSettings['factories'])
+    excluded_factories = FieldProperty(IParagraphNavigationPortletSettings['excluded_factories'])
     anchors_only = FieldProperty(IParagraphNavigationPortletSettings['anchors_only'])
 
 

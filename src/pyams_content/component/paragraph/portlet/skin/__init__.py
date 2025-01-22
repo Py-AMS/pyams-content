@@ -87,6 +87,7 @@ class ParagraphsContainerPortletRenderer(PortletRenderer):
                     anchors_only=settings.anchors_only,
                     exclude_anchors=settings.exclude_anchors,
                     factories=settings.factories,
+                    excluded_factories=settings.excluded_factories,
                     limit=settings.limit)
                 renderers = [
                     paragraph.get_renderer(self.request)
@@ -186,4 +187,5 @@ class ParagraphsNavigationPortletRenderer(PortletRenderer):
             self.paragraphs = container.get_visible_paragraphs(
                 names=settings.paragraphs,
                 anchors_only=settings.anchors_only,
-                factories=settings.factories)
+                factories=settings.factories,
+                excluded_factories=settings.excluded_factories)
