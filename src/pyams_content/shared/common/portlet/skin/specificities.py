@@ -32,8 +32,8 @@ from pyams_content import _
 @adapter_config(required=(IPortalContext, IPyAMSLayer, Interface, ISharedContentSpecificitiesPortletSettings),
                 provides=IPortletRenderer)
 @template_config(template='templates/specificities-default.pt', layer=IPyAMSLayer)
-class SharedContentSpecificitiesRenderer(PortletRenderer):
-    """Shared content specificities renderer"""
+class SharedContentSpecificitiesPortletDefaultRenderer(PortletRenderer):
+    """Shared content specificities portlet default renderer"""
 
     label = _("Shared content specificities (default)")
     weight = 1
