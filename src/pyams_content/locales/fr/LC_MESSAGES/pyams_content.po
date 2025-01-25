@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-01-22 18:11+0100\n"
+"POT-Creation-Date: 2025-01-25 13:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1383,6 +1383,7 @@ msgid "Content type properties"
 msgstr "Propriétés du type de contenu"
 
 #: src/pyams_content/shared/common/zmi/types/__init__.py:203
+#: src/pyams_content/reference/pictogram/thesaurus.py:48
 #: src/pyams_content/reference/pictogram/zmi/table.py:42
 #: src/pyams_content/reference/pictogram/zmi/table.py:102
 msgid "Pictograms"
@@ -6632,9 +6633,9 @@ msgid ""
 "paragraphs are selected explicitly in the previous field"
 msgstr ""
 "Liste des types de blocs que vous souhaitez sélectionner ; une sélection "
-"vide indique que tous les types de blocs de contenus seront pris en compte, à "
-"l'exception de ceux sélectionnés dans le champ suivant ; cette sélection ne "
-"s'applique pas lorsque les blocs sont sélectionnés individuellement sur "
+"vide indique que tous les types de blocs de contenus seront pris en compte, "
+"à l'exception de ceux sélectionnés dans le champ suivant ; cette sélection "
+"ne s'applique pas lorsque les blocs sont sélectionnés individuellement sur "
 "un contenu donné"
 
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:63
@@ -6649,11 +6650,11 @@ msgid ""
 "in the previous field; this setting is not applied when paragraphs are "
 "selected explicitly in the previous field"
 msgstr ""
-"Liste des types de blocs que vous souhaitez écarter ; une sélection "
-"vide indique que tous les types de blocs de contenus seront pris en compte, "
-"sauf si une sélection a été faite dans le champ précédent ; cette sélection "
-"ne s'applique pas lorsque les blocs sont sélectionnés individuellement sur "
-"un contenu donné"
+"Liste des types de blocs que vous souhaitez écarter ; une sélection vide "
+"indique que tous les types de blocs de contenus seront pris en compte, sauf "
+"si une sélection a été faite dans le champ précédent ; cette sélection ne "
+"s'applique pas lorsque les blocs sont sélectionnés individuellement sur un "
+"contenu donné"
 
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:72
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:124
@@ -6720,8 +6721,8 @@ msgid ""
 "selection means that all paragraphs types will be selected"
 msgstr ""
 "Liste des types de blocs sélectionnés pour la navigation ; une sélection "
-"vide indique que tous les types de blocs seront pris en compte, à l'exception "
-"de ceux sélectionnés dans le champ suivant"
+"vide indique que tous les types de blocs seront pris en compte, à "
+"l'exception de ceux sélectionnés dans le champ suivant"
 
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:117
 msgid ""
@@ -6729,9 +6730,9 @@ msgid ""
 "selection means that all paragraphs types will be selected, except if "
 "factories are selected in the previous field"
 msgstr ""
-"Liste des types de blocs exclus de la navigation ; une sélection "
-"vide indique que tous les types de blocs seront pris en compte, sauf "
-"si une sélection a été faite dans le champ précédent"
+"Liste des types de blocs exclus de la navigation ; une sélection vide "
+"indique que tous les types de blocs seront pris en compte, sauf si une "
+"sélection a été faite dans le champ précédent"
 
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:125
 msgid "If 'no', all paragraphs will be used as navigation anchors"
@@ -7560,6 +7561,26 @@ msgid "List of selected pictograms which will be available to shared contents"
 msgstr ""
 "Liste des pictogrammes qui seront rendus disponibles aux contenus partagés"
 
+#: src/pyams_content/reference/pictogram/interfaces.py:90
+msgid "'ON' pictogram"
+msgstr "Pictogramme 'actif'"
+
+#: src/pyams_content/reference/pictogram/interfaces.py:91
+msgid "'ON' state pictogram associated with this term"
+msgstr ""
+"Pictogramme utilisé par certains modes de rendu pour illustrer le statut "
+"\"actif\" associé à ce pictogramme"
+
+#: src/pyams_content/reference/pictogram/interfaces.py:95
+msgid "'OFF' pictogram"
+msgstr "Pictogramme 'inactif'"
+
+#: src/pyams_content/reference/pictogram/interfaces.py:96
+msgid "'OFF' state pictogram associated with this term"
+msgstr ""
+"Pictogramme utilisé par certains modes de rendu pour illustrer le statut "
+"\"inactif\" associé à ce pictogramme"
+
 #: src/pyams_content/reference/pictogram/zmi/__init__.py:62
 msgid "Add pictogram"
 msgstr "Ajouter un pictogramme"
@@ -7626,6 +7647,14 @@ msgstr "Liste des pictogrammes"
 #: src/pyams_content/reference/pictogram/zmi/table.py:113
 msgid "Pictograms table"
 msgstr "Table des pictogrammes"
+
+#: src/pyams_content/reference/pictogram/zmi/thesaurus.py:33
+msgid "Associated pictograms"
+msgstr "Pictogrammes associés"
+
+#: src/pyams_content/reference/pictogram/zmi/thesaurus.py:34
+msgid "Pictograms properties"
+msgstr "Propriétés des pictogrammes"
 
 #: src/pyams_content/reference/pictogram/zmi/widget/__init__.py:38
 msgid "No selected pictogram"

@@ -79,3 +79,24 @@ class IPictogramManager(Interface):
 
 class IPictogramManagerTarget(IAttributeAnnotatable):
     """Pictogram manager target interface"""
+
+
+THESAURUS_TERM_PICTOGRAMS_INFO_KEY = 'pyams_content.extension.pictograms'
+
+
+class IThesaurusTermPictogramsInfo(Interface):
+    """Thesaurus term pictograms info interface"""
+    
+    pictogram_on = Choice(title=_("'ON' pictogram"),
+                          description=_("'ON' state pictogram associated with this term"),
+                          vocabulary=PICTOGRAM_VOCABULARY,
+                          required=False)
+    
+    pictogram_off = Choice(title=_("'OFF' pictogram"),
+                           description=_("'OFF' state pictogram associated with this term"),
+                           vocabulary=PICTOGRAM_VOCABULARY,
+                           required=False)
+
+
+class IThesaurusTermPictogramsTarget(IAttributeAnnotatable):
+    """Thesaurus term pictograms target marker interface"""
