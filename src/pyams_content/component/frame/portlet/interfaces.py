@@ -15,12 +15,12 @@
 This module defines framed text portlet interfaces.
 """
 
-__docformat__ = 'restructuredtext'
-
 from pyams_content.component.frame.interfaces import IFrameInfo
 from pyams_content.component.illustration import IIllustrationTarget
 from pyams_i18n.schema import I18nTextLineField
 from pyams_portal.interfaces import IPortletSettings
+
+__docformat__ = 'restructuredtext'
 
 from pyams_content import _
 
