@@ -32,9 +32,9 @@ from pyams_i18n.schema import I18nTextField, I18nTextLineField
 from pyams_portal.interfaces import DESIGNER_ROLE, IPortalContext, IPortalPage
 from pyams_security.schema import PrincipalField, PrincipalsSetField
 from pyams_site.interfaces import ISiteRoot
+from pyams_utils.interfaces import MISSING_INFO
 from pyams_utils.schema import TextLineListField
 from pyams_workflow.interfaces import IWorkflowManagedContent, WORKFLOWS_VOCABULARY
-
 
 __docformat__ = 'restructuredtext'
 
@@ -108,7 +108,7 @@ BASIC_CONTENT_WORKFLOW = 'pyams_content.workflow.basic'
 
 class SHARED_TOOL_FOLDER_MODES(Enum):
     """Shared tool inner folder modes"""
-    NONE = None
+    NONE = MISSING_INFO
     YEAR_FOLDER = 'year'
     MONTH_FOLDER = 'month'
 
