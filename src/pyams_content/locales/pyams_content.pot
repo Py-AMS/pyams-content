@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-01-25 13:05+0100\n"
+"POT-Creation-Date: 2025-01-27 09:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,6 +97,8 @@ msgstr ""
 #: ./src/pyams_content/shared/view/portlet/interfaces.py:69
 #: ./src/pyams_content/shared/site/zmi/folder.py:83
 #: ./src/pyams_content/shared/site/portlet/interfaces.py:25
+#: ./src/pyams_content/shared/logo/interfaces.py:34
+#: ./src/pyams_content/shared/logo/portlet/interfaces.py:25
 #: ./src/pyams_content/shared/form/interfaces.py:49
 #: ./src/pyams_content/feature/navigation/portlet/interfaces.py:33
 #: ./src/pyams_content/feature/navigation/portlet/interfaces.py:47
@@ -164,6 +166,7 @@ msgid "Browser favourite icon"
 msgstr ""
 
 #: ./src/pyams_content/root/interfaces.py:61
+#: ./src/pyams_content/shared/logo/interfaces.py:28
 msgid "Logo"
 msgstr ""
 
@@ -2468,6 +2471,7 @@ msgid "Force canonical URL?"
 msgstr ""
 
 #: ./src/pyams_content/shared/view/portlet/interfaces.py:117
+#: ./src/pyams_content/shared/logo/skin/interfaces.py:52
 #: ./src/pyams_content/feature/search/portlet/interfaces.py:48
 #: ./src/pyams_content/component/links/interfaces.py:67
 msgid ""
@@ -2845,12 +2849,14 @@ msgid ""
 msgstr ""
 
 #: ./src/pyams_content/shared/site/interfaces.py:242
+#: ./src/pyams_content/shared/logo/interfaces.py:56
 #: ./src/pyams_content/feature/redirect/interfaces.py:70
 #: ./src/pyams_content/component/links/interfaces.py:113
 msgid "Target URL"
 msgstr ""
 
 #: ./src/pyams_content/shared/site/interfaces.py:243
+#: ./src/pyams_content/shared/logo/interfaces.py:57
 #: ./src/pyams_content/component/links/interfaces.py:114
 msgid "URL used to access external resource"
 msgstr ""
@@ -3089,6 +3095,114 @@ msgstr ""
 msgid "Optional navigation button's title"
 msgstr ""
 
+#: ./src/pyams_content/shared/logo/interfaces.py:35
+msgid "Full name of logo organization"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/interfaces.py:38
+#: ./src/pyams_content/component/links/interfaces.py:39
+msgid "Alternate title"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/interfaces.py:39
+msgid ""
+"If set, this title will be displayed in front-office instead of original "
+"title"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/interfaces.py:43
+msgid "Acronym"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/interfaces.py:44
+msgid "Matching logo acronym, without spaces or separators"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/interfaces.py:47
+msgid "Image (colored)"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/interfaces.py:48
+#: ./src/pyams_content/component/extfile/interfaces.py:88
+msgid "Image data"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/interfaces.py:51
+msgid "Image (monochrome)"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/interfaces.py:52
+msgid "An alternate image which can be used by some presentation templates"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/interfaces.py:60
+#: ./src/pyams_content/shared/alert/interfaces.py:97
+#: ./src/pyams_content/feature/navigation/interfaces.py:96
+msgid "Internal reference"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/interfaces.py:61
+msgid ""
+"Internal link target reference. You can search a reference using '+' followed"
+" by internal number, of by entering text matching content title."
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/interfaces.py:77
+#: ./src/pyams_content/shared/logo/portlet/__init__.py:46
+msgid "Logos"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/interfaces.py:85
+#: ./src/pyams_content/shared/logo/portlet/interfaces.py:28
+msgid "Logos references"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/interfaces.py:86
+#: ./src/pyams_content/shared/logo/portlet/interfaces.py:29
+msgid "List of internal logos references"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/interfaces.py:92
+msgid "Presentation template used for this logos paragraph"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/zmi/__init__.py:33
+msgid "Logo management"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/portlet/zmi/templates/logos-preview.pt:3
+msgid "Logos list:"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/portlet/skin/__init__.py:46
+#: ./src/pyams_content/shared/logo/skin/__init__.py:101
+msgid "Simple logos list (default)"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/skin/interfaces.py:31
+msgid "Disabled link"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/skin/interfaces.py:32
+msgid "Use internal reference first"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/skin/interfaces.py:33
+msgid "Use external URL first"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/skin/interfaces.py:45
+msgid "Links priority"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/skin/interfaces.py:46
+msgid "Order in which internal or external links are evaluated"
+msgstr ""
+
+#: ./src/pyams_content/shared/logo/skin/interfaces.py:51
+msgid "Force canonical URL"
+msgstr ""
+
 #: ./src/pyams_content/shared/topic/interfaces.py:30
 msgid "Topic"
 msgstr ""
@@ -3136,11 +3250,6 @@ msgstr ""
 
 #: ./src/pyams_content/shared/alert/interfaces.py:94
 msgid "Message body"
-msgstr ""
-
-#: ./src/pyams_content/shared/alert/interfaces.py:97
-#: ./src/pyams_content/feature/navigation/interfaces.py:96
-msgid "Internal reference"
 msgstr ""
 
 #: ./src/pyams_content/shared/alert/interfaces.py:98
@@ -5327,10 +5436,6 @@ msgid ""
 "below the map"
 msgstr ""
 
-#: ./src/pyams_content/component/links/interfaces.py:39
-msgid "Alternate title"
-msgstr ""
-
 #: ./src/pyams_content/component/links/interfaces.py:40
 msgid "Link title, as shown in front-office"
 msgstr ""
@@ -5552,10 +5657,6 @@ msgstr ""
 
 #: ./src/pyams_content/component/extfile/interfaces.py:82
 msgid "External image"
-msgstr ""
-
-#: ./src/pyams_content/component/extfile/interfaces.py:88
-msgid "Image data"
 msgstr ""
 
 #: ./src/pyams_content/component/extfile/interfaces.py:89
