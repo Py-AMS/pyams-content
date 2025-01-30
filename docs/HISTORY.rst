@@ -1,10 +1,21 @@
 Changelog
 =========
 
-2.3.1
+2.4.0
 -----
+ - added logos shared tool
+ - added support for optional inner year and month folders inside shared tools
+ - added shared content reverse links view
+ - added content specificities paragraph type
+ - added on/off pictograms support to thesaurus terms
  - updated renderers label
  - updated method call in configuration tools and tables checker
+ - updated shared tools themes support
+ - small improvements after Sonarqube analysis...
+ - added warning messages in management interface
+ - added argument to paragraphs container method to be able to exclude paragraphs types
+ - allow exclusion of paragraphs types in paragraphs portlets settings
+ - use illustration renderer settings in verbatim paragraph default renderer
 
 2.3.0
 -----
