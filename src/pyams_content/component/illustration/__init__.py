@@ -14,8 +14,6 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
 from persistent import Persistent
 from pyramid.events import subscriber
 from zope.container.contained import Contained
@@ -40,6 +38,8 @@ from pyams_utils.factory import factory_config
 from pyams_utils.registry import get_pyramid_registry, query_utility
 from pyams_utils.request import check_request
 from pyams_utils.vocabulary import vocabulary_config
+
+__docformat__ = 'restructuredtext'
 
 
 classImplements(BaseSiteRoot, IIllustrationTarget)
@@ -184,7 +184,7 @@ class IllustrationSublocations(ContextAdapter):
     def sublocations(self):
         """Sub-locations iterator"""
         registry = get_pyramid_registry()
-        for name, adapter in registry.getAdapters((self,), IBaseIllustration):
+        for _name, adapter in registry.getAdapters((self.context,), IBaseIllustration):
             yield adapter
 
 
