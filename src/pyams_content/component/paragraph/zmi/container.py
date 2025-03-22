@@ -21,6 +21,7 @@ from pyramid.httpexceptions import HTTPInternalServerError, HTTPNotFound, HTTPSe
 from pyramid.interfaces import IView
 from pyramid.view import view_config
 from zope.contentprovider.interfaces import IContentProvider
+from zope.dublincore.interfaces import IZopeDublinCore
 from zope.interface import implementer
 
 from pyams_content.component.association.interfaces import IAssociationContainerTarget
@@ -31,6 +32,7 @@ from pyams_content.component.paragraph.zmi.interfaces import IInnerParagraphEdit
     IParagraphContainerBaseTable, IParagraphContainerFullTable, IParagraphContainerView, \
     IParagraphTitleToolbar
 from pyams_content.interfaces import MANAGE_CONTENT_PERMISSION, PUBLISH_CONTENT_PERMISSION
+from pyams_content.shared.common.interfaces import IWfSharedContent
 from pyams_content.shared.common.interfaces.types import ITypedSharedTool
 from pyams_content.shared.common.zmi.types.interfaces import ISharedToolTypesTable
 from pyams_content.zmi import content_js
@@ -44,9 +46,11 @@ from pyams_template.template import template_config
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.factory import factory_config
 from pyams_utils.fanstatic import get_resource_path
+from pyams_utils.traversing import get_parent
 from pyams_viewlet.manager import TemplateBasedViewletManager, WeightOrderedViewletManager, \
     viewletmanager_config
 from pyams_viewlet.viewlet import ViewContentProvider, viewlet_config
+from pyams_workflow.interfaces import IWorkflowState
 from pyams_zmi.form import AdminModalDisplayForm
 from pyams_zmi.helper.container import delete_container_element, switch_element_attribute
 from pyams_zmi.interfaces import IAdminLayer, TITLE_SPAN_BREAK
@@ -54,7 +58,7 @@ from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu
 from pyams_zmi.skin import AdminSkin
 from pyams_zmi.table import ActionColumn, AttributeSwitcherColumn, ContentTypeColumn, \
-    InnerTableAdminView, MultipleTablesAdminView, NameColumn, ReorderColumn, Table, \
+    IconColumn, InnerTableAdminView, MultipleTablesAdminView, NameColumn, ReorderColumn, Table, \
     TableAdminView, TrashColumn, VisibilityColumn, get_ordered_data_attributes, get_table_id
 from pyams_zmi.utils import get_object_hint, get_object_icon, get_object_label
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
@@ -176,8 +180,8 @@ def switch_anchor_item(request):
                 provides=IColumn)
 class ParagraphsIconColumn(ContentTypeColumn):
     """Paragraphs table icon column"""
-
-
+    
+    
 @viewletmanager_config(name='pyams_content.paragraph.title-toolbar',
                        context=IBaseParagraph, layer=IAdminLayer,
                        view=IParagraphContainerBaseTable,
@@ -249,6 +253,7 @@ class ParagraphsFullLabelColumn(ParagraphsLabelColumn):
     i18n_header = _("Show/hide all paragraphs")
     head_hint = _("Click to show/hide all paragraphs editors")
     cell_hint = _("Click to show/hide paragraph editor")
+    modified_hint = _("Created or modified in this version")
 
     css_classes = {}
 
@@ -265,6 +270,19 @@ class ParagraphsFullLabelColumn(ParagraphsLabelColumn):
 
     def render_cell(self, item):
         """Cell renderer"""
+        modified_icon = ''
+        item_dc = IZopeDublinCore(item, None)
+        if item_dc is not None:
+            content = get_parent(item, IWfSharedContent)
+            if content is not None:
+                state = IWorkflowState(content, None)
+                if (state is not None) and (state.version_id > 1):
+                    content_dc = IZopeDublinCore(content, None)
+                    if (content_dc is not None) and (item_dc.modified > content_dc.created):
+                        translate = self.request.localizer.translate
+                        hint = translate(self.modified_hint)
+                        modified_icon = f' <i class="fas fa-fw fa-sm fa-circle text-warning hint mx-2"' \
+                                        f'    data-original-title="{hint}"></i>'
         toolbar = ''
         provider = self.request.registry.queryMultiAdapter(
             (item, self.request, self.table), IContentProvider,
@@ -280,6 +298,7 @@ class ParagraphsFullLabelColumn(ParagraphsLabelColumn):
                f'    <i class="far fa-plus-square"></i>' \
                f'  </span>' \
                f'  <span class="title">{super().render_cell(item)}</span>' \
+               f'  <span>{modified_icon}</span>' \
                f'  {toolbar}' \
                f'</div>' \
                f'<div class="editor"></div>'

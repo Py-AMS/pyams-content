@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-01-27 09:42+0100\n"
+"POT-Creation-Date: 2025-03-22 10:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -109,7 +109,7 @@ msgstr "Invité (rôle)"
 #: src/pyams_content/component/contact/portlet/interfaces.py:28
 #: src/pyams_content/component/verbatim/interfaces.py:52
 #: src/pyams_content/component/verbatim/portlet/interfaces.py:30
-#: src/pyams_content/component/paragraph/zmi/container.py:236
+#: src/pyams_content/component/paragraph/zmi/container.py:240
 #: src/pyams_content/component/paragraph/portlet/interfaces.py:33
 #: src/pyams_content/component/frame/portlet/interfaces.py:31
 #: src/pyams_content/reference/zmi/table.py:99
@@ -3411,8 +3411,7 @@ msgstr "Titre de substitution"
 msgid ""
 "If set, this title will be displayed in front-office instead of original "
 "title"
-msgstr ""
-"S'il est renseigné, ce titre est affiché à la place du titre du logo"
+msgstr "S'il est renseigné, ce titre est affiché à la place du titre du logo"
 
 #: src/pyams_content/shared/logo/interfaces.py:43
 msgid "Acronym"
@@ -3451,8 +3450,8 @@ msgid ""
 "followed by internal number, of by entering text matching content title."
 msgstr ""
 "Référence interne du logo ; vous pouvez rechercher une référence en "
-"indiquant un '+' suivi du numéro interne de ce moteur de recherche, "
-"ou en entrant tout ou partie de son titre"
+"indiquant un '+' suivi du numéro interne de ce moteur de recherche, ou en "
+"entrant tout ou partie de son titre"
 
 #: src/pyams_content/shared/logo/interfaces.py:77
 #: src/pyams_content/shared/logo/portlet/__init__.py:46
@@ -3505,8 +3504,8 @@ msgstr "Priorité des liens"
 #: src/pyams_content/shared/logo/skin/interfaces.py:46
 msgid "Order in which internal or external links are evaluated"
 msgstr ""
-"Ordre dans lequel les liens internes ou externes définis au niveau "
-"des logos sont évalués"
+"Ordre dans lequel les liens internes ou externes définis au niveau des logos "
+"sont évalués"
 
 #: src/pyams_content/shared/logo/skin/interfaces.py:51
 msgid "Force canonical URL"
@@ -5697,8 +5696,8 @@ msgid "Gallery description displayed by front-office template"
 msgstr "Description de la galerie présentée aux internautes"
 
 #: src/pyams_content/component/gallery/interfaces.py:133
-#: src/pyams_content/component/gallery/zmi/__init__.py:198
-#: src/pyams_content/component/gallery/zmi/__init__.py:210
+#: src/pyams_content/component/gallery/zmi/__init__.py:196
+#: src/pyams_content/component/gallery/zmi/__init__.py:208
 #: src/pyams_content/component/gallery/portlet/__init__.py:48
 msgid "Medias gallery"
 msgstr "Galerie de médias"
@@ -6492,62 +6491,66 @@ msgstr "Verbatim avec illustration (par défaut)"
 msgid "Renderer"
 msgstr "Mode de rendu"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:158
+#: src/pyams_content/component/paragraph/zmi/container.py:162
 msgid "Click to set/unset paragraph as navigation anchor"
 msgstr "Cliquer pour (dés)activer l'ancre de navigation sur ce bloc"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:160
+#: src/pyams_content/component/paragraph/zmi/container.py:164
 msgid "This paragraph is defined as a navigation anchor"
 msgstr "Ce bloc est une ancre de navigation"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:162
+#: src/pyams_content/component/paragraph/zmi/container.py:166
 msgid "This paragraph is not defined as a navigation anchor"
 msgstr "Ce bloc n'est pas une ancre de navigation"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:249
+#: src/pyams_content/component/paragraph/zmi/container.py:254
 msgid "Show/hide all paragraphs"
 msgstr "Blocs de contenus"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:250
+#: src/pyams_content/component/paragraph/zmi/container.py:255
 msgid "Click to show/hide all paragraphs editors"
 msgstr "Cliquer pour afficher/masquer tous les éditeurs de blocs"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:251
+#: src/pyams_content/component/paragraph/zmi/container.py:256
 msgid "Click to show/hide paragraph editor"
 msgstr "Cliquer pour afficher/masquer l'éditeur du bloc"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:307
+#: src/pyams_content/component/paragraph/zmi/container.py:257
+msgid "Created or modified in this version"
+msgstr "Créé ou modifié dans cette version"
+
+#: src/pyams_content/component/paragraph/zmi/container.py:327
 msgid "Click to lock/unlock paragraph"
 msgstr ""
 "Cliquer pour (dé)verrouiller ce bloc ; un bloc verrouillé ne peut pas être "
 "supprimé par les contributeurs (mais il peut être masqué)"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:309
+#: src/pyams_content/component/paragraph/zmi/container.py:329
 msgid "This paragraph is locked and can't be removed!"
 msgstr "Ce bloc est verrouillé et ne peut pas être supprimé !"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:311
+#: src/pyams_content/component/paragraph/zmi/container.py:331
 msgid "This paragraph is not locked"
 msgstr "Ce bloc n'est pas verrouillé"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:350
-#: src/pyams_content/component/paragraph/zmi/container.py:394
+#: src/pyams_content/component/paragraph/zmi/container.py:370
+#: src/pyams_content/component/paragraph/zmi/container.py:414
 msgid "Paragraphs"
 msgstr "Blocs de contenu"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:358
+#: src/pyams_content/component/paragraph/zmi/container.py:378
 msgid "Paragraphs list"
 msgstr "Liste des blocs de contenu"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:379
+#: src/pyams_content/component/paragraph/zmi/container.py:399
 msgid "Default paragraphs"
 msgstr "Blocs de contenu par défaut"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:466
+#: src/pyams_content/component/paragraph/zmi/container.py:486
 msgid "Links and attachments"
 msgstr "Récap. liens et pièces jointes"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:487
+#: src/pyams_content/component/paragraph/zmi/container.py:507
 msgid "Content blocks links and attachments"
 msgstr "Liens et pièces jointes par bloc de contenu"
 
@@ -6972,28 +6975,28 @@ msgstr "Liens et pièces jointes"
 msgid "Presentation template used for associations"
 msgstr "Mode de rendu utilisé pour cette liste de liens"
 
-#: src/pyams_content/component/association/zmi/container.py:61
+#: src/pyams_content/component/association/zmi/container.py:64
 msgid "Default links and external files"
 msgstr "Liens et pièces jointes par défaut"
 
-#: src/pyams_content/component/association/zmi/container.py:83
-#: src/pyams_content/component/association/zmi/container.py:248
+#: src/pyams_content/component/association/zmi/container.py:86
+#: src/pyams_content/component/association/zmi/container.py:263
 msgid "Links and external files"
 msgstr "Liens et pièces jointes"
 
-#: src/pyams_content/component/association/zmi/container.py:163
+#: src/pyams_content/component/association/zmi/container.py:177
 msgid "Public label"
 msgstr "Libellé public"
 
-#: src/pyams_content/component/association/zmi/container.py:172
+#: src/pyams_content/component/association/zmi/container.py:186
 msgid "Internal target"
 msgstr "Contenu interne"
 
-#: src/pyams_content/component/association/zmi/container.py:189
+#: src/pyams_content/component/association/zmi/container.py:203
 msgid "Size"
 msgstr "Taille"
 
-#: src/pyams_content/component/association/zmi/container.py:233
+#: src/pyams_content/component/association/zmi/container.py:247
 msgid "Links and external files list"
 msgstr "Liste des liens et pièces jointes"
 

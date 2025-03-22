@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-01-27 09:42+0100\n"
+"POT-Creation-Date: 2025-03-22 10:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,7 +110,7 @@ msgstr ""
 #: ./src/pyams_content/component/contact/portlet/interfaces.py:28
 #: ./src/pyams_content/component/verbatim/interfaces.py:52
 #: ./src/pyams_content/component/verbatim/portlet/interfaces.py:30
-#: ./src/pyams_content/component/paragraph/zmi/container.py:236
+#: ./src/pyams_content/component/paragraph/zmi/container.py:240
 #: ./src/pyams_content/component/paragraph/portlet/interfaces.py:33
 #: ./src/pyams_content/component/frame/portlet/interfaces.py:31
 #: ./src/pyams_content/reference/zmi/table.py:99
@@ -5228,8 +5228,8 @@ msgid "Gallery description displayed by front-office template"
 msgstr ""
 
 #: ./src/pyams_content/component/gallery/interfaces.py:133
-#: ./src/pyams_content/component/gallery/zmi/__init__.py:198
-#: ./src/pyams_content/component/gallery/zmi/__init__.py:210
+#: ./src/pyams_content/component/gallery/zmi/__init__.py:196
+#: ./src/pyams_content/component/gallery/zmi/__init__.py:208
 #: ./src/pyams_content/component/gallery/portlet/__init__.py:48
 msgid "Medias gallery"
 msgstr ""
@@ -5986,60 +5986,64 @@ msgstr ""
 msgid "Renderer"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:158
+#: ./src/pyams_content/component/paragraph/zmi/container.py:162
 msgid "Click to set/unset paragraph as navigation anchor"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:160
+#: ./src/pyams_content/component/paragraph/zmi/container.py:164
 msgid "This paragraph is defined as a navigation anchor"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:162
+#: ./src/pyams_content/component/paragraph/zmi/container.py:166
 msgid "This paragraph is not defined as a navigation anchor"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:249
+#: ./src/pyams_content/component/paragraph/zmi/container.py:254
 msgid "Show/hide all paragraphs"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:250
+#: ./src/pyams_content/component/paragraph/zmi/container.py:255
 msgid "Click to show/hide all paragraphs editors"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:251
+#: ./src/pyams_content/component/paragraph/zmi/container.py:256
 msgid "Click to show/hide paragraph editor"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:307
+#: ./src/pyams_content/component/paragraph/zmi/container.py:257
+msgid "Created or modified in this version"
+msgstr ""
+
+#: ./src/pyams_content/component/paragraph/zmi/container.py:327
 msgid "Click to lock/unlock paragraph"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:309
+#: ./src/pyams_content/component/paragraph/zmi/container.py:329
 msgid "This paragraph is locked and can't be removed!"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:311
+#: ./src/pyams_content/component/paragraph/zmi/container.py:331
 msgid "This paragraph is not locked"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:350
-#: ./src/pyams_content/component/paragraph/zmi/container.py:394
+#: ./src/pyams_content/component/paragraph/zmi/container.py:370
+#: ./src/pyams_content/component/paragraph/zmi/container.py:414
 msgid "Paragraphs"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:358
+#: ./src/pyams_content/component/paragraph/zmi/container.py:378
 msgid "Paragraphs list"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:379
+#: ./src/pyams_content/component/paragraph/zmi/container.py:399
 msgid "Default paragraphs"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:466
+#: ./src/pyams_content/component/paragraph/zmi/container.py:486
 msgid "Links and attachments"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:487
+#: ./src/pyams_content/component/paragraph/zmi/container.py:507
 msgid "Content blocks links and attachments"
 msgstr ""
 
@@ -6412,28 +6416,28 @@ msgstr ""
 msgid "Presentation template used for associations"
 msgstr ""
 
-#: ./src/pyams_content/component/association/zmi/container.py:61
+#: ./src/pyams_content/component/association/zmi/container.py:64
 msgid "Default links and external files"
 msgstr ""
 
-#: ./src/pyams_content/component/association/zmi/container.py:83
-#: ./src/pyams_content/component/association/zmi/container.py:248
+#: ./src/pyams_content/component/association/zmi/container.py:86
+#: ./src/pyams_content/component/association/zmi/container.py:263
 msgid "Links and external files"
 msgstr ""
 
-#: ./src/pyams_content/component/association/zmi/container.py:163
+#: ./src/pyams_content/component/association/zmi/container.py:177
 msgid "Public label"
 msgstr ""
 
-#: ./src/pyams_content/component/association/zmi/container.py:172
+#: ./src/pyams_content/component/association/zmi/container.py:186
 msgid "Internal target"
 msgstr ""
 
-#: ./src/pyams_content/component/association/zmi/container.py:189
+#: ./src/pyams_content/component/association/zmi/container.py:203
 msgid "Size"
 msgstr ""
 
-#: ./src/pyams_content/component/association/zmi/container.py:233
+#: ./src/pyams_content/component/association/zmi/container.py:247
 msgid "Links and external files list"
 msgstr ""
 
