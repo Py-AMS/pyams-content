@@ -77,7 +77,10 @@ class AssociationPermissionChecker(ContextAdapter):
 @subscriber(IObjectRemovedEvent, context_selector=IAssociationItem)
 def handle_association_event(event):
     """Handle added association item"""
-    content = get_parent(event.object, IWfSharedContent)
+    target = get_parent(event.object, IAssociationContainerTarget)
+    if target is not None:
+        get_pyramid_registry().notify(ObjectModifiedEvent(target))
+    content = get_parent(target if target is not None else event.object, IWfSharedContent)
     if content is not None:
         get_pyramid_registry().notify(ObjectModifiedEvent(content))
 
