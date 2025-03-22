@@ -15,6 +15,7 @@
 This module provides a few components used for management of associations containers.
 """
 
+from pyramid.decorator import reify
 from pyramid.view import view_config
 from zope.interface import implementer
 
@@ -30,10 +31,12 @@ from pyams_form.interfaces.form import IInnerSubForm
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_layer.skin import apply_skin
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
+from pyams_security.permission import get_edit_permission
 from pyams_skin.interfaces.view import IModalDisplayForm
 from pyams_skin.interfaces.viewlet import IContentPrefixViewletManager
 from pyams_table.column import GetAttrColumn
 from pyams_table.interfaces import IColumn, IValues
+from pyams_template.template import template_config
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.factory import factory_config
 from pyams_utils.interfaces import MISSING_INFO
@@ -99,6 +102,17 @@ class AssociationsTable(SortableTable):
     container_class = IAssociationContainer
 
     display_if_empty = True
+
+    @property
+    def css_classes(self):
+        container = self.container_class(self.context)
+        permission = get_edit_permission(self.request, container, self)
+        table_class = super().css_classes.get('table')
+        if self.request.has_permission(permission, context=container):
+            table_class += ' my-0'
+        return {
+            'table': table_class
+        }
 
 
 @adapter_config(required=(IAssociationContainer, IAdminLayer, IAssociationsTable),
@@ -242,6 +256,7 @@ class AssociationsTableView(InnerTableAdminView):
 @adapter_config(name='associations-group',
                 required=(IAssociationContainerTarget, IAdminLayer, IPropertiesEditForm),
                 provides=IInnerSubForm, force_implements=False)
+@template_config(template='templates/associations-table.pt', layer=IAdminLayer)
 class AssociationsGroup(TableGroupSwitcher):
     """Associations table group"""
 
@@ -258,3 +273,13 @@ class AssociationsGroup(TableGroupSwitcher):
         if IAssociationParagraph.providedBy(self.context):
             return 'open'
         return super().state
+
+    @reify
+    def container(self):
+        """Associations container getter"""
+        return self.container_intf(self.context)
+
+    @property
+    def edit_permission(self):
+        """Edit permission getter"""
+        return get_edit_permission(self.request, self.container, self)
