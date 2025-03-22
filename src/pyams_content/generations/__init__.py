@@ -37,6 +37,7 @@ from pyams_content.root import ISiteRootToolsConfiguration
 from pyams_content.shared.alert.interfaces import IAlertManager
 from pyams_content.shared.common.interfaces import IWfSharedContent
 from pyams_content.shared.common.interfaces.types import IWfTypedSharedContent
+from pyams_content.shared.file.interfaces import IFileManager
 from pyams_content.shared.form.interfaces import IFormManager
 from pyams_content.shared.logo.interfaces import ILogoManager
 from pyams_content.shared.news.interfaces import INewsManager
@@ -66,6 +67,7 @@ REQUIRED_TOOLS = (
     (IAlertManager, 'alerts'),
     (IFormManager, 'forms'),
     (ILogoManager, 'logos'),
+    (IFileManager, 'files'),
     (INewsManager, 'news'),
     (ITopicManager, 'topics'),
     (IResourceManager, 'resources')

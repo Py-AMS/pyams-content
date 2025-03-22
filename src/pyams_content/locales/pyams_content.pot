@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-03-22 10:56+0100\n"
+"POT-Creation-Date: 2025-03-22 14:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3211,6 +3211,31 @@ msgstr ""
 msgid "Topic management"
 msgstr ""
 
+#: ./src/pyams_content/shared/file/interfaces.py:21
+msgid "File"
+msgstr ""
+
+#: ./src/pyams_content/shared/file/interfaces.py:27
+#: ./src/pyams_content/component/extfile/interfaces.py:73
+msgid "File content"
+msgstr ""
+
+#: ./src/pyams_content/shared/file/interfaces.py:28
+msgid "Actual file content"
+msgstr ""
+
+#: ./src/pyams_content/shared/file/interfaces.py:31
+msgid "File name"
+msgstr ""
+
+#: ./src/pyams_content/shared/file/interfaces.py:32
+msgid "Name used to save the file on download"
+msgstr ""
+
+#: ./src/pyams_content/shared/file/zmi/__init__.py:44
+msgid "File management"
+msgstr ""
+
 #: ./src/pyams_content/shared/news/interfaces.py:27
 msgid "News"
 msgstr ""
@@ -5228,8 +5253,8 @@ msgid "Gallery description displayed by front-office template"
 msgstr ""
 
 #: ./src/pyams_content/component/gallery/interfaces.py:133
-#: ./src/pyams_content/component/gallery/zmi/__init__.py:196
-#: ./src/pyams_content/component/gallery/zmi/__init__.py:208
+#: ./src/pyams_content/component/gallery/zmi/__init__.py:195
+#: ./src/pyams_content/component/gallery/zmi/__init__.py:207
 #: ./src/pyams_content/component/gallery/portlet/__init__.py:48
 msgid "Medias gallery"
 msgstr ""
@@ -5651,10 +5676,6 @@ msgstr ""
 msgid "File data"
 msgstr ""
 
-#: ./src/pyams_content/component/extfile/interfaces.py:73
-msgid "File content"
-msgstr ""
-
 #: ./src/pyams_content/component/extfile/interfaces.py:82
 msgid "External image"
 msgstr ""
@@ -5998,52 +6019,52 @@ msgstr ""
 msgid "This paragraph is not defined as a navigation anchor"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:254
+#: ./src/pyams_content/component/paragraph/zmi/container.py:253
 msgid "Show/hide all paragraphs"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:255
+#: ./src/pyams_content/component/paragraph/zmi/container.py:254
 msgid "Click to show/hide all paragraphs editors"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:256
+#: ./src/pyams_content/component/paragraph/zmi/container.py:255
 msgid "Click to show/hide paragraph editor"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:257
+#: ./src/pyams_content/component/paragraph/zmi/container.py:256
 msgid "Created or modified in this version"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:327
+#: ./src/pyams_content/component/paragraph/zmi/container.py:326
 msgid "Click to lock/unlock paragraph"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:329
+#: ./src/pyams_content/component/paragraph/zmi/container.py:328
 msgid "This paragraph is locked and can't be removed!"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:331
+#: ./src/pyams_content/component/paragraph/zmi/container.py:330
 msgid "This paragraph is not locked"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:370
-#: ./src/pyams_content/component/paragraph/zmi/container.py:414
+#: ./src/pyams_content/component/paragraph/zmi/container.py:369
+#: ./src/pyams_content/component/paragraph/zmi/container.py:413
 msgid "Paragraphs"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:378
+#: ./src/pyams_content/component/paragraph/zmi/container.py:377
 msgid "Paragraphs list"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:399
+#: ./src/pyams_content/component/paragraph/zmi/container.py:398
 msgid "Default paragraphs"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:486
+#: ./src/pyams_content/component/paragraph/zmi/container.py:485
 msgid "Links and attachments"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/zmi/container.py:507
+#: ./src/pyams_content/component/paragraph/zmi/container.py:506
 msgid "Content blocks links and attachments"
 msgstr ""
 

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-03-22 10:56+0100\n"
+"POT-Creation-Date: 2025-03-22 14:28+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3519,6 +3519,32 @@ msgstr "Article"
 msgid "Topic management"
 msgstr "Cet article"
 
+#: src/pyams_content/shared/file/interfaces.py:21
+msgid "File"
+msgstr "Fichier"
+
+#: src/pyams_content/shared/file/interfaces.py:27
+#: src/pyams_content/component/extfile/interfaces.py:73
+msgid "File content"
+msgstr "Contenu du fichier"
+
+#: src/pyams_content/shared/file/interfaces.py:28
+msgid "Actual file content"
+msgstr ""
+"Utilisez le bouton \"Parcourir...\" pour rechercher le contenu du fichier"
+
+#: src/pyams_content/shared/file/interfaces.py:31
+msgid "File name"
+msgstr "Nom du fichier"
+
+#: src/pyams_content/shared/file/interfaces.py:32
+msgid "Name used to save the file on download"
+msgstr "Nom proposé pour enregistrer le fichier en cas de téléchargement"
+
+#: src/pyams_content/shared/file/zmi/__init__.py:44
+msgid "File management"
+msgstr "Ce fichier"
+
 #: src/pyams_content/shared/news/interfaces.py:27
 msgid "News"
 msgstr "Actualité"
@@ -5696,8 +5722,8 @@ msgid "Gallery description displayed by front-office template"
 msgstr "Description de la galerie présentée aux internautes"
 
 #: src/pyams_content/component/gallery/interfaces.py:133
-#: src/pyams_content/component/gallery/zmi/__init__.py:196
-#: src/pyams_content/component/gallery/zmi/__init__.py:208
+#: src/pyams_content/component/gallery/zmi/__init__.py:195
+#: src/pyams_content/component/gallery/zmi/__init__.py:207
 #: src/pyams_content/component/gallery/portlet/__init__.py:48
 msgid "Medias gallery"
 msgstr "Galerie de médias"
@@ -6142,12 +6168,7 @@ msgstr "Fichier"
 
 #: src/pyams_content/component/extfile/interfaces.py:72
 msgid "File data"
-msgstr "Fichier"
-
-#: src/pyams_content/component/extfile/interfaces.py:73
-msgid "File content"
-msgstr ""
-"Cliquez sur le bouton \"Parcourir...\" pour sélectionner un nouveau contenu"
+msgstr "Contenu du fichier"
 
 #: src/pyams_content/component/extfile/interfaces.py:82
 msgid "External image"
@@ -6503,54 +6524,54 @@ msgstr "Ce bloc est une ancre de navigation"
 msgid "This paragraph is not defined as a navigation anchor"
 msgstr "Ce bloc n'est pas une ancre de navigation"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:254
+#: src/pyams_content/component/paragraph/zmi/container.py:253
 msgid "Show/hide all paragraphs"
 msgstr "Blocs de contenus"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:255
+#: src/pyams_content/component/paragraph/zmi/container.py:254
 msgid "Click to show/hide all paragraphs editors"
 msgstr "Cliquer pour afficher/masquer tous les éditeurs de blocs"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:256
+#: src/pyams_content/component/paragraph/zmi/container.py:255
 msgid "Click to show/hide paragraph editor"
 msgstr "Cliquer pour afficher/masquer l'éditeur du bloc"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:257
+#: src/pyams_content/component/paragraph/zmi/container.py:256
 msgid "Created or modified in this version"
 msgstr "Créé ou modifié dans cette version"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:327
+#: src/pyams_content/component/paragraph/zmi/container.py:326
 msgid "Click to lock/unlock paragraph"
 msgstr ""
 "Cliquer pour (dé)verrouiller ce bloc ; un bloc verrouillé ne peut pas être "
 "supprimé par les contributeurs (mais il peut être masqué)"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:329
+#: src/pyams_content/component/paragraph/zmi/container.py:328
 msgid "This paragraph is locked and can't be removed!"
 msgstr "Ce bloc est verrouillé et ne peut pas être supprimé !"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:331
+#: src/pyams_content/component/paragraph/zmi/container.py:330
 msgid "This paragraph is not locked"
 msgstr "Ce bloc n'est pas verrouillé"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:370
-#: src/pyams_content/component/paragraph/zmi/container.py:414
+#: src/pyams_content/component/paragraph/zmi/container.py:369
+#: src/pyams_content/component/paragraph/zmi/container.py:413
 msgid "Paragraphs"
 msgstr "Blocs de contenu"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:378
+#: src/pyams_content/component/paragraph/zmi/container.py:377
 msgid "Paragraphs list"
 msgstr "Liste des blocs de contenu"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:399
+#: src/pyams_content/component/paragraph/zmi/container.py:398
 msgid "Default paragraphs"
 msgstr "Blocs de contenu par défaut"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:486
+#: src/pyams_content/component/paragraph/zmi/container.py:485
 msgid "Links and attachments"
 msgstr "Récap. liens et pièces jointes"
 
-#: src/pyams_content/component/paragraph/zmi/container.py:507
+#: src/pyams_content/component/paragraph/zmi/container.py:506
 msgid "Content blocks links and attachments"
 msgstr "Liens et pièces jointes par bloc de contenu"
 
