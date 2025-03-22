@@ -22,8 +22,8 @@ from zope.lifecycleevent import ObjectCreatedEvent
 from zope.schema._bootstrapinterfaces import WrongType
 
 from pyams_content.component.gallery.interfaces import IGalleryContainer, IGalleryFile
-from pyams_content.component.gallery.zmi import get_json_gallery_refresh_event
-from pyams_content.component.gallery.zmi.helpers import get_json_gallery_media_refresh_event
+from pyams_content.component.gallery.zmi import get_json_gallery_refresh_callback
+from pyams_content.component.gallery.zmi.helpers import get_json_gallery_media_refresh_callback
 from pyams_content.component.gallery.zmi.interfaces import IGalleryMediaThumbnailView, IGalleryMediasAddFields, \
     IGalleryMediasView
 from pyams_content.component.paragraph.zmi import get_json_paragraph_toolbar_refresh_event
@@ -137,7 +137,7 @@ class GalleryMediaAddFormRenderer(ContextRequestViewAdapter):
         result = {
             'status': 'success',
             'callbacks': [
-                get_json_gallery_refresh_event(media, self.request, self.view)
+                get_json_gallery_refresh_callback(media, self.request, self.view)
             ]
         }
         event = get_json_paragraph_toolbar_refresh_event(media, self.request)
@@ -296,7 +296,7 @@ class GalleryFilePropertiesEditFormRenderer(ContextRequestViewAdapter):
             'status': 'success',
             'message': self.request.localizer.translate(self.view.success_message),
             'callbacks': [
-                get_json_gallery_media_refresh_event(self.context, self.request, self.view)
+                get_json_gallery_media_refresh_callback(self.context, self.request, self.view)
             ]
         }
 

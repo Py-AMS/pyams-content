@@ -23,7 +23,7 @@ from pyams_utils.traversing import get_parent
 __docformat__ = 'restructuredtext'
 
 
-def get_json_gallery_refresh_event(context, request, view):
+def get_json_gallery_refresh_callback(context, request, view):
     """Get gallery refresh event"""
     gallery = get_parent(context, IGalleryContainer)
     provider = create_object(IGalleryMediasView,
@@ -40,7 +40,7 @@ def get_json_gallery_refresh_event(context, request, view):
     return None
 
 
-def get_json_gallery_media_refresh_event(context, request, view):
+def get_json_gallery_media_refresh_callback(context, request, view):
     """Get gallery media refresh event"""
     provider = create_object(IGalleryMediaThumbnailView,
                              context=context, request=request, view=view)

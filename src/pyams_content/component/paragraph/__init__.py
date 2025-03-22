@@ -174,7 +174,7 @@ class ParagraphDeletePermissionChecker(ParagraphPermissionChecker):
 @subscriber(IObjectModifiedEvent, context_selector=IBaseParagraph)
 @subscriber(IObjectRemovedEvent, context_selector=IBaseParagraph)
 def handle_paragraph_event(event):
-    """Handle added paragraph"""
+    """Handle paragraph event"""
     content = get_parent(event.object, IParagraphContainerTarget,
                          condition=lambda x: not IBaseParagraph.providedBy(x))
     if content is not None:

@@ -14,18 +14,17 @@
 
 
 """
+
 from cgi import FieldStorage
 
 from pyramid.decorator import reify
 from pyramid.httpexceptions import HTTPForbidden, HTTPServerError
 from pyramid.view import view_config
 from zope.interface import implementer
-from zope.location import locate
-from zope.schema._bootstrapinterfaces import WrongType
+from zope.schema.interfaces import WrongType
 
-from pyams_content.component.gallery import IGallery, IGalleryFile, IGalleryTarget
-from pyams_content.component.gallery.interfaces import IGalleryContainer
-from pyams_content.component.gallery.zmi.helpers import get_json_gallery_refresh_event
+from pyams_content.component.gallery.interfaces import IGallery, IGalleryContainer, IGalleryFile, IGalleryTarget
+from pyams_content.component.gallery.zmi.helpers import get_json_gallery_refresh_callback
 from pyams_content.component.gallery.zmi.interfaces import IGalleryMediasView
 from pyams_content.component.paragraph.zmi import get_json_paragraph_toolbar_refresh_event
 from pyams_file.file import get_magic_content_type
@@ -122,20 +121,18 @@ def upload_medias_files(request):
             for content, filename in contents:
                 try:
                     gallery_file = create_object(IGalleryFile)
-                    locate(gallery_file, container)
+                    container.append(gallery_file)
                     gallery_file.data = filename, content
                     gallery_file.author = MISSING_INFO
                 except WrongType:
                     continue
-                else:
-                    container.append(gallery_file, notify=False)
     apply_skin(request, AdminSkin)
     result_view = create_object(IGalleryMediasView, context=container, request=request, view=None)
     result_view.update()
     result = {
         'status': 'success',
         'callbacks': [
-            get_json_gallery_refresh_event(container, request, result_view)
+            get_json_gallery_refresh_callback(container, request, result_view)
         ]
     }
     event = get_json_paragraph_toolbar_refresh_event(container, request)
@@ -178,7 +175,7 @@ def remove_media(request):
         result = {
             'status': 'success',
             'callbacks': [
-                get_json_gallery_refresh_event(gallery, request, None)
+                get_json_gallery_refresh_callback(gallery, request, None)
             ]
         }
         event = get_json_paragraph_toolbar_refresh_event(gallery, request)
