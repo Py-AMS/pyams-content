@@ -341,9 +341,11 @@ def publish_action(wf, context):
     """Publish version"""
     request = check_request()
     translate = request.localizer.translate
+    now = datetime.now(timezone.utc)
     publication_info = IWorkflowPublicationInfo(context)
-    publication_info.publication_date = datetime.now(timezone.utc)
+    publication_info.publication_date = now
     publication_info.publisher = request.principal.id
+    publication_info.apply_first_publication_date()
     version_id = IWorkflowState(context).version_id
     for version in IWorkflowVersions(context).get_versions((PRE_PUBLISHED, PUBLISHED, RETIRING,
                                                             RETIRED, ARCHIVING)):
@@ -367,7 +369,6 @@ def publish_action(wf, context):
             task.name = 'Planned archiving for {}'.format(ISequentialIdInfo(context).public_oid)
             task.schedule_mode = SCHEDULER_TASK_DATE_MODE
             pub_info = IWorkflowPublicationInfo(context)
-            now = datetime.now(timezone.utc)
             schedule_info = IDateTaskScheduling(task)
             schedule_info.active = True
             schedule_info.start_date = max(now + timedelta(seconds=10),
