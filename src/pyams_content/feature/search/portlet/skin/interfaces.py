@@ -62,7 +62,7 @@ class ISearchResultsPortletBaseRendererSettings(IAggregatedPortletRendererSettin
     results_css_class = TextLine(title=_('Results CSS class'),
                                  description=_("CSS class used for view items container"),
                                  default='row mx-0 col col-12 col-md-8 col-lg-9 col-xl-10 float-right')
-
+    
     header_display_mode = Choice(title=_("Header display mode"),
                                  description=_("Defines how results headers will be rendered"),
                                  required=True,
@@ -74,7 +74,18 @@ class ISearchResultsPortletBaseRendererSettings(IAggregatedPortletRendererSettin
                                      "specify maximum text length"),
                        required=True,
                        default=120)
-
+    
+    display_tags = Bool(title=_("Display tags?"),
+                        description=_("If 'no', tags attached to result items will not be displayed"),
+                        required=True,
+                        default=True)
+    
+    display_publication_date = Bool(title=_("Display publication date?"),
+                                    description=_("If 'yes', publication date will be displayed for "
+                                                  "each search result"),
+                                    required=True,
+                                    default=False)
+    
     display_illustrations = Bool(title=_("Display illustrations?"),
                                  description=_("If 'no', view contents will not display "
                                                "illustrations"),

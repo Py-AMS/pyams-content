@@ -38,6 +38,7 @@ from pyams_portal.skin import PortletRenderer
 from pyams_skin.interfaces.viewlet import IBreadcrumbs
 from pyams_template.template import template_config
 from pyams_utils.adapter import NullAdapter, adapter_config
+from pyams_utils.date import format_date
 from pyams_utils.factory import factory_config
 from pyams_utils.text import get_text_start
 from pyams_utils.url import canonical_url, relative_url
@@ -46,6 +47,7 @@ from pyams_viewlet.viewlet import ViewContentProvider
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
+from pyams_workflow.interfaces import IWorkflowPublicationInfo
 
 
 class SearchResultsPortletBaseRendererSettings(Persistent, Contained):
@@ -62,6 +64,8 @@ class SearchResultsPortletBaseRendererSettings(Persistent, Contained):
     header_display_mode = FieldProperty(
         ISearchResultsPortletBaseRendererSettings['header_display_mode'])
     start_length = FieldProperty(ISearchResultsPortletBaseRendererSettings['start_length'])
+    display_tags = FieldProperty(ISearchResultsPortletBaseRendererSettings['display_tags'])
+    display_publication_date = FieldProperty(ISearchResultsPortletBaseRendererSettings['display_publication_date'])
     display_illustrations = FieldProperty(ISearchResultsPortletBaseRendererSettings['display_illustrations'])
     thumb_selection = FieldProperty(ISearchResultsPortletBaseRendererSettings['thumb_selection'])
 
@@ -272,6 +276,11 @@ class WfSharedContentSearchResultRenderer(ViewContentProvider):
         return self.request.registry.queryMultiAdapter((self.context, self.request, self.view),
                                                        ISearchResultTitle)
 
+    @property
+    def publication_date(self):
+        publication_info = IWorkflowPublicationInfo(self.context, None)
+        return format_date(publication_info.visible_publication_date) if publication_info is not None else None
+    
     @property
     def header(self):
         display_mode = HEADER_DISPLAY_MODE.FULL.value

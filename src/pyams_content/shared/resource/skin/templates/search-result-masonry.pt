@@ -1,4 +1,4 @@
-<div class="col mb-3 break-avoid"
+<div class="col px-0 mb-3 break-avoid"
 	 tal:define="target_url view.url;
 				 renderer_settings view.view.renderer_settings;
 				 button_title i18n:renderer_settings.button_title;"
@@ -23,16 +23,28 @@
 		</tal:if>
 		<div class="card-body"
 			 tal:define="title view.title;
-						 header view.header;"
+						 header view.header;
+						 publication_date view.publication_date if renderer_settings.display_publication_date else None;"
 			 tal:condition="title or header">
-			<h3 class="card-title"
-				tal:condition="title">
-				${title}
-			</h3>
-			<p class="card-text"
-			   tal:condition="header">
-				${structure:header}
-			</p>
+			<a class="text-body"
+			   href="${target_url}">
+				<h3 class="card-title ${'mb-0' if publication_date else None}"
+					tal:condition="title">
+					${title}
+				</h3>
+				<div tal:condition="publication_date"
+					 class="mb-2">
+					<i class="small">${publication_date}</i>
+				</div>
+				<div tal:condition="renderer_settings.display_tags"
+					 class="tags position-relative">
+					${structure:tales:tags(context)}
+				</div>
+				<p class="card-text"
+				   tal:condition="header">
+					${structure:header}
+				</p>
+			</a>
 		</div>
 		<div class="card-footer text-right"
 			 tal:condition="button_title and target_url">

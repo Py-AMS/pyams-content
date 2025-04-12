@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-03-22 14:28+0100\n"
+"POT-Creation-Date: 2025-04-12 22:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -454,10 +454,10 @@ msgstr ""
 "propriétaire !"
 
 #: src/pyams_content/shared/common/zmi/workflow.py:167
-#: src/pyams_content/workflow/basic.py:447
-#: src/pyams_content/workflow/basic.py:484
-#: src/pyams_content/workflow/__init__.py:933
-#: src/pyams_content/workflow/__init__.py:970
+#: src/pyams_content/workflow/basic.py:448
+#: src/pyams_content/workflow/basic.py:485
+#: src/pyams_content/workflow/__init__.py:934
+#: src/pyams_content/workflow/__init__.py:971
 #, python-format
 msgid "{state} {date}"
 msgstr "{state} {date}"
@@ -1880,6 +1880,7 @@ msgstr "Titre du contenu"
 
 #: src/pyams_content/shared/common/portlet/interfaces.py:35
 #: src/pyams_content/shared/common/portlet/interfaces.py:84
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:83
 msgid "Display publication date?"
 msgstr "Afficher la date de publication"
 
@@ -1937,6 +1938,7 @@ msgstr "Afficher le titre"
 
 #: src/pyams_content/shared/common/portlet/interfaces.py:76
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:90
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:78
 msgid "Display tags?"
 msgstr "Afficher les tags"
 
@@ -2829,13 +2831,13 @@ msgstr "Classe CSS utilisée pour l'affichage des résultats"
 
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:62
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:40
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:78
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:89
 msgid "Display illustrations?"
 msgstr "Afficher l'illustration"
 
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:63
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:41
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:79
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:90
 msgid "If 'no', view contents will not display illustrations"
 msgstr "Si 'non', l'illustration des résultats ne sera pas affichée"
 
@@ -2845,9 +2847,9 @@ msgstr "Si 'non', l'illustration des résultats ne sera pas affichée"
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:47
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:64
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:97
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:85
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:102
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:132
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:96
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:113
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:143
 #: src/pyams_content/component/gallery/portlet/skin/interfaces.py:31
 #: src/pyams_content/component/gallery/skin/interfaces.py:30
 msgid "Thumbnails selection"
@@ -2860,9 +2862,9 @@ msgstr "Sélection des vignettes"
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:65
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:98
 #: src/pyams_content/feature/navigation/portlet/skin/interfaces.py:31
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:86
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:103
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:133
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:97
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:114
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:144
 #: src/pyams_content/component/gallery/portlet/skin/interfaces.py:32
 #: src/pyams_content/component/gallery/skin/interfaces.py:31
 msgid "Selection used to display images thumbnails"
@@ -2899,16 +2901,16 @@ msgstr "Libellé du lien permettant d'accéder à la liste complète des résult
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:138
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:73
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:106
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:111
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:141
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:122
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:152
 msgid "Columns count"
 msgstr "Nombre de colonnes"
 
 #: src/pyams_content/shared/view/portlet/skin/interfaces.py:139
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:74
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:107
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:112
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:142
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:123
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:153
 msgid "Select the number of panels columns for all available devices"
 msgstr "Nombre de colonnes appliqué sur les différents types de périphériques"
 
@@ -3359,8 +3361,8 @@ msgstr "Page carrefour (sites et rubriques)"
 #: src/pyams_content/shared/site/portlet/interfaces.py:28
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:85
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:118
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:123
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:153
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:134
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:164
 msgid "Button's title"
 msgstr "Libellé du bouton"
 
@@ -3391,8 +3393,8 @@ msgstr "Grille d'éléments, style « Masonry »"
 
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:86
 #: src/pyams_content/shared/site/portlet/skin/interfaces.py:119
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:124
-#: src/pyams_content/feature/search/portlet/skin/interfaces.py:154
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:135
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:165
 msgid "Optional navigation button's title"
 msgstr ""
 "Un bouton de navigation associé à chaque résultat de recherche sera affiché "
@@ -4690,9 +4692,9 @@ msgid ""
 "if they were already members of the reviewers group. Otherwise, only new "
 "reviewers will be notified"
 msgstr ""
-"Si 'oui', tous les utilisateurs sollicités seront notifiés par mail de "
-"votredemande, même s'ils avaient déjà été sollicités auparavant ; dans le "
-"cas contraire, seuls les nouveaux relecteurs seront notifiés."
+"Si 'oui', tous les utilisateurs sollicités seront notifiés par mail de votre "
+"demande, même s'ils avaient déjà été sollicités auparavant ; dans le cas "
+"contraire, seuls les nouveaux relecteurs seront notifiés."
 
 #: src/pyams_content/feature/review/zmi/__init__.py:111
 msgid "Content review"
@@ -5035,19 +5037,19 @@ msgstr "Premiers résultats de la recherche :"
 msgid "No result found."
 msgstr "Aucun résultat trouvé"
 
-#: src/pyams_content/feature/search/portlet/skin/__init__.py:114
+#: src/pyams_content/feature/search/portlet/skin/__init__.py:118
 msgid "Paginated search results (default)"
 msgstr "Liste de résultats, avec ou sans facettes (par défaut)"
 
-#: src/pyams_content/feature/search/portlet/skin/__init__.py:149
+#: src/pyams_content/feature/search/portlet/skin/__init__.py:153
 msgid "Paneled search results"
 msgstr "Grille de résultats, avec ou sans facettes, style « page carrefour »"
 
-#: src/pyams_content/feature/search/portlet/skin/__init__.py:184
+#: src/pyams_content/feature/search/portlet/skin/__init__.py:188
 msgid "Bootstrap cards search results"
 msgstr "Grille de résultats, avec ou sans facettes, style « cartes Bootstrap »"
 
-#: src/pyams_content/feature/search/portlet/skin/__init__.py:215
+#: src/pyams_content/feature/search/portlet/skin/__init__.py:219
 msgid "Bootstrap Masonry cards search results"
 msgstr "Grille de résultats, avec ou sans facettes, style « Masonry »"
 
@@ -5090,6 +5092,15 @@ msgid "If 'no', results will not be paginated"
 msgstr ""
 "LA navigation entre les pages de résultats ne sera possible que si cette "
 "option est sélectionnée"
+
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:79
+msgid "If 'no', tags attached to result items will not be displayed"
+msgstr ""
+"Si 'non', les tags associés aux résultats de la recherche ne seront pas affichés"
+
+#: src/pyams_content/feature/search/portlet/skin/interfaces.py:84
+msgid "If 'yes', publication date will be displayed for each search result"
+msgstr "Si 'oui', la date de publication de chaque résultat de la recherche sera affichée"
 
 #: src/pyams_content/feature/search/portlet/skin/templates/search-panels.pt:27
 #: src/pyams_content/feature/search/portlet/skin/templates/search-default.pt:27
@@ -5210,169 +5221,169 @@ msgstr "publié"
 msgid "archived"
 msgstr "archivé"
 
-#: src/pyams_content/workflow/basic.py:249
-#: src/pyams_content/workflow/__init__.py:353
+#: src/pyams_content/workflow/basic.py:251
+#: src/pyams_content/workflow/__init__.py:355
 #, python-format
 msgid "Published version {0}"
 msgstr "Publication de la version {0}"
 
-#: src/pyams_content/workflow/basic.py:304
-#: src/pyams_content/workflow/__init__.py:413
+#: src/pyams_content/workflow/basic.py:305
+#: src/pyams_content/workflow/__init__.py:414
 msgid "Initialize"
 msgstr "Création"
 
-#: src/pyams_content/workflow/basic.py:307
-#: src/pyams_content/workflow/__init__.py:416
+#: src/pyams_content/workflow/basic.py:308
+#: src/pyams_content/workflow/__init__.py:417
 msgid "Draft creation"
 msgstr "Création du brouillon"
 
-#: src/pyams_content/workflow/basic.py:310
-#: src/pyams_content/workflow/__init__.py:437
-#: src/pyams_content/workflow/__init__.py:550
+#: src/pyams_content/workflow/basic.py:311
+#: src/pyams_content/workflow/__init__.py:438
+#: src/pyams_content/workflow/__init__.py:551
 msgid "Pre-publish content"
 msgstr "Pré-publier le contenu"
 
-#: src/pyams_content/workflow/basic.py:315
-#: src/pyams_content/workflow/__init__.py:442
-#: src/pyams_content/workflow/__init__.py:555
-#: src/pyams_content/workflow/__init__.py:686
+#: src/pyams_content/workflow/basic.py:316
+#: src/pyams_content/workflow/__init__.py:443
+#: src/pyams_content/workflow/__init__.py:556
+#: src/pyams_content/workflow/__init__.py:687
 msgid "Content pre-published"
 msgstr "Contenu pré-publié"
 
-#: src/pyams_content/workflow/basic.py:317
-#: src/pyams_content/workflow/basic.py:332
-#: src/pyams_content/workflow/basic.py:357
-#: src/pyams_content/workflow/__init__.py:444
-#: src/pyams_content/workflow/__init__.py:461
-#: src/pyams_content/workflow/__init__.py:557
-#: src/pyams_content/workflow/__init__.py:581
-#: src/pyams_content/workflow/__init__.py:599
-#: src/pyams_content/workflow/__init__.py:688
-#: src/pyams_content/workflow/__init__.py:705
+#: src/pyams_content/workflow/basic.py:318
+#: src/pyams_content/workflow/basic.py:333
+#: src/pyams_content/workflow/basic.py:358
+#: src/pyams_content/workflow/__init__.py:445
+#: src/pyams_content/workflow/__init__.py:462
+#: src/pyams_content/workflow/__init__.py:558
+#: src/pyams_content/workflow/__init__.py:582
+#: src/pyams_content/workflow/__init__.py:600
+#: src/pyams_content/workflow/__init__.py:689
+#: src/pyams_content/workflow/__init__.py:706
 msgid "Content publication"
 msgstr "Publication de contenu"
 
-#: src/pyams_content/workflow/basic.py:318
-#: src/pyams_content/workflow/__init__.py:445
-#: src/pyams_content/workflow/__init__.py:558
-#: src/pyams_content/workflow/__init__.py:689
+#: src/pyams_content/workflow/basic.py:319
+#: src/pyams_content/workflow/__init__.py:446
+#: src/pyams_content/workflow/__init__.py:559
+#: src/pyams_content/workflow/__init__.py:690
 #, python-format
 msgid "{principal} pre-published the content « {title} »"
 msgstr "{principal} a pré-publié le contenu « {title} »"
 
-#: src/pyams_content/workflow/basic.py:322
-#: src/pyams_content/workflow/__init__.py:570
+#: src/pyams_content/workflow/basic.py:323
+#: src/pyams_content/workflow/__init__.py:571
 msgid "Cancel publication"
 msgstr "Annuler la publication"
 
-#: src/pyams_content/workflow/basic.py:330
-#: src/pyams_content/workflow/__init__.py:578
+#: src/pyams_content/workflow/basic.py:331
+#: src/pyams_content/workflow/__init__.py:579
 msgid "Publication canceled"
 msgstr "Publication annulée"
 
-#: src/pyams_content/workflow/basic.py:333
-#: src/pyams_content/workflow/__init__.py:582
+#: src/pyams_content/workflow/basic.py:334
+#: src/pyams_content/workflow/__init__.py:583
 #, python-format
 msgid "{principal} cancelled the publication for content « {title} »"
 msgstr "{principal} a annulé la publication du contenu « {title} »"
 
-#: src/pyams_content/workflow/basic.py:338
-#: src/pyams_content/workflow/basic.py:346
-#: src/pyams_content/workflow/__init__.py:449
-#: src/pyams_content/workflow/__init__.py:562
-#: src/pyams_content/workflow/__init__.py:587
+#: src/pyams_content/workflow/basic.py:339
+#: src/pyams_content/workflow/basic.py:347
+#: src/pyams_content/workflow/__init__.py:450
+#: src/pyams_content/workflow/__init__.py:563
+#: src/pyams_content/workflow/__init__.py:588
 msgid "Publish content"
 msgstr "Publier le contenu"
 
-#: src/pyams_content/workflow/basic.py:343
-#: src/pyams_content/workflow/basic.py:355
-#: src/pyams_content/workflow/__init__.py:459
-#: src/pyams_content/workflow/__init__.py:567
-#: src/pyams_content/workflow/__init__.py:597
-#: src/pyams_content/workflow/__init__.py:703
+#: src/pyams_content/workflow/basic.py:344
+#: src/pyams_content/workflow/basic.py:356
+#: src/pyams_content/workflow/__init__.py:460
+#: src/pyams_content/workflow/__init__.py:568
+#: src/pyams_content/workflow/__init__.py:598
+#: src/pyams_content/workflow/__init__.py:704
 msgid "Content published"
 msgstr "Publication"
 
-#: src/pyams_content/workflow/basic.py:358
-#: src/pyams_content/workflow/__init__.py:462
-#: src/pyams_content/workflow/__init__.py:600
-#: src/pyams_content/workflow/__init__.py:706
+#: src/pyams_content/workflow/basic.py:359
+#: src/pyams_content/workflow/__init__.py:463
+#: src/pyams_content/workflow/__init__.py:601
+#: src/pyams_content/workflow/__init__.py:707
 #, python-format
 msgid "{principal} published the content « {title} »"
 msgstr "{principal} a publié le contenu « {title} »"
 
-#: src/pyams_content/workflow/basic.py:363
-#: src/pyams_content/workflow/__init__.py:729
-#: src/pyams_content/workflow/__init__.py:762
+#: src/pyams_content/workflow/basic.py:364
+#: src/pyams_content/workflow/__init__.py:730
+#: src/pyams_content/workflow/__init__.py:763
 msgid "Archive content"
 msgstr "Archiver le contenu"
 
-#: src/pyams_content/workflow/basic.py:372
-#: src/pyams_content/workflow/__init__.py:738
-#: src/pyams_content/workflow/__init__.py:771
+#: src/pyams_content/workflow/basic.py:373
+#: src/pyams_content/workflow/__init__.py:739
+#: src/pyams_content/workflow/__init__.py:772
 msgid "Content archived"
 msgstr "Archivage"
 
-#: src/pyams_content/workflow/basic.py:374
-#: src/pyams_content/workflow/__init__.py:742
-#: src/pyams_content/workflow/__init__.py:775
+#: src/pyams_content/workflow/basic.py:375
+#: src/pyams_content/workflow/__init__.py:743
+#: src/pyams_content/workflow/__init__.py:776
 #, python-format
 msgid "{principal} archived content « {title} »"
 msgstr "{principal} a archivé le contenu « {title} »"
 
-#: src/pyams_content/workflow/basic.py:378
-#: src/pyams_content/workflow/basic.py:390
-#: src/pyams_content/workflow/__init__.py:795
-#: src/pyams_content/workflow/__init__.py:808
-#: src/pyams_content/workflow/__init__.py:821
-#: src/pyams_content/workflow/__init__.py:834
-#: src/pyams_content/workflow/__init__.py:847
+#: src/pyams_content/workflow/basic.py:379
+#: src/pyams_content/workflow/basic.py:391
+#: src/pyams_content/workflow/__init__.py:796
+#: src/pyams_content/workflow/__init__.py:809
+#: src/pyams_content/workflow/__init__.py:822
+#: src/pyams_content/workflow/__init__.py:835
+#: src/pyams_content/workflow/__init__.py:848
 msgid "Create new version"
 msgstr "Créer une nouvelle version"
 
-#: src/pyams_content/workflow/basic.py:386
-#: src/pyams_content/workflow/basic.py:398
-#: src/pyams_content/workflow/__init__.py:804
-#: src/pyams_content/workflow/__init__.py:817
-#: src/pyams_content/workflow/__init__.py:830
-#: src/pyams_content/workflow/__init__.py:843
-#: src/pyams_content/workflow/__init__.py:856
+#: src/pyams_content/workflow/basic.py:387
+#: src/pyams_content/workflow/basic.py:399
+#: src/pyams_content/workflow/__init__.py:805
+#: src/pyams_content/workflow/__init__.py:818
+#: src/pyams_content/workflow/__init__.py:831
+#: src/pyams_content/workflow/__init__.py:844
+#: src/pyams_content/workflow/__init__.py:857
 msgid "New version created"
 msgstr "Création d'une nouvelle version"
 
-#: src/pyams_content/workflow/basic.py:402
-#: src/pyams_content/workflow/__init__.py:860
+#: src/pyams_content/workflow/basic.py:403
+#: src/pyams_content/workflow/__init__.py:861
 msgid "Delete version"
 msgstr "Supprimer cette version"
 
-#: src/pyams_content/workflow/basic.py:410
-#: src/pyams_content/workflow/__init__.py:869
+#: src/pyams_content/workflow/basic.py:411
+#: src/pyams_content/workflow/__init__.py:870
 msgid "Version deleted"
 msgstr "Version supprimée"
 
-#: src/pyams_content/workflow/basic.py:428
+#: src/pyams_content/workflow/basic.py:429
 msgid "PyAMS basic workflow"
 msgstr "Workflow basique"
 
-#: src/pyams_content/workflow/basic.py:451
-#: src/pyams_content/workflow/basic.py:476
-#: src/pyams_content/workflow/__init__.py:937
-#: src/pyams_content/workflow/__init__.py:962
+#: src/pyams_content/workflow/basic.py:452
+#: src/pyams_content/workflow/basic.py:477
+#: src/pyams_content/workflow/__init__.py:938
+#: src/pyams_content/workflow/__init__.py:963
 msgid "Unknown state"
 msgstr "(statut inconnu)"
 
-#: src/pyams_content/workflow/basic.py:474
-#: src/pyams_content/workflow/__init__.py:960
+#: src/pyams_content/workflow/basic.py:475
+#: src/pyams_content/workflow/__init__.py:961
 msgid "new version created"
 msgstr "nouvelle version en préparation"
 
-#: src/pyams_content/workflow/basic.py:480
-#: src/pyams_content/workflow/__init__.py:966
+#: src/pyams_content/workflow/basic.py:481
+#: src/pyams_content/workflow/__init__.py:967
 msgid "publication request cancelled"
 msgstr "demande de publication annulée"
 
-#: src/pyams_content/workflow/basic.py:482
-#: src/pyams_content/workflow/__init__.py:968
+#: src/pyams_content/workflow/basic.py:483
+#: src/pyams_content/workflow/__init__.py:969
 msgid "publication refused"
 msgstr "publication refusée"
 
@@ -5420,24 +5431,24 @@ msgstr "retiré"
 msgid "archiving requested"
 msgstr "archivage demandé"
 
-#: src/pyams_content/workflow/__init__.py:419
-#: src/pyams_content/workflow/__init__.py:467
+#: src/pyams_content/workflow/__init__.py:420
+#: src/pyams_content/workflow/__init__.py:468
 msgid "Propose publication"
 msgstr "Demander la publication"
 
-#: src/pyams_content/workflow/__init__.py:426
-#: src/pyams_content/workflow/__init__.py:431
-#: src/pyams_content/workflow/__init__.py:474
-#: src/pyams_content/workflow/__init__.py:479
-#: src/pyams_content/workflow/__init__.py:496
-#: src/pyams_content/workflow/__init__.py:528
+#: src/pyams_content/workflow/__init__.py:427
+#: src/pyams_content/workflow/__init__.py:432
+#: src/pyams_content/workflow/__init__.py:475
+#: src/pyams_content/workflow/__init__.py:480
+#: src/pyams_content/workflow/__init__.py:497
+#: src/pyams_content/workflow/__init__.py:529
 msgid "Publication request"
 msgstr "Demande de publication"
 
-#: src/pyams_content/workflow/__init__.py:427
-#: src/pyams_content/workflow/__init__.py:475
-#: src/pyams_content/workflow/__init__.py:612
-#: src/pyams_content/workflow/__init__.py:718
+#: src/pyams_content/workflow/__init__.py:428
+#: src/pyams_content/workflow/__init__.py:476
+#: src/pyams_content/workflow/__init__.py:613
+#: src/pyams_content/workflow/__init__.py:719
 msgid ""
 "content managers authorized to take charge of your content are going to be "
 "notified of your request."
@@ -5445,180 +5456,180 @@ msgstr ""
 "les responsables habilités à prendre en charge votre demande vont être "
 "sollicités."
 
-#: src/pyams_content/workflow/__init__.py:432
-#: src/pyams_content/workflow/__init__.py:480
+#: src/pyams_content/workflow/__init__.py:433
+#: src/pyams_content/workflow/__init__.py:481
 #, python-format
 msgid "{principal} submitted a publication request for content « {title} »"
 msgstr "{principal} a demandé la publication du contenu « {title} »"
 
-#: src/pyams_content/workflow/__init__.py:485
+#: src/pyams_content/workflow/__init__.py:486
 msgid "Cancel publication request"
 msgstr "Annuler la demande de publication"
 
-#: src/pyams_content/workflow/__init__.py:493
+#: src/pyams_content/workflow/__init__.py:494
 msgid "Publication request canceled"
 msgstr "Annulation de la demande de publication"
 
-#: src/pyams_content/workflow/__init__.py:497
+#: src/pyams_content/workflow/__init__.py:498
 #, python-format
 msgid "{principal} cancelled the publication request for content « {title} »"
 msgstr ""
 "{principal} a annulé la demande de publication pour le contenu « {title} »"
 
-#: src/pyams_content/workflow/__init__.py:502
+#: src/pyams_content/workflow/__init__.py:503
 msgid "Reset canceled publication to draft"
 msgstr "Retour automatique en statut 'brouillon'"
 
-#: src/pyams_content/workflow/__init__.py:506
-#: src/pyams_content/workflow/__init__.py:538
+#: src/pyams_content/workflow/__init__.py:507
+#: src/pyams_content/workflow/__init__.py:539
 msgid "State reset to 'draft' (automatic)"
 msgstr "Retour automatique en statut 'brouillon'"
 
-#: src/pyams_content/workflow/__init__.py:510
+#: src/pyams_content/workflow/__init__.py:511
 msgid "Reset canceled publication to retired"
 msgstr "Retour automatique en statut 'retiré'"
 
-#: src/pyams_content/workflow/__init__.py:514
+#: src/pyams_content/workflow/__init__.py:515
 msgid "State reset to 'retired' (automatic)"
 msgstr "Retour automatique en statut 'retiré'"
 
-#: src/pyams_content/workflow/__init__.py:518
+#: src/pyams_content/workflow/__init__.py:519
 msgid "Refuse publication"
 msgstr "Refuser la publication"
 
-#: src/pyams_content/workflow/__init__.py:526
+#: src/pyams_content/workflow/__init__.py:527
 msgid "Publication refused"
 msgstr "Refus de publication"
 
-#: src/pyams_content/workflow/__init__.py:529
+#: src/pyams_content/workflow/__init__.py:530
 #, python-format
 msgid "{principal} refused the publication request for content « {title} »"
 msgstr "{principal} a refusé la publication du contenu « {title} »"
 
-#: src/pyams_content/workflow/__init__.py:534
+#: src/pyams_content/workflow/__init__.py:535
 msgid "Reset refused publication to draft"
 msgstr "Publication refusée"
 
-#: src/pyams_content/workflow/__init__.py:542
+#: src/pyams_content/workflow/__init__.py:543
 msgid "Reset refused publication to retired"
 msgstr "Publication refusée"
 
-#: src/pyams_content/workflow/__init__.py:546
+#: src/pyams_content/workflow/__init__.py:547
 msgid "State reset to 'refused' (automatic)"
 msgstr "Retour automatique en statut 'refusé'"
 
-#: src/pyams_content/workflow/__init__.py:605
+#: src/pyams_content/workflow/__init__.py:606
 msgid "Request retiring"
 msgstr "Demander le retrait"
 
-#: src/pyams_content/workflow/__init__.py:611
+#: src/pyams_content/workflow/__init__.py:612
 msgid "Retire request"
 msgstr "Demande de retrait"
 
-#: src/pyams_content/workflow/__init__.py:617
-#: src/pyams_content/workflow/__init__.py:635
-#: src/pyams_content/workflow/__init__.py:658
-#: src/pyams_content/workflow/__init__.py:676
+#: src/pyams_content/workflow/__init__.py:618
+#: src/pyams_content/workflow/__init__.py:636
+#: src/pyams_content/workflow/__init__.py:659
+#: src/pyams_content/workflow/__init__.py:677
 msgid "Content removal"
 msgstr "Retrait de contenu"
 
-#: src/pyams_content/workflow/__init__.py:618
+#: src/pyams_content/workflow/__init__.py:619
 #, python-format
 msgid "{principal} submitted a retire request for content « {title} »"
 msgstr "{principal} a demandé le retrait du contenu « {title} »"
 
-#: src/pyams_content/workflow/__init__.py:623
-#: src/pyams_content/workflow/__init__.py:640
+#: src/pyams_content/workflow/__init__.py:624
+#: src/pyams_content/workflow/__init__.py:641
 msgid "Retired content"
 msgstr "Retirer le contenu"
 
-#: src/pyams_content/workflow/__init__.py:632
-#: src/pyams_content/workflow/__init__.py:673
+#: src/pyams_content/workflow/__init__.py:633
+#: src/pyams_content/workflow/__init__.py:674
 msgid "Content retired"
 msgstr "Retrait"
 
-#: src/pyams_content/workflow/__init__.py:636
-#: src/pyams_content/workflow/__init__.py:677
+#: src/pyams_content/workflow/__init__.py:637
+#: src/pyams_content/workflow/__init__.py:678
 #, python-format
 msgid "{principal} retired content « {title} »"
 msgstr "{principal} a retiré le contenu « {title} »"
 
-#: src/pyams_content/workflow/__init__.py:645
+#: src/pyams_content/workflow/__init__.py:646
 msgid "Content retired after passed expiration date"
 msgstr "Retrait automatique après la date de fin de publication"
 
-#: src/pyams_content/workflow/__init__.py:648
+#: src/pyams_content/workflow/__init__.py:649
 msgid "Cancel retiring request"
 msgstr "Annuler la demande de retrait"
 
-#: src/pyams_content/workflow/__init__.py:655
+#: src/pyams_content/workflow/__init__.py:656
 msgid "Retire request canceled"
 msgstr "Annulation de la demande de retrait"
 
-#: src/pyams_content/workflow/__init__.py:659
+#: src/pyams_content/workflow/__init__.py:660
 #, python-format
 msgid "{principal} cancelled the retiring request for content « {title} »"
 msgstr "{principal} a annulé la demande de retrait du contenu « {title} »"
 
-#: src/pyams_content/workflow/__init__.py:664
+#: src/pyams_content/workflow/__init__.py:665
 msgid "Retire content"
 msgstr "Retirer le contenu"
 
-#: src/pyams_content/workflow/__init__.py:681
+#: src/pyams_content/workflow/__init__.py:682
 msgid "Pre-publish retired content"
 msgstr "Pré-publier le contenu retiré"
 
-#: src/pyams_content/workflow/__init__.py:693
+#: src/pyams_content/workflow/__init__.py:694
 msgid "Publish retired content"
 msgstr "Re-publier le contenu"
 
-#: src/pyams_content/workflow/__init__.py:711
+#: src/pyams_content/workflow/__init__.py:712
 msgid "Request archive"
 msgstr "Demander l'archivage"
 
-#: src/pyams_content/workflow/__init__.py:717
+#: src/pyams_content/workflow/__init__.py:718
 msgid "Archive request"
 msgstr "Demande d'archivage"
 
-#: src/pyams_content/workflow/__init__.py:723
-#: src/pyams_content/workflow/__init__.py:741
-#: src/pyams_content/workflow/__init__.py:756
-#: src/pyams_content/workflow/__init__.py:774
+#: src/pyams_content/workflow/__init__.py:724
+#: src/pyams_content/workflow/__init__.py:742
+#: src/pyams_content/workflow/__init__.py:757
+#: src/pyams_content/workflow/__init__.py:775
 msgid "Content archiving"
 msgstr "Archivage de contenu"
 
-#: src/pyams_content/workflow/__init__.py:724
+#: src/pyams_content/workflow/__init__.py:725
 #, python-format
 msgid "{principal} submitted an archive request for content « {title} »"
 msgstr "{principal} a demandé l'archivage du contenu « {title} »"
 
-#: src/pyams_content/workflow/__init__.py:746
+#: src/pyams_content/workflow/__init__.py:747
 msgid "Cancel archiving request"
 msgstr "Annuler la demande d'archivage"
 
-#: src/pyams_content/workflow/__init__.py:753
+#: src/pyams_content/workflow/__init__.py:754
 msgid "Archive request canceled"
 msgstr "Annulation de la demande d'archivage"
 
-#: src/pyams_content/workflow/__init__.py:757
+#: src/pyams_content/workflow/__init__.py:758
 #, python-format
 msgid "{principal} cancelled the archive request for content « {title} »"
 msgstr "{principal} a annulé la demande d'archivage du contenu « {title} »"
 
-#: src/pyams_content/workflow/__init__.py:779
+#: src/pyams_content/workflow/__init__.py:780
 msgid "Archive published content"
 msgstr "Archivage automatique d'un contenu publié"
 
-#: src/pyams_content/workflow/__init__.py:783
-#: src/pyams_content/workflow/__init__.py:791
+#: src/pyams_content/workflow/__init__.py:784
+#: src/pyams_content/workflow/__init__.py:792
 msgid "Content archived after version publication"
 msgstr "Archivage automatique après publication"
 
-#: src/pyams_content/workflow/__init__.py:787
+#: src/pyams_content/workflow/__init__.py:788
 msgid "Archive retiring content"
 msgstr "Archivage automatique d'un contenu en attente de retrait"
 
-#: src/pyams_content/workflow/__init__.py:914
+#: src/pyams_content/workflow/__init__.py:915
 msgid "PyAMS content workflow"
 msgstr "Workflow standard"
 

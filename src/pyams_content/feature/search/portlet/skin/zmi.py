@@ -62,7 +62,7 @@ class SearchResultsPortletRendererHeaderSettingsGroup(Group):
     legend = _("Header display")
 
     fields = Fields(ISearchResultsPortletBaseRendererSettings).select(
-        'header_display_mode', 'start_length')
+        'header_display_mode', 'start_length', 'display_tags', 'display_publication_date')
     weight = 20
 
 

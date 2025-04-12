@@ -20,10 +20,19 @@
 				</tal:if>
 			</a>
 		</div>
-		<div tal:define="button_title i18n:renderer_settings.button_title">
+		<div tal:define="button_title i18n:renderer_settings.button_title;
+						 publication_date view.publication_date if renderer_settings.display_publication_date else None;">
 			<a href="${target}">
-				<h4 class="mt-2">${view.title}</h4>
+				<h4 class="mt-2 ${'mb-0' if publication_date else None}">${view.title}</h4>
 			</a>
+			<div tal:condition="publication_date"
+				 class="mb-2">
+				<i class="small">${publication_date}</i>
+			</div>
+			<div tal:condition="renderer_settings.display_tags"
+				 class="tags position-relative">
+				${structure:tales:tags(context)}
+			</div>
 			<a href="${target}"
 			   tal:define="header view.header"
 			   tal:condition="header">
