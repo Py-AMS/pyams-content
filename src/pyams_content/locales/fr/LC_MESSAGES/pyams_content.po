@@ -3931,9 +3931,9 @@ msgid ""
 "Internal redirection reference. You can search a reference using '+' "
 "followed by internal number, of by entering text matching content title."
 msgstr ""
-"Référence interne vers la cible de la redirection ; vous pouvez recherche "
-"cette référence à partir de son titre, ou de son numéro précédé du signe « + "
-"»"
+"Référence interne vers la cible de la redirection ; vous pouvez rechercher "
+"cette référence à partir de son titre, ou de son numéro précédé du signe "
+"« + »"
 
 #: src/pyams_content/feature/redirect/interfaces.py:71
 msgid "URL to which source URL should be redirected"
@@ -4739,8 +4739,8 @@ msgid ""
 "You have been requested by ${sender}, contributor of « ${service_name} » "
 "website, to make a review of a content."
 msgstr ""
-"Vous êtes sollicité par ${sender}, contributeurr du site internet « "
-"${service_name} », qui souhaite recueillir votre commentaire à propos d'un "
+"Vous êtes sollicité par ${sender}, contributeurr du site internet « $"
+"{service_name} », qui souhaite recueillir votre commentaire à propos d'un "
 "contenu."
 
 #: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:36
@@ -4749,8 +4749,8 @@ msgstr "${sender} a accompagné sa demande de relecture du message suivant :"
 
 #: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:41
 msgid ""
-"To review and comment this publication, please use the following link: "
-"${target}."
+"To review and comment this publication, please use the following link: $"
+"{target}."
 msgstr "Pour accéder à cette contribution, cliquez ici : ${target}."
 
 #: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:44
@@ -5096,11 +5096,14 @@ msgstr ""
 #: src/pyams_content/feature/search/portlet/skin/interfaces.py:79
 msgid "If 'no', tags attached to result items will not be displayed"
 msgstr ""
-"Si 'non', les tags associés aux résultats de la recherche ne seront pas affichés"
+"Si 'non', les tags associés aux résultats de la recherche ne seront pas "
+"affichés"
 
 #: src/pyams_content/feature/search/portlet/skin/interfaces.py:84
 msgid "If 'yes', publication date will be displayed for each search result"
-msgstr "Si 'oui', la date de publication de chaque résultat de la recherche sera affichée"
+msgstr ""
+"Si 'oui', la date de publication de chaque résultat de la recherche sera "
+"affichée"
 
 #: src/pyams_content/feature/search/portlet/skin/templates/search-panels.pt:27
 #: src/pyams_content/feature/search/portlet/skin/templates/search-default.pt:27
