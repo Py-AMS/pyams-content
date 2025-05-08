@@ -60,6 +60,7 @@ class SiteManager(SiteContainerMixin, OrderedContainer, TypedSharedToolMixin, Ba
     description = FieldProperty(ISiteManager['description'])
     notepad = FieldProperty(ISiteManager['notepad'])
     navigation_mode = FieldProperty(ISiteManager['navigation_mode'])
+    indexation_mode = FieldProperty(ISiteManager['indexation_mode'])
 
     sequence_name = ''  # use default sequence generator
     sequence_prefix = ''

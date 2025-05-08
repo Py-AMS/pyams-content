@@ -28,14 +28,16 @@ from zope.schema.vocabulary import getVocabularyRegistry
 
 from pyams_catalog.query import CatalogResultSet
 from pyams_content.feature.seo import ISEOContentInfo
-from pyams_content.feature.sitemap.interfaces import ISitemapExtension
+from pyams_content.feature.sitemap.interfaces import IRobotsExtension, ISitemapExtension
 from pyams_content.root import ISiteRootToolsConfiguration
 from pyams_content.shared.common import IBaseSharedTool, SHARED_CONTENT_TYPES_VOCABULARY
+from pyams_content.shared.site.interfaces import ISiteManager, SITE_MANAGER_INDEXATION_INTERNAL_MODE, \
+    SITE_MANAGER_INDEXATION_NULL_MODE
 from pyams_i18n.interfaces import II18nManager
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_site.interfaces import ISiteRoot
 from pyams_utils.list import unique_iter
-from pyams_utils.registry import get_utilities_for, get_utility
+from pyams_utils.registry import get_all_utilities_registered_for, get_utilities_for, get_utility
 from pyams_utils.timezone import tztime
 from pyams_workflow.interfaces import IWorkflow, IWorkflowPublicationInfo
 
@@ -48,25 +50,44 @@ __docformat__ = 'restructuredtext'
 def site_root_robots_view(request):
     """Site root robots.txt view"""
     request.response.content_type = 'text/plain'
-    disallow = []
+    disallowed_sites = []
+    allowed_inner_sites = []
+    for site in get_all_utilities_registered_for(ISiteManager):
+        publication_info = IWorkflowPublicationInfo(site, None)
+        if (publication_info is not None) and not publication_info.is_visible(request):
+            disallowed_sites.append(site)
+            continue
+        if site.indexation_mode == SITE_MANAGER_INDEXATION_INTERNAL_MODE:
+            disallowed_sites.append(site)
+            allowed_inner_sites.append(site)
+        elif site.indexation_mode == SITE_MANAGER_INDEXATION_NULL_MODE:
+            disallowed_sites.append(site)
+    disallowed_tools = []
     for name, tool in get_utilities_for(IBaseSharedTool):
         if not name:
             continue
         seo_info = ISEOContentInfo(tool, None)
         if seo_info is None:
             if not tool.shared_content_menu:
-                disallow.append(resource_path(tool))
+                disallowed_tools.append(resource_path(tool))
                 continue
         else:
             if not seo_info.include_sitemap:
-                disallow.append(resource_path(tool))
+                disallowed_tools.append(resource_path(tool))
                 continue
         publication_info = IWorkflowPublicationInfo(tool, None)
         if (publication_info is not None) and not publication_info.is_visible(request):
-            disallow.append(resource_path(tool))
+            disallowed_tools.append(resource_path(tool))
+    extensions = []
+    for name, adapter in request.registry.getAdapters((request.context, request),
+                                                      IRobotsExtension):
+        extensions.append(adapter)
     return {
         'tools_configuration': ISiteRootToolsConfiguration(request.root),
-        'disallow': disallow
+        'disallowed_sites': disallowed_sites,
+        'allowed_inner_sites': allowed_inner_sites,
+        'disallowed_tools': disallowed_tools,
+        'extensions': extensions
     }
 
 

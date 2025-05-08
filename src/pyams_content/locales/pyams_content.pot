@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-04-12 22:41+0200\n"
+"POT-Creation-Date: 2025-05-08 13:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -365,7 +365,7 @@ msgstr ""
 #: ./src/pyams_content/shared/common/zmi/types/__init__.py:122
 #: ./src/pyams_content/shared/common/interfaces/types.py:155
 #: ./src/pyams_content/shared/resource/interfaces.py:130
-#: ./src/pyams_content/shared/site/interfaces.py:189
+#: ./src/pyams_content/shared/site/interfaces.py:213
 #: ./src/pyams_content/shared/topic/interfaces.py:36
 #: ./src/pyams_content/shared/form/interfaces.py:44
 msgid "Data type"
@@ -1481,8 +1481,8 @@ msgid "Last principal who modified this content"
 msgstr ""
 
 #: ./src/pyams_content/shared/common/interfaces/__init__.py:236
-#: ./src/pyams_content/shared/site/interfaces.py:111
-#: ./src/pyams_content/shared/site/interfaces.py:161
+#: ./src/pyams_content/shared/site/interfaces.py:128
+#: ./src/pyams_content/shared/site/interfaces.py:178
 #: ./src/pyams_content/shared/form/interfaces.py:54
 msgid "Header"
 msgstr ""
@@ -1492,8 +1492,8 @@ msgid "Content's header is generally displayed in page header"
 msgstr ""
 
 #: ./src/pyams_content/shared/common/interfaces/__init__.py:241
-#: ./src/pyams_content/shared/site/interfaces.py:115
-#: ./src/pyams_content/shared/site/interfaces.py:165
+#: ./src/pyams_content/shared/site/interfaces.py:132
+#: ./src/pyams_content/shared/site/interfaces.py:189
 msgid "Meta-description"
 msgstr ""
 
@@ -1513,16 +1513,16 @@ msgid "They will be included into HTML pages metadata"
 msgstr ""
 
 #: ./src/pyams_content/shared/common/interfaces/__init__.py:253
-#: ./src/pyams_content/shared/site/interfaces.py:123
-#: ./src/pyams_content/shared/site/interfaces.py:173
+#: ./src/pyams_content/shared/site/interfaces.py:140
+#: ./src/pyams_content/shared/site/interfaces.py:197
 #: ./src/pyams_content/shared/site/zmi/folder.py:91
 #: ./src/pyams_content/feature/redirect/interfaces.py:74
 msgid "Notepad"
 msgstr ""
 
 #: ./src/pyams_content/shared/common/interfaces/__init__.py:254
-#: ./src/pyams_content/shared/site/interfaces.py:124
-#: ./src/pyams_content/shared/site/interfaces.py:174
+#: ./src/pyams_content/shared/site/interfaces.py:141
+#: ./src/pyams_content/shared/site/interfaces.py:198
 #: ./src/pyams_content/shared/site/zmi/folder.py:92
 msgid "Internal information to be known about this content"
 msgstr ""
@@ -1622,7 +1622,7 @@ msgid "Presentation template used for these specificities"
 msgstr ""
 
 #: ./src/pyams_content/shared/common/interfaces/types.py:53
-#: ./src/pyams_content/shared/site/interfaces.py:223
+#: ./src/pyams_content/shared/site/interfaces.py:247
 #: ./src/pyams_content/shared/alert/interfaces.py:46
 #: ./src/pyams_content/feature/navigation/interfaces.py:84
 #: ./src/pyams_content/feature/filter/interfaces.py:153
@@ -1704,7 +1704,7 @@ msgstr ""
 
 #: ./src/pyams_content/shared/common/interfaces/types.py:156
 #: ./src/pyams_content/shared/resource/interfaces.py:131
-#: ./src/pyams_content/shared/site/interfaces.py:190
+#: ./src/pyams_content/shared/site/interfaces.py:214
 #: ./src/pyams_content/shared/topic/interfaces.py:37
 #: ./src/pyams_content/shared/form/interfaces.py:45
 msgid "Type of content data"
@@ -2465,7 +2465,7 @@ msgid "You can skip several results if specifying an integer value here..."
 msgstr ""
 
 #: ./src/pyams_content/shared/view/portlet/interfaces.py:116
-#: ./src/pyams_content/shared/site/interfaces.py:232
+#: ./src/pyams_content/shared/site/interfaces.py:256
 #: ./src/pyams_content/feature/navigation/interfaces.py:107
 #: ./src/pyams_content/feature/search/portlet/interfaces.py:47
 #: ./src/pyams_content/component/links/interfaces.py:66
@@ -2742,7 +2742,7 @@ msgstr ""
 msgid "External link"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/manager.py:67
+#: ./src/pyams_content/shared/site/manager.py:68
 msgid "Site manager"
 msgstr ""
 
@@ -2754,110 +2754,132 @@ msgstr ""
 msgid "Use presentation template"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:81
-#: ./src/pyams_content/shared/site/interfaces.py:139
+#: ./src/pyams_content/shared/site/interfaces.py:61
+msgid "Full indexation mode"
+msgstr ""
+
+#: ./src/pyams_content/shared/site/interfaces.py:62
+msgid "Internal only indexation mode"
+msgstr ""
+
+#: ./src/pyams_content/shared/site/interfaces.py:63
+msgid "No indexation mode"
+msgstr ""
+
+#: ./src/pyams_content/shared/site/interfaces.py:98
+#: ./src/pyams_content/shared/site/interfaces.py:156
 msgid "Navigation mode"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:82
+#: ./src/pyams_content/shared/site/interfaces.py:99
 msgid "Site behaviour when navigating to site URL"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:112
+#: ./src/pyams_content/shared/site/interfaces.py:129
 msgid "Heading displayed according to presentation template"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:116
+#: ./src/pyams_content/shared/site/interfaces.py:133
 msgid ""
 "The folder's description is 'hidden' into HTML's page headers; but it can be "
 "seen, for example, in some search engines results as content's description; "
 "if description is empty, content's header will be used."
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:127
+#: ./src/pyams_content/shared/site/interfaces.py:144
 #: ./src/pyams_content/feature/search/interfaces.py:108
 msgid "Visible in folders list"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:128
+#: ./src/pyams_content/shared/site/interfaces.py:145
 msgid "If 'no', folder will not be displayed into folders list"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:133
-#: ./src/pyams_content/shared/site/interfaces.py:206
+#: ./src/pyams_content/shared/site/interfaces.py:150
+#: ./src/pyams_content/shared/site/interfaces.py:230
 #: ./src/pyams_content/feature/search/interfaces.py:114
 msgid "Navigation title"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:134
+#: ./src/pyams_content/shared/site/interfaces.py:151
 #: ./src/pyams_content/feature/search/interfaces.py:115
 msgid ""
 "Folder's title displayed in navigation pages; original title will be used if "
 "none is specified"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:140
+#: ./src/pyams_content/shared/site/interfaces.py:157
 msgid "Folder behaviour when navigating to folder URL"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:162
+#: ./src/pyams_content/shared/site/interfaces.py:179
 msgid "Site's header is generally displayed in page header"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:166
+#: ./src/pyams_content/shared/site/interfaces.py:182
+msgid "Indexation mode"
+msgstr ""
+
+#: ./src/pyams_content/shared/site/interfaces.py:183
+msgid ""
+"Indexation mode is used to specify which site parts should be indexed by "
+"robots"
+msgstr ""
+
+#: ./src/pyams_content/shared/site/interfaces.py:190
 msgid ""
 "The site's description is 'hidden' into HTML's page headers; but it can be "
 "seen, for example, in some search engines results as content's description; "
 "if description is empty, content's header will be used."
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:183
+#: ./src/pyams_content/shared/site/interfaces.py:207
 msgid "Site topic"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:207
+#: ./src/pyams_content/shared/site/interfaces.py:231
 msgid ""
 "Alternate content's title displayed in navigation pages; original title will "
 "be used if none is specified"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:212
+#: ./src/pyams_content/shared/site/interfaces.py:236
 msgid "Show header?"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:213
+#: ./src/pyams_content/shared/site/interfaces.py:237
 msgid "If 'no', no header will be displayed"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:217
+#: ./src/pyams_content/shared/site/interfaces.py:241
 msgid "Navigation header"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:218
+#: ./src/pyams_content/shared/site/interfaces.py:242
 msgid ""
 "Alternate content's header displayed in navigation pages; original header "
 "will be used if none is specified"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:224
+#: ./src/pyams_content/shared/site/interfaces.py:248
 msgid "If 'no', link is not visible"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:233
+#: ./src/pyams_content/shared/site/interfaces.py:257
 #: ./src/pyams_content/feature/navigation/interfaces.py:108
 msgid ""
 "If 'yes', link to internal references will use their canonical instead of "
 "relative URL"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:242
+#: ./src/pyams_content/shared/site/interfaces.py:266
 #: ./src/pyams_content/shared/logo/interfaces.py:56
 #: ./src/pyams_content/feature/redirect/interfaces.py:70
 #: ./src/pyams_content/component/links/interfaces.py:113
 msgid "Target URL"
 msgstr ""
 
-#: ./src/pyams_content/shared/site/interfaces.py:243
+#: ./src/pyams_content/shared/site/interfaces.py:267
 #: ./src/pyams_content/shared/logo/interfaces.py:57
 #: ./src/pyams_content/component/links/interfaces.py:114
 msgid "URL used to access external resource"

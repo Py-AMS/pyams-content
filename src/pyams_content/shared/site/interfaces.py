@@ -52,6 +52,23 @@ SITE_CONTAINER_NAVIGATION_MODES_VOCABULARY = SimpleVocabulary([
     for v, t in SITE_CONTAINER_NAVIGATION_MODES.items()
 ])
 
+
+SITE_MANAGER_INDEXATION_FULL_MODE = 'full'
+SITE_MANAGER_INDEXATION_INTERNAL_MODE = 'internal'
+SITE_MANAGER_INDEXATION_NULL_MODE = 'none'
+
+SITE_MANAGER_INDEXATION_MODES = OrderedDict((
+    (SITE_MANAGER_INDEXATION_FULL_MODE, _("Full indexation mode")),
+    (SITE_MANAGER_INDEXATION_INTERNAL_MODE, _("Internal only indexation mode")),
+    (SITE_MANAGER_INDEXATION_NULL_MODE, _("No indexation mode"))
+))
+
+SITE_MANAGER_INDEXATION_MODES_VOCABULARY = SimpleVocabulary([
+    SimpleTerm(v, title=t)
+    for v, t in SITE_MANAGER_INDEXATION_MODES.items()
+])
+
+
 SITE_CONTENT_VOCABULARY = 'pyams_content.site.content'
 
 
@@ -161,6 +178,13 @@ class ISiteManager(ISharedSite, ISiteContainer, IBaseSharedTool,
     header = I18nTextField(title=_("Header"),
                            description=_("Site's header is generally displayed in page header"),
                            required=False)
+
+    indexation_mode = Choice(title=_("Indexation mode"),
+                             description=_("Indexation mode is used to specify which site parts "
+                                           "should be indexed by robots"),
+                             required=True,
+                             vocabulary=SITE_MANAGER_INDEXATION_MODES_VOCABULARY,
+                             default=SITE_MANAGER_INDEXATION_FULL_MODE)
 
     description = I18nTextField(title=_("Meta-description"),
                                 description=_("The site's description is 'hidden' into HTML's "

@@ -20,6 +20,13 @@ __docformat__ = 'restructuredtext'
 from zope.interface import Attribute, Interface
 
 
+class IRobotsExtension(Interface):
+    """Robots.txt extension interface"""
+    
+    disallowed = Attribute("Disallowed sources")
+    allowed = Attribute("Allowed sources")
+    
+    
 class ISitemapExtension(Interface):
     """Sitemap extension interface"""
 

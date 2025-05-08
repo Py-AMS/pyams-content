@@ -180,7 +180,7 @@ class SiteManagerPropertiesEditForm(PropertiesEditForm):
 
     fields = Fields(ISiteManager).select('title', 'short_name', 'header', 'description') + \
         Fields(IBaseSharedTool).select('shared_content_workflow') + \
-        Fields(ISiteManager).select('navigation_mode', 'notepad')
+        Fields(ISiteManager).select('navigation_mode', 'indexation_mode', 'notepad')
 
 
 @adapter_config(required=(ISiteManager, IAdminLayer, SiteManagerPropertiesEditForm),

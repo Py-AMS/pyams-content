@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-04-12 22:41+0200\n"
+"POT-Creation-Date: 2025-05-08 13:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -375,7 +375,7 @@ msgstr ""
 #: src/pyams_content/shared/common/zmi/types/__init__.py:122
 #: src/pyams_content/shared/common/interfaces/types.py:155
 #: src/pyams_content/shared/resource/interfaces.py:130
-#: src/pyams_content/shared/site/interfaces.py:189
+#: src/pyams_content/shared/site/interfaces.py:213
 #: src/pyams_content/shared/topic/interfaces.py:36
 #: src/pyams_content/shared/form/interfaces.py:44
 msgid "Data type"
@@ -1612,8 +1612,8 @@ msgid "Last principal who modified this content"
 msgstr "Nom du dernier mandataire étant intervenu sur ce contenu"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:236
-#: src/pyams_content/shared/site/interfaces.py:111
-#: src/pyams_content/shared/site/interfaces.py:161
+#: src/pyams_content/shared/site/interfaces.py:128
+#: src/pyams_content/shared/site/interfaces.py:178
 #: src/pyams_content/shared/form/interfaces.py:54
 msgid "Header"
 msgstr "Chapô"
@@ -1623,8 +1623,8 @@ msgid "Content's header is generally displayed in page header"
 msgstr "Le chapô est généralement affiché dans l'en-tête de page"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:241
-#: src/pyams_content/shared/site/interfaces.py:115
-#: src/pyams_content/shared/site/interfaces.py:165
+#: src/pyams_content/shared/site/interfaces.py:132
+#: src/pyams_content/shared/site/interfaces.py:189
 msgid "Meta-description"
 msgstr "Méta-description"
 
@@ -1647,16 +1647,16 @@ msgid "They will be included into HTML pages metadata"
 msgstr "Ces mots-clés sont intégrés dans les en-têtes HTML"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:253
-#: src/pyams_content/shared/site/interfaces.py:123
-#: src/pyams_content/shared/site/interfaces.py:173
+#: src/pyams_content/shared/site/interfaces.py:140
+#: src/pyams_content/shared/site/interfaces.py:197
 #: src/pyams_content/shared/site/zmi/folder.py:91
 #: src/pyams_content/feature/redirect/interfaces.py:74
 msgid "Notepad"
 msgstr "Bloc-notes"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:254
-#: src/pyams_content/shared/site/interfaces.py:124
-#: src/pyams_content/shared/site/interfaces.py:174
+#: src/pyams_content/shared/site/interfaces.py:141
+#: src/pyams_content/shared/site/interfaces.py:198
 #: src/pyams_content/shared/site/zmi/folder.py:92
 msgid "Internal information to be known about this content"
 msgstr ""
@@ -1775,7 +1775,7 @@ msgid "Presentation template used for these specificities"
 msgstr "Mode de rendu utilisé pour les spécificités du contenu"
 
 #: src/pyams_content/shared/common/interfaces/types.py:53
-#: src/pyams_content/shared/site/interfaces.py:223
+#: src/pyams_content/shared/site/interfaces.py:247
 #: src/pyams_content/shared/alert/interfaces.py:46
 #: src/pyams_content/feature/navigation/interfaces.py:84
 #: src/pyams_content/feature/filter/interfaces.py:153
@@ -1868,7 +1868,7 @@ msgstr "Liste des champs spécifiques du gabarit associés à ce type de contenu
 
 #: src/pyams_content/shared/common/interfaces/types.py:156
 #: src/pyams_content/shared/resource/interfaces.py:131
-#: src/pyams_content/shared/site/interfaces.py:190
+#: src/pyams_content/shared/site/interfaces.py:214
 #: src/pyams_content/shared/topic/interfaces.py:37
 #: src/pyams_content/shared/form/interfaces.py:45
 msgid "Type of content data"
@@ -2716,7 +2716,7 @@ msgstr ""
 "position du premier élément à prendre en compte"
 
 #: src/pyams_content/shared/view/portlet/interfaces.py:116
-#: src/pyams_content/shared/site/interfaces.py:232
+#: src/pyams_content/shared/site/interfaces.py:256
 #: src/pyams_content/feature/navigation/interfaces.py:107
 #: src/pyams_content/feature/search/portlet/interfaces.py:47
 #: src/pyams_content/component/links/interfaces.py:66
@@ -3009,7 +3009,7 @@ msgstr "Lien interne"
 msgid "External link"
 msgstr "Lien externe"
 
-#: src/pyams_content/shared/site/manager.py:67
+#: src/pyams_content/shared/site/manager.py:68
 msgid "Site manager"
 msgstr "Site"
 
@@ -3021,23 +3021,35 @@ msgstr "Accéder à la première rubrique ou au premier contenu visible"
 msgid "Use presentation template"
 msgstr "Afficher le modèle de présentation"
 
-#: src/pyams_content/shared/site/interfaces.py:81
-#: src/pyams_content/shared/site/interfaces.py:139
+#: src/pyams_content/shared/site/interfaces.py:61
+msgid "Full indexation mode"
+msgstr "Indexation complète (par défaut)"
+
+#: src/pyams_content/shared/site/interfaces.py:62
+msgid "Internal only indexation mode"
+msgstr "Ne pas indexer la page d'accueil"
+
+#: src/pyams_content/shared/site/interfaces.py:63
+msgid "No indexation mode"
+msgstr "Ne pas indexer l'ensemble du site"
+
+#: src/pyams_content/shared/site/interfaces.py:98
+#: src/pyams_content/shared/site/interfaces.py:156
 msgid "Navigation mode"
 msgstr "Mode de navigation"
 
-#: src/pyams_content/shared/site/interfaces.py:82
+#: src/pyams_content/shared/site/interfaces.py:99
 msgid "Site behaviour when navigating to site URL"
 msgstr ""
 "Comportement attendu lorsqu'un utilisateur navigue vers l'URL de ce site"
 
-#: src/pyams_content/shared/site/interfaces.py:112
+#: src/pyams_content/shared/site/interfaces.py:129
 msgid "Heading displayed according to presentation template"
 msgstr ""
 "Le chapô peut être affiché ou non en fonction du paramétrage du modèle de "
 "présentation"
 
-#: src/pyams_content/shared/site/interfaces.py:116
+#: src/pyams_content/shared/site/interfaces.py:133
 msgid ""
 "The folder's description is 'hidden' into HTML's page headers; but it can be "
 "seen, for example, in some search engines results as content's description; "
@@ -3048,24 +3060,24 @@ msgstr ""
 "présenter les résultats ; si cette description n'est pas renseignée, c'est "
 "le chapô qui sera utilisé comme tel"
 
-#: src/pyams_content/shared/site/interfaces.py:127
+#: src/pyams_content/shared/site/interfaces.py:144
 #: src/pyams_content/feature/search/interfaces.py:108
 msgid "Visible in folders list"
 msgstr "Visible dans la liste des rubriques"
 
-#: src/pyams_content/shared/site/interfaces.py:128
+#: src/pyams_content/shared/site/interfaces.py:145
 msgid "If 'no', folder will not be displayed into folders list"
 msgstr ""
 "Si 'non', la rubrique ne sera pas affichée dans la liste des rubriques du "
 "niveau parent"
 
-#: src/pyams_content/shared/site/interfaces.py:133
-#: src/pyams_content/shared/site/interfaces.py:206
+#: src/pyams_content/shared/site/interfaces.py:150
+#: src/pyams_content/shared/site/interfaces.py:230
 #: src/pyams_content/feature/search/interfaces.py:114
 msgid "Navigation title"
 msgstr "Libellé de navigation"
 
-#: src/pyams_content/shared/site/interfaces.py:134
+#: src/pyams_content/shared/site/interfaces.py:151
 #: src/pyams_content/feature/search/interfaces.py:115
 msgid ""
 "Folder's title displayed in navigation pages; original title will be used if "
@@ -3075,19 +3087,34 @@ msgstr ""
 "libellé n'est spécifié, c'est le libellé d'origine de la rubrique qui sera "
 "utilisé"
 
-#: src/pyams_content/shared/site/interfaces.py:140
+#: src/pyams_content/shared/site/interfaces.py:157
 msgid "Folder behaviour when navigating to folder URL"
 msgstr ""
 "Comportement attendu lorsqu'un utilisateur navigue vers l'URL de cette "
 "rubrique"
 
-#: src/pyams_content/shared/site/interfaces.py:162
+#: src/pyams_content/shared/site/interfaces.py:179
 msgid "Site's header is generally displayed in page header"
 msgstr ""
 "Le chapô peut être affiché ou non en fonction du paramétrage du modèle de "
 "présentation"
 
-#: src/pyams_content/shared/site/interfaces.py:166
+#: src/pyams_content/shared/site/interfaces.py:182
+msgid "Indexation mode"
+msgstr "Mode d'indexation"
+
+#: src/pyams_content/shared/site/interfaces.py:183
+msgid ""
+"Indexation mode is used to specify which site parts should be indexed by "
+"robots"
+msgstr ""
+"Le mode d'indexation permet d'indiquer aux moteurs de recherche, via le fichier "
+"'robots.txt', comment le site doit être indexé ; vous pouvez indiquer de ne pas "
+"indexer la page d'accueil (notamment lorsque celle-ci est héritée intégralement "
+"de la page d'accueil générale du site, afin d'éviter les contenus dupliqués), voire "
+"demander à ce que l'ensemble du site ne soit pas indexé"
+
+#: src/pyams_content/shared/site/interfaces.py:190
 msgid ""
 "The site's description is 'hidden' into HTML's page headers; but it can be "
 "seen, for example, in some search engines results as content's description; "
@@ -3098,11 +3125,11 @@ msgstr ""
 "les résultats ; si cette description n'est pas renseignée, c'est le chapô "
 "qui sera utilisé comme tel"
 
-#: src/pyams_content/shared/site/interfaces.py:183
+#: src/pyams_content/shared/site/interfaces.py:207
 msgid "Site topic"
 msgstr "Article au sein d'un site"
 
-#: src/pyams_content/shared/site/interfaces.py:207
+#: src/pyams_content/shared/site/interfaces.py:231
 msgid ""
 "Alternate content's title displayed in navigation pages; original title will "
 "be used if none is specified"
@@ -3111,19 +3138,19 @@ msgstr ""
 "libellé n'est spécifié, c'est le libellé d'origine de la rubrique qui sera "
 "utilisé"
 
-#: src/pyams_content/shared/site/interfaces.py:212
+#: src/pyams_content/shared/site/interfaces.py:236
 msgid "Show header?"
 msgstr "Afficher le chapô"
 
-#: src/pyams_content/shared/site/interfaces.py:213
+#: src/pyams_content/shared/site/interfaces.py:237
 msgid "If 'no', no header will be displayed"
 msgstr "Si 'non', le chapô ne sera pas affiché"
 
-#: src/pyams_content/shared/site/interfaces.py:217
+#: src/pyams_content/shared/site/interfaces.py:241
 msgid "Navigation header"
 msgstr "Chapô de navigation"
 
-#: src/pyams_content/shared/site/interfaces.py:218
+#: src/pyams_content/shared/site/interfaces.py:242
 msgid ""
 "Alternate content's header displayed in navigation pages; original header "
 "will be used if none is specified"
@@ -3131,11 +3158,11 @@ msgstr ""
 "Chapô spécifique affiché dans les pages de navigation ; le chapô du contenu "
 "sera utilisé si aucun contenu spécifique n'est indiqué ici"
 
-#: src/pyams_content/shared/site/interfaces.py:224
+#: src/pyams_content/shared/site/interfaces.py:248
 msgid "If 'no', link is not visible"
 msgstr "Si 'non', le lien ne sera pas visible"
 
-#: src/pyams_content/shared/site/interfaces.py:233
+#: src/pyams_content/shared/site/interfaces.py:257
 #: src/pyams_content/feature/navigation/interfaces.py:108
 msgid ""
 "If 'yes', link to internal references will use their canonical instead of "
@@ -3144,14 +3171,14 @@ msgstr ""
 "Si 'oui', les liens vers les contenus internes au site utiliseront leur "
 "adresse canonique plutôt qu'une adresse relative"
 
-#: src/pyams_content/shared/site/interfaces.py:242
+#: src/pyams_content/shared/site/interfaces.py:266
 #: src/pyams_content/shared/logo/interfaces.py:56
 #: src/pyams_content/feature/redirect/interfaces.py:70
 #: src/pyams_content/component/links/interfaces.py:113
 msgid "Target URL"
 msgstr "URL de destination"
 
-#: src/pyams_content/shared/site/interfaces.py:243
+#: src/pyams_content/shared/site/interfaces.py:267
 #: src/pyams_content/shared/logo/interfaces.py:57
 #: src/pyams_content/component/links/interfaces.py:114
 msgid "URL used to access external resource"
@@ -3932,8 +3959,8 @@ msgid ""
 "followed by internal number, of by entering text matching content title."
 msgstr ""
 "Référence interne vers la cible de la redirection ; vous pouvez rechercher "
-"cette référence à partir de son titre, ou de son numéro précédé du signe "
-"« + »"
+"cette référence à partir de son titre, ou de son numéro précédé du signe « + "
+"»"
 
 #: src/pyams_content/feature/redirect/interfaces.py:71
 msgid "URL to which source URL should be redirected"
@@ -4739,8 +4766,8 @@ msgid ""
 "You have been requested by ${sender}, contributor of « ${service_name} » "
 "website, to make a review of a content."
 msgstr ""
-"Vous êtes sollicité par ${sender}, contributeurr du site internet « $"
-"{service_name} », qui souhaite recueillir votre commentaire à propos d'un "
+"Vous êtes sollicité par ${sender}, contributeurr du site internet « "
+"${service_name} », qui souhaite recueillir votre commentaire à propos d'un "
 "contenu."
 
 #: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:36
@@ -4749,8 +4776,8 @@ msgstr "${sender} a accompagné sa demande de relecture du message suivant :"
 
 #: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:41
 msgid ""
-"To review and comment this publication, please use the following link: $"
-"{target}."
+"To review and comment this publication, please use the following link: "
+"${target}."
 msgstr "Pour accéder à cette contribution, cliquez ici : ${target}."
 
 #: src/pyams_content/feature/review/zmi/templates/mail-notification.pt:44
