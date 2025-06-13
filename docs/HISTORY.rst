@@ -1,6 +1,17 @@
 Changelog
 =========
 
+2.5.0
+-----
+ - added file shared content
+ - added indicator to display paragraphs added or modified in the last content version
+ - added Dropzone support in associations container table view
+ - added site manager property to handle robots indexation
+ - updated search results portlet renderers settings and templates
+ - updated associations item events handler to propagate modifications to parent paragraph
+ - updated illustration sublocations adapter
+ - use new PyAMS_workflow method to apply first publication date on published content
+
 2.4.0
 -----
  - added logos shared tool

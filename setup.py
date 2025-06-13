@@ -24,7 +24,7 @@ DOCS = os.path.join(os.path.dirname(__file__),
 README = os.path.join(DOCS, 'README.rst')
 HISTORY = os.path.join(DOCS, 'HISTORY.rst')
 
-version = '2.4.0'
+version = '2.5.0'
 long_description = open(README).read() + '\n\n' + open(HISTORY).read()
 
 tests_require = [
@@ -88,7 +88,7 @@ setup(name='pyams_content',
           'pyams_thesaurus',
           'pyams_utils >= 2.3.1',
           'pyams_viewlet',
-          'pyams_workflow',
+          'pyams_workflow >= 2.2.0',
           'pyahocorasick',
           'pyramid',
           'qrcode',
