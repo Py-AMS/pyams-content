@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.5.1
+-----
+ - updated CI for Python 3.12
+
 2.5.0
 -----
  - added file shared content
