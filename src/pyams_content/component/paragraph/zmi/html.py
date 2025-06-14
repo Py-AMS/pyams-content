@@ -49,7 +49,7 @@ from pyams_content import _
 @viewlet_config(name='add-raw-paragraph.menu',
                 context=IParagraphContainerTarget, layer=IAdminLayer,
                 view=IParagraphContainerBaseTable,
-                manager=IContextAddingsViewletManager, weight=900)
+                manager=IContextAddingsViewletManager, weight=600)
 class RawParagraphAddMenu(BaseParagraphAddMenu):
     """Raw paragraph add menu"""
 

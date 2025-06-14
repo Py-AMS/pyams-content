@@ -37,9 +37,8 @@ class MapParagraph(BaseParagraph):
     factory_label = MAP_PARAGRAPH_NAME
     factory_intf = IMapParagraph
 
-    secondary = True
-
     icon_class = MAP_PARAGRAPH_ICON_CLASS
+    secondary = True
 
     position = FieldProperty(IMapParagraph['position'])
 

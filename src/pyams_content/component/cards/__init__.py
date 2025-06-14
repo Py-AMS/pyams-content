@@ -37,6 +37,7 @@ class CardsParagraph(CardsContainer, BaseParagraph):
     factory_intf = ICardsParagraph
 
     icon_class = CARDS_PARAGRAPH_ICON_CLASS
+    secondary = True
 
     renderer = FieldProperty(ICardsParagraph['renderer'])
 

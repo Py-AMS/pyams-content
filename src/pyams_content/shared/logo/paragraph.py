@@ -30,9 +30,8 @@ class LogosParagraph(BaseParagraph):
     factory_label = LOGOS_PARAGRAPH_NAME
     factory_intf = ILogosParagraph
     
-    secondary = True
-    
     icon_class = LOGOS_PARAGRAPH_ICON_CLASS
+    secondary = True
     
     references = FieldProperty(ILogosParagraph['references'])
     renderer = FieldProperty(ILogosParagraph['renderer'])

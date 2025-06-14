@@ -29,9 +29,8 @@ class SpecificitiesParagraph(BaseParagraph):
     factory_label = SPECIFICITIES_PARAGRAPH_NAME
     factory_intf = ISpecificitiesParagraph
     
-    secondary = True
-    
     icon_class = SPECIFICITIES_PARAGRAPH_ICON_CLASS
+    secondary = True
     
     renderer = FieldProperty(ISpecificitiesParagraph['renderer'])
 

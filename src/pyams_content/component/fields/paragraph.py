@@ -39,6 +39,7 @@ class FormFieldsParagraph(BaseParagraph):
     factory_intf = IFormFieldsParagraph
 
     icon_class = FORM_FIELDS_PARAGRAPH_ICON_CLASS
+    secondary = True
 
     renderer = FieldProperty(IFormFieldsParagraph['renderer'])
 

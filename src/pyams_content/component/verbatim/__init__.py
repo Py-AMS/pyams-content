@@ -86,8 +86,8 @@ class VerbatimParagraph(VerbatimBaseMixin, BaseParagraph):
     factory_label = VERBATIM_PARAGRAPH_NAME
     factory_intf = IVerbatimParagraph
 
-    secondary = True
     icon_class = VERBATIM_PARAGRAPH_ICON_CLASS
+    secondary = True
 
 
 @subscriber(IObjectAddedEvent, context_selector=IVerbatimParagraph)

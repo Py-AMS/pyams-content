@@ -50,9 +50,8 @@ class RawParagraph(BaseParagraph):
     factory_label = RAW_PARAGRAPH_NAME
     factory_intf = IRawParagraph
 
-    secondary = True
-
     icon_class = RAW_PARAGRAPH_ICON_CLASS
+    secondary = True
 
     body = FieldProperty(IRawParagraph['body'])
     renderer = FieldProperty(IRawParagraph['renderer'])

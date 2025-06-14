@@ -44,9 +44,8 @@ class FrameParagraph(BaseParagraph):
     factory_label = FRAME_PARAGRAPH_NAME
     factory_intf = IFrameParagraph
 
-    secondary = True
-
     icon_class = FRAME_PARAGRAPH_ICON_CLASS
+    secondary = True
 
     body = FieldProperty(IFrameParagraph['body'])
     renderer = FieldProperty(IFrameParagraph['renderer'])

@@ -30,9 +30,8 @@ class ParagraphsGroup(BaseParagraph):
     factory_label = GROUP_PARAGRAPH_NAME
     factory_intf = IParagraphsGroup
     
-    secondary = True
-    
     icon_class = GROUP_PARAGRAPH_ICON_CLASS
+    secondary = True
 
     renderer = FieldProperty(IParagraphsGroup['renderer'])
 

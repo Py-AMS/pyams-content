@@ -33,7 +33,7 @@ __docformat__ = 'restructuredtext'
 @viewlet_config(name='add-cards-paragraph.menu',
                 context=IParagraphContainerTarget, layer=IAdminLayer,
                 view=IParagraphContainerBaseTable,
-                manager=IContextAddingsViewletManager, weight=800)
+                manager=IContextAddingsViewletManager, weight=600)
 class CardsParagraphAddMenu(BaseParagraphAddMenu):
     """Cards paragraph add menu"""
 

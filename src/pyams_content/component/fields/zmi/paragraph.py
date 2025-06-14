@@ -32,7 +32,7 @@ from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager
 @viewlet_config(name='add-form-fields-paragraph.menu',
                 context=IParagraphContainerTarget, layer=IAdminLayer,
                 view=IParagraphContainerBaseTable,
-                manager=IContextAddingsViewletManager, weight=900)
+                manager=IContextAddingsViewletManager, weight=600)
 class FormFieldsParagraphAddMenu(BaseParagraphAddMenu):
     """Form fields paragraph add menu"""
 

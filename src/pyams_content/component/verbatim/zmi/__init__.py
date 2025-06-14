@@ -307,7 +307,7 @@ class VerbatimEditFormRenderer(ContextRequestViewAdapter):
 @viewlet_config(name='add-verbatim-paragraph.menu',
                 context=IParagraphContainerTarget, layer=IAdminLayer,
                 view=IParagraphContainerBaseTable,
-                manager=IContextAddingsViewletManager, weight=800)
+                manager=IContextAddingsViewletManager, weight=600)
 class VerbatimParagraphAddMenu(BaseParagraphAddMenu):
     """Verbatim paragraph add menu"""
 
