@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.6.0
+-----
+ - added key-numbers paragraph type and portlet
+ - updated paragraphs add menus order
+ - updated PyAMS_scheduler interfaces imports
+
 2.5.1
 -----
  - updated CI for Python 3.12
