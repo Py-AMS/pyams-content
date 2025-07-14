@@ -16,6 +16,8 @@ This module provides dashboard management components which are common to all
 shared contents.
 """
 
+from datetime import datetime, timezone
+
 from hypatia.catalog import CatalogQuery
 from hypatia.interfaces import ICatalog
 from hypatia.query import And, Any, Eq, Or
@@ -105,9 +107,16 @@ def content_workflow_status(context, request, column):
             pub_info = IWorkflowPublicationInfo(context, None)
             if (pub_info is not None) and not pub_info.is_published():
                 translate = request.localizer.translate
-                result += ' <i class="fas fa-fw fa-hourglass-half opacity-75 hint align-base" ' \
-                          '    data-offset="5" title="{}"></i>'.format(
-                    translate(_("Content publication start date is not passed yet")))
+                now = tztime(datetime.now(timezone.utc))
+                if pub_info.publication_expiration_date and (pub_info.publication_effective_date > now):
+                    result += ' <i class="fas fa-fw fa-hourglass-half opacity-75 hint align-base" ' \
+                              '    data-offset="5" title="{}"></i>'.format(
+                            translate(_("Content publication start date is not passed yet")))
+                elif pub_info.publication_expiration_date and (pub_info.publication_expiration_date < now):
+                    result += ' <i class="fas fa-fw fa-exclamation-triangle opacity-75 hint align-base" ' \
+                              '    data-offset="5" title="{}"></i>'.format(
+                            translate(_("Publication end date is passed and content "
+                                        "should have been retired")))
         return result
     return None
 

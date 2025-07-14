@@ -15,6 +15,8 @@
 This module provides common management components for shared contents.
 """
 
+from datetime import datetime, timezone
+
 from zope.interface import Interface
 
 from pyams_content.shared.common import IBaseSharedTool
@@ -31,6 +33,7 @@ from pyams_skin.interfaces.viewlet import IHeaderViewletManager
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
 from pyams_utils.date import format_datetime
+from pyams_utils.timezone import tztime
 from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
 from pyams_viewlet.viewlet import EmptyViewlet, Viewlet, viewlet_config
@@ -215,12 +218,22 @@ class SharedContentWorkflowStatus(Viewlet):
         elif state.state in workflow.published_states:
             pub_info = IWorkflowPublicationInfo(context, None)
             if (pub_info is not None) and not pub_info.is_published():
-                state_format = state_format.replace(
-                    '{state}',
-                    '{{state}} <i class="fas fa-fw fa-hourglass-half font-xs '
-                    'text-danger opacity-75 hint align-base" '
-                    'data-ams-hint-offset="5" title="{0}"></i>'.format(
-                        translate(_("Content publication start date is not passed yet"))))
+                now = tztime(datetime.now(timezone.utc))
+                if pub_info.publication_expiration_date and (pub_info.publication_effective_date > now):
+                    state_format = state_format.replace(
+                            '{state}',
+                            '{{state}} <i class="fas fa-fw fa-hourglass-half font-xs '
+                            'text-danger opacity-75 hint align-base" '
+                            'data-ams-hint-offset="5" title="{0}"></i>'.format(
+                                    translate(_("Content publication start date is not passed yet"))))
+                elif pub_info.publication_expiration_date and (pub_info.publication_expiration_date < now):
+                    state_format = state_format.replace(
+                            '{state}',
+                            '{{state}} <i class="fas fa-fw fa-exclamation-triangle font-xs '
+                            'text-danger opacity-75 hint align-base" '
+                            'data-ams-hint-offset="5" title="{0}"></i>'.format(
+                                    translate(_("Publication end date is passed and content "
+                                                "should have been retired"))))
         state_class = 'text-danger'
         state_format = state_format.replace(
             '{state}',
