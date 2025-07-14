@@ -127,9 +127,9 @@ def handle_scheduler_start(event):
     """Check for scheduler tasks
 
     Workflow management tasks are typically automatically deleted after their execution.
-    If tasks with passed execution date are still present in the scheduler, this is generally
-    because scheduler was stopped at task execution time; so tasks which where not run are
-    re-scheduled at process startup in a very near future...
+    If tasks with a passed execution date are still present in the scheduler, this is generally
+    because the scheduler was stopped at task execution time; so tasks which where not run are
+    re-scheduled at process startup in the very near future...
     """
     with ZODBConnection() as root:
         registry = get_pyramid_registry()

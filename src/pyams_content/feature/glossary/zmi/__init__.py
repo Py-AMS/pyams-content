@@ -21,7 +21,8 @@ from pyams_content.feature.glossary.interfaces import IGlossaryUpdaterTask
 from pyams_content.feature.glossary.task import GlossaryUpdaterTask
 from pyams_form.ajax import ajax_form_config
 from pyams_layer.interfaces import IPyAMSLayer
-from pyams_scheduler.interfaces import ITaskContainer, MANAGE_TASKS_PERMISSION
+from pyams_scheduler.interfaces import MANAGE_TASKS_PERMISSION
+from pyams_scheduler.interfaces.folder import ITaskContainer
 from pyams_scheduler.task.zmi import BaseTaskAddForm, BaseTaskEditForm
 from pyams_scheduler.zmi import TaskContainerTable
 from pyams_skin.interfaces.viewlet import IHelpViewletManager

@@ -56,18 +56,14 @@ class GlossaryUpdaterTask(Task):
     def run(self, report, **kwargs):  # pylint: disable=unused-argument
         """Run glossary automaton update"""
         try:
-            report.write('Glossary automaton update\n'
-                         '=========================\n')
+            report.writeln('Glossary automaton update', prefix='### ')
             root = get_parent(self, ISiteRoot)
             automaton = get_glossary_automaton(root)
-            report.write(f'Automaton size: {len(automaton)} terms\n')
+            report.writeln(f'Automaton size: **{len(automaton)} terms**', suffix='\n')
             return TASK_STATUS_OK, automaton
         except Exception:  # pylint: disable=bare-except
-            etype, value, tb = sys.exc_info()  # pylint: disable=invalid-name
-            report.write('\n\n'
-                         'An error occurred\n'
-                         '=================\n')
-            report.write(''.join(traceback.format_exception(etype, value, tb)))
+            report.writeln('**An SQL error occurred**', suffix='\n')
+            report.write_exception(*sys.exc_info())
             return TASK_STATUS_FAIL, None
 
 
