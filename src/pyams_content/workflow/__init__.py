@@ -245,7 +245,7 @@ def can_delete_version(wf, context):
 
 
 def can_manage_content(wf, context):
-    """Check if a manager can handle content"""
+    """Check if a manager can manage content"""
     request = check_request()
     # grant access to webmaster
     if request.has_permission(MANAGE_SITE_ROOT_PERMISSION, context):
@@ -261,6 +261,13 @@ def can_manage_content(wf, context):
                                                     permission=PUBLISH_CONTENT_PERMISSION,
                                                     request=request)
 
+
+def can_manage_content_by_user(wf, context):
+    """Check if a connected user can manage content"""
+    if is_internal_user_id(wf, context):
+        return False
+    return can_manage_content(wf, context)
+    
 
 def can_cancel_operation(wf, context):
     """Check if we can cancel a request"""
@@ -620,22 +627,22 @@ published_to_retiring = Transition(transition_id='published_to_retiring',
                                                     "for content « {title} »"),
                                    order=7)
 
-published_to_retired = Transition(transition_id='published_to_retired',
-                                  title=_("Retired content"),
-                                  source=PUBLISHED,
-                                  destination=RETIRED,
-                                  permission=PUBLISH_CONTENT_PERMISSION,
-                                  condition=can_manage_content,
-                                  action=unpublish_action,
-                                  menu_icon_class='far fa-fw fa-stop-circle',
-                                  view_name='wf-retire.html',
-                                  show_operator_warning=True,
-                                  history_label=_("Content retired"),
-                                  notify_roles={WEBMASTER_ROLE, PILOT_ROLE, MANAGER_ROLE,
+published_to_retired_by_user = Transition(transition_id='published_to_retired_by_user',
+                                          title=_("Retired content"),
+                                          source=PUBLISHED,
+                                          destination=RETIRED,
+                                          permission=PUBLISH_CONTENT_PERMISSION,
+                                          condition=can_manage_content_by_user,
+                                          action=unpublish_action,
+                                          menu_icon_class='far fa-fw fa-stop-circle',
+                                          view_name='wf-retire.html',
+                                          show_operator_warning=True,
+                                          history_label=_("Content retired"),
+                                          notify_roles={WEBMASTER_ROLE, PILOT_ROLE, MANAGER_ROLE,
                                                 OWNER_ROLE},
-                                  notify_title=_("Content removal"),
-                                  notify_message=_("{principal} retired content « {title} »"),
-                                  order=9)
+                                          notify_title=_("Content removal"),
+                                          notify_message=_("{principal} retired content « {title} »"),
+                                          order=9)
 
 published_to_retired_by_task = Transition(transition_id='published_to_retired_by_task',
                                           title=_("Retired content"),
@@ -776,7 +783,7 @@ archiving_to_archived = Transition(transition_id='archiving_to_archived',
                                    notify_message=_("{principal} archived content « {title} »"),
                                    order=12)
 
-published_to_archived_by_version = Transition(transition_id='published_to_archived',
+published_to_archived_by_version = Transition(transition_id='published_to_archived_by_user',
                                               title=_("Archive published content"),
                                               source=PUBLISHED,
                                               destination=ARCHIVED,
@@ -887,7 +894,7 @@ wf_transitions = [
     prepublished_to_proposed,
     proposed_to_published,
     published_to_retiring,
-    published_to_retired,
+    published_to_retired_by_user,
     published_to_retired_by_task,
     retiring_to_published,
     retiring_to_retired,

@@ -27,7 +27,8 @@ from pyams_content.interfaces import CREATE_VERSION_PERMISSION, MANAGER_ROLE, MA
     MANAGE_SITE_ROOT_PERMISSION, OWNER_ROLE, PILOT_ROLE, PUBLISH_CONTENT_PERMISSION, READER_ROLE, WEBMASTER_ROLE
 from pyams_content.shared.common.interfaces import BASIC_CONTENT_WORKFLOW, IContributorRestrictions, \
     IManagerRestrictions, IWfSharedContentRoles
-from pyams_content.workflow import CANCELED, ContentArchivingTask, ContentPublishingTask, prepublished_to_published
+from pyams_content.workflow import CANCELED, ContentArchivingTask, ContentPublishingTask, is_internal_user_id, \
+    prepublished_to_published
 from pyams_content.workflow.interfaces import IBasicWorkflow
 from pyams_scheduler.interfaces import IScheduler
 from pyams_scheduler.interfaces.task import IDateTaskScheduling, SCHEDULER_TASK_DATE_MODE
@@ -37,7 +38,6 @@ from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.date import format_datetime
 from pyams_utils.registry import get_current_registry, get_utility, query_utility, utility_config
 from pyams_utils.request import check_request
-from pyams_utils.timezone import gmtime
 from pyams_workflow.interfaces import IWorkflow, IWorkflowInfo, IWorkflowPublicationInfo, IWorkflowState, \
     IWorkflowStateLabel, IWorkflowVersions, ObjectClonedEvent, SYSTEM_TRANSITION
 from pyams_workflow.workflow import Transition, Workflow
@@ -161,6 +161,13 @@ def can_manage_content(wf, context):
     return restrictions and restrictions.can_access(context,
                                                     permission=PUBLISH_CONTENT_PERMISSION,
                                                     request=request)
+
+
+def can_manage_content_by_user(wf, context):
+    """Check if a connected user can manage content"""
+    if is_internal_user_id(wf, context):
+        return False
+    return can_manage_content(wf, context)
 
 
 def can_delete_version(wf, context):
@@ -360,20 +367,28 @@ draft_to_published = Transition(transition_id='draft_to_published',
                                                  "« {title} »"),
                                 order=1)
 
-published_to_archived = Transition(transition_id='published_to_archived',
-                                   title=_("Archive content"),
-                                   source=PUBLISHED,
-                                   destination=ARCHIVED,
-                                   permission=PUBLISH_CONTENT_PERMISSION,
-                                   condition=can_manage_content,
-                                   action=archive_action,
-                                   menu_icon_class='fas fa-fw fa-archive',
-                                   view_name='wf-archive.html',
-                                   show_operator_warning=True,
-                                   history_label=_("Content archived"),
-                                   notify_roles={WEBMASTER_ROLE, PILOT_ROLE, MANAGER_ROLE, OWNER_ROLE},
-                                   notify_message=_("{principal} archived content « {title} »"),
-                                   order=2)
+published_to_archived_by_user = Transition(transition_id='published_to_archived_by_user',
+                                           title=_("Archive content"),
+                                           source=PUBLISHED,
+                                           destination=ARCHIVED,
+                                           permission=PUBLISH_CONTENT_PERMISSION,
+                                           condition=can_manage_content_by_user,
+                                           action=archive_action,
+                                           menu_icon_class='fas fa-fw fa-archive',
+                                           view_name='wf-archive.html',
+                                           show_operator_warning=True,
+                                           history_label=_("Content archived"),
+                                           notify_roles={WEBMASTER_ROLE, PILOT_ROLE, MANAGER_ROLE, OWNER_ROLE},
+                                           notify_message=_("{principal} archived content « {title} »"),
+                                           order=2)
+
+published_to_archived_by_task = Transition(transition_id='published_to_archived_by_task',
+                                          title=_("Retired content"),
+                                          source=PUBLISHED,
+                                          destination=ARCHIVED,
+                                          trigger=SYSTEM_TRANSITION,
+                                          condition=is_internal_user_id,
+                                          history_label=_("Content archived after passed expiration date"))
 
 published_to_draft = Transition(transition_id='published_to_draft',
                                 title=_("Create new version"),
@@ -416,7 +431,7 @@ wf_transitions = {init,
                   prepublished_to_draft,
                   prepublished_to_published,
                   draft_to_published,
-                  published_to_archived,
+                  published_to_archived_by_user,
                   published_to_draft,
                   archived_to_draft,
                   delete}
