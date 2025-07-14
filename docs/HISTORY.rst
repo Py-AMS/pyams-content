@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.6.1
+-----
+ - updated workflow status indicators for contents in published state
+ - added workflow conditions to handle transitions handled by internal service
+
 2.6.0
 -----
  - added key-numbers paragraph type and portlet
