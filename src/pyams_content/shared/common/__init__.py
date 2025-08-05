@@ -22,10 +22,12 @@ from zope.container.contained import Contained
 from zope.dublincore.interfaces import IZopeDublinCore
 from zope.interface import implementer
 from zope.intid import IIntIds
-from zope.lifecycleevent import IObjectModifiedEvent
+from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent
+from zope.lifecycleevent import ObjectModifiedEvent
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
+from pyams_catalog.utils import reindex_object
 from pyams_content.feature.filter.interfaces import IFilterValues
 from pyams_content.interfaces import IBaseContentInfo, IObjectType
 from pyams_content.shared.common.interfaces import CONTENT_TYPES_VOCABULARY, IBaseSharedTool, \
@@ -168,6 +170,24 @@ def handle_modified_shared_content(event):
                     intids = query_utility(IIntIds)
                     catalog['modifiers'].reindex_doc(intids.register(content), content)
                 content.last_modifier = principal_id
+
+
+@subscriber(IObjectAddedEvent)
+@subscriber(IObjectModifiedEvent)
+@subscriber(IObjectRemovedEvent)
+def handle_modified_inner_content(event):
+    """Handle modified shared object inner content
+
+    This generic subscriber is used to update index on any content modification.
+    """
+    source = event.object
+    if IWfSharedContent.providedBy(source):
+        return
+    content = get_parent(event.object, IWfSharedContent, allow_context=False)
+    if content is None:
+        return
+    handle_modified_shared_content(ObjectModifiedEvent(content))
+    reindex_object(content)
 
 
 @subscriber(IObjectClonedEvent, context_selector=IWfSharedContent)
