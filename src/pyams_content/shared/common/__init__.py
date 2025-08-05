@@ -36,6 +36,7 @@ from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces import IDefaultProtectionPolicy
 from pyams_security.interfaces.base import VIEW_PERMISSION
+from pyams_security.principal import UnknownPrincipal
 from pyams_security.security import ProtectedObjectMixin
 from pyams_security.utility import get_principal
 from pyams_sequence.interfaces import ISequentialIdInfo, ISequentialIdTarget
@@ -152,20 +153,21 @@ def handle_modified_shared_content(event):
     """Define content's modifiers when content is modified"""
     request = query_request()
     if request is not None:
-        content = event.object
         try:
             principal_id = request.principal.id
         except AttributeError:
             pass
         else:
-            modifiers = content.modifiers or set()
-            if principal_id not in modifiers:
-                modifiers.add(principal_id)
-                content.modifiers = modifiers
-                catalog = query_utility(ICatalog)
-                intids = query_utility(IIntIds)
-                catalog['modifiers'].reindex_doc(intids.register(content), content)
-            content.last_modifier = principal_id
+            if principal_id != UnknownPrincipal.id:
+                content = event.object
+                modifiers = content.modifiers or set()
+                if principal_id not in modifiers:
+                    modifiers.add(principal_id)
+                    content.modifiers = modifiers
+                    catalog = query_utility(ICatalog)
+                    intids = query_utility(IIntIds)
+                    catalog['modifiers'].reindex_doc(intids.register(content), content)
+                content.last_modifier = principal_id
 
 
 @subscriber(IObjectClonedEvent, context_selector=IWfSharedContent)
