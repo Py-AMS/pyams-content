@@ -36,6 +36,7 @@ __docformat__ = 'restructuredtext'
 
 from pyams_content import _
 
+
 ALERT_TYPES_MANAGER_ANNOTATION_KEY = 'pyams_content.alerts.types'
 ALERT_TYPES_VOCABULARY = 'pyams_content.alerts.types'
 
