@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.6.2
+-----
+ - don't update content modifiers when modification is done by an unknown principal
+ - apply modification to shared content when an inner component is modified
+ - updated site tree display
+ - removed internal references menu for alerts
+
 2.6.1
 -----
  - updated workflow status indicators for contents in published state
