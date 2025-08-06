@@ -249,13 +249,13 @@ class SiteContainerTreeNameColumn(DashboardLabelColumn):
             <span class="small hint tree-switcher" title="{hint}" data-ams-hint-gravity="e" 
                   data-ams-click-handler="MyAMS.tree.switchTreeNode"
                   data-ams-stop-propagation="true">{switch}</span>
-            &nbsp;&nbsp;<span class="title">{title}</span> {arrow}
+            <span class="title">{title}</span> {arrow}
         </div>'''.format(
             padding='<span class="tree-node-padding"></span>' * depth,
             hint=translate(_("Click to show/hide inner folders")),
             switch='<span class="switcher {switch_state}">'
                    '<i class="far fa-{state}-square switch"></i>'
-                   '</span>'.format(
+                   '</span>&nbsp;&nbsp;'.format(
                 switch_state='expanded' if expanded else '',
                 state=getattr(item, '_v_state',
                               'minus' if expanded else 'plus'))
