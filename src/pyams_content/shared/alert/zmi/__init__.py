@@ -27,10 +27,11 @@ from pyams_form.interfaces.form import IGroup
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IFormLayer, IPyAMSLayer
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
-from pyams_utils.adapter import adapter_config
+from pyams_utils.adapter import NullAdapter, adapter_config
+from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import FormGroupSwitcher
 from pyams_zmi.interfaces import IAdminLayer
-from pyams_zmi.interfaces.viewlet import IContentManagementMenu, IMenuHeader
+from pyams_zmi.interfaces.viewlet import IContentManagementMenu, IMenuHeader, IPropertiesMenu
 
 __docformat__ = 'restructuredtext'
 
@@ -83,3 +84,11 @@ class AlertPropertiesGroup(FormGroupSwitcher):
 
     fields = Fields(IWfAlert).select('alert_type', 'body', 'reference', 'external_url',
                                      'references', 'maximum_interval')
+
+
+@viewlet_config(name='internal-references.menu',
+                context=IWfAlert, layer=IAdminLayer,
+                manager=IPropertiesMenu, weight=300,
+                permission=VIEW_SYSTEM_PERMISSION)
+class AlertReferencesMenu(NullAdapter):
+    """Disabled alert references menu"""
