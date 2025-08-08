@@ -59,9 +59,14 @@ class SingleViewMergeMode:
 
     @classmethod
     def get_results(cls, view, context, ignore_cache=False, request=None,
-                    aggregates=None, settings=None, get_count=False):
-        count, aggregations, results = view.get_results(context, ignore_cache=ignore_cache, request=request,
-                                                        aggregates=aggregates, settings=settings, get_count=True)
+                    aggregates=None, settings=None, get_count=False, **kwargs):
+        count, aggregations, results = view.get_results(context,
+                                                        ignore_cache=ignore_cache,
+                                                        request=request,
+                                                        aggregates=aggregates,
+                                                        settings=settings,
+                                                        get_count=True,
+                                                        **kwargs)
         if get_count:
             yield count
             yield aggregations
@@ -77,15 +82,26 @@ class ViewsConcatenateMergeMode(SingleViewMergeMode):
 
     @classmethod
     def get_results(cls, views, context, ignore_cache=False, request=None,
-                    aggregates=None, settings=None, get_count=False):
+                    aggregates=None, settings=None, get_count=False, **kwargs):
         views = list(views) or ()
         if len(views) == 1:
-            yield from super().get_results(views[0], context, ignore_cache=ignore_cache, request=request,
-                                           aggregates=aggregates, settings=settings, get_count=get_count)
+            yield from super().get_results(views[0],
+                                           context,
+                                           ignore_cache=ignore_cache,
+                                           request=request,
+                                           aggregates=aggregates,
+                                           settings=settings,
+                                           get_count=get_count,
+                                           **kwargs)
         else:
             results = (
-                view.get_results(context, ignore_cache=ignore_cache, request=request,
-                                 aggregates=aggregates, settings=settings, get_count=False)
+                view.get_results(context,
+                                 ignore_cache=ignore_cache,
+                                 request=request,
+                                 aggregates=aggregates,
+                                 settings=settings,
+                                 get_count=False,
+                                 **kwargs)
                 for view in views
             )
             yield from chain(*results)
@@ -100,15 +116,26 @@ class ViewsRandomMergeMode(SingleViewMergeMode):
 
     @classmethod
     def get_results(cls, views, context, ignore_cache=False, request=None,
-                    aggregates=None, settings=None, get_count=False):
+                    aggregates=None, settings=None, get_count=False, **kwargs):
         views = list(views) or ()
         if len(views) == 1:
-            yield from super().get_results(views[0], context, ignore_cache=ignore_cache, request=request,
-                                           aggregates=aggregates, settings=settings, get_count=get_count)
+            yield from super().get_results(views[0],
+                                           context,
+                                           ignore_cache=ignore_cache,
+                                           request=request,
+                                           aggregates=aggregates,
+                                           settings=settings,
+                                           get_count=get_count,
+                                           **kwargs)
         else:
             results = (
-                view.get_results(context, ignore_cache=ignore_cache, request=request,
-                                 aggregates=aggregates, settings=settings)
+                view.get_results(context,
+                                 ignore_cache=ignore_cache,
+                                 request=request,
+                                 aggregates=aggregates,
+                                 settings=settings,
+                                 get_count=False,
+                                 **kwargs)
                 for view in views
             )
             results = list(chain(*results))
@@ -125,15 +152,26 @@ class ViewsZipMergeMode(SingleViewMergeMode):
 
     @classmethod
     def get_results(cls, views, context, ignore_cache=False, request=None,
-                    aggregates=None, settings=None, get_count=False):
+                    aggregates=None, settings=None, get_count=False, **kwargs):
         views = list(views) or ()
         if len(views) == 1:
-            yield from super().get_results(views[0], context, ignore_cache=ignore_cache, request=request,
-                                           aggregates=aggregates, settings=settings, get_count=get_count)
+            yield from super().get_results(views[0],
+                                           context,
+                                           ignore_cache=ignore_cache,
+                                           request=request,
+                                           aggregates=aggregates,
+                                           settings=settings,
+                                           get_count=get_count,
+                                           **kwargs)
         else:
             results = (
-                view.get_results(context, ignore_cache=ignore_cache, request=request,
-                                 aggregates=aggregates, settings=settings)
+                view.get_results(context,
+                                 ignore_cache=ignore_cache,
+                                 request=request,
+                                 aggregates=aggregates,
+                                 settings=settings,
+                                 get_count=False,
+                                 **kwargs)
                 for view in views
             )
             for array in zip_longest(*results):
@@ -149,15 +187,26 @@ class ViewsRandomZipMergeMode(SingleViewMergeMode):
 
     @classmethod
     def get_results(cls, views, context, ignore_cache=False, request=None,
-                    aggregates=None, settings=None, get_count=False):
+                    aggregates=None, settings=None, get_count=False, **kwargs):
         views = list(views) or ()
         if len(views) == 1:
-            yield from super().get_results(views[0], context, ignore_cache=ignore_cache, request=request,
-                                           aggregates=aggregates, settings=settings, get_count=get_count)
+            yield from super().get_results(views[0],
+                                           context,
+                                           ignore_cache=ignore_cache,
+                                           request=request,
+                                           aggregates=aggregates,
+                                           settings=settings,
+                                           get_count=get_count,
+                                           **kwargs)
         else:
             results = [
-                view.get_results(context, ignore_cache=ignore_cache, request=request,
-                                 aggregates=aggregates, settings=settings)
+                view.get_results(context,
+                                 ignore_cache=ignore_cache,
+                                 request=request,
+                                 aggregates=aggregates,
+                                 settings=settings,
+                                 get_count=False,
+                                 **kwargs)
                 for view in views
             ]
             shuffle(results)
@@ -174,15 +223,24 @@ class SortedMergeMode(SingleViewMergeMode):
 
     @classmethod
     def get_results(cls, views, context, ignore_cache=False, request=None,
-                    aggregates=None, settings=None, get_count=False):
+                    aggregates=None, settings=None, get_count=False, **kwargs):
         views = list(views) or ()
         if len(views) == 1:
-            yield from super().get_results(views[0], context, ignore_cache=ignore_cache, request=request,
-                                           aggregates=aggregates, settings=settings, get_count=get_count)
+            yield from super().get_results(views[0], context,
+                                           ignore_cache=ignore_cache,
+                                           request=request,
+                                           aggregates=aggregates,
+                                           settings=settings,
+                                           get_count=get_count)
         else:
             results = (
-                sorted(view.get_results(context, ignore_cache=ignore_cache, request=request,
-                                        aggregates=aggregates, settings=settings),
+                sorted(view.get_results(context,
+                                        ignore_cache=ignore_cache,
+                                        request=request,
+                                        aggregates=aggregates,
+                                        settings=settings,
+                                        get_count=False,
+                                        **kwargs),
                        key=cls.sort_key, reverse=True)
                 for view in views
             )

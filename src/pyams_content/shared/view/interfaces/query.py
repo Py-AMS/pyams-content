@@ -91,7 +91,7 @@ class IViewsMerger(Interface):
     """
 
     def get_results(self, views, context, ignore_cache=False, request=None,
-                    aggregates=None, settings=None):
+                    aggregates=None, settings=None, **kwargs):
         """Merge results of several views together"""
 
 
