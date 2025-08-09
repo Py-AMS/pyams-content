@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-06-15 00:59+0200\n"
+"POT-Creation-Date: 2025-08-10 00:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -350,14 +350,14 @@ msgid "Site information"
 msgstr "Informations générales"
 
 #: src/pyams_content/root/zmi/dashboard.py:96
-#: src/pyams_content/shared/common/zmi/dashboard.py:292
+#: src/pyams_content/shared/common/zmi/dashboard.py:301
 msgid "Users activity"
 msgstr "Suivre l'activité"
 
 #: src/pyams_content/root/zmi/dashboard.py:113
 #: src/pyams_content/root/zmi/dashboard.py:114
-#: src/pyams_content/shared/common/zmi/dashboard.py:313
-#: src/pyams_content/shared/common/zmi/dashboard.py:314
+#: src/pyams_content/shared/common/zmi/dashboard.py:322
+#: src/pyams_content/shared/common/zmi/dashboard.py:323
 msgid "My dashboard"
 msgstr "Mon tableau de bord"
 
@@ -414,8 +414,8 @@ msgstr "Dernière modification"
 msgid "Shortcuts"
 msgstr "Contenus"
 
-#: src/pyams_content/shared/common/__init__.py:136
-#: src/pyams_content/shared/common/__init__.py:145
+#: src/pyams_content/shared/common/__init__.py:139
+#: src/pyams_content/shared/common/__init__.py:148
 #, python-format
 msgid "{date} by {principal}"
 msgstr "{date} par {principal}"
@@ -455,10 +455,10 @@ msgstr ""
 "propriétaire !"
 
 #: src/pyams_content/shared/common/zmi/workflow.py:167
-#: src/pyams_content/workflow/basic.py:448
-#: src/pyams_content/workflow/basic.py:485
-#: src/pyams_content/workflow/__init__.py:934
-#: src/pyams_content/workflow/__init__.py:971
+#: src/pyams_content/workflow/basic.py:463
+#: src/pyams_content/workflow/basic.py:500
+#: src/pyams_content/workflow/__init__.py:941
+#: src/pyams_content/workflow/__init__.py:978
 #, python-format
 msgid "{state} {date}"
 msgstr "{state} {date}"
@@ -708,44 +708,51 @@ msgstr "Liste des contributeurs"
 msgid "Contributor restrictions"
 msgstr "Restrictions d'un contributeur"
 
-#: src/pyams_content/shared/common/zmi/content.py:170
+#: src/pyams_content/shared/common/zmi/content.py:173
 #, python-format
 msgid "from {}"
 msgstr "de {}"
 
 #. init state format
-#: src/pyams_content/shared/common/zmi/content.py:209
+#: src/pyams_content/shared/common/zmi/content.py:212
 #, python-format
 msgid "{state} <span class=\"px-1\">by</span> {principal}"
 msgstr "{state} <span class=\"px-1\">par</span> {principal}"
 
-#: src/pyams_content/shared/common/zmi/content.py:223
-#: src/pyams_content/shared/common/zmi/dashboard.py:110
+#: src/pyams_content/shared/common/zmi/content.py:228
+#: src/pyams_content/shared/common/zmi/dashboard.py:114
 msgid "Content publication start date is not passed yet"
 msgstr "La date de début de publication de ce contenu n'est pas encore passée"
 
-#: src/pyams_content/shared/common/zmi/content.py:248
+#: src/pyams_content/shared/common/zmi/content.py:235
+#: src/pyams_content/shared/common/zmi/dashboard.py:118
+msgid "Publication end date is passed and content should have been retired"
+msgstr ""
+"La date de fin de publication est atteinte et le contenu devrait avoir été "
+"retiré"
+
+#: src/pyams_content/shared/common/zmi/content.py:261
 #, python-format
 msgid "since {date}"
 msgstr "depuis {date}"
 
-#: src/pyams_content/shared/common/zmi/content.py:261
+#: src/pyams_content/shared/common/zmi/content.py:274
 msgid "access published version"
 msgstr "accéder à la version publiée"
 
-#: src/pyams_content/shared/common/zmi/content.py:270
+#: src/pyams_content/shared/common/zmi/content.py:283
 msgid "access new version"
 msgstr "accéder à la version en préparation"
 
-#: src/pyams_content/shared/common/zmi/content.py:282
+#: src/pyams_content/shared/common/zmi/content.py:295
 msgid "access waiting version"
 msgstr "accéder à la version en attente"
 
-#: src/pyams_content/shared/common/zmi/content.py:297
+#: src/pyams_content/shared/common/zmi/content.py:310
 msgid "access retired version"
 msgstr "accéder à la version retirée"
 
-#: src/pyams_content/shared/common/zmi/content.py:310
+#: src/pyams_content/shared/common/zmi/content.py:323
 msgid "access archived version"
 msgstr "accéder à la version archivée"
 
@@ -902,198 +909,198 @@ msgstr ""
 "utilisés pour alimenter les vues qui s'appuient sur les références internes "
 "de leur contexte."
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:302
+#: src/pyams_content/shared/common/zmi/dashboard.py:311
 msgid "Dashboard"
 msgstr "Tableau de bord"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:326
+#: src/pyams_content/shared/common/zmi/dashboard.py:335
 msgid "You are not actually concerned by any content."
 msgstr "Vous n'êtes actuellement concerné(e) par aucun contenu."
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:360
+#: src/pyams_content/shared/common/zmi/dashboard.py:369
 msgid "MANAGER - No content waiting for your action"
 msgstr "RESPONSABLE - Aucun contenu en attente de votre intervention"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:361
+#: src/pyams_content/shared/common/zmi/dashboard.py:370
 msgid "MANAGER - 1 content waiting for your action"
 msgstr "RESPONSABLE - 1 contenu en attente de votre intervention"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:362
+#: src/pyams_content/shared/common/zmi/dashboard.py:371
 #, python-format
 msgid "MANAGER - {} contents waiting for your action"
 msgstr "RESPONSABLE - {} contenus en attente de votre intervention"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:422
+#: src/pyams_content/shared/common/zmi/dashboard.py:431
 msgid "CONTRIBUTOR - 0 content waiting for action"
 msgstr "CONTRIBUTEUR - Aucun contenu en attente"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:423
+#: src/pyams_content/shared/common/zmi/dashboard.py:432
 msgid "CONTRIBUTOR - 1 content waiting for action"
 msgstr "CONTRIBUTEUR - 1 contenu en attente"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:424
+#: src/pyams_content/shared/common/zmi/dashboard.py:433
 #, python-format
 msgid "CONTRIBUTOR - {0} contents waiting for action"
 msgstr "CONTRIBUTEUR - {} contenus en attente"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:471
+#: src/pyams_content/shared/common/zmi/dashboard.py:480
 msgid "CONTRIBUTOR - 0 modified content"
 msgstr "CONTRIBUTEUR - Aucun contenu modifié"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:472
+#: src/pyams_content/shared/common/zmi/dashboard.py:481
 msgid "CONTRIBUTOR - 1 modified content"
 msgstr "CONTRIBUTEUR - 1 contenu modifié"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:478
+#: src/pyams_content/shared/common/zmi/dashboard.py:487
 #, python-format
 msgid "CONTRIBUTOR - Last {} modified contents"
 msgstr "CONTRIBUTEUR - {} derniers contenus modifiés"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:479
+#: src/pyams_content/shared/common/zmi/dashboard.py:488
 #, python-format
 msgid "CONTRIBUTOR - {} modified contents"
 msgstr "CONTRIBUTEUR - {} contenus modifiés"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:520
+#: src/pyams_content/shared/common/zmi/dashboard.py:529
 msgid "My contents"
 msgstr "Mes contenus"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:537
-#: src/pyams_content/shared/common/zmi/dashboard.py:575
+#: src/pyams_content/shared/common/zmi/dashboard.py:546
+#: src/pyams_content/shared/common/zmi/dashboard.py:584
 msgid "My drafts"
 msgstr "Mes brouillons"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:578
+#: src/pyams_content/shared/common/zmi/dashboard.py:587
 msgid "CONTRIBUTOR - 0 content in preparation"
 msgstr "CONTRIBUTEUR - Aucun contenu en préparation"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:579
+#: src/pyams_content/shared/common/zmi/dashboard.py:588
 msgid "CONTRIBUTOR - 1 content in preparation"
 msgstr "CONTRIBUTEUR - 1 contenu en préparation"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:580
+#: src/pyams_content/shared/common/zmi/dashboard.py:589
 #, python-format
 msgid "CONTRIBUTOR - {} contents in preparation"
 msgstr "CONTRIBUTEUR - {} contenus en préparation"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:595
-#: src/pyams_content/shared/common/zmi/dashboard.py:634
+#: src/pyams_content/shared/common/zmi/dashboard.py:604
+#: src/pyams_content/shared/common/zmi/dashboard.py:643
 msgid "My submissions"
 msgstr "Mes demandes"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:637
+#: src/pyams_content/shared/common/zmi/dashboard.py:646
 msgid "CONTRIBUTOR - 0 submitted content"
 msgstr "CONTRIBUTEUR - Aucun contenu soumis à un responsable"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:638
+#: src/pyams_content/shared/common/zmi/dashboard.py:647
 msgid "CONTRIBUTOR - 1 submitted content"
 msgstr "CONTRIBUTEUR - 1 contenu soumis à un responsable"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:639
+#: src/pyams_content/shared/common/zmi/dashboard.py:648
 #, python-format
 msgid "CONTRIBUTOR - {} submitted contents"
 msgstr "CONTRIBUTEUR - {} contenus soumis à un responsable"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:654
-#: src/pyams_content/shared/common/zmi/dashboard.py:693
+#: src/pyams_content/shared/common/zmi/dashboard.py:663
+#: src/pyams_content/shared/common/zmi/dashboard.py:702
 msgid "My publications"
 msgstr "Mes publications"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:696
+#: src/pyams_content/shared/common/zmi/dashboard.py:705
 msgid "CONTRIBUTOR - 0 published content"
 msgstr "CONTRIBUTEUR - Aucun contenu publié"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:697
+#: src/pyams_content/shared/common/zmi/dashboard.py:706
 msgid "CONTRIBUTOR - 1 published content"
 msgstr "CONTRIBUTEUR - 1 contenu publié"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:698
+#: src/pyams_content/shared/common/zmi/dashboard.py:707
 #, python-format
 msgid "CONTRIBUTOR - {} published contents"
 msgstr "CONTRIBUTEUR - {} contenus publiés"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:713
-#: src/pyams_content/shared/common/zmi/dashboard.py:752
+#: src/pyams_content/shared/common/zmi/dashboard.py:722
+#: src/pyams_content/shared/common/zmi/dashboard.py:761
 msgid "My retired contents"
 msgstr "Mes contenus retirés"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:755
+#: src/pyams_content/shared/common/zmi/dashboard.py:764
 msgid "CONTRIBUTOR - 0 retired content"
 msgstr "CONTRIBUTEUR - Aucun contenu retiré"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:756
+#: src/pyams_content/shared/common/zmi/dashboard.py:765
 msgid "CONTRIBUTOR - 1 retired content"
 msgstr "CONTRIBUTEUR - 1 contenu retiré"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:757
+#: src/pyams_content/shared/common/zmi/dashboard.py:766
 #, python-format
 msgid "CONTRIBUTOR - {} retired contents"
 msgstr "CONTRIBUTEUR - {} contenus retirés"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:772
-#: src/pyams_content/shared/common/zmi/dashboard.py:811
+#: src/pyams_content/shared/common/zmi/dashboard.py:781
+#: src/pyams_content/shared/common/zmi/dashboard.py:820
 msgid "My archived contents"
 msgstr "Mes contenus archivés"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:814
+#: src/pyams_content/shared/common/zmi/dashboard.py:823
 msgid "CONTRIBUTOR - 0 archived content"
 msgstr "CONTRIBUTEUR - Aucun contenu archivé"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:815
+#: src/pyams_content/shared/common/zmi/dashboard.py:824
 msgid "CONTRIBUTOR - 1 archived content"
 msgstr "CONTRIBUTEUR - 1 contenu archivé"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:816
+#: src/pyams_content/shared/common/zmi/dashboard.py:825
 #, python-format
 msgid "CONTRIBUTOR - {} archived contents"
 msgstr "CONTRIBUTEUR - {} contenus archivés"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:831
+#: src/pyams_content/shared/common/zmi/dashboard.py:840
 msgid "All interventions"
 msgstr "Toutes les interventions"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:848
-#: src/pyams_content/shared/common/zmi/dashboard.py:884
+#: src/pyams_content/shared/common/zmi/dashboard.py:857
+#: src/pyams_content/shared/common/zmi/dashboard.py:893
 msgid "Last publications"
 msgstr "Dernières publications"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:887
+#: src/pyams_content/shared/common/zmi/dashboard.py:896
 msgid "CONTRIBUTORS - 0 published content"
 msgstr "CONTRIBUTEURS - Aucun contenu publié"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:888
+#: src/pyams_content/shared/common/zmi/dashboard.py:897
 msgid "CONTRIBUTORS - 1 published content"
 msgstr "CONTRIBUTEURS - 1 contenu publié"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:894
+#: src/pyams_content/shared/common/zmi/dashboard.py:903
 #, python-format
 msgid "CONTRIBUTORS - Last {} published contents"
 msgstr "CONTRIBUTEURS - {} derniers contenus publiés"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:895
+#: src/pyams_content/shared/common/zmi/dashboard.py:904
 #, python-format
 msgid "CONTRIBUTORS - {} published contents"
 msgstr "CONTRIBUTEURS - {} contenus publiés"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:909
-#: src/pyams_content/shared/common/zmi/dashboard.py:943
+#: src/pyams_content/shared/common/zmi/dashboard.py:918
+#: src/pyams_content/shared/common/zmi/dashboard.py:952
 msgid "Last modifications"
 msgstr "Dernières modifications"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:946
+#: src/pyams_content/shared/common/zmi/dashboard.py:955
 msgid "CONTRIBUTORS - 0 modified content"
 msgstr "CONTRIBUTEURS - Aucun contenu modifié"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:947
+#: src/pyams_content/shared/common/zmi/dashboard.py:956
 msgid "CONTRIBUTORS - 1 modified content"
 msgstr "CONTRIBUTEURS - 1 contenu modifié"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:953
+#: src/pyams_content/shared/common/zmi/dashboard.py:962
 #, python-format
 msgid "CONTRIBUTORS - Last {} modified contents"
 msgstr "CONTRIBUTEURS - {} derniers contenus modifiés"
 
-#: src/pyams_content/shared/common/zmi/dashboard.py:954
+#: src/pyams_content/shared/common/zmi/dashboard.py:963
 #, python-format
 msgid "CONTRIBUTORS - {} modified contents"
 msgstr "CONTRIBUTEURS - {} contenus modifiés"
@@ -1358,7 +1365,7 @@ msgstr "Cliquer pour activer ou désactiver ce type de contenu"
 
 #: src/pyams_content/shared/common/zmi/types/container.py:116
 #: src/pyams_content/shared/common/interfaces/types.py:58
-#: src/pyams_content/shared/alert/interfaces.py:51
+#: src/pyams_content/shared/alert/interfaces.py:52
 #: src/pyams_content/shared/alert/zmi/types.py:129
 #: src/pyams_content/feature/redirect/interfaces.py:49
 #: src/pyams_content/feature/filter/interfaces.py:158
@@ -1546,13 +1553,13 @@ msgstr ""
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:179
 #: src/pyams_content/shared/common/interfaces/types.py:94
-#: src/pyams_content/shared/alert/interfaces.py:54
+#: src/pyams_content/shared/alert/interfaces.py:55
 msgid "Dashboards label"
 msgstr "Libellé tableaux de bord"
 
 #: src/pyams_content/shared/common/interfaces/__init__.py:180
 #: src/pyams_content/shared/common/interfaces/types.py:95
-#: src/pyams_content/shared/alert/interfaces.py:55
+#: src/pyams_content/shared/alert/interfaces.py:56
 msgid "Optional label used for dashboards presentation"
 msgstr ""
 "Libellé optionnel utilisé pour l'affichage des contenus de ce gabarit ou de "
@@ -1779,7 +1786,7 @@ msgstr "Mode de rendu utilisé pour les spécificités du contenu"
 
 #: src/pyams_content/shared/common/interfaces/types.py:53
 #: src/pyams_content/shared/site/interfaces.py:247
-#: src/pyams_content/shared/alert/interfaces.py:46
+#: src/pyams_content/shared/alert/interfaces.py:47
 #: src/pyams_content/feature/navigation/interfaces.py:84
 #: src/pyams_content/feature/filter/interfaces.py:153
 #: src/pyams_content/component/verbatim/interfaces.py:56
@@ -1822,7 +1829,7 @@ msgstr ""
 "sera affiché en lieu et place du nom du gabarit"
 
 #: src/pyams_content/shared/common/interfaces/types.py:98
-#: src/pyams_content/shared/alert/interfaces.py:63
+#: src/pyams_content/shared/alert/interfaces.py:64
 msgid "Color"
 msgstr "Couleur"
 
@@ -1831,7 +1838,7 @@ msgid "Color used to illustrate this data type"
 msgstr "Couleur utilisée pour représenter ce type de contenu"
 
 #: src/pyams_content/shared/common/interfaces/types.py:102
-#: src/pyams_content/shared/alert/interfaces.py:58
+#: src/pyams_content/shared/alert/interfaces.py:59
 #: src/pyams_content/feature/navigation/interfaces.py:113
 #: src/pyams_content/component/links/interfaces.py:48
 #: src/pyams_content/component/frame/skin/interfaces.py:60
@@ -2243,37 +2250,37 @@ msgstr "${price} €"
 msgid "More resource info:"
 msgstr "En savoir plus :"
 
-#: src/pyams_content/shared/view/merge.py:76
+#: src/pyams_content/shared/view/merge.py:92
 msgid "Concatenate views items in order"
-msgstr "Concaténer les résultats de chaque vue dans l'ordre sélectionné"
+msgstr "Concaténer les résultats de toutes les vues dans l'ordre sélectionné"
 
-#: src/pyams_content/shared/view/merge.py:99
+#: src/pyams_content/shared/view/merge.py:111
 msgid "Extract items randomly"
-msgstr "Extraire les résultats en ordre aléatoire"
+msgstr "Extraire tous les résultats en ordre aléatoire"
 
-#: src/pyams_content/shared/view/merge.py:124
-msgid "Take items from views one by one, in views order"
+#: src/pyams_content/shared/view/merge.py:132
+msgid "Take items from views one by one in views order"
 msgstr ""
-"Extraire les résultats de chaque vue, une par une, dans l'ordre des vues"
+"Extraire les résultats de chaque vue (une par une) dans l'ordre des vues"
 
-#: src/pyams_content/shared/view/merge.py:148
-msgid "Take items from views one by one, in random order"
-msgstr "Extraire les résultats de chaque vue, une par une, en ordre aléatoire"
+#: src/pyams_content/shared/view/merge.py:152
+msgid "Take items from views one by one in random order"
+msgstr "Extraire les résultats de chaque vue (une par une) en ordre aléatoire"
 
-#: src/pyams_content/shared/view/merge.py:197
+#: src/pyams_content/shared/view/merge.py:194
 msgid "Sort all results by creation date"
 msgstr "Trier tous les résultats sur la date de création"
 
-#: src/pyams_content/shared/view/merge.py:210
+#: src/pyams_content/shared/view/merge.py:207
 msgid "Sort all results by last update date"
 msgstr "Trier tous les résultats sur la date de dernière mise à jour"
 
-#: src/pyams_content/shared/view/merge.py:223
+#: src/pyams_content/shared/view/merge.py:220
 msgid "Sort all results by current publication date"
 msgstr ""
 "Trier tous les résultats sur la date de publication de la version actuelle"
 
-#: src/pyams_content/shared/view/merge.py:236
+#: src/pyams_content/shared/view/merge.py:233
 msgid "Sort all results by first publication date"
 msgstr "Trier tous les résultats sur la date de première publication"
 
@@ -2768,6 +2775,16 @@ msgstr ""
 "Si 'oui', et si ce composant est associé à un moteur de recherche au sein du "
 "même modèle de présentation, ce composant ne sera affiché que sur la "
 "première page de résultats"
+
+#: src/pyams_content/shared/view/portlet/zmi/__init__.py:44
+msgid ""
+"WARNING: il you select multiple views and a renderer using aggregates, "
+"results count and aggregates filters will be those of the first select view "
+"only!"
+msgstr ""
+"ATTENTION : si vous sélectionnez plusieurs vues et un mode de rendu utilisant des facettes, "
+"le nombre de résultats obtenu ainsi que la composition des facettes ne correspondent qu'à "
+"ceux de la première vue sélectionnée !"
 
 #: src/pyams_content/shared/view/portlet/zmi/templates/view-preview.pt:4
 msgid "Views list:"
@@ -3473,7 +3490,7 @@ msgid "An alternate image which can be used by some presentation templates"
 msgstr "Cette image peut être utilisée par certains modèles de présentation"
 
 #: src/pyams_content/shared/logo/interfaces.py:60
-#: src/pyams_content/shared/alert/interfaces.py:97
+#: src/pyams_content/shared/alert/interfaces.py:98
 #: src/pyams_content/feature/navigation/interfaces.py:96
 msgid "Internal reference"
 msgstr "Référence interne"
@@ -3587,45 +3604,45 @@ msgstr "Actualité"
 msgid "News management"
 msgstr "Cette actualité"
 
-#: src/pyams_content/shared/alert/interfaces.py:47
+#: src/pyams_content/shared/alert/interfaces.py:48
 msgid "An hidden alert type can't be assigned to new alerts"
 msgstr ""
 "Un type d'alerte inactif ne peut pas être affecté à de nouvelles alertes"
 
-#: src/pyams_content/shared/alert/interfaces.py:59
+#: src/pyams_content/shared/alert/interfaces.py:60
 msgid "Pictogram associated with this alert type"
 msgstr "Nom du pictogramme associé à ce type d'alerte"
 
-#: src/pyams_content/shared/alert/interfaces.py:64
+#: src/pyams_content/shared/alert/interfaces.py:65
 msgid "Base color associated with this alert type"
 msgstr "Couleur de base associée à ce type d'alerte"
 
-#: src/pyams_content/shared/alert/interfaces.py:79
+#: src/pyams_content/shared/alert/interfaces.py:80
 msgid "Alert"
 msgstr "Alerte"
 
-#: src/pyams_content/shared/alert/interfaces.py:85
+#: src/pyams_content/shared/alert/interfaces.py:86
 #: src/pyams_content/shared/alert/zmi/types.py:222
 msgid "Alert type"
 msgstr "Type d'alerte"
 
-#: src/pyams_content/shared/alert/interfaces.py:86
+#: src/pyams_content/shared/alert/interfaces.py:87
 msgid "Alert type can affect renderer alert style"
 msgstr ""
 "Le type d'alerte peut éventuellement, en fonction du thème graphique, "
 "affecter le rendu de l'alerte"
 
-#: src/pyams_content/shared/alert/interfaces.py:93
+#: src/pyams_content/shared/alert/interfaces.py:94
 msgid "Message content"
 msgstr "Contenu du message"
 
-#: src/pyams_content/shared/alert/interfaces.py:94
+#: src/pyams_content/shared/alert/interfaces.py:95
 msgid "Message body"
 msgstr ""
 "Le contenu du message n'est en général affiché que dans le corps de page, et "
 "non lorsque les alertes sont affichées en bas de page"
 
-#: src/pyams_content/shared/alert/interfaces.py:98
+#: src/pyams_content/shared/alert/interfaces.py:99
 msgid ""
 "Internal link target reference. You can search a reference using '+' "
 "followed by internal number, or by entering text matching content title"
@@ -3634,35 +3651,35 @@ msgstr ""
 "rechercher une référence en indiquant un '+' suivi du numéro interne de ce "
 "moteur de recherche, ou en entrant tout ou partie de son titre"
 
-#: src/pyams_content/shared/alert/interfaces.py:104
+#: src/pyams_content/shared/alert/interfaces.py:105
 msgid "External URL"
 msgstr "URL externe"
 
-#: src/pyams_content/shared/alert/interfaces.py:105
+#: src/pyams_content/shared/alert/interfaces.py:106
 msgid "Alternate external URL"
 msgstr "Adresse d'une page externe à consulter"
 
-#: src/pyams_content/shared/alert/interfaces.py:111
+#: src/pyams_content/shared/alert/interfaces.py:112
 msgid "You can't set internal reference and external URI simultaneously!"
 msgstr ""
 "Vous ne pouvez pas indiquer une référence interne et une URI externe "
 "simultanément !"
 
-#: src/pyams_content/shared/alert/interfaces.py:113
+#: src/pyams_content/shared/alert/interfaces.py:114
 msgid "Concerned contents"
 msgstr "Contenus concernés"
 
-#: src/pyams_content/shared/alert/interfaces.py:114
+#: src/pyams_content/shared/alert/interfaces.py:115
 msgid "If any, these contents will automatically display this alert"
 msgstr ""
 "Si vous sélectionnez des contenus ici, cette alerte leur sera directement "
 "associée et elle pourra être affichée dans leur en-tête de page"
 
-#: src/pyams_content/shared/alert/interfaces.py:118
+#: src/pyams_content/shared/alert/interfaces.py:119
 msgid "Maximum interval"
 msgstr "Intervale d'affichage"
 
-#: src/pyams_content/shared/alert/interfaces.py:119
+#: src/pyams_content/shared/alert/interfaces.py:120
 msgid ""
 "Maximum interval between alert displays on a given device, given in hours; "
 "set to 0 to always display the alert"
@@ -3671,11 +3688,11 @@ msgstr ""
 "exprimé en heures ; indiquer une valeur de 0 pour que l'alerte soit toujours "
 "affichée"
 
-#: src/pyams_content/shared/alert/zmi/__init__.py:55
+#: src/pyams_content/shared/alert/zmi/__init__.py:56
 msgid "Alert management"
 msgstr "Cette alerte"
 
-#: src/pyams_content/shared/alert/zmi/__init__.py:82
+#: src/pyams_content/shared/alert/zmi/__init__.py:83
 msgid "Alert settings"
 msgstr "Paramètres de l'alerte"
 
@@ -4321,7 +4338,7 @@ msgstr "Sélection des images"
 msgid "Glossary updater task"
 msgstr "Mise à jour du glossaire"
 
-#: src/pyams_content/feature/glossary/zmi/__init__.py:48
+#: src/pyams_content/feature/glossary/zmi/__init__.py:49
 msgid ""
 "To use glossary features, you must define a glossary updater task into tasks "
 "scheduler utility!"
@@ -4329,7 +4346,7 @@ msgstr ""
 "Pour utiliser les fonctionnalités du glossaire, vous devez créer une tâche "
 "de mise à jour du glossaire au sein de l'outil de planification de tâches !"
 
-#: src/pyams_content/feature/glossary/zmi/__init__.py:59
+#: src/pyams_content/feature/glossary/zmi/__init__.py:60
 msgid "Add glossary updater task..."
 msgstr "Mise à jour du glossaire"
 
@@ -4558,12 +4575,6 @@ msgstr "Filtrage par thème"
 #: src/pyams_content/feature/filter/zmi/__init__.py:441
 msgid "Collection filter"
 msgstr "Filtrage par collection"
-
-#: src/pyams_content/feature/filter/zmi/portlet.py:49
-msgid "Multiple views are not supported with aggregated portlets renderers!"
-msgstr ""
-"Les modes de rendus comportant des filtres ne peuvent pas prendre en charge "
-"plusieurs vues !"
 
 #: src/pyams_content/feature/filter/skin/processor.py:66
 msgid "-- No selected option --"
@@ -5256,169 +5267,179 @@ msgstr "publié"
 msgid "archived"
 msgstr "archivé"
 
-#: src/pyams_content/workflow/basic.py:251
-#: src/pyams_content/workflow/__init__.py:355
+#: src/pyams_content/workflow/basic.py:258
+#: src/pyams_content/workflow/__init__.py:362
 #, python-format
 msgid "Published version {0}"
 msgstr "Publication de la version {0}"
 
-#: src/pyams_content/workflow/basic.py:305
-#: src/pyams_content/workflow/__init__.py:414
+#: src/pyams_content/workflow/basic.py:312
+#: src/pyams_content/workflow/__init__.py:421
 msgid "Initialize"
 msgstr "Création"
 
-#: src/pyams_content/workflow/basic.py:308
-#: src/pyams_content/workflow/__init__.py:417
+#: src/pyams_content/workflow/basic.py:315
+#: src/pyams_content/workflow/__init__.py:424
 msgid "Draft creation"
 msgstr "Création du brouillon"
 
-#: src/pyams_content/workflow/basic.py:311
-#: src/pyams_content/workflow/__init__.py:438
-#: src/pyams_content/workflow/__init__.py:551
+#: src/pyams_content/workflow/basic.py:318
+#: src/pyams_content/workflow/__init__.py:445
+#: src/pyams_content/workflow/__init__.py:558
 msgid "Pre-publish content"
 msgstr "Pré-publier le contenu"
 
-#: src/pyams_content/workflow/basic.py:316
-#: src/pyams_content/workflow/__init__.py:443
-#: src/pyams_content/workflow/__init__.py:556
-#: src/pyams_content/workflow/__init__.py:687
+#: src/pyams_content/workflow/basic.py:323
+#: src/pyams_content/workflow/__init__.py:450
+#: src/pyams_content/workflow/__init__.py:563
+#: src/pyams_content/workflow/__init__.py:694
 msgid "Content pre-published"
 msgstr "Contenu pré-publié"
 
-#: src/pyams_content/workflow/basic.py:318
-#: src/pyams_content/workflow/basic.py:333
-#: src/pyams_content/workflow/basic.py:358
-#: src/pyams_content/workflow/__init__.py:445
-#: src/pyams_content/workflow/__init__.py:462
-#: src/pyams_content/workflow/__init__.py:558
-#: src/pyams_content/workflow/__init__.py:582
-#: src/pyams_content/workflow/__init__.py:600
-#: src/pyams_content/workflow/__init__.py:689
-#: src/pyams_content/workflow/__init__.py:706
+#: src/pyams_content/workflow/basic.py:325
+#: src/pyams_content/workflow/basic.py:340
+#: src/pyams_content/workflow/basic.py:365
+#: src/pyams_content/workflow/__init__.py:452
+#: src/pyams_content/workflow/__init__.py:469
+#: src/pyams_content/workflow/__init__.py:565
+#: src/pyams_content/workflow/__init__.py:589
+#: src/pyams_content/workflow/__init__.py:607
+#: src/pyams_content/workflow/__init__.py:696
+#: src/pyams_content/workflow/__init__.py:713
 msgid "Content publication"
 msgstr "Publication de contenu"
 
-#: src/pyams_content/workflow/basic.py:319
-#: src/pyams_content/workflow/__init__.py:446
-#: src/pyams_content/workflow/__init__.py:559
-#: src/pyams_content/workflow/__init__.py:690
+#: src/pyams_content/workflow/basic.py:326
+#: src/pyams_content/workflow/__init__.py:453
+#: src/pyams_content/workflow/__init__.py:566
+#: src/pyams_content/workflow/__init__.py:697
 #, python-format
 msgid "{principal} pre-published the content « {title} »"
 msgstr "{principal} a pré-publié le contenu « {title} »"
 
-#: src/pyams_content/workflow/basic.py:323
-#: src/pyams_content/workflow/__init__.py:571
+#: src/pyams_content/workflow/basic.py:330
+#: src/pyams_content/workflow/__init__.py:578
 msgid "Cancel publication"
 msgstr "Annuler la publication"
 
-#: src/pyams_content/workflow/basic.py:331
-#: src/pyams_content/workflow/__init__.py:579
+#: src/pyams_content/workflow/basic.py:338
+#: src/pyams_content/workflow/__init__.py:586
 msgid "Publication canceled"
 msgstr "Publication annulée"
 
-#: src/pyams_content/workflow/basic.py:334
-#: src/pyams_content/workflow/__init__.py:583
+#: src/pyams_content/workflow/basic.py:341
+#: src/pyams_content/workflow/__init__.py:590
 #, python-format
 msgid "{principal} cancelled the publication for content « {title} »"
 msgstr "{principal} a annulé la publication du contenu « {title} »"
 
-#: src/pyams_content/workflow/basic.py:339
-#: src/pyams_content/workflow/basic.py:347
-#: src/pyams_content/workflow/__init__.py:450
-#: src/pyams_content/workflow/__init__.py:563
-#: src/pyams_content/workflow/__init__.py:588
+#: src/pyams_content/workflow/basic.py:346
+#: src/pyams_content/workflow/basic.py:354
+#: src/pyams_content/workflow/__init__.py:457
+#: src/pyams_content/workflow/__init__.py:570
+#: src/pyams_content/workflow/__init__.py:595
 msgid "Publish content"
 msgstr "Publier le contenu"
 
-#: src/pyams_content/workflow/basic.py:344
-#: src/pyams_content/workflow/basic.py:356
-#: src/pyams_content/workflow/__init__.py:460
-#: src/pyams_content/workflow/__init__.py:568
-#: src/pyams_content/workflow/__init__.py:598
-#: src/pyams_content/workflow/__init__.py:704
+#: src/pyams_content/workflow/basic.py:351
+#: src/pyams_content/workflow/basic.py:363
+#: src/pyams_content/workflow/__init__.py:467
+#: src/pyams_content/workflow/__init__.py:575
+#: src/pyams_content/workflow/__init__.py:605
+#: src/pyams_content/workflow/__init__.py:711
 msgid "Content published"
 msgstr "Publication"
 
-#: src/pyams_content/workflow/basic.py:359
-#: src/pyams_content/workflow/__init__.py:463
-#: src/pyams_content/workflow/__init__.py:601
-#: src/pyams_content/workflow/__init__.py:707
+#: src/pyams_content/workflow/basic.py:366
+#: src/pyams_content/workflow/__init__.py:470
+#: src/pyams_content/workflow/__init__.py:608
+#: src/pyams_content/workflow/__init__.py:714
 #, python-format
 msgid "{principal} published the content « {title} »"
 msgstr "{principal} a publié le contenu « {title} »"
 
-#: src/pyams_content/workflow/basic.py:364
-#: src/pyams_content/workflow/__init__.py:730
-#: src/pyams_content/workflow/__init__.py:763
+#: src/pyams_content/workflow/basic.py:371
+#: src/pyams_content/workflow/__init__.py:737
+#: src/pyams_content/workflow/__init__.py:770
 msgid "Archive content"
 msgstr "Archiver le contenu"
 
-#: src/pyams_content/workflow/basic.py:373
-#: src/pyams_content/workflow/__init__.py:739
-#: src/pyams_content/workflow/__init__.py:772
+#: src/pyams_content/workflow/basic.py:380
+#: src/pyams_content/workflow/__init__.py:746
+#: src/pyams_content/workflow/__init__.py:779
 msgid "Content archived"
 msgstr "Archivage"
 
-#: src/pyams_content/workflow/basic.py:375
-#: src/pyams_content/workflow/__init__.py:743
-#: src/pyams_content/workflow/__init__.py:776
+#: src/pyams_content/workflow/basic.py:382
+#: src/pyams_content/workflow/__init__.py:750
+#: src/pyams_content/workflow/__init__.py:783
 #, python-format
 msgid "{principal} archived content « {title} »"
 msgstr "{principal} a archivé le contenu « {title} »"
 
-#: src/pyams_content/workflow/basic.py:379
+#: src/pyams_content/workflow/basic.py:386
+#: src/pyams_content/workflow/__init__.py:631
+#: src/pyams_content/workflow/__init__.py:648
+msgid "Retired content"
+msgstr "Retirer le contenu"
+
 #: src/pyams_content/workflow/basic.py:391
-#: src/pyams_content/workflow/__init__.py:796
-#: src/pyams_content/workflow/__init__.py:809
-#: src/pyams_content/workflow/__init__.py:822
-#: src/pyams_content/workflow/__init__.py:835
-#: src/pyams_content/workflow/__init__.py:848
+msgid "Content archived after passed expiration date"
+msgstr "Retrait automatique après la date de fin de publication"
+
+#: src/pyams_content/workflow/basic.py:394
+#: src/pyams_content/workflow/basic.py:406
+#: src/pyams_content/workflow/__init__.py:803
+#: src/pyams_content/workflow/__init__.py:816
+#: src/pyams_content/workflow/__init__.py:829
+#: src/pyams_content/workflow/__init__.py:842
+#: src/pyams_content/workflow/__init__.py:855
 msgid "Create new version"
 msgstr "Créer une nouvelle version"
 
-#: src/pyams_content/workflow/basic.py:387
-#: src/pyams_content/workflow/basic.py:399
-#: src/pyams_content/workflow/__init__.py:805
-#: src/pyams_content/workflow/__init__.py:818
-#: src/pyams_content/workflow/__init__.py:831
-#: src/pyams_content/workflow/__init__.py:844
-#: src/pyams_content/workflow/__init__.py:857
+#: src/pyams_content/workflow/basic.py:402
+#: src/pyams_content/workflow/basic.py:414
+#: src/pyams_content/workflow/__init__.py:812
+#: src/pyams_content/workflow/__init__.py:825
+#: src/pyams_content/workflow/__init__.py:838
+#: src/pyams_content/workflow/__init__.py:851
+#: src/pyams_content/workflow/__init__.py:864
 msgid "New version created"
 msgstr "Création d'une nouvelle version"
 
-#: src/pyams_content/workflow/basic.py:403
-#: src/pyams_content/workflow/__init__.py:861
+#: src/pyams_content/workflow/basic.py:418
+#: src/pyams_content/workflow/__init__.py:868
 msgid "Delete version"
 msgstr "Supprimer cette version"
 
-#: src/pyams_content/workflow/basic.py:411
-#: src/pyams_content/workflow/__init__.py:870
+#: src/pyams_content/workflow/basic.py:426
+#: src/pyams_content/workflow/__init__.py:877
 msgid "Version deleted"
 msgstr "Version supprimée"
 
-#: src/pyams_content/workflow/basic.py:429
+#: src/pyams_content/workflow/basic.py:444
 msgid "PyAMS basic workflow"
 msgstr "Workflow basique"
 
-#: src/pyams_content/workflow/basic.py:452
-#: src/pyams_content/workflow/basic.py:477
-#: src/pyams_content/workflow/__init__.py:938
-#: src/pyams_content/workflow/__init__.py:963
+#: src/pyams_content/workflow/basic.py:467
+#: src/pyams_content/workflow/basic.py:492
+#: src/pyams_content/workflow/__init__.py:945
+#: src/pyams_content/workflow/__init__.py:970
 msgid "Unknown state"
 msgstr "(statut inconnu)"
 
-#: src/pyams_content/workflow/basic.py:475
-#: src/pyams_content/workflow/__init__.py:961
+#: src/pyams_content/workflow/basic.py:490
+#: src/pyams_content/workflow/__init__.py:968
 msgid "new version created"
 msgstr "nouvelle version en préparation"
 
-#: src/pyams_content/workflow/basic.py:481
-#: src/pyams_content/workflow/__init__.py:967
+#: src/pyams_content/workflow/basic.py:496
+#: src/pyams_content/workflow/__init__.py:974
 msgid "publication request cancelled"
 msgstr "demande de publication annulée"
 
-#: src/pyams_content/workflow/basic.py:483
-#: src/pyams_content/workflow/__init__.py:969
+#: src/pyams_content/workflow/basic.py:498
+#: src/pyams_content/workflow/__init__.py:976
 msgid "publication refused"
 msgstr "publication refusée"
 
@@ -5466,24 +5487,24 @@ msgstr "retiré"
 msgid "archiving requested"
 msgstr "archivage demandé"
 
-#: src/pyams_content/workflow/__init__.py:420
-#: src/pyams_content/workflow/__init__.py:468
+#: src/pyams_content/workflow/__init__.py:427
+#: src/pyams_content/workflow/__init__.py:475
 msgid "Propose publication"
 msgstr "Demander la publication"
 
-#: src/pyams_content/workflow/__init__.py:427
-#: src/pyams_content/workflow/__init__.py:432
-#: src/pyams_content/workflow/__init__.py:475
-#: src/pyams_content/workflow/__init__.py:480
-#: src/pyams_content/workflow/__init__.py:497
-#: src/pyams_content/workflow/__init__.py:529
+#: src/pyams_content/workflow/__init__.py:434
+#: src/pyams_content/workflow/__init__.py:439
+#: src/pyams_content/workflow/__init__.py:482
+#: src/pyams_content/workflow/__init__.py:487
+#: src/pyams_content/workflow/__init__.py:504
+#: src/pyams_content/workflow/__init__.py:536
 msgid "Publication request"
 msgstr "Demande de publication"
 
-#: src/pyams_content/workflow/__init__.py:428
-#: src/pyams_content/workflow/__init__.py:476
-#: src/pyams_content/workflow/__init__.py:613
-#: src/pyams_content/workflow/__init__.py:719
+#: src/pyams_content/workflow/__init__.py:435
+#: src/pyams_content/workflow/__init__.py:483
+#: src/pyams_content/workflow/__init__.py:620
+#: src/pyams_content/workflow/__init__.py:726
 msgid ""
 "content managers authorized to take charge of your content are going to be "
 "notified of your request."
@@ -5491,180 +5512,175 @@ msgstr ""
 "les responsables habilités à prendre en charge votre demande vont être "
 "sollicités."
 
-#: src/pyams_content/workflow/__init__.py:433
-#: src/pyams_content/workflow/__init__.py:481
+#: src/pyams_content/workflow/__init__.py:440
+#: src/pyams_content/workflow/__init__.py:488
 #, python-format
 msgid "{principal} submitted a publication request for content « {title} »"
 msgstr "{principal} a demandé la publication du contenu « {title} »"
 
-#: src/pyams_content/workflow/__init__.py:486
+#: src/pyams_content/workflow/__init__.py:493
 msgid "Cancel publication request"
 msgstr "Annuler la demande de publication"
 
-#: src/pyams_content/workflow/__init__.py:494
+#: src/pyams_content/workflow/__init__.py:501
 msgid "Publication request canceled"
 msgstr "Annulation de la demande de publication"
 
-#: src/pyams_content/workflow/__init__.py:498
+#: src/pyams_content/workflow/__init__.py:505
 #, python-format
 msgid "{principal} cancelled the publication request for content « {title} »"
 msgstr ""
 "{principal} a annulé la demande de publication pour le contenu « {title} »"
 
-#: src/pyams_content/workflow/__init__.py:503
+#: src/pyams_content/workflow/__init__.py:510
 msgid "Reset canceled publication to draft"
 msgstr "Retour automatique en statut 'brouillon'"
 
-#: src/pyams_content/workflow/__init__.py:507
-#: src/pyams_content/workflow/__init__.py:539
+#: src/pyams_content/workflow/__init__.py:514
+#: src/pyams_content/workflow/__init__.py:546
 msgid "State reset to 'draft' (automatic)"
 msgstr "Retour automatique en statut 'brouillon'"
 
-#: src/pyams_content/workflow/__init__.py:511
+#: src/pyams_content/workflow/__init__.py:518
 msgid "Reset canceled publication to retired"
 msgstr "Retour automatique en statut 'retiré'"
 
-#: src/pyams_content/workflow/__init__.py:515
+#: src/pyams_content/workflow/__init__.py:522
 msgid "State reset to 'retired' (automatic)"
 msgstr "Retour automatique en statut 'retiré'"
 
-#: src/pyams_content/workflow/__init__.py:519
+#: src/pyams_content/workflow/__init__.py:526
 msgid "Refuse publication"
 msgstr "Refuser la publication"
 
-#: src/pyams_content/workflow/__init__.py:527
+#: src/pyams_content/workflow/__init__.py:534
 msgid "Publication refused"
 msgstr "Refus de publication"
 
-#: src/pyams_content/workflow/__init__.py:530
+#: src/pyams_content/workflow/__init__.py:537
 #, python-format
 msgid "{principal} refused the publication request for content « {title} »"
 msgstr "{principal} a refusé la publication du contenu « {title} »"
 
-#: src/pyams_content/workflow/__init__.py:535
+#: src/pyams_content/workflow/__init__.py:542
 msgid "Reset refused publication to draft"
 msgstr "Publication refusée"
 
-#: src/pyams_content/workflow/__init__.py:543
+#: src/pyams_content/workflow/__init__.py:550
 msgid "Reset refused publication to retired"
 msgstr "Publication refusée"
 
-#: src/pyams_content/workflow/__init__.py:547
+#: src/pyams_content/workflow/__init__.py:554
 msgid "State reset to 'refused' (automatic)"
 msgstr "Retour automatique en statut 'refusé'"
 
-#: src/pyams_content/workflow/__init__.py:606
+#: src/pyams_content/workflow/__init__.py:613
 msgid "Request retiring"
 msgstr "Demander le retrait"
 
-#: src/pyams_content/workflow/__init__.py:612
+#: src/pyams_content/workflow/__init__.py:619
 msgid "Retire request"
 msgstr "Demande de retrait"
 
-#: src/pyams_content/workflow/__init__.py:618
-#: src/pyams_content/workflow/__init__.py:636
-#: src/pyams_content/workflow/__init__.py:659
-#: src/pyams_content/workflow/__init__.py:677
+#: src/pyams_content/workflow/__init__.py:625
+#: src/pyams_content/workflow/__init__.py:643
+#: src/pyams_content/workflow/__init__.py:666
+#: src/pyams_content/workflow/__init__.py:684
 msgid "Content removal"
 msgstr "Retrait de contenu"
 
-#: src/pyams_content/workflow/__init__.py:619
+#: src/pyams_content/workflow/__init__.py:626
 #, python-format
 msgid "{principal} submitted a retire request for content « {title} »"
 msgstr "{principal} a demandé le retrait du contenu « {title} »"
 
-#: src/pyams_content/workflow/__init__.py:624
-#: src/pyams_content/workflow/__init__.py:641
-msgid "Retired content"
-msgstr "Retirer le contenu"
-
-#: src/pyams_content/workflow/__init__.py:633
-#: src/pyams_content/workflow/__init__.py:674
+#: src/pyams_content/workflow/__init__.py:640
+#: src/pyams_content/workflow/__init__.py:681
 msgid "Content retired"
 msgstr "Retrait"
 
-#: src/pyams_content/workflow/__init__.py:637
-#: src/pyams_content/workflow/__init__.py:678
+#: src/pyams_content/workflow/__init__.py:644
+#: src/pyams_content/workflow/__init__.py:685
 #, python-format
 msgid "{principal} retired content « {title} »"
 msgstr "{principal} a retiré le contenu « {title} »"
 
-#: src/pyams_content/workflow/__init__.py:646
+#: src/pyams_content/workflow/__init__.py:653
 msgid "Content retired after passed expiration date"
 msgstr "Retrait automatique après la date de fin de publication"
 
-#: src/pyams_content/workflow/__init__.py:649
+#: src/pyams_content/workflow/__init__.py:656
 msgid "Cancel retiring request"
 msgstr "Annuler la demande de retrait"
 
-#: src/pyams_content/workflow/__init__.py:656
+#: src/pyams_content/workflow/__init__.py:663
 msgid "Retire request canceled"
 msgstr "Annulation de la demande de retrait"
 
-#: src/pyams_content/workflow/__init__.py:660
+#: src/pyams_content/workflow/__init__.py:667
 #, python-format
 msgid "{principal} cancelled the retiring request for content « {title} »"
 msgstr "{principal} a annulé la demande de retrait du contenu « {title} »"
 
-#: src/pyams_content/workflow/__init__.py:665
+#: src/pyams_content/workflow/__init__.py:672
 msgid "Retire content"
 msgstr "Retirer le contenu"
 
-#: src/pyams_content/workflow/__init__.py:682
+#: src/pyams_content/workflow/__init__.py:689
 msgid "Pre-publish retired content"
 msgstr "Pré-publier le contenu retiré"
 
-#: src/pyams_content/workflow/__init__.py:694
+#: src/pyams_content/workflow/__init__.py:701
 msgid "Publish retired content"
 msgstr "Re-publier le contenu"
 
-#: src/pyams_content/workflow/__init__.py:712
+#: src/pyams_content/workflow/__init__.py:719
 msgid "Request archive"
 msgstr "Demander l'archivage"
 
-#: src/pyams_content/workflow/__init__.py:718
+#: src/pyams_content/workflow/__init__.py:725
 msgid "Archive request"
 msgstr "Demande d'archivage"
 
-#: src/pyams_content/workflow/__init__.py:724
-#: src/pyams_content/workflow/__init__.py:742
-#: src/pyams_content/workflow/__init__.py:757
-#: src/pyams_content/workflow/__init__.py:775
+#: src/pyams_content/workflow/__init__.py:731
+#: src/pyams_content/workflow/__init__.py:749
+#: src/pyams_content/workflow/__init__.py:764
+#: src/pyams_content/workflow/__init__.py:782
 msgid "Content archiving"
 msgstr "Archivage de contenu"
 
-#: src/pyams_content/workflow/__init__.py:725
+#: src/pyams_content/workflow/__init__.py:732
 #, python-format
 msgid "{principal} submitted an archive request for content « {title} »"
 msgstr "{principal} a demandé l'archivage du contenu « {title} »"
 
-#: src/pyams_content/workflow/__init__.py:747
+#: src/pyams_content/workflow/__init__.py:754
 msgid "Cancel archiving request"
 msgstr "Annuler la demande d'archivage"
 
-#: src/pyams_content/workflow/__init__.py:754
+#: src/pyams_content/workflow/__init__.py:761
 msgid "Archive request canceled"
 msgstr "Annulation de la demande d'archivage"
 
-#: src/pyams_content/workflow/__init__.py:758
+#: src/pyams_content/workflow/__init__.py:765
 #, python-format
 msgid "{principal} cancelled the archive request for content « {title} »"
 msgstr "{principal} a annulé la demande d'archivage du contenu « {title} »"
 
-#: src/pyams_content/workflow/__init__.py:780
+#: src/pyams_content/workflow/__init__.py:787
 msgid "Archive published content"
 msgstr "Archivage automatique d'un contenu publié"
 
-#: src/pyams_content/workflow/__init__.py:784
-#: src/pyams_content/workflow/__init__.py:792
+#: src/pyams_content/workflow/__init__.py:791
+#: src/pyams_content/workflow/__init__.py:799
 msgid "Content archived after version publication"
 msgstr "Archivage automatique après publication"
 
-#: src/pyams_content/workflow/__init__.py:788
+#: src/pyams_content/workflow/__init__.py:795
 msgid "Archive retiring content"
 msgstr "Archivage automatique d'un contenu en attente de retrait"
 
-#: src/pyams_content/workflow/__init__.py:915
+#: src/pyams_content/workflow/__init__.py:922
 msgid "PyAMS content workflow"
 msgstr "Workflow standard"
 
@@ -7953,6 +7969,11 @@ msgstr "(Dé)sélectionner le pictogramme"
 #: src/pyams_content/reference/pictogram/zmi/templates/pictogram-header.pt:8
 msgid "Default header: ${header}"
 msgstr "En-tête par défaut : ${header}"
+
+#~ msgid "Multiple views are not supported with aggregated portlets renderers!"
+#~ msgstr ""
+#~ "Les modes de rendus comportant des filtres ne peuvent pas prendre en "
+#~ "charge plusieurs vues !"
 
 #~ msgid "Vertical cards list (default)"
 #~ msgstr "Liste de cartes verticale"

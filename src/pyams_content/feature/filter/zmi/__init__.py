@@ -17,9 +17,9 @@
 from pyramid.view import view_config
 from zope.interface import Interface, alsoProvides
 
-from pyams_content.component.thesaurus import ICollectionsManager, ITagsManager, IThemesManager
-from pyams_content.feature.filter import ICollectionsFilter, IFilter, ITagsFilter, IThemesFilter, ITitleFilter
-from pyams_content.feature.filter.interfaces import IContentTypesFilter, IFiltersContainer, IThesaurusFilter
+from pyams_content.component.thesaurus.interfaces import ICollectionsManager, ITagsManager, IThemesManager
+from pyams_content.feature.filter.interfaces import ICollectionsFilter, IContentTypesFilter, IFilter, IFiltersContainer, \
+    ITagsFilter, IThemesFilter, IThesaurusFilter, ITitleFilter
 from pyams_content.zmi import content_js
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields

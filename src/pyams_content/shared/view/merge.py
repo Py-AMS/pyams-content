@@ -36,6 +36,18 @@ __docformat__ = 'restructuredtext'
 from pyams_content import _
 
 
+def consume_count_and_aggregations(*results):
+    """Consume count and aggregations from results"""
+    outputs = []
+    for idx, result in enumerate(results):
+        (count, aggregations, items) = result
+        if idx == 0:
+            yield count
+            yield aggregations
+        outputs.append(items)
+    yield from outputs
+    
+    
 @vocabulary_config(name=VIEWS_MERGERS_VOCABULARY)
 class ViewsMergersVocabulary(UtilityVocabulary):
     """Views mergers vocabulary"""
@@ -58,19 +70,18 @@ class SingleViewMergeMode:
     """Single view merger"""
 
     @classmethod
-    def get_results(cls, view, context, ignore_cache=False, request=None,
+    def get_results(cls, views, context, ignore_cache=False, request=None,
                     aggregates=None, settings=None, get_count=False, **kwargs):
-        count, aggregations, results = view.get_results(context,
-                                                        ignore_cache=ignore_cache,
-                                                        request=request,
-                                                        aggregates=aggregates,
-                                                        settings=settings,
-                                                        get_count=True,
-                                                        **kwargs)
-        if get_count:
-            yield count
-            yield aggregations
-        yield from results
+        return (
+            view.get_results(context,
+                             ignore_cache=ignore_cache,
+                             request=request,
+                             aggregates=aggregates,
+                             settings=settings,
+                             get_count=get_count,
+                             **kwargs)
+            for view in views
+        )
 
 
 @utility_config(name=MergeModes.CONCAT.value,
@@ -83,28 +94,13 @@ class ViewsConcatenateMergeMode(SingleViewMergeMode):
     @classmethod
     def get_results(cls, views, context, ignore_cache=False, request=None,
                     aggregates=None, settings=None, get_count=False, **kwargs):
-        views = list(views) or ()
-        if len(views) == 1:
-            yield from super().get_results(views[0],
-                                           context,
-                                           ignore_cache=ignore_cache,
-                                           request=request,
-                                           aggregates=aggregates,
-                                           settings=settings,
-                                           get_count=get_count,
-                                           **kwargs)
-        else:
-            results = (
-                view.get_results(context,
-                                 ignore_cache=ignore_cache,
-                                 request=request,
-                                 aggregates=aggregates,
-                                 settings=settings,
-                                 get_count=False,
-                                 **kwargs)
-                for view in views
-            )
-            yield from chain(*results)
+        results = super().get_results(views, context, ignore_cache, request,
+                                      aggregates, settings, get_count, **kwargs)
+        if get_count:
+            results = consume_count_and_aggregations(*results)
+            yield next(results)  # count
+            yield next(results)  # aggregations
+        yield from chain(*results)
 
 
 @utility_config(name=MergeModes.RANDOM.value,
@@ -117,30 +113,15 @@ class ViewsRandomMergeMode(SingleViewMergeMode):
     @classmethod
     def get_results(cls, views, context, ignore_cache=False, request=None,
                     aggregates=None, settings=None, get_count=False, **kwargs):
-        views = list(views) or ()
-        if len(views) == 1:
-            yield from super().get_results(views[0],
-                                           context,
-                                           ignore_cache=ignore_cache,
-                                           request=request,
-                                           aggregates=aggregates,
-                                           settings=settings,
-                                           get_count=get_count,
-                                           **kwargs)
-        else:
-            results = (
-                view.get_results(context,
-                                 ignore_cache=ignore_cache,
-                                 request=request,
-                                 aggregates=aggregates,
-                                 settings=settings,
-                                 get_count=False,
-                                 **kwargs)
-                for view in views
-            )
-            results = list(chain(*results))
-            shuffle(results)
-            yield from iter(results)
+        results = super().get_results(views, context, ignore_cache, request,
+                                      aggregates, settings, get_count, **kwargs)
+        if get_count:
+            results = consume_count_and_aggregations(*results)
+            yield next(results)  # count
+            yield next(results)  # aggregations
+        results = list(chain(*results))
+        shuffle(results)
+        yield from iter(results)
 
 
 @utility_config(name=MergeModes.ZIP.value,
@@ -148,34 +129,19 @@ class ViewsRandomMergeMode(SingleViewMergeMode):
 class ViewsZipMergeMode(SingleViewMergeMode):
     """Views zip merge mode"""
 
-    label = _("Take items from views one by one, in views order")
+    label = _("Take items from views one by one in views order")
 
     @classmethod
     def get_results(cls, views, context, ignore_cache=False, request=None,
                     aggregates=None, settings=None, get_count=False, **kwargs):
-        views = list(views) or ()
-        if len(views) == 1:
-            yield from super().get_results(views[0],
-                                           context,
-                                           ignore_cache=ignore_cache,
-                                           request=request,
-                                           aggregates=aggregates,
-                                           settings=settings,
-                                           get_count=get_count,
-                                           **kwargs)
-        else:
-            results = (
-                view.get_results(context,
-                                 ignore_cache=ignore_cache,
-                                 request=request,
-                                 aggregates=aggregates,
-                                 settings=settings,
-                                 get_count=False,
-                                 **kwargs)
-                for view in views
-            )
-            for array in zip_longest(*results):
-                yield from filter(lambda x: x is not None, array)
+        results = super().get_results(views, context, ignore_cache, request,
+                                      aggregates, settings, get_count, **kwargs)
+        if get_count:
+            results = consume_count_and_aggregations(*results)
+            yield next(results)  # count
+            yield next(results)  # aggregations
+        for array in zip_longest(*results):
+            yield from filter(lambda x: x is not None, array)
 
 
 @utility_config(name=MergeModes.RANDOM_ZIP.value,
@@ -183,35 +149,21 @@ class ViewsZipMergeMode(SingleViewMergeMode):
 class ViewsRandomZipMergeMode(SingleViewMergeMode):
     """Views random zip merge mode"""
 
-    label = _("Take items from views one by one, in random order")
+    label = _("Take items from views one by one in random order")
 
     @classmethod
     def get_results(cls, views, context, ignore_cache=False, request=None,
                     aggregates=None, settings=None, get_count=False, **kwargs):
-        views = list(views) or ()
-        if len(views) == 1:
-            yield from super().get_results(views[0],
-                                           context,
-                                           ignore_cache=ignore_cache,
-                                           request=request,
-                                           aggregates=aggregates,
-                                           settings=settings,
-                                           get_count=get_count,
-                                           **kwargs)
-        else:
-            results = [
-                view.get_results(context,
-                                 ignore_cache=ignore_cache,
-                                 request=request,
-                                 aggregates=aggregates,
-                                 settings=settings,
-                                 get_count=False,
-                                 **kwargs)
-                for view in views
-            ]
-            shuffle(results)
-            for array in zip_longest(*results):
-                yield from filter(lambda x: x is not None, array)
+        results = super().get_results(views, context, ignore_cache, request,
+                                      aggregates, settings, get_count, **kwargs)
+        if get_count:
+            results = consume_count_and_aggregations(*results)
+            yield next(results)  # count
+            yield next(results)  # aggregations
+        results = list(results)
+        shuffle(results)
+        for array in zip_longest(*results):
+            yield from filter(lambda x: x is not None, array)
 
 
 class SortedMergeMode(SingleViewMergeMode):
@@ -224,27 +176,14 @@ class SortedMergeMode(SingleViewMergeMode):
     @classmethod
     def get_results(cls, views, context, ignore_cache=False, request=None,
                     aggregates=None, settings=None, get_count=False, **kwargs):
-        views = list(views) or ()
-        if len(views) == 1:
-            yield from super().get_results(views[0], context,
-                                           ignore_cache=ignore_cache,
-                                           request=request,
-                                           aggregates=aggregates,
-                                           settings=settings,
-                                           get_count=get_count)
-        else:
-            results = (
-                sorted(view.get_results(context,
-                                        ignore_cache=ignore_cache,
-                                        request=request,
-                                        aggregates=aggregates,
-                                        settings=settings,
-                                        get_count=False,
-                                        **kwargs),
-                       key=cls.sort_key, reverse=True)
-                for view in views
-            )
-            yield from merge(*results, key=cls.sort_key, reverse=True)
+        results = super().get_results(views, context, ignore_cache, request,
+                                      aggregates, settings, get_count,
+                                      sort_index=cls.sort_index, **kwargs)
+        if get_count:
+            results = consume_count_and_aggregations(*results)
+            yield next(results)  # count
+            yield next(results)  # aggregations
+        yield from merge(*results, key=cls.sort_key, reverse=True)
 
 
 @utility_config(name=f'{CREATION_DATE_ORDER}.sort',
