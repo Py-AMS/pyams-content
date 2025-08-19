@@ -15,9 +15,11 @@
 """
 
 from zope.interface import Interface
+from zope.schema import Choice
 
 from pyams_content.shared.view import VIEW_CONTENT_TYPE
-from pyams_sequence.schema import InternalReferenceField
+from pyams_content.shared.view.interfaces.query import MergeModes, VIEWS_MERGERS_VOCABULARY
+from pyams_sequence.schema import InternalReferenceField, InternalReferencesListField
 
 __docformat__ = 'restructuredtext'
 
@@ -37,15 +39,22 @@ class IAlertManagerInfo(Interface):
                                        content_type=VIEW_CONTENT_TYPE,
                                        required=False)
 
-    context_view = InternalReferenceField(title=_("Context alerts view"),
-                                          description=_("Reference to the view used to get context alerts; please "
-                                                        "note that alerts content type selection will be added "
-                                                        "automatically to settings of the selected view"),
-                                          content_type=VIEW_CONTENT_TYPE,
-                                          required=False)
+    context_views = InternalReferencesListField(title=_("Context alerts views"),
+                                                description=_("Reference to the views used to get context alerts; please "
+                                                              "note that alerts content type selection will be added "
+                                                              "automatically to settings of the selected views"),
+                                                content_type=VIEW_CONTENT_TYPE,
+                                                required=False)
+    
+    context_views_merge_mode = Choice(title=_("Views merge mode"),
+                                      description=_("If you select several views, you can select \"merge\" mode, which is "
+                                                    "the way used to merge items from several views"),
+                                      vocabulary=VIEWS_MERGERS_VOCABULARY,
+                                      default=MergeModes.CONCAT.value,
+                                      required=True)
 
-    def get_visible_alerts(self, request):
-        """Iterator over visible alerts"""
+    def get_global_alerts(self, request):
+        """Iterator over global alerts"""
 
     def get_context_alerts(self, request, context=None):
         """Iterator over visible alerts associated with request context"""

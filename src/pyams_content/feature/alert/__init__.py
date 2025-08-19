@@ -20,14 +20,32 @@ from zope.container.contained import Contained
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.feature.alert.interfaces import ALERT_MANAGER_KEY, IAlertManagerInfo
-from pyams_content.shared.alert import ALERT_CONTENT_TYPE
-from pyams_content.shared.alert.interfaces import IAlertManager
+from pyams_content.shared.alert.interfaces import ALERT_CONTENT_TYPE, IAlertManager
+from pyams_content.shared.view.interfaces.query import IViewsMerger
+from pyams_portal.interfaces import PREVIEW_MODE
 from pyams_sequence.reference import InternalReferenceMixin, get_reference_target
+from pyams_sequence.workflow import get_last_version, get_sequence_target, get_visible_version
 from pyams_site.interfaces import ISiteRoot
 from pyams_utils.adapter import adapter_config, get_annotation_adapter
 from pyams_utils.factory import factory_config
-from pyams_utils.list import unique_iter
+from pyams_utils.list import boolean_iter, unique_iter
 from pyams_utils.registry import query_utility
+from pyams_utils.request import get_annotations
+
+
+def get_views(oids, request):
+    """Get iterator over views matching given OIDs"""
+    preview_mode = get_annotations(request).get(PREVIEW_MODE)
+    for oid in (oids or ()):
+        view = get_sequence_target(oid, state=None)
+        if view is not None:
+            if preview_mode:
+                getter = get_last_version
+            else:
+                getter = get_visible_version
+            view = getter(view)
+        if view is not None:
+            yield view
 
 
 @factory_config(IAlertManagerInfo)
@@ -35,7 +53,8 @@ class AlertManagerInfo(InternalReferenceMixin, Persistent, Contained):
     """Alert manager info"""
 
     _reference = FieldProperty(IAlertManagerInfo['reference'])
-    context_view = FieldProperty(IAlertManagerInfo['context_view'])
+    context_views = FieldProperty(IAlertManagerInfo['context_views'])
+    context_views_merge_mode = FieldProperty(IAlertManagerInfo['context_views_merge_mode'])
 
     @property
     def reference(self):
@@ -48,8 +67,8 @@ class AlertManagerInfo(InternalReferenceMixin, Persistent, Contained):
         self._reference = value
         del self.target
 
-    def get_visible_alerts(self, request):
-        """Iterator over visible alerts"""
+    def get_global_alerts(self, request):
+        """Iterator over global alerts"""
 
         def check_alert(alert):
             """Hide alerts matching current request context"""
@@ -58,9 +77,10 @@ class AlertManagerInfo(InternalReferenceMixin, Persistent, Contained):
                     return False
             return True
 
-        view = get_reference_target(self.reference)
-        if view is None:
+        has_views, views = boolean_iter(get_views((self.reference,), request))
+        if not has_views:
             return
+        view = next(views)
         yield from filter(check_alert,
                           view.get_results(context=request.context,
                                            request=request,
@@ -68,14 +88,20 @@ class AlertManagerInfo(InternalReferenceMixin, Persistent, Contained):
 
     def get_context_alerts(self, request, context=None):
         """Iterator over visible alerts associated with provided context"""
+        
+        def get_merger():
+            return request.registry.queryUtility(IViewsMerger, name=self.context_views_merge_mode)
+        
         if context is None:
             context = request.context
-        # extract alerts from selected context view
-        view = get_reference_target(self.context_view)
-        if view is not None:
-            shared_alerts = view.get_results(context=context,
-                                             request=request,
-                                             content_type=ALERT_CONTENT_TYPE)
+        # extract alerts from selected context views
+        merger = get_merger()
+        if merger is not None:
+            shared_alerts = merger.get_results(get_views(self.context_views, request),
+                                               context,
+                                               ignore_cache=True,
+                                               request=request,
+                                               content_type=ALERT_CONTENT_TYPE)
         else:
             shared_alerts = ()
         # extract context alerts from alerts manager

@@ -36,7 +36,7 @@ class AlertsContentProvider(ViewContentProvider):
         """Alerts getter"""
         alerts = IAlertManagerInfo(self.request.root, None)
         if alerts is not None:
-            yield from alerts.get_visible_alerts(self.request)
+            yield from alerts.get_global_alerts(self.request)
 
     def get_gravity(self, alert):
         """Alert gravity getter"""
