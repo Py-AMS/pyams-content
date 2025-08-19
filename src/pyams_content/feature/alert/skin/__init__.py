@@ -25,9 +25,9 @@ from pyams_template.template import template_config
 from pyams_viewlet.viewlet import ViewContentProvider, contentprovider_config
 
 
-@contentprovider_config(name='pyams_content.alerts',
+@contentprovider_config(name='pyams_content.global_alerts',
                         layer=IPyAMSUserLayer, view=Interface)
-@template_config(template='templates/alerts.pt',
+@template_config(template='templates/global-alerts.pt',
                  layer=IPyAMSUserLayer)
 class AlertsContentProvider(ViewContentProvider):
     """Alerts content provider"""
