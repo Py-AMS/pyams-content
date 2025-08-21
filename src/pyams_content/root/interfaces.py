@@ -24,12 +24,12 @@ from pyams_i18n.schema import I18nTextField, I18nTextLineField
 from pyams_portal.interfaces import DESIGNER_ROLE
 from pyams_security.interfaces import IContentRoles
 from pyams_security.schema import PrincipalField, PrincipalsSetField
-
+from pyams_utils.schema import MailAddressField
 
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
-from pyams_utils.schema import MailAddressField
+
 
 SITE_ROOT_INFOS_KEY = 'pyams_content.root'
 
