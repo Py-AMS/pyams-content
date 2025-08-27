@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-08-10 00:09+0200\n"
+"POT-Creation-Date: 2025-08-21 16:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2696,10 +2696,12 @@ msgstr ""
 "contexte d'affichage est le conteneur au sein duquel ce contenu est affiché"
 
 #: src/pyams_content/shared/view/portlet/interfaces.py:94
+#: src/pyams_content/feature/alert/interfaces.py:49
 msgid "Views merge mode"
 msgstr "Mode de fusion des vues"
 
 #: src/pyams_content/shared/view/portlet/interfaces.py:95
+#: src/pyams_content/feature/alert/interfaces.py:50
 msgid ""
 "If you select several views, you can select \"merge\" mode, which is the way "
 "used to merge items from several views"
@@ -2782,9 +2784,10 @@ msgid ""
 "results count and aggregates filters will be those of the first select view "
 "only!"
 msgstr ""
-"ATTENTION : si vous sélectionnez plusieurs vues et un mode de rendu utilisant des facettes, "
-"le nombre de résultats obtenu ainsi que la composition des facettes ne correspondent qu'à "
-"ceux de la première vue sélectionnée !"
+"ATTENTION : si vous sélectionnez plusieurs vues et un mode de rendu "
+"utilisant des facettes, le nombre de résultats obtenu ainsi que la "
+"composition des facettes ne correspondent qu'à ceux de la première vue "
+"sélectionnée !"
 
 #: src/pyams_content/shared/view/portlet/zmi/templates/view-preview.pt:4
 msgid "Views list:"
@@ -4604,11 +4607,11 @@ msgstr "Si 'non', le contenu sera exclu de la sitemap du site"
 msgid "SEO configuration"
 msgstr "Configuration SEO"
 
-#: src/pyams_content/feature/alert/interfaces.py:33
+#: src/pyams_content/feature/alert/interfaces.py:35
 msgid "Global alerts view"
 msgstr "Vue des alertes globales"
 
-#: src/pyams_content/feature/alert/interfaces.py:34
+#: src/pyams_content/feature/alert/interfaces.py:36
 msgid ""
 "Internal view target reference; please note that alerts content type "
 "selection will be added automatically to settings of the selected view"
@@ -4618,17 +4621,17 @@ msgstr ""
 "gabarit est effectuée automatiquement quel que soit le paramétrage de la vue "
 "sélectionnée"
 
-#: src/pyams_content/feature/alert/interfaces.py:40
-msgid "Context alerts view"
-msgstr "Vue des alertes contextuelles"
+#: src/pyams_content/feature/alert/interfaces.py:42
+msgid "Context alerts views"
+msgstr "Vues des alertes contextuelles"
 
-#: src/pyams_content/feature/alert/interfaces.py:41
+#: src/pyams_content/feature/alert/interfaces.py:43
 msgid ""
-"Reference to the view used to get context alerts; please note that alerts "
+"Reference to the views used to get context alerts; please note that alerts "
 "content type selection will be added automatically to settings of the "
-"selected view"
+"selected views"
 msgstr ""
-"Référence de la vue dont sont extraites les alertes associées à un contexte, "
+"Références des vues dont sont extraites les alertes associées à un contexte, "
 "qui peuvent être affichées dans leur en-tête de page ; veuillez noter que la "
 "sélection du gabarit est effectuée automatiquement quel que soit le "
 "paramétrage de la vue sélectionnée"
@@ -4642,8 +4645,8 @@ msgstr "Paramétrage des alertes"
 msgid "Alerts management views"
 msgstr "Sélection des vues associées aux alertes"
 
-#: src/pyams_content/feature/alert/skin/templates/alerts.pt:17
-#: src/pyams_content/feature/alert/skin/templates/alerts.pt:22
+#: src/pyams_content/feature/alert/skin/templates/global-alerts.pt:17
+#: src/pyams_content/feature/alert/skin/templates/global-alerts.pt:22
 #: src/pyams_content/feature/alert/skin/templates/context-alerts.pt:19
 #: src/pyams_content/feature/alert/skin/templates/context-alerts.pt:24
 msgid "Read more"

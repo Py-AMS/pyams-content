@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2025-08-10 00:09+0200\n"
+"POT-Creation-Date: 2025-08-21 16:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2451,10 +2451,12 @@ msgid ""
 msgstr ""
 
 #: ./src/pyams_content/shared/view/portlet/interfaces.py:94
+#: ./src/pyams_content/feature/alert/interfaces.py:49
 msgid "Views merge mode"
 msgstr ""
 
 #: ./src/pyams_content/shared/view/portlet/interfaces.py:95
+#: ./src/pyams_content/feature/alert/interfaces.py:50
 msgid ""
 "If you select several views, you can select \"merge\" mode, which is the way "
 "used to merge items from several views"
@@ -4188,25 +4190,25 @@ msgstr ""
 msgid "SEO configuration"
 msgstr ""
 
-#: ./src/pyams_content/feature/alert/interfaces.py:33
+#: ./src/pyams_content/feature/alert/interfaces.py:35
 msgid "Global alerts view"
 msgstr ""
 
-#: ./src/pyams_content/feature/alert/interfaces.py:34
+#: ./src/pyams_content/feature/alert/interfaces.py:36
 msgid ""
 "Internal view target reference; please note that alerts content type "
 "selection will be added automatically to settings of the selected view"
 msgstr ""
 
-#: ./src/pyams_content/feature/alert/interfaces.py:40
-msgid "Context alerts view"
+#: ./src/pyams_content/feature/alert/interfaces.py:42
+msgid "Context alerts views"
 msgstr ""
 
-#: ./src/pyams_content/feature/alert/interfaces.py:41
+#: ./src/pyams_content/feature/alert/interfaces.py:43
 msgid ""
-"Reference to the view used to get context alerts; please note that alerts "
+"Reference to the views used to get context alerts; please note that alerts "
 "content type selection will be added automatically to settings of the "
-"selected view"
+"selected views"
 msgstr ""
 
 #: ./src/pyams_content/feature/alert/zmi/__init__.py:43
@@ -4218,8 +4220,8 @@ msgstr ""
 msgid "Alerts management views"
 msgstr ""
 
-#: ./src/pyams_content/feature/alert/skin/templates/alerts.pt:17
-#: ./src/pyams_content/feature/alert/skin/templates/alerts.pt:22
+#: ./src/pyams_content/feature/alert/skin/templates/global-alerts.pt:17
+#: ./src/pyams_content/feature/alert/skin/templates/global-alerts.pt:22
 #: ./src/pyams_content/feature/alert/skin/templates/context-alerts.pt:19
 #: ./src/pyams_content/feature/alert/skin/templates/context-alerts.pt:24
 msgid "Read more"
