@@ -182,7 +182,7 @@ def extract_external_link_data(event):
         return
     url = event.data.get('url')
     for host in settings.forbidden_hosts or ():
-        if host and url.startswith(host):
+        if host and (url.startswith(host) or url.startswith('/') or url.startswith('../')):
             form.widgets.errors += (Invalid(_("You can't create an external link to this site! "
                                               "Use an internal link instead...")),)
             return

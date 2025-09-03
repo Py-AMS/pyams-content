@@ -134,7 +134,7 @@ def extract_html_paragraph_data(event):
         for link in html('a[href]'):
             href = link.attrib['href']
             for host in settings.forbidden_hosts or ():
-                if host and href.startswith(host):
+                if host and (href.startswith(host) or href.startswith('/') or href.startswith('../')):
                     form.widgets.errors += (Invalid(_("You can't create an external link to this site! "
                                                       "Use an internal link instead...")),)
                     return
