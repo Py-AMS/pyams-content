@@ -1,6 +1,14 @@
 Changelog
 =========
 
+2.7.0
+-----
+ - allow (restricted!) usage of several views in a views content portlet using an aggregated renderer
+ - added support for custom arguments to views mergers results getter
+ - corrected thesaurus query params extension adapters provided interface
+ - added support for multiple views selection in alerts manager contextual configuration
+ - renamed global alerts content provider
+
 2.6.2
 -----
  - don't update content modifiers when modification is done by an unknown principal
