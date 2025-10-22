@@ -272,13 +272,14 @@ class ParagraphsFullLabelColumn(ParagraphsLabelColumn):
         """Cell renderer"""
         modified_icon = ''
         item_dc = IZopeDublinCore(item, None)
-        if item_dc is not None:
+        if (item_dc is not None) and item_dc.modified:
             content = get_parent(item, IWfSharedContent)
             if content is not None:
                 state = IWorkflowState(content, None)
                 if (state is not None) and (state.version_id > 1):
                     content_dc = IZopeDublinCore(content, None)
-                    if (content_dc is not None) and (item_dc.modified > content_dc.created):
+                    if ((content_dc is not None) and content_dc.created and
+                            (item_dc.modified > content_dc.created)):
                         translate = self.request.localizer.translate
                         hint = translate(self.modified_hint)
                         modified_icon = f' <i class="fas fa-fw fa-sm fa-circle text-warning hint mx-2"' \
