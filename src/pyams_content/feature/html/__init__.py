@@ -36,6 +36,20 @@ from pyams_workflow.interfaces import IWorkflowPublicationInfo
 __docformat__ = 'restructuredtext'
 
 
+def basic_html_editor_configuration():
+    """Basic HTML editor configuration getter"""
+    return {
+        'menubar': False,
+        'plugins': 'paste textcolor lists charmap link pyams_link',
+        'toolbar': 'undo redo | pastetext | h3 h4 | bold italic superscript | '
+                   'forecolor backcolor | bullist numlist | '
+                   'charmap pyams_link link',
+        'toolbar1': False,
+        'toolbar2': False,
+        'height': 200
+    }
+
+
 @adapter_config(name='oid_to_href',
                 required=(str, IRequest),
                 provides=IHTMLRenderer)
