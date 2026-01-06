@@ -13,6 +13,7 @@
 """PyAMS_content.feature.alert module
 
 """
+
 from itertools import chain
 
 from persistent import Persistent
@@ -20,7 +21,7 @@ from zope.container.contained import Contained
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.feature.alert.interfaces import ALERT_MANAGER_KEY, IAlertManagerInfo
-from pyams_content.shared.alert.interfaces import ALERT_CONTENT_TYPE, IAlertManager
+from pyams_content.shared.alert.interfaces import ALERT_CONTENT_TYPE, IAlertManager, IWfAlert
 from pyams_content.shared.view.interfaces.query import IViewsMerger
 from pyams_portal.interfaces import PREVIEW_MODE
 from pyams_sequence.reference import InternalReferenceMixin, get_reference_target
@@ -72,6 +73,8 @@ class AlertManagerInfo(InternalReferenceMixin, Persistent, Contained):
 
         def check_alert(alert):
             """Hide alerts matching current request context"""
+            if not IWfAlert.providedBy(alert):
+                return False
             for target in alert.get_targets():
                 if target is request.context:
                     return False
@@ -88,10 +91,10 @@ class AlertManagerInfo(InternalReferenceMixin, Persistent, Contained):
 
     def get_context_alerts(self, request, context=None):
         """Iterator over visible alerts associated with provided context"""
-        
+
         def get_merger():
             return request.registry.queryUtility(IViewsMerger, name=self.context_views_merge_mode)
-        
+
         if context is None:
             context = request.context
         # extract alerts from selected context views
@@ -110,7 +113,8 @@ class AlertManagerInfo(InternalReferenceMixin, Persistent, Contained):
             context_alerts = manager.find_context_alerts(context, request)
         else:
             context_alerts = ()
-        yield from unique_iter(chain(shared_alerts, context_alerts))
+        yield from filter(IWfAlert.providedBy,
+                          unique_iter(chain(shared_alerts, context_alerts)))
 
 
 @adapter_config(context=ISiteRoot,
