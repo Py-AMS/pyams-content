@@ -18,9 +18,9 @@ import math
 
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.feature.search import ISearchFolder
-from pyams_content.feature.search.portlet.interfaces import ISearchResultsPortletSettings, SEARCH_RESULTS_ICON_CLASS, \
-    SEARCH_RESULTS_PORTLET_FLAG, SEARCH_RESULTS_PORTLET_NAME
+from pyams_content.feature.search.interfaces import ISearchFolder
+from pyams_content.feature.search.portlet.interfaces import ISearchResultsFinder, ISearchResultsPortletSettings, \
+    SEARCH_RESULTS_ICON_CLASS, SEARCH_RESULTS_PORTLET_FLAG, SEARCH_RESULTS_PORTLET_NAME
 from pyams_content.shared.view.interfaces import RELEVANCE_ORDER, VISIBLE_PUBLICATION_DATE_ORDER
 from pyams_content.shared.view.portlet import IViewItemsAggregates
 from pyams_portal.interfaces import IPortletRendererSettings
@@ -46,36 +46,56 @@ class SearchResultsPortletSettings(PortletSettings):
     @staticmethod
     def has_user_query(request):
         """User query checker"""
-        return bool(request.params.get('user_search', '').strip())
+        for name, value in request.params.items():
+            if value and name.startswith('user_'):
+                return True
+        return False
 
     def _get_items(self, request=None, start=0, length=10, limit=None, ignore_cache=False):
-        context = get_parent(request.context, ISearchFolder)
-        if context is None:
-            raise StopIteration
-        else:
-            if request is None:
-                request = check_request()
-            params = request.params
-            order_by = params.get('order_by', context.order_by)
-            if (order_by == RELEVANCE_ORDER) and \
-                    not self.has_user_query(request):
-                request.GET['order_by'] = order_by = VISIBLE_PUBLICATION_DATE_ORDER
-            renderer_settings = IPortletRendererSettings(self)
+        if request is None:
+            request = check_request()
+        registry = request.registry
+        finder = registry.queryMultiAdapter((request.context, request), ISearchResultsFinder)
+        if finder is not None:
+            renderer_settings = IPortletRendererSettings(self, None)
             aggregates = IViewItemsAggregates(renderer_settings, None)
             if aggregates is not None:
                 ignore_cache = True
             else:
                 aggregates = {}
-            yield from context.get_results(context, order_by,
-                                           reverse=order_by != RELEVANCE_ORDER,
-                                           limit=limit,
-                                           start=int(start),
-                                           length=int(length),
-                                           ignore_cache=ignore_cache,
-                                           get_count=True,
-                                           request=request,
-                                           aggregates=aggregates,
-                                           settings=self)
+            yield from finder.get_results(start=int(start),
+                                          length=int(length),
+                                          limit=limit,
+                                          ignore_cache=ignore_cache,
+                                          get_count=True,
+                                          aggregates=aggregates,
+                                          settings=self)
+        else:
+            context = get_parent(request.context, ISearchFolder)
+            if context is None:
+                raise StopIteration
+            else:
+                params = request.params
+                order_by = params.get('order_by', context.order_by)
+                if (order_by == RELEVANCE_ORDER) and \
+                        not self.has_user_query(request):
+                    request.GET['order_by'] = order_by = VISIBLE_PUBLICATION_DATE_ORDER
+                renderer_settings = IPortletRendererSettings(self)
+                aggregates = IViewItemsAggregates(renderer_settings, None)
+                if aggregates is not None:
+                    ignore_cache = True
+                else:
+                    aggregates = {}
+                yield from context.get_results(context, order_by,
+                                               reverse=order_by != RELEVANCE_ORDER,
+                                               limit=limit,
+                                               start=int(start),
+                                               length=int(length),
+                                               ignore_cache=ignore_cache,
+                                               get_count=True,
+                                               request=request,
+                                               aggregates=aggregates,
+                                               settings=self)
 
     def get_items(self, request=None, start=0, length=10, limit=None, ignore_cache=False):
         """Search results getter"""

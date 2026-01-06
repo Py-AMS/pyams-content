@@ -14,6 +14,7 @@
 
 """
 
+from zope.interface import Interface
 from zope.schema import Bool
 
 from pyams_i18n.schema import I18nTextLineField
@@ -29,6 +30,15 @@ SEARCH_RESULTS_ICON_CLASS = 'fas fa-search'
 
 SEARCH_RESULTS_PORTLET_FLAG = 'pyams_content.portlet.search.has_results'
 """Request annotations flag for portlet search results"""
+
+
+class ISearchResultsFinder(Interface):
+    """Search results finder interface"""
+
+    def get_results(self, start=0, length=None, limit=None,
+                    ignore_cache=False, get_count=False,
+                    aggregates=None, settings=None, **kwargs):
+        """Search results finder"""
 
 
 class ISearchResultsPortletSettings(IPortletSettings):
