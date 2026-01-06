@@ -132,8 +132,13 @@ class SharedContentAddForm(AdminModalAddForm):
     @property
     def content_factory(self):
         """Shared content factory"""
-        return self.context.shared_content_factory.factory.content_factory
+        return self.shared_content_factory.factory.content_factory
 
+    @property
+    def shared_content_factory(self):
+        """Shared content factory"""
+        return self.context.shared_content_factory
+    
     @property
     def container_target(self):
         """New content container getter"""
@@ -174,7 +179,7 @@ class SharedContentAddForm(AdminModalAddForm):
 
     def add(self, obj):
         """Add new content to container"""
-        factory = self.context.shared_content_factory
+        factory = self.shared_content_factory
         if factory is not None:
             content = factory()
             self.request.registry.notify(ObjectCreatedEvent(content))

@@ -22,7 +22,7 @@ from zope.lifecycleevent.interfaces import IObjectAddedEvent
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.interfaces import MANAGE_TOOL_PERMISSION
-from pyams_content.shared.common.interfaces import IBaseSharedTool, ISharedContent, ISharedTool, \
+from pyams_content.shared.common.interfaces import IBaseSharedTool, IInnerSharedTool, ISharedContent, ISharedTool, \
     ISharedToolContainer
 from pyams_i18n.content import I18nManagerMixin
 from pyams_security.interfaces import IDefaultProtectionPolicy, IViewContextPermissionChecker
@@ -54,25 +54,31 @@ class BaseSharedTool(ProtectedObjectMixin, I18nManagerMixin):
     shared_content_menu = True
     shared_content_workflow = FieldProperty(IBaseSharedTool['shared_content_workflow'])
     inner_folders_mode = FieldProperty(IBaseSharedTool['inner_folders_mode'])
+    
+    shared_tool_dashboard = True
 
 
-@implementer(ISharedTool)
-class SharedTool(Folder, BaseSharedTool):
-    """Shared tool class"""
+@implementer(IInnerSharedTool)
+class InnerSharedTool(BaseSharedTool):
+    """Inner shared tool class"""
 
     shared_content_type = None
     '''Shared content type must be defined by subclasses'''
+
+    @property
+    def shared_content_factory(self):
+        return get_object_factory(ISharedContent, name=self.shared_content_type)
+
+
+@implementer(ISharedTool)
+class SharedTool(Folder, InnerSharedTool):
+    """Shared tool class"""
 
     label = FieldProperty(ISharedTool['label'])
     navigation_label = FieldProperty(ISharedTool['navigation_label'])
     facets_label = FieldProperty(ISharedTool['facets_label'])
     facets_type_label = FieldProperty(ISharedTool['facets_type_label'])
     dashboard_label = FieldProperty(ISharedTool['dashboard_label'])
-    
-
-    @property
-    def shared_content_factory(self):
-        return get_object_factory(ISharedContent, name=self.shared_content_type)
 
 
 @subscriber(IObjectAddedEvent, context_selector=ISharedTool)

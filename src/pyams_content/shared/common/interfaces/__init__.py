@@ -14,6 +14,7 @@
 
 This module defines interfaces which are common to all shared contents.
 """
+
 from collections import OrderedDict
 from enum import Enum
 
@@ -132,6 +133,8 @@ class IBaseSharedTool(IBaseContent, IContainer):
 
     shared_content_menu = Attribute("Boolean flag indicating if tool is displayed into 'Shared "
                                     "contents' or Shared tools' menu")
+    
+    shared_tool_dashboard = Attribute("Boolean flag indicating if tool have a contents dashboard")
 
     shared_content_workflow = Choice(title=_("Workflow name"),
                                      description=_("Name of workflow utility used to manage tool "
@@ -146,15 +149,25 @@ class IBaseSharedTool(IBaseContent, IContainer):
                                 required=True)
 
 
-SHARED_TOOL_WORKFLOW_STATES_VOCABULARY = 'pyams_content.workflow.states'
-
-
-class ISharedTool(IBaseSharedTool):
-    """Shared tool interface"""
+class IInnerSharedTool(IBaseSharedTool):
+    """Inner shared tool interface"""
 
     contains('.ISharedContent')
 
     shared_content_type = Attribute("Shared data content type name")
+    
+    shared_content_factory = Attribute("Shared data factory getter")
+
+
+class IInnerSharedToolPortalContext(IInnerSharedTool, IPortalContext):
+    """Inner shared tool with portal context interface"""
+
+
+SHARED_TOOL_WORKFLOW_STATES_VOCABULARY = 'pyams_content.workflow.states'
+
+
+class ISharedTool(IInnerSharedTool):
+    """Shared tool interface"""
 
     label = I18nTextLineField(title=_("Single content label"),
                               description=_("This label can be used to tag content type of a single content "
