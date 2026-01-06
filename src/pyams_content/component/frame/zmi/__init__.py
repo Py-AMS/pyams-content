@@ -24,6 +24,7 @@ from pyams_content.component.paragraph import IParagraphContainer, IParagraphCon
 from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu, \
     IParagraphContainerBaseTable
 from pyams_content.component.paragraph.zmi.html import extract_html_paragraph_data
+from pyams_content.feature.html import basic_html_editor_configuration
 from pyams_form.ajax import ajax_form_config
 from pyams_form.interfaces.form import IDataExtractedEvent
 from pyams_layer.interfaces import IPyAMSLayer
@@ -77,13 +78,4 @@ def extract_frame_paragraph_data(event):
                 provides=IHTMLEditorConfiguration)
 def frame_paragraph_editor_configuration(context, request, view):
     """Frame paragraph editor configuration"""
-    return {
-        'menubar': False,
-        'plugins': 'paste textcolor lists charmap link pyams_link',
-        'toolbar': 'undo redo | pastetext | h3 h4 | bold italic superscript | '
-                   'forecolor backcolor | bullist numlist | '
-                   'charmap pyams_link link',
-        'toolbar1': False,
-        'toolbar2': False,
-        'height': 200
-    }
+    return basic_html_editor_configuration()

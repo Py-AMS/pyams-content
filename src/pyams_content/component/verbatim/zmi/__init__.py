@@ -25,6 +25,7 @@ from pyams_content.component.paragraph.zmi.interfaces import IParagraphContainer
 from pyams_content.component.verbatim.interfaces import IVerbatimContainer, IVerbatimInfo, IVerbatimParagraph, \
     VERBATIM_PARAGRAPH_ICON_CLASS, VERBATIM_PARAGRAPH_NAME, VERBATIM_PARAGRAPH_TYPE
 from pyams_content.component.verbatim.zmi.interfaces import IVerbatimTable
+from pyams_content.feature.html import basic_html_editor_configuration
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IAJAXFormRenderer
@@ -52,8 +53,7 @@ from pyams_zmi.interfaces.form import IFormTitle, IPropertiesEditForm
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager, IToolbarViewletManager
 from pyams_zmi.table import I18nColumnMixin, IconColumn, InnerTableAdminView, ReorderColumn, SortableTable, \
-    TableElementEditor, \
-    TrashColumn, VisibilityColumn
+    TableElementEditor, TrashColumn, VisibilityColumn
 from pyams_zmi.utils import get_object_label
 
 __docformat__ = 'restructuredtext'
@@ -340,13 +340,4 @@ class VerbatimParagraphAddForm(BaseParagraphAddForm):
                 provides=IHTMLEditorConfiguration)
 def verbatim_quote_editor_configuration(context, request, view):
     """Verbatim quote editor configuration"""
-    return {
-        'menubar': False,
-        'plugins': 'paste textcolor lists charmap link pyams_link',
-        'toolbar': 'undo redo | pastetext | h3 h4 | bold italic superscript | '
-                   'forecolor backcolor | bullist numlist | '
-                   'charmap pyams_link link',
-        'toolbar1': False,
-        'toolbar2': False,
-        'height': 200
-    }
+    return basic_html_editor_configuration()
