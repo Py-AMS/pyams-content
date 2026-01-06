@@ -3,7 +3,7 @@
 	<legend i18n:translate="">SEARCH - <tal:var i18n:name="legend" content="view.legend">view.legend</tal:var></legend>
 	<form class="ams-form d-flex flex-row align-items-center"
 		  method="post"
-		  data-async action="quick-search.json"
+		  data-async action="${view.quick_search_url}"
 		  data-ams-form-submit-target="#quick_search_results">
 		<div class="input-group col col-md-6 px-0">
 			<input type="text" required
@@ -16,7 +16,7 @@
 			</button>
 		</div>
 		<div class="input-group col col-md-6">
-			<a href="#advanced-search.html"
+			<a href="${view.advanced_search_url}"
 			   i18n:translate="">Advanced search...</a>
 		</div>
 	</form>

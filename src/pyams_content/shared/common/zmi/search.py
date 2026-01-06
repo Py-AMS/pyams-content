@@ -31,8 +31,8 @@ from pyams_content.component.thesaurus import ICollectionsManager, ITagsManager,
 from pyams_content.shared.common import IBaseSharedTool, SHARED_CONTENT_TYPES_VOCABULARY
 from pyams_content.shared.common.interfaces import SHARED_TOOL_WORKFLOW_STATES_VOCABULARY
 from pyams_content.shared.common.interfaces.types import DATA_TYPES_VOCABULARY
-from pyams_content.shared.common.zmi.dashboard import BaseSharedToolDashboardSingleView, \
-    DashboardTable, BaseSharedToolDashboardView, SharedToolDashboardView
+from pyams_content.shared.common.zmi.dashboard import BaseSharedToolDashboardMenu, BaseSharedToolDashboardSingleView, \
+    BaseSharedToolDashboardValuesAdapter, BaseSharedToolDashboardView, DashboardTable, SharedToolDashboardView
 from pyams_content.zmi.interfaces import IAllDashboardMenu
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IFormFields, IGroup
@@ -49,7 +49,7 @@ from pyams_table.interfaces import IValues
 from pyams_template.template import template_config
 from pyams_thesaurus.schema import ThesaurusTermsListField
 from pyams_thesaurus.zmi.widget import ThesaurusTermsTreeFieldWidget
-from pyams_utils.adapter import ContextRequestViewAdapter, NullAdapter, adapter_config
+from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.list import unique_iter
 from pyams_utils.registry import get_utility
 from pyams_utils.schema import DatetimesRangeField
@@ -63,7 +63,6 @@ from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.table import IInnerTable
 from pyams_zmi.search import SearchForm, SearchResultsView, SearchView
 from pyams_zmi.skin import AdminSkin
-from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
 __docformat__ = 'restructuredtext'
 
@@ -95,7 +94,7 @@ def get_quick_search_params(query, request, catalog, sequence):
 
 @adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolQuickSearchResultsTable),
                 provides=IValues)
-class SharedToolQuickSearchResultsValues(ContextRequestViewAdapter):
+class SharedToolQuickSearchResultsValues(BaseSharedToolDashboardValuesAdapter):
     """Shared tool quick search results values adapter"""
 
     @property
@@ -111,10 +110,8 @@ class SharedToolQuickSearchResultsValues(ContextRequestViewAdapter):
         if query.startswith('+'):
             params = Eq(catalog['oid'], sequence.get_full_oid(query))
         else:
-            vocabulary = getVocabularyRegistry().get(self.context,
-                                                     SHARED_CONTENT_TYPES_VOCABULARY)
             params = And(Eq(catalog['parents'], intids.register(self.context)),
-                         Any(catalog['content_type'], vocabulary.by_value.keys()))
+                         Any(catalog['content_type'], self.get_content_types()))
             params &= get_quick_search_params(query, self.request, catalog, sequence)
         yield from unique_iter(map(get_last_version,
                                    CatalogResultSet(CatalogQuery(catalog).query(
@@ -154,13 +151,16 @@ def shared_tool_quick_search_view(request):
 @template_config(template='templates/quick-search.pt', layer=IAdminLayer)
 class SharedToolQuickSearchView(BaseSharedToolDashboardView):
     """Shared tool quick search view"""
-
+    
     @property
     def legend(self):
         """Legend getter"""
         translate = self.request.localizer.translate
         return translate(_("Between all contents of « {} » content type")) \
             .format(translate(self.context.shared_content_factory.factory.content_name))
+
+    quick_search_url = 'quick-search.json'
+    advanced_search_url = '#advanced-search.html'
 
     def render(self):
         """Viewlet renderer"""
@@ -197,7 +197,7 @@ def WorkflowStatesVocabulary(context):
                 context=IBaseSharedTool, layer=IAdminLayer,
                 manager=IAllDashboardMenu, weight=40,
                 permission=VIEW_SYSTEM_PERMISSION)
-class SharedToolAdvancedSearchMenu(NavigationMenuItem):
+class SharedToolAdvancedSearchMenu(BaseSharedToolDashboardMenu):
     """Shared tool advanced search menu"""
 
     label = _("Advanced search")
@@ -344,16 +344,15 @@ class SharedToolAdvancedSearchResultsTable(DashboardTable):
 
 @adapter_config(required=(IBaseSharedTool, IPyAMSLayer, SharedToolAdvancedSearchResultsTable),
                 provides=IValues)
-class SharedToolAdvancedSearchResultsValues(ContextRequestViewAdapter):
+class SharedToolAdvancedSearchResultsValues(BaseSharedToolDashboardValuesAdapter):
     """Shared tool advanced search results values"""
 
     def get_params(self, data):
         """Extract catalog query params from incoming request"""
         intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
-        vocabulary = getVocabularyRegistry().get(self.context, SHARED_CONTENT_TYPES_VOCABULARY)
         params = And(Eq(catalog['parents'], intids.register(self.context)),
-                     Any(catalog['content_type'], vocabulary.by_value.keys()))
+                     Any(catalog['content_type'], self.get_content_types()))
         query = data.get('query')
         if query:
             sequence = get_utility(ISequentialIntIds)
