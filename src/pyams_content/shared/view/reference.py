@@ -25,8 +25,8 @@ from zope.schema.fieldproperty import FieldProperty
 
 from pyams_catalog.query import CatalogResultSet
 from pyams_content.shared.view import IViewSettings, IWfView
-from pyams_content.shared.view.interfaces.query import EXCLUDED_VIEW_ITEMS, IViewQueryFilterExtension, \
-    IViewQueryParamsExtension, IViewUserQuery
+from pyams_content.shared.view.interfaces.query import EXCLUDED_VIEW_ITEMS, IViewQueryParamsExtension, \
+    IViewQueryResultsFilterExtension, IViewUserQuery
 from pyams_content.shared.view.interfaces.settings import ALWAYS_REFERENCE_MODE, IViewInternalReferencesSettings, \
     ONLY_REFERENCE_MODE, VIEW_REFERENCES_SETTINGS_KEY
 from pyams_sequence.interfaces import IInternalReferencesList, ISequentialIdInfo
@@ -103,7 +103,7 @@ class ViewReferencesQueryParamsExtension(ContextAdapter):
 
 @adapter_config(name='references',
                 required=IWfView,
-                provides=IViewQueryFilterExtension)
+                provides=IViewQueryResultsFilterExtension)
 class ViewReferencesQueryFilterExtension(ContextAdapter):
     """View internal references filter extension
 

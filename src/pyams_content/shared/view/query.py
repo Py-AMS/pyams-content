@@ -26,8 +26,8 @@ from hypatia.query import Any, Eq, Gt, Lt, NotAny, Or
 from pyams_catalog.query import CatalogResultSet, or_
 from pyams_content.shared.view import IViewQuery, IWfView
 from pyams_content.shared.view.interfaces import RELEVANCE_ORDER, TITLE_ORDER
-from pyams_content.shared.view.interfaces.query import END_PARAMS_MARKER, IViewQueryFilterExtension, \
-    IViewQueryParamsExtension, IViewUserQuery
+from pyams_content.shared.view.interfaces.query import END_PARAMS_MARKER, IViewQueryParamsExtension, \
+    IViewQueryResultsFilterExtension, IViewUserQuery
 from pyams_i18n.interfaces import INegotiator
 from pyams_utils.adapter import ContextAdapter, adapter_config, get_adapter_weight
 from pyams_utils.list import unique_iter
@@ -133,7 +133,7 @@ class ViewQuery(ContextAdapter):
                                                 limit=limit)
             total_count = query[0]
             items = CatalogResultSet(query)
-        for name, adapter in sorted(registry.getAdapters((view,), IViewQueryFilterExtension),
+        for name, adapter in sorted(registry.getAdapters((view,), IViewQueryResultsFilterExtension),
                                     key=get_adapter_weight):
             items = adapter.filter(context, items, request)
         return unique_iter(items), total_count, {}

@@ -62,7 +62,7 @@ class IViewQueryParamsExtension(IViewQueryExtension):
         """
 
 
-class IViewQueryFilterExtension(IViewQueryExtension):
+class IViewQueryResultsFilterExtension(IViewQueryExtension):
     """View query filter extension
 
     Query filters are applied after query execution, so they are generally slower than
