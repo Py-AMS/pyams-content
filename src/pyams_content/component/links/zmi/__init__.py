@@ -181,8 +181,12 @@ def extract_external_link_data(event):
     if (settings is None) or not settings.check_external_links:
         return
     url = event.data.get('url')
+    if url.startswith('/') or url.startswith('./') or url.startswith('../'):
+        form.widgets.errors += (Invalid(_("You must use absolute URLs; relative URLs are forbidden in "
+                                          "external links.")))
+        return
     for host in settings.forbidden_hosts or ():
-        if host and (url.startswith(host) or url.startswith('/') or url.startswith('../')):
+        if host and url.startswith(host):
             form.widgets.errors += (Invalid(_("You can't create an external link to this site! "
                                               "Use an internal link instead...")),)
             return

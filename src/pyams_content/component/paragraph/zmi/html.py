@@ -133,8 +133,12 @@ def extract_html_paragraph_data(event):
         html = PyQuery(f'<html>{body}</html>')
         for link in html('a[href]'):
             href = link.attrib['href']
+            if href.startswith('/') or href.startswith('./') or href.startswith('../'):
+                form.widgets.errors += (Invalid(_("You must use absolute URLs; relative URLs are forbidden in "
+                                                  "external links.")))
+                return
             for host in settings.forbidden_hosts or ():
-                if host and (href.startswith(host) or href.startswith('/') or href.startswith('../')):
+                if host and href.startswith(host):
                     form.widgets.errors += (Invalid(_("You can't create an external link to this site! "
-                                                      "Use an internal link instead...")),)
+                                                      "Use an internal link instead.")),)
                     return
