@@ -32,7 +32,7 @@ from pyams_content.shared.common.zmi.dashboard import BaseSharedToolDashboardSin
     SharedToolDashboardManagerWaitingValues, SharedToolDashboardManagerWaitingView, \
     SharedToolDashboardMenu, SharedToolDashboardOwnerModifiedView, \
     SharedToolDashboardOwnerWaitingView, SharedToolLastModificationsView, \
-    SharedToolLastModifiedMenu, SharedToolLastPublicationsMenu, SharedToolLastPublicationsView, \
+    SharedToolLastModificationsMenu, SharedToolLastPublicationsMenu, SharedToolLastPublicationsView, \
     SharedToolMissingContentWarning, SharedToolMyDashboardMenu, SharedToolPreparationsMenu, \
     SharedToolPreparationsView, SharedToolPublicationsMenu, SharedToolPublicationsView, \
     SharedToolRetiredContentsMenu, SharedToolRetiredContentsView, SharedToolSubmissionsMenu, \
@@ -562,7 +562,7 @@ class SiteRootAllInterventionsMenu(SharedToolAllInterventionsMenu):
 # Last published contents
 #
 
-@viewlet_config(name='last-published.menu',
+@viewlet_config(name='last-published-contents.menu',
                 context=ISiteRoot, layer=IAdminLayer,
                 manager=IAllDashboardMenu, weight=25,
                 permission=VIEW_SYSTEM_PERMISSION)
@@ -599,7 +599,7 @@ class SiteRootLastPublicationsValues(ContextRequestViewAdapter):
                                                          reverse=True)))
 
 
-@pagelet_config(name='last-published.html',
+@pagelet_config(name='last-published-contents.html',
                 context=ISiteRoot, layer=IPyAMSLayer,
                 permission=VIEW_SYSTEM_PERMISSION)
 class SiteRootLastPublicationsView(SharedToolLastPublicationsView):
@@ -612,11 +612,11 @@ class SiteRootLastPublicationsView(SharedToolLastPublicationsView):
 # Last modified contents
 #
 
-@viewlet_config(name='last-modified.menu',
+@viewlet_config(name='last-modified-contents.menu',
                 context=ISiteRoot, layer=IAdminLayer,
                 manager=IAllDashboardMenu, weight=30,
                 permission=VIEW_SYSTEM_PERMISSION)
-class SiteRootLastModifiedMenu(SharedToolLastModifiedMenu):
+class SiteRootLastModificationsMenu(SharedToolLastModificationsMenu):
     """Site root modified contents dashboard menu"""
 
 
@@ -642,7 +642,7 @@ class SiteRootLastModificationsValues(ContextRequestViewAdapter):
                                                          reverse=True)))
 
 
-@pagelet_config(name='last-modified.html',
+@pagelet_config(name='last-modified-contents.html',
                 context=ISiteRoot, layer=IPyAMSLayer,
                 permission=VIEW_SYSTEM_PERMISSION)
 class SiteRootLastModificationsView(SharedToolLastModificationsView):

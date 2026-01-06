@@ -32,13 +32,14 @@ from zope.schema.vocabulary import getVocabularyRegistry
 
 from pyams_catalog.query import CatalogResultSet
 from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION, PUBLISH_CONTENT_PERMISSION
-from pyams_content.shared.common.interfaces import IBaseSharedTool, IManagerRestrictions, ISharedContent, \
-    IWfSharedContentRoles, SHARED_CONTENT_TYPES_VOCABULARY
+from pyams_content.shared.common.interfaces import IBaseSharedTool, IManagerRestrictions, \
+    ISharedContent, IWfSharedContentRoles, SHARED_CONTENT_TYPES_VOCABULARY
 from pyams_content.shared.common.zmi.content import shared_content_version_getter
 from pyams_content.zmi.interfaces import IAllDashboardMenu, IDashboardColumn, \
     IDashboardContentModifier, IDashboardContentNumber, IDashboardContentOwner, \
     IDashboardContentStatus, IDashboardContentStatusDatetime, IDashboardContentTimestamp, \
-    IDashboardContentVersion, IDashboardTable, IDashboardView, IMyDashboardMenu
+    IDashboardContentVersion, IDashboardManagerWaitingTable, IDashboardOwnerModifiedTable, IDashboardOwnerWaitingTable, \
+    IDashboardTable, IDashboardTableContentTypes, IDashboardView, IMyDashboardMenu
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_pagelet.pagelet import pagelet_config
 from pyams_security.interfaces import ISecurityManager
@@ -63,7 +64,6 @@ from pyams_zmi.interfaces.table import IInnerTable, ITableWithActions
 from pyams_zmi.interfaces.viewlet import IContentManagementMenu, IMenuHeader
 from pyams_zmi.table import InnerTableAdminView, MultipleTablesAdminView, Table, TableAdminView
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
-
 
 __docformat__ = 'restructuredtext'
 
@@ -223,6 +223,15 @@ def shared_content_timestamp(context, request, view):
 # Base shared tool dashboard components
 #
 
+class BaseSharedToolDashboardMenu(NavigationMenuItem):
+    """Base shared tool dashboard menu"""
+
+    def __new__(cls, context, request, view, manager=None):
+        if IBaseSharedTool.providedBy(context) and not context.shared_tool_dashboard:
+            return None
+        return NavigationMenuItem.__new__(cls)
+
+
 class BaseDashboardTable(Table):
     """Base dashboard table"""
 
@@ -305,7 +314,7 @@ def shared_tool_menu_header(context, request, view, menu):
                 context=IBaseSharedTool, layer=IAdminLayer,
                 manager=IContentManagementMenu, weight=5,
                 permission=VIEW_SYSTEM_PERMISSION)
-class SharedToolDashboardMenu(NavigationMenuItem):
+class SharedToolDashboardMenu(BaseSharedToolDashboardMenu):
     """Shared tool dashboard menu"""
 
     label = _("Dashboard")
@@ -323,6 +332,18 @@ class SharedToolDashboardView(MultipleTablesAdminView):
     table_label = _("My dashboard")
 
 
+class BaseSharedToolDashboardValuesAdapter(ContextRequestViewAdapter):
+    """Base shared tool dashboard manager values adapter"""
+    
+    def get_content_types(self):
+        factory = self.request.registry.queryMultiAdapter((self.context, self.view),
+                                                          IDashboardTableContentTypes)
+        if factory is not None:
+            return factory
+        vocabulary = getVocabularyRegistry().get(self.context, SHARED_CONTENT_TYPES_VOCABULARY)
+        return vocabulary.by_value.keys()
+    
+    
 @adapter_config(name='no-content-warning',
                 required=(IBaseSharedTool, IAdminLayer, SharedToolDashboardView),
                 provides=IInnerTable, force_implements=False)
@@ -350,6 +371,7 @@ class SharedToolMissingContentWarning(AlertMessage):
 # Manager waiting contents
 #
 
+@implementer(IDashboardManagerWaitingTable)
 class SharedToolDashboardManagerWaitingTable(DashboardTable):
     """Shared tool dashboard manager waiting table"""
 
@@ -373,9 +395,9 @@ class SharedToolDashboardManagerWaitingView(BaseSharedToolDashboardView):
     weight = 20
 
 
-@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolDashboardManagerWaitingTable),
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, IDashboardManagerWaitingTable),
                 provides=IValues)
-class SharedToolDashboardManagerWaitingValues(ContextRequestViewAdapter):
+class SharedToolDashboardManagerWaitingValues(BaseSharedToolDashboardValuesAdapter):
     """Shared tool dashboard waiting values getter"""
 
     @property
@@ -384,9 +406,8 @@ class SharedToolDashboardManagerWaitingValues(ContextRequestViewAdapter):
         intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
         workflow = IWorkflow(self.context)
-        vocabulary = getVocabularyRegistry().get(self.context, SHARED_CONTENT_TYPES_VOCABULARY)
         params = And(Eq(catalog['parents'], intids.register(self.context)),
-                     Any(catalog['content_type'], vocabulary.by_value.keys()),
+                     Any(catalog['content_type'], self.get_content_types()),
                      Any(catalog['workflow_state'], workflow.waiting_states))
         yield from filter(
             self.check_access,
@@ -412,6 +433,7 @@ class SharedToolDashboardManagerWaitingValues(ContextRequestViewAdapter):
 # Last owned contents waiting for action
 #
 
+@implementer(IDashboardOwnerWaitingTable)
 class SharedToolDashboardOwnerWaitingTable(DashboardTable):
     """Table of owned contents waiting for action"""
 
@@ -435,9 +457,9 @@ class SharedToolDashboardOwnerWaitingView(BaseSharedToolDashboardView):
     weight = 30
 
 
-@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolDashboardOwnerWaitingTable),
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, IDashboardOwnerWaitingTable),
                 provides=IValues)
-class SharedToolDashboardOwnerWaitingValues(ContextRequestViewAdapter):
+class SharedToolDashboardOwnerWaitingValues(BaseSharedToolDashboardValuesAdapter):
     """Shared tool dashboard waiting owned contents values adapter"""
 
     @property
@@ -446,9 +468,8 @@ class SharedToolDashboardOwnerWaitingValues(ContextRequestViewAdapter):
         intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
         workflow = IWorkflow(self.context)
-        vocabulary = getVocabularyRegistry().get(self.context, SHARED_CONTENT_TYPES_VOCABULARY)
         params = And(Eq(catalog['parents'], intids.register(self.context)),
-                     Any(catalog['content_type'], vocabulary.by_value.keys()),
+                     Any(catalog['content_type'], self.get_content_types()),
                      Any(catalog['workflow_state'], workflow.waiting_states),
                      Eq(catalog['workflow_principal'], self.request.principal.id))
         yield from unique_iter(
@@ -461,6 +482,7 @@ class SharedToolDashboardOwnerWaitingValues(ContextRequestViewAdapter):
 # Last owner modified contents
 #
 
+@implementer(IDashboardOwnerModifiedTable)
 class SharedToolDashboardOwnerModifiedTable(DashboardTable):
     """Shared tool dashboard owner modified table"""
 
@@ -490,9 +512,9 @@ class SharedToolDashboardOwnerModifiedView(BaseSharedToolDashboardView):
     weight = 40
 
 
-@adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolDashboardOwnerModifiedTable),
+@adapter_config(required=(IBaseSharedTool, IAdminLayer, IDashboardOwnerModifiedTable),
                 provides=IValues)
-class SharedToolDashboardOwnerModifiedValues(ContextRequestViewAdapter):
+class SharedToolDashboardOwnerModifiedValues(BaseSharedToolDashboardValuesAdapter):
     """Shared tool dashboard owner modified adapter"""
 
     @property
@@ -501,9 +523,8 @@ class SharedToolDashboardOwnerModifiedValues(ContextRequestViewAdapter):
         principal_id = self.request.principal.id
         intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
-        vocabulary = getVocabularyRegistry().get(self.context, SHARED_CONTENT_TYPES_VOCABULARY)
         params = And(Eq(catalog['parents'], intids.register(self.context)),
-                     Any(catalog['content_type'], vocabulary.by_value.keys()),
+                     Any(catalog['content_type'], self.get_content_types()),
                      Or(Eq(catalog['role:owner'], principal_id),
                         Eq(catalog['role:contributor'], principal_id)))
         yield from unique_iter(
@@ -523,7 +544,7 @@ class SharedToolDashboardOwnerModifiedValues(ContextRequestViewAdapter):
                        manager=IContentManagementMenu, weight=10,
                        permission=VIEW_SYSTEM_PERMISSION,
                        provides=IMyDashboardMenu)
-class SharedToolMyDashboardMenu(NavigationMenuItem):
+class SharedToolMyDashboardMenu(BaseSharedToolDashboardMenu):
     """Shared tool 'my contents' dashboard menu"""
 
     label = _("My contents")
@@ -540,7 +561,7 @@ class SharedToolMyDashboardMenu(NavigationMenuItem):
                 context=IBaseSharedTool, layer=IAdminLayer,
                 manager=IMyDashboardMenu, weight=5,
                 permission=VIEW_SYSTEM_PERMISSION)
-class SharedToolPreparationsMenu(NavigationMenuItem):
+class SharedToolPreparationsMenu(BaseSharedToolDashboardMenu):
     """Shared tool preparations dashboard menu"""
 
     label = _("My drafts")
@@ -554,7 +575,7 @@ class SharedToolPreparationsTable(DashboardTable):
 
 @adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolPreparationsTable),
                 provides=IValues)
-class SharedToolPreparationsValues(ContextRequestViewAdapter):
+class SharedToolPreparationsValues(BaseSharedToolDashboardValuesAdapter):
     """Shared tool preparations values adapter"""
 
     @property
@@ -563,9 +584,8 @@ class SharedToolPreparationsValues(ContextRequestViewAdapter):
         intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
         workflow = IWorkflow(self.context)
-        vocabulary = getVocabularyRegistry().get(self.context, SHARED_CONTENT_TYPES_VOCABULARY)
         params = And(Eq(catalog['parents'], intids.register(self.context)),
-                     Any(catalog['content_type'], vocabulary.by_value.keys()),
+                     Any(catalog['content_type'], self.get_content_types()),
                      Or(Eq(catalog['role:owner'], principal_id),
                         Eq(catalog['role:contributor'], principal_id)),
                      Eq(catalog['workflow_state'], workflow.initial_state))
@@ -598,7 +618,7 @@ class SharedToolPreparationsView(BaseSharedToolDashboardSingleView):
                 context=IBaseSharedTool, layer=IAdminLayer,
                 manager=IMyDashboardMenu, weight=10,
                 permission=VIEW_SYSTEM_PERMISSION)
-class SharedToolSubmissionsMenu(NavigationMenuItem):
+class SharedToolSubmissionsMenu(BaseSharedToolDashboardMenu):
     """Shared tool submissions dashboard menu"""
 
     label = _("My submissions")
@@ -612,7 +632,7 @@ class SharedToolSubmissionsTable(DashboardTable):
 
 @adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolSubmissionsTable),
                 provides=IValues)
-class SharedToolSubmissionsValues(ContextRequestViewAdapter):
+class SharedToolSubmissionsValues(BaseSharedToolDashboardValuesAdapter):
     """Shared tool submissions values adapter"""
 
     @property
@@ -622,9 +642,8 @@ class SharedToolSubmissionsValues(ContextRequestViewAdapter):
         intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
         workflow = IWorkflow(context)
-        vocabulary = getVocabularyRegistry().get(context, SHARED_CONTENT_TYPES_VOCABULARY)
         params = And(Eq(catalog['parents'], intids.register(context)),
-                     Any(catalog['content_type'], vocabulary.by_value.keys()),
+                     Any(catalog['content_type'], self.get_content_types()),
                      Or(Eq(catalog['role:owner'], principal_id),
                         Eq(catalog['role:contributor'], principal_id)),
                      Any(catalog['workflow_state'], workflow.waiting_states))
@@ -657,7 +676,7 @@ class SharedToolSubmissionsView(BaseSharedToolDashboardSingleView):
                 context=IBaseSharedTool, layer=IAdminLayer,
                 manager=IMyDashboardMenu, weight=15,
                 permission=VIEW_SYSTEM_PERMISSION)
-class SharedToolPublicationsMenu(NavigationMenuItem):
+class SharedToolPublicationsMenu(BaseSharedToolDashboardMenu):
     """Shared tool publications dashboard menu"""
 
     label = _("My publications")
@@ -671,7 +690,7 @@ class SharedToolPublicationsTable(DashboardTable):
 
 @adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolPublicationsTable),
                 provides=IValues)
-class SharedToolPublicationsValues(ContextRequestViewAdapter):
+class SharedToolPublicationsValues(BaseSharedToolDashboardValuesAdapter):
     """Shared tool publications values adapter"""
 
     @property
@@ -681,9 +700,8 @@ class SharedToolPublicationsValues(ContextRequestViewAdapter):
         intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
         workflow = get_utility(IWorkflow, name=context.shared_content_workflow)
-        vocabulary = getVocabularyRegistry().get(context, SHARED_CONTENT_TYPES_VOCABULARY)
         params = And(Eq(catalog['parents'], intids.register(context)),
-                     Any(catalog['content_type'], vocabulary.by_value.keys()) &
+                     Any(catalog['content_type'], self.get_content_types()) &
                      Or(Eq(catalog['role:owner'], principal_id),
                         Eq(catalog['role:contributor'], principal_id)),
                      Any(catalog['workflow_state'], workflow.published_states))
@@ -716,7 +734,7 @@ class SharedToolPublicationsView(BaseSharedToolDashboardSingleView):
                 context=IBaseSharedTool, layer=IAdminLayer,
                 manager=IMyDashboardMenu, weight=20,
                 permission=VIEW_SYSTEM_PERMISSION)
-class SharedToolRetiredContentsMenu(NavigationMenuItem):
+class SharedToolRetiredContentsMenu(BaseSharedToolDashboardMenu):
     """Shared tool retired contents dashboard menu"""
 
     label = _("My retired contents")
@@ -730,7 +748,7 @@ class SharedToolRetiredContentsTable(DashboardTable):
 
 @adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolRetiredContentsTable),
                 provides=IValues)
-class SharedToolRetiredContentsValues(ContextRequestViewAdapter):
+class SharedToolRetiredContentsValues(BaseSharedToolDashboardValuesAdapter):
     """Shared tool retired contents values adapter"""
 
     @property
@@ -740,9 +758,8 @@ class SharedToolRetiredContentsValues(ContextRequestViewAdapter):
         intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
         workflow = get_utility(IWorkflow, name=context.shared_content_workflow)
-        vocabulary = getVocabularyRegistry().get(context, SHARED_CONTENT_TYPES_VOCABULARY)
         params = And(Eq(catalog['parents'], intids.register(context)),
-                     Any(catalog['content_type'], vocabulary.by_value.keys()) &
+                     Any(catalog['content_type'], self.get_content_types()) &
                      Or(Eq(catalog['role:owner'], principal_id),
                         Eq(catalog['role:contributor'], principal_id)),
                      Any(catalog['workflow_state'], workflow.retired_states))
@@ -775,7 +792,7 @@ class SharedToolRetiredContentsView(BaseSharedToolDashboardSingleView):
                 context=IBaseSharedTool, layer=IAdminLayer,
                 manager=IMyDashboardMenu, weight=25,
                 permission=VIEW_SYSTEM_PERMISSION)
-class SharedToolArchivedContentsMenu(NavigationMenuItem):
+class SharedToolArchivedContentsMenu(BaseSharedToolDashboardMenu):
     """Shared tool archived contents dashboard menu"""
 
     label = _("My archived contents")
@@ -789,7 +806,7 @@ class SharedToolArchivedContentsTable(DashboardTable):
 
 @adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolArchivedContentsTable),
                 provides=IValues)
-class SharedToolArchivedContentsValues(ContextRequestViewAdapter):
+class SharedToolArchivedContentsValues(BaseSharedToolDashboardValuesAdapter):
     """Shared tool archived contents values adapter"""
 
     @property
@@ -799,9 +816,8 @@ class SharedToolArchivedContentsValues(ContextRequestViewAdapter):
         intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
         workflow = get_utility(IWorkflow, name=context.shared_content_workflow)
-        vocabulary = getVocabularyRegistry().get(context, SHARED_CONTENT_TYPES_VOCABULARY)
         params = And(Eq(catalog['parents'], intids.register(context)),
-                     Any(catalog['content_type'], vocabulary.by_value.keys()) &
+                     Any(catalog['content_type'], self.get_content_types()) &
                      Or(Eq(catalog['role:owner'], principal_id),
                         Eq(catalog['role:contributor'], principal_id)),
                      Any(catalog['workflow_state'], workflow.archived_states))
@@ -834,7 +850,7 @@ class SharedToolArchivedContentsView(BaseSharedToolDashboardSingleView):
                        manager=IContentManagementMenu, weight=20,
                        permission=VIEW_SYSTEM_PERMISSION,
                        provides=IAllDashboardMenu)
-class SharedToolAllInterventionsMenu(NavigationMenuItem):
+class SharedToolAllInterventionsMenu(BaseSharedToolDashboardMenu):
     """Shared tool 'all interventions' dashboard menu"""
 
     label = _("All interventions")
@@ -847,15 +863,15 @@ class SharedToolAllInterventionsMenu(NavigationMenuItem):
 # Last published contents
 #
 
-@viewlet_config(name='last-published.menu',
+@viewlet_config(name='last-published-contents.menu',
                 context=IBaseSharedTool, layer=IAdminLayer,
                 manager=IAllDashboardMenu, weight=25,
                 permission=VIEW_SYSTEM_PERMISSION)
-class SharedToolLastPublicationsMenu(NavigationMenuItem):
+class SharedToolLastPublicationsMenu(BaseSharedToolDashboardMenu):
     """Shared tool modified contents dashboard menu"""
 
     label = _("Last publications")
-    href = '#last-published.html'
+    href = '#last-published-contents.html'
 
 
 @implementer(IView)
@@ -865,7 +881,7 @@ class SharedToolLastPublicationsTable(DashboardTable):
 
 @adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolLastPublicationsTable),
                 provides=IValues)
-class SharedToolLastPublicationsValues(ContextRequestViewAdapter):
+class SharedToolLastPublicationsValues(BaseSharedToolDashboardValuesAdapter):
     """Shared tool publications values adapter"""
 
     @property
@@ -873,9 +889,8 @@ class SharedToolLastPublicationsValues(ContextRequestViewAdapter):
         intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
         workflow = get_utility(IWorkflow, name=self.context.shared_content_workflow)
-        vocabulary = getVocabularyRegistry().get(self.context, SHARED_CONTENT_TYPES_VOCABULARY)
         params = And(Eq(catalog['parents'], intids.register(self.context)),
-                     Any(catalog['content_type'], vocabulary.by_value.keys()) &
+                     Any(catalog['content_type'], self.get_content_types()) &
                      Any(catalog['workflow_state'], workflow.published_states))
         yield from unique_iter(
             CatalogResultSet(CatalogQuery(catalog).query(params,
@@ -884,7 +899,7 @@ class SharedToolLastPublicationsValues(ContextRequestViewAdapter):
                                                          reverse=True)))
 
 
-@pagelet_config(name='last-published.html',
+@pagelet_config(name='last-published-contents.html',
                 context=IBaseSharedTool, layer=IPyAMSLayer,
                 permission=VIEW_SYSTEM_PERMISSION)
 class SharedToolLastPublicationsView(BaseSharedToolDashboardSingleView):
@@ -908,15 +923,15 @@ class SharedToolLastPublicationsView(BaseSharedToolDashboardSingleView):
 # Last modified contents
 #
 
-@viewlet_config(name='last-modified.menu',
+@viewlet_config(name='last-modified-contents.menu',
                 context=IBaseSharedTool, layer=IAdminLayer,
                 manager=IAllDashboardMenu, weight=30,
                 permission=VIEW_SYSTEM_PERMISSION)
-class SharedToolLastModifiedMenu(NavigationMenuItem):
+class SharedToolLastModificationsMenu(BaseSharedToolDashboardMenu):
     """Shared tool modified contents dashboard menu"""
 
     label = _("Last modifications")
-    href = '#last-modified.html'
+    href = '#last-modified-contents.html'
 
 
 @implementer(IView)
@@ -926,16 +941,15 @@ class SharedToolLastModificationsTable(DashboardTable):
 
 @adapter_config(required=(IBaseSharedTool, IAdminLayer, SharedToolLastModificationsTable),
                 provides=IValues)
-class SharedToolLastModificationsValues(ContextRequestViewAdapter):
+class SharedToolLastModificationsValues(BaseSharedToolDashboardValuesAdapter):
     """Shared tool modifications values adapter"""
 
     @property
     def values(self):
         intids = get_utility(IIntIds)
         catalog = get_utility(ICatalog)
-        vocabulary = getVocabularyRegistry().get(self.context, SHARED_CONTENT_TYPES_VOCABULARY)
         params = And(Eq(catalog['parents'], intids.register(self.context)),
-                     Any(catalog['content_type'], vocabulary.by_value.keys()))
+                     Any(catalog['content_type'], self.get_content_types()))
         yield from unique_iter(
             CatalogResultSet(CatalogQuery(catalog).query(params,
                                                          limit=50,
@@ -943,7 +957,7 @@ class SharedToolLastModificationsValues(ContextRequestViewAdapter):
                                                          reverse=True)))
 
 
-@pagelet_config(name='last-modified.html',
+@pagelet_config(name='last-modified-contents.html',
                 context=IBaseSharedTool, layer=IPyAMSLayer,
                 permission=VIEW_SYSTEM_PERMISSION)
 class SharedToolLastModificationsView(BaseSharedToolDashboardSingleView):

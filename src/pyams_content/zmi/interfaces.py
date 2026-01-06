@@ -30,6 +30,42 @@ class IDashboardTable(Interface):
     """Dashboard table marker interface"""
 
 
+class IDashboardManagerWaitingTable(IDashboardTable):
+    """Dashboard manager waiting content table marker interface"""
+
+
+class IDashboardOwnerWaitingTable(IDashboardTable):
+    """Dashboard owner waiting content table marker interface"""
+
+
+class IDashboardOwnerModifiedTable(IDashboardTable):
+    """Dashboard owner modified content table marker interface"""
+
+
+class IDashboardPreparationsTable(IDashboardTable):
+    """Dashboard preparations table marker interface"""
+
+
+class IDashboardSubmissionsTable(IDashboardTable):
+    """Dashboard submissions table marker interface"""
+
+
+class IDashboardPublicationsTable(IDashboardTable):
+    """Dashboard publications table marker interface"""
+
+
+class IDashboardRetiredContentTable(IDashboardTable):
+    """Dashboard retired content table marker interface"""
+
+
+class IDashboardArchivedContentTable(IDashboardTable):
+    """Dashboard archived content table marker interface"""
+
+
+class IDashboardTableContentTypes(Interface):
+    """Dashboard table content types getter interface"""
+
+
 class IDashboardColumn(Interface):
     """Dashboard column marker interface"""
 
