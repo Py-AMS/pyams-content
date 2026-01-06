@@ -432,6 +432,7 @@ wf_transitions = {init,
                   prepublished_to_published,
                   draft_to_published,
                   published_to_archived_by_user,
+                  published_to_archived_by_task,
                   published_to_draft,
                   archived_to_draft,
                   delete}
