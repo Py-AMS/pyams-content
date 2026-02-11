@@ -31,7 +31,7 @@ from pyams_scheduler.interfaces import IScheduler
 from pyams_scheduler.interfaces.task import TASK_STATUS_FAIL, TASK_STATUS_OK
 from pyams_scheduler.task import Task
 from pyams_site.interfaces import ISiteRoot
-from pyams_thesaurus.interfaces.term import IThesaurusTerm
+from pyams_thesaurus.interfaces.term import IThesaurusLoaderTerm, IThesaurusTerm
 from pyams_utils.factory import factory_config
 from pyams_utils.finder import find_objects_providing
 from pyams_utils.registry import get_utility
@@ -72,6 +72,9 @@ class GlossaryUpdaterTask(Task):
 @subscriber(IObjectRemovedEvent, context_selector=IThesaurusTerm)
 def handle_updated_thesaurus_term(event):
     """Reset glossary automaton on term update"""
+    term = event.object
+    if IThesaurusLoaderTerm.providedBy(term):
+        return
     request = check_request()
     tags_manager = ITagsManager(request.root)
     if not tags_manager.enable_glossary:
