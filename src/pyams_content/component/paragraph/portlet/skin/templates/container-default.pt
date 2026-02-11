@@ -7,7 +7,7 @@
 		</h2>
 		<tal:loop repeat="renderer view.renderers">
 			<tal:if condition="renderer is not None">
-				<a id="part_${tales:cache_key(renderer.context)}"></a>
+				<a id="part_${view.get_paragraph_anchor(renderer.context)}"></a>
 				${structure:renderer.render(view.template_name)}
 			</tal:if>
 		</tal:loop>

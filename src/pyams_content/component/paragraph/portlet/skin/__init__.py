@@ -19,13 +19,12 @@ from zope.interface import Interface
 
 from pyams_content.component.paragraph.interfaces import IParagraphContainer
 from pyams_content.component.paragraph.portlet import IParagraphNavigationPortletSettings
-from pyams_content.component.paragraph.portlet.interfaces import \
-    IParagraphContainerPortletSettings
-from pyams_content.component.paragraph.portlet.skin.interfaces import \
-    IParagraphContainerPortletRenderer
+from pyams_content.component.paragraph.portlet.interfaces import IParagraphContainerPortletSettings
+from pyams_content.component.paragraph.portlet.skin.interfaces import IParagraphContainerPortletRenderer
 from pyams_content.feature.renderer.interfaces import ISharedContentRenderer
 from pyams_content.shared.site.interfaces import ISiteContainer
 from pyams_content.skin.interfaces import IContentSummaryInfo
+from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortalContext, IPortletRenderer
 from pyams_portal.skin import PortletRenderer
@@ -33,7 +32,7 @@ from pyams_sequence.interfaces import IInternalReference, ISequentialIdInfo
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
 from pyams_utils.list import is_not_none
-
+from pyams_utils.url import generate_url
 
 __docformat__ = 'restructuredtext'
 
@@ -119,6 +118,11 @@ class ParagraphsContainerPortletRenderer(PortletRenderer):
             key = f'{key}::{self.request.view_name}'
         return key
 
+    def get_paragraph_anchor(self, item):
+        """Paragraph anchor getter"""
+        title = II18n(item).query_attribute('title', request=self.request)
+        return f'{item.__name__}::{generate_url(title)}' if title else item.__name__
+
     def get_navigation_links(self):
         """Navigation links getter"""
 
@@ -189,3 +193,8 @@ class ParagraphsNavigationPortletRenderer(PortletRenderer):
                 anchors_only=settings.anchors_only,
                 factories=settings.factories,
                 excluded_factories=settings.excluded_factories)
+
+    def get_paragraph_anchor(self, item):
+        """Paragraph anchor getter"""
+        title = II18n(item).query_attribute('title', request=self.request)
+        return f'{item.__name__}::{generate_url(title)}' if title else item.__name__

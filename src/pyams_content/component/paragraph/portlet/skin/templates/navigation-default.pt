@@ -10,7 +10,7 @@
 				tal:define="title i18n:item.title"
 				tal:condition="title">
 				<a class="nav-link"
-				   href="#part_${tales:cache_key(item)}">
+				   href="#part_${view.get_paragraph_anchor(item)}">
 					${title}
 				</a>
 			</li>
