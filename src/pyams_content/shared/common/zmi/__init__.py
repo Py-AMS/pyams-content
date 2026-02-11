@@ -383,9 +383,10 @@ class SharedContentPropertiesEditFormRenderer(AJAXFormRenderer):
 
     def render(self, changes):
         """AJAX form renderer"""
-        if 'title' in changes.get(IBaseContent, ()):
+        if changes and ('title' in changes.get(IBaseContent, ())):
             return {
-                'status': 'redirect'
+                'status': 'redirect',
+                'message': self.request.localizer.translate(self.form.success_message)
             }
         return super().render(changes)
 
@@ -393,7 +394,8 @@ class SharedContentPropertiesEditFormRenderer(AJAXFormRenderer):
 @adapter_config(name='main',
                 required=(IWfSharedContent, IAdminLayer, SharedContentPropertiesEditForm),
                 provides=IAJAXFormRenderer)
-class SharedContentPropertiesEditFormRenderer(ContextRequestViewAdapter):
+class MainSharedContentPropertiesEditFormRenderer(ContextRequestViewAdapter):
+    """Main shared content properties edit form renderer"""
 
     def render(self, changes):
         """AJAX form renderer"""
