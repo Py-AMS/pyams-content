@@ -16,7 +16,7 @@ This module defines interfaces of associations renderers.
 """
 
 from zope.interface import Interface
-from zope.schema import Choice
+from zope.schema import Bool, Choice
 
 from pyams_utils.text import PYAMS_HTML_RENDERERS_VOCABULARY
 
@@ -33,3 +33,9 @@ class IAssociationParagraphDefaultRendererSettings(Interface):
                                 vocabulary=PYAMS_HTML_RENDERERS_VOCABULARY,
                                 required=True,
                                 default='text')
+
+    display_link_first = Bool(title=_("Display link before description?"),
+                              description=_("Associations links are normally displayed after the description; "
+                                            "by using this option, you can display links first"),
+                              required=True,
+                              default=False)

@@ -33,6 +33,8 @@ class AssociationContainerRendererMixin:
     """Associations container renderer mixin"""
 
     description_format = 'text'
+    display_link_first = False
+
     template_name = ''
 
     def __init__(self, *args, **kwargs):
@@ -54,6 +56,7 @@ class AssociationContainerRendererMixin:
         super().update()
         if settings is not None:
             self.description_format = settings.description_format
+            self.display_link_first = settings.display_link_first
         self.template_name = template_name
         self.state.update(state)
         self.attachments = []

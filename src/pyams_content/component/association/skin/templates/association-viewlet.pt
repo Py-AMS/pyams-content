@@ -17,12 +17,19 @@
 				<tal:var define="item_info view.get_link_info(item);
 								 description i18n:item.description;
 								 data i18n:item.data;">
-					<p class="d-flex flex-column">
+					<p class="d-flex flex-column"
+					   tal:switch="view.display_link_first">
+						<a tal:case="True"
+						   tal:define="href_data tales:absolute_url(data);"
+						   href="${href_data}" target="_blank">
+							${item_info.user_title}
+						</a>
 						<tal:if condition="description">
 							${structure:tales:html(description, renderer_style)}
 							<br tal:condition="view.description_format == 'text'" />
 						</tal:if>
-						<a tal:define="href_data tales:absolute_url(data);"
+						<a tal:case="False"
+						   tal:define="href_data tales:absolute_url(data);"
 						   href="${href_data}" target="_blank">
 							${item_info.user_title}
 						</a>
@@ -43,14 +50,22 @@
 				<div tal:define="link_info view.get_link_info(link);
 								 description i18n:link.description;
 								 pictogram link.pictogram;">
-					<tal:if condition="description">
-						${structure:tales:html(description, renderer_style)}
-						<br tal:condition="view.description_format == 'text'" />
-					</tal:if>
-					<a class="d-block"
-					   tal:define="href link.get_url(request);
-								   target None if (href.startswith('mailto:') or href.startswith(request.application_url)) else '_blank'"
-					   href="${href}" target="${target}">${link_info.user_title}</a>
+					<tal:case switch="view.display_link_first">
+						<a tal:case="True"
+						   class="d-block ${'mt-3' if not repeat['link'].start() else ''} ${'mb-0' if description else ''}"
+						   tal:define="href link.get_url(request);
+									   target None if (href.startswith('mailto:') or href.startswith(request.application_url)) else '_blank'"
+						   href="${href}" target="${target}">${link_info.user_title}</a>
+						<tal:if condition="description">
+							${structure:tales:html(description, renderer_style)}
+							<br tal:condition="view.description_format == 'text'" />
+						</tal:if>
+						<a tal:case="False"
+						   class="d-block"
+						   tal:define="href link.get_url(request);
+									   target None if (href.startswith('mailto:') or href.startswith(request.application_url)) else '_blank'"
+						   href="${href}" target="${target}">${link_info.user_title}</a>
+					</tal:case>
 				</div>
 			</div>
 		</div>

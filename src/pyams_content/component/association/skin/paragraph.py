@@ -39,6 +39,7 @@ class AssociationParagraphDefaultRendererSettings(Persistent, Contained):
     """Association container paragraph default renderer settings"""
 
     description_format = FieldProperty(IAssociationParagraphDefaultRendererSettings['description_format'])
+    display_link_first = FieldProperty(IAssociationParagraphDefaultRendererSettings['display_link_first'])
 
 
 @adapter_config(name=DEFAULT_RENDERER_NAME,
