@@ -36,11 +36,22 @@ class IViewQuery(Interface):
         """Get tuple of limited results and total results count"""
 
 
-class IViewUserQuery(Interface):
+CUSTOM_QUERY_SEARCH_MODE_KEY = 'pyams_content.query.search_mode'
+
+
+class IBaseUserQuery(Interface):
     """View user search query interface"""
 
     def get_user_params(self, request):
         """Get dynamic user query params"""
+
+
+class IViewUserQuery(IBaseUserQuery):
+    """View user search query interface"""
+
+
+class ICustomUserQueryHandler(IBaseUserQuery):
+    """Custom user search query handler interface"""
 
 
 class IViewQueryExtension(Interface):

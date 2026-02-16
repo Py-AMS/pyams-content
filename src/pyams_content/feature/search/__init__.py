@@ -23,6 +23,8 @@ from pyams_content.feature.preview.interfaces import IPreviewTarget
 from pyams_content.feature.search.interfaces import ISearchFolder
 from pyams_content.interfaces import MANAGE_SITE_PERMISSION
 from pyams_content.shared.view import WfView
+from pyams_content.shared.view.interfaces.query import IViewQuery
+from pyams_content.shared.view.query import ViewQuery
 from pyams_portal.interfaces import IPortalContext, IPortalFooterContext, IPortalHeaderContext
 from pyams_security.interfaces import IDefaultProtectionPolicy, IViewContextPermissionChecker
 from pyams_utils.adapter import ContextAdapter, adapter_config
@@ -67,3 +69,13 @@ class SearchFolderPermissionChecker(ContextAdapter):
     """Search folder permission checker"""
 
     edit_permission = MANAGE_SITE_PERMISSION
+
+
+@adapter_config(required=ISearchFolder,
+                provides=IViewQuery)
+class SearchFolderQuery(ViewQuery):
+    """Search folder query"""
+    
+    def get_params(self, context, request=None, **kwargs):
+        kwargs.pop('get_user_params', None)
+        return super().get_params(context, request, get_user_params=True, **kwargs)

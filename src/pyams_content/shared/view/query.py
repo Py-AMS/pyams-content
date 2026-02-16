@@ -26,8 +26,8 @@ from hypatia.query import Any, Eq, Gt, Lt, NotAny, Or
 from pyams_catalog.query import CatalogResultSet, or_
 from pyams_content.shared.view import IViewQuery, IWfView
 from pyams_content.shared.view.interfaces import RELEVANCE_ORDER, TITLE_ORDER
-from pyams_content.shared.view.interfaces.query import END_PARAMS_MARKER, IViewQueryParamsExtension, \
-    IViewQueryResultsFilterExtension, IViewUserQuery
+from pyams_content.shared.view.interfaces.query import CUSTOM_QUERY_SEARCH_MODE_KEY, END_PARAMS_MARKER, \
+    ICustomUserQueryHandler, IViewQueryParamsExtension, IViewQueryResultsFilterExtension, IViewUserQuery
 from pyams_i18n.interfaces import INegotiator
 from pyams_utils.adapter import ContextAdapter, adapter_config, get_adapter_weight
 from pyams_utils.list import unique_iter
@@ -110,11 +110,24 @@ class ViewQuery(ContextAdapter):
                 filters &= Gt(catalog['content_publication_date'],
                               now - timedelta(days=age_limit))
         params &= filters
+        # add user search params
+        if kwargs.pop('get_user_params', None) is True:
+            search_mode = request.annotations.get(CUSTOM_QUERY_SEARCH_MODE_KEY)
+            for name, adapter in registry.getAdapters((self,), IViewUserQuery):
+                if search_mode:
+                    query_handler = registry.queryMultiAdapter((self, adapter),
+                                                               ICustomUserQueryHandler,
+                                                               name=f'{name}::{search_mode}')
+                    if query_handler is not None:
+                        for user_param in query_handler.get_user_params(request):
+                            params &= user_param
+                        continue
+                for user_param in adapter.get_user_params(request):
+                    params &= user_param
         return params
 
     def get_results(self, context, sort_index, reverse, limit,
                     request=None, aggregates=None, settings=None, **kwargs):
-        view = self.context
         catalog = get_utility(ICatalog)
         registry = get_pyramid_registry()
         params = self.get_params(context, request, **kwargs)
@@ -133,10 +146,11 @@ class ViewQuery(ContextAdapter):
                                                 limit=limit)
             total_count = query[0]
             items = CatalogResultSet(query)
-        for name, adapter in sorted(registry.getAdapters((view,), IViewQueryResultsFilterExtension),
+        for name, adapter in sorted(registry.getAdapters((self.context,),
+                                                         IViewQueryResultsFilterExtension),
                                     key=get_adapter_weight):
             items = adapter.filter(context, items, request)
-        return unique_iter(items), total_count, {}
+        return total_count, {}, unique_iter(items)
 
 
 @adapter_config(name='user-params',

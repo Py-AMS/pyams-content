@@ -43,11 +43,11 @@ from pyams_utils.factory import factory_config
 from pyams_utils.text import get_text_start
 from pyams_utils.url import canonical_url, relative_url
 from pyams_viewlet.viewlet import ViewContentProvider
+from pyams_workflow.interfaces import IWorkflowPublicationInfo
 
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
-from pyams_workflow.interfaces import IWorkflowPublicationInfo
 
 
 class SearchResultsPortletBaseRendererSettings(Persistent, Contained):
