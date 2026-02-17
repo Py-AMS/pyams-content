@@ -1,6 +1,19 @@
 Changelog
 =========
 
+2.8.0
+-----
+ - added interfaces and properties and updated dashboards and search tools for better handling of
+   "inner" shared tools located inside a site manager
+ - added support for custom search results finder adapters in search results portlet
+ - added controls when rendering paragraphs container elements title
+ - updated content paragraphs anchors names to get persistent names across versions
+ - added message to shared content properties edit form renderer
+ - added optional views adapters interfaces
+ - updated default associations paragraph renderer settings to display links before their description
+ - ignore glossary updater task when loading thesaurus terms
+ - restrict URLs domain in external links
+
 2.7.0
 -----
  - allow (restricted!) usage of several views in a views content portlet using an aggregated renderer
