@@ -12,14 +12,14 @@
 
 """PyAMS_content.skin.interfaces module
 
-this module defines common contents rendering interfaces.
+This module defines common contents rendering interfaces.
 """
-
-__docformat__ = 'restructuredtext'
 
 from zope.interface import Attribute, Interface
 
 from pyams_layer.interfaces import IPyAMSUserLayer
+
+__docformat__ = 'restructuredtext'
 
 
 class IPyAMSDefaultLayer(IPyAMSUserLayer):
@@ -65,6 +65,13 @@ class IContentSummaryInfo(Interface):
     title = Attribute("Content title")
     header = Attribute("Content header")
     button_title = Attribute("Button title")
+
+
+class IContentVisibilityChecker(Interface):
+    """Content visibility checker interface"""
+
+    def is_visible(self) -> bool:
+        """Visibility getter"""
 
 
 class IPublicURL(Interface):

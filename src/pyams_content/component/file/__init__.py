@@ -12,20 +12,21 @@
 
 """PyAMS_content.component.file module
 
-This module provides a custom file view to check parents publication.
+This module provides a custom file view to check the parents publication.
 """
-
-__docformat__ = 'restructuredtext'
 
 from pyramid.httpexceptions import HTTPNotFound
 from pyramid.location import lineage
 from pyramid.view import view_config
 
+from pyams_content.skin.interfaces import IContentVisibilityChecker
 from pyams_file.interfaces import IFile
 from pyams_file.skin.view import FileView
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_security.interfaces.base import VIEW_SYSTEM_PERMISSION
 from pyams_workflow.interfaces import IWorkflowPublicationInfo
+
+__docformat__ = 'restructuredtext'
 
 
 @view_config(context=IFile,
@@ -34,8 +35,13 @@ def ProtectedFileView(request):  # pylint: disable=invalid-name
     """Protected file view"""
     context = request.context
     if not request.has_permission(VIEW_SYSTEM_PERMISSION, context=context):  # authenticated
+        registry = request.registry
         for parent in lineage(context):
+            checker = registry.queryMultiAdapter((parent, request), IContentVisibilityChecker)
+            if (checker is not None) and not checker.is_visible():
+                raise HTTPNotFound()
             publication_info = IWorkflowPublicationInfo(parent, None)
-            if (publication_info is not None) and not publication_info.is_visible(request):
+            if (publication_info is not None) and \
+                    not publication_info.is_visible(request, check_parent=False):
                 raise HTTPNotFound()
     return FileView(request)
