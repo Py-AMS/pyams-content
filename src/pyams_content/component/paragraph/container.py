@@ -15,7 +15,6 @@
 This module provides paragraphs containers classes and adapters.
 """
 
-from ZODB.interfaces import IBroken
 from pyramid.events import subscriber
 from zope.copy import copy
 from zope.lifecycleevent import IObjectAddedEvent
@@ -24,12 +23,13 @@ from zope.traversing.interfaces import ITraversable
 
 from pyams_content.component.paragraph import IParagraphContainerTarget
 from pyams_content.component.paragraph.interfaces import IBaseParagraph, IParagraphContainer, \
-    IParagraphFactorySettings, IParagraphFactorySettingsTarget, PARAGRAPH_CONTAINER_KEY
+    IParagraphContainerItems, IParagraphFactorySettings, IParagraphFactorySettingsTarget, PARAGRAPH_CONTAINER_KEY
 from pyams_content.shared.common import IWfSharedContent
 from pyams_content.shared.common.interfaces.types import IWfTypedSharedContent
 from pyams_utils.adapter import ContextAdapter, adapter_config, get_annotation_adapter
 from pyams_utils.container import BTreeOrderedContainer
 from pyams_utils.factory import factory_config, get_object_factory
+from pyams_utils.request import query_request
 from pyams_utils.traversing import get_parent
 from pyams_workflow.interfaces import IWorkflowState
 
@@ -51,35 +51,15 @@ class ParagraphContainer(BTreeOrderedContainer):
         )
 
     def get_visible_paragraphs(self, names=None, anchors_only=False, exclude_anchors=False,
-                               factories=None, excluded_factories=None, limit=None):
+                               factories=None, excluded_factories=None, limit=None, **kwargs):
         """Visible paragraphs getter"""
-        count = 0
-        if names:
-            for name in names:
-                paragraph = self.get(name)
-                if (paragraph is not None) and \
-                        (not IBroken.providedBy(paragraph)) and \
-                        paragraph.visible:
-                    yield paragraph
-                    count += 1
-                    if limit and (count == limit):
-                        return
-        else:
-            for paragraph in self.values():
-                if IBroken.providedBy(paragraph) or not paragraph.visible:
-                    continue
-                if anchors_only and not paragraph.anchor:
-                    continue
-                if exclude_anchors and paragraph.anchor:
-                    continue
-                if factories and (paragraph.factory_name not in factories):
-                    continue
-                if excluded_factories and (paragraph.factory_name in excluded_factories):
-                    continue
-                yield paragraph
-                count += 1
-                if limit and (count == limit):
-                    return
+        request = kwargs.pop('request', None)
+        if request is None:
+            request = query_request()
+        adapter = request.registry.queryMultiAdapter((self, request), IParagraphContainerItems)
+        if adapter is not None:
+            yield from adapter.get_visible_paragraphs(names, anchors_only, exclude_anchors,
+                                                      factories, excluded_factories, limit, **kwargs)
 
 
 @adapter_config(required=IParagraphContainerTarget,

@@ -73,20 +73,24 @@ class IParagraphTitle(Interface):
     """Paragraph title adapter"""
 
 
-class IParagraphContainer(IOrderedContainer):
+class IParagraphContainerItems(Interface):
+    """Paragraph container items interface"""
+
+    def get_visible_paragraphs(self, names=None, anchors_only=False, exclude_anchors=False,
+                               factories=None, excluded_factories=None, limit=None, **kwargs):
+        """Get visible paragraphs matching given arguments"""
+
+
+class IParagraphContainer(IParagraphContainerItems, IOrderedContainer):
     """Paragraphs container"""
 
     contains(IBaseParagraph)
 
     def append(self, value):
-        """Add given value to container"""
+        """Add the given value to container"""
 
     def get_paragraphs(self, factories):
         """Get paragraphs matching given factories"""
-
-    def get_visible_paragraphs(self, names=None, anchors_only=False, exclude_anchors=False,
-                               factories=None, excluded_factories=None, limit=None):
-        """Get visible paragraphs matching given arguments"""
 
 
 CONTENT_PARAGRAPHS_VOCABULARY = 'pyams_content.paragraphs'

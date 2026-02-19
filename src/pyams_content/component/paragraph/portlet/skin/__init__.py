@@ -87,7 +87,8 @@ class ParagraphsContainerPortletRenderer(PortletRenderer):
                     exclude_anchors=settings.exclude_anchors,
                     factories=settings.factories,
                     excluded_factories=settings.excluded_factories,
-                    limit=settings.limit)
+                    limit=settings.limit,
+                    request=self.request)
                 renderers = [
                     paragraph.get_renderer(self.request)
                     for paragraph in paragraphs
@@ -192,7 +193,8 @@ class ParagraphsNavigationPortletRenderer(PortletRenderer):
                 names=settings.paragraphs,
                 anchors_only=settings.anchors_only,
                 factories=settings.factories,
-                excluded_factories=settings.excluded_factories)
+                excluded_factories=settings.excluded_factories,
+                request=self.request)
 
     def get_paragraph_anchor(self, item):
         """Paragraph anchor getter"""

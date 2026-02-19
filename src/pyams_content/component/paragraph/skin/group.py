@@ -30,7 +30,7 @@ class BaseParagraphsGroupRenderer(BaseContentRenderer):
     def get_paragraphs(self):
         container = IParagraphContainer(self.context, None)
         if container is not None:
-            yield from container.get_visible_paragraphs()
+            yield from container.get_visible_paragraphs(request=self.request)
 
     def update(self):
         super().update()
