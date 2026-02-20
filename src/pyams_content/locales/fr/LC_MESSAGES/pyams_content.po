@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2026-02-14 11:58+0100\n"
+"POT-Creation-Date: 2026-02-20 17:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4914,7 +4914,7 @@ msgstr "NON affiché"
 msgid "Default content renderer"
 msgstr "Mode de rendu par défaut"
 
-#: src/pyams_content/feature/search/__init__.py:42
+#: src/pyams_content/feature/search/__init__.py:44
 msgid "Search folder"
 msgstr "Moteur de recherche"
 
@@ -6098,8 +6098,9 @@ msgstr "{} : {}"
 msgid ""
 "You must use absolute URLs; relative URLs are forbidden in external links."
 msgstr ""
-"Vous devez utiliser une URL absolue (donc préfixée par exemple par 'https://') ; "
-"les URLs relatives ne sont pas autorisées dans les liens externes"
+"Vous devez utiliser une URL absolue (donc préfixée par exemple par "
+"'https://') ; les URLs relatives ne sont pas autorisées dans les liens "
+"externes"
 
 #: src/pyams_content/component/links/zmi/__init__.py:190
 msgid ""
@@ -6829,11 +6830,11 @@ msgstr ""
 msgid "§ Title"
 msgstr "Titre §"
 
-#: src/pyams_content/component/paragraph/interfaces/__init__.py:114
+#: src/pyams_content/component/paragraph/interfaces/__init__.py:118
 msgid "Allowed paragraphs"
 msgstr "Types de blocs autorisés"
 
-#: src/pyams_content/component/paragraph/interfaces/__init__.py:115
+#: src/pyams_content/component/paragraph/interfaces/__init__.py:119
 msgid ""
 "List of paragraphs allowed for this content type; if selection is empty, all "
 "paragraphs types will be allowed"
@@ -6841,11 +6842,11 @@ msgstr ""
 "Liste des types de blocs autorisés au sein de ce gabarit ; une sélection "
 "vide indique que tous les types de blocs seront utilisables"
 
-#: src/pyams_content/component/paragraph/interfaces/__init__.py:120
+#: src/pyams_content/component/paragraph/interfaces/__init__.py:124
 msgid "Default paragraphs types"
 msgstr "Types de blocs par défaut"
 
-#: src/pyams_content/component/paragraph/interfaces/__init__.py:121
+#: src/pyams_content/component/paragraph/interfaces/__init__.py:125
 msgid ""
 "Empty paragraphs of these types will be added automatically to new contents "
 "of this content type; if paragraphs are associated to content type, these "
@@ -7065,7 +7066,7 @@ msgstr "Aucun filtre, tous les types de blocs de contenu sont sélectionnés"
 msgid "Paragraphs list (default)"
 msgstr "Liste des blocs de contenu (par défaut)"
 
-#: src/pyams_content/component/paragraph/portlet/skin/__init__.py:181
+#: src/pyams_content/component/paragraph/portlet/skin/__init__.py:182
 msgid "Paragraphs navigation (default)"
 msgstr "Navigation au sein des blocs (par défaut)"
 
@@ -7216,9 +7217,9 @@ msgid ""
 "Associations links are normally displayed after the description; by using "
 "this option, you can display links first"
 msgstr ""
-"Les liens vers les pièces jointes ou vers d'autres contenus internes ou externes "
-"sont normalement affichés après leur description ; vous pouvez activer cette option "
-"pour que les liens s'affichent avant leur description"
+"Les liens vers les pièces jointes ou vers d'autres contenus internes ou "
+"externes sont normalement affichés après leur description ; vous pouvez "
+"activer cette option pour que les liens s'affichent avant leur description"
 
 #: src/pyams_content/component/association/skin/paragraph.py:53
 msgid "Associations list (default)"
@@ -7266,11 +7267,19 @@ msgstr "Mode de rendu utilisé pour cette illustration"
 msgid "Main illustration"
 msgstr "Illustration principale"
 
-#: src/pyams_content/component/illustration/zmi/__init__.py:98
+#: src/pyams_content/component/illustration/zmi/__init__.py:67
+msgid "Current illustration"
+msgstr "Illustration définie"
+
+#: src/pyams_content/component/illustration/zmi/__init__.py:68
+msgid "Add illustration"
+msgstr "Ajouter une illustration"
+
+#: src/pyams_content/component/illustration/zmi/__init__.py:111
 msgid "Navigation link illustration"
 msgstr "Illustration de navigation"
 
-#: src/pyams_content/component/illustration/zmi/__init__.py:140
+#: src/pyams_content/component/illustration/zmi/__init__.py:153
 msgid "Use responsive selection"
 msgstr "Utiliser les sélections responsives"
 

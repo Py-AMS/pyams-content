@@ -60,6 +60,19 @@ class BasicIllustrationPropertiesEditForm(FormGroupSwitcher):
         """Form state getter"""
         return 'open' if self.get_content().has_data() else 'closed'
 
+    @property
+    def hint(self):
+        translate = self.request.localizer.translate
+        if self.get_content().has_data():
+            return translate(_("Current illustration"))
+        return translate(_("Add illustration"))
+
+    @property
+    def hint_icon_class(self):
+        if self.get_content().has_data():
+            return 'image'
+        return 'plus'
+
 
 @adapter_config(required=(IIllustrationTargetBase, IAdminLayer, BasicIllustrationPropertiesEditForm),
                 provides=IFormContent)

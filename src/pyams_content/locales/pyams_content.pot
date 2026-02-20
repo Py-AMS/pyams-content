@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2026-02-14 11:58+0100\n"
+"POT-Creation-Date: 2026-02-20 17:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4473,7 +4473,7 @@ msgstr ""
 msgid "Default content renderer"
 msgstr ""
 
-#: ./src/pyams_content/feature/search/__init__.py:42
+#: ./src/pyams_content/feature/search/__init__.py:44
 msgid "Search folder"
 msgstr ""
 
@@ -6296,21 +6296,21 @@ msgstr ""
 msgid "§ Title"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:114
+#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:118
 msgid "Allowed paragraphs"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:115
+#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:119
 msgid ""
 "List of paragraphs allowed for this content type; if selection is empty, all "
 "paragraphs types will be allowed"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:120
+#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:124
 msgid "Default paragraphs types"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:121
+#: ./src/pyams_content/component/paragraph/interfaces/__init__.py:125
 msgid ""
 "Empty paragraphs of these types will be added automatically to new contents "
 "of this content type; if paragraphs are associated to content type, these "
@@ -6485,7 +6485,7 @@ msgstr ""
 msgid "Paragraphs list (default)"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/portlet/skin/__init__.py:181
+#: ./src/pyams_content/component/paragraph/portlet/skin/__init__.py:182
 msgid "Paragraphs navigation (default)"
 msgstr ""
 
@@ -6672,11 +6672,19 @@ msgstr ""
 msgid "Main illustration"
 msgstr ""
 
-#: ./src/pyams_content/component/illustration/zmi/__init__.py:98
+#: ./src/pyams_content/component/illustration/zmi/__init__.py:67
+msgid "Current illustration"
+msgstr ""
+
+#: ./src/pyams_content/component/illustration/zmi/__init__.py:68
+msgid "Add illustration"
+msgstr ""
+
+#: ./src/pyams_content/component/illustration/zmi/__init__.py:111
 msgid "Navigation link illustration"
 msgstr ""
 
-#: ./src/pyams_content/component/illustration/zmi/__init__.py:140
+#: ./src/pyams_content/component/illustration/zmi/__init__.py:153
 msgid "Use responsive selection"
 msgstr ""
 
