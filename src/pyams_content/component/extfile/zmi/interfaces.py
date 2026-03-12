@@ -15,9 +15,7 @@
 This module provides private interfaces used by external files management components.
 """
 
-from pyams_content.component.association.zmi import IAssociationItemAddForm, \
-    IAssociationItemEditForm
-
+from pyams_content.component.association.zmi import IAssociationItemAddForm, IAssociationItemEditForm
 
 __docformat__ = 'restructuredtext'
 

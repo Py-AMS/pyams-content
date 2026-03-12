@@ -20,20 +20,18 @@ from pyramid.events import subscriber
 from zope.interface import implementer
 from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent, \
     ObjectModifiedEvent
-from zope.location import locate
 from zope.location.interfaces import ISublocations
 from zope.schema.fieldproperty import FieldProperty
 from zope.traversing.interfaces import ITraversable
 
-from pyams_catalog.utils import index_object
 from pyams_content.component.gallery.interfaces import GALLERY_CONTAINER_KEY, GALLERY_RENDERERS, \
     IBaseGallery, IGallery, IGalleryContainer, IGalleryFile, IGalleryItem, IGalleryTarget
 from pyams_content.component.illustration import VirtualIllustration
 from pyams_content.component.illustration.interfaces import IBaseIllustration
-from pyams_content.component.paragraph import IBaseParagraph
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.feature.renderer import RenderedContentMixin, RenderersVocabulary
 from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
-from pyams_content.shared.common import IWfSharedContent
+from pyams_content.shared.common.interfaces import IWfSharedContent
 from pyams_file.interfaces import IBaseImageFile
 from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_utils.adapter import ContextAdapter, adapter_config, get_annotation_adapter
@@ -43,7 +41,6 @@ from pyams_utils.list import boolean_iter
 from pyams_utils.registry import get_current_registry
 from pyams_utils.traversing import get_parent
 from pyams_utils.vocabulary import vocabulary_config
-
 
 __docformat__ = 'restructuredtext'
 

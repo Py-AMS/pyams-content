@@ -20,12 +20,11 @@ from zope.container.interfaces import IOrderedContainer
 from zope.interface import Interface
 from zope.schema import Bool, Choice, TextLine
 
-from pyams_content.component.paragraph import IBaseParagraph
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.component.paragraph.schema import ParagraphRendererChoice
-from pyams_content.feature.renderer import IRenderedContent
+from pyams_content.feature.renderer.interfaces import IRenderedContent
 from pyams_file.schema import AudioField, MediaField
 from pyams_i18n.schema import I18nTextField, I18nTextLineField
-
 
 __docformat__ = 'restructuredtext'
 

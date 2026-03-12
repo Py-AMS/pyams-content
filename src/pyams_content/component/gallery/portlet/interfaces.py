@@ -21,7 +21,6 @@ from pyams_content.component.gallery.interfaces import IGalleryContainer
 from pyams_i18n.schema import I18nTextLineField
 from pyams_portal.interfaces import IPortletSettings
 
-
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _

@@ -17,7 +17,7 @@ This module defines framed text portlet management components.
 
 from zope.interface import Interface
 
-from pyams_content.component.frame.portlet import IFramePortletSettings
+from pyams_content.component.frame.portlet.interfaces import IFramePortletSettings
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IInnerSubForm
 from pyams_layer.interfaces import IPyAMSLayer

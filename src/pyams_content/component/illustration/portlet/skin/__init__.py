@@ -20,7 +20,7 @@ from zope.container.contained import Contained
 from zope.interface import Interface
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.component.illustration import IIllustration
+from pyams_content.component.illustration.interfaces import IIllustration
 from pyams_content.component.illustration.portlet.interfaces import IIllustrationPortletContent, \
     IIllustrationPortletSettings
 from pyams_content.component.illustration.portlet.skin.interfaces import \

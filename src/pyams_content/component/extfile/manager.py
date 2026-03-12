@@ -20,10 +20,8 @@ from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.extfile.interfaces import EXTFILE_MANAGER_INFO_KEY, \
     IExtFileManagerInfo, IExtFileManagerTarget
-from pyams_site.interfaces import ISiteRoot
 from pyams_utils.adapter import adapter_config, get_annotation_adapter
 from pyams_utils.factory import factory_config
-
 
 __docformat__ = 'restructuredtext'
 

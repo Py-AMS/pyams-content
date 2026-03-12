@@ -22,8 +22,8 @@ from zope.lifecycleevent import ObjectCreatedEvent
 from zope.schema._bootstrapinterfaces import WrongType
 
 from pyams_content.component.gallery.interfaces import IGalleryContainer, IGalleryFile
-from pyams_content.component.gallery.zmi import get_json_gallery_refresh_callback
-from pyams_content.component.gallery.zmi.helpers import get_json_gallery_media_refresh_callback
+from pyams_content.component.gallery.zmi.helpers import get_json_gallery_media_refresh_callback, \
+    get_json_gallery_refresh_callback
 from pyams_content.component.gallery.zmi.interfaces import IGalleryMediaThumbnailView, IGalleryMediasAddFields, \
     IGalleryMediasView
 from pyams_content.component.paragraph.zmi import get_json_paragraph_toolbar_refresh_event

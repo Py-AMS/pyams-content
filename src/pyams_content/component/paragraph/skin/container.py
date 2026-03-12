@@ -10,8 +10,7 @@
 
 from ZODB.interfaces import IBroken
 
-from pyams_content.component.paragraph import IParagraphContainer
-from pyams_content.component.paragraph.interfaces import IParagraphContainerItems
+from pyams_content.component.paragraph.interfaces import IParagraphContainer, IParagraphContainerItems
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_utils.adapter import ContextRequestAdapter, adapter_config
 

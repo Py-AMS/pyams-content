@@ -24,10 +24,8 @@ from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 from zope.traversing.interfaces import ITraversable
 
 from pyams_catalog.utils import index_object
-from pyams_content.component.association import IAssociationContainer, \
-    IAssociationContainerTarget, IAssociationItem
-from pyams_content.component.association.interfaces import ASSOCIATION_CONTAINER_KEY, \
-    ASSOCIATION_VOCABULARY, IAssociationInfo
+from pyams_content.component.association.interfaces import ASSOCIATION_CONTAINER_KEY, ASSOCIATION_VOCABULARY, \
+    IAssociationContainer, IAssociationContainerTarget, IAssociationInfo, IAssociationItem
 from pyams_utils.adapter import ContextAdapter, adapter_config, get_annotation_adapter
 from pyams_utils.factory import factory_config
 from pyams_utils.registry import get_pyramid_registry

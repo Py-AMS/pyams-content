@@ -19,10 +19,10 @@ from pyramid.events import subscriber
 
 from pyams_content.component.frame.interfaces import FRAME_PARAGRAPH_ICON_CLASS, FRAME_PARAGRAPH_NAME, \
     FRAME_PARAGRAPH_TYPE, IFrameParagraph
-from pyams_content.component.frame.portlet import IFramePortletSettings
-from pyams_content.component.paragraph import IParagraphContainer, IParagraphContainerTarget
-from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu, \
-    IParagraphContainerBaseTable
+from pyams_content.component.frame.portlet.interfaces import IFramePortletSettings
+from pyams_content.component.paragraph.interfaces import IParagraphContainer, IParagraphContainerTarget
+from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu
+from pyams_content.component.paragraph.zmi.interfaces import IParagraphContainerBaseTable
 from pyams_content.component.paragraph.zmi.html import extract_html_paragraph_data
 from pyams_content.feature.html import basic_html_editor_configuration
 from pyams_form.ajax import ajax_form_config

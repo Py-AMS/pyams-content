@@ -8,8 +8,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-from pyams_content.component.keynumber import IKeyNumbersContainer
-from pyams_content.feature.navigation import IMenusContainer
+from pyams_content.component.keynumber.interfaces import IKeyNumbersContainer
 from pyams_i18n.schema import I18nTextField, I18nTextLineField
 from pyams_portal.interfaces import IPortletSettings
 

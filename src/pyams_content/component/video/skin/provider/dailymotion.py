@@ -16,7 +16,7 @@ This module defines Dailymotion video renderer.
 """
 
 from pyams_content.component.video.provider.interfaces import IDailymotionVideoSettings
-from pyams_content.component.video.skin import IExternalVideoRenderer
+from pyams_content.component.video.skin.interfaces import IExternalVideoRenderer
 from pyams_content.component.video.skin.provider import BaseExternalVideoRenderer, time_to_seconds
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_template.template import template_config

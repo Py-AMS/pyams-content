@@ -15,16 +15,16 @@
 This module defines base external videos renderers class.
 """
 
-__docformat__ = 'restructuredtext'
-
 from urllib.parse import urlencode
 
-from pyams_content.component.video.provider import ICustomVideoSettings
-from pyams_content.component.video.skin import IExternalVideoRenderer
+from pyams_content.component.video.provider.interfaces import ICustomVideoSettings
+from pyams_content.component.video.skin.interfaces import IExternalVideoRenderer
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
 from pyams_viewlet.viewlet import BaseContentProvider
+
+__docformat__ = 'restructuredtext'
 
 
 def time_to_seconds(value):

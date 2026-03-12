@@ -8,8 +8,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-from pyams_content.component.keynumber import IKeyNumbersParagraph
-from pyams_content.feature.renderer import BaseContentRenderer, IContentRenderer
+from pyams_content.component.keynumber.interfaces import IKeyNumbersParagraph
+from pyams_content.feature.renderer import BaseContentRenderer
+from pyams_content.feature.renderer.interfaces import IContentRenderer
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
 from pyams_template.template import template_config

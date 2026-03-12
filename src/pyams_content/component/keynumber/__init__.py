@@ -26,7 +26,8 @@ from zope.schema.fieldproperty import FieldProperty
 from pyams_content.component.keynumber.interfaces import IKeyNumberInfo, IKeyNumbersContainer, IKeyNumbersParagraph, \
     KEYNUMBERS_PARAGRAPH_ICON_CLASS, KEYNUMBERS_PARAGRAPH_NAME, KEYNUMBERS_PARAGRAPH_RENDERERS, \
     KEYNUMBERS_PARAGRAPH_TYPE
-from pyams_content.component.paragraph import BaseParagraph, IBaseParagraph, ParagraphPermissionChecker
+from pyams_content.component.paragraph import BaseParagraph, ParagraphPermissionChecker
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.feature.renderer import RenderersVocabulary
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer

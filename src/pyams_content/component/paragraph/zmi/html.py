@@ -21,7 +21,7 @@ from pyramid.events import subscriber
 from zope.interface import Invalid, alsoProvides
 
 from pyams_content.component.links.interfaces import IExternalLinksManagerInfo
-from pyams_content.component.paragraph import IParagraphContainer, IParagraphContainerTarget
+from pyams_content.component.paragraph.interfaces import IParagraphContainer, IParagraphContainerTarget
 from pyams_content.component.paragraph.interfaces.html import HTML_PARAGRAPH_ICON_CLASS, \
     HTML_PARAGRAPH_NAME, HTML_PARAGRAPH_TYPE, IHTMLParagraph, IRawParagraph, \
     RAW_PARAGRAPH_ICON_CLASS, RAW_PARAGRAPH_NAME, RAW_PARAGRAPH_TYPE

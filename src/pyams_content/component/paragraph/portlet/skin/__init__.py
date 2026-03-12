@@ -18,8 +18,8 @@ This module defines paragraph container portlet renderer.
 from zope.interface import Interface
 
 from pyams_content.component.paragraph.interfaces import IParagraphContainer
-from pyams_content.component.paragraph.portlet import IParagraphNavigationPortletSettings
-from pyams_content.component.paragraph.portlet.interfaces import IParagraphContainerPortletSettings
+from pyams_content.component.paragraph.portlet.interfaces import IParagraphContainerPortletSettings, \
+    IParagraphNavigationPortletSettings
 from pyams_content.component.paragraph.portlet.skin.interfaces import IParagraphContainerPortletRenderer
 from pyams_content.feature.renderer.interfaces import ISharedContentRenderer
 from pyams_content.shared.site.interfaces import ISiteContainer

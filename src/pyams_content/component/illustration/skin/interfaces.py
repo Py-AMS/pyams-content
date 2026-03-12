@@ -18,9 +18,8 @@ This module provides skin interfaces specific to illustrations rendering.
 from zope.interface import Attribute, Interface
 from zope.schema import Bool
 
-from pyams_content.feature.renderer import IRendererSettings
+from pyams_content.feature.renderer.interfaces import IRendererSettings
 from pyams_skin.schema import BootstrapThumbnailsSelectionField
-
 
 __docformat__ = 'restructuredtext'
 

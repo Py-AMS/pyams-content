@@ -14,7 +14,7 @@
 
 """
 
-from pyams_content.feature.renderer import IRendererSettings
+from pyams_content.feature.renderer.interfaces import IRendererSettings
 from pyams_skin.schema import BootstrapThumbnailsSelectionField
 
 

@@ -17,8 +17,8 @@ This module defines interfaces of Bootstrap cards paragraphs renderer settings.
 
 __docformat__ = 'restructuredtext'
 
-from pyams_content.feature.renderer import IRendererSettings
-from pyams_portal.portlets.cards.skin import ICardsPortletMasonryRendererSettings, ICardsPortletRendererSettings
+from pyams_content.feature.renderer.interfaces import IRendererSettings
+from pyams_portal.portlets.cards.skin.interfaces import ICardsPortletMasonryRendererSettings, ICardsPortletRendererSettings
 
 
 class ICardsParagraphDefaultRendererSettings(ICardsPortletRendererSettings, IRendererSettings):

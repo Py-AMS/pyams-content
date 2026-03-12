@@ -17,11 +17,11 @@ This module defines renderers for framed text portlet.
 
 from zope.interface import Interface
 
-from pyams_content.component.frame.portlet import IFramePortletSettings
+from pyams_content.component.frame.portlet.interfaces import IFramePortletSettings
 from pyams_content.component.frame.portlet.skin.interfaces import IFramePortletDefaultRendererSettings, \
     IFramePortletLateralRendererSettings
 from pyams_content.component.frame.skin import FrameDefaultRendererSettings, FrameLateralRendererSettings
-from pyams_content.component.illustration import IIllustration
+from pyams_content.component.illustration.interfaces import IIllustration
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortalContext, IPortletRenderer
 from pyams_portal.skin import PortletRenderer

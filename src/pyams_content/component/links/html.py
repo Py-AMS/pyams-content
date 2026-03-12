@@ -16,22 +16,23 @@ This module defines components which are used to handle associations in HTML
 components.
 """
 
-__docformat__ = 'restructuredtext'
-
 import re
 
 from pyquery import PyQuery
 from zope.lifecycleevent import ObjectCreatedEvent
 
-from pyams_content.component.association import IAssociationContainer
-from pyams_content.component.extfile import IBaseExtFile
-from pyams_content.component.links import IExternalLink, IInternalLink, IMailtoLink
+from pyams_content.component.association.interfaces import IAssociationContainer
+from pyams_content.component.extfile.interfaces import IBaseExtFile
+from pyams_content.component.links.interfaces import IExternalLink, IInternalLink, IMailtoLink
 from pyams_i18n.interfaces import II18n
 from pyams_sequence.interfaces import ISequentialIntIds
 from pyams_utils.factory import get_object_factory
 from pyams_utils.registry import get_pyramid_registry, get_utility
 from pyams_utils.request import check_request
 from pyams_utils.url import absolute_url
+
+__docformat__ = 'restructuredtext'
+
 
 FULL_EMAIL = re.compile(r'(.*) <(.*)>')
 

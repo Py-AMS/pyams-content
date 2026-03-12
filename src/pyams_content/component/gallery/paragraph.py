@@ -19,11 +19,11 @@ from zope.schema.fieldproperty import FieldProperty
 from pyams_content.component.gallery import BaseGallery
 from pyams_content.component.gallery.interfaces import GALLERY_PARAGRAPH_ICON_CLASS, \
     GALLERY_PARAGRAPH_NAME, GALLERY_PARAGRAPH_RENDERERS, GALLERY_PARAGRAPH_TYPE, IGalleryParagraph
-from pyams_content.component.paragraph import BaseParagraph, IBaseParagraph
+from pyams_content.component.paragraph import BaseParagraph
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.feature.renderer import RenderersVocabulary
 from pyams_utils.factory import factory_config
 from pyams_utils.vocabulary import vocabulary_config
-
 
 __docformat__ = 'restructuredtext'
 

@@ -17,8 +17,8 @@ This module defines generic components used to handle paragraphs renderers setti
 
 from zope.traversing.interfaces import ITraversable
 
-from pyams_content.component.paragraph import IBaseParagraph
-from pyams_content.feature.renderer import IRendererSettings
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
+from pyams_content.feature.renderer.interfaces import IRendererSettings
 from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_workflow.content import HiddenContentPublicationInfo
 from pyams_workflow.interfaces import IWorkflowPublicationInfo

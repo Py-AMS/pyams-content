@@ -19,7 +19,7 @@ __docformat__ = 'restructuredtext'
 
 from zope.interface import implementer_only
 
-from pyams_content.component.extfile import IExtFileManagerInfo
+from pyams_content.component.extfile.interfaces import IExtFileManagerInfo
 from pyams_form.browser.text import TextWidget
 from pyams_form.interfaces import DISPLAY_MODE, INPUT_MODE
 from pyams_form.interfaces.widget import ITextWidget

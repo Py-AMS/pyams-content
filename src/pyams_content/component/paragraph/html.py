@@ -15,15 +15,13 @@
 This module defines raw and rich text HTML paragraphs.
 """
 
-__docformat__ = 'restructuredtext'
-
 from pyramid.events import subscriber
 from zope.interface import implementer
-from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent
+from zope.lifecycleevent.interfaces import IObjectAddedEvent, IObjectModifiedEvent
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.extfile.interfaces import IExtFileContainerTarget
-from pyams_content.component.illustration import IIllustrationTarget
+from pyams_content.component.illustration.interfaces import IIllustrationTarget
 from pyams_content.component.links.html import check_content_links
 from pyams_content.component.links.interfaces import ILinkContainerTarget
 from pyams_content.component.paragraph import BaseParagraph
@@ -35,6 +33,8 @@ from pyams_content.component.paragraph.interfaces.html import HTML_PARAGRAPH_ICO
 from pyams_content.feature.renderer import RenderersVocabulary
 from pyams_utils.factory import factory_config
 from pyams_utils.vocabulary import vocabulary_config
+
+__docformat__ = 'restructuredtext'
 
 
 #

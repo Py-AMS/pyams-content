@@ -10,7 +10,7 @@
 
 from zope.interface import Interface
 
-from pyams_content.component.keynumber.portlet import IKeyNumbersPortletSettings
+from pyams_content.component.keynumber.portlet.interfaces import IKeyNumbersPortletSettings
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortalContext, IPortletRenderer
 from pyams_portal.skin import PortletRenderer

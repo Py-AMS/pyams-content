@@ -18,7 +18,7 @@ This module provides management components for scripts and scripts containers.
 from pyramid.view import view_config
 from zope.interface import Interface, alsoProvides
 
-from pyams_content.feature.script import IScriptContainer, IScriptContainerTarget, IScriptInfo
+from pyams_content.feature.script.interfaces import IScriptContainer, IScriptContainerTarget, IScriptInfo
 from pyams_content.feature.script.zmi.interfaces import IScriptContainerNavigationMenu, IScriptContainerTable
 from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
 from pyams_form.ajax import ajax_form_config

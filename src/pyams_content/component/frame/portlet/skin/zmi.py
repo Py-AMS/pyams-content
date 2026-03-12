@@ -15,7 +15,7 @@
 This module defines components for framed text portlet renderers settings management interface.
 """
 
-from pyams_content.component.frame.skin import IFrameDefaultRendererSettings, IFrameLateralRendererSettings
+from pyams_content.component.frame.skin.interfaces import IFrameDefaultRendererSettings, IFrameLateralRendererSettings
 from pyams_content.reference.pictogram.zmi.widget import PictogramSelectFieldWidget
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IFormFields

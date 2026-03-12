@@ -20,7 +20,8 @@ from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.cards.interfaces import CARDS_PARAGRAPH_ICON_CLASS, CARDS_PARAGRAPH_NAME, \
     CARDS_PARAGRAPH_RENDERERS, CARDS_PARAGRAPH_TYPE, ICardsParagraph
-from pyams_content.component.paragraph import BaseParagraph, IBaseParagraph
+from pyams_content.component.paragraph import BaseParagraph
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.feature.renderer import RenderersVocabulary
 from pyams_portal.portlets.cards import CardsContainer
 from pyams_utils.factory import factory_config

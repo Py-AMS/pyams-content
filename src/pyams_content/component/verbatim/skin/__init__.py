@@ -14,10 +14,11 @@
 
 This module defines renderers for verbatim paragraph.
 """
-from pyams_content.component.illustration import IIllustration
+
+from pyams_content.component.illustration.interfaces import IIllustration
 from pyams_content.component.verbatim.interfaces import IVerbatimParagraph
-from pyams_content.feature.renderer import DefaultContentRenderer, IRendererSettings
-from pyams_content.feature.renderer.interfaces import IContentRenderer
+from pyams_content.feature.renderer import DefaultContentRenderer
+from pyams_content.feature.renderer.interfaces import IContentRenderer, IRendererSettings
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
 from pyams_template.template import template_config

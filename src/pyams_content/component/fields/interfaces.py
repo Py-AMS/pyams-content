@@ -17,7 +17,7 @@ This module defines form fields paragraph interface.
 
 __docformat__ = 'restructuredtext'
 
-from pyams_content.component.paragraph import IBaseParagraph
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.component.paragraph.schema import ParagraphRendererChoice
 
 from pyams_content import _

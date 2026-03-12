@@ -17,7 +17,7 @@ This module defines management components for search folders.
 
 from zope.interface import Interface
 
-from pyams_content.feature.search import ISearchFolder
+from pyams_content.feature.search.interfaces import ISearchFolder
 from pyams_content.interfaces import CREATE_CONTENT_PERMISSION, MANAGE_CONTENT_PERMISSION, MANAGE_SITE_PERMISSION
 from pyams_content.shared.site.interfaces import ISiteContainer
 from pyams_content.shared.site.zmi.folder import ISiteFolderAddFormFields, SiteFolderAddForm
@@ -43,11 +43,11 @@ from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IContentManagementMenu, IContextActionsDropdownMenu, \
     IContextAddingsViewletManager, IMenuHeader, IPropertiesMenu
 from pyams_zmi.table import TableElementEditor
+from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
-from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
 
 
 @viewlet_config(name='add-search-folder.divider',

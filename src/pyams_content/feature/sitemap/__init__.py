@@ -23,14 +23,14 @@ from hypatia.interfaces import ICatalog
 from hypatia.query import Any, Eq
 from pyramid.traversal import resource_path
 from pyramid.view import view_config
-from zope.intid import IIntIds
+from zope.intid.interfaces import IIntIds
 from zope.schema.vocabulary import getVocabularyRegistry
 
 from pyams_catalog.query import CatalogResultSet
-from pyams_content.feature.seo import ISEOContentInfo
+from pyams_content.feature.seo.interfaces import ISEOContentInfo
 from pyams_content.feature.sitemap.interfaces import IRobotsExtension, ISitemapExtension
-from pyams_content.root import ISiteRootToolsConfiguration
-from pyams_content.shared.common import IBaseSharedTool, SHARED_CONTENT_TYPES_VOCABULARY
+from pyams_content.root.interfaces import ISiteRootToolsConfiguration
+from pyams_content.shared.common.interfaces import IBaseSharedTool, SHARED_CONTENT_TYPES_VOCABULARY
 from pyams_content.shared.site.interfaces import ISiteManager, SITE_MANAGER_INDEXATION_INTERNAL_MODE, \
     SITE_MANAGER_INDEXATION_NULL_MODE
 from pyams_i18n.interfaces import II18nManager

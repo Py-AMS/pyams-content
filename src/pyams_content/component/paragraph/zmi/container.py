@@ -58,7 +58,7 @@ from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu
 from pyams_zmi.skin import AdminSkin
 from pyams_zmi.table import ActionColumn, AttributeSwitcherColumn, ContentTypeColumn, \
-    IconColumn, InnerTableAdminView, MultipleTablesAdminView, NameColumn, ReorderColumn, Table, \
+    InnerTableAdminView, MultipleTablesAdminView, NameColumn, ReorderColumn, Table, \
     TableAdminView, TrashColumn, VisibilityColumn, get_ordered_data_attributes, get_table_id
 from pyams_zmi.utils import get_object_hint, get_object_icon, get_object_label
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem

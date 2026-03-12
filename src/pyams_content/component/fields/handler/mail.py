@@ -33,7 +33,6 @@ from pyams_utils.list import boolean_iter
 from pyams_utils.registry import get_utility, utility_config
 from pyams_utils.request import query_request
 
-
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _

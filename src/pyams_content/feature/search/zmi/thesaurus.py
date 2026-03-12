@@ -14,8 +14,8 @@
 
 """
 
-from pyams_content.component.thesaurus import ICollectionsManager, ITagsManager, IThemesManager
-from pyams_content.feature.search import ISearchFolder
+from pyams_content.component.thesaurus.interfaces import ICollectionsManager, ITagsManager, IThemesManager
+from pyams_content.feature.search.interfaces import ISearchFolder
 from pyams_content.shared.view.interfaces.settings import IViewCollectionsSettings, IViewTagsSettings, \
     IViewThemesSettings
 from pyams_content.shared.view.zmi.thesaurus import ViewCollectionsEditForm, ViewTagsEditForm, ViewThemesEditForm

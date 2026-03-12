@@ -23,11 +23,11 @@ from pyams_content.component.association.interfaces import ASSOCIATION_PARAGRAPH
     IAssociationParagraph
 from pyams_content.component.extfile.interfaces import IExtFileContainerTarget
 from pyams_content.component.links.interfaces import ILinkContainerTarget
-from pyams_content.component.paragraph import BaseParagraph, IBaseParagraph
+from pyams_content.component.paragraph import BaseParagraph
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.feature.renderer import RenderersVocabulary
 from pyams_utils.factory import factory_config
 from pyams_utils.vocabulary import vocabulary_config
-
 
 __docformat__ = 'restructuredtext'
 

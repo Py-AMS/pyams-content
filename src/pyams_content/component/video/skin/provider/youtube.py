@@ -16,7 +16,7 @@ This module defines YouTube external video renderer.
 """
 
 from pyams_content.component.video.provider.interfaces import IYoutubeVideoSettings
-from pyams_content.component.video.skin import IExternalVideoRenderer
+from pyams_content.component.video.skin.interfaces import IExternalVideoRenderer
 from pyams_content.component.video.skin.provider import BaseExternalVideoRenderer, get_playlist_id, time_to_seconds
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_template.template import template_config

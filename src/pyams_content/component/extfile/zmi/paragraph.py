@@ -16,15 +16,14 @@ This module defines components which are used to handle paragraphs
 which are also associations containers.
 """
 
-from pyams_content.component.association import IAssociationContainer, IAssociationContainerTarget
-from pyams_content.component.extfile import EXTAUDIO_ICON_CLASS, EXTFILE_ICON_CLASS, \
+from pyams_content.component.association.interfaces import IAssociationContainer, IAssociationContainerTarget
+from pyams_content.component.extfile.interfaces import EXTAUDIO_ICON_CLASS, EXTFILE_ICON_CLASS, \
     EXTIMAGE_ICON_CLASS, EXTVIDEO_ICON_CLASS, IExtAudio, IExtFile, IExtImage, IExtVideo
 from pyams_content.component.paragraph.zmi.container import ParagraphTitleToolbarItemMixin
 from pyams_content.component.paragraph.zmi.interfaces import IParagraphContainerFullTable, \
     IParagraphTitleToolbar
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.interfaces import IAdminLayer
-
 
 __docformat__ = 'restructuredtext'
 

@@ -18,7 +18,7 @@ from zope.interface import Attribute, Interface, Invalid, invariant
 from zope.schema import Bool, Choice, Set
 
 from pyams_content.interfaces import IBaseContent
-from pyams_content.shared.common import VIEWS_SHARED_CONTENT_TYPES_VOCABULARY
+from pyams_content.shared.common.interfaces import VIEWS_SHARED_CONTENT_TYPES_VOCABULARY
 from pyams_content.shared.common.interfaces.types import ALL_DATA_TYPES_VOCABULARY
 from pyams_content.shared.site.interfaces import IBaseSiteItem, ISiteElement
 from pyams_content.shared.view.interfaces import IWfView, RELEVANCE_ORDER, USER_VIEW_ORDER_VOCABULARY

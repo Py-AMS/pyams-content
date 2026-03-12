@@ -19,7 +19,7 @@ from html import escape
 from pyramid.encode import url_quote, urlencode
 from pyramid.events import subscriber
 from zope.interface import alsoProvides, directlyProvidedBy, implementer, noLongerProvides
-from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent
+from zope.lifecycleevent.interfaces import IObjectAddedEvent, IObjectModifiedEvent
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 

@@ -11,8 +11,7 @@
 import html
 from zope.interface import Interface
 
-from pyams_content.feature.search import ISearchFolder
-from pyams_content.feature.search.interfaces import ISearchFormRequestParams
+from pyams_content.feature.search.interfaces import ISearchFolder, ISearchFormRequestParams
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_utils.adapter import ContextRequestAdapter, ContextRequestViewAdapter, adapter_config
 from pyams_utils.interfaces.tales import ITALESExtension

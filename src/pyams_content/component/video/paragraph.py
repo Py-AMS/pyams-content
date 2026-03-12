@@ -18,7 +18,8 @@ videos as content paragraphs.
 
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.component.paragraph import BaseParagraph, IBaseParagraph
+from pyams_content.component.paragraph import BaseParagraph
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.component.video import ExternalVideo
 from pyams_content.component.video.interfaces import EXTERNAL_VIDEO_PARAGRAPH_ICON_CLASS, \
     EXTERNAL_VIDEO_PARAGRAPH_NAME, EXTERNAL_VIDEO_PARAGRAPH_RENDERERS, EXTERNAL_VIDEO_PARAGRAPH_TYPE, \

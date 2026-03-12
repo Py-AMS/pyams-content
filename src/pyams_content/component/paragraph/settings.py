@@ -19,8 +19,6 @@ These settings are used to define which types of paragraphs are allowed in
 each content.
 """
 
-__docformat__ = 'restructuredtext'
-
 from persistent import Persistent
 from zope.schema.fieldproperty import FieldProperty
 
@@ -28,6 +26,8 @@ from pyams_content.component.paragraph.interfaces import IParagraphFactorySettin
     IParagraphFactorySettingsTarget, PARAGRAPH_FACTORY_SETTINGS_KEY
 from pyams_utils.adapter import adapter_config, get_annotation_adapter
 from pyams_utils.factory import factory_config
+
+__docformat__ = 'restructuredtext'
 
 
 @factory_config(IParagraphFactorySettings)

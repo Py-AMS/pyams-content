@@ -14,9 +14,9 @@ from pyramid.httpexceptions import HTTPForbidden, HTTPServerError
 from pyramid.view import view_config
 from zope.schema.interfaces import WrongType
 
-from pyams_content.component.association import IAssociationContainer, IAssociationContainerTarget
-from pyams_content.component.association.zmi import IAssociationsTable
-from pyams_content.component.extfile import IExtFile
+from pyams_content.component.association.interfaces import IAssociationContainer, IAssociationContainerTarget
+from pyams_content.component.association.zmi.interfaces import IAssociationsTable
+from pyams_content.component.extfile.interfaces import IExtFile
 from pyams_content.component.paragraph.zmi import get_json_paragraph_toolbar_refresh_event
 from pyams_file.file import get_magic_content_type
 from pyams_file.interfaces.archive import IArchiveExtractor

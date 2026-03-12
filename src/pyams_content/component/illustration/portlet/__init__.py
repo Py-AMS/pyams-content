@@ -19,7 +19,6 @@ from pyams_content.component.illustration.portlet.interfaces import IIllustratio
 from pyams_portal.portlet import Portlet, PortletSettings, portlet_config
 from pyams_utils.factory import factory_config
 
-
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _

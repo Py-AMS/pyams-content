@@ -19,10 +19,10 @@ from persistent import Persistent
 from zope.container.contained import Contained
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.component.frame import IFrameParagraph
+from pyams_content.component.frame.interfaces import IFrameParagraph
 from pyams_content.component.frame.skin.interfaces import IFrameDefaultRendererSettings, \
     IFrameLateralRendererSettings
-from pyams_content.component.illustration import IIllustration
+from pyams_content.component.illustration.interfaces import IIllustration
 from pyams_content.feature.renderer import DefaultContentRenderer, IContentRenderer
 from pyams_content.reference.pictogram import IPictogramTable
 from pyams_layer.interfaces import IPyAMSLayer

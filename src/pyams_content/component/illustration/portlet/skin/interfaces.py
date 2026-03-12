@@ -20,7 +20,6 @@ from zope.schema import Bool
 
 from pyams_skin.schema import BootstrapThumbnailsSelectionField
 
-
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _

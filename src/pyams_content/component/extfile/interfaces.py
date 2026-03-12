@@ -18,12 +18,11 @@ This module defines interfaces which are used to handle external files.
 from zope.interface import Interface
 from zope.schema import Choice, TextLine
 
-from pyams_content.component.association import IAssociationContainerTarget, IAssociationItem
+from pyams_content.component.association.interfaces import IAssociationContainerTarget, IAssociationItem
 from pyams_file.schema import I18nAudioField, I18nFileField, I18nThumbnailImageField, \
     I18nVideoField
 from pyams_i18n.interfaces import BASE_LANGUAGES_VOCABULARY_NAME
 from pyams_i18n.schema import I18nTextField, I18nTextLineField
-
 
 __docformat__ = 'restructuredtext'
 

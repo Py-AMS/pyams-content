@@ -22,7 +22,6 @@ from pyams_fields.interfaces import IFormHandlerInfo
 from pyams_i18n.schema import I18nHTMLField, I18nTextLineField
 from pyams_utils.schema import MailAddressField
 
-
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _

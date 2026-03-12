@@ -16,15 +16,13 @@ This module defines management interface components which are used to handle
 galleries paragraphs.
 """
 
-from pyams_content.component.gallery import IBaseGallery, IGallery, IGalleryTarget
-from pyams_content.component.gallery.interfaces import GALLERY_PARAGRAPH_ICON_CLASS, \
-    GALLERY_PARAGRAPH_NAME, GALLERY_PARAGRAPH_TYPE, IGalleryParagraph
-from pyams_content.component.paragraph import IParagraphContainer, IParagraphContainerTarget
+from pyams_content.component.gallery.interfaces import GALLERY_PARAGRAPH_ICON_CLASS, GALLERY_PARAGRAPH_NAME, \
+    GALLERY_PARAGRAPH_TYPE, IBaseGallery, IGalleryParagraph, IGalleryTarget
+from pyams_content.component.paragraph.interfaces import IParagraphContainer, IParagraphContainerTarget
 from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu, \
     IParagraphContainerBaseTable, IParagraphContainerFullTable
 from pyams_content.component.paragraph.zmi.container import ParagraphTitleToolbarItemMixin
 from pyams_content.component.paragraph.zmi.interfaces import IParagraphTitleToolbar
-from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IFormFields
@@ -33,8 +31,8 @@ from pyams_portal.zmi.widget import RendererSelectFieldWidget
 from pyams_utils.adapter import adapter_config
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager
-
 
 __docformat__ = 'restructuredtext'
 

@@ -20,9 +20,9 @@ from persistent import Persistent
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
-from pyams_content.component.video import IExternalVideo, IExternalVideoProvider, IExternalVideoSettings, \
-    external_video_settings
-from pyams_content.component.video.interfaces import PYAMS_VIDEOS_PROVIDERS
+from pyams_content.component.video import external_video_settings
+from pyams_content.component.video.interfaces import IExternalVideo, IExternalVideoProvider, IExternalVideoSettings, \
+    PYAMS_VIDEOS_PROVIDERS
 from pyams_content.component.video.provider.interfaces import ICustomVideoSettings
 from pyams_utils.adapter import adapter_config, get_adapter_weight
 from pyams_utils.factory import factory_config

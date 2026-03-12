@@ -20,13 +20,13 @@ from persistent import Persistent
 from pyramid.events import subscriber
 from zope.container.contained import Contained
 from zope.interface import alsoProvides
-from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent, \
-    ObjectModifiedEvent
+from zope.lifecycleevent import ObjectModifiedEvent
+from zope.lifecycleevent.interfaces import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.component.gallery import IBaseGallery, IGalleryFile
+from pyams_content.component.gallery.interfaces import IBaseGallery, IGalleryFile
 from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
-from pyams_content.shared.common import IWfSharedContent
+from pyams_content.shared.common.interfaces import IWfSharedContent
 from pyams_file.interfaces import IImageFile, IResponsiveImage
 from pyams_file.property import FileProperty
 from pyams_i18n.interfaces import INegotiator

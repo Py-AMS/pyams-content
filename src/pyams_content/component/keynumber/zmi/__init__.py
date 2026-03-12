@@ -11,11 +11,11 @@
 from pyramid.view import view_config
 from zope.interface import Interface, implementer
 
-from pyams_content.component.keynumber import IKeyNumberInfo, IKeyNumbersContainer, IKeyNumbersParagraph, \
+from pyams_content.component.keynumber.interfaces import IKeyNumberInfo, IKeyNumbersContainer, IKeyNumbersParagraph, \
     KEYNUMBERS_PARAGRAPH_ICON_CLASS, KEYNUMBERS_PARAGRAPH_NAME, KEYNUMBERS_PARAGRAPH_TYPE
-from pyams_content.component.paragraph import IParagraphContainer, IParagraphContainerTarget
-from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu, \
-    IParagraphContainerBaseTable
+from pyams_content.component.paragraph.interfaces import IParagraphContainer, IParagraphContainerTarget
+from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu
+from pyams_content.component.paragraph.zmi.interfaces import IParagraphContainerBaseTable
 from pyams_content.interfaces import MANAGE_CONTENT_PERMISSION
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields

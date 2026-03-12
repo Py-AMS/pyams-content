@@ -19,9 +19,9 @@ __docformat__ = 'restructuredtext'
 
 from pyams_content.component.fields.interfaces import FORM_FIELDS_PARAGRAPH_ICON_CLASS, \
     FORM_FIELDS_PARAGRAPH_NAME, FORM_FIELDS_PARAGRAPH_TYPE, IFormFieldsParagraph
-from pyams_content.component.paragraph import IParagraphContainer, IParagraphContainerTarget
-from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu, \
-    IParagraphContainerBaseTable
+from pyams_content.component.paragraph.interfaces import IParagraphContainer, IParagraphContainerTarget
+from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu
+from pyams_content.component.paragraph.zmi.interfaces import IParagraphContainerBaseTable
 from pyams_form.ajax import ajax_form_config
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_viewlet.viewlet import viewlet_config

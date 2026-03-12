@@ -17,9 +17,9 @@ This module defines components for framed text renderer settings management inte
 
 __docformat__ = 'restructuredtext'
 
-from pyams_content.component.frame.skin import IFrameDefaultRendererSettings, \
+from pyams_content.component.frame.skin.interfaces import IFrameDefaultRendererSettings, \
     IFrameLateralRendererSettings
-from pyams_content.component.paragraph.zmi import IParagraphRendererSettingsEditForm
+from pyams_content.component.paragraph.zmi.interfaces import IParagraphRendererSettingsEditForm
 from pyams_content.reference.pictogram.zmi.widget import PictogramSelectFieldWidget
 from pyams_form.field import Fields
 from pyams_form.interfaces.form import IFormFields

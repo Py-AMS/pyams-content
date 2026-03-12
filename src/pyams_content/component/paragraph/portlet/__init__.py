@@ -14,22 +14,21 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.component.paragraph import IBaseParagraph, IParagraphContainer, \
+from pyams_content.component.paragraph.interfaces import IBaseParagraph, IParagraphContainer, \
     IParagraphContainerTarget
 from pyams_content.component.paragraph.portlet.interfaces import \
     IParagraphContainerPortletSettings, IParagraphNavigationPortletSettings
 from pyams_portal.portlet import Portlet, PortletSettings, portlet_config
-from pyams_security.interfaces.base import VIEW_PERMISSION
 from pyams_sequence.reference import InternalReferenceMixin
 from pyams_utils.factory import factory_config, get_object_factory
 from pyams_utils.interfaces import MISSING_INFO
 from pyams_utils.request import check_request
 from pyams_utils.traversing import get_parent
 from pyams_zmi.utils import get_object_label
+
+__docformat__ = 'restructuredtext'
 
 from pyams_content import _
 

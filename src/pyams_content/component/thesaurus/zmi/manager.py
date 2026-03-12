@@ -17,7 +17,7 @@ This module defines management components for thesaurus manager related forms.
 
 from zope.interface import alsoProvides
 
-from pyams_content.component.thesaurus import ICollectionsManager, ICollectionsManagerTarget, \
+from pyams_content.component.thesaurus.interfaces import ICollectionsManager, ICollectionsManagerTarget, \
     ITagsManager, ITagsManagerTarget, IThemesManager, IThemesManagerTarget
 from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
 from pyams_content.zmi import content_js

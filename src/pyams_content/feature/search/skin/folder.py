@@ -8,7 +8,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-from pyams_content.feature.search import ISearchFolder
+from pyams_content.feature.search.interfaces import ISearchFolder
 from pyams_content.shared.site.interfaces import ISiteElementNavigation
 from pyams_content.shared.site.portlet.skin.interfaces import ISiteContainerSummaryItemHeader, \
     ISiteContainerSummaryItemTitle, ISiteContainerSummaryItemURL

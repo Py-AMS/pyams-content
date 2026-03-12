@@ -15,9 +15,9 @@
 This module defines interfaces which are used to handle tags and themes management interface.
 """
 
-__docformat__ = 'restructuredtext'
-
 from zope.interface import Interface
+
+__docformat__ = 'restructuredtext'
 
 
 class IThesaurusThemesEditForm(Interface):

@@ -13,7 +13,7 @@ from zope.container.interfaces import IOrderedContainer
 from zope.location.interfaces import IContained
 from zope.schema import Bool, TextLine
 
-from pyams_content.component.paragraph import IBaseParagraph
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.component.paragraph.schema import ParagraphRendererChoice
 from pyams_i18n.schema import I18nTextLineField
 

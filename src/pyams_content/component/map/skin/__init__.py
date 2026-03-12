@@ -15,7 +15,8 @@ from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.map.interfaces import IMapParagraph
 from pyams_content.component.map.skin.interfaces import IBaseMapRendererSettings, IMapDefaultRendererSettings
-from pyams_content.feature.renderer import DefaultContentRenderer, IContentRenderer
+from pyams_content.feature.renderer import DefaultContentRenderer
+from pyams_content.feature.renderer.interfaces import IContentRenderer
 from pyams_gis.configuration import MapConfiguration
 from pyams_gis.interfaces.configuration import IMapConfiguration
 from pyams_gis.interfaces.utility import IMapManager

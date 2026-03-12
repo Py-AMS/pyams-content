@@ -20,7 +20,7 @@ from zope.schema import Text, TextLine
 
 from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.component.paragraph.schema import ParagraphRendererChoice
-from pyams_content.shared.form import FORM_CONTENT_TYPE
+from pyams_content.shared.form.interfaces import FORM_CONTENT_TYPE
 from pyams_file.schema import ImageField
 from pyams_gis.schema import GeoPointField
 from pyams_i18n.schema import I18nTextLineField

@@ -21,10 +21,9 @@ from zope.lifecycleevent import IObjectAddedEvent
 from zope.location.interfaces import ISublocations
 from zope.traversing.interfaces import ITraversable
 
-from pyams_content.component.paragraph import IParagraphContainerTarget
-from pyams_content.component.paragraph.interfaces import IBaseParagraph, IParagraphContainer, \
-    IParagraphContainerItems, IParagraphFactorySettings, IParagraphFactorySettingsTarget, PARAGRAPH_CONTAINER_KEY
-from pyams_content.shared.common import IWfSharedContent
+from pyams_content.component.paragraph.interfaces import IBaseParagraph, IParagraphContainer, IParagraphContainerItems, \
+    IParagraphContainerTarget, IParagraphFactorySettings, IParagraphFactorySettingsTarget, PARAGRAPH_CONTAINER_KEY
+from pyams_content.shared.common.interfaces import IWfSharedContent
 from pyams_content.shared.common.interfaces.types import IWfTypedSharedContent
 from pyams_utils.adapter import ContextAdapter, adapter_config, get_annotation_adapter
 from pyams_utils.container import BTreeOrderedContainer

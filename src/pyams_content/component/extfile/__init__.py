@@ -19,8 +19,8 @@ import os
 
 from pyramid.events import subscriber
 from zope.interface import alsoProvides, implementer
-from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent, \
-    ObjectModifiedEvent
+from zope.lifecycleevent import ObjectModifiedEvent
+from zope.lifecycleevent.interfaces import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.association import AssociationItem
@@ -29,7 +29,7 @@ from pyams_content.component.extfile.interfaces import EXTAUDIO_ICON_CLASS, EXTA
     EXTFILE_ICON_CLASS, EXTFILE_ICON_HINT, EXTIMAGE_ICON_CLASS, EXTIMAGE_ICON_HINT, \
     EXTVIDEO_ICON_CLASS, EXTVIDEO_ICON_HINT, IBaseExtFile, IExtAudio, IExtFile, \
     IExtFileManagerInfo, IExtImage, IExtVideo
-from pyams_content.shared.common import IWfSharedContent
+from pyams_content.shared.common.interfaces import IWfSharedContent
 from pyams_file.file import EXTENSIONS_THUMBNAILS
 from pyams_file.interfaces import IFileInfo, IImageFile, IResponsiveImage
 from pyams_file.property import I18nFileProperty
@@ -41,7 +41,6 @@ from pyams_utils.registry import get_pyramid_registry, query_utility
 from pyams_utils.request import check_request
 from pyams_utils.size import get_human_size
 from pyams_utils.traversing import get_parent
-
 
 __docformat__ = 'restructuredtext'
 

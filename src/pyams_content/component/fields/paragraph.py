@@ -16,17 +16,17 @@ This module provides form fields paragraph persistent classes and adapters.
 """
 
 from zope.schema.fieldproperty import FieldProperty
+
 from pyams_content.component.fields.interfaces import FORM_FIELDS_PARAGRAPH_ICON_CLASS, \
     FORM_FIELDS_PARAGRAPH_NAME, FORM_FIELDS_PARAGRAPH_RENDERERS, FORM_FIELDS_PARAGRAPH_TYPE, \
     IFormFieldsParagraph
-from pyams_content.component.paragraph import BaseParagraph, IBaseParagraph
+from pyams_content.component.paragraph import BaseParagraph
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.feature.renderer import RenderersVocabulary
 from pyams_utils.factory import factory_config
-
+from pyams_utils.vocabulary import vocabulary_config
 
 __docformat__ = 'restructuredtext'
-
-from pyams_utils.vocabulary import vocabulary_config
 
 
 @factory_config(IFormFieldsParagraph)

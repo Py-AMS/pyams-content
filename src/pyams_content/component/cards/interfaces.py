@@ -15,9 +15,9 @@
 Bootstrap cards paragraph interfaces.
 """
 
-from pyams_content.component.paragraph import IBaseParagraph
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.component.paragraph.schema import ParagraphRendererChoice
-from pyams_portal.portlets.cards import ICardsContainer
+from pyams_portal.portlets.cards.interfaces import ICardsContainer
 
 __docformat__ = 'restructuredtext'
 

@@ -14,7 +14,7 @@
 
 """
 
-from pyams_content.component.association.zmi import IAssociationItemAddForm, IAssociationItemEditForm
+from pyams_content.component.association.zmi.interfaces import IAssociationItemAddForm, IAssociationItemEditForm
 
 
 __docformat__ = 'restructuredtext'

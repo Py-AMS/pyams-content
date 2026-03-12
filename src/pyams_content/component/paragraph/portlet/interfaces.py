@@ -14,15 +14,15 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
 from zope.schema import Bool, Choice, Int, List, Set
 
-from pyams_content.component.paragraph import CONTENT_PARAGRAPHS_VOCABULARY, \
+from pyams_content.component.paragraph.interfaces import CONTENT_PARAGRAPHS_VOCABULARY, \
     PARAGRAPH_FACTORIES_VOCABULARY
 from pyams_i18n.schema import I18nTextLineField
 from pyams_portal.interfaces import IPortletSettings
 from pyams_sequence.schema import InternalReferenceField
+
+__docformat__ = 'restructuredtext'
 
 from pyams_content import _
 

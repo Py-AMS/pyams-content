@@ -14,9 +14,6 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
-from pyams_content import _
 from pyams_content.feature.search.interfaces import ISearchManagerInfo
 from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
 from pyams_form.ajax import ajax_form_config
@@ -30,6 +27,10 @@ from pyams_zmi.form import AdminEditForm, FormGroupChecker
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuDivider, NavigationMenuItem
+
+__docformat__ = 'restructuredtext'
+
+from pyams_content import _
 
 
 @viewlet_config(name='search.divider',

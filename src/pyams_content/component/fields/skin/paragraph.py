@@ -18,10 +18,10 @@ This module provides components for rendering of form fields paragraphs.
 from zope.interface import Interface
 
 from pyams_content.component.fields.interfaces import IFormFieldsParagraph
-from pyams_content.component.paragraph.portlet.skin import IParagraphContainerPortletRenderer
+from pyams_content.component.paragraph.portlet.skin.interfaces import IParagraphContainerPortletRenderer
 from pyams_content.feature.renderer import DefaultContentRenderer, IContentRenderer
 from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
-from pyams_content.shared.form import IWfForm
+from pyams_content.shared.form.interfaces import IWfForm
 from pyams_fields.interfaces import IFormFieldContainerTarget, IFormHandlersInfo
 from pyams_fields.skin import FormFieldContainerInputForm
 from pyams_fields.skin.interfaces import IFormFieldContainerInputForm
@@ -31,7 +31,6 @@ from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
 from pyams_utils.traversing import get_parent
 from pyams_viewlet.viewlet import ViewContentProvider
-
 
 __docformat__ = 'restructuredtext'
 

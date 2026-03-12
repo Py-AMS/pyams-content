@@ -15,17 +15,17 @@
 This module defines renderers of Bootstrap cards paragraphs.
 """
 
-from pyams_content.component.cards import ICardsParagraph
+from pyams_content.component.cards.interfaces import ICardsParagraph
 from pyams_content.component.cards.skin.interfaces import ICardsParagraphDefaultRendererSettings, \
     ICardsParagraphMasonryRendererSettings
-from pyams_content.feature.renderer import BaseContentRenderer, IContentRenderer
-from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
+from pyams_content.feature.renderer import BaseContentRenderer
+from pyams_content.feature.renderer.interfaces import IContentRenderer
 from pyams_layer.interfaces import IPyAMSLayer
+from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
 from pyams_portal.portlets.cards.skin import CardsPortletMasonryRendererSettings, CardsPortletRendererSettings
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
 from pyams_utils.factory import factory_config
-
 
 __docformat__ = 'restructuredtext'
 

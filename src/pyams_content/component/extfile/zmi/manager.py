@@ -15,8 +15,7 @@
 This module provides management components to external files manager.
 """
 
-from pyams_content.component.extfile import IExtFileManagerInfo
-from pyams_content.component.extfile.interfaces import IExtFileManagerTarget
+from pyams_content.component.extfile.interfaces import IExtFileManagerInfo, IExtFileManagerTarget
 from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
@@ -28,7 +27,6 @@ from pyams_zmi.form import AdminEditForm
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import IPropertiesMenu
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
-
 
 __docformat__ = 'restructuredtext'
 

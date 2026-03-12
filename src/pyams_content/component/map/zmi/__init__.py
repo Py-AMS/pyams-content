@@ -8,8 +8,6 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-__docformat__ = 'restructuredtext'
-
 from pyams_content.component.map.interfaces import IMapParagraph, MAP_PARAGRAPH_ICON_CLASS, MAP_PARAGRAPH_NAME, \
     MAP_PARAGRAPH_TYPE
 from pyams_content.component.paragraph.interfaces import IParagraphContainer, IParagraphContainerTarget
@@ -20,6 +18,8 @@ from pyams_layer.interfaces import IPyAMSLayer
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager
+
+__docformat__ = 'restructuredtext'
 
 
 @viewlet_config(name='add-map-paragraph.menu',

@@ -20,7 +20,8 @@ from pyramid.events import subscriber
 from pyramid.location import lineage
 from zope.container.contained import Contained
 from zope.interface import alsoProvides
-from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent, ObjectModifiedEvent
+from zope.lifecycleevent import ObjectModifiedEvent
+from zope.lifecycleevent.interfaces import IObjectAddedEvent, IObjectModifiedEvent
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.thesaurus.interfaces import COLLECTIONS_INFO_KEY, \
@@ -38,7 +39,6 @@ from pyams_utils.inherit import BaseInheritInfo, InheritedFieldProperty
 from pyams_utils.registry import get_pyramid_registry, query_utility
 from pyams_utils.request import query_request
 from pyams_utils.traversing import get_parent
-
 
 __docformat__ = 'restructuredtext'
 

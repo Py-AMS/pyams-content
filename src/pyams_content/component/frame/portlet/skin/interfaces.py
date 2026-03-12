@@ -15,7 +15,7 @@
 This module defines framed text portlet renderers settings interfaces.
 """
 
-from pyams_content.component.frame.skin import IFrameDefaultRendererSettings, IFrameLateralRendererSettings
+from pyams_content.component.frame.skin.interfaces import IFrameDefaultRendererSettings, IFrameLateralRendererSettings
 from pyams_portal.interfaces import IPortletRendererSettings
 
 __docformat__ = 'restructuredtext'

@@ -20,8 +20,8 @@ from zope.container.contained import Contained
 from zope.interface import Interface
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.component.gallery import IGallery
-from pyams_content.component.gallery.portlet import IGalleryPortletSettings
+from pyams_content.component.gallery.interfaces import IGallery
+from pyams_content.component.gallery.portlet.interfaces import IGalleryPortletSettings
 from pyams_content.component.gallery.portlet.skin.interfaces import \
     IGalleryPortletCarouselRendererSettings, IGalleryPortletDefaultRendererSettings
 from pyams_layer.interfaces import IPyAMSLayer

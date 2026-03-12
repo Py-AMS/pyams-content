@@ -17,11 +17,11 @@ This module provides base illustrations adapters.
 
 from zope.interface import Interface
 
-from pyams_content.component.illustration import IBaseIllustrationTarget, IIllustration, \
+from pyams_content.component.illustration.interfaces import IBaseIllustrationTarget, IIllustration, \
     IIllustrationTargetBase, ILinkIllustration, ILinkIllustrationTarget
-from pyams_content.component.links import IInternalLink
+from pyams_content.component.links.interfaces import IInternalLink
 from pyams_content.interfaces import IBaseContent
-from pyams_content.shared.common import ISharedContent
+from pyams_content.shared.common.interfaces import ISharedContent
 from pyams_content.skin.interfaces import IContentBannerIllustration, IContentIllustration, \
     IContentNavigationIllustration
 from pyams_layer.interfaces import IPyAMSLayer

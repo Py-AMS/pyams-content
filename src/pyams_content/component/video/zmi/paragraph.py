@@ -23,13 +23,13 @@ from pyramid.response import Response
 from pyramid.view import view_config
 from zope.interface import Interface, Invalid, alsoProvides
 
-from pyams_content.component.paragraph import IParagraphContainer, IParagraphContainerTarget
+from pyams_content.component.paragraph.interfaces import IParagraphContainer, IParagraphContainerTarget
 from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu, \
-    IInnerParagraphEditForm, IParagraphContainerBaseTable, InnerParagraphPropertiesEditForm, \
-    ParagraphPropertiesEditFormMixin
-from pyams_content.component.video import IExternalVideoProvider, IExternalVideoSettings, external_video_settings
+    InnerParagraphPropertiesEditForm, ParagraphPropertiesEditFormMixin
+from pyams_content.component.paragraph.zmi.interfaces import IInnerParagraphEditForm, IParagraphContainerBaseTable
+from pyams_content.component.video import external_video_settings
 from pyams_content.component.video.interfaces import EXTERNAL_VIDEO_PARAGRAPH_ICON_CLASS, EXTERNAL_VIDEO_PARAGRAPH_NAME, \
-    EXTERNAL_VIDEO_PARAGRAPH_TYPE, IExternalVideoParagraph
+    EXTERNAL_VIDEO_PARAGRAPH_TYPE, IExternalVideoParagraph, IExternalVideoProvider, IExternalVideoSettings
 from pyams_content.interfaces import MANAGE_CONTENT_PERMISSION
 from pyams_form.ajax import ajax_form_config
 from pyams_form.button import Buttons

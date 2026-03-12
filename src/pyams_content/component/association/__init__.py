@@ -20,13 +20,13 @@ from persistent import Persistent
 from pyramid.events import subscriber
 from zope.container.contained import Contained
 from zope.interface import implementer
-from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent, \
-    ObjectModifiedEvent
+from zope.lifecycleevent import ObjectModifiedEvent
+from zope.lifecycleevent.interfaces import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.association.interfaces import IAssociationContainer, \
     IAssociationContainerTarget, IAssociationItem
-from pyams_content.shared.common import IWfSharedContent
+from pyams_content.shared.common.interfaces import IWfSharedContent
 from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_utils.adapter import ContextAdapter, adapter_config
 from pyams_utils.registry import get_pyramid_registry

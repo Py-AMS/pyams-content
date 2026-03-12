@@ -20,13 +20,12 @@ import re
 from persistent import Persistent
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.component.video import IExternalVideo, IExternalVideoSettings, external_video_settings
-from pyams_content.component.video.interfaces import IExternalVideoProvider
+from pyams_content.component.video import external_video_settings
+from pyams_content.component.video.interfaces import IExternalVideo, IExternalVideoProvider, IExternalVideoSettings
 from pyams_content.component.video.provider.interfaces import IYoutubeVideoSettings
 from pyams_utils.adapter import adapter_config
 from pyams_utils.factory import factory_config
 from pyams_utils.registry import utility_config
-
 
 __docformat__ = 'restructuredtext'
 

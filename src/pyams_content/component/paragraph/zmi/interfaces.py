@@ -14,11 +14,11 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
 from zope.interface import Interface
 
 from pyams_viewlet.interfaces import IViewletManager
+
+__docformat__ = 'restructuredtext'
 
 
 class IParagraphContainerBaseTable(Interface):

@@ -16,7 +16,7 @@
 
 __docformat__ = 'restructuredtext'
 
-from pyams_content.feature.search import ISearchFolder
+from pyams_content.feature.search.interfaces import ISearchFolder
 from pyams_form.ajax import ajax_form_config
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_security.interfaces.base import FORBIDDEN_PERMISSION, VIEW_SYSTEM_PERMISSION

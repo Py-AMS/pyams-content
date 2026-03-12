@@ -16,7 +16,8 @@ This module defines interfaces common to all text frames components.
 """
 
 from zope.interface import Interface
-from pyams_content.component.paragraph import IBaseParagraph
+
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.component.paragraph.schema import ParagraphRendererChoice
 from pyams_i18n.schema import I18nHTMLField
 

@@ -17,7 +17,7 @@ This module defines interfaces of HTML paragraph default renderer.
 
 from zope.schema import Bool, Choice
 
-from pyams_content.feature.renderer import IRendererSettings
+from pyams_content.feature.renderer.interfaces import IRendererSettings
 from pyams_skin.interfaces import BOOTSTRAP_STATUS_VOCABULARY
 
 __docformat__ = 'restructuredtext'

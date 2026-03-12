@@ -19,7 +19,6 @@ from zope.interface import Interface
 
 from pyams_portal.interfaces import IPortletSettings
 
-
 __docformat__ = 'restructuredtext'
 
 

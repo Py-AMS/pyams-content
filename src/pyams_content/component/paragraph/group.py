@@ -10,10 +10,10 @@
 
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.component.paragraph import BaseParagraph, IBaseParagraph
+from pyams_content.component.paragraph import BaseParagraph
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.component.paragraph.interfaces.group import GROUP_PARAGRAPH_ICON_CLASS, GROUP_PARAGRAPH_NAME, \
-    GROUP_PARAGRAPH_RENDERERS, \
-    GROUP_PARAGRAPH_TYPE, IParagraphsGroup
+    GROUP_PARAGRAPH_RENDERERS, GROUP_PARAGRAPH_TYPE, IParagraphsGroup
 from pyams_content.feature.renderer import RenderersVocabulary
 from pyams_utils.factory import factory_config
 from pyams_utils.vocabulary import vocabulary_config

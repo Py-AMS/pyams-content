@@ -20,8 +20,7 @@ from zope.interface import Invalid, implementer
 
 from pyams_content.component.association.interfaces import IAssociationContainer, IAssociationContainerTarget, \
     IAssociationInfo
-from pyams_content.component.association.zmi import AssociationItemAddFormMixin, \
-    AssociationItemAddMenuMixin
+from pyams_content.component.association.zmi import AssociationItemAddFormMixin, AssociationItemAddMenuMixin
 from pyams_content.component.association.zmi.interfaces import IAssociationsTable
 from pyams_content.component.links import ExternalLink, InternalLink, MailtoLink
 from pyams_content.component.links.interfaces import IBaseLink, IExternalLink, IExternalLinksManagerInfo, IInternalLink, \

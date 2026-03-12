@@ -18,14 +18,12 @@ specialized components like verbatims, contact cards, framed text, illustrations
 galleries, videos or any other kind of content that you can imagine...
 """
 
-__docformat__ = 'restructuredtext'
-
 from persistent import Persistent
 from pyramid.events import subscriber
 from zope.container.contained import Contained
 from zope.interface import implementer
-from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent, \
-    ObjectModifiedEvent
+from zope.lifecycleevent import ObjectModifiedEvent
+from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
@@ -45,6 +43,8 @@ from pyams_utils.request import check_request
 from pyams_utils.traversing import get_parent
 from pyams_utils.vocabulary import vocabulary_config
 from pyams_zmi.interfaces import IObjectHint, IObjectIcon, IObjectLabel
+
+__docformat__ = 'restructuredtext'
 
 
 @vocabulary_config(name=PARAGRAPH_FACTORIES_VOCABULARY)

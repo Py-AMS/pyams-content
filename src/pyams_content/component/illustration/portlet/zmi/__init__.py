@@ -19,7 +19,7 @@ __docformat__ = 'restructuredtext'
 
 from zope.interface import Interface
 
-from pyams_content.component.illustration.portlet import IIllustrationPortletSettings
+from pyams_content.component.illustration.portlet.interfaces import IIllustrationPortletSettings
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortletPreviewer
 from pyams_portal.zmi import PortletPreviewer

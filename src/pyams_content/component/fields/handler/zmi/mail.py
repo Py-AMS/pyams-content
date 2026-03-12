@@ -16,7 +16,7 @@ Management interface components for 'mailto' form handler.
 """
 
 from pyams_content.component.fields.handler.interfaces import IMailtoHandlerInfo
-from pyams_content.shared.common.zmi import ISharedContentPropertiesMenu
+from pyams_content.shared.common.zmi.interfaces import ISharedContentPropertiesMenu
 from pyams_fields.interfaces import IFormHandlersInfo, IFormHandlersTarget
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields
@@ -28,7 +28,6 @@ from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminEditForm
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
-
 
 __docformat__ = 'restructuredtext'
 

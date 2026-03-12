@@ -22,7 +22,7 @@ from zope.interface import Attribute, Interface
 from zope.schema import Choice
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
-from pyams_content.feature.renderer import IRendererSettings
+from pyams_content.feature.renderer.interfaces import IRendererSettings
 from pyams_content.reference.pictogram.interfaces import SELECTED_PICTOGRAM_VOCABULARY
 from pyams_skin.interfaces import BOOTSTRAP_STATUS_VOCABULARY
 from pyams_skin.schema import BootstrapThumbnailsSelectionField

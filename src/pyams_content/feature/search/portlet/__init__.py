@@ -22,7 +22,7 @@ from pyams_content.feature.search.interfaces import ISearchFolder
 from pyams_content.feature.search.portlet.interfaces import ISearchResultsFinder, ISearchResultsPortletSettings, \
     SEARCH_RESULTS_ICON_CLASS, SEARCH_RESULTS_PORTLET_FLAG, SEARCH_RESULTS_PORTLET_NAME
 from pyams_content.shared.view.interfaces import RELEVANCE_ORDER, VISIBLE_PUBLICATION_DATE_ORDER
-from pyams_content.shared.view.portlet import IViewItemsAggregates
+from pyams_content.shared.view.portlet.interfaces import IViewItemsAggregates
 from pyams_portal.interfaces import IPortletRendererSettings
 from pyams_portal.portlet import Portlet, PortletSettings, portlet_config
 from pyams_utils.factory import factory_config

@@ -20,7 +20,7 @@ from hypatia.interfaces import ICatalog
 from hypatia.query import Any
 from zope.intid.interfaces import IIntIds
 
-from pyams_content.component.thesaurus import ICollectionsManager, ITagsManager, IThemesManager
+from pyams_content.component.thesaurus.interfaces import ICollectionsManager, ITagsManager, IThemesManager
 from pyams_content.feature.search.interfaces import ISearchFolder, ISearchFolderQuery, ISearchFormRequestParams
 from pyams_content.shared.view.interfaces.query import IViewUserQuery
 from pyams_layer.interfaces import IPyAMSUserLayer

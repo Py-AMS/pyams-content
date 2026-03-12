@@ -16,8 +16,7 @@
 
 from zope.interface import Interface
 
-from pyams_content.feature.script import IScriptContainer
-from pyams_content.feature.script.interfaces import IScriptContainerSettings
+from pyams_content.feature.script.interfaces import IScriptContainer, IScriptContainerSettings
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_viewlet.viewlet import ViewContentProvider, contentprovider_config
 

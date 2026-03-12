@@ -14,13 +14,10 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
 from zope.interface import Interface
 
-from pyams_content import _
-from pyams_content.component.paragraph import IParagraphContainerTarget
-from pyams_content.component.paragraph.portlet import IParagraphContainerPortletSettings, \
+from pyams_content.component.paragraph.interfaces import IParagraphContainerTarget
+from pyams_content.component.paragraph.portlet.interfaces import IParagraphContainerPortletSettings, \
     IParagraphNavigationPortletSettings
 from pyams_form.interfaces.form import IInnerSubForm
 from pyams_layer.interfaces import IPyAMSLayer
@@ -32,6 +29,10 @@ from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
 from pyams_utils.traversing import get_parent
 from pyams_zmi.interfaces import IAdminLayer
+
+__docformat__ = 'restructuredtext'
+
+from pyams_content import _
 
 
 class ParagraphPortletSettingsEditFormMixin:

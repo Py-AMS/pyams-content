@@ -14,19 +14,19 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
 from pyramid.decorator import reify
 from zope.contentprovider.interfaces import IContentProvider
 from zope.interface import Interface
 
-from pyams_content.component.thesaurus import ITagsInfo
+from pyams_content.component.thesaurus.interfaces import ITagsInfo
 from pyams_content.feature.search.interfaces import ISearchManagerInfo
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_template.template import template_config
 from pyams_utils.adapter import ContextRequestViewAdapter, adapter_config
 from pyams_utils.interfaces.tales import ITALESExtension
 from pyams_viewlet.viewlet import ViewContentProvider, contentprovider_config
+
+__docformat__ = 'restructuredtext'
 
 
 @contentprovider_config(name='pyams_content.tags',

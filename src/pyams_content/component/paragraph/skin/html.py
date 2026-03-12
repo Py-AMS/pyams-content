@@ -19,11 +19,12 @@ from pygments.lexers import get_lexer_by_name
 from zope.container.contained import Contained
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.component.illustration import IIllustration
+from pyams_content.component.illustration.interfaces import IIllustration
 from pyams_content.component.paragraph.interfaces.html import IHTMLParagraph, IRawParagraph
 from pyams_content.component.paragraph.skin.interfaces.html import IHTMLParagraphAlertRendererSettings, \
     IHTMLParagraphRendererSettings
-from pyams_content.feature.renderer import DefaultContentRenderer, IContentRenderer
+from pyams_content.feature.renderer import DefaultContentRenderer
+from pyams_content.feature.renderer.interfaces import IContentRenderer
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import DEFAULT_RENDERER_NAME

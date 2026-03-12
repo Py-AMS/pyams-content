@@ -14,15 +14,13 @@
 
 """
 
-from pyams_content.component.association import IAssociationContainer, IAssociationContainerTarget
-from pyams_content.component.links import EXTERNAL_LINK_ICON_CLASS, IExternalLink, IInternalLink, \
+from pyams_content.component.association.interfaces import IAssociationContainer, IAssociationContainerTarget
+from pyams_content.component.links.interfaces import EXTERNAL_LINK_ICON_CLASS, IExternalLink, IInternalLink, \
     IMailtoLink, INTERNAL_LINK_ICON_CLASS, MAILTO_LINK_ICON_CLASS
-from pyams_content.component.paragraph.zmi import IParagraphContainerFullTable
 from pyams_content.component.paragraph.zmi.container import ParagraphTitleToolbarItemMixin
-from pyams_content.component.paragraph.zmi.interfaces import IParagraphTitleToolbar
+from pyams_content.component.paragraph.zmi.interfaces import IParagraphContainerFullTable, IParagraphTitleToolbar
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.interfaces import IAdminLayer
-
 
 __docformat__ = 'restructuredtext'
 

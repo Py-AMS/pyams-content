@@ -20,9 +20,8 @@ from zope.container.interfaces import IOrderedContainer
 from zope.interface import Attribute, Interface
 from zope.schema import Bool, Choice, List, Set
 
-from pyams_content.feature.renderer import IContentRenderer, IRenderedContent
+from pyams_content.feature.renderer.interfaces import IContentRenderer, IRenderedContent
 from pyams_i18n.schema import I18nTextLineField
-
 
 __docformat__ = 'restructuredtext'
 

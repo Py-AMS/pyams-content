@@ -17,8 +17,7 @@ This module defines management components for scripts container settings.
 
 from zope.interface import alsoProvides
 
-from pyams_content.feature.script import IScriptContainerTarget
-from pyams_content.feature.script.interfaces import IScriptContainerSettings
+from pyams_content.feature.script.interfaces import IScriptContainerSettings, IScriptContainerTarget
 from pyams_content.feature.script.zmi.interfaces import IScriptContainerNavigationMenu
 from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
 from pyams_form.ajax import ajax_form_config

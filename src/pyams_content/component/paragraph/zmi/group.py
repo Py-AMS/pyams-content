@@ -8,14 +8,11 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-__docformat__ = 'restructuredtext'
-
-from pyams_content import _
-from pyams_content.component.paragraph import IParagraphContainer, IParagraphContainerTarget
+from pyams_content.component.paragraph.interfaces import IParagraphContainer, IParagraphContainerTarget
 from pyams_content.component.paragraph.interfaces.group import GROUP_PARAGRAPH_ICON_CLASS, GROUP_PARAGRAPH_NAME, \
     GROUP_PARAGRAPH_TYPE, IParagraphsGroup
-from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu, \
-    IParagraphContainerBaseTable
+from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu
+from pyams_content.component.paragraph.zmi.interfaces import IParagraphContainerBaseTable
 from pyams_form.ajax import ajax_form_config
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_skin.interfaces.viewlet import IContentSuffixViewletManager
@@ -24,6 +21,10 @@ from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.form import IPropertiesEditForm
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager
 from pyams_zmi.table import InnerTableAdminView
+
+__docformat__ = 'restructuredtext'
+
+from pyams_content import _
 
 
 @viewlet_config(name='add-group-paragraph.menu',

@@ -17,12 +17,12 @@ This module provides management components for external files.
 
 from zope.interface import Interface, implementer
 
-from pyams_content.component.association import IAssociationContainer, IAssociationContainerTarget
-from pyams_content.component.association.zmi import AssociationItemAddFormMixin, \
-    AssociationItemAddMenuMixin, IAssociationsTable
-from pyams_content.component.extfile import ExtAudio, ExtFile, ExtImage, ExtVideo, IExtAudio, \
-    IExtFile, IExtImage, IExtVideo
-from pyams_content.component.extfile.interfaces import IExtFileContainerTarget
+from pyams_content.component.association.interfaces import IAssociationContainer, IAssociationContainerTarget
+from pyams_content.component.association.zmi import AssociationItemAddFormMixin, AssociationItemAddMenuMixin
+from pyams_content.component.association.zmi.interfaces import IAssociationsTable
+from pyams_content.component.extfile import ExtAudio, ExtFile, ExtImage, ExtVideo
+from pyams_content.component.extfile.interfaces import IExtAudio, IExtFile, IExtFileContainerTarget, IExtImage, \
+    IExtVideo
 from pyams_content.component.extfile.zmi.interfaces import IExtFileAddForm, IExtFileEditForm
 from pyams_content.component.extfile.zmi.widget import I18nExtFileTitleFieldWidget
 from pyams_form.ajax import ajax_form_config
@@ -38,7 +38,6 @@ from pyams_zmi.interfaces import IAdminLayer, IObjectHint, TITLE_SPAN_BREAK
 from pyams_zmi.interfaces.form import IFormTitle
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager
 from pyams_zmi.utils import get_object_hint, get_object_label
-
 
 __docformat__ = 'restructuredtext'
 

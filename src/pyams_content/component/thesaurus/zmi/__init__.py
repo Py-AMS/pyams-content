@@ -18,7 +18,7 @@
 from pyramid.traversal import lineage
 from zope.interface import Interface, alsoProvides, implementer
 
-from pyams_content.component.thesaurus import ICollectionsInfo, ICollectionsManager, \
+from pyams_content.component.thesaurus.interfaces import ICollectionsInfo, ICollectionsManager, \
     ICollectionsTarget, ITagsInfo, ITagsManager, ITagsTarget, IThemesInfo, IThemesManager, \
     IThemesTarget
 from pyams_content.component.thesaurus.zmi.interfaces import IThesaurusThemesEditForm
@@ -43,7 +43,6 @@ from pyams_zmi.interfaces.viewlet import IPropertiesMenu
 from pyams_zmi.table import ActionColumn
 from pyams_zmi.utils import get_object_hint, get_object_label
 from pyams_zmi.zmi.viewlet.menu import NavigationMenuItem
-
 
 __docformat__ = 'restructuredtext'
 

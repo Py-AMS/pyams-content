@@ -25,7 +25,6 @@ from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.feature.renderer import RenderersVocabulary
 from pyams_file.interfaces import IImageFile, IResponsiveImage
 from pyams_file.property import FileProperty
-from pyams_gis.schema import GeoPointField
 from pyams_utils.factory import factory_config
 from pyams_utils.vocabulary import vocabulary_config
 

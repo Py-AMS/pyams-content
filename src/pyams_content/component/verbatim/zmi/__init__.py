@@ -18,7 +18,7 @@ This module defines components for verbatim management.
 from pyramid.view import view_config
 from zope.interface import Interface, implementer
 
-from pyams_content.component.illustration import IIllustration
+from pyams_content.component.illustration.interfaces import IIllustration
 from pyams_content.component.paragraph.interfaces import IParagraphContainer, IParagraphContainerTarget
 from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu
 from pyams_content.component.paragraph.zmi.interfaces import IParagraphContainerBaseTable

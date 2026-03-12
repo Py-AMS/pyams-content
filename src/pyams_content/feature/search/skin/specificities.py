@@ -12,7 +12,7 @@ __docformat__ = 'restructuredtext'
 
 from zope.interface import Interface
 
-from pyams_content.feature.search import ISearchFolder
+from pyams_content.feature.search.interfaces import ISearchFolder
 from pyams_content.shared.common.portlet.interfaces import ISpecificitiesRenderer
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_template.template import template_config

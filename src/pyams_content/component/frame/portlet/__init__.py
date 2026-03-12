@@ -19,8 +19,8 @@ from zope.interface import alsoProvides
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.frame.portlet.interfaces import IFramePortletSettings
-from pyams_content.component.illustration import IIllustration, IParagraphIllustration, \
-    illustration_factory
+from pyams_content.component.illustration import illustration_factory
+from pyams_content.component.illustration.interfaces import IIllustration, IParagraphIllustration
 from pyams_portal.portlet import Portlet, PortletSettings, portlet_config
 from pyams_utils.adapter import adapter_config
 from pyams_utils.factory import factory_config
