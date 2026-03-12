@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2026-02-20 17:19+0100\n"
+"POT-Creation-Date: 2026-03-12 14:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3435,48 +3435,60 @@ msgstr ""
 msgid "Open preview in new tab"
 msgstr ""
 
-#: ./src/pyams_content/feature/script/interfaces.py:34
+#: ./src/pyams_content/feature/script/interfaces.py:35
+#: ./src/pyams_content/feature/header/portlet/__init__.py:43
+msgid "Page header"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/interfaces.py:36
+msgid "Page body top"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/interfaces.py:37
+msgid "Page body bottom"
+msgstr ""
+
+#: ./src/pyams_content/feature/script/interfaces.py:49
 msgid "Active script?"
 msgstr ""
 
-#: ./src/pyams_content/feature/script/interfaces.py:35
+#: ./src/pyams_content/feature/script/interfaces.py:50
 msgid "An inactive script is not included into page resources"
 msgstr ""
 
-#: ./src/pyams_content/feature/script/interfaces.py:39
+#: ./src/pyams_content/feature/script/interfaces.py:54
 #: ./src/pyams_content/feature/script/zmi/__init__.py:149
 msgid "Script name"
 msgstr ""
 
-#: ./src/pyams_content/feature/script/interfaces.py:40
+#: ./src/pyams_content/feature/script/interfaces.py:55
 msgid "This is just a descriptive name given to the script"
 msgstr ""
 
-#: ./src/pyams_content/feature/script/interfaces.py:43
+#: ./src/pyams_content/feature/script/interfaces.py:58
 msgid "Script body"
 msgstr ""
 
-#: ./src/pyams_content/feature/script/interfaces.py:44
+#: ./src/pyams_content/feature/script/interfaces.py:59
 #, python-format
 msgid ""
 "Script source code, including the HTML wrapping tag; you can use variables by"
 " embracing them with {} characters"
 msgstr ""
 
-#: ./src/pyams_content/feature/script/interfaces.py:48
-msgid "Bottom script?"
+#: ./src/pyams_content/feature/script/interfaces.py:63
+msgid "Script position"
 msgstr ""
 
-#: ./src/pyams_content/feature/script/interfaces.py:49
-msgid ""
-"If 'yes', script will be included in page bottom instead of page HTML head"
+#: ./src/pyams_content/feature/script/interfaces.py:64
+msgid "Script position in page resources"
 msgstr ""
 
-#: ./src/pyams_content/feature/script/interfaces.py:82
+#: ./src/pyams_content/feature/script/interfaces.py:97
 msgid "Scripts params"
 msgstr ""
 
-#: ./src/pyams_content/feature/script/interfaces.py:83
+#: ./src/pyams_content/feature/script/interfaces.py:98
 msgid ""
 "If your scripts have to use parameters, you can set their values here, using "
 "\"NAME=value\" syntax for each parameter; you can add comments by prefixing "
@@ -4415,10 +4427,6 @@ msgstr ""
 
 #: ./src/pyams_content/feature/header/interfaces.py:38
 msgid "Hide header"
-msgstr ""
-
-#: ./src/pyams_content/feature/header/portlet/__init__.py:43
-msgid "Page header"
 msgstr ""
 
 #: ./src/pyams_content/feature/header/portlet/interfaces.py:33

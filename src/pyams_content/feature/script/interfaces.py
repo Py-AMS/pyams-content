@@ -15,17 +15,32 @@
 This module defines interfaces related to optional scripts management.
 """
 
+from collections import OrderedDict
+
 from zope.annotation.interfaces import IAttributeAnnotatable
 from zope.container.constraints import contains
 from zope.container.interfaces import IContainer
-from zope.interface import Interface
-from zope.schema import Bool, Text, TextLine
+from zope.interface import Attribute, Interface
+from zope.schema import Bool, Choice, Text, TextLine
+from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
 from pyams_utils.schema import TextLineListField
 
 __docformat__ = 'restructuredtext'
 
 from pyams_content import _
+
+
+SCRIPT_POSITIONS_LABELS = OrderedDict((
+    ('head', _("Page header")),
+    ('top', _("Page body top")),
+    ('bottom', _("Page body bottom"))
+))
+
+SCRIPT_POSITIONS_VOCABULARY = SimpleVocabulary([
+    SimpleTerm(v, title=t)
+    for v, t in SCRIPT_POSITIONS_LABELS.items()
+])
 
 
 class IScriptInfo(IAttributeAnnotatable):
@@ -45,11 +60,11 @@ class IScriptInfo(IAttributeAnnotatable):
                               "by embracing them with {} characters"),
                 required=False)
 
-    bottom_script = Bool(title=_("Bottom script?"),
-                         description=_("If 'yes', script will be included in page bottom instead of "
-                                       "page HTML head"),
-                         required=True,
-                         default=False)
+    position = Choice(title=_("Script position"),
+                      description=_("Script position in page resources"),
+                      vocabulary=SCRIPT_POSITIONS_VOCABULARY,
+                      required=True,
+                      default='head')
 
 
 SCRIPT_CONTAINER_KEY = 'pyams_content.scripts'
@@ -85,8 +100,7 @@ class IScriptContainerSettings(Interface):
                                                 "you can add comments by prefixing lines with #"),
                                   required=False)
 
-    def items(self):
-        """Get all variables as mapping"""
+    items = Attribute("Get all variables as mapping")
 
 
 class IScriptContainerTarget(IAttributeAnnotatable):

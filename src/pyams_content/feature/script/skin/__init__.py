@@ -24,6 +24,22 @@ from pyams_viewlet.viewlet import ViewContentProvider, contentprovider_config
 __docformat__ = 'restructuredtext'
 
 
+@contentprovider_config(name='pyams.head_scripts',
+                        layer=IPyAMSUserLayer, view=Interface)
+class HeadScriptsContentProvider(ViewContentProvider):
+    """Head scripts content provider"""
+    
+    def render(self, template_name=''):
+        container = IScriptContainer(self.request.root, None)
+        if container is None:
+            return ''
+        settings = IScriptContainerSettings(self.request.root)
+        return '\n'.join((
+            script.body.format(**settings.items)
+            for script in container.get_head_scripts()
+        ))
+
+
 @contentprovider_config(name='pyams.top_scripts',
                         layer=IPyAMSUserLayer, view=Interface)
 class TopScriptsContentProvider(ViewContentProvider):

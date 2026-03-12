@@ -39,7 +39,7 @@ class ScriptInfo(Persistent, Contained):
     active = FieldProperty(IScriptInfo['active'])
     name = FieldProperty(IScriptInfo['name'])
     body = FieldProperty(IScriptInfo['body'])
-    bottom_script = FieldProperty(IScriptInfo['bottom_script'])
+    position = FieldProperty(IScriptInfo['position'])
 
 
 @adapter_config(required=IScriptInfo,
@@ -56,15 +56,23 @@ class ScriptContainer(BTreeOrderedContainer):
     
     def get_active_items(self):
         """Active items iterator"""
-        yield from filter(lambda x: x.active, self.values())
+        yield from filter(lambda x: x.active,
+                          self.values())
+
+    def get_head_scripts(self):
+        """Get iterator over head scripts"""
+        yield from filter(lambda x: x.position == 'head',
+                          self.get_active_items())
 
     def get_top_scripts(self):
         """Get iterator over top scripts"""
-        yield from filter(lambda x: not x.bottom_script, self.get_active_items())
+        yield from filter(lambda x: x.position == 'top',
+                          self.get_active_items())
 
     def get_bottom_scripts(self):
         """Get iterator over bottom scripts"""
-        yield from filter(lambda x: x.bottom_script, self.get_active_items())
+        yield from filter(lambda x: x.position == 'bottom',
+                          self.get_active_items())
 
 
 @adapter_config(required=IScriptContainerTarget,

@@ -299,7 +299,7 @@ class WebsiteGenerationsChecker:
     """PyAMS content package generations checker"""
 
     order = 100
-    generation = 2
+    generation = 3
 
     def evolve(self, site, current=None):
         """Check for required utilities, tables and tools"""

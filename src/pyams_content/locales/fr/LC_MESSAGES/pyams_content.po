@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2026-02-20 17:19+0100\n"
+"POT-Creation-Date: 2026-03-12 14:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3777,28 +3777,41 @@ msgstr "Aperçu"
 msgid "Open preview in new tab"
 msgstr "Ouvrir l'aperçu dans un nouvel onglet"
 
-#: src/pyams_content/feature/script/interfaces.py:34
+#: src/pyams_content/feature/script/interfaces.py:35
+#: src/pyams_content/feature/header/portlet/__init__.py:43
+msgid "Page header"
+msgstr "En-tête de page"
+
+#: src/pyams_content/feature/script/interfaces.py:36
+msgid "Page body top"
+msgstr "Corps de la page, en tête"
+
+#: src/pyams_content/feature/script/interfaces.py:37
+msgid "Page body bottom"
+msgstr "Corps de la page, en pied"
+
+#: src/pyams_content/feature/script/interfaces.py:49
 msgid "Active script?"
 msgstr "Script actif ?"
 
-#: src/pyams_content/feature/script/interfaces.py:35
+#: src/pyams_content/feature/script/interfaces.py:50
 msgid "An inactive script is not included into page resources"
 msgstr "Un script inactif ne sera pas intégré dans les ressources de la page"
 
-#: src/pyams_content/feature/script/interfaces.py:39
+#: src/pyams_content/feature/script/interfaces.py:54
 #: src/pyams_content/feature/script/zmi/__init__.py:149
 msgid "Script name"
 msgstr "Nom du script"
 
-#: src/pyams_content/feature/script/interfaces.py:40
+#: src/pyams_content/feature/script/interfaces.py:55
 msgid "This is just a descriptive name given to the script"
 msgstr "Nom descriptif donné au script"
 
-#: src/pyams_content/feature/script/interfaces.py:43
+#: src/pyams_content/feature/script/interfaces.py:58
 msgid "Script body"
 msgstr "Contenu du script"
 
-#: src/pyams_content/feature/script/interfaces.py:44
+#: src/pyams_content/feature/script/interfaces.py:59
 #, python-format
 msgid ""
 "Script source code, including the HTML wrapping tag; you can use variables "
@@ -3809,22 +3822,19 @@ msgstr ""
 "en les encadrant avec des caractères {} ; ATTENTION: vous devez doubler les "
 "accolades déjà présentes dans le corps du script !!!"
 
-#: src/pyams_content/feature/script/interfaces.py:48
-msgid "Bottom script?"
-msgstr "Script de bas de page"
+#: src/pyams_content/feature/script/interfaces.py:63
+msgid "Script position"
+msgstr "Position du script"
 
-#: src/pyams_content/feature/script/interfaces.py:49
-msgid ""
-"If 'yes', script will be included in page bottom instead of page HTML head"
-msgstr ""
-"Si 'oui', ce script sera inclus dans le pied de page et non dans la balise "
-"HEAD du code HTML"
+#: src/pyams_content/feature/script/interfaces.py:64
+msgid "Script position in page resources"
+msgstr "Mode d'intégration du script dans la page HTML générée"
 
-#: src/pyams_content/feature/script/interfaces.py:82
+#: src/pyams_content/feature/script/interfaces.py:97
 msgid "Scripts params"
 msgstr "Paramètres des scripts"
 
-#: src/pyams_content/feature/script/interfaces.py:83
+#: src/pyams_content/feature/script/interfaces.py:98
 msgid ""
 "If your scripts have to use parameters, you can set their values here, using "
 "\"NAME=value\" syntax for each parameter; you can add comments by prefixing "
@@ -4855,10 +4865,6 @@ msgstr "Afficher seulement le début du chapô"
 #: src/pyams_content/feature/header/interfaces.py:38
 msgid "Hide header"
 msgstr "Masquer le chapô"
-
-#: src/pyams_content/feature/header/portlet/__init__.py:43
-msgid "Page header"
-msgstr "En-tête de page"
 
 #: src/pyams_content/feature/header/portlet/interfaces.py:33
 msgid "Display logo"
@@ -8008,6 +8014,15 @@ msgstr "(Dé)sélectionner le pictogramme"
 #: src/pyams_content/reference/pictogram/zmi/templates/pictogram-header.pt:8
 msgid "Default header: ${header}"
 msgstr "En-tête par défaut : ${header}"
+
+#~ msgid "Bottom script?"
+#~ msgstr "Script de bas de page"
+
+#~ msgid ""
+#~ "If 'yes', script will be included in page bottom instead of page HTML head"
+#~ msgstr ""
+#~ "Si 'oui', ce script sera inclus dans le pied de page et non dans la "
+#~ "balise HEAD du code HTML"
 
 #~ msgid "Multiple views are not supported with aggregated portlets renderers!"
 #~ msgstr ""
