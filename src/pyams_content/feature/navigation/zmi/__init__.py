@@ -16,10 +16,10 @@
 
 from zope.interface import Interface, implementer
 
-from pyams_content.component.association.zmi import IAssociationsTable
-from pyams_content.feature.navigation import IMenu, IMenuLinksContainer, IMenusContainer, \
-    IMenusContainerTarget, Menu
-from pyams_content.feature.navigation.interfaces import IMenuLinksContainerTarget
+from pyams_content.component.association.zmi.interfaces import IAssociationsTable
+from pyams_content.feature.navigation import Menu
+from pyams_content.feature.navigation.interfaces import IMenu, IMenuLinksContainer, IMenuLinksContainerTarget, \
+    IMenusContainer, IMenusContainerTarget
 from pyams_content.feature.navigation.zmi.interfaces import IMenusTable
 from pyams_content.reference.pictogram.zmi.widget import PictogramSelectFieldWidget
 from pyams_form.ajax import ajax_form_config
@@ -36,8 +36,7 @@ from pyams_utils.traversing import get_parent
 from pyams_utils.url import absolute_url
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalAddForm, AdminModalEditForm
-from pyams_zmi.helper.event import get_json_table_row_add_callback, \
-    get_json_table_row_refresh_callback
+from pyams_zmi.helper.event import get_json_table_row_add_callback, get_json_table_row_refresh_callback
 from pyams_zmi.interfaces import IAdminLayer, IObjectHint, IObjectIcon, IObjectLabel, TITLE_SPAN_BREAK
 from pyams_zmi.interfaces.form import IFormTitle, IPropertiesEditForm
 from pyams_zmi.interfaces.table import ITableElementEditor

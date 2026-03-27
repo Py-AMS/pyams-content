@@ -16,10 +16,8 @@
 
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.component.association import IAssociationContainer
-from pyams_content.component.association.interfaces import ASSOCIATION_CONTAINER_KEY
-from pyams_content.feature.navigation import IMenusContainer
-from pyams_content.feature.navigation.interfaces import IMenuLinksContainer
+from pyams_content.component.association.interfaces import ASSOCIATION_CONTAINER_KEY, IAssociationContainer
+from pyams_content.feature.navigation.interfaces import IMenuLinksContainer, IMenusContainer
 from pyams_content.feature.navigation.portlet.interfaces import IDoubleNavigationPortletSettings, \
     ISimpleNavigationMenu, ISimpleNavigationPortletSettings
 from pyams_portal.portlet import Portlet, PortletSettings, portlet_config

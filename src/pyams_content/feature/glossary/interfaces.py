@@ -19,7 +19,6 @@ from zope.interface import Interface
 
 from pyams_scheduler.interfaces import ITask
 
-
 __docformat__ = 'restructuredtext'
 
 

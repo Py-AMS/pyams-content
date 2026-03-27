@@ -15,7 +15,7 @@
 This module defines components used to handle glossary updater task.
 """
 
-from pyams_content.component.thesaurus import ITagsManagerTarget
+from pyams_content.component.thesaurus.interfaces import ITagsManagerTarget
 from pyams_content.component.thesaurus.zmi.manager import TagsManagerGlossaryGroup
 from pyams_content.feature.glossary.interfaces import IGlossaryUpdaterTask
 from pyams_content.feature.glossary.task import GlossaryUpdaterTask
@@ -31,7 +31,6 @@ from pyams_skin.viewlet.menu import MenuItem
 from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.interfaces import IAdminLayer
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager
-
 
 __docformat__ = 'restructuredtext'
 

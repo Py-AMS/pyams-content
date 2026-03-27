@@ -19,7 +19,7 @@ from pyramid.traversal import lineage
 from zope.interface import Interface
 
 from pyams_content.feature.header.interfaces import IPageHeaderTitle
-from pyams_content.feature.header.portlet import IPageHeaderPortletSettings
+from pyams_content.feature.header.portlet.interfaces import IPageHeaderPortletSettings
 from pyams_content.root import ISiteRootInfos
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSLayer

@@ -14,7 +14,7 @@
 
 """
 
-from pyams_content.feature.alert import IAlertManagerInfo
+from pyams_content.feature.alert.interfaces import IAlertManagerInfo
 from pyams_content.interfaces import MANAGE_SITE_ROOT_PERMISSION
 from pyams_form.ajax import ajax_form_config
 from pyams_form.field import Fields

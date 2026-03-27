@@ -22,7 +22,7 @@ from pyramid.decorator import reify
 from pyramid.httpexceptions import HTTPNotFound
 from zope.interface import implementer
 
-from pyams_content.component.thesaurus import ITagsManager
+from pyams_content.component.thesaurus.interfaces import ITagsManager
 from pyams_content.feature.glossary import GLOSSARY_CACHE_KEY, GLOSSARY_CACHE_NAME, \
     GLOSSARY_CACHE_NAMESPACE, GLOSSARY_CACHE_REGION, get_glossary_automaton
 from pyams_content.feature.glossary.interfaces import REQUEST_GLOSSARY_KEY

@@ -8,12 +8,11 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-__docformat__ = 'restructuredtext'
-
-from pyams_content.feature.search import ISearchFolder
-from pyams_content.feature.search.interfaces import ISearchFormRequestParams
+from pyams_content.feature.search.interfaces import ISearchFolder, ISearchFormRequestParams
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_utils.adapter import ContextRequestAdapter, adapter_config
+
+__docformat__ = 'restructuredtext'
 
 
 class BaseFormRequestParams(ContextRequestAdapter):

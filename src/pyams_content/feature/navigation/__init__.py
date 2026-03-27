@@ -15,8 +15,6 @@
 This module defines base navigation menus components.
 """
 
-__docformat__ = 'restructuredtext'
-
 from persistent import Persistent
 from pyramid.events import subscriber
 from zope.container.contained import Contained
@@ -24,15 +22,14 @@ from zope.interface import alsoProvides
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.component.association import IAssociationContainer
 from pyams_content.component.association.container import AssociationContainer
-from pyams_content.component.association.interfaces import ASSOCIATION_CONTAINER_KEY
-from pyams_content.component.illustration import ILinkIllustrationTarget
-from pyams_content.component.links import IInternalLink
+from pyams_content.component.association.interfaces import ASSOCIATION_CONTAINER_KEY, IAssociationContainer
+from pyams_content.component.illustration.interfaces import ILinkIllustrationTarget
+from pyams_content.component.links.interfaces import IInternalLink
 from pyams_content.feature.navigation.interfaces import IDynamicMenu, IMenu, IMenuLinksContainer, \
     IMenuLinksContainerTarget, IMenusContainer, IMenusContainerTarget, MENUS_CONTAINER_KEY, \
     MENU_ICON_CLASS, MENU_ICON_HINT
-from pyams_content.reference.pictogram import IPictogramTable
+from pyams_content.reference.pictogram.interfaces import IPictogramTable
 from pyams_content.shared.site.interfaces import ISiteContainer
 from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_sequence.reference import InternalReferenceMixin
@@ -45,6 +42,8 @@ from pyams_utils.url import canonical_url, relative_url
 from pyams_utils.zodb import volatile_property
 from pyams_workflow.interfaces import IWorkflowPublicationInfo
 from pyams_zmi.interfaces import IAdminLayer
+
+__docformat__ = 'restructuredtext'
 
 
 @factory_config(IMenuLinksContainer)

@@ -16,11 +16,9 @@
 
 from zope.interface import Attribute, Interface
 
-from pyams_content.feature.navigation import IMenusContainerTarget
-from pyams_content.feature.navigation.interfaces import IMenuLinksContainerTarget
+from pyams_content.feature.navigation.interfaces import IMenuLinksContainerTarget, IMenusContainerTarget
 from pyams_i18n.schema import I18nTextLineField
 from pyams_portal.interfaces import IPortletSettings
-
 
 __docformat__ = 'restructuredtext'
 

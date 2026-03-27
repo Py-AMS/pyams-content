@@ -14,12 +14,11 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
-from pyams_content.feature.filter import IFilterAggregate
-from pyams_content.feature.filter.interfaces import IAggregatedPortletRendererSettings, IFiltersContainer
-from pyams_content.shared.view.portlet import IViewItemsAggregates
+from pyams_content.feature.filter.interfaces import IAggregatedPortletRendererSettings, IFilterAggregate, IFiltersContainer
+from pyams_content.shared.view.portlet.interfaces import IViewItemsAggregates
 from pyams_utils.adapter import adapter_config
+
+__docformat__ = 'restructuredtext'
 
 
 @adapter_config(required=IAggregatedPortletRendererSettings,

@@ -16,7 +16,7 @@
 
 from zope.interface import Interface
 
-from pyams_content.feature.header.portlet import IPageHeaderPortletSettings
+from pyams_content.feature.header.portlet.interfaces import IPageHeaderPortletSettings
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortletPreviewer
 from pyams_portal.zmi import PortletPreviewer

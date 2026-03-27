@@ -16,15 +16,15 @@ This module provides a small content provider which can be used to display
 previous history comments.
 """
 
-__docformat__ = 'restructuredtext'
-
-from pyams_content.feature.history import IHistoryContainer
+from pyams_content.feature.history.interfaces import IHistoryContainer
 from pyams_security.utility import get_principal
 from pyams_template.template import template_config
 from pyams_utils.date import format_datetime
 from pyams_utils.timezone import tztime
 from pyams_viewlet.viewlet import BaseContentProvider
 from pyams_zmi.interfaces import IAdminLayer
+
+__docformat__ = 'restructuredtext'
 
 
 @template_config(template='templates/history.pt', layer=IAdminLayer)

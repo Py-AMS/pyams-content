@@ -18,8 +18,8 @@ from zope.interface import Interface, implementer
 
 from pyams_content.component.association.interfaces import IAssociationInfo
 from pyams_content.component.association.zmi.container import AssociationsGroup
-from pyams_content.feature.navigation import IMenuLinksContainerTarget
-from pyams_content.feature.navigation.portlet import IDoubleNavigationPortletSettings, \
+from pyams_content.feature.navigation.interfaces import IMenuLinksContainerTarget
+from pyams_content.feature.navigation.portlet.interfaces import IDoubleNavigationPortletSettings, \
     ISimpleNavigationPortletSettings
 from pyams_form.interfaces.form import IInnerSubForm
 from pyams_layer.interfaces import IPyAMSLayer

@@ -17,7 +17,7 @@
 from zope.interface import Interface
 from zope.schema import Choice
 
-from pyams_content.shared.view import VIEW_CONTENT_TYPE
+from pyams_content.shared.view.interfaces import VIEW_CONTENT_TYPE
 from pyams_content.shared.view.interfaces.query import MergeModes, VIEWS_MERGERS_VOCABULARY
 from pyams_sequence.schema import InternalReferenceField, InternalReferencesListField
 

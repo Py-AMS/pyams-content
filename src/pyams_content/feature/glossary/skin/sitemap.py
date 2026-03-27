@@ -18,13 +18,12 @@ glossary sitemap.
 
 from pyramid.view import view_config
 
-from pyams_content.component.thesaurus import ITagsManager
+from pyams_content.component.thesaurus.interfaces import ITagsManager
 from pyams_content.feature.sitemap.interfaces import ISitemapExtension
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_site.interfaces import ISiteRoot
 from pyams_thesaurus.interfaces.thesaurus import IThesaurus
 from pyams_utils.adapter import ContextRequestAdapter, adapter_config
-
 
 __docformat__ = 'restructuredtext'
 

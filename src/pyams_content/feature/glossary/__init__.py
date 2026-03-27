@@ -20,12 +20,11 @@ import pickle
 
 from ahocorasick import Automaton
 
-from pyams_content.component.thesaurus import ITagsManager
+from pyams_content.component.thesaurus.interfaces import ITagsManager
 from pyams_thesaurus.interfaces.term import STATUS_PUBLISHED
 from pyams_thesaurus.interfaces.thesaurus import IThesaurus
 from pyams_utils.cache import get_cache
 from pyams_utils.registry import query_utility
-
 
 __docformat__ = 'restructuredtext'
 

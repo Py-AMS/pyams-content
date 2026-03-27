@@ -17,10 +17,8 @@ This module defines navigation management components interfaces.
 
 from zope.interface import Interface
 
-from pyams_content.component.association.zmi import IAssociationsTable
 from pyams_content.component.association.zmi.interfaces import IAssociationsContainerEditForm, \
-    IAssociationsView
-
+    IAssociationsTable, IAssociationsView
 
 __docformat__ = 'restructuredtext'
 

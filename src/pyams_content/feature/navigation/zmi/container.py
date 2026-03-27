@@ -17,8 +17,7 @@
 from zope.interface import implementer
 
 from pyams_content.component.association.zmi.container import AssociationsTable
-from pyams_content.feature.navigation import IMenusContainer
-from pyams_content.feature.navigation.interfaces import IMenusContainerTarget
+from pyams_content.feature.navigation.interfaces import IMenusContainerTarget, IMenusContainer
 from pyams_content.feature.navigation.zmi.interfaces import IMenusContainerEditForm, IMenusTable
 from pyams_form.ajax import ajax_form_config
 from pyams_form.interfaces.form import IInnerSubForm

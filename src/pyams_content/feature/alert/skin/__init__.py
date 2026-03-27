@@ -14,15 +14,15 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
 from zope.interface import Interface
 
-from pyams_content.feature.alert import IAlertManagerInfo
+from pyams_content.feature.alert.interfaces import IAlertManagerInfo
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_template.template import template_config
 from pyams_viewlet.viewlet import ViewContentProvider, contentprovider_config
+
+__docformat__ = 'restructuredtext'
 
 
 @contentprovider_config(name='pyams_content.global_alerts',

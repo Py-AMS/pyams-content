@@ -19,12 +19,11 @@ This task has to be planned like all normal tasks.
 """
 
 import sys
-import traceback
 
 from pyramid.events import subscriber
-from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent
+from zope.lifecycleevent.interfaces import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent
 
-from pyams_content.component.thesaurus import ITagsManager
+from pyams_content.component.thesaurus.interfaces import ITagsManager
 from pyams_content.feature.glossary import get_glossary_automaton
 from pyams_content.feature.glossary.interfaces import IGlossaryUpdaterTask
 from pyams_scheduler.interfaces import IScheduler
@@ -37,7 +36,6 @@ from pyams_utils.finder import find_objects_providing
 from pyams_utils.registry import get_utility
 from pyams_utils.request import check_request
 from pyams_utils.traversing import get_parent
-
 
 __docformat__ = 'restructuredtext'
 

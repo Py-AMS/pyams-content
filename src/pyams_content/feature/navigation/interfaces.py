@@ -19,13 +19,12 @@ from zope.container.constraints import containers, contains
 from zope.interface import Attribute, Interface
 from zope.schema import Bool, Choice
 
-from pyams_content.component.association import IAssociationContainer, IAssociationContainerTarget
+from pyams_content.component.association.interfaces import IAssociationContainer, IAssociationContainerTarget
 from pyams_content.component.links.interfaces import ILinkContainerTarget
 from pyams_content.reference.pictogram.interfaces import SELECTED_PICTOGRAM_VOCABULARY
 from pyams_i18n.schema import I18nTextLineField
 from pyams_sequence.interfaces import IInternalReference
 from pyams_sequence.schema import InternalReferenceField
-
 
 __docformat__ = 'restructuredtext'
 

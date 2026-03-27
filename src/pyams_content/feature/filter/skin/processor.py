@@ -14,9 +14,8 @@
 
 """
 
-from pyams_content.feature.filter import IFilter
 from pyams_content.feature.filter.interfaces import IAggregatedPortletRendererSettings, \
-    IFilterProcessorAggregationsHandler, IFiltersContainer
+    IFilter, IFilterProcessorAggregationsHandler, IFiltersContainer
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_portal.interfaces import IPortletRenderer

@@ -20,10 +20,9 @@ from zope.interface import Interface
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.component.association.interfaces import IAssociationInfo
-from pyams_content.feature.navigation.portlet import IDoubleNavigationPortletSettings, \
+from pyams_content.feature.navigation.portlet.interfaces import IDoubleNavigationPortletSettings, \
     ISimpleNavigationPortletSettings
-from pyams_content.feature.navigation.portlet.skin.interfaces import \
-    IDoubleNavigationPortletDefaultRendererSettings, \
+from pyams_content.feature.navigation.portlet.skin.interfaces import IDoubleNavigationPortletDefaultRendererSettings, \
     ISimpleNavigationPortletDefaultRendererSettings
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortalContext, IPortletRenderer
@@ -31,7 +30,6 @@ from pyams_portal.skin import PortletRenderer
 from pyams_template.template import template_config
 from pyams_utils.adapter import adapter_config
 from pyams_utils.factory import factory_config
-
 
 __docformat__ = 'restructuredtext'
 

@@ -15,12 +15,10 @@
 This module provides custom glossary terms renderers.
 """
 
-__docformat__ = 'restructuredtext'
-
 from zope.interface import Interface
 
-from pyams_content.component.illustration import IIllustration
-from pyams_content.feature.glossary.skin import IThesaurusTermRenderer
+from pyams_content.component.illustration.interfaces import IIllustration
+from pyams_content.feature.glossary.skin.interfaces import IThesaurusTermRenderer
 from pyams_i18n.interfaces import II18n
 from pyams_layer.interfaces import IPyAMSUserLayer
 from pyams_template.template import template_config
@@ -28,6 +26,8 @@ from pyams_thesaurus.extension.html import IThesaurusTermHTMLInfo
 from pyams_thesaurus.interfaces.term import IThesaurusTerm
 from pyams_utils.adapter import adapter_config
 from pyams_viewlet.viewlet import ViewContentProvider
+
+__docformat__ = 'restructuredtext'
 
 
 @adapter_config(name='header',
