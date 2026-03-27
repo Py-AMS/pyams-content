@@ -8,7 +8,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-from pyams_content.feature.script import IScriptContainer
+from pyams_content.feature.script.interfaces import IScriptContainer
 
 __docformat__ = 'restructuredtext'
 

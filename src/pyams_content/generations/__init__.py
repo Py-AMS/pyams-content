@@ -14,8 +14,6 @@
 
 """
 
-__docformat__ = 'restructuredtext'
-
 import logging
 from importlib import import_module
 
@@ -28,12 +26,12 @@ from pyams_catalog.index import DatetimeIndexWithInterface, FacetIndexWithInterf
     FieldIndexWithInterface, KeywordIndexWithInterface
 from pyams_catalog.interfaces import DATE_RESOLUTION, MINUTE_RESOLUTION
 from pyams_catalog.nltk import get_fulltext_lexicon
-from pyams_content.component.thesaurus import ICollectionsInfo, ITagsInfo, IThemesInfo
+from pyams_content.component.thesaurus.interfaces import ICollectionsInfo, ITagsInfo, IThemesInfo
 from pyams_content.feature.filter.interfaces import IFilterIndexInfo
 from pyams_content.interfaces import CONTRIBUTOR_ROLE, IBaseContent, IObjectTypes, MANAGER_ROLE, OWNER_ROLE, \
     PILOT_ROLE, WEBMASTER_ROLE
-from pyams_content.reference.pictogram import IPictogramTable
-from pyams_content.root import ISiteRootToolsConfiguration
+from pyams_content.reference.pictogram.interfaces import IPictogramTable
+from pyams_content.root.interfaces import ISiteRootToolsConfiguration
 from pyams_content.shared.alert.interfaces import IAlertManager
 from pyams_content.shared.common.interfaces import IWfSharedContent
 from pyams_content.shared.common.interfaces.types import IWfTypedSharedContent
@@ -52,6 +50,8 @@ from pyams_utils.factory import get_all_factories
 from pyams_utils.interfaces.traversing import IPathElements
 from pyams_utils.registry import get_pyramid_registry, utility_config
 from pyams_workflow.interfaces import IWorkflowPublicationInfo, IWorkflowState
+
+__docformat__ = 'restructuredtext'
 
 
 LOGGER = logging.getLogger('PyAMS (content)')

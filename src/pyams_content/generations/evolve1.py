@@ -8,7 +8,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-from pyams_content.feature.alert import IAlertManagerInfo
+from pyams_content.feature.alert.interfaces import IAlertManagerInfo
 
 __docformat__ = 'restructuredtext'
 

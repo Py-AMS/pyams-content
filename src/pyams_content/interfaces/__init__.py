@@ -15,13 +15,12 @@
 This module defines main content permissions, roles and interfaces.
 """
 
-from zope.annotation import IAttributeAnnotatable
+from zope.annotation.interfaces import IAttributeAnnotatable
 from zope.interface import Interface
 from zope.location.interfaces import IContained
 from zope.schema import Datetime, Set, TextLine
 
 from pyams_i18n.schema import I18nTextLineField
-
 
 __docformat__ = 'restructuredtext'
 
