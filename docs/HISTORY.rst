@@ -1,6 +1,13 @@
 Changelog
 =========
 
+2.9.0
+-----
+ - added support for custom paragraphs getters adapters in paragraphs containers
+ - added custom interface support to get external file visibility
+ - added support for hints with custom icon in illustrations fields switchers
+ - updated external scripts properties to handle their position in generated HTML (head, top body or bottom body)
+
 2.8.0
 -----
  - added interfaces and properties and updated dashboards and search tools for better handling of

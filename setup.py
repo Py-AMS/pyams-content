@@ -24,12 +24,12 @@ DOCS = os.path.join(os.path.dirname(__file__),
 README = os.path.join(DOCS, 'README.rst')
 HISTORY = os.path.join(DOCS, 'HISTORY.rst')
 
-version = '2.8.0'
+version = '2.9.0'
 long_description = open(README).read() + '\n\n' + open(HISTORY).read()
 
 tests_require = [
     'pyams_security_views',
-    'pyams_zmi',
+    'pyams_zmi >= 2.7.0',
     'pyramid_zcml',
     'zope.exceptions'
 ]
