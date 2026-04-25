@@ -8,7 +8,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-from pyams_content.shared.logo import LOGO_CONTENT_TYPE
+from pyams_content.shared.logo.skin import LOGO_CONTENT_TYPE
 from pyams_i18n.schema import I18nTextLineField
 from pyams_portal.interfaces import IPortletSettings
 from pyams_sequence.interfaces import IInternalReferencesList

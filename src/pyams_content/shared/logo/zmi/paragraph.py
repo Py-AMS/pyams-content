@@ -8,9 +8,9 @@
 # FOR A PARTICULAR PURPOSE.
 #
 
-from pyams_content.component.paragraph import IParagraphContainer, IParagraphContainerTarget
-from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu, \
-    IParagraphContainerBaseTable
+from pyams_content.component.paragraph.interfaces import IParagraphContainer, IParagraphContainerTarget
+from pyams_content.component.paragraph.zmi import BaseParagraphAddForm, BaseParagraphAddMenu
+from pyams_content.component.paragraph.zmi.interfaces import IParagraphContainerBaseTable
 from pyams_content.shared.logo.interfaces import ILogosParagraph, LOGOS_PARAGRAPH_ICON_CLASS, LOGOS_PARAGRAPH_NAME, \
     LOGOS_PARAGRAPH_TYPE
 from pyams_form.ajax import ajax_form_config

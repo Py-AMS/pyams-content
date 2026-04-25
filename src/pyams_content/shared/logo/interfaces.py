@@ -10,10 +10,9 @@
 
 from zope.schema import TextLine, URI
 
-from pyams_content.component.paragraph import IBaseParagraph
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.component.paragraph.schema import ParagraphRendererChoice
-from pyams_content.shared.common import ISharedContent, IWfSharedContent
-from pyams_content.shared.common.interfaces import ISharedTool
+from pyams_content.shared.common.interfaces import ISharedContent, ISharedTool, IWfSharedContent
 from pyams_file.schema import I18nImageField
 from pyams_i18n.schema import I18nTextLineField
 from pyams_sequence.interfaces import IInternalReference, IInternalReferencesList

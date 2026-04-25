@@ -10,11 +10,12 @@
 
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.component.paragraph import BaseParagraph, IBaseParagraph
+from pyams_content.component.paragraph import BaseParagraph
+from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.feature.renderer import RenderersVocabulary
 from pyams_content.shared.logo.interfaces import ILogosParagraph, LOGOS_PARAGRAPH_ICON_CLASS, LOGOS_PARAGRAPH_NAME, \
     LOGOS_PARAGRAPH_RENDERERS, LOGOS_PARAGRAPH_TYPE
-from pyams_sequence.reference import InternalReferenceMixin, get_reference_target
+from pyams_sequence.reference import get_reference_target
 from pyams_utils.factory import factory_config
 from pyams_utils.vocabulary import vocabulary_config
 

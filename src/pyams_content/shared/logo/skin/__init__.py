@@ -18,11 +18,11 @@ from persistent import Persistent
 from zope.container.contained import Contained
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.feature.renderer import DefaultContentRenderer, IContentRenderer
-from pyams_content.shared.logo import IWfLogo
-from pyams_content.shared.logo.interfaces import ILogosParagraph
+from pyams_content.feature.renderer import DefaultContentRenderer
+from pyams_content.feature.renderer.interfaces import IContentRenderer
+from pyams_content.shared.logo.interfaces import ILogosParagraph, IWfLogo
 from pyams_content.shared.logo.skin.interfaces import ILogosParagraphDefaultRendererSettings, TARGET_PRIORITY
-from pyams_content.shared.view.portlet.skin import IViewItemTargetURL
+from pyams_content.shared.view.portlet.skin.interfaces import IViewItemTargetURL
 from pyams_layer.interfaces import IPyAMSLayer, IPyAMSUserLayer
 from pyams_portal.interfaces import DEFAULT_RENDERER_NAME
 from pyams_template.template import template_config

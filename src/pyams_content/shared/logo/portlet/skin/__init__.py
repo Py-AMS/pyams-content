@@ -13,9 +13,9 @@ from zope.container.contained import Contained
 from zope.interface import Interface
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.shared.logo.portlet import ILogosPortletSettings
+from pyams_content.shared.logo.portlet.interfaces import ILogosPortletSettings
 from pyams_content.shared.logo.portlet.skin.interfaces import ILogosPortletDefaultRendererSettings
-from pyams_content.shared.logo.skin import TARGET_PRIORITY
+from pyams_content.shared.logo.skin.interfaces import TARGET_PRIORITY
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortalContext, IPortletRenderer
 from pyams_portal.skin import PortletRenderer

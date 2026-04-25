@@ -10,7 +10,7 @@
 
 from zope.interface import Interface
 
-from pyams_content.shared.logo.portlet import ILogosPortletSettings
+from pyams_content.shared.logo.portlet.skin import ILogosPortletSettings
 from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import IPortletPreviewer
 from pyams_portal.zmi import PortletPreviewer
