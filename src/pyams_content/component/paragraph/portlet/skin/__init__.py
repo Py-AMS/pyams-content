@@ -17,7 +17,7 @@ This module defines paragraph container portlet renderer.
 
 from zope.interface import Interface
 
-from pyams_content.component.paragraph.interfaces import IParagraphContainer
+from pyams_content.component.paragraph.interfaces import IBaseParagraph, IParagraphContainer
 from pyams_content.component.paragraph.portlet.interfaces import IParagraphContainerPortletSettings, \
     IParagraphNavigationPortletSettings
 from pyams_content.component.paragraph.portlet.skin.interfaces import IParagraphContainerPortletRenderer
@@ -121,8 +121,9 @@ class ParagraphsContainerPortletRenderer(PortletRenderer):
 
     def get_paragraph_anchor(self, item):
         """Paragraph anchor getter"""
-        title = II18n(item).query_attribute('title', request=self.request)
-        return f'{item.__name__}::{generate_url(title)}' if title else item.__name__
+        if not IBaseParagraph.providedBy(item):
+            return None
+        return item.get_anchor(self.request)
 
     def get_navigation_links(self):
         """Navigation links getter"""
@@ -198,5 +199,6 @@ class ParagraphsNavigationPortletRenderer(PortletRenderer):
 
     def get_paragraph_anchor(self, item):
         """Paragraph anchor getter"""
-        title = II18n(item).query_attribute('title', request=self.request)
-        return f'{item.__name__}::{generate_url(title)}' if title else item.__name__
+        if not IBaseParagraph.providedBy(item):
+            return None
+        return item.get_anchor(self.request)

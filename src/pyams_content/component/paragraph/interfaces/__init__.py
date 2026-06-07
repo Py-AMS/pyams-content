@@ -64,6 +64,9 @@ class IBaseParagraph(IRenderedContent, IAttributeAnnotatable):
     title = I18nTextLineField(title=_("§ Title"),
                               required=False)
 
+    def get_anchor(self, request=None):
+        """Get paragraph anchor value"""
+
 
 PARAGRAPH_HIDDEN_FIELDS = ('__parent__', '__name__', 'visible', 'anchor', 'locked', 'renderer')
 
