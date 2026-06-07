@@ -1,0 +1,22 @@
+<tal:var define="settings view.settings" i18n:domain="pyams_content">
+	${structure:view.get_setting(settings, 'title')}
+	${structure:view.get_setting(settings, 'header')}
+	<small><strong i18n:translate="">Milestones list:</strong></small>
+	<ul class="mb-0">
+		<li class="text-truncated"
+			tal:repeat="milestone settings.values()">
+			<i class="fa-fw ${'far fa-eye' if milestone.visible else 'far fa-eye-slash text-danger'} hint"></i>
+			<i tal:omit-tag="">
+				<i tal:omit-tag="">${i18n:milestone.title}</i>
+				<tal:label tal:define="header i18n:milestone.header"
+						   tal:condition="header">
+					— <i tal:omit-tag="">${header}</i>
+				</tal:label>
+				<tal:anchor tal:condition="milestone.anchor">
+					<small class="text-muted">(#${milestone.anchor})</small>
+				</tal:anchor>
+			</i>
+		</li>
+	</ul>
+</tal:var>
+

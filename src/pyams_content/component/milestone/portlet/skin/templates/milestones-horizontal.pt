@@ -1,0 +1,51 @@
+<tal:var i18n:domain="pyams_content"
+		 tal:define="items view.settings.get_visible_items();
+					 (has_items, milestones) tales:boolean_iter(items);"
+		 tal:condition="has_items">
+	<h3 tal:define="title i18n:view.settings.title"
+		tal:condition="title"
+		class="position-relative border-bottom pb-2 mt-4">
+		${title}
+		<span class="position-absolute underline"></span>
+	</h3>
+	<p tal:define="header i18n:view.settings.header"
+	   tal:condition="header"
+	   class="lead">
+		${header}
+	</p>
+	<ul class="milestones milestones-horizontal">
+		<li class="milestone-item"
+			tal:repeat="milestone milestones">
+			<div class="milestone-badge"
+				 tal:define="pictogram milestone.pictogram;
+							 image i18n:pictogram.image">
+				<img tal:condition="image"
+					 class="mw-100 mh-100"
+					 src="${tales:absolute_url(image)}"
+					 alt="${i18n:pictogram.alt_title}" />
+				<i tal:condition="not:image"
+				   class="fa fa-fw fa-check"></i>
+			</div>
+			<div class="milestone-panel">
+				<a tal:omit-tag="not:milestone.anchor"
+				   href="#${view.get_paragraph_anchor(milestone)}">
+					<div class="milestone-heading">
+						<h4 class="milestone-title">
+							${i18n:milestone.title}
+						</h4>
+						<p>
+							<small class="text-muted"
+								   tal:define="header i18n:milestone.header">
+								${structure:tales:br(header)}
+							</small>
+						</p>
+					</div>
+					<div class="milestone-body"
+						 tal:define="body i18n:milestone.body">
+						${structure:tales:html(body, 'oid_to_href;glossary')}
+					</div>
+				</a>
+			</div>
+		</li>
+	</ul>
+</tal:var>
