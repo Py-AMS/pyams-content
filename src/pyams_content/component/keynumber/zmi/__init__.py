@@ -104,7 +104,7 @@ class KeyNumbersTableVisibleColumn(VisibilityColumn):
 @view_config(name='switch-visible-item.json',
              context=IKeyNumbersContainer, request_type=IPyAMSLayer,
              renderer='json', xhr=True)
-def switch_visible_card(request):
+def switch_visible_key_number(request):
     """Switch visible key number"""
     return switch_element_attribute(request)
 

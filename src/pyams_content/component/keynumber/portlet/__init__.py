@@ -10,7 +10,7 @@
 
 from zope.schema.fieldproperty import FieldProperty
 
-from pyams_content.component.keynumber import KeyNumbersContainer
+from pyams_content.component.keynumber import KeyNumbersContainer, KEYNUMBERS_PARAGRAPH_ICON_CLASS
 from pyams_content.component.keynumber.portlet.interfaces import IKeyNumbersPortletSettings
 from pyams_portal.portlet import Portlet, PortletSettings, portlet_config
 from pyams_utils.factory import factory_config
@@ -39,4 +39,4 @@ class KeyNumbersPortlet(Portlet):
     label = _("Key-numbers")
     
     settings_factory = IKeyNumbersPortletSettings
-    toolbar_css_class = 'fas fa-dashboard'
+    toolbar_css_class = KEYNUMBERS_PARAGRAPH_ICON_CLASS
