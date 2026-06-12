@@ -21,7 +21,7 @@ from zope.container.constraints import contains
 from zope.container.interfaces import IOrderedContainer
 from zope.interface import Attribute
 from zope.location.interfaces import IContained
-from zope.schema import Bool, Choice, TextLine
+from zope.schema import Bool, Choice
 
 from pyams_content.component.paragraph import CONTENT_PARAGRAPHS_VOCABULARY
 from pyams_content.component.paragraph.interfaces import IBaseParagraph
