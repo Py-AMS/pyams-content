@@ -15,7 +15,6 @@
 """
 
 from pyramid.decorator import reify
-from zope.interface import Interface
 
 from pyams_content.reference.pictogram import IPictogramTable
 from pyams_content.reference.zmi.table import ReferenceTableContainerTable
@@ -42,9 +41,9 @@ from pyams_content import _
 PICTOGRAM_TABLE_LABEL = _("Pictograms")
 
 
-@adapter_config(required=(IPictogramTable, IPyAMSLayer, Interface),
+@adapter_config(required=(IPictogramTable, IPyAMSLayer),
                 provides=IObjectLabel)
-def pictogram_table_label(context, request, view):
+def pictogram_table_label(context, request):
     """Pictograms table label"""
     return request.localizer.translate(PICTOGRAM_TABLE_LABEL)
 

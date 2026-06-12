@@ -107,17 +107,17 @@ class DataTypeAddFormRenderer(ContextRequestViewAdapter):
         }
 
 
-@adapter_config(required=(IDataType, IAdminLayer, Interface),
+@adapter_config(required=(IDataType, IAdminLayer),
                 provides=IObjectLabel)
-def data_type_label(context, request, view):
+def data_type_label(context, request):
     """Data type label"""
     i18n = II18n(context)
     return i18n.query_attribute('label', request=request)
 
 
-@adapter_config(required=(IDataType, IAdminLayer, Interface),
+@adapter_config(required=(IDataType, IAdminLayer),
                 provides=IObjectHint)
-def data_type_hint(context, request, view):  # pylint: disable=unused-argument
+def data_type_hint(context, request):  # pylint: disable=unused-argument
     """Data type hint"""
     return request.localizer.translate(_("Data type"))
 

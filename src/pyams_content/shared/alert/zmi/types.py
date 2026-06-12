@@ -207,17 +207,17 @@ class AlertTypeAddFormRenderer(ContextRequestViewAdapter):
         }
 
 
-@adapter_config(required=(IAlertType, IAdminLayer, Interface),
+@adapter_config(required=(IAlertType, IAdminLayer),
                 provides=IObjectLabel)
-def alert_type_label(context, request, view):
+def alert_type_label(context, request):
     """Alert type label"""
     i18n = II18n(context)
     return i18n.query_attribute('label', request=request)
 
 
-@adapter_config(required=(IAlertType, IAdminLayer, Interface),
+@adapter_config(required=(IAlertType, IAdminLayer),
                 provides=IObjectHint)
-def alert_type_hint(context, request, view):  # pylint: disable=unused-argument
+def alert_type_hint(context, request):  # pylint: disable=unused-argument
     """Alert type hint"""
     return request.localizer.translate(_("Alert type"))
 

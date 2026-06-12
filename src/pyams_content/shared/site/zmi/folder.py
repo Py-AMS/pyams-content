@@ -56,9 +56,9 @@ __docformat__ = 'restructuredtext'
 from pyams_content import _
 
 
-@adapter_config(required=(ISiteFolder, IAdminLayer, Interface),
+@adapter_config(required=(ISiteFolder, IAdminLayer),
                 provides=IObjectLabel)
-def site_folder_label(context, request, view):
+def site_folder_label(context, request):
     """Site folder label"""
     return II18n(context).query_attribute('title', request=request)
 

@@ -50,7 +50,7 @@ from pyams_viewlet.viewlet import viewlet_config
 from pyams_workflow.interfaces import IWorkflowPublicationInfo
 from pyams_zmi.form import AdminModalAddForm, AdminModalEditForm, FormGroupChecker
 from pyams_zmi.helper.event import get_json_table_row_refresh_callback
-from pyams_zmi.interfaces import IAdminLayer, TITLE_SPAN_BREAK
+from pyams_zmi.interfaces import IAdminLayer, IObjectLabel, TITLE_SPAN_BREAK
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager
 from pyams_zmi.table import TableElementEditor
@@ -380,6 +380,14 @@ class ExternalSiteLinkPropertiesEditForm(SiteLinkPropertiesEditForm):
     """External site link properties edit form"""
 
     fields = Fields(IExternalSiteLink).select('url', 'navigation_title')
+
+
+@adapter_config(required=(IExternalSiteLink, IPyAMSLayer),
+                provides=IObjectLabel)
+def external_site_link_label(context, request):
+    """External site link label"""
+    label = II18n(context).query_attribute('navigation_title', request=request)
+    return label or context.url
 
 
 @adapter_config(required=(IExternalSiteLink, IAdminLayer, IModalEditForm),

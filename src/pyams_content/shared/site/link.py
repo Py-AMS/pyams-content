@@ -201,11 +201,3 @@ class ExternalSiteLinkNavigationAdapter(ContextRequestAdapter):
     def visible(self):
         """Navigation link visibility getter"""
         return self.context.visible
-
-
-@adapter_config(required=(IExternalSiteLink, IPyAMSLayer, Interface),
-                provides=IObjectLabel)
-def external_site_link_label(context, request, view):
-    """External site link label"""
-    label = II18n(context).query_attribute('navigation_title', request=request)
-    return label or context.url

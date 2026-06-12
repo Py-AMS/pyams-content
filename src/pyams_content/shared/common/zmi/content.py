@@ -55,9 +55,9 @@ def shared_content_version_getter(context, request, view, interface):
         return request.registry.queryMultiAdapter((version, request, view), interface)
 
 
-@adapter_config(required=(IWfSharedContent, IAdminLayer, Interface),
+@adapter_config(required=(IWfSharedContent, IAdminLayer),
                 provides=IObjectHint)
-def wf_shared_content_hint(context, request, view):
+def wf_shared_content_hint(context, request):
     """Workflow-managed shared content hint"""
     translate = request.localizer.translate
     return translate(context.content_name)
@@ -70,9 +70,9 @@ def shared_content_hint(context, request, view):
     return shared_content_version_getter(context, request, view, IObjectHint)
 
 
-@adapter_config(required=(IWfSharedContent, IAdminLayer, Interface),
+@adapter_config(required=(IWfSharedContent, IAdminLayer),
                 provides=IObjectLabel)
-def wf_shared_content_label(context, request, view):
+def wf_shared_content_label(context, request):
     """Workflow-managed shared content label"""
     return II18n(context).query_attribute('title', request=request)
 

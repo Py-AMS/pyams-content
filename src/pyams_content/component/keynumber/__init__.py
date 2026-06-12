@@ -18,7 +18,7 @@ This module provides persistent classes used to handle key numbers.
 from persistent import Persistent
 from pyramid.events import subscriber
 from zope.container.contained import Contained
-from zope.interface import Interface, implementer
+from zope.interface import implementer
 from zope.lifecycleevent import ObjectModifiedEvent
 from zope.lifecycleevent.interfaces import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent
 from zope.schema.fieldproperty import FieldProperty
@@ -29,8 +29,6 @@ from pyams_content.component.keynumber.interfaces import IKeyNumberInfo, IKeyNum
 from pyams_content.component.paragraph import BaseParagraph, ParagraphPermissionChecker
 from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.feature.renderer import RenderersVocabulary
-from pyams_i18n.interfaces import II18n
-from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import MANAGE_TEMPLATE_PERMISSION
 from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_utils.adapter import ContextAdapter, adapter_config
@@ -39,7 +37,6 @@ from pyams_utils.factory import factory_config
 from pyams_utils.registry import get_pyramid_registry
 from pyams_utils.traversing import get_parent
 from pyams_utils.vocabulary import vocabulary_config
-from pyams_zmi.interfaces import IObjectLabel
 
 __docformat__ = 'restructuredtext'
 
@@ -77,13 +74,6 @@ class KeyNumberPermissionChecker(ContextAdapter):
         if container is not None:
             return IViewContextPermissionChecker(container).edit_permission
         return None
-    
-
-@adapter_config(required=(IKeyNumberInfo, IPyAMSLayer, Interface),
-                provides=IObjectLabel)
-def key_number_label(context, request, view):  # pylint: disable=unused-argument
-    """Key number label getter"""
-    return II18n(context).get_attribute('label', request=request)
 
 
 @implementer(IKeyNumbersContainer)

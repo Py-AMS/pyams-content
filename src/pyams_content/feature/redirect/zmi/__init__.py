@@ -95,16 +95,16 @@ class RedirectionRuleAddFormRenderer(SimpleAddFormRenderer):
     table_factory = IRedirectionsTable
 
 
-@adapter_config(required=(IRedirectionRule, IAdminLayer, Interface),
+@adapter_config(required=IRedirectionRule,
                 provides=IObjectLabel)
-def redirection_rule_label(context, request, view):
+def redirection_rule_label(context):
     """Redirection rule label"""
     return context.label
 
 
-@adapter_config(required=(IRedirectionRule, IAdminLayer, Interface),
+@adapter_config(required=(IRedirectionRule, IAdminLayer),
                 provides=IObjectHint)
-def redirection_rule_hint(context, request, view):
+def redirection_rule_hint(context, request):
     """Redirection rule hint"""
     return request.localizer.translate(_("Redirection rule"))
 

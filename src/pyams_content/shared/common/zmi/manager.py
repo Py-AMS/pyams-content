@@ -46,9 +46,9 @@ __docformat__ = 'restructuredtext'
 from pyams_content import _
 
 
-@adapter_config(required=(ISharedTool, IAdminLayer, Interface),
+@adapter_config(required=(ISharedTool, IAdminLayer),
                 provides=IObjectLabel)
-def shared_tool_label(context, request, view):
+def shared_tool_label(context, request):
     """Shared tool label"""
     return II18n(context).query_attribute('title', request=request)
 

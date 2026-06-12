@@ -130,23 +130,23 @@ class MenuAddFormRenderer(ContextRequestViewAdapter):
         }
 
 
-@adapter_config(required=(IMenu, IAdminLayer, Interface),
+@adapter_config(required=IMenu,
                 provides=IObjectIcon)
-def menu_icon(context, request, view):
+def menu_icon(context):
     """Menu icon getter"""
     return Menu.icon_class
 
 
-@adapter_config(required=(IMenu, IAdminLayer, Interface),
+@adapter_config(required=(IMenu, IAdminLayer),
                 provides=IObjectHint)
-def menu_hint(context, request, view):
+def menu_hint(context, request):
     """Menu hint getter"""
     return request.localizer.translate(Menu.icon_hint)
 
 
-@adapter_config(required=(IMenu, IAdminLayer, Interface),
+@adapter_config(required=(IMenu, IAdminLayer),
                 provides=IObjectLabel)
-def menu_label(context, request, view):
+def menu_label(context, request):
     """Menu label getter"""
     return II18n(context).query_attribute('title', request=request)
 

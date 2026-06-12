@@ -33,9 +33,9 @@ from pyams_content import _
 REFERENCE_MANAGER_LABEL = _("References")
 
 
-@adapter_config(required=(IReferenceManager, IPyAMSLayer, Interface),
+@adapter_config(required=(IReferenceManager, IPyAMSLayer),
                 provides=IObjectLabel)
-def reference_manager_label(context, request, view):
+def reference_manager_label(context, request):
     """Reference manager label"""
     return request.localizer.translate(REFERENCE_MANAGER_LABEL)
 

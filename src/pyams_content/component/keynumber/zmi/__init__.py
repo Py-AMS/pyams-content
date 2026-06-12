@@ -35,7 +35,7 @@ from pyams_viewlet.viewlet import viewlet_config
 from pyams_zmi.form import AdminModalAddForm, AdminModalEditForm
 from pyams_zmi.helper.container import delete_container_element, switch_element_attribute
 from pyams_zmi.helper.event import get_json_table_row_add_callback, get_json_table_row_refresh_callback
-from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.interfaces import IAdminLayer, IObjectLabel
 from pyams_zmi.interfaces.form import IFormTitle, IPropertiesEditForm
 from pyams_zmi.interfaces.table import ITableElementEditor
 from pyams_zmi.interfaces.viewlet import IContextAddingsViewletManager, IToolbarViewletManager
@@ -224,6 +224,13 @@ class KeyNumberAddFormRenderer(ContextRequestViewAdapter):
                                                 KeyNumbersTable, changes)
             ]
         }
+
+
+@adapter_config(required=(IKeyNumberInfo, IPyAMSLayer),
+                provides=IObjectLabel)
+def key_number_label(context, request):  # pylint: disable=unused-argument
+    """Key number label getter"""
+    return II18n(context).get_attribute('label', request=request)
 
 
 @adapter_config(required=(IKeyNumberInfo, IAdminLayer, Interface),

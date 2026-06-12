@@ -18,7 +18,7 @@ This module provides persistent classes used to handle milestones.
 from persistent import Persistent
 from pyramid.events import subscriber
 from zope.container.contained import Contained
-from zope.interface import Interface, implementer
+from zope.interface import implementer
 from zope.lifecycleevent import ObjectModifiedEvent
 from zope.lifecycleevent.interfaces import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent
 from zope.schema.fieldproperty import FieldProperty
@@ -30,8 +30,6 @@ from pyams_content.component.paragraph import BaseParagraph, ParagraphPermission
 from pyams_content.component.paragraph.interfaces import IBaseParagraph
 from pyams_content.feature.renderer import RenderersVocabulary
 from pyams_content.reference.pictogram.interfaces import IPictogramTable
-from pyams_i18n.interfaces import II18n
-from pyams_layer.interfaces import IPyAMSLayer
 from pyams_portal.interfaces import MANAGE_TEMPLATE_PERMISSION
 from pyams_security.interfaces import IViewContextPermissionChecker
 from pyams_utils.adapter import ContextAdapter, adapter_config
@@ -41,7 +39,6 @@ from pyams_utils.registry import get_pyramid_registry, query_utility
 from pyams_utils.traversing import get_parent
 from pyams_utils.vocabulary import vocabulary_config
 from pyams_utils.zodb import volatile_property
-from pyams_zmi.interfaces import IObjectLabel
 
 __docformat__ = 'restructuredtext'
 
@@ -112,13 +109,6 @@ class MilestonePermissionChecker(ContextAdapter):
         if container is not None:
             return IViewContextPermissionChecker(container).edit_permission
         return None
-
-
-@adapter_config(required=(IMilestoneInfo, IPyAMSLayer, Interface),
-                provides=IObjectLabel)
-def milestone_label(context, request, view):  # pylint: disable=unused-argument
-    """Milestone label getter"""
-    return II18n(context).get_attribute('title', request=request)
 
 
 @implementer(IMilestonesContainer)

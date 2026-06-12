@@ -120,9 +120,9 @@ class SiteManagerAddFormRenderer(ContextRequestViewAdapter):
         }
 
 
-@adapter_config(required=(ISiteManager, IAdminLayer, Interface),
+@adapter_config(required=(ISiteManager, IAdminLayer),
                 provides=IObjectLabel)
-def site_manager_label(context, request, view):
+def site_manager_label(context, request):
     """Site manager table element name"""
     return II18n(context).query_attribute('title', request=request)
 

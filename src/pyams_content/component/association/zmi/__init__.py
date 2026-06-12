@@ -91,23 +91,23 @@ class AssociationItemAddFormRenderer(ContextRequestViewAdapter):
         return result
 
 
-@adapter_config(required=(IAssociationItem, IAdminLayer, Interface),
+@adapter_config(required=IAssociationItem,
                 provides=IObjectLabel)
-def association_item_label(context, request, view):  # pylint: disable=unused-argument
+def association_item_label(context):  # pylint: disable=unused-argument
     """Association item label getter"""
     return IAssociationInfo(context).user_title
 
 
-@adapter_config(required=(IAssociationItem, IAdminLayer, Interface),
+@adapter_config(required=IAssociationItem,
                 provides=IObjectIcon)
-def association_item_icon(context, request, view):
+def association_item_icon(context):
     """Association item icon getter"""
     return f'fa-fw {context.icon_class}'
 
 
-@adapter_config(required=(IAssociationItem, IAdminLayer, Interface),
+@adapter_config(required=(IAssociationItem, IAdminLayer),
                 provides=IObjectHint)
-def association_item_hint(context, request, view):
+def association_item_hint(context, request):
     """Association item hint getter"""
     return request.localizer.translate(context.icon_hint)
 

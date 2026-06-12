@@ -95,9 +95,9 @@ class SearchFolderAddForm(SiteFolderAddForm):
             self.widgets['parent'].permission = MANAGE_SITE_PERMISSION
 
 
-@adapter_config(required=(ISearchFolder, IAdminLayer, Interface),
+@adapter_config(required=(ISearchFolder, IAdminLayer),
                 provides=IObjectLabel)
-def search_folder_label(context, request, view):
+def search_folder_label(context, request):
     """Search folder label"""
     return II18n(context).query_attribute('title', request=request)
 

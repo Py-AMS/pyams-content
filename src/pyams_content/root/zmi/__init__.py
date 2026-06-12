@@ -45,9 +45,9 @@ def site_root_management_menu_header(context, request, view, manager):
     return _("Main site management")
 
 
-@adapter_config(required=(ISiteRoot, IAdminLayer, Interface),
+@adapter_config(required=(ISiteRoot, IAdminLayer),
                 provides=IObjectLabel)
-def site_root_label(context, request, view):
+def site_root_label(context, request):
     """Site root label"""
     return IZMIConfiguration(request.root).site_name
 

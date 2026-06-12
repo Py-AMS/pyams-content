@@ -16,7 +16,7 @@
 
 from persistent import Persistent
 from zope.container.contained import Contained
-from zope.interface import Interface, implementer
+from zope.interface import implementer
 from zope.schema.fieldproperty import FieldProperty
 
 from pyams_content.feature.filter.interfaces import CONTENT_TYPE_FILTER_MODE, ICollectionsFilter, IContentTypesFilter, \
@@ -55,9 +55,9 @@ class Filter(Persistent, Contained):
         return ICacheKeyValue(self)
 
 
-@adapter_config(required=(IFilter, IPyAMSLayer, Interface),
+@adapter_config(required=(IFilter, IPyAMSLayer),
                 provides=IObjectLabel)
-def filter_label(context, request, view):  # pylint: disable=unused-argument
+def filter_label(context, request):  # pylint: disable=unused-argument
     """Filter label getter"""
     return II18n(context).get_attribute('label', request=request)
 

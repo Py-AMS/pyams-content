@@ -19,14 +19,11 @@ from zope.interface import Interface
 
 from pyams_content.reference import IReferenceTable
 from pyams_content.zmi.viewlet.toplinks import TopTabsViewletManager
-from pyams_i18n.interfaces import II18n
-from pyams_skin.viewlet.menu import MenuItem
 from pyams_utils.registry import get_all_utilities_registered_for
-from pyams_utils.url import absolute_url
 from pyams_viewlet.manager import viewletmanager_config
 from pyams_zmi.interfaces import IAdminLayer
+from pyams_zmi.utils import get_object_label
 from pyams_zmi.zmi.viewlet.toplinks import TopMenuViewletManager
-
 
 __docformat__ = 'restructuredtext'
 
@@ -46,8 +43,11 @@ class ReferencesTablesMenu(TopMenuViewletManager):
         context = self.context
         request = self.request
         parent = self.__parent__
-        for table in sorted(get_all_utilities_registered_for(IReferenceTable),
-                            key=lambda x: locale.strxfrm(II18n(x).query_attribute('title',
-                                                                                  request=request)
-                                                         or '')):
-            self.add_menu(context, request, parent, table)
+        for table, label in sorted((
+                (
+                        table,
+                        get_object_label(table, request=request)
+                )
+                for table in get_all_utilities_registered_for(IReferenceTable)
+        ), key=lambda x: locale.strxfrm(x[1])):
+            self.add_menu(context, request, parent, table, label)

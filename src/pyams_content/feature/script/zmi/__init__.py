@@ -250,16 +250,16 @@ class ScriptAddFormRenderer(SimpleAddFormRenderer):
     table_factory = IScriptContainerTable
 
 
-@adapter_config(required=(IScriptInfo, IAdminLayer, Interface),
+@adapter_config(required=IScriptInfo,
                 provides=IObjectLabel)
-def script_label(context, request, view):
+def script_label(context):
     """Script label"""
     return context.name
 
 
-@adapter_config(required=(IScriptInfo, IAdminLayer, Interface),
+@adapter_config(required=(IScriptInfo, IAdminLayer),
                 provides=IObjectHint)
-def script_hint(context, request, view):
+def script_hint(context, request):
     """Script hint"""
     return request.localizer.translate(_("Custom script"))
 
