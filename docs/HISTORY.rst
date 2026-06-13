@@ -1,6 +1,12 @@
 Changelog
 =========
 
+2.10.0
+------
+ - added milestones paragraph and portlet
+ - updated base paragraph interface to handle anchors
+ - updated objects label, icon and hint adapters signatures
+
 2.9.0
 -----
  - added support for custom paragraphs getters adapters in paragraphs containers
