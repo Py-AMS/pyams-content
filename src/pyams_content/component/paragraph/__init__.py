@@ -12,9 +12,9 @@
 
 """PyAMS_content.component.paragraph module
 
-Paragraphs are components which are used to build the *content* of a given web page;
+Paragraphs are components that are used to build the *content* of a given web page;
 these components can be very simple elements like rich HTML text, but can also include
-specialized components like verbatims, contact cards, framed text, illustrations, images
+specialized components like verbatims, contact cards, framed text, illustrations, image
 galleries, videos or any other kind of content that you can imagine...
 """
 
@@ -23,7 +23,7 @@ from pyramid.events import subscriber
 from zope.container.contained import Contained
 from zope.interface import implementer
 from zope.lifecycleevent import ObjectModifiedEvent
-from zope.lifecycleevent import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent
+from zope.lifecycleevent.interfaces import IObjectAddedEvent, IObjectModifiedEvent, IObjectRemovedEvent
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleTerm, SimpleVocabulary
 
@@ -41,7 +41,6 @@ from pyams_utils.html import html_to_text
 from pyams_utils.registry import get_pyramid_registry
 from pyams_utils.request import check_request
 from pyams_utils.traversing import get_parent
-from pyams_utils.url import generate_url
 from pyams_utils.vocabulary import vocabulary_config
 from pyams_zmi.interfaces import IObjectHint, IObjectIcon, IObjectLabel
 
@@ -117,8 +116,7 @@ class BaseParagraph(RenderedContentMixin, Persistent, Contained):
 
     def get_anchor(self, request=None):
         """Get paragraph anchor"""
-        title = II18n(self).query_attribute('title', request=request)
-        return f'part_{self.__name__}::{generate_url(title)}' if title else self.__name__
+        return f'part_{self.__name__}'
 
 
 @adapter_config(required=IBaseParagraph,
