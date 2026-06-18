@@ -307,7 +307,7 @@ class SharedContentWorkflowStatus(Viewlet):
                     target = retired_versions[-1]
                     if (target is not context) and (target not in targets):
                         result.append(self.create_link(**{
-                            'title': translate(_("access retired version")),
+                            'title': translate(_("access last retired version")),
                             'href': absolute_url(target, request, 'admin'),
                             'css_class': 'text-primary'
                         }))
@@ -320,7 +320,7 @@ class SharedContentWorkflowStatus(Viewlet):
                         target = archived_versions[-1]
                         if (target is not context) and (target not in targets):
                             result.append(self.create_link(**{
-                                'title': translate(_("access archived version")),
+                                'title': translate(_("access last archived version")),
                                 'href': absolute_url(target, request, 'admin'),
                                 'css_class': 'text-primary'
                             }))

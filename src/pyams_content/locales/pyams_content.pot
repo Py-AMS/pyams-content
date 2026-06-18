@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2026-06-07 17:46+0200\n"
+"POT-Creation-Date: 2026-06-18 20:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -698,11 +698,11 @@ msgid "access waiting version"
 msgstr ""
 
 #: ./src/pyams_content/shared/common/zmi/content.py:310
-msgid "access retired version"
+msgid "access last retired version"
 msgstr ""
 
 #: ./src/pyams_content/shared/common/zmi/content.py:323
-msgid "access archived version"
+msgid "access last archived version"
 msgstr ""
 
 #: ./src/pyams_content/shared/common/zmi/__init__.py:95
@@ -1299,8 +1299,8 @@ msgstr ""
 
 #: ./src/pyams_content/shared/common/zmi/types/__init__.py:203
 #: ./src/pyams_content/reference/pictogram/thesaurus.py:48
-#: ./src/pyams_content/reference/pictogram/zmi/table.py:42
-#: ./src/pyams_content/reference/pictogram/zmi/table.py:102
+#: ./src/pyams_content/reference/pictogram/zmi/table.py:41
+#: ./src/pyams_content/reference/pictogram/zmi/table.py:101
 msgid "Pictograms"
 msgstr ""
 
@@ -1308,7 +1308,7 @@ msgstr ""
 msgid "Shared contents"
 msgstr ""
 
-#: ./src/pyams_content/shared/common/zmi/viewlet/__init__.py:64
+#: ./src/pyams_content/shared/common/zmi/viewlet/__init__.py:68
 msgid "Shared tools"
 msgstr ""
 
@@ -5301,12 +5301,12 @@ msgstr ""
 msgid "New milestone properties"
 msgstr ""
 
-#: ./src/pyams_content/component/milestone/zmi/__init__.py:246
+#: ./src/pyams_content/component/milestone/zmi/__init__.py:253
 #, python-format
 msgid "Milestone: {}"
 msgstr ""
 
-#: ./src/pyams_content/component/milestone/zmi/__init__.py:249
+#: ./src/pyams_content/component/milestone/zmi/__init__.py:256
 msgid "Milestone properties"
 msgstr ""
 
@@ -5327,13 +5327,13 @@ msgstr ""
 msgid "Milestones list:"
 msgstr ""
 
-#: ./src/pyams_content/component/milestone/portlet/skin/__init__.py:38
-#: ./src/pyams_content/component/milestone/skin/__init__.py:50
+#: ./src/pyams_content/component/milestone/portlet/skin/__init__.py:47
+#: ./src/pyams_content/component/milestone/skin/__init__.py:48
 msgid "Vertical timeline (default)"
 msgstr ""
 
-#: ./src/pyams_content/component/milestone/portlet/skin/__init__.py:49
-#: ./src/pyams_content/component/milestone/skin/__init__.py:62
+#: ./src/pyams_content/component/milestone/portlet/skin/__init__.py:58
+#: ./src/pyams_content/component/milestone/skin/__init__.py:60
 msgid "Horizontal timeline"
 msgstr ""
 
@@ -6240,12 +6240,12 @@ msgstr ""
 msgid "New key-number properties"
 msgstr ""
 
-#: ./src/pyams_content/component/keynumber/zmi/__init__.py:246
+#: ./src/pyams_content/component/keynumber/zmi/__init__.py:253
 #, python-format
 msgid "Key-number: {}"
 msgstr ""
 
-#: ./src/pyams_content/component/keynumber/zmi/__init__.py:248
+#: ./src/pyams_content/component/keynumber/zmi/__init__.py:255
 msgid "Key-number properties"
 msgstr ""
 
@@ -6594,7 +6594,7 @@ msgstr ""
 msgid "Paragraphs list (default)"
 msgstr ""
 
-#: ./src/pyams_content/component/paragraph/portlet/skin/__init__.py:182
+#: ./src/pyams_content/component/paragraph/portlet/skin/__init__.py:183
 msgid "Paragraphs navigation (default)"
 msgstr ""
 
@@ -7333,7 +7333,7 @@ msgstr ""
 msgid "Table management"
 msgstr ""
 
-#: ./src/pyams_content/reference/zmi/viewlet/__init__.py:42
+#: ./src/pyams_content/reference/zmi/viewlet/__init__.py:39
 msgid "Reference tables"
 msgstr ""
 
@@ -7424,15 +7424,15 @@ msgid ""
 "To include a pictogram, you can move it from *available pictograms* list to *selected pictograms* list by just doing a double click onto it; the reverse operation is working in the same way..."
 msgstr ""
 
-#: ./src/pyams_content/reference/pictogram/zmi/table.py:60
+#: ./src/pyams_content/reference/pictogram/zmi/table.py:59
 msgid "Table contents"
 msgstr ""
 
-#: ./src/pyams_content/reference/pictogram/zmi/table.py:105
+#: ./src/pyams_content/reference/pictogram/zmi/table.py:104
 msgid "Pictograms list"
 msgstr ""
 
-#: ./src/pyams_content/reference/pictogram/zmi/table.py:113
+#: ./src/pyams_content/reference/pictogram/zmi/table.py:112
 msgid "Pictograms table"
 msgstr ""
 

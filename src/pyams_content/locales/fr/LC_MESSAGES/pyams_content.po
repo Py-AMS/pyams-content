@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE 1.0\n"
-"POT-Creation-Date: 2026-06-07 17:46+0200\n"
+"POT-Creation-Date: 2026-06-18 20:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -752,12 +752,12 @@ msgid "access waiting version"
 msgstr "accéder à la version en attente"
 
 #: src/pyams_content/shared/common/zmi/content.py:310
-msgid "access retired version"
-msgstr "accéder à la version retirée"
+msgid "access last retired version"
+msgstr "accéder à la dernière version retirée"
 
 #: src/pyams_content/shared/common/zmi/content.py:323
-msgid "access archived version"
-msgstr "accéder à la version archivée"
+msgid "access last archived version"
+msgstr "accéder à la dernière version archivée"
 
 #: src/pyams_content/shared/common/zmi/__init__.py:95
 #, python-format
@@ -1399,8 +1399,8 @@ msgstr "Propriétés du type de contenu"
 
 #: src/pyams_content/shared/common/zmi/types/__init__.py:203
 #: src/pyams_content/reference/pictogram/thesaurus.py:48
-#: src/pyams_content/reference/pictogram/zmi/table.py:42
-#: src/pyams_content/reference/pictogram/zmi/table.py:102
+#: src/pyams_content/reference/pictogram/zmi/table.py:41
+#: src/pyams_content/reference/pictogram/zmi/table.py:101
 msgid "Pictograms"
 msgstr "Pictogrammes"
 
@@ -1408,7 +1408,7 @@ msgstr "Pictogrammes"
 msgid "Shared contents"
 msgstr "Gabarits"
 
-#: src/pyams_content/shared/common/zmi/viewlet/__init__.py:64
+#: src/pyams_content/shared/common/zmi/viewlet/__init__.py:68
 msgid "Shared tools"
 msgstr "Outils"
 
@@ -5777,12 +5777,12 @@ msgstr "Nouveau jalon"
 msgid "New milestone properties"
 msgstr "Propriétés du nouveau jalon"
 
-#: src/pyams_content/component/milestone/zmi/__init__.py:246
+#: src/pyams_content/component/milestone/zmi/__init__.py:253
 #, python-format
 msgid "Milestone: {}"
 msgstr "Jalon : {}"
 
-#: src/pyams_content/component/milestone/zmi/__init__.py:249
+#: src/pyams_content/component/milestone/zmi/__init__.py:256
 msgid "Milestone properties"
 msgstr "Propriétés du jalon"
 
@@ -5803,13 +5803,13 @@ msgstr "Ce texte sera affiché en-dessous du titre"
 msgid "Milestones list:"
 msgstr "Liste des jalons :"
 
-#: src/pyams_content/component/milestone/portlet/skin/__init__.py:38
-#: src/pyams_content/component/milestone/skin/__init__.py:50
+#: src/pyams_content/component/milestone/portlet/skin/__init__.py:47
+#: src/pyams_content/component/milestone/skin/__init__.py:48
 msgid "Vertical timeline (default)"
 msgstr "Chronologie verticale (par défaut)"
 
-#: src/pyams_content/component/milestone/portlet/skin/__init__.py:49
-#: src/pyams_content/component/milestone/skin/__init__.py:62
+#: src/pyams_content/component/milestone/portlet/skin/__init__.py:58
+#: src/pyams_content/component/milestone/skin/__init__.py:60
 msgid "Horizontal timeline"
 msgstr "Chronologie horizontale"
 
@@ -6764,12 +6764,12 @@ msgstr "Nouveau chiffre-clé"
 msgid "New key-number properties"
 msgstr "Propriétés du nouveau chiffre-clé"
 
-#: src/pyams_content/component/keynumber/zmi/__init__.py:246
+#: src/pyams_content/component/keynumber/zmi/__init__.py:253
 #, python-format
 msgid "Key-number: {}"
 msgstr "Chiffre-clé : {}"
 
-#: src/pyams_content/component/keynumber/zmi/__init__.py:248
+#: src/pyams_content/component/keynumber/zmi/__init__.py:255
 msgid "Key-number properties"
 msgstr "Propriétés du chiffre-clé"
 
@@ -7173,7 +7173,7 @@ msgstr "Aucun filtre, tous les types de blocs de contenu sont sélectionnés"
 msgid "Paragraphs list (default)"
 msgstr "Liste des blocs de contenu (par défaut)"
 
-#: src/pyams_content/component/paragraph/portlet/skin/__init__.py:182
+#: src/pyams_content/component/paragraph/portlet/skin/__init__.py:183
 msgid "Paragraphs navigation (default)"
 msgstr "Navigation au sein des blocs (par défaut)"
 
@@ -7968,7 +7968,7 @@ msgstr "Propriétés de la table"
 msgid "Table management"
 msgstr "Gérer cette table"
 
-#: src/pyams_content/reference/zmi/viewlet/__init__.py:42
+#: src/pyams_content/reference/zmi/viewlet/__init__.py:39
 msgid "Reference tables"
 msgstr "Références"
 
@@ -8074,15 +8074,15 @@ msgstr ""
 "effectuant un double-clic sur ce pictogramme, ou en utilisant les flèches "
 "positionnées au niveau de chaque pictogramme"
 
-#: src/pyams_content/reference/pictogram/zmi/table.py:60
+#: src/pyams_content/reference/pictogram/zmi/table.py:59
 msgid "Table contents"
 msgstr "Contenu"
 
-#: src/pyams_content/reference/pictogram/zmi/table.py:105
+#: src/pyams_content/reference/pictogram/zmi/table.py:104
 msgid "Pictograms list"
 msgstr "Liste des pictogrammes"
 
-#: src/pyams_content/reference/pictogram/zmi/table.py:113
+#: src/pyams_content/reference/pictogram/zmi/table.py:112
 msgid "Pictograms table"
 msgstr "Table des pictogrammes"
 
