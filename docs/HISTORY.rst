@@ -1,6 +1,10 @@
 Changelog
 =========
 
+2.10.1
+------
+ - updated shared content workflow status label
+
 2.10.0
 ------
  - added milestones paragraph and portlet
